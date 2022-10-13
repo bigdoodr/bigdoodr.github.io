@@ -3,13 +3,38 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-.col-container {
-  display: flex;
-  width: 100%;
+* {
+  box-sizing: border-box;
 }
-.col {
-  flex: 1;
-  padding: 16px;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 1200px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
 }
 </style>
 </head>
