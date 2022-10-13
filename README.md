@@ -1,6 +1,6 @@
 # webpages
-These are the things I’m interested in.\n
-Local News\n
-National Politics\n
-My Friends’ Tweets\n
+These are the things I’m interested in.  
+Local News  
+National Politics  
+My Friends’ Tweets  
 Web Comics
