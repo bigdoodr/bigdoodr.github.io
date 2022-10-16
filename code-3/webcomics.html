@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 500px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="row">
+  <div class="column">
+    <p><a class="twitter-timeline" data-width="300" data-height="500" data-dnt="true" data-theme="dark" href="https://twitter.com/CatsCafeComics?ref_src=twsrc%5Etfw">Tweets by CatsCafeComics</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+  </div>
+  <div class="column">
+    <p><a class="twitter-timeline" data-width="300" data-height="500" data-dnt="true" data-theme="dark" href="https://twitter.com/xkcd?ref_src=twsrc%5Etfw">Tweets by xkcd</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+  </div>
+  <div class="column">
+  	<p><a class="twitter-timeline" data-width="300" data-height="500" data-dnt="true" data-theme="dark" href="https://twitter.com/Snoopy?ref_src=twsrc%5Etfw">Tweets by Snoopy</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></a>
+  </div>
+  <div class="column">
+  	<p><a class="twitter-timeline" data-width="300" data-height="500" data-dnt="true" data-theme="dark" href="https://twitter.com/calvinandhobbes?ref_src=twsrc%5Etfw">Tweets by calvinandhobbes</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+  </div>
+</div>
+
+
+</body>
+</html>
