@@ -5,6 +5,7 @@
 
 	<meta charset="utf-8" /> 
 <script src="https://kit.fontawesome.com/39b9bf3219.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 <style>
 body {
@@ -32,47 +33,6 @@ hr.rounded {
   border-radius: 5px;
 }
 
-</style>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* The grid: Floating column */
-.column {
-  float: left;
-  width: 100%;
-  padding: 15px;
-  text-align: left;
-  cursor: pointer;
-  color: white;
-}
-
-.containerTab {
-  padding: 20px;
-  color: white;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Closable button inside the container tab */
-.closebtn {
-  float: right;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="referrer" content="same-origin" />
@@ -133,7 +93,7 @@ body {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
 	<title>Tweets of Interest</title>
-	<link rel="stylesheet" type="text/css" media="all" href="rw_common/themes/Climate/consolidated-4.css?rwcache=688518870" />
+	<link rel="stylesheet" type="text/css" media="all" href="rw_common/themes/Climate/consolidated-4.css?rwcache=689124421" />
 		
 	    
 </head>
@@ -203,18 +163,23 @@ body {
 		</div>
 	</main>
 
-	<script type="text/javascript" src="rw_common/themes/Climate/js/main.js?rwcache=688518870"></script>
+	<script type="text/javascript" src="rw_common/themes/Climate/js/main.js?rwcache=689124421"></script>
 <rapidweaver-badge url="https://pages.scruggsfam.rocks" position-x="right" position-y="bottom" transition="slide" delay-type="scroll" delay="30%" mode="dark" target="_blank"><img src= "rw_common/assets/avatar.png" alt="thatsa me" /><p>Made by bigdoodr</p></rapidweaver-badge>
-<script src="rw_common/assets/rw-badge.js?rwcache=688518870"></script>
+<script src="rw_common/assets/rw-badge.js?rwcache=689124421"></script>
 <script>
-function openTab(tabName) {
-  var i, x;
-  x = document.getElementsByClassName("containerTab");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  document.getElementById(tabName).style.display = "block";
-}
+$( "button1" ).click(function() {
+  $( "p1" ).toggle();
+});
+</script>
+<script>
+$( "button2" ).click(function() {
+  $( "p2" ).toggle();
+});
+</script>
+<script>
+$( "button3" ).click(function() {
+  $( "p3" ).toggle();
+});
 </script>
 
 
