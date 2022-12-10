@@ -5,7 +5,19 @@
 
 	<meta charset="utf-8" /> 
 <script src="https://kit.fontawesome.com/39b9bf3219.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<style>
+.fa {
+  font-size: 50px;
+  cursor: pointer;
+  user-select: none;
+}
 
+.fa:hover {
+  color: darkblue;
+}
+</style>
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -33,47 +45,6 @@ hr.rounded {
 }
 
 </style>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* The grid: Floating column */
-.column {
-  float: left;
-  width: 100%;
-  padding: 15px;
-  text-align: left;
-  cursor: pointer;
-  color: white;
-}
-
-.containerTab {
-  padding: 20px;
-  color: white;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Closable button inside the container tab */
-.closebtn {
-  float: right;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
-</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="referrer" content="same-origin" />
 		<meta name="robots" content="index, follow" />
@@ -95,7 +66,7 @@ body {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
 	<title>Blog</title>
-	<link rel="stylesheet" type="text/css" media="all" href="../rw_common/themes/Climate/consolidated.css?rwcache=688007138" />
+	<link rel="stylesheet" type="text/css" media="all" href="../rw_common/themes/Climate/consolidated.css?rwcache=692381147" />
 		
 	    <link rel="alternate" type="application/rss+xml" title="My RSS Feed" href="https://bigdoodr.github.io/blog/files/feed.xml" />
 <script type="text/javascript" async src="https://bigdoodr.github.io/blog/files/meta.js"></script>
@@ -115,7 +86,7 @@ body {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto"><li class="nav-item"><a href="../" rel="" class="nav-link">Home</a></li><li class="nav-item"><a href="../twitterfeeds.html" rel="" class="nav-link">TweetWall</a></li></ul>
+                <ul class="navbar-nav ml-auto"><li class="nav-item"><a href="../" rel="" class="nav-link">Home</a></li><li class="nav-item"><a href="../twitterfeeds.html" rel="" class="nav-link">TweetWall</a></li><li class="nav-item"><a href="../rii.html" rel="" class="nav-link">Random Internet Images</a></li></ul>
             </div>
         </nav>
 
@@ -131,13 +102,13 @@ body {
 		<div class="container py-5">
 			<div class="row">
 				<div class="col-sm-0 main">
-					
+					<div id="unique-entry-id-0" class="blog-entry"><h1 class="blog-entry-title"><a href="files/0d6598858814ea125d8b2501fe0e193b-0.html" class="blog-permalink">Up First</a></h1><div class="blog-entry-date">22/10/22 16:47 </div><div class="blog-entry-body"><span style="font-size:16px; color:#626262;">NPR's Up First is the news you need to start your day. The three biggest stories of the day, with reporting and analysis from NPR News &mdash; in 10 minutes. Available weekdays by 6 a.m. ET, with hosts Leila Fadel, Steve Inskeep, Rachel Martin and A Martinez. Also available on Saturdays by 8 a.m. ET, with Ayesha Rascoe and Scott Simon. On Sundays, hear a longer exploration behind the headlines with Rachel Martin, available by 8 a.m. ET.<br /></span><span style="font-size:16px; color:#626262;"><a href="https://www.npr.org/podcasts/510318/up-first">https://www.npr.org/podcasts/510318/up-first</a></span></div></div>
                 </div>
 
                 <div class="col-sm-0 sidebar">
                     <h4></h4>
                     
-                    <div id="blog-archives"></div><div id="blog-rss-feeds"><a class="blog-rss-link" href="files/feed.xml" rel="alternate" type="application/rss+xml" title="My RSS Feed">RSS Feed</a><br /></div>
+                    <div id="blog-categories"></div><div id="blog-archives"><a class="blog-archive-link-enabled" href="files/archive-october-2022.html">October 2022</a><br /></div><div id="blog-rss-feeds"><a class="blog-rss-link" href="files/feed.xml" rel="alternate" type="application/rss+xml" title="My RSS Feed">RSS Feed</a><br /></div>
                 </div>
 			</div>
 		</div>
@@ -150,25 +121,30 @@ body {
 							
 						</div>
 
-						<ul class="navbar-nav ml-auto"><li class="nav-item"><a href="../" rel="" class="nav-link">Home</a></li><li class="nav-item"><a href="../twitterfeeds.html" rel="" class="nav-link">TweetWall</a></li></ul>
+						<ul class="navbar-nav ml-auto"><li class="nav-item"><a href="../" rel="" class="nav-link">Home</a></li><li class="nav-item"><a href="../twitterfeeds.html" rel="" class="nav-link">TweetWall</a></li><li class="nav-item"><a href="../rii.html" rel="" class="nav-link">Random Internet Images</a></li></ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</main>
 
-	<script type="text/javascript" src="../rw_common/themes/Climate/js/main.js?rwcache=688007138"></script>
+	<script type="text/javascript" src="../rw_common/themes/Climate/js/main.js?rwcache=692381147"></script>
 <rapidweaver-badge url="https://pages.scruggsfam.rocks" position-x="right" position-y="bottom" transition="slide" delay-type="scroll" delay="30%" mode="dark" target="_blank"><img src= "../rw_common/assets/avatar.png" alt="thatsa me" /><p>Made by bigdoodr</p></rapidweaver-badge>
-<script src="../rw_common/assets/rw-badge.js?rwcache=688007138"></script>
+<script src="../rw_common/assets/rw-badge.js?rwcache=692381147"></script>
 <script>
-function openTab(tabName) {
-  var i, x;
-  x = document.getElementsByClassName("containerTab");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  document.getElementById(tabName).style.display = "block";
-}
+$( "button1" ).click(function() {
+  $( "p1" ).toggle();
+});
+</script>
+<script>
+$( "button2" ).click(function() {
+  $( "p2" ).toggle();
+});
+</script>
+<script>
+$( "button3" ).click(function() {
+  $( "p3" ).toggle();
+});
 </script>
 
 
