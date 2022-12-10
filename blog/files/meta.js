@@ -56,7 +56,7 @@
 	};
  
 	// Object containing all website meta info
-	var websiteMeta = {"3dab9509172385fac5b539cc1a10fb3f-0.html":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et tellus sed odio interdum consectetur. Sed odio turpis, commodo ut justo non, digniss","752f82acc7eb77c807d708e2ecb0504f-1.html":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et tellus sed odio interdum consectetur. Sed odio turpis, commodo ut justo non, digniss","archive-july-2018.html":"Archives for July 2018"};
+	var websiteMeta = {"category-work.html":"A list of posts in category &ldquo;Work&rdquo;","category-humor.html":"A list of posts in category &ldquo;Humor&rdquo;","0d6598858814ea125d8b2501fe0e193b-0.html":"NPR's Up First is the news you need to start your day. The three biggest stories of the day, with reporting and analysis from NPR News — in 10 minutes","archive-october-2022.html":"Archives for October 2022","category-apple.html":"A list of posts in category &ldquo;Apple&rdquo;","category-personal.html":"A list of posts in category &ldquo;Personal&rdquo;","category-podcasts.html":"A list of posts in category &ldquo;Podcasts&rdquo;"};
  
 	// pageId must match the key in websiteMeta object
 	var url = window.location.pathname;
