@@ -2,6 +2,21 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/39b9bf3219.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<style>
+.fa {
+  font-size: 50px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fa:hover {
+  color: darkblue;
+}
+</style>
+
 <style>
 * {
   box-sizing: border-box;
@@ -55,5 +70,32 @@ body {
   </div>
 <a href="shortcuts://open-shortcut?name=Peanuts%20Comic"><embed type="image/png" src="https://upload.wikimedia.org/wikipedia/en/2/22/Charlie_Brown.png"><br />Today's Peanuts Comic</a>
 </div>
+<p1><button1><font size="6"><i class="fa-regular fa-chevron-up"></i></font><i onclick="myFunction(this)" class="fa-solid fa-plus fa-sm"></i></p1>
+<script>
+function myFunction(x) {
+  x.classList.toggle("fa-xmark");
+}
+</script>
+</button1>
+
+<script>
+$( "button1" ).click(function() {
+  $( "p1" ).toggle();
+});
+</script>
+<script>
+// Add active class to the current button (highlight it)
+var header = document.getElementById("myDIV");
+var btns = header.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+  var current = document.getElementsByClassName("active");
+  if (current.length > 0) { 
+    current[0].className = current[0].className.replace(" active", "");
+  }
+  this.className += " active";
+  });
+}
+</script>
 </body>
 </html>
