@@ -1,117 +1,176 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
 
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	
-<script src="https://kit.fontawesome.com/39b9bf3219.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-<style>
-.fa {
-  font-size: 50px;
-  cursor: pointer;
-  user-select: none;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bigDoodR Things</title>
+    <script src="https://kit.fontawesome.com/39b9bf3219.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
-.fa:hover {
-  color: darkblue;
-}
-</style>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="referrer" content="same-origin" />
-		<meta name="description" content="Bookmarks to things I access daily." />
-		<meta name="robots" content="index, follow" />
-		<meta name="generator" content="RapidWeaver" />
-		<link rel="apple-touch-icon" sizes="180x180" href="https://bigdoodr.scruggsfam.rocks/resources/doodatar.png" />
-<link rel="apple-touch-icon" sizes="167x167" href="https://bigdoodr.scruggsfam.rocks/resources/medium.png" />
-<link rel="icon" type="image/png" href="https://bigdoodr.scruggsfam.rocks/resources/favicon_large.png" sizes="64x64" />
-<link rel="icon" type="image/png" href="https://bigdoodr.scruggsfam.rocks/resources/favicon_medium.png" sizes="32x32" />
-<link rel="apple-touch-icon" sizes="152x152" href="https://bigdoodr.scruggsfam.rocks/resources/small.png" />
-<link rel="icon" type="image/png" href="https://bigdoodr.scruggsfam.rocks/resources/rounddoodatar16.png" sizes="16x16" />
 
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="bigdoodr Things">
-	<meta name="twitter:description" content="Bookmarks to things I access daily.">
-	<meta name="twitter:image" content="https://bigdoodr.scruggsfam.rocks/resources/Untitled.png">
-	<meta name="twitter:url" content="https://bigdoodr.scruggsfam.rocks/index.html">
-	<meta property="og:type" content="website">
-	<meta property="og:site_name" content="bigdoodr Things">
-	<meta property="og:title" content="bigdoodr Things">
-	<meta property="og:description" content="Bookmarks to things I access daily.">
-	<meta property="og:image" content="https://bigdoodr.scruggsfam.rocks/resources/Untitled.png">
-	<meta property="og:url" content="https://bigdoodr.scruggsfam.rocks/index.html">
-	
-	<title>bigdoodr Things</title>
-	<link rel="stylesheet" type="text/css" media="all" href="rw_common/themes/Engineer/consolidated-0.css?rwcache=714482188" />
-		
-	    
+    <style>
+        .fa {
+          font-size: 50px;
+          cursor: pointer;
+		  user-select: none;
+		}
+
+		.fa:hover {
+		  color: darkblue;
+		}
+		body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Default background color */
+            color: #333; /* Default text color */
+            transition: background-color 0.5s;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #1C1C1C; /* Heading color */
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); /* Horizontal offset, vertical offset, blur radius, shadow color */
+        }
+        
+        /* Banner section */
+        .banner-section {
+            text-align: center;
+            padding: 40px 0;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        .avatar-image {
+            background-image: url('https://bigdoodr.github.io/resources/doodatar.png?raw=true');
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-size: contain;
+            background-color: #fff;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        /* Background image section */
+        .background-section {
+            background-image: url('https://bigdoodr.github.io/resources/Untitled.png?raw=true'); /* Replace with your image URL */
+            background-size: cover;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Links section */
+        .links-section {
+            padding: 40px 0;
+        }
+
+        .links-container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .link {
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid #007BFF;
+            color: #007BFF;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .link:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        /* Mastodon feeds section */
+        .mastodon-feeds-section {
+            display: flex;
+            flex-wrap: wrap; /* Allow the items to wrap to the next line if the container is too narrow */
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .mastodon-feed {
+            width: 305px;
+            margin-right: 20px; /* Adjust the margin to add space between feeds */
+    margin-bottom: 20px; /* Add margin at the bottom to create space between rows */
+        }
+    </style>
 </head>
 
-<!-- This page was created with RapidWeaver from Realmac Software. http://www.realmacsoftware.com -->
-
 <body>
-	<div class="hero" id="hero">
-		<nav class="navbar navbar-expand-lg">
-			<a class="navbar-brand" href="https://bigdoodr.scruggsfam.rocks/"><img src="rw_common/images/rounddoodatar.png" width="1024" height="1024" alt=""I’m the Dood. Or His Doodness or Doodr or El Dooderino if you’re not into the whole brevity thing.""/> <span class="navbar-title">bigdoodr Things</span></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav ml-auto"><li class="nav-item active"><a href="./" rel="" class="nav-link">Home</a></li></ul>
-			</div>
-		</nav>
 
-		<div class="hero-content container d-flex align-items-center" id="hero">
-			<div class="">
-				<h1 class="hero-title">bigdoodr Things</h1>
-				<p class="hero-slogan display-4"></p>
-			</div>
-			<div class="hero-background" title="Futuristic Neon City Generated with Stable Diffusion"></div>
-			<div class="hero-overlay"></div>
-		</div>
+    <div class="container">
 
-	</div>
+        <!-- Banner section -->
+        <div class="banner-section">
+            <div class="avatar-image"></div>
+            <h1>bigDoodR Things</h1>
+        </div>
 
-    <div class="content">
-        <section class="main" style="position: relative;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 main">
-                        <h3 id="iclassfa-brandsfa-googleinestrenewrenewlogo"><i class="fa-brands fa-google"></i> <a href="https://nestrenew.google.com/u/0/renew/portal/ad28379b-1ffc-4711-be75-e12f850c8a5c">Nest Renew</a> <img src="https://www.gstatic.com/nestgreenenergy/assets/png/leaf_icon.png" alt="Renew Logo" /></h3>
+        <!-- Background image section -->
+        <div class="background-section">
+            <h1>Daily Visits</h1>
+<!--            <p>Your text on top of the background image.</p> -->
+        </div>
 
-<p><a href="https://www.woot.com"><img src="https://d3rqdbvvokrlbl.cloudfront.net/lib/images/sites/header/woot-an-amazon-company.svg" width="100" height="20"></a></p>
-
-<p><a href="https://www.meh.com"><img src="https://d260m1l4i17rje.cloudfront.net/images/account/themes/meh.com/logo@2x-d39405b735d6678116a67937568005a37f948ae1.png" width="100" height="20"></a></p>
-
-<h3 id="iclassfa-brandsfa-mastodonibloomscrolling"><i class="fa-brands fa-mastodon"></i> <a href="https://mastodon.social/tags/bloomscrolling">BloomScrolling</a></h3>
-                    </div>
-
-                    <div class="col-sm-12 sidebar">
-                        <h2></h2>
-                         
-                    </div>
-                </div>
+        <!-- Links section -->
+        <div class="links-section">
+<!--            <h1>Links Section</h1> -->
+            <div class="links-container">
+                <a href="https://www.meh.com"><img src="https://d260m1l4i17rje.cloudfront.net/images/account/themes/meh.com/logo@2x-d39405b735d6678116a67937568005a37f948ae1.png" width="100"></a>
+                <a href="https://www.woot.com"><img src="https://d3rqdbvvokrlbl.cloudfront.net/lib/images/sites/header/woot-an-amazon-company.svg" width="100"></a>
+                <h3 id="iclassfa-brandsfa-mastodonibloomscrolling"><i class="fa-brands fa-mastodon" aria-hidden="true"></i> <a href="https://mastodon.social/deck/getting-started" class="link">Mastodon Deck</a>
+<!--            <a href="https://example.com" class="link">Link 3</a> -->
             </div>
-        </section>
+        </div>
+
+        <!-- Mastodon feeds section -->
+            <h3>Masto Feeds</h3>
+        <div class="mastodon-feeds-section">
+            <div class="mastodon-feed">
+                <iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Fmastodon.social%2Fusers%2Fwonderofscience&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
+            </div>
+            <div class="mastodon-feed">
+                <iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Fmastodon.social%2Fusers%2FBasicAppleGuy&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
+            </div>
+            <div class="mastodon-feed">
+            	<iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Frobot.rodeo%2Fusers%2Fmike&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
+            </div>
+            <!-- Add more Mastodon feeds as needed -->
+        </div>
+
     </div>
 
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 footer-content">
-					<ul class="navbar-nav ml-auto"><li class="nav-item active"><a href="./" rel="" class="nav-link">Home</a></li></ul>
-					
-				</div>
-			</div>
-		</div>
-	</footer>
+    <script>
+        // Check if prefers-color-scheme is supported
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.style.backgroundColor = '#121212'; // Dark mode background color
+            document.body.style.color = '#fff'; // Dark mode text color
+        }
 
-	<script type="text/javascript" src="rw_common/themes/Engineer/js/main.js?rwcache=714482188"></script>
-<rapidweaver-badge url="https://bigdoodr.scruggsfam.rocks/" position-x="right" position-y="bottom" transition="slide" delay-type="time" delay="1000" mode="auto" target="_blank"><img src= "rw_common/assets/avatar.png" alt="thatsa me" /><p>Made by bigdoodr</p></rapidweaver-badge>
-<script src="rw_common/assets/rw-badge.js?rwcache=714482188"></script>
-<a rel="me" href="https://mastodon.social/@bigdoodr">Find Me on Mastodon</a></body>
+        // Listen for changes in the color scheme preference
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.body.style.backgroundColor = '#121212'; // Dark mode background color
+                document.body.style.color = '#fff'; // Dark mode text color
+            } else {
+                document.body.style.backgroundColor = '#f0f0f0'; // Light mode background color
+                document.body.style.color = '#333'; // Light mode text color
+            }
+        });
+    </script>
+
+</body>
 
 </html>
