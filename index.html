@@ -91,6 +91,21 @@
             background-color: #007BFF;
             color: #fff;
         }
+        
+        .image-back {
+        	display: inline-block; /* Make the link a block so you can set the background color */
+        	padding: 10px; /* Add padding for better visibility */
+        	background-color: #007BFF; /* Set the desired background color */
+    		text-decoration: none; /* Remove the default link underline */
+    		color: #fff; /* Set the text color */
+    	}
+    	
+    	.image-back img {
+    		display: block; /* Make the image a block to fill the container */
+    		width: 100px; /* Make the image fill the container */
+    		height: auto; /* Maintain the image's aspect ratio */
+    		border-radius: 5px; /* Optional: Add rounded corners */
+		}
 
         /* Mastodon feeds section */
         .mastodon-feeds-section {
@@ -128,7 +143,7 @@
         <div class="links-section">
 <!--            <h1>Links Section</h1> -->
             <div class="links-container">
-                <a href="https://www.meh.com"><img src="https://d260m1l4i17rje.cloudfront.net/images/account/themes/meh.com/logo@2x-d39405b735d6678116a67937568005a37f948ae1.png" width="100"></a>
+                <a href="https://www.meh.com" class="image-back"><img src="https://d260m1l4i17rje.cloudfront.net/images/account/themes/meh.com/logo@2x-d39405b735d6678116a67937568005a37f948ae1.png" width="100"></a>
                 <a href="https://www.woot.com"><img src="https://d3rqdbvvokrlbl.cloudfront.net/lib/images/sites/header/woot-an-amazon-company.svg" width="100"></a>
                 <h3 id="iclassfa-brandsfa-mastodonibloomscrolling"><i class="fa-brands fa-mastodon" aria-hidden="true"></i> <a href="https://mastodon.social/deck/getting-started" class="link">Mastodon Deck</a>
 <!--            <a href="https://example.com" class="link">Link 3</a> -->
