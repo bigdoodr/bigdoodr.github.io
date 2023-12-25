@@ -40,7 +40,25 @@
             color: #1C1C1C; /* Heading color */
             text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); /* Horizontal offset, vertical offset, blur radius, shadow color */
         }
-        
+
+	/* Navigation menu */
+        .menu-btn {
+            display: none; /* Initially hide the menu button for small screens */
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-item {
+            margin-right: 20px;
+        }
+
         /* Banner section */
         .banner-section {
             text-align: center;
@@ -129,6 +147,22 @@
 
     <div class="container">
 
+        <!-- Navigation menu button -->
+        <div class="menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <!-- Navigation menu -->
+        <ul class="menu">
+            <li class="menu-item"><a href="index.html">Home</a></li>
+            <li class="menu-item"><a href="mastofeeds.html#news">News & Tech Sites</a></li>
+            <li class="menu-item"><a href="mastofeeds.html#apple">Apple Peeps</a></li>
+            <li class="menu-item"><a href="mastofeeds.html#famous">Famous Folks</a></li>
+            <li class="menu-item"><a href="mastofeeds.html#bots">MastoBots</a></li>
+            <li class="menu-item"><a href="mastofeeds.html#other">Other Accounts</a></li>
+            <!-- Add more menu items as needed -->
+        </ul>
+
         <!-- Banner section -->
         <div class="banner-section">
             <div class="avatar-image"></div>
@@ -153,19 +187,15 @@
         </div>
 
         <!-- Mastodon feeds section -->
+<!-- 
             <h3>Masto Feeds</h3>
         <div class="mastodon-feeds-section">
             <div class="mastodon-feed">
-                <iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Fmastodon.social%2Fusers%2Fwonderofscience&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
-            </div>
-            <div class="mastodon-feed">
                 <iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Fmastodon.social%2Fusers%2FBasicAppleGuy&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
             </div>
-            <div class="mastodon-feed">
-            	<iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Frobot.rodeo%2Fusers%2Fmike&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
-            </div>
-            <!-- Add more Mastodon feeds as needed -->
+            <!~~ Add more Mastodon feeds as needed ~~>
         </div>
+ -->
 
     </div>
 
@@ -186,6 +216,30 @@
                 document.body.style.color = '#333'; // Light mode text color
             }
         });
+
+        // Toggle the menu visibility
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.style.display = (menu.style.display === 'flex' || menu.style.display === '') ? 'none' : 'flex';
+        }
+
+        // Check if the viewport is small, then show the menu button
+        window.addEventListener('resize', function () {
+            const menuBtn = document.querySelector('.menu-btn');
+            const menu = document.querySelector('.menu');
+            if (window.innerWidth <= 768) {
+                menuBtn.style.display = 'block';
+                menu.style.display = 'none'; // Hide the menu initially for small screens
+            } else {
+                menuBtn.style.display = 'none';
+                menu.style.display = 'flex'; // Show the menu for larger screens
+            }
+        });
+
+        // Initial check for small screens
+        if (window.innerWidth <= 768) {
+            document.querySelector('.menu-btn').style.display = 'block';
+        }
     </script>
 <a rel="me" href="https://mastodon.social/@bigdoodr">Find Me on Mastodon</a>
 </body>
