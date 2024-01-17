@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Me and My Code of Ethics</title>
   <style>
+
+	@media only screen and (max-width: 600px) {
+  		/* Styles for screens smaller than 600px */
+	}
+
+	@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  		/* Styles for screens between 601px and 1024px */
+	}
+
+	@media only screen and (min-width: 1025px) {
+  		/* Styles for screens larger than 1024px */
+	}
+
     body {
       margin: 0;
       padding: 0;
@@ -95,9 +108,23 @@
       object-position: bottom;
     }
 
-    #img3 {
-      max-width: 33.33%;
+    #img2 {
+      max-width: 50%;
+      height: auto;
+      border-radius: 20px;
     }
+
+    #img3-container {
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    #img3 {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+    }
+
   </style>
 </head>
 <body>
@@ -118,7 +145,7 @@
   <!-- Section 2 -->
   <section id="section2">
     <div class="container">
-      <img src="mando.png" alt="Picture of a Mandolorian helmet with the words This is the way written below it.">
+      <img id="img2" src="mando.png" alt="Picture of a Mandolorian helmet with the words This is the way written below it.">
       <div class="text">
         <h1 align="right">CODE OF ETHICS</h1>
         <p>The IT industry should be a force for good, but if not kept in check, can overreach the purpose it is intended to serve. I take the responsibility granted to me as an endpoint engineer very seriously, and offer this page as my commitment to both individuals and the institution I work for to keep personal privacy and the security of our work environment in focus simultaneously.</p>
@@ -135,6 +162,7 @@
         <p>Endpoint Engineers can remotely configure computer settings. This generally occurs when preparing a device to meet security protocols, in effort to protect against threats such as attacks, malware, and viruses, as well as to protect the integrity and security of information.</p>
         <p>Some security protocols may be considered inconvenient; they should be reviewed to ensure they are essential and only then activated with as little of a disruption as possible.</p>
       </div>
+      <div id="img3-container">
       <img id="img3" src="woz.png" alt="Caricature of Steve Wozniak">
     </div>
   </section>
