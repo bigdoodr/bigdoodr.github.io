@@ -8,11 +8,44 @@
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    .menu-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+}
 
+    .sliding-menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease-in-out;
+    z-index: 999;
+}
+
+</style>
 <body>
+<div class="menu-btn" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+</div>
+            <div class="sliding-menu">
             {% include menu.html %}
 
     {{ content }}
+
+<script>
+    function toggleMenu() {
+        const menu = document.querySelector('.sliding-menu');
+        menu.classList.toggle('open');
+    }
+</script>
 
 </body>
 
