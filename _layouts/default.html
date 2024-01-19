@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <style>
     .menu-btn {
@@ -43,6 +42,7 @@
 
 <script>
     function toggleMenu() {
+        console.log('Toggle menu function called');
         const menu = document.querySelector('.sliding-menu');
         menu.classList.toggle('open');
     }
