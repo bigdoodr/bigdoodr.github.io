@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,24 +45,6 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for contrast */
         }
 
-        /* Navigation menu */
-        .menu-btn {
-            display: none; /* Initially hide the menu button for small screens */
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .menu {
-            display: flex;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .menu-item {
-            margin-right: 20px;
-        }
-
         /* Mastodon feeds section */
         .mastodon-feeds-section {
             display: flex;
@@ -88,22 +74,6 @@
 
     <div class="container">
 
-        <!-- Navigation menu button -->
-        <div class="menu-btn" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
-
-        <!-- Navigation menu -->
-        <ul class="menu">
-            <li class="menu-item"><a href="index.html">Home</a></li>
-            <li class="menu-item"><a href="mastofeeds.html#news">News & Tech Sites</a></li>
-            <li class="menu-item"><a href="mastofeeds.html#apple">Apple Peeps</a></li>
-            <li class="menu-item"><a href="mastofeeds.html#famous">Famous Folks</a></li>
-            <li class="menu-item"><a href="mastofeeds.html#bots">MastoBots</a></li>
-            <li class="menu-item"><a href="mastofeeds.html#other">Other Accounts</a></li>
-            <!-- Add more menu items as needed -->
-        </ul>
-
         <!-- Mastodon feed sections -->
         <div class="feed-section">
             <h2 id="news">News & Tech Sites</h2>
@@ -127,10 +97,10 @@
 					<img width="72" height="72" src="https://files.mastodon.social/cache/accounts/avatars/109/882/577/507/706/827/original/6601871808fbd82e.jpg"></br>NPR<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fpress.coop/@npr.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
                 </div>
                 <div class="mastodon-feed">
-					 <img width="72" height="72" src="https://files.mastodon.social/cache/accounts/avatars/109/520/908/526/990/513/original/db3cd28c31194c79.png"></br>MacStories<iframe width="250" height="750" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmacstories.net%2Frss&mode=html&showonly=&maxitems=0&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%23999999&headtxtcol=%23ffffff&titlebgcol=%23f1eded&titletxtcol=%23000000&itembgcol=%23ffffff&itemtxtcol=%23000000&ctl=0"></iframe>
+					 <img width="72" height="72" src="https://files.mastodon.social/cache/accounts/avatars/109/520/908/526/990/513/original/db3cd28c31194c79.png"></br>MacStories<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmacstories.net%2Frss&mode=html&showonly=&maxitems=0&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%23999999&headtxtcol=%23ffffff&titlebgcol=%23f1eded&titletxtcol=%23000000&itembgcol=%23ffffff&itemtxtcol=%23000000&ctl=0"></iframe>
                 </div>
                 <div class="mastodon-feed">
-					 <img width="72" height="72" src="https://assets.newsie.social/accounts/avatars/109/365/798/068/322/628/original/9a1afc79447695cb.png"></br>ProPublica<iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Fnewsie.social%2Fusers%2FProPublica&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
+					 <img width="72" height="72" src="https://assets.newsie.social/accounts/avatars/109/365/798/068/322/628/original/9a1afc79447695cb.png"></br>ProPublica<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fnewsie.social%2Fusers%2FProPublica.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
                 </div>
                 <div class="mastodon-feed">
                     <!-- Embed another Mastodon feed for Tech Sites here -->
@@ -181,13 +151,13 @@
                 	 <iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fwww.mastodon.social/@mrmacintosh.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
                 </div>
                 <div class="mastodon-feed">
-                	 <iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Faus.social%2Fusers%2Fbartreardon&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
+                	 <iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Faus.social%2Fusers%2Fbartreardon.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
                 </div>
                 <div class="mastodon-feed">
-                	 <iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Fmastodon.twocanoes.com%2Fusers%2Ftperfitt&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
+                	 <iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmastodon.twocanoes.com%2Fusers%2Ftperfitt.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
                 </div>
                 <div class="mastodon-feed">
-                	 <iframe allowfullscreen sandbox="allow-top-navigation allow-scripts allow-popups allow-popups-to-escape-sandbox" width="300" height="700" src="https://mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Ftheinternet.social%2Fusers%2Ftbridge&theme=dark&size=100&header=true&replies=false&boosts=true"></iframe>
+                	 <iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Ftheinternet.social%2Fusers%2Ftbridge.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
                 </div>
 
                 <!-- Add more Mastodon feeds for Apple Peeps as needed -->
@@ -237,6 +207,33 @@
         </div>
 
         <div class="feed-section">
+            <h2 id="tags">Hashtags</h2>
+            <div class="mastodon-feeds-section">
+                <div class="mastodon-feed">
+                	<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmastodon.social%2Ftags%2Fttrpg.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
+                </div>
+                <div class="mastodon-feed">
+                	<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmastodon.social%2Ftags%2Fbloomscrolling.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
+            	</div>
+            	<div class="mastodon-feed">
+            		<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmastodon.social%2Ftags%2Fwallpaper.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
+            	</div>
+            	<div class="mastodon-feed">
+            		<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmastodon.social%2Ftags%2Ffungus.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
+            	</div>
+            	<div class="mastodon-feed">
+            		<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmastodon.social%2Ftags%2Fttrpg.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
+            	</div>
+            	<div class="mastodon-feed">
+            		<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmastodon.social%2Ftags%2Fpathfinder.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
+            	</div>
+            	<div class="mastodon-feed">
+            		<iframe width="300" height="700" class="rssdog" src="https://www.rssdog.com/index.php?url=https%3A%2F%2Fmastodon.social%2Ftags%2Fphotography.rss&mode=html&showonly=&maxitems=5&showdescs=1&desctrim=0&descmax=0&tabwidth=100%25&showdate=1&linktarget=_blank&bordercol=%23d4d0c8&headbgcol=%232a2f3a&headtxtcol=%23ffffff&titlebgcol=%232a2f3a&titletxtcol=%23ffffff&itembgcol=%23272c36&itemtxtcol=%23ffffff&ctl=0"></iframe>
+            	</div>
+            </div>
+        </div>
+
+        <div class="feed-section">
             <h2 id="other">Other Accounts</h2>
             <div class="mastodon-feeds-section">
                 <div class="mastodon-feed">
@@ -264,6 +261,7 @@
 
     </div>
 
+
     <script>
         // Check if prefers-color-scheme is supported
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -282,29 +280,6 @@
             }
         });
 
-        // Toggle the menu visibility
-        function toggleMenu() {
-            const menu = document.querySelector('.menu');
-            menu.style.display = (menu.style.display === 'flex' || menu.style.display === '') ? 'none' : 'flex';
-        }
-
-        // Check if the viewport is small, then show the menu button
-        window.addEventListener('resize', function () {
-            const menuBtn = document.querySelector('.menu-btn');
-            const menu = document.querySelector('.menu');
-            if (window.innerWidth <= 768) {
-                menuBtn.style.display = 'block';
-                menu.style.display = 'none'; // Hide the menu initially for small screens
-            } else {
-                menuBtn.style.display = 'none';
-                menu.style.display = 'flex'; // Show the menu for larger screens
-            }
-        });
-
-        // Initial check for small screens
-        if (window.innerWidth <= 768) {
-            document.querySelector('.menu-btn').style.display = 'block';
-        }
     </script>
 
 </body>
