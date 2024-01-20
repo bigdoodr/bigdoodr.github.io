@@ -1,179 +1,90 @@
+---
+layout: default
+---
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Internet Images</title>
+    <script src="https://kit.fontawesome.com/39b9bf3219.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="icon" href="https://bigdoodr.github.io/resources/doodatar.png" type="image/x-icon">
+    <link rel="shortcut icon" href="https://bigdoodr.github.io/resources/doodatar.png" type="image/x-icon">
 
-	<meta charset="utf-8" /> 
-<script src="https://kit.fontawesome.com/39b9bf3219.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-<style>
-.fa {
-  font-size: 50px;
-  cursor: pointer;
-  user-select: none;
-}
+    <style>
+        .fa {
+          font-size: 50px;
+          cursor: pointer;
+		  		  user-select: none;
+				}
 
-.fa:hover {
-  color: darkblue;
-}
-</style>
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Dashed border */
-hr.dashed {
-  border-top: 3px dashed #bbb;
-}
-
-/* Dotted border */
-hr.dotted {
-  border-top: 3px dotted #bbb;
-}
-
-/* Solid border */
-hr.solid {
-  border-top: 3px solid #bbb;
-}
-
-/* Rounded border */
-hr.rounded {
-  border-top: 8px solid #bbb;
-  border-radius: 5px;
-}
-
-</style>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="referrer" content="same-origin" />
-		<meta name="robots" content="index, follow" />
-		<meta name="generator" content="RapidWeaver" />
+				.fa:hover {
+		  		  color: darkblue;
+				}
 		
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:site" content="@bigdoodr">
-	<meta name="twitter:creator" content="@bigdoodr">
-	<meta name="twitter:title" content="Random Internet Images">
-	<meta name="twitter:image" content="https://bigdoodr.github.io/resources/Untitled.png">
-	<meta name="twitter:url" content="https://bigdoodr.github.io/rii.html">
-	<meta property="og:type" content="website">
-	<meta property="og:site_name" content="Placeholder Landing Page">
-	<meta property="og:title" content="Random Internet Images">
-	<meta property="og:image" content="https://bigdoodr.github.io/resources/Untitled.png">
-	<meta property="og:url" content="https://bigdoodr.github.io/rii.html"> 
+		        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Default background color */
+            color: #333; /* Default text color */
+            transition: background-color 0.5s;
+        }
 
-	<!-- Meta tags -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-	<title>Random Internet Images</title>
-	<link rel="stylesheet" type="text/css" media="all" href="rw_common/themes/Climate/consolidated-5.css?rwcache=698421996" />
-		
-	    
+        h1 {
+            color: #007BFF; /* Heading color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for contrast */
+        }
+    </style>
 </head>
 
-<!-- This page was created with RapidWeaver from Realmac Software. http://www.realmacsoftware.com -->
-
 <body>
-	<div class="hero" id="hero">
-        <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="https://bigdoodr.github.io/"><img src="rw_common/images/rounddoodatar.png" width="1024" height="1024" alt=""I’m the Dood. Or His Doodness or Doodr or El Dooderino if you’re not into the whole brevity thing.""/>
-                <span class="navbar-title"></span>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto"><li class="nav-item"><a href="./" rel="" class="nav-link">Home</a></li><li class="nav-item"><a href="twitterfeeds.html" rel="" class="nav-link">TweetWall</a></li><li class="nav-item active"><a href="rii.html" rel="" class="nav-link">Random Internet Images</a></li></ul>
-            </div>
-        </nav>
 
-		<div class="hero-content" id="hero">
-				<h1 class="hero-title"></h1>
-				<h2 class="hero-slogan"></h2>
-		</div>
+    <div class="container">
 
-		<div class="hero-background"></div>
-	</div>
-
-	<main class="content">
-		<div class="container py-5">
-			<div class="row">
-				<div class="col-sm-8 main">
-					<h3 id="nasaapod">Nasa APOD</h3>
-
-<p><img src="https://go-apod.herokuapp.com/image" width="1000" height="1000"></p>
-
-<h3 id="randomimagefromunsplash">Random Image from Unsplash</h3>
+<h1 id="randomimagefromunsplash">Random Image from Unsplash</h1>
 
 <p><img src="https://source.unsplash.com/random" width="2000" height="1000"></p>
 
-<h3 id="randompicsumimage">Random PicSum Image</h3>
+<h1 id="randompicsumimage">Random PicSum Image</h1>
 
 <p><img src="https://picsum.photos/3840/2160/" width="2000" height="1000"></p>
 
-<h3 id="bingswallpaperoftheday">Bing's Wallpaper of the day</h3>
+<h1 id="bingswallpaperoftheday">Bing's Wallpaper of the day</h1>
 
 <p><img src="https://cdn.jsdelivr.net/gh/WangNingkai/BingImageApi@latest/images/latest.png" width="2000" height="1000"></p>
-                </div>
-
-                <div class="col-sm-4 sidebar">
-                    <h4></h4>
-                    
-                    
-                </div>
-			</div>
-		</div>
-
-		<div class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="footer-content text-center">
-							
-						</div>
-
-						<ul class="navbar-nav ml-auto"><li class="nav-item"><a href="./" rel="" class="nav-link">Home</a></li><li class="nav-item"><a href="twitterfeeds.html" rel="" class="nav-link">TweetWall</a></li><li class="nav-item active"><a href="rii.html" rel="" class="nav-link">Random Internet Images</a></li></ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
-
-	<script type="text/javascript" src="rw_common/themes/Climate/js/main.js?rwcache=698421996"></script>
-<rapidweaver-badge url="https://bigdoodr.scruggsfam.rocks" position-x="right" position-y="bottom" transition="slide" delay-type="scroll" delay="30%" mode="dark" target="_blank"><img src= "rw_common/assets/avatar.png" alt="thatsa me" /><p>Made by bigdoodr</p></rapidweaver-badge>
-<script src="rw_common/assets/rw-badge.js?rwcache=698421996"></script>
-<script>
-$( "button1" ).click(function() {
-  $( "p1" ).toggle();
-});
-</script>
-<script>
-$( "button2" ).click(function() {
-  $( "p2" ).toggle();
-});
-</script>
-<script>
-$( "button3" ).click(function() {
-  $( "p3" ).toggle();
-});
-</script>
+    </div>
 
 
+    <script>
+        // Check if prefers-color-scheme is supported
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.style.backgroundColor = '#121212'; // Dark mode background color
+            document.body.style.color = '#fff'; // Dark mode text color
+        }
 
-<script>
-// Add active class to the current button (highlight it)
-var header = document.getElementById("myDIV");
-var btns = header.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-  var current = document.getElementsByClassName("active");
-  if (current.length > 0) { 
-    current[0].className = current[0].className.replace(" active", "");
-  }
-  this.className += " active";
-  });
-}
-</script></body>
+        // Listen for changes in the color scheme preference
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.body.style.backgroundColor = '#121212'; // Dark mode background color
+                document.body.style.color = '#fff'; // Dark mode text color
+            } else {
+                document.body.style.backgroundColor = '#f0f0f0'; // Light mode background color
+                document.body.style.color = '#333'; // Light mode text color
+            }
+        });
+
+    </script>
+
+</body>
 
 </html>
