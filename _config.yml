@@ -1,0 +1,5 @@
+plugins:
+  - jekyll-feed
+title: bigDoodR Things
+description: These are some of the things I like
+author: bigDoodR
