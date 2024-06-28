@@ -13,65 +13,38 @@
 <body>
     <h1>Resources</h1>
     <p>Thank you for attending my session at the 2024 MacAdmins Conference. Below are links to all of the items I referenced in the presentation.</p>
-    <ul id="link-list"></ul>
-
-    <script>
-        const links = [
-            "https://github.com/root3nl/SupportApp",
-            "https://github.com/SAP/macOS-enterprise-privileges",
-            "https://github.com/sgmills/PrivilegesDemoter",
-            "https://github.com/kcrawford/dockutil",
-            "https://github.com/mvdbent/setDock",
-            "https://appleshare.it/posts/use-dockutil-in-a-script/",
-            "https://github.com/installomator/installomator",
-            "https://github.com/robjschroeder/App-Auto-Patch",
-            "http://github.com/swiftDialog/swiftDialog/",
-            "https://youtu.be/QtWNBn76LQM?si=AdudnovFouXej3cQ",
-            "https://github.com/grahampugh/nice-updater",
-            "https://github.com/SecondSonConsulting/renew",
-            "https://kometa.wiki/en/latest/kometa/install/local/",
-            "https://it-training.apple.com/tutorials/apt-deployment#developing-your-mac-compliance-strategy",
-            "https://macadmins.news/",
-            "https://web.archive.org/web/20230912154712/https:/lifehacker.com/improve-your-critical-thinking-with-this-cheatsheet-1843678157",
-            "https://www.linkedin.com/learning/time-management-fundamentals-14548057/clearing-your-mind-of-its-to-dos-with-mental-triggers",
-            "https://github.com/SecondSonConsulting/Baseline",
-            "https://snelson.us/sym",
-            "https://github.com/Installomator/Installomator/blob/main/MDM/Progress%201st%20swiftDialog.sh",
-            "https://github.com/macadmins/nudge",
-            "https://github.com/Macjutsu/super",
-            "https://github.com/grahampugh/nice-updater",
-            "https://github.com/SecondSonConsulting/Renew",
-            "https://tombridge.com/2021/07/08/the-three-paragons-of-it-chidi-ted-jules/",
-            "https://blog.kandji.io/git-github-and-version-control",
-            "https://beta.apple.com/it",
-            "http://sofa.macadmins.io/",
-            "https://support.apple.com/en-us/102772",
-            "https://trusted.jamf.com/docs/establishing-compliance-baselines"
-        ];
-
-        const linkList = document.getElementById('link-list');
-
-        links.forEach(link => {
-            fetch(`https://textance.herokuapp.com/title/${link}`)
-                .then(response => response.text())
-                .then(title => {
-                    const listItem = document.createElement('li');
-                    const anchor = document.createElement('a');
-                    anchor.href = link;
-                    anchor.textContent = title || link;
-                    listItem.appendChild(anchor);
-                    linkList.appendChild(listItem);
-                })
-                .catch(error => {
-                    const listItem = document.createElement('li');
-                    const anchor = document.createElement('a');
-                    anchor.href = link;
-                    anchor.textContent = link;
-                    listItem.appendChild(anchor);
-                    linkList.appendChild(listItem);
-                });
-        });
-    </script>
+    <ul>
+        <li><a href="https://github.com/root3nl/SupportApp">SupportApp</a></li>
+        <li><a href="https://github.com/SAP/macOS-enterprise-privileges">macOS-enterprise-privileges</a></li>
+        <li><a href="https://github.com/sgmills/PrivilegesDemoter">PrivilegesDemoter</a></li>
+        <li><a href="https://github.com/kcrawford/dockutil">dockutil</a></li>
+        <li><a href="https://github.com/mvdbent/setDock">setDock</a></li>
+        <li><a href="https://appleshare.it/posts/use-dockutil-in-a-script/">Use DockUtil in a Script</a></li>
+        <li><a href="https://github.com/installomator/installomator">Installomator</a></li>
+        <li><a href="https://github.com/robjschroeder/App-Auto-Patch">App-Auto-Patch</a></li>
+        <li><a href="http://github.com/swiftDialog/swiftDialog/">swiftDialog</a></li>
+        <li><a href="https://youtu.be/QtWNBn76LQM?si=AdudnovFouXej3cQ">Video: Managing Privileges</a></li>
+        <li><a href="https://github.com/grahampugh/nice-updater">nice-updater</a></li>
+        <li><a href="https://github.com/SecondSonConsulting/renew">Renew</a></li>
+        <li><a href="https://kometa.wiki/en/latest/kometa/install/local/">Install Kometa Locally</a></li>
+        <li><a href="https://it-training.apple.com/tutorials/apt-deployment#developing-your-mac-compliance-strategy">Developing Your Mac Compliance Strategy</a></li>
+        <li><a href="https://macadmins.news/">MacAdmins News</a></li>
+        <li><a href="https://web.archive.org/web/20230912154712/https:/lifehacker.com/improve-your-critical-thinking-with-this-cheatsheet-1843678157">Improve Your Critical Thinking with This Cheatsheet</a></li>
+        <li><a href="https://www.linkedin.com/learning/time-management-fundamentals-14548057/clearing-your-mind-of-its-to-dos-with-mental-triggers">Clearing Your Mind of Its To-Dos with Mental Triggers</a></li>
+        <li><a href="https://github.com/SecondSonConsulting/Baseline">Baseline</a></li>
+        <li><a href="https://snelson.us/sym">Sym</a></li>
+        <li><a href="https://github.com/Installomator/Installomator/blob/main/MDM/Progress%201st%20swiftDialog.sh">Progress 1st swiftDialog</a></li>
+        <li><a href="https://github.com/macadmins/nudge">Nudge</a></li>
+        <li><a href="https://github.com/Macjutsu/super">Super</a></li>
+        <li><a href="https://github.com/grahampugh/nice-updater">nice-updater</a></li>
+        <li><a href="https://github.com/SecondSonConsulting/Renew">Renew</a></li>
+        <li><a href="https://tombridge.com/2021/07/08/the-three-paragons-of-it-chidi-ted-jules/">The Three Paragons of IT: Chidi, Ted, Jules</a></li>
+        <li><a href="https://blog.kandji.io/git-github-and-version-control">Git, GitHub, and Version Control</a></li>
+        <li><a href="https://beta.apple.com/it">Apple Beta Software Program</a></li>
+        <li><a href="http://sofa.macadmins.io/">SOFA</a></li>
+        <li><a href="https://support.apple.com/en-us/102772">About Apple Platform Security</a></li>
+        <li><a href="https://trusted.jamf.com/docs/establishing-compliance-baselines">Establishing Compliance Baselines</a></li>
+    </ul>
   <iframe src="https://bigdoodr.github.io/ActiveUpdateCycleWebPage" width="100%" height="600px" style="border:none;"></iframe>
 </body>
 </html>
