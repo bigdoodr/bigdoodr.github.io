@@ -5,11 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources</title>
     <style>
-        body {
+        .fa {
+          font-size: 50px;
+          cursor: pointer;
+		  user-select: none;
+		}
+
+		.fa:hover {
+		  color: darkblue;
+		}
+		body {
+            margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Default background color */
+            color: #333; /* Default text color */
+            transition: background-color 0.5s;
         }
-    </style>
-</head>
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #1C1C1C; /* Heading color */
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); /* Horizontal offset, vertical offset, blur radius, shadow color */
+        }
+    </style></head>
 <body>
     <h1>Resources</h1>
     <p>Thank you for attending my session at the 2024 MacAdmins Conference. Below are links to all of the items I referenced in the presentation.</p>
@@ -45,6 +68,26 @@
         <li><a href="https://support.apple.com/en-us/102772">About Apple Platform Security</a></li>
         <li><a href="https://trusted.jamf.com/docs/establishing-compliance-baselines">Establishing Compliance Baselines</a></li>
     </ul>
+    <p>And, if you so desire, you can go through the presentation again below--or <a href="https://bigdoodr.github.io/ActiveUpdateCycleWebPage">fullscreen</a>.</p>
   <iframe src="https://bigdoodr.github.io/ActiveUpdateCycleWebPage" width="100%" height="600px" style="border:none;"></iframe>
+  <script>
+        // Check if prefers-color-scheme is supported
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.style.backgroundColor = '#121212'; // Dark mode background color
+            document.body.style.color = '#fff'; // Dark mode text color
+        }
+
+        // Listen for changes in the color scheme preference
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.body.style.backgroundColor = '#121212'; // Dark mode background color
+                document.body.style.color = '#fff'; // Dark mode text color
+            } else {
+                document.body.style.backgroundColor = '#f0f0f0'; // Light mode background color
+                document.body.style.color = '#333'; // Light mode text color
+            }
+        });
+
+  </script>
 </body>
 </html>
