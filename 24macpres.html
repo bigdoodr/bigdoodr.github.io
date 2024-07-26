@@ -6,15 +6,16 @@
     <title>Resources</title>
     <style>
         .fa {
-          font-size: 50px;
-          cursor: pointer;
-		  user-select: none;
-		}
+            font-size: 50px;
+            cursor: pointer;
+            user-select: none;
+        }
 
-		.fa:hover {
-		  color: darkblue;
-		}
-		body {
+        .fa:hover {
+            color: darkblue;
+        }
+
+        body {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0; /* Default background color */
@@ -35,19 +36,29 @@
             background-color: #ff9090;
             border-radius: 50%;
             text-align: center;
-
-
         }
 
         a {
-            color: white;
+            color: #0066cc; /* Default link color for light mode */
         }
-        
+
+        /* Dark mode styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212; /* Dark mode background color */
+                color: #fff; /* Dark mode text color */
+            }
+
+            a {
+                color: #bb86fc; /* Link color for dark mode */
+            }
+        }
+
         li {
             margin-bottom: 10px; /* Adjust the value to control the spacing */
         }
-
-    </style></head>
+    </style>
+</head>
 <body>
     <h1>Resources</h1>
     <p>Thank you for attending my session at the 2024 MacAdmins Conference.</p>
@@ -55,7 +66,7 @@
     <h2>Session Notes: <a href="https://bit.ly/3xNPs12">https://bit.ly/3xNPs12</a></h2>
     <p>Below are links to all of the items I referenced in the presentation, as well as items that have helped me along the way.</p>
     <ul>
-        <li><a href="https://macadmins.news/">MacAdmins.news</a> | <a href="https://docs.macsysadmin.se/2023/pdf/day4session3.pdf">Armin Briegel - MacAdmin Tools MSA 2023 Presentation Slides</a> | <a href="https://docs.macsysadmin.se/2023/video_h265/Day4Session3.mp4">Session Video</li>
+        <li><a href="https://macadmins.news/">MacAdmins.news</a> | <a href="https://docs.macsysadmin.se/2023/pdf/day4session3.pdf">Armin Briegel - MacAdmin Tools MSA 2023 Presentation Slides</a> | <a href="https://docs.macsysadmin.se/2023/video_h265/Day4Session3.mp4">Session Video</a></li>
         <li><a href="https://web.archive.org/web/20230912154712/https:/lifehacker.com/improve-your-critical-thinking-with-this-cheatsheet-1843678157">Improve Your Critical Thinking with This Cheatsheet</a> | <a href="https://www.linkedin.com/learning/time-management-fundamentals-14548057/clearing-your-mind-of-its-to-dos-with-mental-triggers">Clearing Your Mind of Its To-Dos with Mental Triggers</a></li>
         <li><a href="https://tombridge.com/2021/07/08/the-three-paragons-of-it-chidi-ted-jules/">Tom Bridge - Campfire 2021 - The Three Paragons of IT: Chidi, Ted, Jules Presentation Slides</a> | <a href="https://www.youtube.com/embed/MAPRodESB-0">Session Video</a></li>
         <li><a href="https://blog.kandji.io/git-github-and-version-control">Kandji - Git, GitHub, and Version Control</a></li>
@@ -72,11 +83,11 @@
         <li>Documentation Examples: <a href="https://kometa.wiki/en/latest/kometa/install/local/">Team Kometa - Install Guide</a> | <a href="https://it-training.apple.com/tutorials/apt-deployment#developing-your-mac-compliance-strategy">Apple - Mac Compliance Strategy</a> | <a href="https://snelson.us/featured/">Dan - Featured Blog Entries</a></li>
         <li><a href="https://support.apple.com/en-us/102772">Apple - Vintage + Obsolete Macs</a></li>
         <li><a href="https://trusted.jamf.com/docs/establishing-compliance-baselines">Jamf Compliance Editor</a></li>
-        <li>MAIDs/MAAs: <a href="https://www.modtitan.com/2023/10/resources-from-this-falls-byo.html">Dr. K - 2023 BYO Conference Presentations</a> | <a href="https://support.apple.com/guide/apple-business-manager/transfer-apple-services-when-federating-axm6603d9206/web">Apple - Transfer Apple Services When Federating</a>
+        <li>MAIDs/MAAs: <a href="https://www.modtitan.com/2023/10/resources-from-this-falls-byo.html">Dr. K - 2023 BYO Conference Presentations</a> | <a href="https://support.apple.com/guide/apple-business-manager/transfer-apple-services-when-federating-axm6603d9206/web">Apple - Transfer Apple Services When Federating</a></li>
     </ul>
     <p>And, if you so desire, you can go through the presentation again below--or <a href="https://bigdoodr.github.io/ActiveUpdateCycleWebPage">fullscreen</a>.</p>
-  <iframe src="https://bigdoodr.github.io/ActiveUpdateCycleWebPage" width="100%" height="600px" style="border:none;"></iframe>
-  <script>
+    <iframe src="https://bigdoodr.github.io/ActiveUpdateCycleWebPage" width="100%" height="600px" style="border:none;"></iframe>
+    <script>
         // Check if prefers-color-scheme is supported
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.body.style.backgroundColor = '#121212'; // Dark mode background color
@@ -89,11 +100,10 @@
                 document.body.style.backgroundColor = '#121212'; // Dark mode background color
                 document.body.style.color = '#fff'; // Dark mode text color
             } else {
-                document.body.style.backgroundColor = '#333333'; // Light mode background color
-                document.body.style.color = '#ffffff'; // Light mode text color
+                document.body.style.backgroundColor = '#f0f0f0'; // Light mode background color
+                document.body.style.color = '#333'; // Light mode text color
             }
         });
-
-  </script>
+    </script>
 </body>
 </html>
