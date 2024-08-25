@@ -1,6 +1,6 @@
-# webpages
-These are the things I’m interested in.
-Local News
-National Politics
-My Friends’ Tweets
-Web Comics
+# website
+This is my playground for webpage editing. Here you'll find links to:
+My Mastodon page
+My Code of Ethics
+My Personal Journey on Disconnecting from Google
+My First Presentation at a Conference
