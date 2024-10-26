@@ -1,6 +1,7 @@
 title: bigDoodR Things
 description: These are some of the things I like
 author: bigDoodR
+url: https:bigdoodr.github.io
 
 # Email / Social media user names used by the minima theme:
 # All of these are optional and can be removed or commented out
@@ -15,6 +16,11 @@ linkedin_username: "casey-scruggs-467147245"
 #youtube_username: username
 #googleplus_username: +username
 
+social-links:
+#  Resume:          /resume
+  LinkedIn:        https://linkedin.com/in/casey-scruggs-467147245
+  Mastodon:        https://mastodon.social/@bigdoodr
+
 #########################################################################################
 ######### Nothing below needs to be changed (unless you know what you're doing) #########
 #########################################################################################
@@ -26,6 +32,12 @@ kramdown:
   syntax_highlighter_opts:
     disable: true
     
+header_pages:
+  - resume.html
+#  - archive.html
+  - bookmarks.md
+
+
 plugins:
   - jekyll-feed
   - jekyll-sitemap
