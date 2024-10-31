@@ -44,31 +44,16 @@ hr {
   opacity: 0.3;
 }
 
-/* Light mode default */
-.banner-title {
-    color: #1C1C1C;
-}
-
-.banner-link {
+/* Light mode (default) */
+body {
+    background-color: #ffffff;
     color: #333333;
-    text-decoration: none;
-}
-
-.banner-link:hover {
-    color: #555555;
 }
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
-    .banner-title {
-        color: #ffffff;
-    }
-
-    .banner-link {
-        color: #bbbbbb;
-    }
-
-    .banner-link:hover {
-        color: #ff9090;
+    body {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text color */
     }
 }
