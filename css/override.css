@@ -44,23 +44,10 @@ hr {
   opacity: 0.3;
 }
 
-/* Light mode (default) */
+/* Light mode */
 body {
     background-color: #ffffff;
     color: #333333;
-}
-
-.banner-title {
-    color: #1C1C1C; /* Dark grey title for light mode */
-}
-
-.banner-link {
-    color: #333333; /* Dark link color for light mode */
-    text-decoration: none;
-}
-
-.banner-link:hover {
-    color: #555555; /* Slightly lighter color on hover for light mode */
 }
 
 /* Dark mode */
@@ -71,15 +58,31 @@ body {
     }
 }
 
+/* Banner styles for title and links */
+.banner-title {
+    color: #1C1C1C; /* Dark grey for light mode */
+}
+
+.banner-link {
+    color: #333333; /* Dark link color for light mode */
+    text-decoration: none;
+}
+
+.banner-link:hover {
+    color: #555555; /* Light mode hover color */
+}
+
+/* Dark mode styles for banner */
+@media (prefers-color-scheme: dark) {
     .banner-title {
         color: #ffffff; /* White title for dark mode */
     }
 
     .banner-link {
-        color: #bbbbbb; /* Light grey link color for dark mode */
+        color: #bbbbbb; /* Light grey link color in dark mode */
     }
 
     .banner-link:hover {
-        color: #ff9090; /* Accent color for hover effect in dark mode */
+        color: #ff9090; /* Accent color for dark mode hover */
     }
 }
