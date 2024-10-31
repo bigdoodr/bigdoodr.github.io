@@ -44,45 +44,31 @@ hr {
   opacity: 0.3;
 }
 
-/* Light mode */
-body {
-    background-color: #ffffff;
-    color: #333333;
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212; /* Dark background */
-        color: #ffffff; /* Light text color */
-    }
-}
-
-/* Banner styles for title and links */
+/* Light mode default */
 .banner-title {
-    color: #1C1C1C; /* Dark grey for light mode */
+    color: #1C1C1C;
 }
 
 .banner-link {
-    color: #333333; /* Dark link color for light mode */
+    color: #333333;
     text-decoration: none;
 }
 
 .banner-link:hover {
-    color: #555555; /* Light mode hover color */
+    color: #555555;
 }
 
-/* Dark mode styles for banner */
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
     .banner-title {
-        color: #ffffff; /* White title for dark mode */
+        color: #ffffff;
     }
 
     .banner-link {
-        color: #bbbbbb; /* Light grey link color in dark mode */
+        color: #bbbbbb;
     }
 
     .banner-link:hover {
-        color: #ff9090; /* Accent color for dark mode hover */
+        color: #ff9090;
     }
 }
