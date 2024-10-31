@@ -43,3 +43,17 @@ hr {
   font-size: 2.5em;
   opacity: 0.3;
 }
+
+/* Light mode (default) */
+body {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text color */
+    }
+}
