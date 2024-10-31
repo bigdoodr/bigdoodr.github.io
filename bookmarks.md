@@ -1,3 +1,7 @@
+---
+title: "Bookmarks"
+---
+
 - [![Meh](https://d2b8wt72ktn9a2.cloudfront.net/mediocre/image/upload/f_auto,dpr_2.0,q_auto,w_800/v1600295223/yedkpqbutk3qxfffpmad.png)](https://www.meh.com)
 - [![Woot](https://d3rqdbvvokrlbl.cloudfront.net/lib/images/sites/header/woot-an-amazon-company.svg)](https://www.woot.com)
 - [Mastodon Deck](https://mastodon.social/deck/getting-started)
