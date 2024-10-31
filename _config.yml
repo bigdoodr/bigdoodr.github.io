@@ -33,7 +33,7 @@ kramdown:
     disable: true
     
 header_pages:
-#  - resume.html
+  - about.html
   - archive.md
   - bookmarks.md
 
