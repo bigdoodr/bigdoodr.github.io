@@ -58,40 +58,23 @@ body {
     }
 }
 
-/* Additional banner styling */
-.banner {
-    text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: #ffffff;
-}
-
-.banner-title {
-    font-size: 2em;
-    color: #ffffff;
-}
-
-.banner-link {
-    color: #bbbbbb;
+/* Banner link color adjustments */
+.page-content a {
+    color: #333333; /* Dark color for light mode links */
     text-decoration: none;
-    margin: 0 15px;
 }
 
-.banner-link:hover {
-    color: #ff9090;
+.page-content a:hover {
+    color: #555555; /* Hover color for light mode */
 }
 
-/* Dark mode for the banner */
+/* Dark mode link colors */
 @media (prefers-color-scheme: dark) {
-    .banner {
-        background-color: #121212;
+    .page-content a {
+        color: #bbbbbb; /* Light grey link color for dark mode */
     }
 
-    .banner-link {
-        color: #ffffff;
-    }
-
-    .banner-link:hover {
-        color: #ff9090;
+    .page-content a:hover {
+        color: #ff9090; /* Accent color on hover in dark mode */
     }
 }
