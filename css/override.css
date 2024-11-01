@@ -57,3 +57,41 @@ body {
         color: #ffffff; /* Light text color */
     }
 }
+
+/* Additional banner styling */
+.banner {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #ffffff;
+}
+
+.banner-title {
+    font-size: 2em;
+    color: #ffffff;
+}
+
+.banner-link {
+    color: #bbbbbb;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.banner-link:hover {
+    color: #ff9090;
+}
+
+/* Dark mode for the banner */
+@media (prefers-color-scheme: dark) {
+    .banner {
+        background-color: #121212;
+    }
+
+    .banner-link {
+        color: #ffffff;
+    }
+
+    .banner-link:hover {
+        color: #ff9090;
+    }
+}
