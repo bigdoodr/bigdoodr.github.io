@@ -1,3 +1,14 @@
+/* Force the menu to always display */
+nav ul {
+    display: flex !important; /* Keeps the links visible and in a row */
+    flex-direction: row; /* Ensures links stay horizontal */
+}
+
+/* Optional: Remove any toggle button or mobile-specific styling */
+.menu-toggle {
+    display: none !important; /* Hides the mobile menu toggle button */
+}
+
 hr {
   margin-top: 30px;
   margin-bottom: 20px;
