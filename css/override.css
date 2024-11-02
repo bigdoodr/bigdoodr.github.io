@@ -1,14 +1,3 @@
-/* Force the menu to always display */
-nav ul {
-    display: flex !important; /* Keeps the links visible and in a row */
-    flex-direction: row; /* Ensures links stay horizontal */
-}
-
-/* Optional: Remove any toggle button or mobile-specific styling */
-.menu-toggle {
-    display: none !important; /* Hides the mobile menu toggle button */
-}
-
 hr {
   margin-top: 30px;
   margin-bottom: 20px;
@@ -55,37 +44,53 @@ hr {
   opacity: 0.3;
 }
 
-/* Light mode (default) */
-body {
-    background-color: #ffffff;
-    color: #333333;
+/* HighlightJS overrides */
+.hljs {
+  max-height: 500px;
 }
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212; /* Dark background */
-        color: #ffffff; /* Light text color */
-    }
+/* Copy code button */
+.copy-code-button {
+  color: #272822;
+  background-color: #FFF;
+  border-color: #272822;
+  border: 2px solid;
+  border-radius: 3px 3px 0px 0px;
+
+  /* right-align */
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+
+  margin-bottom: -2px;
+  padding: 3px 8px;
+  font-size: 0.8em;
 }
 
-/* Banner link color adjustments */
-.page-content a {
-    color: #333333; /* Dark color for light mode links */
-    text-decoration: none;
+.copy-code-button:hover {
+  cursor: pointer;
+  background-color: #F2F2F2;
 }
 
-.page-content a:hover {
-    color: #555555; /* Hover color for light mode */
+.copy-code-button:focus {
+  /* Avoid an ugly focus outline on click in Chrome,
+     but darken the button for accessibility.
+     See https://stackoverflow.com/a/25298082/1481479 */
+  background-color: #E6E6E6;
+  outline: 0;
 }
 
-/* Dark mode link colors */
-@media (prefers-color-scheme: dark) {
-    .page-content a {
-        color: #bbbbbb; /* Light grey link color for dark mode */
-    }
+.copy-code-button:active {
+  background-color: #D9D9D9;
+}
 
-    .page-content a:hover {
-        color: #ff9090; /* Accent color on hover in dark mode */
-    }
+.highlight pre {
+  /* Avoid pushing up the copy buttons. */
+  margin: 0;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }
