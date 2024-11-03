@@ -3,7 +3,7 @@ layout: post
 title: "I Kissed Google Goodbye"
 description: "A breakdown of my breakup with the Alphabet company"
 date: 2024-06-22T19:16:19-19:16
-tags: tech
+tags: Tech
 image: /7d4b6ea0-c621-11ee-89b2-95cd1f4ddbf3.png
 ---
 
