@@ -1,5 +1,5 @@
 ---
-title: "About Me"
+title: "About Me and My Code of Ethics"
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +8,12 @@ title: "About Me"
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Me and My Code of Ethics</title>
   <link rel="stylesheet" href="/css/override.css">
+  <script src="https://unpkg.com/darkreader@4.9.40/darkreader.js"></script>
+  <script type="text/javascript">
+    DarkReader.setFetchMethod(window.fetch); // Fix to remedy CORS errors in Chrome console
+    DarkReader.auto({ brightness: 100, contrast: 90, sepia: 10 }); // Automatically applies dark mode
+  </script>
+
 </head>
 <body>
   <header class="banner">
@@ -15,7 +21,13 @@ title: "About Me"
     <nav>
       <ul>
         {% for page in site.pages %}
-          {% if page.url in site.header_pages %}
+          {% assign is_header_page = false %}
+          {% for header_page in site.header_pages %}
+            {% if page.url == header_page %}
+              {% assign is_header_page = true %}
+            {% endif %}
+          {% endfor %}
+          {% if is_header_page %}
             <li><a href="{{ page.url | relative_url }}" class="banner-link">{{ page.title | escape }}</a></li>
           {% endif %}
         {% endfor %}
