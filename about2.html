@@ -1,7 +1,27 @@
 ---
-layout: default
 title: "About Me"
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me and My Code of Ethics</title>
+  <link rel="stylesheet" href="/css/override.css">
+</head>
+<body>
+  <header class="banner">
+    <h1 class="banner-title">{{ site.title }}</h1>
+    <nav>
+      <ul>
+        {% for page in site.pages %}
+          {% if page.url in site.header_pages %}
+            <li><a href="{{ page.url | relative_url }}" class="banner-link">{{ page.title | escape }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  </header>
 
 <!-- Section 1 -->
 <section id="section1">
