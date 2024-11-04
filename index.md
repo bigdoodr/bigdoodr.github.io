@@ -7,6 +7,7 @@
 	src="/resources/doodatar.png"
 	alt="Artwork of the Dude holding a White Russian from The Big Lebowski movie">
 </img>
+
 ---
 
 Find me on [Mastodon](https://mastodon.social/@bigdoodr)
