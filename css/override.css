@@ -94,3 +94,11 @@ hr {
     display: none !important;
   }
 }
+
+.utterances {
+    margin-top: 40px; /* Space between post content and comments */
+}
+
+.utterances-frame {
+    border: none; /* Remove frame border */
+}
