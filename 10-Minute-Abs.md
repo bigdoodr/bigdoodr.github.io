@@ -14,42 +14,46 @@ Perform Exercise for 45 seconds
 
 Rest for 15 seconds
 
-<center>![Crescent Tucks](/resources/1.crescent-tucks.gif)</center>
+<div style="text-align: center;">
 
-<center>Crescent Tucks</center>
+![Crescent Tucks](/resources/1.crescent-tucks.gif)
 
-<center>![Backward 7s](/resources/2.backward-7s.gif)</center>
+Crescent Tucks
 
-<center>Backward 7x</center>
+![Backward 7s](/resources/2.backward-7s.gif)
 
-<center>![Swipers](/resources/3.swipers.gif)</center>
+Backward 7x
 
-<center>Swipers</center>
+![Swipers](/resources/3.swipers.gif)
 
-<center>![Side Cycles](/resources/4.side-cycles.gif)</center>
+Swipers
 
-<center>Side Cycles - Left</center>
+![Side Cycles](/resources/4.side-cycles.gif)
 
-<center>![Side Cycles](/resources/4.side-cycles.gif)</center>
+Side Cycles - Left
 
-<center>Side Cycles - Right</center>
+![Side Cycles](/resources/4.side-cycles.gif)
 
-<center>![Mountain Hip Dips](/resources/5.mountain-hip-dips.gif)</center>
+Side Cycles - Right
 
-<center>Mountain Hip Dips</center>
+![Mountain Hip Dips](/resources/5.mountain-hip-dips.gif)
 
-<center>![Frog V-Ups](/resources/6.frog-v-ups.gif)</center>
+Mountain Hip Dips
 
-<center>Frog V-Ups</center>
+![Frog V-Ups](/resources/6.frog-v-ups.gif)
 
-<center>![Side Scissor Crunches](/resources/7.side-scissor-crunch.gif)</center>
+Frog V-Ups
 
-<center>Side Scissor Crunches - Left</center>
+![Side Scissor Crunches](/resources/7.side-scissor-crunch.gif)
 
-<center>![Side Scissor Crunches](/resources/7.side-scissor-crunch.gif)</center>
+Side Scissor Crunches - Left
 
-<center>Side Scissor Crunches - Right</center>
+![Side Scissor Crunches](/resources/7.side-scissor-crunch.gif)
 
-<center>![Corpse Crunch](/resources/8.corpse-crunch.gif)</center>
+Side Scissor Crunches - Right
 
-<center>Corpse Crunch</center>
+![Corpse Crunch](/resources/8.corpse-crunch.gif)
+
+Corpse Crunch
+
+</div>
