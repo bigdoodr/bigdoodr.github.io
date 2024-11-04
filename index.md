@@ -1,6 +1,12 @@
-<div style="width: 150px; height: 150px; backgroud-color: #ffffff; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">
-	<img src="https://bigdoodr.github.io/resources/doodatar.png?raw=true" alt="Avatar Image" width="80">
-</div>
+<img
+	style="display: block;
+		   border-radius: 75%;
+		   margin-left: auto;
+		   margin-right: auto;
+		   width: 30%"
+	src="/resources/doodatar.png"
+	alt="Artwork of the Dude holding a White Russian from The Big Lebowski movie">
+</img>
 ---
 
 Find me on [Mastodon](https://mastodon.social/@bigdoodr)

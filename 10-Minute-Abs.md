@@ -8,7 +8,7 @@ image:
 
 # 10 Minute Abs by Jeff Cavaliere
 
-Source: [10 Minute Ab Workout | 8 Ab Exercises | Athlean-X](https://athleanx.com/articles/abs-for-men/10-minute-ab-workout) ; [YouTube Video](https://www.youtube.com/embed/i27K2ry9jEo)
+Source: [10 Minute Ab Workout \| 8 Ab Exercises \| Athlean-X](https://athleanx.com/articles/abs-for-men/10-minute-ab-workout) ; [YouTube Video](https://www.youtube.com/embed/i27K2ry9jEo)
 
 Perform Exercise for 45 seconds
 
@@ -16,40 +16,40 @@ Rest for 15 seconds
 
 ![Crescent Tucks](/resources/1.crescent-tucks.gif)
 
-Crescent Tucks
+<center>Crescent Tucks</center>
 
 ![Backward 7s](/resources/2.backward-7s.gif)
 
-Backward 7x
+<center>Backward 7x</center>
 
 ![Swipers](/resources/3.swipers.gif)
 
-Swipers
+<center>Swipers</center>
 
 ![Side Cycles](/resources/4.side-cycles.gif)
 
-Side Cycles - Left
+<center>Side Cycles - Left</center>
 
 ![Side Cycles](/resources/4.side-cycles.gif)
 
-Side Cycles - Right
+<center>Side Cycles - Right</center>
 
 ![Mountain Hip Dips](/resources/5.mountain-hip-dips.gif)
 
-Mountain Hip Dips
+<center>Mountain Hip Dips</center>
 
 ![Frog V-Ups](/resources/6.frog-v-ups.gif)
 
-Frog V-Ups
+<center>Frog V-Ups</center>
 
 ![Side Scissor Crunches](/resources/7.side-scissor-crunch.gif)
 
-Side Scissor Crunches - Left
+<center>Side Scissor Crunches - Left</center>
 
 ![Side Scissor Crunches](/resources/7.side-scissor-crunch.gif)
 
-Side Scissor Crunches - Right
+<center>Side Scissor Crunches - Right</center>
 
 ![Corpse Crunch](/resources/8.corpse-crunch.gif)
 
-Corpse Crunch
+<center>Corpse Crunch</center>
