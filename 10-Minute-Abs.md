@@ -3,7 +3,7 @@ title: 10 Minute Abs by Jeff Cavaliere
 description: 10 Core Exercises in 10 Minutes
 date: 2021-05-12T13:00:00-13:00
 tags: Fitness
-image: 
+image: /resources/1.crescent-tucks.gif
 ---
 
 # 10 Minute Abs by Jeff Cavaliere
@@ -14,46 +14,42 @@ Perform Exercise for 45 seconds
 
 Rest for 15 seconds
 
-<div style="text-align: center;">
-
 ![Crescent Tucks](/resources/1.crescent-tucks.gif)
 
-Crescent Tucks
+- Crescent Tucks
 
 ![Backward 7s](/resources/2.backward-7s.gif)
 
-Backward 7x
+- Backward 7x
 
 ![Swipers](/resources/3.swipers.gif)
 
-Swipers
+- Swipers
 
 ![Side Cycles](/resources/4.side-cycles.gif)
 
-Side Cycles - Left
+- Side Cycles - Left
 
 ![Side Cycles](/resources/4.side-cycles.gif)
 
-Side Cycles - Right
+- Side Cycles - Right
 
 ![Mountain Hip Dips](/resources/5.mountain-hip-dips.gif)
 
-Mountain Hip Dips
+- Mountain Hip Dips
 
 ![Frog V-Ups](/resources/6.frog-v-ups.gif)
 
-Frog V-Ups
+- Frog V-Ups
 
 ![Side Scissor Crunches](/resources/7.side-scissor-crunch.gif)
 
-Side Scissor Crunches - Left
+- Side Scissor Crunches - Left
 
 ![Side Scissor Crunches](/resources/7.side-scissor-crunch.gif)
 
-Side Scissor Crunches - Right
+- Side Scissor Crunches - Right
 
 ![Corpse Crunch](/resources/8.corpse-crunch.gif)
 
-Corpse Crunch
-
-</div>
+- Corpse Crunch
