@@ -298,6 +298,30 @@
   </section>
 {%- endif -%}
 
+{%- if site.data.skills -%}
+  <section class="content-section">
+    <header class="section-header"><h2>Skills</h2></header>
+    <div class="section-content">
+      {%- for skill in site.data.skills -%}
+        <div class="resume-item">
+          <h4 class="resume-item-details">{{ skill.skill }}</h4>
+          <div class="resume-item-copy">
+            <div class="skill-description">
+              {{ skill.description }}
+            </div>
+            <div class="skill-level">
+              <div class="skill-bar">
+                <div class="skill-bar-fill" style="width: {{ skill.level }}%;"></div>
+              </div>
+              <span>{{ skill.level }}%</span>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
 <div class="bottom-bar no-print">
   <div class="bottom-bar__content">
     <div class="bottom-bar__text">

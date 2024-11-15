@@ -1,0 +1,47 @@
+#- skill: string
+#  description: string
+#  level: percentage value
+#  list:
+#    - array
+#    - of
+#    - strings
+#
+# Template supports both a description AND a skill list, however it may look best if only one or the
+# other is used. Lists are sorted and concatenated without line breaks separated by • (&bull;)
+
+- skill: Apple Device Management (macOS, iPadOS)
+  description: macOS, iPadOS
+  level: 100
+- skill: Device Enrollment and Provisioning
+  description: Apple Configurator, Apple School Manager, Mosyle Business MDM Solution
+  level: 100
+- skill: Problem Solving & Troubleshooting
+  description: Identifying and resolving complex technical issues through logical analysis, root cause identification, and creative solutions, ensuring minimal downtime and optimal system performance.
+  level: 100
+- skill: Project Management
+  description: Planning, coordinating, and executing projects by defining objectives, managing resources, and ensuring timely delivery while maintaining alignment with stakeholder expectations and organizational goals.
+  level: 80
+- skill: Scripting and Automation
+  description: Bash, Python, Zsh
+  level: 70
+- skill: Technical Writing & Documentation
+  description: Creating clear, concise, and user-focused documentation, chiefly in the form of knowledge-base articles and web pages, for both end-users and support team members. Skilled in translating complex technical concepts into accessible information tailored to diverse audiences.
+  level: 100
+- skill: User Support
+  description: Providing responsive and empathetic technical assistance to end-users, diagnosing and resolving hardware, software, and network issues. Skilled in delivering clear guidance, minimizing downtime, and enhancing user satisfaction through effective communication and problem resolution.
+  level: 100
+- skill: Tools & Technologies
+  list:
+    - Confluence
+    - Docker
+    - Excel
+    - TeamDynamix
+      - Ticket Tracking
+      - Knowledge-Base
+      - Asset Tracking
+      - Project Management
+      - ?
+
+# HCHB to add:
+# Azure, Bicep, Azure DevOps, Pipelines (YAML), DacFx
+# Splunk, SentryOne, JAMS, Rancher, DBADash, 

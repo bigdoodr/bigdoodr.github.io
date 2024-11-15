@@ -1,8 +1,8 @@
 theme: default
 header:
   name: Casey Scruggs
-  suffix: Your Suffix (optional)
-  display_contact_info: true
+#  suffix: Your Suffix (optional)
+  display_contact_info: false
   current_title: Endpoint Engineer
   intro: >
     Well-versed Systems Engineer with 5+ years of experience managing Apple devices and using the Mosyle Business MDM platform in a Higher Ed. environment. Proven track record in deploying security and compliance solutions, optimizing endpoint eﬀectiveness, and supporting seamless user experiences. Passionate about creating secure, user-friendly environments where technology empowers people to do their best work.
