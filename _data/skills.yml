@@ -9,7 +9,7 @@
 # Template supports both a description AND a skill list, however it may look best if only one or the
 # other is used. Lists are sorted and concatenated without line breaks separated by • (&bull;)
 
-- skill: Apple Device Management (macOS, iPadOS)
+- skill: Apple Device Management
   description: macOS, iPadOS
   level: 100
 - skill: Device Enrollment and Provisioning

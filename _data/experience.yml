@@ -1,0 +1,46 @@
+
+- company: "Western Kentucky University"
+  summary: "A leading public university committed to academic excellence and innovation, fostering a vibrant campus community and providing a broad range of educational, research, and cultural opportunities to students and the surrounding region."
+  logo: "https://www.wku.edu/marketingandcommunications/images/wkucuptall.png"
+  url: "https://www.wku.edu/"
+  positions:
+
+  - title: "Systems Engineer/Endpoint Engineer"
+    startdate: 2019-08
+#   enddate:
+    description: "Responsible for supporting Apple equipment and software. Oversee the installation, configuration and upgrading of workstations, servers and related hardware and software in a LAN, WAN, and stand-alone environment. Responsible for researching, developing, and implementing new technologies related to endpoints."
+    duties:
+      - "Primary lead on maintenance of Mosyle MDM solution, setting the pace for change implementation to enhance the user experience and security of nearly 1,000 macOS devices"
+      - "Improved macOS software update compliance and app updates by implementing the “Nice-Updater” and “Installomator” scripts"
+      - "Supports system users, educating employees on troubleshooting and problem-solving protocols"
+      - "Researches software and systems products to determine purchase recommendations"
+      - "Created newsletter to communicate features of & upcoming changes to devices; currently in third year"
+      - "Streamlined troubleshooting processes to improve system support and enhance communication between support team and end-users"
+      - "Co-managed implementation and ongoing maintenance of VMware (now Omnissa) Horizon remote desktop virtualization"
+      - "Extensive use of project management software while leading and collaborating on multiple initiatives"
+      - "Deployment of security and compliance enforcements, ensuring alignment with institutional policies while maintaining user-friendly environments"
+
+  - title: "Desktop Support Consultant"
+    startdate: 2016-07
+    enddate: 2019-09
+    description: "Provide hardware and software techniceal support for desktop computer systems used by University faculty and staff."
+    duties:
+      - "Primary support for macOS and mobile devices, including hands-on repair and troubleshooting for faculty, staﬀ, and students"
+      - "Developed and maintained knowledge base articles covering department- specific policies"
+      - "Assisted clients with technology selection and configuration, ensuring optimal setups for both desktop and mobile devices"
+      - "Performed workstation setups, including configuring hardware, devices, and software for new employees, improving eﬃciency of onboarding processes"
+      - "Patched software and installed new versions to eliminate security problems and protect data"
+      - "Used critical thinking to identify and resolve technical issues, exceeding service-level goals through eﬀective task prioritization and follow-up"
+      - "Co-led configuration and deployment of Mosyle Business MDM solution"
+
+  - title: "Helpdesk Consultant"
+    startdate: 2006-01
+    enddate: 2016-06
+    description: "Function as WKU's central point of contact for recording and troubleshooting customer incidents and escalating problems when necessary for the IT Division."
+    duties:
+      - "Provided customer service and technical support for macOS and Windows platforms, resolving hardware and software issues for faculty, staﬀ, and students"
+      - "Oﬀered support for wireless connectivity, Active Directory, Exchange- based email accounts, Microsoft 365 email accounts, Microsoft Oﬃce productivity suite, and all major web browsers"
+      - "Provided phone and remote troubleshooting, repair, and installation of hardware and software on macOS and Windows platforms on both branded and custom-built machines"
+      - "Entered tickets into division-wide tracking system and included clear written descriptions of problems or requests reported and troubleshooting steps completed"
+      - "Trained and mentored student workers and colleagues on Apple devices and university software"
+      - "Co-managed the implementation of and developed articles for a knowledge base, improving user self-service, streamlining troubleshooting, and reducing support ticket volume"
