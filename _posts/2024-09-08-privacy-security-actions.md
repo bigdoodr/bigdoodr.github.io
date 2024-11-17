@@ -10,9 +10,9 @@ The late Kevin Mitnick's book, Art of Invisibility, was released in 2017. I didn
 
 Key |
 Symbol | Meaning
-👍 | Something Everybody Should Do
-🤔 | Something that Might be Worth Doing, but will take some effort
-🫤 | Impractical for Most
+👍 | Something everybody should do
+🤔 | Something worth doing, but will take some effort
+🫤 | Impractical for most
 🔐 | Passwords App
 + | Available via iCloud+
 
