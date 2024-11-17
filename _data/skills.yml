@@ -9,11 +9,11 @@
 # Template supports both a description AND a skill list, however it may look best if only one or the
 # other is used. Lists are sorted and concatenated without line breaks separated by • (&bull;)
 
-- skill: Apple Device Management
-  description: macOS, iPadOS
+- skill: Apple Device Enrollment and Provisioning
+  description: macOS, iPadOS, Apple Configurator, Apple School Manager
   level: 100
-- skill: Device Enrollment and Provisioning
-  description: Apple Configurator, Apple School Manager, Mosyle Business MDM Solution
+- skill: Apple Device Management
+  description: Mosyle Business MDM Solution
   level: 100
 - skill: Problem Solving & Troubleshooting
   description: Identifying and resolving complex technical issues through logical analysis, root cause identification, and creative solutions, ensuring minimal downtime and optimal system performance.

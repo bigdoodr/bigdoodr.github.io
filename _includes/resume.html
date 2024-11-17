@@ -113,6 +113,13 @@
               {%- endfor -%}
             </div>
           {%- endif -%}
+          {%- if skill.list -%}
+            <div class="skill-level">
+              <div class="skill-bar">
+                <div class="skill-bar-fill" style="width: {{ skill.level }}%;"></div>
+              </div>
+            </div>
+          {%- endif -%}
         </div>
       </div>
     {%- endfor -%}
@@ -175,30 +182,15 @@
               </div>
             </div>
             <div class="resume-item-copy">
-              <div class="position-summary">{{ position.summary }}</div>
-              {%- if position.projects -%}
+              <div class="position-description">{{ position.description }}</div>
+              {%- if position.duties -%}
                 <ul class="resume-item-list">
-                  {%- for project in position.projects -%}<li>{{ project }}</li>{%- endfor -%}
+                  {%- for duty in position.duties -%}<li>{{ duty }}</li>{%- endfor -%}
                 </ul>
               {%- endif -%}
             </div>
           </div>
         {%- endfor -%}
-      </div>
-    {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.recognition -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Recognition</h2></header>
-    <div class="section-content">
-    {%- for recognition in site.data.recognitions -%}
-      <div class="resume-item">
-        <h3 class="resume-item-title" itemprop="award">{{ recognition.award }}</h3>
-        <h4 class="resume-item-details">{{ recognition.organization }} &bull; {{ recognition.year }}</h4>
-        <div class="resume-item-copy">{{ recognition.summary }}</div>
       </div>
     {%- endfor -%}
     </div>
@@ -228,22 +220,24 @@
   </section>
 {%- endif -%}
 
-{%- if resume.sections.projects -%}
+{%- if resume.sections.ackandact -%}
   <section class="content-section">
-    <header class="section-header"><h2>Personal Projects</h2></header>
+    <header class="section-header"><h2>Acknowledgements and Activities</h2></header>
     <div class="section-content">
-    {%- for project in site.data.projects -%}
-      <div class="resume-item" itemscope itemtype="http://schema.org/CreativeWork">
-        <meta itemprop="creator" content="{{ site.author }}" itemtype="http://schema.org/Person" />
-        <h3 class="resume-item-title" itemprop="name">{%- if project.url -%}<a href="{{ project.url }}" itemprop="url">{{ project.project }}</a>{%- else -%}{{ project.project }}{%- endif -%}</h3>
-        <h4 class="resume-item-details" itemprop="description">{{ project.role }}  &bull; {{ project.duration }}</h4>
-        <div class="resume-item-copy">{{ project.description }}</div>
+    {%- for ackandact in site.data.ackandact -%}
+      <div class="resume-item" itemscope itemtype="http://schema.org/Event">
+        <meta itemprop="performer" content="{{ site.author }}" itemtype="http://schema.org/Person" />
+        <h3 class="resume-item-title" itemprop="name">{%- if ackandact.url -%}<a href="{{ ackandact.url }}" itemprop="url">{{ ackandact.ackandact }}</a>{%- else -%}{{ ackandact.ackandact }}{%- endif -%}</h3>
+        <h4 class="resume-item-details" itemprop="description">{{ ackandact.role }}  &bull; {{ ackandact.year }}</h4>
+        <div class="resume-item-copy">{{ ackandact.activity }}</div>
+        <div class="resume-item-copy">{{ ackandact.description }}</div>
       </div>
     {%- endfor -%}
     </div>
   </section>
 {%- endif -%}
 
+<!-- 
 {%- if resume.sections.associations -%}
   <section class="content-section">
     <header class="section-header"><h2>Associations</h2></header>
@@ -258,7 +252,9 @@
     </div>
   </section>
 {%- endif -%}
+ -->
 
+<!-- 
 {%- if resume.sections.interests -%}
   <section class="content-section">
     <header class="section-header"><h2>Outside Interests</h2></header>
@@ -269,7 +265,9 @@
     </div>
   </section>
 {%- endif -%}
+ -->
 
+<!-- 
 {%- if resume.sections.links -%}
   <section class="content-section">
     <header class="section-header"><h2>Additional Links</h2></header>
@@ -282,6 +280,7 @@
     </div>
   </section>
 {%- endif -%}
+ -->
 
 {%- if resume.sections.social_links -%}
   <section class="content-section">
@@ -294,30 +293,6 @@
           </ul>
         {%- endif -%}
       </div>
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if site.data.skills -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Skills</h2></header>
-    <div class="section-content">
-      {%- for skill in site.data.skills -%}
-        <div class="resume-item">
-          <h4 class="resume-item-details">{{ skill.skill }}</h4>
-          <div class="resume-item-copy">
-            <div class="skill-description">
-              {{ skill.description }}
-            </div>
-            <div class="skill-level">
-              <div class="skill-bar">
-                <div class="skill-bar-fill" style="width: {{ skill.level }}%;"></div>
-              </div>
-              <span>{{ skill.level }}%</span>
-            </div>
-          </div>
-        </div>
-      {%- endfor -%}
     </div>
   </section>
 {%- endif -%}
