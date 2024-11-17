@@ -10,6 +10,7 @@
   #share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
   #share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
   #share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+  #share-buttons > div.mastodon:hover > svg {fill: #3088d4;}
   #share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
   #share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
   #share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
@@ -29,4 +30,19 @@
     <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
   <div class="mail"     title="Share this through Email"  onclick="window.open('mailto:?&body={{ safeurl }}&subject={{ safetitlepre }}{{ safetitle }}','popup','width=600,height=600'); return false;">
     <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z"/></svg></div>
+  </div>
+  <!-- Mastodon Share Button -->
+  <div class="mastodon" title="Share this on Mastodon" onclick="mastodonShare('{{ safeurl }}', '{{ safetitle }}')">
+    <svg viewBox="0 0 216 216" xmlns="http://www.w3.org/2000/svg"><path fill="#3088d4" d="M108 0C48.4 0 0 48.4 0 108s48.4 108 108 108 108-48.4 108-108S167.6 0 108 0z"/><path fill="#fff" d="M161.4 48.9H54.6c-3.1 0-5.6 2.5-5.6 5.6v57.8c0 33.8 20.4 62.6 61.5 62.6 41.1 0 61.5-28.8 61.5-62.6V54.5c.1-3.1-2.4-5.6-5.6-5.6zM97.4 139.4c-2.7 2.7-7.3 2.5-11.6-1.1l-17.8-17.4c-1.8-1.8-3.3-4.2-3.3-7.4V98.7c0-3.3 1.6-6.1 4.4-7.4 2.8-1.4 6.3-1.4 9.2.1l25 12.7 25-12.7c2.8-1.4 6.3-1.4 9.2-.1 2.8 1.3 4.4 4.1 4.4 7.4v14.8c0 3.1-1.6 5.6-3.3 7.4l-17.8 17.4c-4.4 3.6-8.9 3.8-11.6 1.1L97.4 139.4z"/></svg>
+  </div>
 </div>
+
+<script>
+  function mastodonShare(url, title) {
+    const instance = prompt("Enter your Mastodon instance (e.g., mastodon.social):");
+    if (instance) {
+      const shareUrl = `https://${instance}/share?text=${title}%20${url}`;
+      window.open(shareUrl, "_blank", "width=600,height=400");
+    }
+  }
+</script>
