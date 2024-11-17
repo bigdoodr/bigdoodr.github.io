@@ -92,37 +92,25 @@
   {%- endif -%}
 </header>
 
-{%- if resume.sections.skills -%}
+{%- if site.data.skills -%}
   <section class="content-section">
     <header class="section-header"><h2>Skills</h2></header>
     <div class="section-content">
-    {%- for skill in site.data.skills -%}
-      <div class="resume-item">
-        <h4 class="resume-item-details">{{ skill.skill }}</h4>
-        <div class="resume-item-copy">
-          {%- if skill.description -%}
+      {%- for skill in site.data.skills -%}
+        <div class="resume-item">
+          <h4 class="resume-item-details">{{ skill.skill }}</h4>
+          <div class="resume-item-copy">
             <div class="skill-description">
               {{ skill.description }}
             </div>
-          {%- endif -%}
-          {%- if skill.list -%}
-            {%- assign skillSorted = skill.list | sort_natural -%}
-            <div class="skill-list">
-              {%- for item in skillSorted -%}
-                <span>{{ item }}</span>{%- if forloop.last -%}{%- else -%}<span> &bull; </span>{%- endif -%}
-              {%- endfor -%}
-            </div>
-          {%- endif -%}
-          {%- if skill.list -%}
             <div class="skill-level">
               <div class="skill-bar">
                 <div class="skill-bar-fill" style="width: {{ skill.level }}%;"></div>
               </div>
             </div>
-          {%- endif -%}
+          </div>
         </div>
-      </div>
-    {%- endfor -%}
+      {%- endfor -%}
     </div>
   </section>
 {%- endif -%}
@@ -220,19 +208,26 @@
   </section>
 {%- endif -%}
 
-{%- if resume.sections.ackandact -%}
+{%- if site.data.ackandact -%}
   <section class="content-section">
-    <header class="section-header"><h2>Acknowledgements and Activities</h2></header>
+    <header class="section-header"><h2>Acknowledgments and Activities</h2></header>
     <div class="section-content">
-    {%- for ackandact in site.data.ackandact -%}
-      <div class="resume-item" itemscope itemtype="http://schema.org/Event">
-        <meta itemprop="performer" content="{{ site.author }}" itemtype="http://schema.org/Person" />
-        <h3 class="resume-item-title" itemprop="name">{%- if ackandact.url -%}<a href="{{ ackandact.url }}" itemprop="url">{{ ackandact.ackandact }}</a>{%- else -%}{{ ackandact.ackandact }}{%- endif -%}</h3>
-        <h4 class="resume-item-details" itemprop="description">{{ ackandact.role }}  &bull; {{ ackandact.year }}</h4>
-        <div class="resume-item-copy">{{ ackandact.activity }}</div>
-        <div class="resume-item-copy">{{ ackandact.description }}</div>
-      </div>
-    {%- endfor -%}
+      {%- for item in site.data.ackandact -%}
+        <div class="resume-item">
+          <h3 class="resume-item-title">
+            {{ item.role }} - 
+            <span class="resume-activity">
+              {%- if item.url -%}
+                <a href="{{ item.url }}" target="_blank">{{ item.activity }}</a>
+              {%- else -%}
+                {{ item.activity }}
+              {%- endif -%}
+            </span>
+          </h3>
+          <h4 class="resume-item-details">{{ item.year }}</h4>
+          <div class="resume-item-copy">{{ item.description }}</div>
+        </div>
+      {%- endfor -%}
     </div>
   </section>
 {%- endif -%}

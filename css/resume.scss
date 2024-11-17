@@ -2,7 +2,7 @@
 ---
 
 @mixin heading-font {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;	
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;    
 }
 
 h1, h2, h3, h4, h5, ul, ol, li, p {
@@ -79,24 +79,20 @@ ul, ol {
         }
 
         .contact-button {
-            // block
             display: block;
             width: 220px;
             line-height: 55px;
             border-radius: 0.2rem;
             background-color: #efefef;
             margin: 1rem auto;
-        
-            // text
             text-align: center;
             text-decoration: none;
             @include heading-font;
             font-size: 1.375rem;
             font-weight: 300;
             color: #333333;
-            
-            // link
             transition: all 0.2s ease;
+
             &:hover {
                 background-color: #333333;
                 color: #ffffff;
@@ -164,7 +160,7 @@ ul, ol {
 
                     .position-duration {
                         white-space: nowrap;
-                        display:inline;
+                        display: inline;
                     }
                 }
 
@@ -179,6 +175,26 @@ ul, ol {
                 font-weight: 700;
             }
         }
+
+        /* Acknowledgments and Activities Section */
+        .ackandact-item {
+            margin-bottom: 1rem;
+
+            .ackandact-title {
+                font-weight: bold;
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .ackandact-details {
+                font-style: italic;
+                color: #666666;
+            }
+
+            .ackandact-description {
+                margin-top: 0.5rem;
+            }
+        }
     }
 
     .bottom-bar {
@@ -187,7 +203,6 @@ ul, ol {
         right: 0;
         background: #333333;
         color: #ffffff;
-        //box-sizing: border-box;
         padding: 10px;
 
         .bottom-bar__content > * {
@@ -219,7 +234,6 @@ ul, ol {
     display: none !important;
 }
 
-// Set print margins
 @page {
     margin: 0.3in 0.4in 0.3in 0.4in;
 }
@@ -302,24 +316,24 @@ ul, ol {
 }
 
 .skill-bar {
-  background-color: #e0e0e0; /* Light grey background */
-  border-radius: 5px;
-  overflow: hidden;
-  position: relative;
-  height: 10px;
-  width: 100%; /* Full width */
-  margin-top: 5px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    height: 10px;
+    width: 100%;
+    margin-top: 5px;
 }
 
 .skill-bar-fill {
-  background-color: #007bff; /* Blue fill */
-  height: 100%;
-  width: 0%; /* Default width (set dynamically) */
-  transition: width 0.5s ease; /* Smooth fill animation */
+    background-color: #007bff;
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
 }
 
 .skill-level span {
-  margin-left: 10px;
-  font-size: 0.9em;
-  color: #555555;
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #555555;
 }

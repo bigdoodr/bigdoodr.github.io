@@ -108,57 +108,52 @@ Symbol | Meaning
 - [ ] 🤔 Securely wipe data from devices before selling or discarding
 
 ## 11. Workplace Privacy
-- [ ] Lock devices when leaving your desk
-- [ ] Limit personal activities on work devices
-- [ ] Use secure printing methods
-- [ ] Be cautious with office cameras and microphones
-- [ ] Secure videoconferencing systems
-- [ ] Remove metadata from documents before sharing externally
-- [ ] Separate work and personal communications
+- [ ] 👍 Lock devices when leaving your desk
+- [ ] 🤔 Limit personal activities on work devices
+- [ ] 👍 Use secure printing methods
+- [ ] 👍 Be cautious with office cameras and microphones
+- [ ] 👍 Secure videoconferencing systems
+- [ ] 🤔 Remove metadata from documents before sharing externally
+- [ ] 👍 Separate work and personal communications
 
 ## 12. IoT and Smart Home Security
-- [ ] Change default passwords on all IoT devices
-- [ ] Disable unnecessary features on smart devices
-- [ ] Physically secure devices to prevent tampering
-- [ ] Use strong authentication methods for smart home ecosystems
-- [ ] Avoid connecting sensitive devices to shared networks
+- [ ] 🤔 Change default passwords on all IoT devices
+- [ ] 🫤 Disable unnecessary features on smart devices
+- [ ] 👍 Physically secure devices to prevent tampering
+- [ ] 🤔 Use strong authentication methods for smart home ecosystems
+- [ ] 🤔 Avoid connecting sensitive devices to shared networks
 
 ## 13. Vehicle Privacy and Security
-- [ ] Update vehicle software regularly
-- [ ] Limit telematics and remote features when not in use
-- [ ] Secure car apps with strong passwords and 2FA
-- [ ] Clear infotainment system data before selling or returning a vehicle
-- [ ] Be cautious with connected car features and data sharing
+- [ ] 👍 Update vehicle software regularly
+- [ ] 🤔 Limit telematics and remote features when not in use
+- [ ] 👍 Clear infotainment system data before selling or returning a vehicle
+- [ ] 👍 Be cautious with connected car features and data sharing
 
 ## 14. Travel Security
-- [ ] Clean up sensitive data from devices before travel
-- [ ] Use whole-disk encryption and consider hidden encrypted folders
-- [ ] Upload encrypted data to secure cloud services
-- [ ] Be aware of local laws regarding device searches
-- [ ] Use social engineering techniques if necessary during border crossings
-- [ ] Avoid leaving devices unattended in hotel rooms
-- [ ] Use a VPN immediately upon connecting to hotel Wi-Fi
+- [ ] 👍 Clean up sensitive data from devices before travel
+- [ ] 🤔 Use whole-disk encryption and consider hidden encrypted folders
+- [ ] 👍 Upload encrypted data to secure cloud services
+- [ ] 👍 Be aware of local laws regarding device searches
+- [ ] 👍 Avoid leaving devices unattended in hotel rooms
+- [ ] 🤔 Use a VPN immediately upon connecting to hotel Wi-Fi
 
 ## 15. Education and Awareness
-- [ ] Stay informed about current privacy and security threats
-- [ ] Educate others about privacy and security best practices
-- [ ] Regularly review and update security measures
-- [ ] Be aware of phishing attempts and social engineering tactics
+- [ ] 🤔 Stay informed about current privacy and security threats
+- [ ] 🤔 Educate others about privacy and security best practices
+- [ ] 🤔 Regularly review and update security measures
+- [ ] 👍 Be aware of phishing attempts and social engineering tactics
 
 ## 16. Legal and Ethical Considerations
-- [ ] Know your rights regarding privacy laws and regulations
-- [ ] Advocate for stronger privacy protections
-- [ ] Be aware of surveillance practices by companies and governments
-- [ ] Use caution with intellectual property and sensitive information online
+- [ ] 👍 Know your rights regarding privacy laws and regulations
+- [ ] 👍 Advocate for stronger privacy protections
+- [ ] 👍 Be aware of surveillance practices by companies and governments
+- [ ] 👍 Use caution with intellectual property and sensitive information online
 
 ## 17. Incident Response
-- [ ] Have a plan for responding to potential security breaches or identity theft
-- [ ] Know how to report and address unauthorized access or data leaks
-- [ ] Monitor accounts and credit reports for signs of compromise
+- [ ] 🤔 Have a plan for responding to potential security breaches or identity theft
+- [ ] 🤔 Know how to report and address unauthorized access or data leaks
+- [ ] 👍 Monitor accounts and credit reports for signs of compromise
 
 ## 18. Advanced Anonymity Techniques
-- [ ] Use public Wi-Fi cautiously and with proper protection
-- [ ] Create and maintain separate email accounts for different personas
-- [ ] Be aware of risks associated with Dark Web access
-- [ ] Consider using Tails OS for a secure, amnesic live system
-- [ ] Implement multi-layered approaches for achieving online anonymity
+- [ ] 👍 Use public Wi-Fi cautiously and with proper protection
+- [ ] 🤔 + Create and maintain separate email accounts for different personas
