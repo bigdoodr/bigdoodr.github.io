@@ -6,78 +6,135 @@ date: 2024-09-12T13:00:00-13:00
 tags: Tech
 image: /resources/building-shield-solid.png
 ---
-As a continuation of the actions an individual should take to enhance their privacy and security, one onus of a company/organization should be to protect both their employees' and their customers' / users' security & privacy and encourage those people to be mindful of their digital presence. Also adapted from Kevin Mitnick's book, Art of Invisibility, below are items I think befalls on a good corporation to implement. Ask yourself if your employeer does these things. Consider what websites you patronize and if their data usage policies address these items.
+As a continuation of the actions an individual should take to enhance their privacy and security, one onus of a company/organization should be to protect both their employees' and their customers' / users' security & privacy and encourage those people to be mindful of their digital presence.
+
+Also adapted from Kevin Mitnick's book, Art of Invisibility, below are items I think befalls on a good corporation to implement.
+
+Ask yourself if your employeer does these things.
+
+Consider what websites you patronize and if their data usage policies address these items.
 
 # Org Responsibilities to Employees and Customers
 
 ### Password and Authentication Management
 
-Promote Strong Password Hygiene
-: Require strong, unique passwords and encourage the use of password managers to securely store them.
+<dl>
+<dt>Promote Strong Password Hygiene</dt>
+<dd>Require strong, unique passwords and encourage the use of password managers to securely store them.</dd>
+</dl>
 
-Implement Multi-Factor Authentication (MFA)
-: Require MFA for accessing sensitive systems and data to add an extra layer of protection.
+<dl>
+<dt>Implement Multi-Factor Authentication (MFA)</dt>
+<dd>Require MFA for accessing sensitive systems and data to add an extra layer of protection.</dd>
+</dl>
 
-Utilize Passwordless Authentication
-: Encourage secure alternatives such as biometric authentication for sensitive applications.
+<dl>
+<dt>Utilize Passwordless Authentication</dt>
+<dd>Encourage secure alternatives such as biometric authentication for sensitive applications.</dd>
+</dl>
+
 ###  Encryption and Secure Communications
 
-End-to-End Encryption
-: Enforce encryption for all communications, including emails, messaging, and VoIP services.
+<dl>
+<dt>End-to-End Encryption</dt>
+<dd>Enforce encryption for all communications, including emails, messaging, and VoIP services.</dd>
+</dl>
 
-Encrypt Data at Rest and in Transit
-: Ensure sensitive data is always encrypted, whether stored locally or transmitted over networks.
+<dl>
+<dt>Encrypt Data at Rest and in Transit</dt>
+<dd>Ensure sensitive data is always encrypted, whether stored locally or transmitted over networks.</dd>
+</dl>
+
 ### Network Security
 
-Secure Wi-Fi and Network Traffic
-: Use WPA3 or VPNs to secure connections and deploy firewalls and intrusion detection systems to monitor traffic.
+<dl>
+<dt>Secure Wi-Fi and Network Traffic</dt>
+<dd>Use WPA3 or VPNs to secure connections and deploy firewalls and intrusion detection systems to monitor traffic.</dd>
+</dl>
 
-Segment Networks
-: Isolate IoT and less-secure devices from the core network to limit exposure in case of a breach.
+<dl>
+<dt>Segment Networks</dt>
+<dd>Isolate IoT and less-secure devices from the core network to limit exposure in case of a breach.</dd>
+</dl>
+
 ### Device and Account Security
 
-Enforce Device Security Policies
-: Implement mandatory device locking, remote-wipe capabilities, and full-disk encryption on all company-issued devices.
+<dl>
+<dt>Enforce Device Security Policies</dt>
+<dd>Implement mandatory device locking, remote-wipe capabilities, and full-disk encryption on all company-issued devices.</dd>
+</dl>
 
-Regular Software Updates
-: Ensure timely updates to all devices, apps, and firmware to mitigate vulnerabilities.
+<dl>
+<dt>Regular Software Updates</dt>
+<dd>Ensure timely updates to all devices, apps, and firmware to mitigate vulnerabilities.</dd>
+</dl>
 
-Mobile Device Management (MDM)
-: Use MDM solutions to enforce security policies, remotely wipe devices, and manage app usage.
+<dl>
+<dt>Mobile Device Management (MDM)</dt>
+<dd>Use MDM solutions to enforce security policies, remotely wipe devices, and manage app usage.</dd>
+</dl>
+
 ### Data Privacy and Minimization
 
-Limit Data Collection and Retention
-: Collect only necessary data and securely delete it when no longer needed. 
+<dl>
+<dt>Limit Data Collection and Retention</dt>
+<dd>Collect only necessary data and securely delete it when no longer needed.</dd>
+</dl>
 
-Provide Privacy Controls
-: Allow users to opt out of data collection and provide clear, transparent privacy policies regarding data handling.
-Email Scanning Disclosure
-: Organizations should periodically notify their users of their email scanning policy.
+<dl>
+<dt>Provide Privacy Controls</dt>
+<dd>Allow users to opt out of data collection and provide clear, transparent privacy policies regarding data handling.</dd>
+</dl>
+
+<dl>
+<dt>Email Scanning Disclosure</dt>
+<dd>Organizations should periodically notify their users of their email scanning policy.</dd>
+</dl>
+
 ### Security Awareness and Training
 
-Conduct Regular Training
-: Offer security awareness training on topics like phishing, social engineering, secure device handling, and safe online practices.
+<dl>
+<dt>Conduct Regular Training</dt>
+<dd>Offer security awareness training on topics like phishing, social engineering, secure device handling, and safe online practices.</dd>
+</dl>
 
-Simulated Security Drills
-: Regularly conduct phishing simulations and other security exercises to test employee readiness.
+<dl>
+<dt>Simulated Security Drills</dt>
+<dd>Regularly conduct phishing simulations and other security exercises to test employee readiness.</dd>
+</dl>
+
 ### Secure Cloud and Backup Solutions
 
-Encrypted Cloud Backup
-: Ensure cloud backups are encrypted and regularly audited for compliance with security standards.
+<dl>
+<dt>Encrypted Cloud Backup</dt>
+<dd>Ensure cloud backups are encrypted and regularly audited for compliance with security standards.</dd>
+</dl>
 
-Control Cloud Access
-: Implement strict permissions and two-factor authentication for cloud services to safeguard sensitive data.
+<dl>
+<dt>Control Cloud Access</dt>
+<dd>Implement strict permissions and two-factor authentication for cloud services to safeguard sensitive data.</dd>
+</dl>
+
 ### Incident Response and Auditing
 
-Develop an Incident Response Plan
-: Create a clear response plan for handling data breaches, including roles, communication protocols, and recovery steps.
+<dl>
+<dt>Develop an Incident Response Plan</dt>
+<dd>Create a clear response plan for handling data breaches, including roles, communication protocols, and recovery steps.</dd>
+</dl>
 
-Conduct Regular Audits
-: Perform routine audits of security practices, data handling, and third-party vendor compliance.
+<dl>
+<dt>Conduct Regular Audits</dt>
+<dd>Perform routine audits of security practices, data handling, and third-party vendor compliance.</dd>
+</dl>
+
 ### Physical and Environmental Security
 
-Secure Devices Physically
-: Encourage the use of cable locks and secure storage options for devices, particularly during travel or remote work.
+<dl>
+<dt>Secure Devices Physically</dt>
+<dd>Encourage the use of cable locks and secure storage options for devices, particularly during travel or remote work.</dd>
+</dl>
 
-Monitor and Control Physical Access
-: Use secure printing and access controls for sensitive areas to prevent unauthorized data exposure.
+<dl>
+<dt>Monitor and Control Physical Access</dt>
+<dd>Use secure printing and access controls for sensitive areas to prevent unauthorized data exposure.</dd>
+</dl>
