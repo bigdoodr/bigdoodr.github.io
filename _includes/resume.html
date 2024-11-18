@@ -1,31 +1,29 @@
 {%- assign resume = site.data.resume -%}
-<!-- All code hijacked from https://github.com/chadbaldwin/chadbaldwin.github.io/blob/main/_includes/resume.html; Many thanks to him! --> 
+<!-- All code adapted from https://github.com/chadbaldwin/chadbaldwin.github.io/blob/main/_includes/resume.html -->
 <script>
-  // Hack to get a better name when printing the file to PDF
-  document.title = "{{resume.header.name}}{{if resume.header.suffix}}, {{resume.header.suffix}}{{endif}} - {{resume.header.current_title}} - Resume";
+  // Set a more informative document title for printing or PDF saving
+  document.title = "{{ resume.header.name }}{% if resume.header.suffix %}, {{ resume.header.suffix }}{% endif %} - {{ resume.header.current_title }} - Resume";
 
-  function JobDateDiff (start, end) {
-      var daysDiff = (new Date(end).getTime() -  new Date(start).getTime()) / 86400000 //ms in a day;
-
+  function JobDateDiff(start, end) {
+      var daysDiff = (new Date(end).getTime() - new Date(start).getTime()) / 86400000; // ms in a day
       var years = Math.floor(daysDiff / 365.25);
       var months = Math.ceil(daysDiff % 365.25 / 30.4375);
       if (months == 12) { months = 0; years++; }
 
-      // Yeah, I know this is hacky, deal with it, I just threw it in real quick because I was tired of seeing "1 yrs 1 mos"
       var returnText = "";
-      if (years == 1) { returnText += `${years} yr ` }
-      if (years > 1) { returnText += `${years} yrs ` }
-      if (months == 1) { returnText += `${months} mo ` }
-      if (months > 1) { returnText += `${months} mos ` }
+      if (years === 1) { returnText += `${years} yr `; }
+      if (years > 1) { returnText += `${years} yrs `; }
+      if (months === 1) { returnText += `${months} mo `; }
+      if (months > 1) { returnText += `${months} mos `; }
       returnText = returnText.trim();
 
       document.write(returnText);
   }
 
-  // Remove the bottom-bar when X is clicked
+  // Close the bottom bar on click
   document.addEventListener("click", function(e) {
-    if (e.target.className.indexOf("bottom-bar__close") !== -1) {
-      document.getElementsByClassName("bottom-bar")[0].remove();
+    if (e.target.classList.contains("bottom-bar__close")) {
+      document.querySelector(".bottom-bar").remove();
     }
   });
 </script>
@@ -33,14 +31,20 @@
 <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Open+Sans:400,300,800,700" rel="stylesheet" type="text/css">
 <link href="/css/resume.css" rel="stylesheet" type="text/css">
 
-{%- if resume.contact.phone -%}<meta itemprop="telephone" content="{{ resume.contact.phone }}"/>{%- endif -%}
-{%- if resume.contact.address -%}<meta itemprop="address" content="{{ resume.contact.address }}"/>{%- endif -%}
+<!-- Metadata -->
+{%- if resume.contact.phone -%}
+<meta itemprop="telephone" content="{{ resume.contact.phone }}"/>
+{%- endif -%}
+{%- if resume.contact.address -%}
+<meta itemprop="address" content="{{ resume.contact.address }}"/>
+{%- endif -%}
 
 <header class="page-header">
   <!-- Avatar -->
   {%- if site.gravatar_hash -%}
     <img src="https://www.gravatar.com/avatar/{{ site.gravatar_hash }}?size=100" alt="my photo" class="avatar no-print" itemprop="image">
   {%- endif -%}
+
   <!-- Name and Suffix -->
   <div class="header-title">
     <span class="header-name" itemprop="name">{{ resume.header.name }}</span>
@@ -48,273 +52,66 @@
       <span class="header-suffix">, {{ resume.header.suffix }}</span>
     {%- endif -%}
   </div>
+
   <!-- Contact Info -->
   {%- if resume.header.display_contact_info -%}
     <div class="header-contact-info">
       {%- for item in resume.contact -%}
         <span class="header-contact-info-item">{{ item[1] }}</span>
-          {%- if forloop.last -%}
-          {%- else -%}
-            <span> &bull; </span>
-          {%- endif -%}
+        {%- unless forloop.last -%}
+          <span> &bull; </span>
+        {%- endunless -%}
       {%- endfor -%}
     </div>
   {%- endif -%}
-  <!-- Title and social icon links -->
+
+  <!-- Title and Social Links -->
   <div class="title-bar no-print">
     <div class="job-title" itemprop="jobTitle">{{ resume.header.current_title }}</div>
     {%- if resume.social -%}
       <div class="icon-links">
         {%- for item in resume.social -%}
           <a href="{{ item[1] }}" class="icon-link" itemprop="sameAs" target="_blank">
-            {%- case item[0] -%}
-              {%- when "GitHub"    -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-<!-- 
-              {%- when "Twitter"   -%}<img src="/img/socialicons/twitter.svg">
-              {%- when "Medium"    -%}<img src="/img/socialicons/medium.svg">
-              {%- when "Dribbble"  -%}<img src="/img/socialicons/dribbble.svg">
- -->
-              {%- when "Facebook"  -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/></svg>
-              {%- when "LinkedIn"  -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/></svg>
-              {%- when "Mastodon"  -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M433 179.1c0-97.2-63.7-125.7-63.7-125.7-62.5-28.7-228.6-28.4-290.5 0 0 0-63.7 28.5-63.7 125.7 0 115.7-6.6 259.4 105.6 289.1 40.5 10.7 75.3 13 103.3 11.4 50.8-2.8 79.3-18.1 79.3-18.1l-1.7-36.9s-36.3 11.4-77.1 10.1c-40.4-1.4-83-4.4-89.6-54a102.5 102.5 0 0 1 -.9-13.9c85.6 20.9 158.7 9.1 178.8 6.7 56.1-6.7 105-41.3 111.2-72.9 9.8-49.8 9-121.5 9-121.5zm-75.1 125.2h-46.6v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.3V197c0-58.5-64-56.6-64-6.9v114.2H90.2c0-122.1-5.2-147.9 18.4-175 25.9-28.9 79.8-30.8 103.8 6.1l11.6 19.5 11.6-19.5c24.1-37.1 78.1-34.8 103.8-6.1 23.7 27.3 18.4 53 18.4 175z"/></svg>
-<!-- 
-              {%- when "Instagram" -%}<img src="/img/socialicons/instagram.svg">
- -->
-              {%- when "Website"   -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M274.7 274.7l-37.4-37.4L166 346zM256 8C119 8 8 119 8 256S119 504 256 504 504 393 504 256 393 8 256 8zM411.9 182.8l14.8-6.1A8 8 0 0 1 437.1 181h0a8 8 0 0 1 -4.3 10.5L418 197.6a8 8 0 0 1 -10.5-4.3h0A8 8 0 0 1 411.9 182.8zM314.4 94l6.1-14.8A8 8 0 0 1 331 74.9h0a8 8 0 0 1 4.3 10.5l-6.1 14.8a8 8 0 0 1 -10.5 4.3h0A8 8 0 0 1 314.4 94zM256 60h0a8 8 0 0 1 8 8V84a8 8 0 0 1 -8 8h0a8 8 0 0 1 -8-8V68A8 8 0 0 1 256 60zM181 74.9a8 8 0 0 1 10.5 4.3L197.6 94a8 8 0 1 1 -14.8 6.1l-6.1-14.8A8 8 0 0 1 181 74.9zm-63.6 42.5h0a8 8 0 0 1 11.3 0L140 128.7A8 8 0 0 1 140 140h0a8 8 0 0 1 -11.3 0l-11.3-11.3A8 8 0 0 1 117.4 117.4zM60 256h0a8 8 0 0 1 8-8H84a8 8 0 0 1 8 8h0a8 8 0 0 1 -8 8H68A8 8 0 0 1 60 256zm40.2 73.2-14.8 6.1A8 8 0 0 1 74.9 331h0a8 8 0 0 1 4.3-10.5L94 314.4a8 8 0 0 1 10.5 4.3h0A8 8 0 0 1 100.2 329.2zm4.3-136h0A8 8 0 0 1 94 197.6l-14.8-6.1A8 8 0 0 1 74.9 181h0a8 8 0 0 1 10.5-4.3l14.8 6.1A8 8 0 0 1 104.5 193.2zM197.6 418l-6.1 14.8a8 8 0 0 1 -14.8-6.1l6.1-14.8A8 8 0 1 1 197.6 418zM264 444a8 8 0 0 1 -8 8h0a8 8 0 0 1 -8-8V428a8 8 0 0 1 8-8h0a8 8 0 0 1 8 8zm67-6.9h0a8 8 0 0 1 -10.5-4.3L314.4 418a8 8 0 0 1 4.3-10.5h0a8 8 0 0 1 10.5 4.3l6.1 14.8A8 8 0 0 1 331 437.1zm63.6-42.5h0a8 8 0 0 1 -11.3 0L372 383.3A8 8 0 0 1 372 372h0a8 8 0 0 1 11.3 0l11.3 11.3A8 8 0 0 1 394.6 394.6zM286.3 286.3 110.3 401.7 225.8 225.8 401.7 110.3zM437.1 331h0a8 8 0 0 1 -10.5 4.3l-14.8-6.1a8 8 0 0 1 -4.3-10.5h0A8 8 0 0 1 418 314.4l14.8 6.1A8 8 0 0 1 437.1 331zM444 264H428a8 8 0 0 1 -8-8h0a8 8 0 0 1 8-8h16a8 8 0 0 1 8 8h0A8 8 0 0 1 444 264z"/></svg>
-            {%- endcase -%}
+            <i class="fab fa-{{ item[0] | downcase }}"></i>
           </a>
         {%- endfor -%}
       </div>
     {%- endif -%}
   </div>
-  <!-- Summary -->
-  <div class="executive-summary" itemprop="description"><p>{{ resume.header.intro }}</p></div>
-  <!-- Contact me button -->
-  {%- if resume.contact.email -%}
-    <div>
-      <a href="mailto:{{ resume.contact.email }}" class="contact-button no-print" itemprop="email">Contact me</a>
-    </div>
-  {%- endif -%}
 </header>
 
-{%- if site.data.skills -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Skills</h2></header>
-    <div class="section-content">
-      {%- for skill in site.data.skills -%}
-        <div class="resume-item">
-          <h4 class="resume-item-details">{{ skill.skill }}</h4>
-          <div class="resume-item-copy">
-            <div class="skill-description">
-              {{ skill.description }}
-            </div>
-            <div class="skill-level">
-              <div class="skill-bar">
-                <div class="skill-bar-fill" style="width: {{ skill.level }}%;"></div>
-              </div>
-            </div>
-          </div>
+<!-- Content Sections -->
+<main>
+  {%- for section in resume.sections -%}
+    <section id="{{ section.id }}" class="resume-section">
+      <h2 class="section-title">{{ section.title }}</h2>
+      {%- if section.description -%}
+        <div class="section-description">
+          {{ section.description | markdownify }}
         </div>
-      {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.experience -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Experience</h2></header>
-    <div class="section-content">
-    {%- for job in site.data.experience -%}
-      {%- assign positions = job.positions | sort_natural: "startdate" | reverse -%}
-
-      {%- if positions.size > 1 -%}
-        {%- assign jobfirstpos = positions | last -%}
-        {%- assign joblastpos = positions | first -%}
-
-        {%- assign jobStartDate = jobfirstpos.startdate | date: "%F" -%}
-        {%- assign jobEndDate = joblastpos.enddate | default: 'now' | date: "%F" -%}
       {%- endif -%}
-
-      <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/Organization">
-        <img src="{{ job.logo }}" class="company-logo">
-
-        <h3 class="resume-item-title company-name" itemprop="name" >
-          {%- if job.url -%}<a href="{{ job.url }}" itemprop="url" target="_blank">{{ job.company }}</a>{%- else -%}{{ job.company }}{%- endif -%}
-        </h3>
-
-        {%- if positions.size > 1 -%}
-          <div class="company-duration">
-            <span>{{ jobfirstpos.startdate | date: "%b, %Y" }}</span>
-            <span> &ndash; </span>
-            <span>{{ joblastpos.enddate | date: "%b, %Y" | default: "Present" }}</span>
-            <span> &bull; </span>
-            <span><script>JobDateDiff("{{ jobStartDate }}","{{ jobEndDate }}")</script></span>
-          </div>
-        {%- endif -%}
-
-        {%- if job.summary -%}
-          <div class="job-summary">
-            {{ job.summary }}
-          </div>
-        {%- endif -%}
-
-        {%- for position in positions -%}
-          {%- assign posStartDate = position.startdate | date: "%F" -%}
-          {%- assign posEndDate = position.enddate | default: 'now' | date: "%F" -%}
-
-          <div class="resume-job-position">
-            <div class="position-title">
-              <h4 class="resume-item-details" itemprop="description">{{position.title }}</h4>
-              <div class="position-duration">
-                <span> &bull; </span>
-                <span>{{ position.startdate | date: "%b, %Y" }}</span>
-                <span> &ndash; </span>
-                <span>{{ position.enddate | date: "%b, %Y" | default: "Present" }}</span>
-                <span> &bull; </span>
-                <span><script>JobDateDiff("{{ posStartDate }}","{{ posEndDate }}")</script></span>
-              </div>
-            </div>
-            <div class="resume-item-copy">
-              <div class="position-description">{{ position.description }}</div>
-              {%- if position.duties -%}
-                <ul class="resume-item-list">
-                  {%- for duty in position.duties -%}<li>{{ duty }}</li>{%- endfor -%}
-                </ul>
+      
+      {%- if section.items -%}
+        <ul class="section-list">
+          {%- for item in section.items -%}
+            <li class="section-item">
+              <h3 class="item-title">{{ item.title }}</h3>
+              {%- if item.subtitle -%}
+                <p class="item-subtitle">{{ item.subtitle }}</p>
               {%- endif -%}
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if resume.sections.education -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Education</h2></header>
-    <div class="section-content">
-    {%- for education in site.data.education -%}
-      <div class="resume-item" itemscope itemprop="alumniOf" itemtype="http://schema.org/CollegeOrUniversity">
-        <h3 class="resume-item-title" itemprop="name">{{ education.uni }}</h3>
-        <h4 class="resume-item-details group" itemprop="description">{{ education.degree }} &bull; {{ education.year }}</h4>
-        <h5 class="resume-item-details award-title" itemprop="description">{{ education.award }}</h5>
-        <div class="resume-item-copy" >
-          {%- if education.awards -%}
-            <ul class="resume-item-list">
-              {%- for award in education.awards -%}<li>{{ award.award }}</li>{%- endfor -%}
-            </ul>
-          {%- endif -%}
-          </div>
-        <div class="resume-item-copy" itemprop="description">{{ education.summary }}</div>
-      </div>
-    {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-{%- if site.data.ackandact -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Acknowledgments and Activities</h2></header>
-    <div class="section-content">
-      {%- for item in site.data.ackandact -%}
-        <div class="resume-item">
-          <h3 class="resume-item-title">
-            {{ item.role }} - 
-            <span class="resume-activity">
-              {%- if item.url -%}
-                <a href="{{ item.url }}" target="_blank">{{ item.activity }}</a>
-              {%- else -%}
-                {{ item.activity }}
+              {%- if item.dates -%}
+                <span class="item-dates">
+                  {{ item.dates.start }} - {{ item.dates.end }}
+                  <script>JobDateDiff('{{ item.dates.start }}', '{{ item.dates.end }}')</script>
+                </span>
               {%- endif -%}
-            </span>
-          </h3>
-          <h4 class="resume-item-details">{{ item.year }}</h4>
-          <div class="resume-item-copy">{{ item.description }}</div>
-        </div>
-      {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
-
-<!-- 
-{%- if resume.sections.associations -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Associations</h2></header>
-    <div class="section-content">
-    {%- for association in site.data.associations -%}
-      <div class="resume-item" itemscope itemprop="memberOf" itemtype="http://schema.org/Organization">
-        <h3 class="resume-item-title" itemprop="name">{%- if association.url -%}<a href="{{ association.url }}">{{ association.organization }}</a>{%- else -%}{{ association.organization }}{%- endif -%}</h3>
-        <h4 class="resume-item-details" itemprop="description">{{ association.role }} &bull; {{ association.year }}</h4>
-        <div class="resume-item-copy">{{ association.summary }}</div>
-      </div>
-    {%- endfor -%}
-    </div>
-  </section>
-{%- endif -%}
- -->
-
-<!-- 
-{%- if resume.sections.interests -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Outside Interests</h2></header>
-    <div class="section-content">
-      <div class="resume-item">
-        <div class="resume-item-copy">{{ site.data.interests.description }}</div>
-      </div>
-    </div>
-  </section>
-{%- endif -%}
- -->
-
-<!-- 
-{%- if resume.sections.links -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Additional Links</h2></header>
-    <div class="section-content">
-      <div class="resume-item">
-        <ul class="resume-item-list">
-          {%- for item in site.data.links -%}<li><strong>{{ item.name }}</strong>: <a href="{{ item.url }}" target="_blank">{{ item.label }}</a></li>{%- endfor -%}
+              {%- if item.description -%}
+                <p class="item-description">{{ item.description | markdownify }}</p>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
         </ul>
-      </div>
-    </div>
-  </section>
-{%- endif -%}
- -->
-
-{%- if resume.sections.social_links -%}
-  <section class="content-section">
-    <header class="section-header"><h2>Social Links</h2></header>
-    <div class="section-content">
-      <div class="resume-item">
-        {%- if resume.social -%}
-          <ul class="resume-item-list">
-            {%- for item in resume.social -%}<li><strong>{{ item[0] }}</strong>: <a href="{{ item[1] }}" target="_blank">{{ item[1] }}</a></li>{%- endfor -%}
-          </ul>
-        {%- endif -%}
-      </div>
-    </div>
-  </section>
-{%- endif -%}
-
-<div class="resume-item-copy ackandact-description">
-  {{ item.description | markdownify }}
-</div>
-
-<div class="bottom-bar no-print">
-  <div class="bottom-bar__content">
-    <div class="bottom-bar__text">
-      <a href="/assets/Casey Scruggs - Resume.pdf" >
-        PDF version available here
-      </a>
-    </div>
-    <button class="bottom-bar__close" type="button">&times;</button>
-  </div>
-</div>
-
-{%- comment -%}
-<footer class="page-footer">
-  <p class="footer-line">Made by <a href="http://twitter.com/jglovier">@jglovier</a>. Fork me on <a href="https://github.com/jglovier/resume-template">GitHub</a>.</p>
-  <p class="footer-line">If this is your live resume, you can modify or remove this part. ;-)</p>
-</footer>
-{%- endcomment -%}
+      {%- endif -%}
+    </section>
+  {%- endfor -%}
+</main>
