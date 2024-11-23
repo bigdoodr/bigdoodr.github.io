@@ -10,26 +10,26 @@
 # other is used. Lists are sorted and concatenated without line breaks separated by • (&bull;)
 
 - skill: Apple Device Enrollment and Provisioning
+  level: 100
   description: macOS, iPadOS, Apple Configurator, Apple School Manager
-  level: 100
 - skill: Apple Device Management
+  level: 100
   description: Mosyle Business MDM Solution
-  level: 100
 - skill: Problem Solving & Troubleshooting
+  level: 100
   description: Identifying and resolving complex technical issues through logical analysis, root cause identification, and creative solutions, ensuring minimal downtime and optimal system performance.
-  level: 100
 - skill: Project Management
-  description: Planning, coordinating, and executing projects by defining objectives, managing resources, and ensuring timely delivery while maintaining alignment with stakeholder expectations and organizational goals.
   level: 80
+  description: Planning, coordinating, and executing projects by defining objectives, managing resources, and ensuring timely delivery while maintaining alignment with stakeholder expectations and organizational goals.
 - skill: Scripting and Automation
-  description: Bash, Python, Zsh
   level: 70
+  description: Bash, Python, Zsh
 - skill: Technical Writing & Documentation
+  level: 100
   description: Creating clear, concise, and user-focused documentation, chiefly in the form of knowledge-base articles and web pages, for both end-users and support team members. Skilled in translating complex technical concepts into accessible information tailored to diverse audiences.
-  level: 100
 - skill: User Support
-  description: Providing responsive and empathetic technical assistance to end-users, diagnosing and resolving hardware, software, and network issues. Skilled in delivering clear guidance, minimizing downtime, and enhancing user satisfaction through effective communication and problem resolution.
   level: 100
+  description: Providing responsive and empathetic technical assistance to end-users, diagnosing and resolving hardware, software, and network issues. Skilled in delivering clear guidance, minimizing downtime, and enhancing user satisfaction through effective communication and problem resolution.
 - skill: Tools & Technologies
   list:
     - Confluence
