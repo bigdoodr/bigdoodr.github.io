@@ -101,7 +101,7 @@
             {%- if skill.list -%}
               <div class="skill-list">
                 {%- for item in skill.list -%}
-                  {%- if item contains ':' -%}
+                  {%- if item contains '=>' -%}
                     {%- assign parts = item | split: '=>' -%}
                     <span>{{ parts[0] }} ({{ parts[1] | strip_newlines | strip }})</span>
                   {%- else -%}
