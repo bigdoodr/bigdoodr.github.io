@@ -108,11 +108,18 @@
             </div>
             {%- endif -%}
             {%- if skill.list -%}
-            <ul class="skill-list">
+            <div class="skill-list-inline">
               {%- for item in skill.list -%}
-              <li>{{ item }}</li>
+                {%- if item contains ":" -%}
+                  {%- assign parent = item | split: ":" | first -%}
+                  {%- assign subitems = item | split: ":" | last | split: "," -%}
+                  <span>{{ parent }} ({{ subitems | join: ", " }})</span>
+                {%- else -%}
+                  <span>{{ item }}</span>
+                {%- endif -%}
+                {%- if forloop.last -%}{%- else -%}<span> &bull; </span>{%- endif -%}
               {%- endfor -%}
-            </ul>
+            </div>
             {%- endif -%}
           </div>
         </div>

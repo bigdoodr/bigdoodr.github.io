@@ -337,3 +337,14 @@ ul, ol {
     font-size: 0.9em;
     color: #555555;
 }
+
+.skill-list-inline {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #555555;
+
+  span {
+    display: inline-block;
+    margin-right: 5px; /* Adjust spacing if needed */
+  }
+}
