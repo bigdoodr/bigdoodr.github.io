@@ -95,31 +95,21 @@
         <div class="resume-item">
           <h4 class="resume-item-details">{{ skill.skill }}</h4>
           <div class="resume-item-copy">
-            {%- if skill.level -%}
-            <div class="skill-level">
-              <div class="skill-bar">
-                <div class="skill-bar-fill" style="width: {{ skill.level }}%;"></div>
-              </div>
-            </div>
-            {%- endif -%}
             {%- if skill.description -%}
-            <div class="skill-description">
-              {{ skill.description }}
-            </div>
+              <div class="skill-description">{{ skill.description }}</div>
             {%- endif -%}
             {%- if skill.list -%}
-            <div class="skill-list-inline">
-              {%- for item in skill.list -%}
-                {%- if item contains ":" -%}
-                  {%- assign parent = item | split: ":" | first -%}
-                  {%- assign subitems = item | split: ":" | last | split: "," -%}
-                  <span>{{ parent }} ({{ subitems | join: ", " }})</span>
-                {%- else -%}
-                  <span>{{ item }}</span>
-                {%- endif -%}
-                {%- if forloop.last -%}{%- else -%}<span> &bull; </span>{%- endif -%}
-              {%- endfor -%}
-            </div>
+              <div class="skill-list">
+                {%- for item in skill.list -%}
+                  {%- if item contains ':' -%}
+                    {%- assign parts = item | split: '=>' -%}
+                    <span>{{ parts[0] }} ({{ parts[1] | strip_newlines | strip }})</span>
+                  {%- else -%}
+                    <span>{{ item }}</span>
+                  {%- endif -%}
+                  {%- if forloop.last == false -%} • {%- endif -%}
+                {%- endfor -%}
+              </div>
             {%- endif -%}
           </div>
         </div>

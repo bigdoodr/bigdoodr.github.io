@@ -32,10 +32,12 @@
   description: Providing responsive and empathetic technical assistance to end-users, diagnosing and resolving hardware, software, and network issues. Skilled in delivering clear guidance, minimizing downtime, and enhancing user satisfaction through effective communication and problem resolution.
 - skill: Tools & Technologies
   list:
+    - Data Processing: Airtable, Microsoft Excel, Notion
     - Confluence
     - Docker
-    - Excel
-    - TeamDynamix: Ticket Tracking, Knowledge-Base, Asset Tracking, Project Management
+    - GitHub
+    - Remote Collaboration: Microsoft Teams, Slack, Zoom
+    - TeamDynamix: Ticket Tracking, Knowledge-Base, Asset Management, Project Management
 
 # HCHB to add:
 # Azure, Bicep, Azure DevOps, Pipelines (YAML), DacFx
