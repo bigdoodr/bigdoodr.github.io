@@ -220,7 +220,7 @@
             </span>
           </h3>
           <h4 class="resume-item-details">{{ item.year }}</h4>
-          <div class="resume-item-copy">{{ item.description }}</div>
+          <div>{{ item.description | markdownify }}</div>
         </div>
       {%- endfor -%}
     </div>
@@ -286,12 +286,6 @@
     </div>
   </section>
 {%- endif -%}
-
-<div class="resume-item-copy">
-  {{ item.description | markdownify }}
-</div>
-
-<pre>{{ site.data.ackandact | jsonify }}</pre>
 
 <div class="bottom-bar no-print">
   <div class="bottom-bar__content">
