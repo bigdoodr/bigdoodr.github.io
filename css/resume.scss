@@ -345,6 +345,13 @@ ul, ol {
 
   span {
     display: inline-block;
-    margin-right: 5px; /* Adjust spacing if needed */
+    margin-right: 0.5rem; /* Adjusted spacing for consistency */
+    white-space: nowrap; /* Prevents text wrapping within items */
   }
+}
+
+.skill-list {
+  display: flex; /* Inline layout for items */
+  flex-wrap: wrap; /* Wraps items to the next line if needed */
+  gap: 0.5rem; /* Adds spacing between items */
 }
