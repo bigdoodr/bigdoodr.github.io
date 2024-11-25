@@ -14,6 +14,8 @@ Ask yourself if your employeer does these things.
 
 Consider what websites you patronize and if their data usage policies address these items.
 
+To go really deep and reflect on how companies' IT Security should communicate with their employees, check out [honest.security](https://honest.security). 
+
 # Org Responsibilities to Employees and Customers
 
 ### Password and Authentication Management

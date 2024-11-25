@@ -36,17 +36,17 @@
       <i class="fa-solid fa-envelope"></i>
     </a>
   </div>
-  <div class="mastodon" onclick="mastodonShare">
-    <a href="https://mastodon.social/share?text={{ safetitle }}&url={{ safeurl }}" target="_blank" title="Share on Mastodon">
-      <i class="fa-brands fa-mastodon"></i>
-    </a>
-  </div>
+<div class="mastodon" onclick="mastodonShare('{{ safeurl }}', '{{ safetitle }}')">
+  <a href="#" title="Share on Mastodon">
+    <i class="fa-brands fa-mastodon"></i>
+  </a>
+</div>
 
 <script>
   function mastodonShare(url, title) {
     const instance = prompt("Enter your Mastodon instance (e.g., mastodon.social):");
     if (instance) {
-      const shareUrl = `https://${instance}/share?text=${title}%20${url}`;
+      const shareUrl = `https://${instance}/share?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
       window.open(shareUrl, "_blank", "width=600,height=400");
     }
   }
