@@ -138,3 +138,7 @@ Consider what websites you patronize and if their data usage policies address th
 <dt>Monitor and Control Physical Access</dt>
 <dd>Use secure printing and access controls for sensitive areas to prevent unauthorized data exposure.</dd>
 </dl>
+
+<div class="pdf-link">
+  <a href="/assets/org-responsibilities.pdf" target="_blank">Get the PDF version here</a>
+</div>

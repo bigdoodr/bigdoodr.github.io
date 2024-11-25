@@ -6,9 +6,12 @@ date: 2024-09-08T23:00:00-23:00
 tags: Tech
 image: /resources/user-secret-solid.png
 ---
-The late [Kevin Mitnick](https://www.mitnicksecurity.com/about-kevin-mitnick-mitnick-security#:~:text=Kevin%20Mitnick%20was%20an%20inspiration)'s book, [Art of Invisibility](https://www.mitnicksecurity.com/the-art-of-invisibility-mitnick-security), was released in 2017. I didn't read it until 2024. Though some of the topics covered were a little dated, the majority of them are quite relevant.  \nWhile making my way through the book, I made a checklist of actions a person can take to enhance their digital privacy and security. Most suggestions are good, practical, and easy-to-implement actions. Others are rather drastic and don't necessarily apply to most folks that just want to safeguard their digital presence a little better.  \nI've made a key to indicate what I think is the practicality of each suggestion. I'm also a big fan of Apple's [iCloud+](https://support.apple.com/guide/icloud/icloud-overview-mmfc854d9604/icloud) service, and the [Passwords app](https://support.apple.com/en-us/120758), and the security enhancements they offer, so I've indicated which items can be implemented with them.
+The late [Kevin Mitnick](https://www.mitnicksecurity.com/about-kevin-mitnick-mitnick-security#:~:text=Kevin%20Mitnick%20was%20an%20inspiration)'s book, [Art of Invisibility](https://www.mitnicksecurity.com/the-art-of-invisibility-mitnick-security), was released in 2017. I didn't read it until 2024. Though some of the topics covered were a little dated, the majority of them are quite relevant.  
+While making my way through the book, I made a checklist of actions a person can take to enhance their digital privacy and security. Most suggestions are good, practical, and easy-to-implement actions. Others are rather drastic and don't necessarily apply to most folks that just want to safeguard their digital presence a little better.  
+I've made a key to indicate what I think is the practicality of each suggestion. I'm also a big fan of Apple's [iCloud+](https://support.apple.com/guide/icloud/icloud-overview-mmfc854d9604/icloud) service, and the [Passwords app](https://support.apple.com/en-us/120758), and the security enhancements they offer, so I've indicated which items can be implemented with them.
 
-Key
+### Key
+
 Symbol | Meaning
 👍 | Something everybody should do
 🤔 | Something worth doing, but will take some effort
@@ -157,3 +160,7 @@ Symbol | Meaning
 ## 18. Advanced Anonymity Techniques
 - [ ]  👍 Use public Wi-Fi cautiously and with proper protection
 - [ ]  🤔 <font size="3">⊕</font> Create and maintain separate email accounts for different personas
+
+<div class="pdf-link">
+  <a href="/assets/privacy-security-actions.pdf" target="_blank">Get the PDF version here</a>
+</div>

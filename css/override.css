@@ -121,3 +121,26 @@ hr {
 .social-icons a:hover {
   color: #0077b5; /* Example hover color */
 }
+
+.pdf-link {
+  position: fixed; /* Sticks to a fixed position on the page */
+  bottom: 1rem;    /* Distance from the bottom */
+  right: 1rem;     /* Distance from the right */
+  background-color: #333; /* Dark background for visibility */
+  color: #fff;     /* Light text for contrast */
+  padding: 0.5rem 1rem; /* Padding for a button-like appearance */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 0.9rem; /* Slightly smaller font */
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  z-index: 1000; /* Ensures it stays above other content */
+}
+
+.pdf-link a {
+  color: #fff; /* Ensures the link color matches the text */
+  text-decoration: none; /* Removes underline */
+}
+
+.pdf-link a:hover {
+  text-decoration: underline; /* Adds underline on hover for clarity */
+}
