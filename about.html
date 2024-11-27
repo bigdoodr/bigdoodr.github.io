@@ -1,6 +1,11 @@
 ---
 title: "About Me"
+description: "About me and my code of ethics"
+date: 2022-03-20T05:00:00-5:00
+tags: Tech
+image: /mando.png
 ---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,133 +14,246 @@ title: "About Me"
   <title>About Me and My Code of Ethics</title>
   <style>
 
-	@media only screen and (max-width: 600px) {
-  		/* Styles for screens smaller than 600px */
-	}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
 
-	@media only screen and (min-width: 601px) and (max-width: 1024px) {
-  		/* Styles for screens between 601px and 1024px */
-	}
+h1, h2, h3, h4, h5, h6 {
+  font-size: 3em;
+}
 
-	@media only screen and (min-width: 1025px) {
-  		/* Styles for screens larger than 1024px */
-	}
+p {
+  font-size: 1.5em;
+}
+/* Header and Navigation Styling */
+.site-header {
+  display: flex; /* Use flexbox to align items */
+  align-items: center; /* Vertically align items */
+  justify-content: space-between; /* Distribute space between title and nav links */
+  background-color: #333333; /* Header background color */
+  padding: 1rem 2rem; /* Add spacing */
+}
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-size: 16px;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-size: 3em;}
-      
-    p {
-      font-size: 1.5em
-    }
+.site-title {
+  color: white;
+  font-size: 1.5em;
+  text-decoration: none;
+}
 
-    section {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
+.site-nav {
+  display: flex; /* Flex container for nav links */
+  gap: 1rem; /* Add spacing between links */
+}
 
-    #section1 {
-      background-color: #333333;
-      color: #FFFFFF;
-    }
+.site-nav .page-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
 
-    #section2 {
-      background-color: #FF0000;
-      color: #FFFFFF;
-    }
+.site-nav .page-link:hover {
+  text-decoration: underline;
+}
 
-    #section3 {
-      background-color: #FFFFFF;
-    }
+/* Base styling for the header */
+header {
+  position: relative;
+  padding: 10px 0;
+  background-color: #222;
+}
 
-    #section4 {
-      background-color: #000000;
-      color: #FFFFFF;
-      align-items: right;
-      justify-content: right;
-      text-align: right;
-    }
-    #section5 {
-      background-color: #000000;
-      color: #FFFFFF;
-      align-items: left;
-      justify-content: left;
-      text-align: left;
-    }
+/* Menu Icon Styling */
+.menu-icon {
+  display: none; /* Hidden by default, shown only on small screens */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-    .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+.menu-icon svg {
+  fill: white;
+}
 
-    .text {
-      max-width: 50%;
-      text-align: left;
-    }
-    
-    .text.right-aligned {
-      text-align: right;
-    }
-    
-    .text h2 {
-    	margin-bottom: 300px;
-    }
+/* Dropdown Menu for Small Screens */
+#menu-links {
+  display: none; /* Hidden by default */
+}
 
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-    
-    #img1-container {
-      overflow: hidden;
-      border-radius: 20px;
-    }
+#menu-links.show {
+  display: block; /* Show links when toggled */
+  position: absolute;
+  right: 1rem;
+  top: 100%; /* Position below the header */
+  background-color: #333;
+  padding: 1rem;
+  z-index: 10;
+  border-radius: 5px;
+}
 
-    #img1 {
-      max-width: 100%;
-      height: auto;
-      border-radius: 20px;
-      object-position: bottom;
-    }
+#menu-links a {
+  display: block; /* Stack links vertically */
+  margin: 0.5rem 0;
+  color: white;
+  text-decoration: none;
+}
 
-    #img2 {
-      max-width: 50%;
-      height: auto;
-      border-radius: 20px;
-    }
+#menu-links a:hover {
+  text-decoration: underline;
+}
 
-    #img3-container {
-      overflow: hidden;
-      border-radius: 20px;
-    }
+/* Responsive styling for small screens */
+@media (max-width: 768px) {
+  /* Show the menu icon on small screens */
+  .menu-icon {
+    display: inline-block;
+  }
 
-    #img3 {
-      max-width: 100%;
-      height: auto;
-      border-radius: 20px;
-    }
-    
-    a {
-            color: white;
-        }
+  /* Hide the site navigation links */
+  .site-nav {
+    display: none;
+  }
+
+  /* Display the dropdown menu when the "show" class is added */
+  #menu-links.show {
+    display: block;
+  }
+}
+
+/* Styling for larger screens (default layout) */
+@media (min-width: 769px) {
+  /* Display the navigation links in a row */
+  .site-nav {
+    display: flex;
+    justify-content: flex-end; /* Align links to the far right */
+  }
+
+  /* Hide the dropdown menu on large screens */
+  #menu-links {
+    display: none;
+  }
+
+  /* Ensure page links show on large screens */
+  .page-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .page-links a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .page-links a:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Sections */
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#section1 {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+#section2 {
+  background-color: #FF0000;
+  color: #FFFFFF;
+}
+
+#section3 {
+  background-color: #FFFFFF;
+}
+
+#section4 {
+  background-color: #000000;
+  color: #FFFFFF;
+  text-align: right;
+}
+
+#section5 {
+  background-color: #000000;
+  color: #FFFFFF;
+  text-align: left;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+#img1-container,
+#img3-container {
+  overflow: hidden;
+}
+
+#img1, #img2, #img3 {
+  object-fit: cover;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.text {
+  max-width: 50%;
+  text-align: left;
+}
+
+.text.right-aligned {
+  text-align: right;
+}
+
+a {
+  color: white;
+}
 
   </style>
 </head>
 <body>
-
+  <div class="no-print">
+<header class="site-header">
+  <a class="site-title" href="/">bigDoodR Things</a>
+  
+  <!-- Menu Icon (Visible on Small Screens) -->
+  <button class="menu-icon" aria-label="Toggle menu" onclick="toggleMenu()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+      <path d="M3 6h18M3 12h18M3 18h18" stroke="white" stroke-width="2" fill="none" />
+    </svg>
+  </button>
+  
+  <!-- Navigation Links -->
+  <nav class="site-nav">
+    <a class="page-link" href="/resume">Resume</a>
+    <a class="page-link" href="/about">About Me</a>
+    <a class="page-link" href="/archive">Blog Archive</a>
+    <a class="page-link" href="/bookmarks">Bookmarks</a>
+  </nav>
+  
+  <!-- Dropdown Menu Links (for Small Screens) -->
+  <div id="menu-links">
+    <a href="/resume">Resume</a>
+    <a href="/about">About Me</a>
+    <a href="/archive">Blog Archive</a>
+    <a href="/bookmarks">Bookmarks</a>
+  </div>
+</header>
+  </div>
   <!-- Section 1 -->
   <section id="section1">
     <div class="container">
@@ -145,14 +263,14 @@ title: "About Me"
         <p align="right">Do the best you can until you know better. Then when you know better, do better.</br>-MAYA ANGELOU</p>
       </div>
       <div id="img1-container">
-      <img id="img1" src="me.jpg" alt="Photo of Casey Scruggs">
+      <img id="img1" src="/resources/me.jpg" alt="Photo of Casey Scruggs">
     </div>
   </section>
 
   <!-- Section 2 -->
   <section id="section2">
     <div class="container">
-      <img id="img2" src="mando.png" alt="Picture of a Mandolorian helmet with the words This is the way written below it.">
+      <img id="img2" src="/resources/mando.png" alt="Picture of a Mandolorian helmet with the words This is the way written below it.">
       <div class="text">
         <h1 align="right">CODE OF ETHICS</h1>
         <p>The IT industry should be a force for good, but if not kept in check, can overreach the purpose it is intended to serve. I take the responsibility granted to me as an endpoint engineer very seriously, and offer this page as my commitment to both individuals and the institution I work for to keep personal privacy and the security of our work environment in focus simultaneously.</p>
@@ -170,7 +288,7 @@ title: "About Me"
         <p>Some security protocols may be considered inconvenient; they should be reviewed to ensure they are essential and only then activated with as little of a disruption as possible.</p>
       </div>
       <div id="img3-container">
-      <img id="img3" src="woz.png" alt="Caricature of Steve Wozniak">
+      <img id="img3" src="/resources/woz.png" alt="Caricature of Steve Wozniak">
     </div>
   </section>
 
@@ -192,6 +310,12 @@ title: "About Me"
 	  </div>
 	</div>
   </section>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu-links');
+    menu.classList.toggle('show'); // Toggles the 'show' class to display the dropdown
+  }
+</script>
 
 </body>
 </html>
