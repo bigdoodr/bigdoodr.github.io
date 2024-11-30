@@ -43,7 +43,7 @@ image: /resources/1.crescent-tucks.gif
     <li><img src="/resources/BridgeAndReachOver.gif" alt="Bridge and Reach Over"> Bridge and Reach Over</li>
     <li><img src="/resources/QLSlide.gif" alt="QL Slide"> QL Slide</li>
     <li><img src="/resources/SquatAndReach.gif" alt="Squat and Reach"> Squat and Reach</li>
-    <li><img src="/resources/KneelingLungAndTorsoTwist.gif" alt="Kneeling Lunge and Torso Twist"> Kneeling Lunge and Torso Twist</li>
+    <li><img src="/resources/KneelingLungeAndTorsoTwist.gif" alt="Kneeling Lunge and Torso Twist"> Kneeling Lunge and Torso Twist</li>
     <li><img src="/resources/HipHingeAndTorsoBend.gif" alt="Hip Hinge and Torso Bend"> Hip Hinge and Torso Bend</li>
   </ul>
 </details>
