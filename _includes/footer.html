@@ -2,15 +2,16 @@
   <data class="u-url" href="{{ "/" | relative_url }}"></data>
 
   <div class="wrapper">
-
     <div class="footer-col-wrapper">
       <div class="footer-col">
-        <p class="feed-subscribe">
-          <!-- RSS link with only the icon -->
-          <a href="{{ site.feed.path | default: '/feed.xml' | absolute_url }}">
-            <i class="fas fa-rss orange"></i>
-          </a>
-        </p>
+        <ul class="social-icons">
+          <li>
+            <a href="{{ '/feed.xml' | relative_url }}" title="RSS Feed">
+              <i class="fas fa-rss orange"></i>
+            </a>
+          </li>
+          {%- include social.html -%}
+        </ul>
         {%- if site.author %}
         <ul class="contact-list">
           {% if site.author.name -%}
@@ -23,11 +24,5 @@
         {%- endif %}
       </div>
     </div>
-
-    <div class="social-links">
-      <!-- Include other social icons here (GitHub, LinkedIn, Mastodon, etc.) -->
-      {%- include social.html -%}
-    </div>
-
   </div>
 </footer>

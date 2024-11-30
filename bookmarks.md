@@ -8,5 +8,4 @@ title: "Bookmarks"
 - <div style="width: 80px; height: auto; display: inline-block; padding: 5px;">
    <a href="https://www.woot.com"><img src="https://d3rqdbvvokrlbl.cloudfront.net/lib/images/sites/header/woot-an-amazon-company.svg" width="70"></a></div>
 
-- [Mastodon Deck](https://mastodon.social/deck/getting-started)
-- [10 Minute Abs](/10-Minute-Abs.md)
+- [Daily Exercises](/DailyExercies.md)
