@@ -12,6 +12,7 @@ image: /mando.png
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Me and My Code of Ethics</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
   <style>
 
 body {
@@ -151,6 +152,25 @@ header {
   }
 }
 
+/* Adjust layout for small screens */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements */
+    text-align: center; /* Center text */
+  }
+
+  .text {
+    max-width: 100%; /* Make text take full width */
+    text-align: center; /* Center-align text */
+  }
+
+  #img1-container, #img2-container, #img3-container {
+    width: 100%; /* Make images take full width */
+    margin: 10px 0; /* Add spacing between text and images */
+  }
+}
+
 /* Sections */
 section {
   display: flex;
@@ -185,7 +205,7 @@ section {
   text-align: left;
 }
 
-/* Images */
+/* Image Styling */
 img {
   max-width: 100%;
   height: auto;
@@ -195,13 +215,15 @@ img {
 #img1-container,
 #img2-container,
 #img3-container {
+  flex: 1; /* Ensures images and text take equal space */
   overflow: hidden;
 }
 
 #img1, #img2, #img3 {
-  object-fit: cover;
+  object-fit: cover; /* Ensures proper cropping without distortion */
 }
 
+/* General container layout */
 .container {
   display: flex;
   align-items: center;
@@ -211,6 +233,7 @@ img {
   box-sizing: border-box;
 }
 
+/* Text alignment */
 .text {
   max-width: 50%;
   text-align: left;
@@ -255,92 +278,108 @@ a {
   </div>
 </header>
   </div>
-  <!-- Section 1 -->
-  <section id="section1">
-    <div class="container">
-      <div class="text">
-        <h1>CASEY SCRUGGS</h1>
-        <h2>Endpoint Engineer</h2>
-        <p align="right">Do the best you can until you know better. Then when you know better, do better.</br>-MAYA ANGELOU</p>
-      </div>
-      <div id="img1-container">
+<!-- Section 1 -->
+<section id="section1">
+  <div class="container">
+    <div class="text">
+      <h1>CASEY SCRUGGS</h1>
+      <h2>Endpoint Engineer</h2>
+      <p align="right">Do the best you can until you know better. Then when you know better, do better.</br>-MAYA ANGELOU</p>
+    </div>
+    <div id="img1-container">
       <img id="img1" src="/resources/me.jpg" alt="Photo of Casey Scruggs">
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Section 2 -->
-  <section id="section2">
-    <div class="container">
-      <div id="img2-container">
+<!-- Section 2 -->
+<section id="section2">
+  <div class="container">
+    <div id="img2-container">
       <img id="img2" src="/resources/mando.png" alt="Picture of a Mandolorian helmet with the words This is the way written below it.">
-      <div class="text">
-        <h1 align="right">CODE OF ETHICS</h1>
-        <p>The IT industry should be a force for good, but if not kept in check, can overreach the purpose it is intended to serve. I take the responsibility granted to me as an endpoint engineer very seriously, and offer this page as my commitment to both individuals and the institution I work for to keep personal privacy and the security of our work environment in focus simultaneously.</p>
-      </div>
     </div>
-  </section>
-
-  <!-- Section 3 -->
-  <section id="section3">
-    <div class="container">
-      <div class="text">
-        <h1>CAPABILITIES AND LIMITATIONS</h1>
-        <p>Generally, IT Engineers have access to persons' electronic information, some of which may be personal and confidential, such as employee ID and email address. This generally occurs when troubleshooting an issue directly with the account holder. In other instances, accessing this electronic information should only be performed when necessary and permission has been granted by proper employer and legal authorities.</p>
-        <p>Endpoint Engineers can remotely configure computer settings. This generally occurs when preparing a device to meet security protocols, in effort to protect against threats such as attacks, malware, and viruses, as well as to protect the integrity and security of information.</p>
-        <p>Some security protocols may be considered inconvenient; they should be reviewed to ensure they are essential and only then activated with as little of a disruption as possible.</p>
-      </div>
-      <div id="img3-container">
-      <img id="img3" src="/resources/woz.png" alt="Caricature of Steve Wozniak">
-    </div>
-  </section>
-
-  <!-- Section 4 -->
-  <section id="section4">
-  	  <div class="text.right-aligned">
-        <h1>FURTHER READING</h1>
-	  </div>
-	</div>
-  </section>
-
-  <!-- Section 5 -->
-  <section id="section5">
-  	  <div class="text">
-        <p>Below are links to what inspired me to create this page.</p>
-		<p><a href="https://tombridge.com/2021/07/14/video-posted-for-three-paragons-of-it/">Three Paragons of IT - Tom Bridge</a></p>
-		<p><a href="https://www.acm.org/code-of-ethics">ACM Code of Ethics</a></p>
-		<p><a href="https://www.computer.org/education/code-of-ethics">IEEE Code of Ethics</a></p>
-	  </div>
-	</div>
-  </section>
-
-<footer class="site-footer h-card">
-  <data class="u-url" href="{{ "/" | relative_url }}"></data>
-
-  <div class="wrapper">
-    <div class="footer-col-wrapper">
-      <div class="footer-col">
-        <ul class="social-icons">
-          <li>
-            <a href="{{ '/feed.xml' | relative_url }}" title="RSS Feed">
-              <i class="fas fa-rss orange"></i>
-            </a>
-          </li>
-          {%- include social.html -%}
-        </ul>
-        {%- if site.author %}
-        <ul class="contact-list">
-          {% if site.author.name -%}
-            <li class="p-name">{{ site.author.name | escape }}</li>
-          {% endif -%}
-          {% if site.author.email -%}
-            <li><a class="u-email" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
-          {%- endif %}
-        </ul>
-        {%- endif %}
-      </div>
+    <div class="text right-aligned">
+      <h1 align="right">CODE OF ETHICS</h1>
+      <p>The IT industry should be a force for good, but if not kept in check, can overreach the purpose it is intended to serve. I take the responsibility granted to me as an endpoint engineer very seriously, and offer this page as my commitment to both individuals and the institution I work for to keep personal privacy and the security of our work environment in focus simultaneously.</p>
     </div>
   </div>
-</footer>
+</section>
+
+<!-- Section 3 -->
+<section id="section3">
+  <div class="container">
+    <div class="text">
+      <h1>CAPABILITIES AND LIMITATIONS</h1>
+      <p>Generally, IT Engineers have access to persons' electronic information, some of which may be personal and confidential, such as employee ID and email address. This generally occurs when troubleshooting an issue directly with the account holder. In other instances, accessing this electronic information should only be performed when necessary and permission has been granted by proper employer and legal authorities.</p>
+      <p>Endpoint Engineers can remotely configure computer settings. This generally occurs when preparing a device to meet security protocols, in effort to protect against threats such as attacks, malware, and viruses, as well as to protect the integrity and security of information.</p>
+      <p>Some security protocols may be considered inconvenient; they should be reviewed to ensure they are essential and only then activated with as little of a disruption as possible.</p>
+    </div>
+    <div id="img3-container">
+      <img id="img3" src="/resources/woz.png" alt="Caricature of Steve Wozniak">
+    </div>
+  </div>
+</section>
+
+<!-- Section 4 -->
+<section id="section4">
+  <div class="text.right-aligned">
+    <h1>FURTHER READING</h1>
+  </div>
+</section>
+
+  <!-- Section 5 -->
+<section id="section5">
+  <div class="text">
+    <p>Below are links to what inspired me to create this page.</p>
+	<p><a href="https://tombridge.com/2021/07/14/video-posted-for-three-paragons-of-it/">Three Paragons of IT - Tom Bridge</a></p>
+	<p><a href="https://www.acm.org/code-of-ethics">ACM Code of Ethics</a></p>
+	<p><a href="https://www.computer.org/education/code-of-ethics">IEEE Code of Ethics</a></p>
+  </div>
+</section>
+
+<div class="no-print">
+  <footer class="site-footer h-card">
+    <data class="u-url" href="/"></data>
+    <div class="wrapper">
+      <div class="footer-col-wrapper">
+        <div class="footer-col">
+          <ul class="social-icons">
+            <!-- RSS Feed -->
+            <li>
+              <a href="/feed.xml" title="RSS Feed">
+                <i class="fas fa-rss orange"></i>
+              </a>
+            </li>
+            <!-- GitHub -->
+            <li>
+              <a href="https://github.com/bigdoodr" target="_blank">
+                <i class="fab fa-github"></i>
+                <span class="sr-only">GitHub</span>
+              </a>
+            </li>
+            <!-- LinkedIn -->
+            <li>
+              <a href="https://linkedin.com/in/casey-scruggs-467147245" target="_blank">
+                <i class="fab fa-linkedin"></i>
+                <span class="sr-only">LinkedIn</span>
+              </a>
+            </li>
+            <!-- Mastodon -->
+            <li>
+              <a rel="me" href="https://mastodon.social/@bigdoodr" target="_blank">
+                <i class="fab fa-mastodon"></i>
+                <span class="sr-only">Mastodon</span>
+              </a>
+            </li>
+          </ul>
+          <ul class="contact-list">
+            <!-- Add contact information here if needed -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
 
 <script>
   function toggleMenu() {
