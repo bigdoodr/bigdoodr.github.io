@@ -33,14 +33,26 @@
   <script type="text/javascript"> hljs.highlightAll(); </script>
   <!-- end highlight.js support -->
 
-  {% if jekyll.environment == 'production' -%}
-  <!-- dark theme using DarkReader -->
+{% if jekyll.environment == 'production' %}
   <script src="//unpkg.com/darkreader@4.9.40/darkreader.js"></script>
   <script type="text/javascript">
-    DarkReader.setFetchMethod(window.fetch); // Fix to remedy CORS errors in chrome console
-    //DarkReader.enable();
-    DarkReader.auto( {brightness: 100, contrast: 90, sepia: 10} );
+    if (localStorage.getItem('theme') === 'dark') {
+      DarkReader.setFetchMethod(window.fetch);
+      DarkReader.enable();
+    }
   </script>
-  {%- endif %}
+{% endif %}
+<script>
+  // Check for saved theme preference
+  let currentTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+
+  // Toggle theme function
+  function toggleTheme() {
+    currentTheme = (currentTheme === 'light') ? 'dark' : 'light';
+    localStorage.setItem('theme', currentTheme);
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  }
+</script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>

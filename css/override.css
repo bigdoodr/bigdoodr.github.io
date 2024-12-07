@@ -144,3 +144,21 @@ hr {
 .pdf-link a:hover {
   text-decoration: underline; /* Adds underline on hover for clarity */
 }
+
+/* Default (Light) theme styles */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+/* Dark theme styles */
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+}
+
+/* Apply the variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
