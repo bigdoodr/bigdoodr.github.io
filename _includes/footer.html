@@ -25,5 +25,32 @@
       </div>
     </div>
   </div>
-<button onclick="toggleTheme()">Toggle Theme</button>
+  <label for="theme-selector">Choose Theme:</label>
+  <select id="theme-selector" onchange="changeTheme()"></select>
 </footer>
+
+<script>
+  // Define the themes
+  const themes = ['callisto', 'thebe', 'dracula', 'pastel', 'solarized'];
+
+  // Populate the dropdown
+  const themeSelector = document.getElementById('theme-selector');
+  themes.forEach((theme) => {
+    const option = document.createElement('option');
+    option.value = theme;
+    option.textContent = theme.charAt(0).toUpperCase() + theme.slice(1); // Capitalize theme names
+    themeSelector.appendChild(option);
+  });
+
+  // Set current theme from localStorage or default
+  const currentTheme = localStorage.getItem('theme') || 'callisto';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  themeSelector.value = currentTheme;
+
+  // Change theme dynamically
+  function changeTheme() {
+    const selectedTheme = themeSelector.value;
+    document.documentElement.setAttribute('data-theme', selectedTheme);
+    localStorage.setItem('theme', selectedTheme);
+  }
+</script>
