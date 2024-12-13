@@ -26,31 +26,52 @@
     </div>
   </div>
   <label for="theme-selector">Choose Theme:</label>
-  <select id="theme-selector" onchange="changeTheme()"></select>
+  <select id="theme-selector" onchange="changeTheme()">
+    <option value="adventure">Adventure</option>
+    <option value="adventure-basic">Adventure-basic</option>
+    <option value="argon">Argon</option>
+    <option value="argonnord-frost">Argonnord-frost</option>
+    <option value="basic">Basic</option>
+    <option value="bee">Bee</option>
+    <option value="blue-purple">Blue-purple</option>
+    <option value="callisto">Callisto</option>
+    <option value="cherry-blossom">Cherry-blossom</option>
+    <option value="color-block">Color-block</option>
+    <option value="colorful">Colorful</option>
+    <option value="crayola">Crayola</option>
+    <option value="dashy-docs">Dashy-docs</option>
+    <option value="deep-ocean">Deep-ocean</option>
+    <option value="dracula">Dracula</option>
+    <option value="fallout">Fallout</option>
+    <option value="glass">Glass</option>
+    <option value="glass-2">Glass-2</option>
+    <option value="glow">Glow</option>
+    <option value="glow-colorfulcyberpunk">Glow-colorfulcyberpunk</option>
+    <option value="hacker-girl">Hacker-girl</option>
+    <option value="high-contrast-dark">High-contrast-dark</option>
+    <option value="high-contrast-light">High-contrast-light</option>
+    <option value="lissy">Lissy</option>
+    <option value="material">Material</option>
+    <option value="material-dark">Material-dark</option>
+    <option value="material-dark-original">Material-dark-original</option>
+    <option value="material-original">Material-original</option>
+    <option value="matrix">Matrix</option>
+    <option value="matrix-red">Matrix-red</option>
+    <option value="minimal-dark">Minimal-dark</option>
+    <option value="minimal-light">Minimal-light</option>
+    <option value="neomorphic">Neomorphic</option>
+    <option value="night-bat">Night-bat</option>
+    <option value="nord">Nord</option>
+    <option value="oblivion">Oblivion</option>
+    <option value="oblivion-blue">Oblivion-blue</option>
+    <option value="oblivion-lemon">Oblivion-lemon</option>
+    <option value="oblivion-mint">Oblivion-mint</option>
+    <option value="oblivion-scotch">Oblivion-scotch</option>
+    <option value="one-dark">One-dark</option>
+    <option value="raspberry-jam">Raspberry-jam</option>
+    <option value="tama">Tama</option>
+    <option value="thebe">Thebe</option>
+    <option value="tiger">Tiger</option>
+    <option value="vaporware">Vaporware</option>
+    <option value="whimsy">  </select>
 </footer>
-
-<script>
-  // Define the themes
-  const themes = ['callisto', 'thebe', 'dracula', 'pastel', 'solarized'];
-
-  // Populate the dropdown
-  const themeSelector = document.getElementById('theme-selector');
-  themes.forEach((theme) => {
-    const option = document.createElement('option');
-    option.value = theme;
-    option.textContent = theme.charAt(0).toUpperCase() + theme.slice(1); // Capitalize theme names
-    themeSelector.appendChild(option);
-  });
-
-  // Set current theme from localStorage or default
-  const currentTheme = localStorage.getItem('theme') || 'callisto';
-  document.documentElement.setAttribute('data-theme', currentTheme);
-  themeSelector.value = currentTheme;
-
-  // Change theme dynamically
-  function changeTheme() {
-    const selectedTheme = themeSelector.value;
-    document.documentElement.setAttribute('data-theme', selectedTheme);
-    localStorage.setItem('theme', selectedTheme);
-  }
-</script>
