@@ -76,3 +76,17 @@
     <option value="whimsy"></option>
   </select>
 </footer>
+
+<script>
+  // Load the current theme from localStorage or default to light
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  document.getElementById('theme-selector').value = currentTheme;
+
+  // Change theme when the dropdown is used
+  function changeTheme() {
+    const selectedTheme = document.getElementById('theme-selector').value;
+    document.documentElement.setAttribute('data-theme', selectedTheme);
+    localStorage.setItem('theme', selectedTheme);
+  }
+</script>
