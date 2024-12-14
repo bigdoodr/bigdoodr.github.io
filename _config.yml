@@ -54,3 +54,7 @@ defaults:
       type: posts
     values:
       tags: Other
+
+sass:
+  sass_dir: _sass
+  style: compressed # Optional, compresses the output CSS
