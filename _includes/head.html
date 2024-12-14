@@ -1,47 +1,59 @@
+
 <!-- Site build date: {{ "now" | date: "%FT%T%z" }} -->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- SEO metadata -->
+  <!-- Begin SEO -->
   {% seo %}
+  <!-- End SEO -->
 
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ '/css/main.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/css/color-themes.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/css/override.css' | relative_url }}">
+  <link rel="stylesheet" type="text/css" href="/css/override.css">
 
-  <!-- RSS Feeds -->
   {% feed_meta %}
 
-  <!-- Google Analytics (production only) -->
-  {% if jekyll.environment == 'production' and site.google_analytics %}
+  {% if jekyll.environment == 'production' and site.google_analytics -%}
+  <!-- Begin Google Analytics -->
   {% include google-analytics.html %}
-  {% endif %}
+  <!-- End Google Analytics -->
+  {%- endif %}
 
-  <!-- highlight.js support -->
+  <!-- Begin highlight.js support -->
   <link rel="stylesheet" href="/js/highlightjs/styles/github.css">
-  <link rel="stylesheet" href="/js/highlightjs/styles/ssms.css">
-  <script src="/js/highlightjs/highlight.min.js"></script>
-  <script src="/js/highlightjs/languages/plaintext.min.js"></script>
-  <script src="/js/highlightjs/languages/powershell.min.js"></script>
-  <script src="/js/highlightjs/languages/tsql.min.js"></script>
-  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="/js/highlightjs/styles/ssms.css" />
 
-  <!-- FontAwesome for icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/highlightjs/highlight.min.js"></script>
 
-  <!-- Theme switcher -->
-  <script>
-    // Set theme based on localStorage or default to 'light'
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+  <script type="text/javascript" src="/js/highlightjs/languages/plaintext.min.js"></script>
+  <script type="text/javascript" src="/js/highlightjs/languages/powershell.min.js"></script>
+  <script type="text/javascript" src="/js/highlightjs/languages/tsql.min.js"></script>
 
-    // Function to toggle theme
-    function toggleTheme(newTheme) {
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    }
+  <script type="text/javascript"> hljs.highlightAll(); </script>
+  <!-- end highlight.js support -->
+
+  {% if jekyll.environment == 'production' -%}
+  <!-- dark theme using DarkReader -->
+  <script src="//unpkg.com/darkreader@4.9.40/darkreader.js"></script>
+  <script type="text/javascript">
+    DarkReader.setFetchMethod(window.fetch); // Fix to remedy CORS errors in chrome console
+    //DarkReader.enable();
+    DarkReader.auto( {brightness: 100, contrast: 90, sepia: 10} );
   </script>
+  {%- endif %}
+<script>
+  // Check for saved theme preference
+  let currentTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+
+  // Toggle theme function
+  function toggleTheme() {
+    currentTheme = (currentTheme === 'light') ? 'dark' : 'light';
+    localStorage.setItem('theme', currentTheme);
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  }
+</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
