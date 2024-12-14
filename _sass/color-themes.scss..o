@@ -1,0 +1,223 @@
+html[data-theme='callisto'] {
+  --background: #141b33;
+  --text-color: #ffffff;
+  --primary: #00CCB4;
+  --secondary: #0b1021;
+}
+
+html[data-theme='thebe'] {
+  --background: #141b33;
+  --text-color: #b187f5;
+  --primary: #b187f5;
+  --secondary: #9660ec;
+}
+
+html[data-theme='dracula'] {
+  --background: #44475a;
+  --text-color: #98ace9;
+  --primary: #98ace9;
+  --secondary: #282a36;
+}
+
+html[data-theme='crayola'] {
+  --background: #191d2e;
+  --text-color: #7fd8e7;
+  --primary: #7fd8e7;
+  --secondary: #070912;
+}
+
+html[data-theme='bee'] {
+  --background: #0b1021;
+  --text-color: #c3eb5c;
+  --primary: #c3eb5c;
+  --secondary: #1c2636;
+}
+
+html[data-theme='raspberry-jam'] {
+  --background: #0b1021;
+  --text-color: #eb2d6c;
+  --primary: #eb2d6c;
+  --secondary: #1c2636;
+}
+
+html[data-theme='tiger'] {
+  --background: #0b1021;
+  --text-color: #f58233;
+  --primary: #f58233;
+  --secondary: #1c2636;
+}
+
+html[data-theme='matrix-red'] {
+  --background: #000000;
+  --text-color: #f00;
+  --primary: #f00;
+  --secondary: #000000;
+}
+
+html[data-theme='matrix'] {
+  --background: #000000;
+  --text-color: #2bca2b;
+  --primary: #2bca2b;
+  --secondary: #000000;
+}
+
+html[data-theme='blue-purple'] {
+  --background: #e5e8f5;
+  --text-color: #5346f3;
+  --primary: #54dbf8;
+  --secondary: #5346f3;
+}
+
+html[data-theme='hacker-girl'] {
+  --background: #000000;
+  --text-color: #e435f1;
+  --primary: #e435f1;
+  --secondary: #000000;
+}
+
+html[data-theme='high-contrast-light'] {
+  --background: #ffffff;
+  --text-color: #000000;
+  --primary: #000000;
+  --secondary: #ffffff;
+}
+
+html[data-theme='high-contrast-dark'] {
+  --background: #000000;
+  --text-color: #ffffff;
+  --primary: #ffffff;
+  --secondary: #000000;
+}
+
+html[data-theme='nord'] {
+  --background: #3B4252;
+  --text-color: #D8DEE9;
+  --primary: #88C0D0;
+  --secondary: #434C5E;
+}
+
+html[data-theme='deep-ocean'] {
+  --background: #151e2d;
+  --text-color: #aabbc3;
+  --primary: #aabbc3;
+  --secondary: #4afcffb3;
+}
+
+html[data-theme='argon'] {
+  --background: #15131f;
+  --text-color: #aabbc3;
+  --primary: #fd7293;
+  --secondary: #fd7293;
+}
+
+html[data-theme='nord-frost'] {
+  --background: #3B4252;
+  --text-color: #D8DEE9;
+  --primary: #88C0D0;
+  --secondary: #434C5E;
+}
+
+html[data-theme='material-original'] {
+  --background: #f1f1f1;
+  --text-color: #555555;
+  --primary: #29B6F6;
+  --secondary: #01579B;
+}
+
+html[data-theme='material-dark-original'] {
+  --background: #39434C;
+  --text-color: #555555;
+  --primary: #08B0BB;
+  --secondary: #1b252c;
+}
+
+html[data-theme='colorful'] {
+  --background: #0b1021;
+  --text-color: #e8eae1;
+  --primary: #e8eae1;
+  --secondary: #05070e;
+}
+
+html[data-theme="adventure"], html[data-theme="adventure-basic"] {
+  --background: #0b1021;
+  --text-color: #ffffffe6;
+  --primary: #ffffffe6;
+  --secondary: #181c3a;
+}
+
+html[data-theme="color-block"] {
+  --background: #16213E;
+  --text-color: #E94560;
+  --primary: #E94560;
+  --secondary: #1b294c;
+}
+
+html[data-theme="one-dark"] {
+  --background: #282c33;
+  --text-color: #c5cad3;
+  --primary: #c5cad3;
+  --secondary: #1c1f23;
+}
+
+html[data-theme="cyberpunk"] {
+  --background: #01012b;
+  --text-color: #ff2a6d;
+  --primary: #ebeb0f;
+  --secondary: #ff2a6d;
+}
+
+html[data-theme="lissy"] {
+  --background: #25282c;
+  --text-color: #ffffffcc;
+  --primary: #ffffffcc;
+  --secondary: #191c20;
+}
+
+html[data-theme='glass'], html[data-theme='glass-2'], html[data-theme='neomorphic'] {
+  --background: #190842;
+  --text-color: #fff;
+  --primary: #fff;
+  --secondary: #181c3a;
+}
+
+html[data-theme='glass'] {
+  --background: #090317;
+  --text-color: #fff;
+  --primary: #fff;
+  --secondary: #181c3a;
+}
+
+html[data-theme='glass-2'] {
+  --background: #090317;
+  --text-color: #fff;
+  --primary: #fff;
+  --secondary: #181c3a;
+}
+
+html[data-theme='neomorphic'] {
+  --background: #5b56f7;
+  --text-color: #fff;
+  --primary: #fff;
+  --secondary: #12103c;
+}
+
+html[data-theme="night-bat"] {
+  --background: #252931;
+  --text-color: #fff;
+  --primary: #4780ff;
+  --secondary: #303540;
+}
+
+html[data-theme='cherry-blossom'] {
+  --background: #11171d;
+  --text-color: #e1e8ee;
+  --primary: #e1e8ee;
+  --secondary: #070a0d;
+}
+
+html[data-theme="tama"] {
+  --background: #0b1021;
+  --text-color: #ffffffe6;
+  --primary: #ffffffe6;
+  --secondary: #181c3a;
+}
