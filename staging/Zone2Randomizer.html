@@ -100,6 +100,7 @@
         let isPaused = false;
         let workoutSequence = [];
         let currentIndex = 0;
+        let elapsedTime = 0;
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -168,18 +169,25 @@
 
             timeRemaining = workoutSequence.reduce((total, step) => total + step.duration, 0);
             currentIndex = 0;
+            elapsedTime = 0;
             highlightCurrentExercise();
             updateTimerDisplay();
 
             timerInterval = setInterval(() => {
                 if (!isPaused) {
                     timeRemaining--;
+                    elapsedTime++;
 
-                    if (timeRemaining === workoutSequence.slice(0, currentIndex + 1).reduce((total, step) => total + step.duration, 0)) {
-                        currentIndex++;
-                        highlightCurrentExercise();
+                    let accumulatedTime = 0;
+                    for (let i = 0; i < workoutSequence.length; i++) {
+                        accumulatedTime += workoutSequence[i].duration;
+                        if (elapsedTime <= accumulatedTime) {
+                            currentIndex = i;
+                            break;
+                        }
                     }
 
+                    highlightCurrentExercise();
                     updateTimerDisplay();
 
                     if (timeRemaining <= 0) {
