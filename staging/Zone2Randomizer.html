@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Randomizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .exercise-list {
+            list-style: none;
+            padding: 0;
+        }
+        .exercise-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Workout Randomizer</h1>
+    <div class="controls">
+        <label for="duration">Workout Duration (minutes):</label>
+        <input type="number" id="duration" value="10" min="1" max="60">
+        <button id="generate">Generate Workout</button>
+    </div>
+    <ul class="exercise-list" id="exerciseList"></ul>
+
+    <script>
+        const exercises = [
+            "Shadow Boxing",
+            "Squats",
+            "Push-Ups",
+            "Bear Taps",
+            "Swipers",
+            "3-Way Lunges",
+            "Shoulder Taps",
+            "Russian V-Twists",
+            "Bridges",
+            "Spider-Man Lunges",
+            "Ab Roller",
+            "Bicycle Crunches",
+            "Bench Dips",
+            "Toe Taps",
+            "Reverse Lunge to High Knee",
+            "Good Mornings"
+        ];
+
+        const exerciseList = document.getElementById('exerciseList');
+        const generateButton = document.getElementById('generate');
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function generateWorkout() {
+            const duration = parseInt(document.getElementById('duration').value, 10);
+            const exercisesPerSet = 4;
+            const exerciseTime = 30; // seconds
+            const restTime = 60; // seconds
+
+            // Calculate the total number of exercises needed
+            const totalTime = duration * 60; // convert minutes to seconds
+            const timePerSet = (exercisesPerSet * exerciseTime) + restTime;
+            const totalSets = Math.floor(totalTime / timePerSet);
+
+            const workout = [];
+
+            for (let i = 0; i < totalSets; i++) {
+                shuffleArray(exercises);
+                workout.push(...exercises.slice(0, exercisesPerSet));
+            }
+
+            displayWorkout(workout, exercisesPerSet);
+        }
+
+        function displayWorkout(workout, exercisesPerSet) {
+            exerciseList.innerHTML = '';
+
+            workout.forEach((exercise, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${exercise} (${Math.floor(index / exercisesPerSet) + 1})`;
+                exerciseList.appendChild(li);
+            });
+        }
+
+        generateButton.addEventListener('click', generateWorkout);
+    </script>
+</body>
+</html>
