@@ -114,16 +114,23 @@
             const exerciseTime = 30; // seconds
             const restTime = 60; // seconds
 
-            // Calculate the total number of exercises needed
             const totalTime = duration * 60; // convert minutes to seconds
             const timePerSet = (exercisesPerSet * exerciseTime) + restTime;
-            const totalSets = Math.floor(totalTime / timePerSet);
 
             workoutSequence = [];
+            let remainingTime = totalTime;
 
-            for (let i = 0; i < totalSets; i++) {
+            while (remainingTime > 0) {
                 shuffleArray(exercises);
-                workoutSequence.push(...exercises.slice(0, exercisesPerSet), "Rest for 1 minute");
+                for (let i = 0; i < exercisesPerSet && remainingTime > 0; i++) {
+                    workoutSequence.push(exercises[i]);
+                    remainingTime -= exerciseTime;
+                }
+
+                if (remainingTime >= restTime) {
+                    workoutSequence.push("Rest for 1 minute");
+                    remainingTime -= restTime;
+                }
             }
 
             displayWorkout(workoutSequence);
