@@ -95,15 +95,15 @@
         <div class="resume-item">
           <h4 class="resume-item-details">{{ skill.skill }}</h4>
           <div class="resume-item-copy">
-            {%- if skill.description -%}
-              <div class="skill-description">{{ skill.description }}</div>
-            {%- endif -%}
             {%- if skill.level -%}
               <div class="skill-level">
               <div class="skill-bar">
                 <div class="skill-bar-fill" style="width: {{ skill.level }}%;"></div>
               </div>
               </div>
+            {%- endif -%}
+            {%- if skill.description -%}
+              <div class="skill-description">{{ skill.description }}</div>
             {%- endif -%}
             {%- if skill.list -%}
               <ul class="skill-list">
