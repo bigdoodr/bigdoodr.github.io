@@ -30,6 +30,10 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        .timer {
+            text-align: center;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -40,6 +44,11 @@
         <button id="generate">Generate Workout</button>
     </div>
     <ul class="exercise-list" id="exerciseList"></ul>
+
+    <div class="timer">
+        <button id="startTimer">Start Timer</button>
+        <div id="timerDisplay">00:00</div>
+    </div>
 
     <script>
         const exercises = [
@@ -63,6 +72,8 @@
 
         const exerciseList = document.getElementById('exerciseList');
         const generateButton = document.getElementById('generate');
+        const startTimerButton = document.getElementById('startTimer');
+        const timerDisplay = document.getElementById('timerDisplay');
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -86,23 +97,47 @@
 
             for (let i = 0; i < totalSets; i++) {
                 shuffleArray(exercises);
-                workout.push(...exercises.slice(0, exercisesPerSet));
+                workout.push(...exercises.slice(0, exercisesPerSet), "Rest for 1 minute");
             }
 
-            displayWorkout(workout, exercisesPerSet);
+            displayWorkout(workout);
         }
 
-        function displayWorkout(workout, exercisesPerSet) {
+        function displayWorkout(workout) {
             exerciseList.innerHTML = '';
 
             workout.forEach((exercise, index) => {
                 const li = document.createElement('li');
-                li.textContent = `${exercise} (${Math.floor(index / exercisesPerSet) + 1})`;
+                li.textContent = exercise;
                 exerciseList.appendChild(li);
             });
         }
 
+        function startTimer() {
+            const duration = parseInt(document.getElementById('duration').value, 10) * 60; // seconds
+            let timeRemaining = duration;
+
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, '0');
+                const seconds = (timeRemaining % 60).toString().padStart(2, '0');
+                timerDisplay.textContent = `${minutes}:${seconds}`;
+            }
+
+            updateTimerDisplay();
+
+            const timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Workout complete!');
+                }
+            }, 1000);
+        }
+
         generateButton.addEventListener('click', generateWorkout);
+        startTimerButton.addEventListener('click', startTimer);
     </script>
 </body>
 </html>
