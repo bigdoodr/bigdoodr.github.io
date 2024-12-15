@@ -30,8 +30,9 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .exercise-list .active {
-            background-color: #ffd700;
+        .exercise-list li.active {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
         }
         .timer {
             text-align: center;
@@ -57,7 +58,7 @@
     <h1>Workout Randomizer</h1>
     <div class="controls">
         <label for="duration">Workout Duration (minutes):</label>
-        <input type="number" id="duration" value="10" min="1" max="60">
+        <input type="number" id="duration" value="10" min="1" max="120">
         <button id="generate">Generate Workout</button>
     </div>
     <ul class="exercise-list" id="exerciseList"></ul>
@@ -97,8 +98,8 @@
         let timerInterval = null;
         let timeRemaining = 0;
         let isPaused = false;
-        let currentExerciseIndex = 0;
-        let workoutPlan = [];
+        let workoutSequence = [];
+        let currentIndex = 0;
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -118,14 +119,14 @@
             const timePerSet = (exercisesPerSet * exerciseTime) + restTime;
             const totalSets = Math.floor(totalTime / timePerSet);
 
-            workoutPlan = [];
+            workoutSequence = [];
 
             for (let i = 0; i < totalSets; i++) {
                 shuffleArray(exercises);
-                workoutPlan.push(...exercises.slice(0, exercisesPerSet), "Rest for 1 minute");
+                workoutSequence.push(...exercises.slice(0, exercisesPerSet), "Rest for 1 minute");
             }
 
-            displayWorkout(workoutPlan);
+            displayWorkout(workoutSequence);
         }
 
         function displayWorkout(workout) {
@@ -145,25 +146,34 @@
             timerDisplay.textContent = `${minutes}:${seconds}`;
         }
 
+        function highlightCurrentExercise() {
+            const items = exerciseList.querySelectorAll('li');
+            items.forEach((item, index) => {
+                item.classList.toggle('active', index === currentIndex);
+            });
+        }
+
         function startTimer() {
             if (isPaused) {
                 isPaused = false;
                 return;
             }
 
-            timeRemaining = workoutPlan.length * 30; // Assume 30 seconds per exercise/rest
+            timeRemaining = workoutSequence.length * 30; // 30 seconds per step
+            currentIndex = 0;
+            highlightCurrentExercise();
             updateTimerDisplay();
-            highlightExercise(currentExerciseIndex);
 
             timerInterval = setInterval(() => {
                 if (!isPaused) {
                     timeRemaining--;
-                    updateTimerDisplay();
 
-                    if (timeRemaining % 30 === 0 && currentExerciseIndex < workoutPlan.length - 1) {
-                        currentExerciseIndex++;
-                        highlightExercise(currentExerciseIndex);
+                    if (timeRemaining % 30 === 0 && currentIndex < workoutSequence.length - 1) {
+                        currentIndex++;
+                        highlightCurrentExercise();
                     }
+
+                    updateTimerDisplay();
 
                     if (timeRemaining <= 0) {
                         clearInterval(timerInterval);
@@ -175,13 +185,6 @@
 
         function pauseTimer() {
             isPaused = true;
-        }
-
-        function highlightExercise(index) {
-            const items = exerciseList.querySelectorAll('li');
-            items.forEach((item, idx) => {
-                item.classList.toggle('active', idx === index);
-            });
         }
 
         generateButton.addEventListener('click', generateWorkout);
