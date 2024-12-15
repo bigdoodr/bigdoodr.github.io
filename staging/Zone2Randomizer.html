@@ -123,12 +123,12 @@
             while (remainingTime > 0) {
                 shuffleArray(exercises);
                 for (let i = 0; i < exercisesPerSet && remainingTime > 0; i++) {
-                    workoutSequence.push(exercises[i]);
+                    workoutSequence.push({ name: exercises[i], duration: exerciseTime });
                     remainingTime -= exerciseTime;
                 }
 
                 if (remainingTime >= restTime) {
-                    workoutSequence.push("Rest for 1 minute");
+                    workoutSequence.push({ name: "Rest for 1 minute", duration: restTime });
                     remainingTime -= restTime;
                 }
             }
@@ -139,9 +139,9 @@
         function displayWorkout(workout) {
             exerciseList.innerHTML = '';
 
-            workout.forEach((exercise, index) => {
+            workout.forEach((step, index) => {
                 const li = document.createElement('li');
-                li.textContent = exercise;
+                li.textContent = step.name;
                 if (index === 0) li.classList.add('active');
                 exerciseList.appendChild(li);
             });
@@ -166,7 +166,7 @@
                 return;
             }
 
-            timeRemaining = workoutSequence.length * 30; // 30 seconds per step
+            timeRemaining = workoutSequence.reduce((total, step) => total + step.duration, 0);
             currentIndex = 0;
             highlightCurrentExercise();
             updateTimerDisplay();
@@ -175,7 +175,7 @@
                 if (!isPaused) {
                     timeRemaining--;
 
-                    if (timeRemaining % 30 === 0 && currentIndex < workoutSequence.length - 1) {
+                    if (timeRemaining === workoutSequence.slice(0, currentIndex + 1).reduce((total, step) => total + step.duration, 0)) {
                         currentIndex++;
                         highlightCurrentExercise();
                     }
