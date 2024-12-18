@@ -160,7 +160,7 @@
 
         let selectedExercises = [...exercises];
         let workoutSequence = [];
-        let timerInterval = null;
+        let timerInterval;
         let timeRemaining = 0;
         let currentIndex = 0;
 
@@ -237,52 +237,81 @@
             .join('');
     }
 
-    function startWorkout() {
-        if (workoutSequence.length === 0) {
-            alert("Please generate a workout first!");
-            return;
-        }
+function startWorkout() {
+    // Ensure there's a workout sequence to run
+    if (workoutSequence.length === 0) {
+        alert("Please generate a workout first!");
+        return;
+    }
 
+    // Initialize currentIndex if not already set
+    if (typeof currentIndex === "undefined" || currentIndex >= workoutSequence.length) {
         currentIndex = 0;
-        timeRemaining = workoutSequence[currentIndex].duration;
+    }
+
+    // Set the initial timeRemaining for the current exercise
+    timeRemaining = workoutSequence[currentIndex].duration;
+
+    // Update video in floating timer if applicable
+    if (workoutSequence[currentIndex].video) {
+        currentExerciseVideo.src = workoutSequence[currentIndex].video;
+    } else {
+        currentExerciseVideo.src = ""; // No video for rest
+    }
+
+    // Highlight current exercise
+    document.querySelectorAll('.exercise-list li').forEach((li, idx) => {
+        li.classList.toggle('active', idx === currentIndex);
+    });
+
+    // Start the timer interval
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+
+        // Update the timer display
         updateTimerDisplay();
 
-        timerInterval = setInterval(() => {
-            timeRemaining--;
+        // When time runs out for the current step
+        if (timeRemaining <= 0) {
+            beepSound.play(); // Play sound at transition
 
-            // Update timer display
-            updateTimerDisplay();
-
-            // Move to next exercise/rest if time is up
-            if (timeRemaining <= 0) {
-                beepSound.play(); // Play sound at each transition
-                currentIndex++;
-
-                if (currentIndex >= workoutSequence.length) {
-                    clearInterval(timerInterval);
-                    alert("Workout complete!");
-                    return;
-                }
-
-                // Set new duration and update video
-                timeRemaining = workoutSequence[currentIndex].duration;
-                if (workoutSequence[currentIndex].video) {
-                    currentExerciseVideo.src = workoutSequence[currentIndex].video;
-                } else {
-                    currentExerciseVideo.src = ""; // No video for rest
-                }
-
-                // Highlight current exercise
-                document.querySelectorAll('.exercise-list li').forEach((li, idx) => {
-                    li.classList.toggle('active', idx === currentIndex);
-                });
+            // Move to the next step
+            currentIndex++;
+            if (currentIndex >= workoutSequence.length) {
+                clearInterval(timerInterval);
+                alert("Workout complete!");
+                return;
             }
-        }, 1000);
-    }
 
-    function pauseWorkout() {
-        clearInterval(timerInterval);
-    }
+            // Update new step details
+            timeRemaining = workoutSequence[currentIndex].duration;
+
+            // Update video
+            if (workoutSequence[currentIndex].video) {
+                currentExerciseVideo.src = workoutSequence[currentIndex].video;
+            } else {
+                currentExerciseVideo.src = ""; // No video for rest
+            }
+
+            // Highlight new current exercise
+            document.querySelectorAll('.exercise-list li').forEach((li, idx) => {
+                li.classList.toggle('active', idx === currentIndex);
+            });
+        }
+    }, 1000);
+}
+
+// Ensure pauseWorkout stops the timer
+function pauseWorkout() {
+    clearInterval(timerInterval);
+}
+
+// Ensure timer updates with corresponding selections
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, "0");
+    const seconds = (timeRemaining % 60).toString().padStart(2, "0");
+    document.getElementById("timerDisplay").textContent = `${minutes}:${seconds}`;
+}
 
     // Render exercise selection
     renderExerciseSelection();
