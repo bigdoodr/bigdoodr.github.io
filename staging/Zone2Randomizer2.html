@@ -127,7 +127,7 @@
         <div id="timerDisplay">00:00</div>
         <button id="startTimer">Start</button>
         <button id="pauseTimer">Pause</button>
-        <video id="currentExerciseVideo" autoplay loop muted></video>
+        <video id="currentExerciseVideo" autoplay loop muted playsinline></video>
     </div>
     <audio id="beepSound" src="/sounds/beep.mp3" preload="auto"></audio>
     <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
@@ -170,7 +170,7 @@
                 const card = document.createElement('div');
                 card.className = 'exercise-card selected';
                 card.innerHTML = `
-                    <video src="${exercise.video}" autoplay loop muted></video>
+                    <video src="${exercise.video}" autoplay loop muted playsinline></video>
                     <p>${exercise.name}</p>
                 `;
                 card.addEventListener('click', () => {
