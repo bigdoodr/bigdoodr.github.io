@@ -2,7 +2,7 @@
 layout: post
 title: Workout Randomizer
 description: entry about creating a webpage for shuffling warmups/exercises
-date: 2024-12-18T20:30:00-20:30
+date: 2024-12-18T14:30:00-14:30
 tags: Fitness
 image: /resources/person-running-solid.png
 ---
