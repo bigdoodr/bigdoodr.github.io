@@ -23,4 +23,5 @@ Without further ado, here's my randomizer: [Workout Randomizer](/exercises/Zone2
 More info on Zone 2 cardio:
 
 [A Guide to the Biggest Thing Missing From Your Fitness Routine: Zone 2 Training](https://www.artofmanliness.com/health-fitness/fitness/zone-2-training/)
+
 [Slow & Steady Wins The Race: Reasons To Do Zone 2 Cardio](https://www.gymshark.com/blog/article/benefits-of-zone-2-cardio)
