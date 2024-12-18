@@ -15,6 +15,12 @@
         h1 {
             text-align: center;
         }
+        .instructions {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #555;
+        }
         .controls {
             text-align: center;
             margin-bottom: 20px;
@@ -61,14 +67,15 @@
         }
         .floating-timer {
             position: fixed;
-            top: 10px;
-            right: 10px;
+            bottom: 20px;
+            right: 20px;
             background-color: #333;
             color: #fff;
             padding: 10px;
             border-radius: 5px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
         }
         .floating-timer button {
             margin: 5px;
@@ -79,9 +86,19 @@
             border-radius: 5px;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
+    <script>
+        // Enable DarkReader
+        DarkReader.enable({
+            brightness: 100,
+            contrast: 100,
+            sepia: 10
+        });
+    </script>
 </head>
 <body>
     <h1>Workout Randomizer</h1>
+    <div class="instructions">Click or tap on an exercise card to deselect any exercises you don't want to include.</div>
 
     <!-- Controls -->
     <div class="controls">
@@ -151,7 +168,7 @@
         function displayExerciseCards() {
             exercises.forEach(exercise => {
                 const card = document.createElement('div');
-                card.className = 'exercise-card';
+                card.className = 'exercise-card selected'; // Pre-selected
                 card.innerHTML = `
                     <h3>${exercise.name}</h3>
                     <video src="${exercise.video}" autoplay loop muted></video>
