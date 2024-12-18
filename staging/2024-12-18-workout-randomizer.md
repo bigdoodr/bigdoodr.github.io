@@ -16,11 +16,11 @@ For the couple of days that I needed to go easy on my ankle, it worked pretty we
 
 So I started playing around in ChatGPT and had it put all the pieces together. After a few days and lots of tweaks, it's finally working (mostly) as desired.
 
-I'm really happy with it as it is currently. And since my ankle is back to normal, I'll be adding in ones that have a harder impact, e.g. jump rope, high knees, etc.
+I'm really happy with it as it is currently. And since my ankle is back to normal, I'll be adding in ones that have a harder impact, e.g. jump rope, high knees, etc. Short-term, I'll probably make a page that is just a tabata timer. Long-term, I'm thinking of adding alternative/substitution/more complex variations of exercises. Maybe that'll be a 2025 goal.
 
-Without further ado, here's my randomizer: /staging/Zone2Randomizer2
+Without further ado, here's my randomizer: [Workout Randomizer](/exercises/Zone2Randomizer)
 
 More info on Zone 2 cardio:
 
-https://www.artofmanliness.com/health-fitness/fitness/zone-2-training/
-https://www.gymshark.com/blog/article/benefits-of-zone-2-cardio
+[A Guide to the Biggest Thing Missing From Your Fitness Routine: Zone 2 Training](https://www.artofmanliness.com/health-fitness/fitness/zone-2-training/)
+[Slow & Steady Wins The Race: Reasons To Do Zone 2 Cardio](https://www.gymshark.com/blog/article/benefits-of-zone-2-cardio)
