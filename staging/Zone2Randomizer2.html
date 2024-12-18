@@ -185,22 +185,112 @@
             });
         }
 
-        function generateWorkout() {
-            // Generate workout logic here
+    function generateWorkout() {
+        // Get user inputs
+        const workoutDuration = parseInt(document.getElementById('duration').value) * 60; // Convert minutes to seconds
+        const exerciseDuration = parseInt(document.getElementById('exerciseDuration').value);
+        const restDuration = parseInt(document.getElementById('restDuration').value);
+        const restFrequency = parseInt(document.getElementById('restFrequency').value);
+
+        if (selectedExercises.length === 0) {
+            alert("Please select at least one exercise!");
+            return;
         }
 
-        function startWorkout() {
-            // Start workout logic here
+        // Calculate total number of exercise + rest periods
+        const totalPeriods = Math.floor(workoutDuration / (exerciseDuration + restDuration / restFrequency));
+        workoutSequence = [];
+
+        // Randomly select exercises and add rests
+        let exerciseCounter = 0;
+        for (let i = 0; i < totalPeriods; i++) {
+            // Add an exercise
+            const randomIndex = Math.floor(Math.random() * selectedExercises.length);
+            workoutSequence.push({
+                type: "exercise",
+                name: selectedExercises[randomIndex].name,
+                video: selectedExercises[randomIndex].video,
+                duration: exerciseDuration,
+            });
+
+            exerciseCounter++;
+
+            // Add a rest if necessary
+            if (exerciseCounter % restFrequency === 0 && exerciseCounter < totalPeriods) {
+                workoutSequence.push({
+                    type: "rest",
+                    name: "Rest",
+                    video: null,
+                    duration: restDuration,
+                });
+            }
         }
 
-        function pauseWorkout() {
-            clearInterval(timerInterval);
+        // Display workout
+        const exerciseList = document.getElementById('exerciseList');
+        exerciseList.innerHTML = workoutSequence
+            .map((step, index) =>
+                `<li class="${step.type === 'exercise' ? 'active' : ''}" id="step-${index}">
+                    ${step.name} (${step.type === 'exercise' ? step.duration + 's' : ''})
+                </li>`
+            )
+            .join('');
+    }
+
+    function startWorkout() {
+        if (workoutSequence.length === 0) {
+            alert("Please generate a workout first!");
+            return;
         }
 
-        renderExerciseSelection();
-        document.getElementById('generate').addEventListener('click', generateWorkout);
-        document.getElementById('startTimer').addEventListener('click', startWorkout);
-        document.getElementById('pauseTimer').addEventListener('click', pauseWorkout);
-    </script>
+        currentIndex = 0;
+        timeRemaining = workoutSequence[currentIndex].duration;
+        updateTimerDisplay();
+
+        timerInterval = setInterval(() => {
+            timeRemaining--;
+
+            // Update timer display
+            updateTimerDisplay();
+
+            // Move to next exercise/rest if time is up
+            if (timeRemaining <= 0) {
+                beepSound.play(); // Play sound at each transition
+                currentIndex++;
+
+                if (currentIndex >= workoutSequence.length) {
+                    clearInterval(timerInterval);
+                    alert("Workout complete!");
+                    return;
+                }
+
+                // Set new duration and update video
+                timeRemaining = workoutSequence[currentIndex].duration;
+                if (workoutSequence[currentIndex].video) {
+                    currentExerciseVideo.src = workoutSequence[currentIndex].video;
+                } else {
+                    currentExerciseVideo.src = ""; // No video for rest
+                }
+
+                // Highlight current exercise
+                document.querySelectorAll('.exercise-list li').forEach((li, idx) => {
+                    li.classList.toggle('active', idx === currentIndex);
+                });
+            }
+        }, 1000);
+    }
+
+    function pauseWorkout() {
+        clearInterval(timerInterval);
+    }
+
+    // Render exercise selection
+    renderExerciseSelection();
+
+    // Event listeners
+    document.getElementById('generate').addEventListener('click', generateWorkout);
+    document.getElementById('startTimer').addEventListener('click', startWorkout);
+    document.getElementById('pauseTimer').addEventListener('click', pauseWorkout);
+</script>
 </body>
 </html>
