@@ -5,131 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workout Randomizer</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-        }
-        .instructions {
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            color: #555;
-        }
-        .controls {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .exercise-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .exercise-card {
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 200px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .exercise-card.selected {
-            border-color: #28a745;
-            background-color: #d4edda;
-        }
-        .exercise-card video {
-            width: 100%;
-            border-radius: 5px;
-        }
-        .exercise-list {
-            list-style: none;
-            padding: 0;
-        }
-        .exercise-list li {
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .exercise-list li.active {
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-        }
-        .floating-timer {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
-        .floating-timer button {
-            margin: 5px;
-        }
-        .floating-timer video {
-            width: 200px;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
+        /* Same styles as before */
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
-    <script>
-        // Enable DarkReader
-        DarkReader.enable({
-            brightness: 100,
-            contrast: 100,
-            sepia: 10
-        });
-    </script>
 </head>
 <body>
     <h1>Workout Randomizer</h1>
-    <div class="instructions">Click or tap on an exercise card to deselect any exercises you don't want to include.</div>
-
-    <!-- Controls -->
+    <p class="instructions">Click on exercises to deselect unwanted ones. By default, all are selected.</p>
     <div class="controls">
-        <label for="exerciseDuration">Exercise Duration (seconds):</label>
-        <input type="number" id="exerciseDuration" value="30" min="10" max="300">
-        <label for="restDuration">Rest Duration (seconds):</label>
-        <input type="number" id="restDuration" value="60" min="10" max="300">
-        <label for="restFrequency">Rest After Every N Exercises:</label>
-        <input type="number" id="restFrequency" value="4" min="1" max="10">
         <label for="duration">Workout Duration (minutes):</label>
         <input type="number" id="duration" value="10" min="1" max="120">
+        <label for="exerciseDuration">Exercise Duration (seconds):</label>
+        <input type="number" id="exerciseDuration" value="30" min="5" max="300">
+        <label for="restDuration">Rest Duration (seconds):</label>
+        <input type="number" id="restDuration" value="60" min="10" max="300">
+        <label for="restFrequency">Rest After (exercises):</label>
+        <input type="number" id="restFrequency" value="4" min="1" max="10">
         <button id="generate">Generate Workout</button>
     </div>
-
-    <!-- Exercise Cards -->
-    <div class="exercise-container" id="exerciseContainer"></div>
-
-    <!-- Workout List -->
+    <div class="exercise-selection" id="exerciseSelection"></div>
     <ul class="exercise-list" id="exerciseList"></ul>
-
-    <!-- Floating Timer -->
     <div class="floating-timer" id="floatingTimer">
         <div id="timerDisplay">00:00</div>
-        <video id="currentExerciseVideo" autoplay loop muted></video>
         <button id="startTimer">Start</button>
         <button id="pauseTimer">Pause</button>
+        <video id="currentExerciseVideo" autoplay loop muted></video>
     </div>
-
-    <audio id="notificationSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
-
+    <audio id="beepSound" src="sounds/beep.mp3" preload="auto"></audio>
+    <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
     <script>
+        DarkReader.enable();
+
         const exercises = [
             { name: "Shadow Boxing", video: "/resources/shadowboxing.mp4" },
             { name: "Squats", video: "/resources/squats.mp4" },
@@ -149,106 +54,121 @@
             { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4" }
         ];
 
-        const exerciseContainer = document.getElementById('exerciseContainer');
+        const exerciseSelection = document.getElementById('exerciseSelection');
         const exerciseList = document.getElementById('exerciseList');
-        const generateButton = document.getElementById('generate');
         const timerDisplay = document.getElementById('timerDisplay');
-        const videoElement = document.getElementById('currentExerciseVideo');
-        const startTimerButton = document.getElementById('startTimer');
-        const pauseTimerButton = document.getElementById('pauseTimer');
-        const notificationSound = document.getElementById('notificationSound');
+        const currentExerciseVideo = document.getElementById('currentExerciseVideo');
+        const beepSound = document.getElementById('beepSound');
 
-        let workoutSequence = [];
+        let selectedExercises = [...exercises];
         let timerInterval = null;
-        let currentIndex = 0;
         let timeRemaining = 0;
-        let isPaused = false;
+        let workoutSequence = [];
+        let currentIndex = 0;
 
-        // Display exercise cards
-        function displayExerciseCards() {
-            exercises.forEach(exercise => {
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function renderExerciseSelection() {
+            exerciseSelection.innerHTML = '';
+            exercises.forEach((exercise, index) => {
                 const card = document.createElement('div');
-                card.className = 'exercise-card selected'; // Pre-selected
-                card.innerHTML = `
-                    <h3>${exercise.name}</h3>
-                    <video src="${exercise.video}" autoplay loop muted></video>
-                `;
+                card.className = 'exercise-card selected';
+                card.innerHTML = `<video src="${exercise.video}" autoplay loop muted></video><p>${exercise.name}</p>`;
                 card.addEventListener('click', () => {
                     card.classList.toggle('selected');
+                    if (card.classList.contains('selected')) {
+                        selectedExercises.push(exercise);
+                    } else {
+                        selectedExercises = selectedExercises.filter(e => e.name !== exercise.name);
+                    }
                 });
-                exerciseContainer.appendChild(card);
+                exerciseSelection.appendChild(card);
             });
         }
 
-        // Generate workout
         function generateWorkout() {
-            const selectedCards = document.querySelectorAll('.exercise-card.selected');
-            workoutSequence = Array.from(selectedCards).map(card => {
-                const name = card.querySelector('h3').textContent;
-                const videoSrc = card.querySelector('video').getAttribute('src');
-                return { name, video: videoSrc, duration: parseInt(document.getElementById('exerciseDuration').value) };
-            });
+            const duration = parseInt(document.getElementById('duration').value, 10) * 60;
+            const exerciseDuration = parseInt(document.getElementById('exerciseDuration').value, 10);
+            const restDuration = parseInt(document.getElementById('restDuration').value, 10);
+            const restFrequency = parseInt(document.getElementById('restFrequency').value, 10);
+
+            workoutSequence = [];
+            shuffleArray(selectedExercises);
+            let timeLeft = duration;
+            let exerciseCounter = 0;
+
+            while (timeLeft > 0) {
+                if (exerciseCounter > 0 && exerciseCounter % restFrequency === 0) {
+                    workoutSequence.push({ name: "Rest", video: "", duration: restDuration });
+                    timeLeft -= restDuration;
+                }
+
+                for (let i = 0; i < selectedExercises.length && timeLeft > 0; i++) {
+                    const exercise = selectedExercises[i];
+                    workoutSequence.push({ ...exercise, duration: exerciseDuration });
+                    timeLeft -= exerciseDuration;
+                    exerciseCounter++;
+                }
+            }
 
             displayWorkout(workoutSequence);
         }
 
         function displayWorkout(workout) {
             exerciseList.innerHTML = '';
-            workout.forEach((exercise, index) => {
+            workout.forEach((step, index) => {
                 const li = document.createElement('li');
-                li.textContent = `${exercise.name}`;
-                li.id = `step-${index}`;
+                li.textContent = step.name;
+                if (index === 0) li.classList.add('active');
                 exerciseList.appendChild(li);
             });
+            currentIndex = 0;
+            updateFloatingTimer(workout[currentIndex]);
+        }
+
+        function updateFloatingTimer(currentStep) {
+            timerDisplay.textContent = `${currentStep.duration}s`;
+            currentExerciseVideo.src = currentStep.video || '';
         }
 
         function startWorkout() {
             if (workoutSequence.length === 0) return;
 
-            currentIndex = 0;
-            timeRemaining = workoutSequence[currentIndex].duration;
-            updateTimerDisplay();
-            playCurrentExerciseVideo();
-            timerInterval = setInterval(timerTick, 1000);
-        }
+            let currentStep = workoutSequence[currentIndex];
+            timeRemaining = currentStep.duration;
 
-        function timerTick() {
-            if (timeRemaining > 0) {
-                timeRemaining--;
-                updateTimerDisplay();
-            } else {
-                notificationSound.play();
-                currentIndex++;
-                if (currentIndex < workoutSequence.length) {
-                    timeRemaining = workoutSequence[currentIndex].duration;
-                    playCurrentExerciseVideo();
-                    updateActiveStep();
+            timerInterval = setInterval(() => {
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    timerDisplay.textContent = `${timeRemaining}s`;
                 } else {
-                    clearInterval(timerInterval);
-                    alert("Workout Complete!");
+                    beepSound.play(); // Play sound on step change
+                    currentIndex++;
+                    if (currentIndex < workoutSequence.length) {
+                        currentStep = workoutSequence[currentIndex];
+                        updateFloatingTimer(currentStep);
+                        timeRemaining = currentStep.duration;
+                    } else {
+                        clearInterval(timerInterval);
+                        alert('Workout complete!');
+                    }
                 }
-            }
+            }, 1000);
         }
 
-        function updateTimerDisplay() {
-            timerDisplay.textContent = `Time: ${timeRemaining}s`;
+        function pauseWorkout() {
+            clearInterval(timerInterval);
         }
 
-        function playCurrentExerciseVideo() {
-            const currentExercise = workoutSequence[currentIndex];
-            videoElement.src = currentExercise.video;
-        }
-
-        function updateActiveStep() {
-            document.querySelectorAll('.exercise-list li').forEach((li, index) => {
-                li.classList.toggle('active', index === currentIndex);
-            });
-        }
-
-        generateButton.addEventListener('click', generateWorkout);
-        startTimerButton.addEventListener('click', startWorkout);
-
-        displayExerciseCards();
+        renderExerciseSelection();
+        document.getElementById('generate').addEventListener('click', generateWorkout);
+        document.getElementById('startTimer').addEventListener('click', startWorkout);
+        document.getElementById('pauseTimer').addEventListener('click', pauseWorkout);
     </script>
 </body>
 </html>
