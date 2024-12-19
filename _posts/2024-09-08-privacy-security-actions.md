@@ -2,7 +2,7 @@
 layout: post
 title: Protecting Your Digital Self
 description: a giant list of things folks should consider for their digital presence
-date: 2024-09-08T23:00:00-23:00
+date: 2024-09-08T23:00:00-6:00
 tags: Tech
 image: /resources/user-secret-solid.png
 ---

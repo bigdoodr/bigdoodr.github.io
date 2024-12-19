@@ -2,7 +2,7 @@
 layout: post
 title: Protecting Employees and Customers Digital Presence
 description: recommendations for what an organization should do to encourage their clients and employees practice safer and smarter digital activities
-date: 2024-09-12T13:00:00-13:00
+date: 2024-09-12T13:00:00-6:00
 tags: Tech
 image: /resources/building-shield-solid.png
 ---
