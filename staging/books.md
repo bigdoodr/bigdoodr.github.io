@@ -30,3 +30,5 @@ description: Book tracker
 | Brick Dust and Bones | M. R. Fournet | [Book Details](https://openlibrary.org/works/OL28692574W) | 👍 |
 | The Club | Ellery Lloyd | [Book Details](https://openlibrary.org/works/OL27775853W) | 👍 |
 | Canto Bight | Saladin Ahmed<br>Rae Carson<br>Mira Grant<br>John Jackson Miller | [Book Details](https://openlibrary.org/works/OL19723104W) | 👍 |
+| Serpent's Secret | Sayantani DasGupta | [Book Details](https://openlibrary.org/works/OL19751990W) | 👍 |
+| System Collapse | Martha Wells | [Book Details](https://openlibrary.org/works/OL33402895W) | 👍 |

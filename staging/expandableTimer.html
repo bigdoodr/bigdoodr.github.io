@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Workout Routine</title>
+  <style>
+  body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f9f9f9;
+}
+#workout-container {
+  max-width: 600px;
+  margin: auto;
+}
+.exercise {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  background: #fff;
+}
+h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+button {
+  margin: 10px 0;
+}
+ </style>
+</head>
+<body>
+  <div id="workout-container">
+    <h1>Custom Workout Routine</h1>
+    <div id="exercises">
+      <!-- Exercise blocks will be dynamically added here -->
+    </div>
+    <button id="add-exercise">Add Another Exercise</button>
+    <button id="start-workout">Start Workout</button>
+    <input type="file" id="import-routine" style="display: none;">
+    <button id="import-btn">Import Saved Routine</button>
+    <button id="export-btn">Export Routine</button>
+  </div>
+
+  <audio id="beep-sound" src="/sounds/beep.mp3"></audio>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const workoutContainer = document.getElementById('workout-container');
+  const exercisesDiv = document.getElementById('exercises');
+  const addExerciseBtn = document.getElementById('add-exercise');
+  const startWorkoutBtn = document.getElementById('start-workout');
+  const importRoutineBtn = document.getElementById('import-btn');
+  const exportRoutineBtn = document.getElementById('export-btn');
+  const beepSound = document.getElementById('beep-sound');
+
+  let exercises = [];
+
+  function addExercise() {
+    const exerciseId = exercises.length + 1;
+    const exerciseDiv = document.createElement('div');
+    exerciseDiv.classList.add('exercise');
+    exerciseDiv.innerHTML = `
+      <h2 contenteditable="true">Exercise ${exerciseId}</h2>
+      <select class="exercise-type">
+        <option value="timed">Timed Exercise</option>
+        <option value="rep">Rep Counter</option>
+      </select>
+      <div class="settings">
+        <label>Sets: <input type="number" min="1" max="10" value="1" class="sets"></label>
+        <label>Exercise Time: <input type="time" class="exercise-time" step="1"></label>
+        <label>Rest Time: <input type="time" class="rest-time" step="1"></label>
+      </div>
+    `;
+    exercisesDiv.appendChild(exerciseDiv);
+    exercises.push(exerciseDiv);
+  }
+
+  function startWorkout() {
+    // Timer and workout flow logic here
+  }
+
+  function exportRoutine() {
+    const routine = exercises.map(exercise => ({
+      title: exercise.querySelector('h2').innerText,
+      type: exercise.querySelector('.exercise-type').value,
+      sets: exercise.querySelector('.sets').value,
+      exerciseTime: exercise.querySelector('.exercise-time').value,
+      restTime: exercise.querySelector('.rest-time').value,
+    }));
+    const blob = new Blob([JSON.stringify(routine)], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'routine.json';
+    link.click();
+  }
+
+  function importRoutine(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const importedRoutine = JSON.parse(reader.result);
+        exercisesDiv.innerHTML = '';
+        exercises = [];
+        importedRoutine.forEach(exerciseData => {
+          addExercise();
+          const exerciseDiv = exercises[exercises.length - 1];
+          exerciseDiv.querySelector('h2').innerText = exerciseData.title;
+          exerciseDiv.querySelector('.exercise-type').value = exerciseData.type;
+          exerciseDiv.querySelector('.sets').value = exerciseData.sets;
+          exerciseDiv.querySelector('.exercise-time').value = exerciseData.exerciseTime;
+          exerciseDiv.querySelector('.rest-time').value = exerciseData.restTime;
+        });
+      };
+      reader.readAsText(file);
+    }
+  }
+
+  addExerciseBtn.addEventListener('click', addExercise);
+  startWorkoutBtn.addEventListener('click', startWorkout);
+  exportRoutineBtn.addEventListener('click', exportRoutine);
+  importRoutineBtn.addEventListener('click', () => document.getElementById('import-routine').click());
+  document.getElementById('import-routine').addEventListener('change', importRoutine);
+});
+</script>
+</body>
+</html>
