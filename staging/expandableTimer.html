@@ -45,22 +45,19 @@ button {
 
   <audio id="beep-sound" src="/sounds/beep.mp3"></audio>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-  const workoutContainer = document.getElementById('workout-container');
+<script>
+document.addEventListener('DOMContentLoaded', () => {
   const exercisesDiv = document.getElementById('exercises');
   const addExerciseBtn = document.getElementById('add-exercise');
   const startWorkoutBtn = document.getElementById('start-workout');
-  const importRoutineBtn = document.getElementById('import-btn');
-  const exportRoutineBtn = document.getElementById('export-btn');
-  const beepSound = document.getElementById('beep-sound');
-
   let exercises = [];
 
   function addExercise() {
     const exerciseId = exercises.length + 1;
     const exerciseDiv = document.createElement('div');
     exerciseDiv.classList.add('exercise');
+    exerciseDiv.setAttribute('draggable', true);
+
     exerciseDiv.innerHTML = `
       <h2 contenteditable="true">Exercise ${exerciseId}</h2>
       <select class="exercise-type">
@@ -69,60 +66,58 @@ button {
       </select>
       <div class="settings">
         <label>Sets: <input type="number" min="1" max="10" value="1" class="sets"></label>
-        <label>Exercise Time: <input type="time" class="exercise-time" step="1"></label>
-        <label>Rest Time: <input type="time" class="rest-time" step="1"></label>
+        <div class="timed-options">
+          <label>Exercise Time:
+            <input type="number" class="exercise-hours" placeholder="H" min="0" max="23"> :
+            <input type="number" class="exercise-minutes" placeholder="M" min="0" max="59"> :
+            <input type="number" class="exercise-seconds" placeholder="S" min="0" max="59">
+          </label>
+        </div>
+        <label>Rest Time:
+          <input type="number" class="rest-hours" placeholder="H" min="0" max="23"> :
+          <input type="number" class="rest-minutes" placeholder="M" min="0" max="59"> :
+          <input type="number" class="rest-seconds" placeholder="S" min="0" max="59">
+        </label>
       </div>
+      <button class="delete-exercise">Delete Exercise</button>
     `;
+
+    // Update visibility of inputs based on type
+    const exerciseType = exerciseDiv.querySelector('.exercise-type');
+    exerciseType.addEventListener('change', () => {
+      const timedOptions = exerciseDiv.querySelector('.timed-options');
+      timedOptions.style.display = exerciseType.value === 'timed' ? 'block' : 'none';
+    });
+
+    // Delete functionality
+    const deleteBtn = exerciseDiv.querySelector('.delete-exercise');
+    deleteBtn.addEventListener('click', () => {
+      exerciseDiv.remove();
+      exercises = exercises.filter((el) => el !== exerciseDiv);
+    });
+
+    // Drag-and-drop functionality
+    exerciseDiv.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', exercises.indexOf(exerciseDiv));
+    });
+    exercisesDiv.addEventListener('dragover', (e) => e.preventDefault());
+    exercisesDiv.addEventListener('drop', (e) => {
+      const fromIndex = e.dataTransfer.getData('text/plain');
+      const toIndex = [...exercisesDiv.children].indexOf(e.target.closest('.exercise'));
+      if (toIndex >= 0 && fromIndex >= 0 && fromIndex !== toIndex) {
+        exercisesDiv.insertBefore(exercises[fromIndex], exercises[toIndex]);
+        exercises.splice(toIndex, 0, exercises.splice(fromIndex, 1)[0]);
+      }
+    });
+
     exercisesDiv.appendChild(exerciseDiv);
     exercises.push(exerciseDiv);
   }
 
-  function startWorkout() {
-    // Timer and workout flow logic here
-  }
-
-  function exportRoutine() {
-    const routine = exercises.map(exercise => ({
-      title: exercise.querySelector('h2').innerText,
-      type: exercise.querySelector('.exercise-type').value,
-      sets: exercise.querySelector('.sets').value,
-      exerciseTime: exercise.querySelector('.exercise-time').value,
-      restTime: exercise.querySelector('.rest-time').value,
-    }));
-    const blob = new Blob([JSON.stringify(routine)], { type: 'application/json' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'routine.json';
-    link.click();
-  }
-
-  function importRoutine(event) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const importedRoutine = JSON.parse(reader.result);
-        exercisesDiv.innerHTML = '';
-        exercises = [];
-        importedRoutine.forEach(exerciseData => {
-          addExercise();
-          const exerciseDiv = exercises[exercises.length - 1];
-          exerciseDiv.querySelector('h2').innerText = exerciseData.title;
-          exerciseDiv.querySelector('.exercise-type').value = exerciseData.type;
-          exerciseDiv.querySelector('.sets').value = exerciseData.sets;
-          exerciseDiv.querySelector('.exercise-time').value = exerciseData.exerciseTime;
-          exerciseDiv.querySelector('.rest-time').value = exerciseData.restTime;
-        });
-      };
-      reader.readAsText(file);
-    }
-  }
-
   addExerciseBtn.addEventListener('click', addExercise);
-  startWorkoutBtn.addEventListener('click', startWorkout);
-  exportRoutineBtn.addEventListener('click', exportRoutine);
-  importRoutineBtn.addEventListener('click', () => document.getElementById('import-routine').click());
-  document.getElementById('import-routine').addEventListener('change', importRoutine);
+  startWorkoutBtn.addEventListener('click', () => {
+    alert('Start workout functionality to be implemented.');
+  });
 });
 </script>
 </body>
