@@ -28,6 +28,28 @@ h2 {
 button {
   margin: 10px 0;
 }
+
+.active {
+  background-color: #e0f7fa;
+  border-color: #00796b;
+}
+
+.dimmed {
+  opacity: 0.5;
+}
+#countdown-display {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #00796b;
+}
+
+.exercise .countdown {
+  font-size: 1.5em;
+  color: #00796b;
+  margin-top: 10px;
+}
+
  </style>
 </head>
 <body>
@@ -79,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <input type="number" class="rest-seconds" placeholder="S" min="0" max="59">
         </label>
       </div>
+      <div class="countdown"></div>
       <button class="delete-exercise">Delete Exercise</button>
     `;
 
@@ -132,33 +155,46 @@ function startWorkout() {
     return { title, type, sets, exerciseTime, restTime };
   });
 
-  // Recursive function to process exercises
+  const countdownDisplay = document.createElement('div');
+  countdownDisplay.id = 'countdown-display';
+  workoutContainer.insertBefore(countdownDisplay, exercisesDiv);
+
   let currentExercise = 0;
 
   function runTimer(duration, message, callback) {
+    const currentExerciseDiv = exercises[currentExercise];
+    const countdownDiv = currentExerciseDiv.querySelector('.countdown');
     let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
+
     const interval = setInterval(() => {
       if (totalSeconds <= 0) {
         clearInterval(interval);
         beepSound.play();
-        alert(message);
-        callback();
+        countdownDiv.textContent = message;
+        setTimeout(() => {
+          countdownDiv.textContent = '';
+          callback();
+        }, 1000);
         return;
       }
-      console.log(`Remaining: ${Math.floor(totalSeconds / 3600)}:${Math.floor(totalSeconds / 60) % 60}:${totalSeconds % 60}`);
+
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor(totalSeconds / 60) % 60;
+      const seconds = totalSeconds % 60;
+      countdownDiv.textContent = `Time Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
       totalSeconds--;
     }, 1000);
   }
 
   function processExercise() {
-    if (currentExercise >= workoutRoutine.length) {
+    if (currentExercise >= exercises.length) {
       alert('Routine Complete!');
+      exercises.forEach((exercise) => exercise.querySelector('.countdown').textContent = '');
       return;
     }
 
+const exerciseDiv = exercises[currentExercise];
     const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExercise];
-    alert(`Starting: ${title}`);
-
     let currentSet = 1;
 
     function nextSet() {
@@ -168,13 +204,12 @@ function startWorkout() {
         return;
       }
 
-      alert(`Set ${currentSet} of ${sets}`);
       if (type === 'timed') {
         runTimer(exerciseTime, 'Exercise Time Over', () => {
           runTimer(restTime, 'Rest Time Over', nextSet);
         });
       } else if (type === 'rep') {
-        const proceed = confirm('Complete the set and click OK to continue.');
+        const proceed = confirm(`Set ${currentSet} completed. Continue?`);
         if (proceed) {
           runTimer(restTime, 'Rest Time Over', nextSet);
         }
@@ -238,6 +273,7 @@ function importRoutine(event) {
   };
   reader.readAsText(file);
 }
+
 addExerciseBtn.addEventListener('click', addExercise);
 startWorkoutBtn.addEventListener('click', startWorkout);
 exportRoutineBtn.addEventListener('click', exportRoutine);
