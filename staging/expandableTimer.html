@@ -114,10 +114,136 @@ document.addEventListener('DOMContentLoaded', () => {
     exercises.push(exerciseDiv);
   }
 
-  addExerciseBtn.addEventListener('click', addExercise);
-  startWorkoutBtn.addEventListener('click', () => {
-    alert('Start workout functionality to be implemented.');
+function startWorkout() {
+  const workoutRoutine = exercises.map((exerciseDiv) => {
+    const title = exerciseDiv.querySelector('h2').innerText;
+    const type = exerciseDiv.querySelector('.exercise-type').value;
+    const sets = parseInt(exerciseDiv.querySelector('.sets').value, 10);
+    const exerciseTime = type === 'timed' ? {
+      hours: parseInt(exerciseDiv.querySelector('.exercise-hours').value || 0, 10),
+      minutes: parseInt(exerciseDiv.querySelector('.exercise-minutes').value || 0, 10),
+      seconds: parseInt(exerciseDiv.querySelector('.exercise-seconds').value || 0, 10),
+    } : null;
+    const restTime = {
+      hours: parseInt(exerciseDiv.querySelector('.rest-hours').value || 0, 10),
+      minutes: parseInt(exerciseDiv.querySelector('.rest-minutes').value || 0, 10),
+      seconds: parseInt(exerciseDiv.querySelector('.rest-seconds').value || 0, 10),
+    };
+    return { title, type, sets, exerciseTime, restTime };
   });
+
+  // Recursive function to process exercises
+  let currentExercise = 0;
+
+  function runTimer(duration, message, callback) {
+    let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
+    const interval = setInterval(() => {
+      if (totalSeconds <= 0) {
+        clearInterval(interval);
+        beepSound.play();
+        alert(message);
+        callback();
+        return;
+      }
+      console.log(`Remaining: ${Math.floor(totalSeconds / 3600)}:${Math.floor(totalSeconds / 60) % 60}:${totalSeconds % 60}`);
+      totalSeconds--;
+    }, 1000);
+  }
+
+  function processExercise() {
+    if (currentExercise >= workoutRoutine.length) {
+      alert('Routine Complete!');
+      return;
+    }
+
+    const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExercise];
+    alert(`Starting: ${title}`);
+
+    let currentSet = 1;
+
+    function nextSet() {
+      if (currentSet > sets) {
+        currentExercise++;
+        processExercise();
+        return;
+      }
+
+      alert(`Set ${currentSet} of ${sets}`);
+      if (type === 'timed') {
+        runTimer(exerciseTime, 'Exercise Time Over', () => {
+          runTimer(restTime, 'Rest Time Over', nextSet);
+        });
+      } else if (type === 'rep') {
+        const proceed = confirm('Complete the set and click OK to continue.');
+        if (proceed) {
+          runTimer(restTime, 'Rest Time Over', nextSet);
+        }
+      }
+      currentSet++;
+    }
+
+    nextSet();
+  }
+
+  processExercise();
+}
+
+function exportRoutine() {
+  const routine = exercises.map((exerciseDiv) => ({
+    title: exerciseDiv.querySelector('h2').innerText,
+    type: exerciseDiv.querySelector('.exercise-type').value,
+    sets: exerciseDiv.querySelector('.sets').value,
+    exerciseTime: {
+      hours: exerciseDiv.querySelector('.exercise-hours')?.value || 0,
+      minutes: exerciseDiv.querySelector('.exercise-minutes')?.value || 0,
+      seconds: exerciseDiv.querySelector('.exercise-seconds')?.value || 0,
+    },
+    restTime: {
+      hours: exerciseDiv.querySelector('.rest-hours')?.value || 0,
+      minutes: exerciseDiv.querySelector('.rest-minutes')?.value || 0,
+      seconds: exerciseDiv.querySelector('.rest-seconds')?.value || 0,
+    },
+  }));
+
+  const blob = new Blob([JSON.stringify(routine)], { type: 'application/json' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'routine.json';
+  link.click();
+}
+function importRoutine(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const routine = JSON.parse(reader.result);
+    exercisesDiv.innerHTML = '';
+    exercises = [];
+    routine.forEach((exerciseData) => {
+      addExercise();
+      const exerciseDiv = exercises[exercises.length - 1];
+      exerciseDiv.querySelector('h2').innerText = exerciseData.title;
+      exerciseDiv.querySelector('.exercise-type').value = exerciseData.type;
+      exerciseDiv.querySelector('.sets').value = exerciseData.sets;
+      if (exerciseData.type === 'timed') {
+        exerciseDiv.querySelector('.exercise-hours').value = exerciseData.exerciseTime.hours;
+        exerciseDiv.querySelector('.exercise-minutes').value = exerciseData.exerciseTime.minutes;
+        exerciseDiv.querySelector('.exercise-seconds').value = exerciseData.exerciseTime.seconds;
+      }
+      exerciseDiv.querySelector('.rest-hours').value = exerciseData.restTime.hours;
+      exerciseDiv.querySelector('.rest-minutes').value = exerciseData.restTime.minutes;
+      exerciseDiv.querySelector('.rest-seconds').value = exerciseData.restTime.seconds;
+    });
+  };
+  reader.readAsText(file);
+}
+addExerciseBtn.addEventListener('click', addExercise);
+startWorkoutBtn.addEventListener('click', startWorkout);
+exportRoutineBtn.addEventListener('click', exportRoutine);
+importRoutineBtn.addEventListener('click', () => document.getElementById('import-routine').click());
+document.getElementById('import-routine').addEventListener('change', importRoutine);
+
 });
 </script>
 </body>
