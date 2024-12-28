@@ -60,8 +60,8 @@ button {
     </div>
     <button id="add-exercise">Add Another Exercise</button>
     <button id="start-workout">Start Workout</button>
-    <input type="file" id="import-routine" style="display: none;">
     <button id="import-btn">Import Saved Routine</button>
+    <input type="file" id="import-routine" style="display: none;">
     <button id="export-btn">Export Routine</button>
   </div>
 
@@ -74,7 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const startWorkoutBtn = document.getElementById('start-workout');
   const workoutContainer = document.getElementById('workout-container');
   const exportRoutineBtn = document.getElementById('export-btn');
+  const importRoutineBtn = document.getElementById('import-btn');
   const importRoutineInput = document.getElementById('import-routine');
+  const beepSound = document.getElementById('beep-sound');
 
   let exercises = [];
 
