@@ -58,7 +58,7 @@ button {
     <div id="exercises">
       <!-- Exercise blocks will be dynamically added here -->
     </div>
-    <button id="add-exercise">Add Another Exercise</button>
+    <button id="add-exercise">Add Exercise</button>
     <button id="start-workout">Start Workout</button>
     <button id="import-btn">Import Saved Routine</button>
     <input type="file" id="import-routine" style="display: none;">
@@ -79,6 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const beepSound = document.getElementById('beep-sound');
 
   let exercises = [];
+
+  function enableAudio() {
+  // Play a silent sound to unlock audio permissions
+  beepSound.play().catch(() => {
+    console.log("Audio permissions enabled after user interaction.");
+  });
+}
 
   function addExercise() {
     const exerciseId = exercises.length + 1;
@@ -175,7 +182,11 @@ function startWorkout() {
     const interval = setInterval(() => {
       if (totalSeconds <= 0) {
         clearInterval(interval);
-        beepSound.play();
+        function playBeepSound() {
+          beepSound.play().catch((error) => {
+              console.error("Beep sound failed to play:", error);
+                });
+        }
         countdownDiv.textContent = message;
         setTimeout(() => {
           countdownDiv.textContent = '';
@@ -215,7 +226,7 @@ const exerciseDiv = exercises[currentExercise];
           runTimer(restTime, 'Rest Time Over', nextSet);
         });
       } else if (type === 'rep') {
-        const proceed = confirm(`Set ${currentSet} completed. Continue?`);
+        const proceed = confirm(`Begin Set ${currentSet}. When completed, click Continue below.`);
         if (proceed) {
           runTimer(restTime, 'Rest Time Over', nextSet);
         }
@@ -285,7 +296,10 @@ function importRoutine(event) {
 }
 
 addExerciseBtn.addEventListener('click', addExercise);
-startWorkoutBtn.addEventListener('click', startWorkout);
+startWorkoutBtn.addEventListener('click', () => {
+  enableAudio(); // Ensure audio permissions are unlocked
+  startWorkout();
+});
 exportRoutineBtn.addEventListener('click', exportRoutine);
 importRoutineBtn.addEventListener('click', () => importRoutineInput.click());
 importRoutineInput.addEventListener('change', importRoutine);
