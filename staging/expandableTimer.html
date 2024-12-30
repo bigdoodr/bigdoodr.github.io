@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <title>Custom Workout Routine</title>
   <style>
   body {
@@ -50,6 +51,33 @@ button {
   margin-top: 10px;
 }
 
+.editable-title {
+  display: inline-block;
+  padding: 5px;
+  border: 1px dashed #00796b; /* Dashed border to indicate interactivity */
+  background-color: #e0f7fa;
+  color: #00796b;
+  border-radius: 4px;
+  cursor: text;
+}
+.editable-title:focus {
+  outline: none;
+  border-color: #004d40; /* Highlight when focused */
+  background-color: #b2dfdb;
+}
+
+.drag-handle {
+  cursor: grab;
+  font-size: 1.2em;
+  color: #555;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.drag-handle:active {
+  cursor: grabbing;
+}
+
  </style>
 </head>
 <body>
@@ -92,8 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const exerciseDiv = document.createElement('div');
     exerciseDiv.classList.add('exercise');
     exerciseDiv.setAttribute('draggable', true);
+    exerciseDiv.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', exercises.indexOf(exerciseDiv));
+    });
+
 
     exerciseDiv.innerHTML = `
+      <div class="drag-handle">
+          <i class="fas fa-grip-lines"></i>
+      </div>
       <h2 contenteditable="true">Exercise ${exerciseId}</h2>
       <select class="exercise-type">
         <option value="timed">Timed Exercise</option>
@@ -189,9 +224,9 @@ function startWorkout() {
       if (totalSeconds <= 0) {
         clearInterval(interval);
         playBeepSound(); // Play beep at every timer completion
-        countdownDiv.textContent = message;
+        countdownDiv.textContent = `${label} Over`;
         setTimeout(() => {
-          countdownDiv.textContent = '';
+          countdownDiv.textContent = ''; // Clear message
           callback();
         }, 1000);
         return;
@@ -200,7 +235,7 @@ function startWorkout() {
       const hours = Math.floor(totalSeconds / 3600);
       const minutes = Math.floor(totalSeconds / 60) % 60;
       const seconds = totalSeconds % 60;
-      countdownDiv.textContent = `Time Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
       totalSeconds--;
     }, 1000);
   }
@@ -225,13 +260,13 @@ const exerciseDiv = exercises[currentExercise];
       }
 
       if (type === 'timed') {
-        runTimer(exerciseTime, 'Exercise Time Over', () => {
-          runTimer(restTime, 'Rest Time Over', nextSet); // Play beep here automatically via runTimer
+        runTimer(exerciseTime, 'Exercise Time', () => {
+          runTimer(restTime, 'Rest Time', nextSet); // Play beep here automatically via runTimer
         });
       } else if (type === 'rep') {
-        const proceed = confirm(`Begin Set ${currentSet}. When completed, click Continue below.`);
+        const proceed = confirm(`Begin Set ${currentSet}. When completed, click OK below to continue.`);
         if (proceed) {
-          runTimer(restTime, 'Rest Time Over', nextSet);
+          runTimer(restTime, 'Rest Time', nextSet);
         }
       }
       currentSet++;
