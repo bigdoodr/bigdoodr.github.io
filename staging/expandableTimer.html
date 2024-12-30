@@ -55,8 +55,8 @@ button {
   display: inline-block;
   padding: 5px;
   border: 1px dashed #00796b; /* Dashed border to indicate interactivity */
-  background-color: #e0f7fa;
-  color: #00796b;
+  background-color: #333333;
+  color: #eeeeee;
   border-radius: 4px;
   cursor: text;
 }
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="drag-handle">
           <i class="fas fa-grip-lines"></i>
       </div>
-      <h2 contenteditable="true">Exercise ${exerciseId}</h2>
+      <h2 contenteditable="true" class="editable-title">Exercise ${exerciseId}</h2>
       <select class="exercise-type">
         <option value="timed">Timed Exercise</option>
         <option value="rep">Rep Counter</option>
@@ -268,8 +268,7 @@ function processExercise() {
         runTimer(restTime, 'Rest Time', nextSet);
       });
     } else if (type === 'rep') {
-      countdownDiv.textContent = `Complete Set ${currentSet} and click OK to continue.`;
-      const proceed = confirm(`Set ${currentSet} completed. Continue?`);
+      const proceed = confirm(`Complete Set ${currentSet} then press OK below to continue.`);
       if (proceed) {
         runTimer(restTime, 'Rest Time', nextSet);
       }
