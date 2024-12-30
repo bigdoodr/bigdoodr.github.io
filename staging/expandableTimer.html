@@ -215,65 +215,71 @@ function startWorkout() {
           });
   }
   
-  function runTimer(duration, message, callback) {
-    const currentExerciseDiv = exercises[currentExercise];
-    const countdownDiv = currentExerciseDiv.querySelector('.countdown');
-    let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
+function runTimer(duration, label, callback) {
+  const currentExerciseDiv = exercises[currentExercise];
+  const countdownDiv = currentExerciseDiv.querySelector('.countdown');
+  let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
 
-    const interval = setInterval(() => {
-      if (totalSeconds <= 0) {
-        clearInterval(interval);
-        playBeepSound(); // Play beep at every timer completion
-        countdownDiv.textContent = `${label} Over`;
-        setTimeout(() => {
-          countdownDiv.textContent = ''; // Clear message
-          callback();
-        }, 1000);
-        return;
-      }
-
-      const hours = Math.floor(totalSeconds / 3600);
-      const minutes = Math.floor(totalSeconds / 60) % 60;
-      const seconds = totalSeconds % 60;
-      countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      totalSeconds--;
-    }, 1000);
-  }
-
-  function processExercise() {
-    if (currentExercise >= exercises.length) {
-      playBeepSound(); // Final beep for routine completion
-      alert('Routine Complete!');
-      exercises.forEach((exercise) => exercise.querySelector('.countdown').textContent = '');
+  const interval = setInterval(() => {
+    if (totalSeconds <= 0) {
+      clearInterval(interval);
+      playBeepSound(); // Play beep at every timer completion
+      countdownDiv.textContent = `${label} Over`;
+      setTimeout(() => {
+        countdownDiv.textContent = ''; // Clear message
+        callback();
+      }, 1000);
       return;
     }
 
-const exerciseDiv = exercises[currentExercise];
-    const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExercise];
-    let currentSet = 1;
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor(totalSeconds / 60) % 60;
+    const seconds = totalSeconds % 60;
+    countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    totalSeconds--;
+  }, 1000);
+}
 
-    function nextSet() {
-      if (currentSet > sets) {
-        currentExercise++;
-        processExercise(); // Proceed to the next exercise
-        return;
-      }
 
-      if (type === 'timed') {
-        runTimer(exerciseTime, 'Exercise Time', () => {
-          runTimer(restTime, 'Rest Time', nextSet); // Play beep here automatically via runTimer
-        });
-      } else if (type === 'rep') {
-        const proceed = confirm(`Begin Set ${currentSet}. When completed, click OK below to continue.`);
-        if (proceed) {
-          runTimer(restTime, 'Rest Time', nextSet);
-        }
-      }
-      currentSet++;
+function processExercise() {
+  if (currentExercise >= exercises.length) {
+    playBeepSound(); // Final beep for routine completion
+    alert('Routine Complete!');
+    return;
+  }
+
+  const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExercise];
+  let currentSet = 1;
+
+  function nextSet() {
+    if (currentSet > sets) {
+      currentExercise++;
+      processExercise(); // Proceed to the next exercise
+      return;
     }
 
-    nextSet();
+    const currentExerciseDiv = exercises[currentExercise];
+    const countdownDiv = currentExerciseDiv.querySelector('.countdown');
+    countdownDiv.textContent = `Set ${currentSet} of ${sets} (${type === 'timed' ? 'Timed Exercise' : 'Rep Counter'})`;
+
+    if (type === 'timed') {
+      // Pass "Exercise Time" and "Rest Time" as labels to `runTimer`
+      runTimer(exerciseTime, 'Exercise Time', () => {
+        runTimer(restTime, 'Rest Time', nextSet);
+      });
+    } else if (type === 'rep') {
+      countdownDiv.textContent = `Complete Set ${currentSet} and click OK to continue.`;
+      const proceed = confirm(`Set ${currentSet} completed. Continue?`);
+      if (proceed) {
+        runTimer(restTime, 'Rest Time', nextSet);
+      }
+    }
+    currentSet++;
   }
+
+  nextSet();
+}
+
 
   processExercise();
 }
