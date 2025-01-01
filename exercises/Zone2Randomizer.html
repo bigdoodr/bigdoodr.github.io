@@ -257,42 +257,28 @@
     }
 
 function startWorkout() {
-    // Ensure there's a workout sequence to run
     if (workoutSequence.length === 0) {
         alert("Please generate a workout first!");
         return;
     }
 
-    // Initialize currentIndex if not already set
-    if (typeof currentIndex === "undefined" || currentIndex >= workoutSequence.length) {
-        currentIndex = 0;
-    }
-
-    // Set the initial timeRemaining for the current exercise
+    // Initialize the workout
+    currentIndex = 0;
     timeRemaining = workoutSequence[currentIndex].duration;
 
-    // Update video in floating timer if applicable
-    if (workoutSequence[currentIndex].video) {
-        currentExerciseVideo.src = workoutSequence[currentIndex].video;
-    } else {
-        currentExerciseVideo.src = ""; // No video for rest
-    }
+    // Set the initial video and highlight
+    updateCurrentStep();
 
-    // Highlight current exercise
-    document.querySelectorAll('.exercise-list li').forEach((li, idx) => {
-        li.classList.toggle('active', idx === currentIndex);
-    });
-
-    // Start the timer interval
+    // Start the timer
     timerInterval = setInterval(() => {
         timeRemaining--;
 
         // Update the timer display
         updateTimerDisplay();
 
-        // When time runs out for the current step
+        // Check if time for the current step is over
         if (timeRemaining <= 0) {
-            playBeepSound(); // Play sound at transition
+            playBeepSound(); // Trigger sound at the end of every step
 
             // Move to the next step
             currentIndex++;
@@ -302,23 +288,35 @@ function startWorkout() {
                 return;
             }
 
-            // Update new step details
+            // Update to the next step
             timeRemaining = workoutSequence[currentIndex].duration;
-
-            // Update video
-            if (workoutSequence[currentIndex].video) {
-                currentExerciseVideo.src = workoutSequence[currentIndex].video;
-            } else {
-                currentExerciseVideo.src = ""; // No video for rest
-            }
-
-            // Highlight new current exercise
-            document.querySelectorAll('.exercise-list li').forEach((li, idx) => {
-                li.classList.toggle('active', idx === currentIndex);
-            });
+            updateCurrentStep();
         }
     }, 1000);
 }
+
+// Helper function to update the current step (video, highlight, etc.)
+function updateCurrentStep() {
+    // Update the video
+    if (workoutSequence[currentIndex].video) {
+        currentExerciseVideo.src = workoutSequence[currentIndex].video;
+    } else {
+        currentExerciseVideo.src = ""; // Clear video for rest periods
+    }
+
+    // Highlight the current exercise in the list
+    document.querySelectorAll(".exercise-list li").forEach((li, idx) => {
+        li.classList.toggle("active", idx === currentIndex);
+    });
+}
+
+// Helper function to update the timer display
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, "0");
+    const seconds = (timeRemaining % 60).toString().padStart(2, "0");
+    timerDisplay.textContent = `${minutes}:${seconds}`;
+}
+
 
 // Ensure pauseWorkout stops the timer
 function pauseWorkout() {
