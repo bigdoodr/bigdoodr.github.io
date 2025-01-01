@@ -164,6 +164,22 @@
         const currentExerciseVideo = document.getElementById('currentExerciseVideo');
         const beepSound = document.getElementById('beepSound');
 
+        // Ensure audio plays after user interaction
+        let beepSound = new Audio('/sounds/beep.mp3');
+        
+        // Add an event listener to initialize audio after user interaction
+        document.body.addEventListener('click', () => {
+        	playBeepSound().catch(() => {}); // Play and catch any errors to prevent console warnings
+        	beepSound.pause(); // Pause immediately after initializing
+        }, { once: true }); // This runs only once
+        
+        function playBeepSound() {
+        	beepSound.currentTime = 0; // Reset to start
+        	playBeepSound().catch(err => {
+        		console.error("Audio play failed:", err);
+        	});
+        }
+
         let selectedExercises = [...exercises];
         let workoutSequence = [];
         let timerInterval;
@@ -279,7 +295,7 @@ function startWorkout() {
 
         // When time runs out for the current step
         if (timeRemaining <= 0) {
-            beepSound.play(); // Play sound at transition
+            playBeepSound(); // Play sound at transition
 
             // Move to the next step
             currentIndex++;
