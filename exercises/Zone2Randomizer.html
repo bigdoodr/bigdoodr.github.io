@@ -165,17 +165,14 @@
         const beepSound = document.getElementById('beepSound');
 
         // Ensure audio plays after user interaction
-        let beepSound = new Audio('/sounds/beep.mp3');
-        
-        // Add an event listener to initialize audio after user interaction
         document.body.addEventListener('click', () => {
-        	playBeepSound().catch(() => {}); // Play and catch any errors to prevent console warnings
+        	beepSound.play().catch(() => {}); // Play and catch any errors to prevent console warnings
         	beepSound.pause(); // Pause immediately after initializing
         }, { once: true }); // This runs only once
         
         function playBeepSound() {
         	beepSound.currentTime = 0; // Reset to start
-        	playBeepSound().catch(err => {
+        	beepSound.play().catch(err => {
         		console.error("Audio play failed:", err);
         	});
         }
