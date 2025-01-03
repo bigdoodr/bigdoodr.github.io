@@ -162,20 +162,31 @@
         const exerciseSelection = document.getElementById('exerciseSelection');
         const timerDisplay = document.getElementById('timerDisplay');
         const currentExerciseVideo = document.getElementById('currentExerciseVideo');
+        
+        // Initialize beepSound and ensure audio permissions are unlocked
         const beepSound = document.getElementById('beepSound');
 
-        // Ensure audio plays after user interaction
-        document.body.addEventListener('click', () => {
-        	beepSound.play().catch(() => {}); // Play and catch any errors to prevent console warnings
-        	beepSound.pause(); // Pause immediately after initializing
-        }, { once: true }); // This runs only once
-        
-        function playBeepSound() {
-        	beepSound.currentTime = 0; // Reset to start
-        	beepSound.play().catch(err => {
-        		console.error("Audio play failed:", err);
-        	});
-        }
+		// Unlock audio on user interaction
+		document.body.addEventListener('click', () => {
+		    beepSound.play().catch(() => {
+		        console.log("Audio permissions unlocked after user interaction.");
+    		});
+		    beepSound.pause(); // Pause immediately after unlocking
+		}, { once: true }); // Runs only once
+
+		function playBeepSound() {
+		    beepSound.currentTime = 0; // Reset to start
+		    beepSound.play().catch(err => {
+		        console.error("Audio play failed:", err);
+		    });
+		}
+
+		// Update the timer display
+		function updateTimerDisplay() {
+		    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, "0");
+		    const seconds = (timeRemaining % 60).toString().padStart(2, "0");
+		    document.getElementById("timerDisplay").textContent = `${minutes}:${seconds}`;
+		}
 
         let selectedExercises = [...exercises];
         let workoutSequence = [];
@@ -264,35 +275,35 @@ function startWorkout() {
 
     // Initialize the workout
     currentIndex = 0;
-    timeRemaining = workoutSequence[currentIndex].duration;
 
-    // Set the initial video and highlight
-    updateCurrentStep();
-
-    // Start the timer
-    timerInterval = setInterval(() => {
-        timeRemaining--;
-
-        // Update the timer display
-        updateTimerDisplay();
-
-        // Check if time for the current step is over
-        if (timeRemaining <= 0) {
-            playBeepSound(); // Trigger sound at the end of every step
-
-            // Move to the next step
-            currentIndex++;
-            if (currentIndex >= workoutSequence.length) {
-                clearInterval(timerInterval);
-                alert("Workout complete!");
-                return;
-            }
-
-            // Update to the next step
-            timeRemaining = workoutSequence[currentIndex].duration;
-            updateCurrentStep();
+    // Function to process each step
+    function processStep() {
+        if (currentIndex >= workoutSequence.length) {
+            playBeepSound(); // Final beep for routine completion
+            alert("Workout complete!");
+            return;
         }
-    }, 1000);
+
+        const currentStep = workoutSequence[currentIndex];
+        timeRemaining = currentStep.duration;
+
+        // Update video and highlight
+        updateCurrentStep();
+
+        const interval = setInterval(() => {
+            timeRemaining--;
+            updateTimerDisplay();
+
+            if (timeRemaining <= 0) {
+                clearInterval(interval);
+                playBeepSound(); // Play sound at each transition
+                currentIndex++;
+                processStep(); // Move to the next step
+            }
+        }, 1000);
+    }
+
+    processStep();
 }
 
 // Helper function to update the current step (video, highlight, etc.)
@@ -310,24 +321,10 @@ function updateCurrentStep() {
     });
 }
 
-// Helper function to update the timer display
-function updateTimerDisplay() {
-    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, "0");
-    const seconds = (timeRemaining % 60).toString().padStart(2, "0");
-    timerDisplay.textContent = `${minutes}:${seconds}`;
-}
-
 
 // Ensure pauseWorkout stops the timer
 function pauseWorkout() {
     clearInterval(timerInterval);
-}
-
-// Ensure timer updates with corresponding selections
-function updateTimerDisplay() {
-    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, "0");
-    const seconds = (timeRemaining % 60).toString().padStart(2, "0");
-    document.getElementById("timerDisplay").textContent = `${minutes}:${seconds}`;
 }
 
     // Render exercise selection
