@@ -193,7 +193,7 @@
 		function updateTimerDisplay() {
 		    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, "0");
 		    const seconds = (timeRemaining % 60).toString().padStart(2, "0");
-		    document.getElementById("timerDisplay").textContent = `${minutes}:${seconds}`;
+		    timerDisplay.textContent = `${minutes}:${seconds}`;
 		}
 
         let selectedExercises = [...exercises];
@@ -281,38 +281,38 @@ function startWorkout() {
         return;
     }
 
-    // Initialize the workout
-    currentIndex = 0;
+    currentIndex = 0; // Start at the first step
+    timeRemaining = workoutSequence[currentIndex].duration; // Set time for the first step
 
-    // Function to process each step
-    function processStep() {
-        if (currentIndex >= workoutSequence.length) {
-            playBeepSound(); // Final beep for routine completion
-            alert("Workout complete!");
-            return;
-        }
+    // Update video and highlight
+    updateCurrentStep();
+    updateTimerDisplay();
 
-        const currentStep = workoutSequence[currentIndex];
-        timeRemaining = currentStep.duration;
+    // Single interval to manage the workout
+    timerInterval = setInterval(() => {
+        timeRemaining--;
 
-        // Update video and highlight
-        updateCurrentStep();
+        // Update the timer display
+        updateTimerDisplay();
 
-        const interval = setInterval(() => {
-            timeRemaining--;
-            updateTimerDisplay();
+        // If time for the current step is up
+        if (timeRemaining <= 0) {
+            playBeepSound(); // Play sound at each transition
+            currentIndex++; // Move to the next step
 
-            if (timeRemaining <= 0) {
-                clearInterval(interval);
-                playBeepSound(); // Play sound at each transition
-                currentIndex++;
-                processStep(); // Move to the next step
+            if (currentIndex >= workoutSequence.length) {
+                clearInterval(timerInterval); // End the workout
+                alert("Workout complete!");
+                return;
             }
-        }, 1000);
-    }
 
-    processStep();
+            // Update for the next step
+            timeRemaining = workoutSequence[currentIndex].duration;
+            updateCurrentStep();
+        }
+    }, 1000);
 }
+
 
 // Helper function to update the current step (video, highlight, etc.)
 function updateCurrentStep() {
