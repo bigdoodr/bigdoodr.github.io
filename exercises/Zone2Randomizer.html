@@ -189,6 +189,24 @@
     		});
 		}
 
+		function runTimer(duration, label, callback) {
+    		let totalSeconds = duration;
+
+		    const interval = setInterval(() => {
+		        if (totalSeconds <= 0) {
+		            clearInterval(interval);
+		            playBeepSound(); // Play beep at timer completion
+		            callback(); // Proceed to the next step
+		            return;
+		        }
+
+		        const minutes = Math.floor(totalSeconds / 60);
+		        const seconds = totalSeconds % 60;
+		        timerDisplay.textContent = `${label}: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+		        totalSeconds--;
+	    	}, 1000);
+		}
+
 		// Update the timer display
 		function updateTimerDisplay() {
 		    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, "0");
@@ -281,35 +299,37 @@ function startWorkout() {
         return;
     }
 
-    currentIndex = 0; // Start at the first step
-    timeRemaining = workoutSequence[currentIndex].duration; // Set the duration for the first step
+    currentIndex = 0;
 
-    // Initialize the first step
-    updateCurrentStep();
-    updateTimerDisplay();
-
-    // Start the global timer
-    timerInterval = setInterval(() => {
-        if (timeRemaining > 0) {
-            timeRemaining--;
-            updateTimerDisplay();
+    function processStep() {
+        if (currentIndex >= workoutSequence.length) {
+            playBeepSound(); // Final beep for workout completion
+            alert("Workout complete!");
+            return;
         }
 
-        if (timeRemaining === 0) {
-            playBeepSound(); // Play sound at the end of every step
-            currentIndex++; // Move to the next step
+        const currentStep = workoutSequence[currentIndex];
+        const label = currentStep.type === "exercise" ? "Exercise Time" : "Rest Time";
 
-            if (currentIndex >= workoutSequence.length) {
-                clearInterval(timerInterval); // End workout
-                alert("Workout complete!");
-                return;
-            }
-
-            // Update for the next step
-            timeRemaining = workoutSequence[currentIndex].duration;
-            updateCurrentStep();
+        // Update video and highlight
+        if (currentStep.video) {
+            currentExerciseVideo.src = currentStep.video;
+        } else {
+            currentExerciseVideo.src = ""; // Clear video for rest periods
         }
-    }, 1000); // Run every second
+
+        document.querySelectorAll(".exercise-list li").forEach((li, idx) => {
+            li.classList.toggle("active", idx === currentIndex);
+        });
+
+        // Run the timer for the current step
+        runTimer(currentStep.duration, label, () => {
+            currentIndex++;
+            processStep(); // Move to the next step
+        });
+    }
+
+    processStep(); // Start the first step
 }
 
 
