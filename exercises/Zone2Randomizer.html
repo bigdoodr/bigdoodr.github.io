@@ -185,6 +185,9 @@
     		beepSound.play().catch(err => {
         		console.error("Beep sound failed to play:", err);
     		});
+
+    		// Optional: Lower beep sound volume (so it doesn't override music)
+    		beepSound.volume = 0.5;
 		}
 
 		function runTimer(totalSeconds, label, onComplete) {
