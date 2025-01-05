@@ -183,10 +183,10 @@
 		}, { once: true }); // Runs only once
 
 		function playBeepSound() {
-		    beepSound.currentTime = 0; // Reset to start
-		    beepSound.play().catch(err => {
-		        console.error("Audio play failed:", err);
-		    });
+    		beepSound.currentTime = 0; // Reset to start
+    		beepSound.play().catch(err => {
+        		console.error("Beep sound failed to play:", err);
+    		});
 		}
 
 		// Update the timer display
@@ -282,26 +282,25 @@ function startWorkout() {
     }
 
     currentIndex = 0; // Start at the first step
-    timeRemaining = workoutSequence[currentIndex].duration; // Set time for the first step
+    timeRemaining = workoutSequence[currentIndex].duration; // Set the duration for the first step
 
-    // Update video and highlight
+    // Initialize the first step
     updateCurrentStep();
     updateTimerDisplay();
 
-    // Single interval to manage the workout
+    // Start the global timer
     timerInterval = setInterval(() => {
-        timeRemaining--;
+        if (timeRemaining > 0) {
+            timeRemaining--;
+            updateTimerDisplay();
+        }
 
-        // Update the timer display
-        updateTimerDisplay();
-
-        // If time for the current step is up
-        if (timeRemaining <= 0) {
-            playBeepSound(); // Play sound at each transition
+        if (timeRemaining === 0) {
+            playBeepSound(); // Play sound at the end of every step
             currentIndex++; // Move to the next step
 
             if (currentIndex >= workoutSequence.length) {
-                clearInterval(timerInterval); // End the workout
+                clearInterval(timerInterval); // End workout
                 alert("Workout complete!");
                 return;
             }
@@ -310,7 +309,7 @@ function startWorkout() {
             timeRemaining = workoutSequence[currentIndex].duration;
             updateCurrentStep();
         }
-    }, 1000);
+    }, 1000); // Run every second
 }
 
 
