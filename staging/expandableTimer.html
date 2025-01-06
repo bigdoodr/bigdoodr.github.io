@@ -94,8 +94,6 @@ button {
     <button id="export-btn">Export Routine</button>
   </div>
 
-  <audio id="beep-sound" src="/sounds/beep.mp3"></audio>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const exercisesDiv = document.getElementById('exercises');
@@ -105,19 +103,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const exportRoutineBtn = document.getElementById('export-btn');
   const importRoutineBtn = document.getElementById('import-btn');
   const importRoutineInput = document.getElementById('import-routine');
-  const beepSound = document.getElementById('beep-sound');
+  
+  let audioContext;
+  let beepBuffer;
+  
+  // Initialize the audio context and load the beep sound
+  function initializeAudio() {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Fetch and decode the audio file
+    fetch("/sounds/beep.mp3")
+        .then(response => response.arrayBuffer())
+        .then(data => audioContext.decodeAudioData(data))
+        .then(buffer => {
+            beepBuffer = buffer; // Store the decoded audio buffer
+        })
+        .catch(err => console.error("Error loading beep sound:", err));
+}
+
+  // Call initializeAudio when the page is loaded or when the user interacts
+  document.body.addEventListener("click", () => {
+    if (!audioContext) {
+        initializeAudio();
+    }
+  }, { once: true });
+
 
   let exercises = [];
-
-  function enableAudio() {
-  // Play a silent sound to unlock audio permissions
-  beepSound.play().catch(() => {
-    console.log("Audio permissions enabled after user interaction.");
-  });
-
-  // Optional: Lower beep sound volume (so it doesn't override music)
-  beepSound.volume = 0.5;
-  }
 
   function addExercise() {
     const exerciseId = exercises.length + 1;
@@ -214,10 +226,17 @@ function startWorkout() {
   let currentExercise = 0;
 
   function playBeepSound() {
-    beepSound.play().catch((error) => {
-        console.error("Beep sound failed to play:", error);
-          });
-  }
+    if (!audioContext || !beepBuffer) {
+        console.error("Audio context or beep buffer is not initialized.");
+        return;
+    }
+
+    const source = audioContext.createBufferSource(); // Create a source node
+    source.buffer = beepBuffer; // Set the beep sound buffer
+    source.connect(audioContext.destination); // Connect to the audio context's output
+    source.start(0); // Play the sound immediately
+}
+
   
 function runTimer(duration, label, callback) {
   const currentExerciseDiv = exercises[currentExercise];
