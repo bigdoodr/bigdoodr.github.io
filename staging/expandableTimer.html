@@ -363,7 +363,7 @@ function importRoutine(event) {
 
 addExerciseBtn.addEventListener('click', addExercise);
 startWorkoutBtn.addEventListener('click', () => {
-  enableAudio(); // Ensure audio permissions are unlocked
+  initializeAudio(); // Ensure audio permissions are unlocked
   startWorkout();
 });
 exportRoutineBtn.addEventListener('click', exportRoutine);
