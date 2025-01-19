@@ -21,4 +21,6 @@ image: /resources/stopwatch.png
 	- again with ChatGPT's assistance, was able to adapt Tim's example for both pages; the sound plays without stopping other audio
 - though not entirely perfect (specifically, if the browser loses focus on mobile), the new timer page is in good enough shape to publish
 	- drag and drop works, but actually order of exercises remains as original creation
-- example routine: 10 minute abs from Jeff's YouTube video / exercises bookmark link
+- example routine: [10 minute abs from Jeff's YouTube video](/exercises/10MinuteAbsByJeffCavaliere.json) / [exercises bookmark link](/DailyExercises.html)
+- exercises can be renamed, moved around (though not triggering properly at time of writing), and deleted
+- routines can be saved/exported in json format and imported for re-use

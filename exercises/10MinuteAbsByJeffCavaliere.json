@@ -1,0 +1,152 @@
+[
+  {
+    "title": "Crescent Tucks",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  },
+  {
+    "title": "Backward 7s",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  },
+  {
+    "title": "Swipers",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  },
+  {
+    "title": "Side Cycles - Left",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  },
+  {
+    "title": "Side Cycles - Right",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  },
+  {
+    "title": "Mountain Hip Dips",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": "0",
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  },
+  {
+    "title": "Frog V-Ups",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  },
+  {
+    "title": "Side Scissor Crunches - Left",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  },
+  {
+    "title": "Side Scissor Crunches - Right",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  },
+  {
+    "title": "Corpse Crunch",
+    "type": "timed",
+    "sets": "1",
+    "exerciseTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "45"
+    },
+    "restTime": {
+      "hours": 0,
+      "minutes": 0,
+      "seconds": "15"
+    }
+  }
+]
