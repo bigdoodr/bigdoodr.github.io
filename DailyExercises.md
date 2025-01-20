@@ -1,7 +1,7 @@
 ---
 title: Daily Exercises
 description: Stretches and Core Exercises to Start the Day
-date: 2021-05-12T13:00:00-13:00
+date: 2021-05-12T13:00:00-6:00
 tags: Fitness
 image: /resources/1.crescent-tucks.gif
 ---

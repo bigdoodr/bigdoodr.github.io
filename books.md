@@ -2,10 +2,16 @@
 layout: page
 title: Books
 description: Book tracker
+date: 2025-01-20T16:12:30-6:00
+tags: Books
+image: /resources/books.purple.png
 ---
 
-
+<details>
+  <summary>
 ## 2024 Reading
+
+</summary>
 
 | Title | Author | Link | My Review |
 | Soul Boom | Rainn Wilson | [Book Details](https://openlibrary.org/works/OL28763073W) | 👍 |
@@ -32,3 +38,8 @@ description: Book tracker
 | Canto Bight | Saladin Ahmed<br>Rae Carson<br>Mira Grant<br>John Jackson Miller | [Book Details](https://openlibrary.org/works/OL19723104W) | 👍 |
 | Serpent's Secret | Sayantani DasGupta | [Book Details](https://openlibrary.org/works/OL19751990W) | 👍 |
 | System Collapse | Martha Wells | [Book Details](https://openlibrary.org/works/OL33402895W) | 👍 |
+
+</details>
+
+## 2025 Reading
+| The Lost City of the Monkey God | Douglas Preston | [Book Details](https://openlibrary.org/works/OL17876084W) | 👍 |
