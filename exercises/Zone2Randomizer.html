@@ -22,6 +22,18 @@
             margin-bottom: 20px;
         }
 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 2px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
         .controls {
             display: flex;
             flex-wrap: wrap;
@@ -48,12 +60,14 @@
         }
 
         .exercise-card {
+            display: inline-block;
             position: relative;
             overflow: hidden;
             border: 2px solid #ccc;
             border-radius: 10px;
             cursor: pointer;
             text-align: center;
+            margin: 5px;
         }
 
         .exercise-card.selected {
@@ -61,7 +75,7 @@
         }
 
         .exercise-card video {
-            width: 100%;
+            width: 100px;
             height: auto;
         }
 
@@ -130,14 +144,14 @@
         <button id="pauseTimer">Pause</button>
         <video id="currentExerciseVideo" autoplay loop muted playsinline></video>
     </div>
-	<table style="border-collapse: collapse; width: 100%;">
+	<table>
 	  <thead>
 		<tr>
-		  <th style="border: 2px solid black; padding: 10px;">Muscle Group</th>
-		  <th style="border: 2px solid black; padding: 10px;">Beginner</th>
-		  <th style="border: 2px solid black; padding: 10px;">Medium</th>
-		  <th style="border: 2px solid black; padding: 10px;">Hard</th>
-		  <th style="border: 2px solid black; padding: 10px;">Expert/Advanced</th>
+		  <th>Muscle Group</th>
+		  <th>Beginner</th>
+		  <th>Medium</th>
+		  <th>Hard</th>
+		  <th>Expert/Advanced</th>
 		</tr>
 	  </thead>
 	  <tbody id="exerciseTableBody">
@@ -174,7 +188,7 @@
 	  },
 	  "Triceps": {
 	  	"Beginner": [{ name: "Bench Dips", video: "/resources/benchDipsAngle1.mp4" }],
-	  	"Medium": ["Diamond Cutter Push-Ups"],
+	  	"Medium": [], //to be added later: "Diamond Cutter Push-Ups"
 	  	"Hard": [],
 	  	"Expert/Advanced": []
 	  },
@@ -194,7 +208,7 @@
 	  	"Beginner": [{ name: "Ab-Roller", video: "/resources/abRollerAngle1.mp4" }, { name: "Bird Dogs", video: "/resources/birdDogs.mp4" }, { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4" }, { name: "Swipers", video: "/resources/swipersAngle2.mp4" }],
 	  	"Medium": [{ name: "Plank Elbow Ups", video: "/resources/plankElbowUps.mp4" }, { name: "Shoulder Taps", video: "/resources/shoulderTapsAngle1.mp4" }],
 	  	"Hard": [],
-	  	"Expert/Advanced": []
+	  	"Expert/Advanced": [{ name: "Twisting Piston Push-Ups", video: "/resources/twistingPistonPushUps.mp4"}]
 	  },
 	  "Cardio": {
 	  	"Beginner": [{ name: "Jump/Air Rope", video: "/resources/jumprope.mp4" }, { name: "Shadow Boxing", video: "/resources/shadowboxing.mp4" }, { name: "Toe Taps", video: "/resources/toeTaps.mp4" }],
