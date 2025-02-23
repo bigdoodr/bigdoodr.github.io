@@ -129,51 +129,160 @@
         <button id="pauseTimer">Pause</button>
         <video id="currentExerciseVideo" autoplay loop muted playsinline></video>
     </div>
+    <table>
+	  <thead>
+		<tr>
+		  <th>Muscle Group</th>
+		  <th>Beginner</th>
+		  <th>Medium</th>
+		  <th>Hard</th>
+		  <th>Expert/Advanced</th>
+		</tr>
+	  </thead>
+	  <tbody id="exerciseTableBody">
+	  </tbody>
+	</table>
     <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
     <script>
         DarkReader.enable();
 
-        const exercises = [
-            { name: "Shadow Boxing", video: "/resources/shadowboxing.mp4" },
-            { name: "Squats", video: "/resources/squats.mp4" },
-            { name: "Push-Ups", video: "/resources/pushupsAngle2.mp4" },
-            { name: "Bear Taps", video: "/resources/bearTapsAngle2.mp4" },
-            { name: "Swipers", video: "/resources/swipersAngle2.mp4" },
-            { name: "3-Way Lunges", video: "/resources/3wayLungesAngle2.mp4" },
-            { name: "Shoulder Taps", video: "/resources/shoulderTapsAngle1.mp4" },
-            { name: "Russian V-Twists", video: "/resources/russianVTwistsAngle1.mp4" },
-            { name: "Bridges", video: "/resources/bridgesAngle2.mp4" },
-            { name: "Spider-Man Lunges", video: "/resources/spidermanLungesAngle2.mp4" },
-            { name: "Ab Roller", video: "/resources/abRollerAngle1.mp4" },
-            { name: "Bicycle Crunches", video: "/resources/bicycleCrunchesAngle2.mp4" },
-            { name: "Bench Dips", video: "/resources/benchDipsAngle1.mp4" },
-            { name: "Toe Taps", video: "/resources/toeTaps.mp4" },
-            { name: "Reverse Lunge to High Knee", video: "/resources/reverseLungeHighKneeAngle2.mp4" },
-            { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4" },
-            { name: "Jump/Air Rope", video: "/resources/jumprope.mp4" },
-            { name: "High Knees", video: "/resources/highknees.mp4" },
-            { name: "Jumping Jacks", video: "/resources/jumpingjacks.mp4" },
-            { name: "Skier Hops", video: "/resources/skierhops.mp4" },
-            { name: "One-Legged Skier Push-Ups", video: "/resources/onelegskierpushups.mp4" },
-            { name: "Triple Skyfalls", video: "/resources/3xskyfalls.mp4" },
-            { name: "Frog Hops", video: "/resources/frogHops.mp4" },
-            { name: "Hip Bucks", video: "/resources/hipBucks.mp4" },
-            { name: "Moutain Climbers", video: "/resources/mountainClimbers.mp4" },
-            { name: "Plank Elbow to Knee Taps", video: "/resources/plankElbowToKneeTaps.mp4" },
-            { name: "Prisoner Squat Jumps", video: "/resources/prisonerSquatJumps.mp4" },
-            { name: "Single Leg Hip Bucks", video: "/resources/singleLegHipBucks.mp4" },
-            { name: "Squat Jumps", video: "/resources/squatJumps.mp4" },
-            { name: "Walking Marches", video: "/resources/walkingMarches.mp4" },
-            { name: "3-Point Alternating Hops", video: "/resources/3pointAltHops.mp4" },
-            { name: "Bird Dogs", video: "/resources/birdDogs.mp4" },
-            { name: "Kneeling Spider-Man Push-Ups", video: "/resources/kneelingSpidermanPushups.mp4" },
-            { name: "Ninja Tuck Jumps", video: "/resources/ninjaTuckJumps.mp4" },
-            { name: "Pike Pushups", video: "/resources/pikePushups.mp4" },
-            { name: "Plank Elbow Ups", video: "/resources/plankElbowUps.mp4" },
-            { name: "Prisoner Ninja Tuck Jumps", video: "/resources/prisonerNinjaTuckJumps.mp4" },
-            { name: "Alternating Split Squats", video: "/resources/splitSquats.mp4" },
-            { name: "Spider-Man Push-Ups", video: "/resources/spidermanPushups.mp4" }
-        ];
+	const categorizedExercises = {
+	  "Chest": {
+		"Beginner": [],
+		"Medium": ["Push-Ups"],
+		"Hard": [],
+		"Expert/Advanced": ["One-Legged Skier Push-Ups"]
+	  },
+	  "Legs": {
+		"Beginner": ["Squats", "3-Way Lunges"],
+		"Medium": ["Alternating Split Squats", "Frog Hops", "Squat Jumps"],
+		"Hard": ["180° Squat Jumps", "Ninja Tuck Jumps", "Prisoner Squat Jumps", "3-Point Alternating Hops"],
+		"Expert/Advanced": ["Prisoner Ninja Tuck Jumps", "Triple Skyfalls"]
+	  },
+	  "Legs, No Cardio": {
+	  	"Beginner": ["Reverse Lunge to High Knee"],
+	  	"Medium": [],
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  },
+	  "Shoulders": {
+	  	"Beginner": [],
+	  	"Medium": ["Pike Push-Ups"],
+	  	"Hard": ["Kneeling Spider-Man Push-Ups"],
+	  	"Expert/Advanced": ["Spider-Man Push-Ups"]
+	  },
+	  "Triceps": {
+	  	"Beginner": ["Bench Dips"],
+	  	"Medium": ["Diamond Cutter Push-Ups"],
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  },
+	  "Glutes": {
+	  	"Beginner": ["Bridges", "Hip Bucks"],
+	  	"Medium": ["Single Leg Hip Bucks"],
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  },
+	  "Core": {
+	  	"Beginner": ["Bear Taps", "Walking Marches"],
+	  	"Medium": ["Jackknives - Level 1", "Russian V-Twists", "Spider-Man Lunges"],
+	  	"Hard": ["Bicycle Crunches", "Jackknives - Level 2", "Mountain Climbers", "Plank Elbow to Knee Taps", "Side Kickthroughs"],
+	  	"Expert/Advanced": ["Twisting Piston Push-Ups"]
+	  },
+	  "Core, No Cardio": {
+	  	"Beginner": ["Ab-Roller", "Bird Dogs", "Good Mornings", "Swipers"],
+	  	"Medium": ["Plank Elbow Ups", "Shoulder Taps"],
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  },
+	  "Cardio": {
+	  	"Beginner": ["Jump/Air Rope", "Shadow Boxing", "Toe Taps"],
+	  	"Medium": ["High Knees", "Jumping Jacks", "Skier Hops"],
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  }
+	  // Add other categories similarly
+	};
+	
+	const exercises = [
+	  { name: "180° Squat Jumps", video: "/resources/180JumpSquats.mp4" },
+	  { name: "3-Point Alternating Hops", video: "/resources/3pointAltHops.mp4" },
+	  { name: "3-Way Lunges", video: "/resources/3wayLungesAngle2.mp4" },
+	  { name: "Triple Skyfalls", video: "/resources/3xskyfalls.mp4" },
+	  { name: "Ab-Roller", video: "/resources/abRollerAngle1.mp4" },
+	  { name: "Bear Taps", video: "/resources/bearTapsAngle2.mp4" },
+	  { name: "Bench Dips", video: "/resources/benchDipsAngle1.mp4" },
+	  { name: "Bicycle Crunches", video: "/resources/bicycleCrunchesAngle2.mp4" },
+	  { name: "Bird Dogs", video: "/resources/birdDogs.mp4" },
+	  { name: "Bridges", video: "/resources/bridgesAngle2.mp4" },
+	  { name: "Frog Hops", video: "/resources/frogHops.mp4" },
+	  { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4" },
+	  { name: "High Knees", video: "/resources/highknees.mp4" },
+	  { name: "Hip Bucks", video: "/resources/hipBucks.mp4" },
+	  { name: "Jackknives - Level 1", video: "/resources/jackknivesLevel1.mp4" },
+	  { name: "Jackknives - Level 2", video: "/resources/jackknivesLevel2.mp4" },
+	  { name: "Jumping Jacks", video: "/resources/jumpingjacks.mp4" },
+	  { name: "Jump/Air Rope", video: "/resources/jumprope.mp4" },
+	  { name: "Kneeling Spider-Man Push-Ups", video: "/resources/kneelingSpidermanPushups.mp4" },
+	  { name: "Mountain Climbers", video: "/resources/mountainClimbers.mp4" },
+	  { name: "Ninja Tuck Jumps", video: "/resources/ninjaTuckJumps.mp4" },
+	  { name: "One-Legged Skier Push-Ups", video: "/resources/onelegskierpushups.mp4" },
+	  { name: "Pike Push-Ups", video: "/resources/pikePushups.mp4" },
+	  { name: "Plank Elbow to Knee Taps", video: "/resources/plankElbowToKneeTaps.mp4" },
+	  { name: "Plank Elbow Ups", video: "/resources/plankElbowUps.mp4" },
+	  { name: "Prisoner Ninja Tuck Jumps", video: "/resources/prisonerNinjaTuckJumps.mp4" },
+	  { name: "Prisoner Squat Jumps", video: "/resources/prisonerSquatJumps.mp4" },
+	  { name: "Push-Ups", video: "/resources/pushupsAngle2.mp4" },
+	  { name: "Reverse Lunge to High Knee", video: "/resources/reverseLungeHighKneeAngle2.mp4" },
+	  { name: "Russian V-Twists", video: "/resources/russianVTwistsAngle1.mp4" },
+	  { name: "Shadow Boxing", video: "/resources/shadowboxing.mp4" },
+	  { name: "Shoulder Taps", video: "/resources/shoulderTapsAngle1.mp4" },
+	  { name: "Side Kickthroughs", video: "/resources/sideKickthroughs.mp4" },
+	  { name: "Single Leg Hip Bucks", video: "/resources/singleLegHipBucks.mp4" },
+	  { name: "Skier Hops", video: "/resources/skierhops.mp4" },
+	  { name: "Spider-Man Lunges", video: "/resources/spidermanLungesAngle2.mp4" },
+	  { name: "Spider-Man Push-Ups", video: "/resources/spidermanPushups.mp4" },
+	  { name: "Alternating Split Squats", video: "/resources/splitSquats.mp4" },
+	  { name: "Squat Jumps", video: "/resources/squatJumps.mp4" },
+	  { name: "Squats", video: "/resources/squats.mp4" },
+	  { name: "Swipers", video: "/resources/swipersAngle2.mp4" },
+	  { name: "Toe Taps", video: "/resources/toeTaps.mp4" },
+	  { name: "Walking Marches", video: "/resources/walkingMarches.mp4" }
+	  // Add more exercises from your list
+	];
+	
+	function getExerciseVideo(name) {
+	  const exercise = exercises.find(e => e.name === name);
+	  return exercise ? exercise.video : "";
+	}
+	
+	function renderExerciseTable() {
+	  const tableBody = document.getElementById("exerciseTableBody");
+	  tableBody.innerHTML = "";
+	
+	  Object.entries(categorizedExercises).forEach(([muscleGroup, levels]) => {
+		const row = document.createElement("tr");
+		row.innerHTML = `<td>${muscleGroup}</td>`;
+		["Beginner", "Medium", "Hard", "Expert/Advanced"].forEach(level => {
+		  const exercises = levels[level] || [];
+		  const cell = document.createElement("td");
+		  exercises.forEach(exercise => {
+			const videoSrc = getExerciseVideo(exercise);
+			const div = document.createElement("div");
+			div.className = "exercise-card selected";
+			div.innerHTML = `<video src="${videoSrc}" autoplay loop muted playsinline></video><p>${exercise}</p>`;
+			div.addEventListener("click", () => {
+			  div.classList.toggle("selected");
+			});
+			cell.appendChild(div);
+		  });
+		  row.appendChild(cell);
+		});
+		tableBody.appendChild(row);
+	  });
+	}
+	
+	renderExerciseTable();
 
         const exerciseSelection = document.getElementById('exerciseSelection');
         const timerDisplay = document.getElementById('timerDisplay');
@@ -204,15 +313,25 @@
 		}, { once: true });
 
 		function playBeepSound() {
-		    if (!audioContext || !beepBuffer) {
-        		console.error("Audio context or beep buffer is not initialized.");
-        		return;
-    		}
-
-    		const source = audioContext.createBufferSource(); // Create a source node
-    		source.buffer = beepBuffer; // Set the beep sound buffer
-    		source.connect(audioContext.destination); // Connect to the audio context's output
-    		source.start(0); // Play the sound immediately
+			if (!audioContext || !beepBuffer) {
+				console.error("Audio context or beep buffer is not initialized.");
+				return;
+			}
+		
+			// Resume audio context if suspended
+			if (audioContext.state === "suspended") {
+				audioContext.resume().then(() => {
+					const source = audioContext.createBufferSource();
+					source.buffer = beepBuffer;
+					source.connect(audioContext.destination);
+					source.start(0);
+				}).catch(err => console.error("Error resuming audio context:", err));
+			} else {
+				const source = audioContext.createBufferSource();
+				source.buffer = beepBuffer;
+				source.connect(audioContext.destination);
+				source.start(0);
+			}
 		}
 
 		function runTimer(totalSeconds, label, onComplete) {

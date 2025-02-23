@@ -7,12 +7,15 @@ tags: Books
 image: /resources/books.purple.png
 ---
 
-<details>
-  <summary>
+
+## 2025 Reading
+| The Lost City of the Monkey God | Douglas Preston | [Book Details](https://openlibrary.org/works/OL17876084W) | 👍 |
+| Something Wilder | Christina Lauren | [Book Details](https://openlibrary.org/works/OL26280333W) | 👍 |
+| The Grey Wolf | Louise Penny | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=The Grey Wolf) | 👍 |
+| James | Percival Everett | [Book Details](https://openlibrary.org/works/OL36506504W) | 👍 |
+| Murder Most English | B. D. Churston | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Murder Most English) | 👍 |
+
 ## 2024 Reading
-
-</summary>
-
 | Title | Author | Link | My Review |
 | Soul Boom | Rainn Wilson | [Book Details](https://openlibrary.org/works/OL28763073W) | 👍 |
 | Artemis | Andy Weir | [Book Details](https://openlibrary.org/works/OL17837968W) | 👍 |
@@ -38,8 +41,3 @@ image: /resources/books.purple.png
 | Canto Bight | Saladin Ahmed<br>Rae Carson<br>Mira Grant<br>John Jackson Miller | [Book Details](https://openlibrary.org/works/OL19723104W) | 👍 |
 | Serpent's Secret | Sayantani DasGupta | [Book Details](https://openlibrary.org/works/OL19751990W) | 👍 |
 | System Collapse | Martha Wells | [Book Details](https://openlibrary.org/works/OL33402895W) | 👍 |
-
-</details>
-
-## 2025 Reading
-| The Lost City of the Monkey God | Douglas Preston | [Book Details](https://openlibrary.org/works/OL17876084W) | 👍 |
