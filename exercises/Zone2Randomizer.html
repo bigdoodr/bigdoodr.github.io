@@ -204,15 +204,9 @@
 	  }
 	  // Add other categories similarly
 	};
-	
-	function getExerciseVideo(name) {
-	  const categorizedExercises = categorizedExercises.find(e => e.name === name);
-	  return categorizedExercises ? exercise.video : "";
-	}
-	
-	function renderExerciseTable() {
-	  const tableBody = document.getElementById("exerciseTableBody");
-	  tableBody.innerHTML = "";
+		
+    const tableBody = document.getElementById("exerciseTableBody");
+    tableBody.innerHTML = "";
 	
 	  Object.entries(categorizedExercises).forEach(([muscleGroup, levels]) => {
 		const row = document.createElement("tr");
@@ -220,11 +214,10 @@
 		["Beginner", "Medium", "Hard", "Expert/Advanced"].forEach(level => {
 		  const exercises = levels[level] || [];
 		  const cell = document.createElement("td");
-		  categorizedExercises.forEach(categorizedExercises => {
-			const videoSrc = getExerciseVideo(categorizedExercises);
+		  exercises.forEach(({ name, video }) => {
 			const div = document.createElement("div");
 			div.className = "exercise-card selected";
-			div.innerHTML = `<video src="${videoSrc}" autoplay loop muted playsinline></video><p>${categorizedExercises}</p>`;
+			div.innerHTML = `<video src="${videoSrc}" autoplay loop muted playsinline></video><p>${name}</p>`;
 			div.addEventListener("click", () => {
 			  div.classList.toggle("selected");
 			});
