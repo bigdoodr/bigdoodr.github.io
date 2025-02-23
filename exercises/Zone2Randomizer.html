@@ -206,8 +206,8 @@
 	};
 	
 	function getExerciseVideo(name) {
-	  const exercise = exercises.find(e => e.name === name);
-	  return exercise ? exercise.video : "";
+	  const categorizedExercises = exercises.find(e => e.name === name);
+	  return categorizedExercises ? exercise.video : "";
 	}
 	
 	function renderExerciseTable() {
@@ -220,11 +220,11 @@
 		["Beginner", "Medium", "Hard", "Expert/Advanced"].forEach(level => {
 		  const exercises = levels[level] || [];
 		  const cell = document.createElement("td");
-		  exercises.forEach(exercise => {
-			const videoSrc = getExerciseVideo(exercise);
+		  exercises.forEach(categorizedExercises => {
+			const videoSrc = getExerciseVideo(categorizedExercises);
 			const div = document.createElement("div");
 			div.className = "exercise-card selected";
-			div.innerHTML = `<video src="${videoSrc}" autoplay loop muted playsinline></video><p>${exercise}</p>`;
+			div.innerHTML = `<video src="${videoSrc}" autoplay loop muted playsinline></video><p>${categorizedExercises}</p>`;
 			div.addEventListener("click", () => {
 			  div.classList.toggle("selected");
 			});
@@ -319,7 +319,7 @@
 
         function renderExerciseSelection() {
             exerciseSelection.innerHTML = '';
-            exercises.forEach((exercise) => {
+            exercises.forEach((categorizedExercises) => {
                 const card = document.createElement('div');
                 card.className = 'exercise-card selected';
                 card.innerHTML = `
@@ -329,7 +329,7 @@
                 card.addEventListener('click', () => {
                     card.classList.toggle('selected');
                     if (card.classList.contains('selected')) {
-                        selectedExercises.push(exercise);
+                        selectedExercises.push(categorizedExercises);
                     } else {
                         selectedExercises = selectedExercises.filter(e => e.name !== exercise.name);
                     }
@@ -360,7 +360,7 @@
             // Add an exercise
             const randomIndex = Math.floor(Math.random() * selectedExercises.length);
             workoutSequence.push({
-                type: "exercise",
+                type: "categorizedExercises",
                 name: selectedExercises[randomIndex].name,
                 video: selectedExercises[randomIndex].video,
                 duration: exerciseDuration,
@@ -383,8 +383,8 @@
         const exerciseList = document.getElementById('exerciseList');
         exerciseList.innerHTML = workoutSequence
             .map((step, index) =>
-                `<li class="${step.type === 'exercise' ? 'active' : ''}" id="step-${index}">
-                    ${step.name} (${step.type === 'exercise' ? step.duration + 's' : ''})
+                `<li class="${step.type === 'categorizedExercises' ? 'active' : ''}" id="step-${index}">
+                    ${step.name} (${step.type === 'categorizedExercises' ? step.duration + 's' : ''})
                 </li>`
             )
             .join('');
@@ -406,7 +406,7 @@ function startWorkout() {
         }
 
         const currentStep = workoutSequence[currentIndex];
-        const label = currentStep.type === "exercise" ? "Exercise Time" : "Rest Time";
+        const label = currentStep.type === "categorizedExercises" ? "Exercise Time" : "Rest Time";
 
         // Update video and highlight
         if (currentStep.video) {
