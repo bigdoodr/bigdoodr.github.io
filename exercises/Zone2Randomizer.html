@@ -36,14 +36,15 @@
 
         .controls {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin: 20px;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            margin: 10px;
         }
 
         .controls label {
             margin-right: 5px;
+            font-weight: bold;
         }
 
         .controls input, .controls button {
@@ -88,11 +89,12 @@
             bottom: 0;
             width: 100%;
             text-align: center;
+            font-size: 8px;
         }
 
         .floating-timer {
             position: fixed;
-            top: 80%;
+            top: 25%;
             right: 10px;
             zIndex: 1000;
             transform: translateY(-50%);
@@ -128,12 +130,16 @@
     <div class="controls">
         <label for="duration">Workout Duration (minutes):</label>
         <input type="number" id="duration" value="10" min="1" max="120">
+        
         <label for="exerciseDuration">Exercise Duration (seconds):</label>
         <input type="number" id="exerciseDuration" value="30" min="5" max="300">
+        
         <label for="restDuration">Rest Duration (seconds):</label>
         <input type="number" id="restDuration" value="60" min="10" max="300">
+
         <label for="restFrequency">Rest After (exercises):</label>
         <input type="number" id="restFrequency" value="4" min="1" max="10">
+        
         <button id="generate">Generate Workout</button>
     </div>
     <div class="exercise-selection" id="exerciseSelection"></div>
@@ -202,13 +208,13 @@
 	  	"Beginner": [{ name: "Bear Taps", video: "/resources/bearTapsAngle2.mp4" }, { name: "Walking Marches", video: "/resources/walkingMarches.mp4" }],
 	  	"Medium": [{ name: "Jackknives - Level 1", video: "/resources/jackknivesLevel1.mp4" }, { name: "Russian V-Twists", video: "/resources/russianVTwistsAngle1.mp4" }, { name: "Spider-Man Lunges", video: "/resources/spidermanLungesAngle2.mp4" }],
 	  	"Hard": [{ name: "Bicycle Crunches", video: "/resources/bicycleCrunchesAngle2.mp4" }, { name: "Jackknives - Level 2", video: "/resources/jackknivesLevel2.mp4" }, { name: "Mountain Climbers", video: "/resources/mountainClimbers.mp4" }, { name: "Plank Elbow to Knee Taps", video: "/resources/plankElbowToKneeTaps.mp4" }, { name: "Side Kickthroughs", video: "/resources/sideKickthroughs.mp4" }],
-	  	"Expert/Advanced": ["Twisting Piston Push-Ups"]
+	  	"Expert/Advanced": [{ name: "Twisting Piston Push-Ups", video: "/resources/twistingPistonPushUps.mp4"}]
 	  },
 	  "Core, No Cardio": {
 	  	"Beginner": [{ name: "Ab-Roller", video: "/resources/abRollerAngle1.mp4" }, { name: "Bird Dogs", video: "/resources/birdDogs.mp4" }, { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4" }, { name: "Swipers", video: "/resources/swipersAngle2.mp4" }],
 	  	"Medium": [{ name: "Plank Elbow Ups", video: "/resources/plankElbowUps.mp4" }, { name: "Shoulder Taps", video: "/resources/shoulderTapsAngle1.mp4" }],
 	  	"Hard": [],
-	  	"Expert/Advanced": [{ name: "Twisting Piston Push-Ups", video: "/resources/twistingPistonPushUps.mp4"}]
+	  	"Expert/Advanced": []
 	  },
 	  "Cardio": {
 	  	"Beginner": [{ name: "Jump/Air Rope", video: "/resources/jumprope.mp4" }, { name: "Shadow Boxing", video: "/resources/shadowboxing.mp4" }, { name: "Toe Taps", video: "/resources/toeTaps.mp4" }],
@@ -242,6 +248,36 @@
 		tableBody.appendChild(row);
 	  });
 	
+	function renderExerciseTable() {
+		const tableBody = document.getElementById("exerciseTableBody");
+		tableBody.innerHTML = "";
+	
+		Object.entries(categorizedExercises).forEach(([muscleGroup, levels]) => {
+			const row = document.createElement("tr");
+			row.innerHTML = `<td>${muscleGroup}</td>`;
+	
+			["Beginner", "Medium", "Hard", "Expert/Advanced"].forEach(level => {
+				const exercises = levels[level] || [];
+				const cell = document.createElement("td");
+	
+				exercises.forEach(({ name, video }) => {
+					const div = document.createElement("div");
+					div.className = "exercise-card selected";
+					div.innerHTML = `<video src="${video}" autoplay loop muted playsinline></video><p>${name}</p>`;
+					div.addEventListener("click", () => {
+						div.classList.toggle("selected");
+					});
+					cell.appendChild(div);
+				});
+	
+				row.appendChild(cell);
+			});
+	
+			tableBody.appendChild(row);
+		});
+	}
+	
+	// Call this function to populate the table
 	renderExerciseTable();
 
         const exerciseSelection = document.getElementById('exerciseSelection');
