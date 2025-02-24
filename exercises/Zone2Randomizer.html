@@ -353,33 +353,80 @@
 		    timerDisplay.textContent = `${minutes}:${seconds}`;
 		}
 
-        let selectedExercises = [...exercises];
+        let selectedExercises = getSelectedExercises();
         let workoutSequence = [];
         let timerInterval;
         let timeRemaining = 0;
         let currentIndex = 0;
 
         function renderExerciseSelection() {
+            const exerciseSelection = document.getElementById("exerciseSelection");
+            if (exerciseSelection) {
+                exerciseSelection.remove();
+            }
             exerciseSelection.innerHTML = '';
-            categorizedExercises.forEach((categorizedExercises) => {
-                const card = document.createElement('div');
-                card.className = 'exercise-card selected';
-                card.innerHTML = `
-                    <video src="${exercise.video}" autoplay loop muted playsinline></video>
-                    <p>${exercise.name}</p>
-                `;
-                card.addEventListener('click', () => {
-                    card.classList.toggle('selected');
-                    if (card.classList.contains('selected')) {
-                        selectedExercises.push(categorizedExercises);
-                    } else {
-                        selectedExercises = selectedExercises.filter(e => e.name !== exercise.name);
-                    }
+
+            Object.values(categorizedExercises).forEach(levels => {
+                Object.values(levels).forEach(exercises => {
+                    exercises.forEach(({ name, video }) => {
+                        const card = document.createElement("div");
+                        card.className = "exercise-card selected";
+                        card.innerHTML = `
+                            <video src="${video}" autoplay loop muted playsinline></video>
+                            <p>${name}</p>
+                        `;
+                        card.addEventListener("click", () => {
+                            card.classList.toggle("selected");
+                        });
+                        exerciseSelection.appendChild(card);
+                    });
                 });
-                exerciseSelection.appendChild(card);
             });
         }
 
+        function getSelectedExercises() {
+            return [...document.querySelectorAll(".exercise-card.selected")].map(card => {
+                return {
+                    name: card.querySelector("p").textContent,
+                    video: card.querySelector("video").src
+                };
+            });
+        }
+
+        document.getElementById("generate").addEventListener("click", generateWorkout);
+    function renderExerciseTable() {
+    const tableBody = document.getElementById("exerciseTableBody");
+    tableBody.innerHTML = "";
+
+    Object.entries(categorizedExercises).forEach(([muscleGroup, levels]) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${muscleGroup}</td>`;
+
+        ["Beginner", "Medium", "Hard", "Expert/Advanced"].forEach(level => {
+            const exercises = levels[level] || [];
+            const cell = document.createElement("td");
+
+            exercises.forEach(({ name, video }) => {
+                const div = document.createElement("div");
+                div.className = "exercise-card selected";
+                div.innerHTML = `<video src="${video}" autoplay loop muted playsinline></video><p>${name}</p>`;
+                div.addEventListener("click", () => {
+                    div.classList.toggle("selected");
+                });
+                cell.appendChild(div);
+            });
+
+            row.appendChild(cell);
+        });
+
+        tableBody.appendChild(row);
+    });
+}
+
+// Call function to populate the table on page load
+renderExerciseTable();
+
+    
     function generateWorkout() {
         // Get user inputs
         const workoutDuration = parseInt(document.getElementById('duration').value) * 60; // Convert minutes to seconds
