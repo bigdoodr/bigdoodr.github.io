@@ -42,9 +42,23 @@
             border-color: #4caf50;
         }
 
-        .workout-display {
+        .floating-workout {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 10px;
             text-align: center;
-            margin: 20px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+        }
+
+        .floating-workout video {
+            width: 300px;
+            height: auto;
         }
     </style>
 </head>
@@ -66,7 +80,13 @@
     <h2>Select Maximum Difficulty</h2>
     <div class="exercise-options" id="difficultyLevels"></div>
     
-    <div class="workout-display" id="workoutDisplay"></div>
+    <div class="floating-workout" id="workoutModal">
+        <h2 id="exerciseName"></h2>
+        <video id="exerciseVideo" controls></video>
+        <div id="timer">00:00</div>
+        <button id="startRoutine">Start Routine</button>
+        <button id="pauseRoutine">Pause</button>
+    </div>
     
     <script>
         const exercises = {
@@ -127,27 +147,30 @@
             // Add other categories similarly
 		};
 
-
-
-
-
-        
         const focusAreas = Object.keys(exercises);
         const difficultyLevels = ["Beginner", "Medium", "Hard", "Expert/Advanced"];
         
-        function renderOptions(containerId, options) {
+        function renderOptions(containerId, options, allowMultiple = true, preselectAll = false) {
             const container = document.getElementById(containerId);
             options.forEach(option => {
                 const card = document.createElement("div");
                 card.className = "option-card";
                 card.textContent = option;
-                card.addEventListener("click", () => card.classList.toggle("selected"));
+                if (preselectAll) card.classList.add("selected");
+                
+                card.addEventListener("click", () => {
+                    if (!allowMultiple) {
+                        document.querySelectorAll(`#${containerId} .option-card`).forEach(el => el.classList.remove("selected"));
+                    }
+                    card.classList.toggle("selected");
+                });
                 container.appendChild(card);
             });
         }
         
-        renderOptions("focusAreas", focusAreas);
-        renderOptions("difficultyLevels", difficultyLevels);
+        renderOptions("focusAreas", focusAreas, true, true);
+        renderOptions("difficultyLevels", difficultyLevels, false);
+        document.querySelector(`#difficultyLevels .option-card:last-child`).classList.add("selected");
         
         document.getElementById("generate").addEventListener("click", () => {
             const selectedAreas = [...document.querySelectorAll("#focusAreas .selected")].map(el => el.textContent);
@@ -164,10 +187,12 @@
                 });
             });
             
-            const workoutDisplay = document.getElementById("workoutDisplay");
-            workoutDisplay.innerHTML = workoutExercises.length > 0
-                ? workoutExercises.map(ex => `<p>${ex.name} <br><video src="${ex.video}" width="200" controls></video></p>`).join("")
-                : "No exercises found for your selection.";
+            if (workoutExercises.length > 0) {
+                const firstExercise = workoutExercises[0];
+                document.getElementById("exerciseName").textContent = firstExercise.name;
+                document.getElementById("exerciseVideo").src = firstExercise.video;
+                document.getElementById("workoutModal").style.display = "block";
+            }
         });
     </script>
 </body>
