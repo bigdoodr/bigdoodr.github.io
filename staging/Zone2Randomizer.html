@@ -82,7 +82,7 @@
     
     <div class="floating-workout" id="workoutModal">
         <h2 id="exerciseName"></h2>
-        <video id="exerciseVideo" controls></video>
+        <video id="exerciseVideo" playsinline loop></video>
         <div id="timer">00:00</div>
         <button id="startRoutine">Start Routine</button>
         <button id="pauseRoutine">Pause</button>
@@ -147,50 +147,76 @@
             // Add other categories similarly
 		};
 
-        const focusAreas = Object.keys(exercises);
-        const difficultyLevels = ["Beginner", "Medium", "Hard", "Expert/Advanced"];
-        
-        function renderOptions(containerId, options, allowMultiple = true, preselectAll = false) {
-            const container = document.getElementById(containerId);
-            options.forEach(option => {
-                const card = document.createElement("div");
-                card.className = "option-card";
-                card.textContent = option;
-                if (preselectAll) card.classList.add("selected");
-                
-                card.addEventListener("click", () => {
-                    if (!allowMultiple) {
-                        document.querySelectorAll(`#${containerId} .option-card`).forEach(el => el.classList.remove("selected"));
+        let timerInterval, currentExerciseIndex = 0;
+        let workoutExercises = [];
+        let isPaused = false;
+
+        function playBeep() {
+            const beep = new Audio("/sounds/beep.mp3");
+            beep.play();
+        }
+
+        function startTimer(duration, callback) {
+            let timeRemaining = duration;
+            document.getElementById("timer").textContent = `${timeRemaining}s`;
+            
+            timerInterval = setInterval(() => {
+                if (!isPaused) {
+                    timeRemaining--;
+                    document.getElementById("timer").textContent = `${timeRemaining}s`;
+                    if (timeRemaining <= 0) {
+                        clearInterval(timerInterval);
+                        playBeep();
+                        callback();
                     }
-                    card.classList.toggle("selected");
-                });
-                container.appendChild(card);
+                }
+            }, 1000);
+        }
+
+        function startRoutine() {
+            if (workoutExercises.length === 0) return;
+            playBeep();
+            executeExercise();
+        }
+
+        function executeExercise() {
+            if (currentExerciseIndex >= workoutExercises.length) {
+                playBeep();
+                document.getElementById("workoutModal").style.display = "none";
+                return;
+            }
+            
+            const exercise = workoutExercises[currentExerciseIndex];
+            document.getElementById("exerciseName").textContent = exercise.name;
+            document.getElementById("exerciseVideo").src = exercise.video;
+            document.getElementById("exerciseVideo").play();
+            
+            startTimer(parseInt(document.getElementById("exerciseDuration").value), () => {
+                currentExerciseIndex++;
+                executeExercise();
             });
         }
-        
-        renderOptions("focusAreas", focusAreas, true, true);
-        renderOptions("difficultyLevels", difficultyLevels, false);
-        document.querySelector(`#difficultyLevels .option-card:last-child`).classList.add("selected");
-        
+
+        function pauseRoutine() {
+            isPaused = !isPaused;
+        }
+
+        document.getElementById("startRoutine").addEventListener("click", startRoutine);
+        document.getElementById("pauseRoutine").addEventListener("click", pauseRoutine);
+
         document.getElementById("generate").addEventListener("click", () => {
             const selectedAreas = [...document.querySelectorAll("#focusAreas .selected")].map(el => el.textContent);
             const maxDifficulty = document.querySelector("#difficultyLevels .selected")?.textContent || "Beginner";
             
-            let workoutExercises = [];
+            workoutExercises = [];
             selectedAreas.forEach(area => {
-                difficultyLevels.forEach(level => {
-                    if (level === maxDifficulty || difficultyLevels.indexOf(level) <= difficultyLevels.indexOf(maxDifficulty)) {
-                        if (exercises[area] && exercises[area][level]) {
-                            workoutExercises = workoutExercises.concat(exercises[area][level]);
-                        }
-                    }
-                });
+                if (exercises[area] && exercises[area][maxDifficulty]) {
+                    workoutExercises = workoutExercises.concat(exercises[area][maxDifficulty]);
+                }
             });
             
             if (workoutExercises.length > 0) {
-                const firstExercise = workoutExercises[0];
-                document.getElementById("exerciseName").textContent = firstExercise.name;
-                document.getElementById("exerciseVideo").src = firstExercise.video;
+                currentExerciseIndex = 0;
                 document.getElementById("workoutModal").style.display = "block";
             }
         });
