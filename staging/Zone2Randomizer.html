@@ -89,6 +89,9 @@
     </div>
     
     <script>
+        const focusAreas = Object.keys(exercises);
+        const difficultyLevels = ["Beginner", "Medium", "Hard", "Expert/Advanced"];
+        
         const exercises = {
             "Chest": {
 			  "Beginner": [],
@@ -200,6 +203,28 @@
         function pauseRoutine() {
             isPaused = !isPaused;
         }
+
+		function renderOptions(containerId, options, isMultiSelect = false, selectAll = false) {
+			const container = document.getElementById(containerId);
+			container.innerHTML = "";
+			
+			options.forEach(option => {
+				const div = document.createElement("div");
+				div.className = "option-card";
+				div.textContent = option;
+				div.addEventListener("click", () => {
+					if (!isMultiSelect) {
+						document.querySelectorAll(`#${containerId} .option-card`).forEach(el => el.classList.remove("selected"));
+					}
+					div.classList.toggle("selected");
+				});
+				container.appendChild(div);
+			});
+		
+			if (selectAll) {
+				document.querySelectorAll(`#${containerId} .option-card`).forEach(el => el.classList.add("selected"));
+			}
+		}
 
         document.getElementById("startRoutine").addEventListener("click", startRoutine);
         document.getElementById("pauseRoutine").addEventListener("click", pauseRoutine);
