@@ -204,6 +204,11 @@
         document.getElementById("startRoutine").addEventListener("click", startRoutine);
         document.getElementById("pauseRoutine").addEventListener("click", pauseRoutine);
 
+        renderOptions("focusAreas", focusAreas, true, true);
+        renderOptions("difficultyLevels", difficultyLevels, false);
+        document.querySelector(`#difficultyLevels .option-card:last-child`).classList.add("selected");
+        
+
         document.getElementById("generate").addEventListener("click", () => {
             const selectedAreas = [...document.querySelectorAll("#focusAreas .selected")].map(el => el.textContent);
             const maxDifficulty = document.querySelector("#difficultyLevels .selected")?.textContent || "Beginner";
