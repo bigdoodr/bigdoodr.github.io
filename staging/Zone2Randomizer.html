@@ -224,6 +224,7 @@ function startTimer(duration, callback) {
 function startRoutine() {
     if (workoutExercises.length === 0) return;
     playBeep();
+    document.getElementById("workoutModal").style.display = "block";
     executeExercise();
 }
 
@@ -241,7 +242,19 @@ function executeExercise() {
 
     startTimer(parseInt(document.getElementById("exerciseDuration").value), () => {
         currentExerciseIndex++;
-        executeExercise();
+
+        // Check if a rest period should be inserted
+        if (currentExerciseIndex % parseInt(document.getElementById("restFrequency").value) === 0) {
+            document.getElementById("exerciseName").textContent = "Rest Period";
+            document.getElementById("exerciseVideo").pause();
+            document.getElementById("exerciseVideo").src = ""; // Clear the video
+
+            startTimer(parseInt(document.getElementById("restDuration").value), () => {
+                executeExercise();
+            });
+        } else {
+            executeExercise();
+        }
     });
 }
 
