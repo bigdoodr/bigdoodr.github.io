@@ -10,15 +10,19 @@ image: /resources/books.purple.png
 
 ## 2025 Reading
 
-| Title                           | Author           | Link                                                                                                          |
-| ------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------- |
-| The Lost City of the Monkey God | Douglas Preston  | [Book Details](https://openlibrary.org/works/OL17876084W)                                                     |
-| Something Wilder                | Christina Lauren | [Book Details](https://openlibrary.org/works/OL26280333W)                                                     |
-| The Grey Wolf                   | Louise Penny     | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=The%20Grey%20Wolf)       |
-| James                           | Percival Everett | [Book Details](https://openlibrary.org/works/OL36506504W)                                                     |
-| Murder Most English             | B. D. Churston   | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Murder%20Most%20English) |
-| The Guest List                  | Lucy Foley       | [Book Details](https://openlibrary.org/works/OL20742637W)                                                     |
-| The God of the Woods            | Liz Moore        | [Book Details](https://openlibrary.org/works/OL37827517W)                                                     |
+| Title                           | Author                       | Link                                                                                                          |
+| ------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| The Lost City of the Monkey God | Douglas Preston              | [Book Details](https://openlibrary.org/works/OL17876084W)                                                     |
+| Something Wilder                | Christina Lauren             | [Book Details](https://openlibrary.org/works/OL26280333W)                                                     |
+| The Grey Wolf                   | Louise Penny                 | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=The%20Grey%20Wolf)       |
+| James                           | Percival Everett             | [Book Details](https://openlibrary.org/works/OL36506504W)                                                     |
+| Murder Most English             | B. D. Churston               | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Murder%20Most%20English) |
+| The Guest List                  | Lucy Foley                   | [Book Details](https://openlibrary.org/works/OL20742637W)                                                     |
+| The God of the Woods            | Liz Moore                    | [Book Details](https://openlibrary.org/works/OL37827517W)                                                     |
+| Renegades                       | Marissa Meyer                | [Book Details](https://openlibrary.org/works/OL17867102W)                                                     |
+| Darkly Dreaming Dexter          | Jeff Lindsay                 | [Book Details](https://openlibrary.org/works/OL3968346W)                                                      |
+| Smooth Operator                 | Stuart Woods<br>Parnell Hall | [Book Details](https://openlibrary.org/works/OL20475799W)                                                     |
+| One Day in December             | Josie Silver                 | [Book Details](https://openlibrary.org/works/OL19762562W)                                                     |
 
 ## 2024 Reading
 

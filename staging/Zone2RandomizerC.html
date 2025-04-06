@@ -176,6 +176,7 @@ document.getElementById("generate").addEventListener("click", () => {
     const selectedAreas = [...document.querySelectorAll("#focusAreas .selected")].map(el => el.textContent);
     const maxDifficulty = document.querySelector("#difficultyLevels .selected")?.textContent || "Beginner";
 
+    // Filter exercises based on selected focus areas and difficulty level
     workoutExercises = [];
     selectedAreas.forEach(area => {
         difficultyLevels.forEach(level => {
@@ -187,12 +188,11 @@ document.getElementById("generate").addEventListener("click", () => {
         });
     });
 
-    if (workoutExercises.length > 0) {
-        currentExerciseIndex = 0;
-        document.getElementById("exerciseName").textContent = workoutExercises[0].name;
-        document.getElementById("exerciseVideo").src = workoutExercises[0].video;
-        document.getElementById("workoutModal").style.display = "block";
-    }
+    // Shuffle the exercises array
+    workoutExercises = workoutExercises.sort(() => Math.random() - 0.5);
+
+    // Start the routine
+    startRoutine();
 });
 
 let timerInterval, currentExerciseIndex = 0;
@@ -221,17 +221,18 @@ function startTimer(duration, callback) {
     }, 1000);
 }
 
-function startRoutine() {
+  function startRoutine() {
     if (workoutExercises.length === 0) return;
     playBeep();
+    document.getElementById("workoutModal").style.display = "block";
     executeExercise();
-}
+  }
 
-function executeExercise() {
+  function executeExercise() {
     if (currentExerciseIndex >= workoutExercises.length) {
-        playBeep();
-        document.getElementById("workoutModal").style.display = "none";
-        return;
+      playBeep();
+      document.getElementById("workoutModal").style.display = "none";
+      return;
     }
 
     const exercise = workoutExercises[currentExerciseIndex];
@@ -240,14 +241,46 @@ function executeExercise() {
     document.getElementById("exerciseVideo").play();
 
     startTimer(parseInt(document.getElementById("exerciseDuration").value), () => {
-        currentExerciseIndex++;
-        executeExercise();
-    });
-}
+      currentExerciseIndex++;
+      // Check if a rest period should be inserted
+      if (currentExerciseIndex % parseInt(document.getElementById("restFrequency").value) === 0) {
+        document.getElementById("exerciseName").textContent = "Rest Period";
+        document.getElementById("exerciseVideo").pause();
+        document.getElementById("exerciseVideo").src = ""; // Clear the video
 
-function pauseRoutine() {
+        startTimer(parseInt(document.getElementById("restDuration").value), () => {
+          executeExercise();
+        });
+      } else {
+        executeExercise();
+      }
+    });
+  }
+
+  function pauseRoutine() {
     isPaused = !isPaused;
-}
+    if (isPaused) {
+      document.getElementById("exerciseVideo").pause();
+      clearInterval(timerInterval);
+    } else {
+      document.getElementById("exerciseVideo").play();
+      startTimer(parseInt(document.getElementById("exerciseDuration").value), () => {
+        currentExerciseIndex++;
+        // Check if a rest period should be inserted
+        if (currentExerciseIndex % parseInt(document.getElementById("restFrequency").value) === 0) {
+          document.getElementById("exerciseName").textContent = "Rest Period";
+          document.getElementById("exerciseVideo").pause();
+          document.getElementById("exerciseVideo").src = ""; // Clear the video
+
+          startTimer(parseInt(document.getElementById("restDuration").value), () => {
+            executeExercise();
+          });
+        } else {
+          executeExercise();
+        }
+      });
+    }
+  }
 
 document.getElementById("startRoutine").addEventListener("click", startRoutine);
 document.getElementById("pauseRoutine").addEventListener("click", pauseRoutine);
