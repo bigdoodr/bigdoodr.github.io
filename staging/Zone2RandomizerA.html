@@ -1,291 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workout Randomizer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1, .instructions {
-            text-align: center;
-        }
-
-        .controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin: 20px;
-        }
-
-        .exercise-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px;
-        }
-
-        .option-card {
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .option-card.selected {
-            border-color: #4caf50;
-        }
-
-        .floating-workout {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            border: 2px solid black;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-        }
-
-        .floating-workout video {
-            width: 300px;
-            height: auto;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workout Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+    }
+    h2 {
+      margin-top: 1em;
+    }
+    label {
+      margin-right: 10px;
+    }
+    .horizontal-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1em;
+      align-items: center;
+    }
+    .floating-box {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1em;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    .floating-box video {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .floating-box video {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Workout Randomizer</h1>
-    <p class="instructions">Select the focus areas and the highest difficulty level you're comfortable with.</p>
-    
-    <div class="controls">
-        <label>Workout Duration (minutes): <input type="number" id="duration" value="10" min="1" max="120"></label>
-        <label>Exercise Duration (seconds): <input type="number" id="exerciseDuration" value="30" min="5" max="300"></label>
-        <label>Rest Duration (seconds): <input type="number" id="restDuration" value="60" min="10" max="300"></label>
-        <label>Rest After (exercises): <input type="number" id="restFrequency" value="4" min="1" max="10"></label>
-        <button id="generate">Generate Workout</button>
+  <h1>Workout Generator</h1>
+  <form id="workoutForm">
+    <h2>Focus Areas</h2>
+    <div class="horizontal-group" id="focusAreas"></div>
+
+    <h2>Difficulty</h2>
+    <div class="horizontal-group">
+      <label><input type="radio" name="difficulty" value="Beginner"> Beginner</label>
+      <label><input type="radio" name="difficulty" value="Medium"> Medium</label>
+      <label><input type="radio" name="difficulty" value="Hard"> Hard</label>
+      <label><input type="radio" name="difficulty" value="Expert/Advanced" checked> Expert/Advanced</label>
     </div>
-    
-    <h2>Select Focus Areas</h2>
-    <div class="exercise-options" id="focusAreas"></div>
-    
-    <h2>Select Maximum Difficulty</h2>
-    <div class="exercise-options" id="difficultyLevels"></div>
-    
-    <div class="floating-workout" id="workoutModal">
-        <h2 id="exerciseName"></h2>
-        <video id="exerciseVideo" controls></video>
-        <div id="timer">00:00</div>
-        <button id="startRoutine">Start Routine</button>
-        <button id="pauseRoutine">Pause</button>
+
+    <h2>Durations</h2>
+    <div class="horizontal-group">
+      <label>Total Duration (minutes): <input type="number" id="totalDuration" value="5" min="1"></label>
+      <label>Exercise Duration (seconds): <input type="number" id="exerciseDuration" value="5" min="1"></label>
+      <label>Rest Duration (seconds): <input type="number" id="restDuration" value="5" min="1"></label>
+      <label>Rest Every Nth Exercises: <input type="number" id="restEvery" value="1" min="1"></label>
     </div>
-    
-    <script>
-        const exercises = {
-            "Chest": {
-                "Beginner": [],
-                "Medium": [{ name: "Push-Ups", video: "/resources/pushupsAngle2.mp4" }],
-                "Hard": [],
-                "Expert/Advanced": [{ name: "One-Legged Skier Push-Ups", video: "/resources/onelegskierpushups.mp4" }]
-            },
-            "Legs": {
-                "Beginner": [{ name: "Squats", video: "/resources/squats.mp4" }, { name: "3-Way Lunges", video: "/resources/3wayLungesAngle2.mp4" }],
-                "Medium": [{ name: "Alternating Split Squats", video: "/resources/splitSquats.mp4" }, { name: "Frog Hops", video: "/resources/frogHops.mp4" }, { name: "Squat Jumps", video: "/resources/squatJumps.mp4" }],
-                "Hard": [{ name: "180° Squat Jumps", video: "/resources/180JumpSquats.mp4" }, { name: "Ninja Tuck Jumps", video: "/resources/ninjaTuckJumps.mp4" }, { name: "Prisoner Squat Jumps", video: "/resources/prisonerSquatJumps.mp4" }, { name: "3-Point Alternating Hops", video: "/resources/3pointAltHops.mp4" }],
-                "Expert/Advanced": [{ name: "Prisoner Ninja Tuck Jumps", video: "/resources/prisonerNinjaTuckJumps.mp4" }, { name: "Triple Skyfalls", video: "/resources/3xskyfalls.mp4" }]
-            },
-            "Legs, No Cardio": {
-                "Beginner": [{ name: "Reverse Lunge to High Knee", video: "/resources/reverseLungeHighKneeAngle2.mp4" }],
-                "Medium": [],
-                "Hard": [],
-                "Expert/Advanced": []
-            },
-            "Shoulders": {
-                "Beginner": [],
-                "Medium": [{ name: "Pike Push-Ups", video: "/resources/pikePushups.mp4" }],
-                "Hard": [{ name: "Kneeling Spider-Man Push-Ups", video: "/resources/kneelingSpidermanPushups.mp4" }],
-                "Expert/Advanced": [{ name: "Spider-Man Push-Ups", video: "/resources/spidermanPushups.mp4" }]
-            },
-            "Triceps": {
-                "Beginner": [{ name: "Bench Dips", video: "/resources/benchDipsAngle1.mp4" }],
-                "Medium": [], //to be added later: "Diamond Cutter Push-Ups"
-                "Hard": [],
-                "Expert/Advanced": []
-            },
-            "Glutes": {
-                "Beginner": [{ name: "Bridges", video: "/resources/bridgesAngle2.mp4" }, { name: "Hip Bucks", video: "/resources/hipBucks.mp4" }],
-                "Medium": [{ name: "Single Leg Hip Bucks", video: "/resources/singleLegHipBucks.mp4" }],
-                "Hard": [],
-                "Expert/Advanced": []
-            },
-            "Core": {
-                "Beginner": [{ name: "Bear Taps", video: "/resources/bearTapsAngle2.mp4" }, { name: "Walking Marches", video: "/resources/walkingMarches.mp4" }],
-                "Medium": [{ name: "Jackknives - Level 1", video: "/resources/jackknivesLevel1.mp4" }, { name: "Russian V-Twists", video: "/resources/russianVTwistsAngle1.mp4" }, { name: "Spider-Man Lunges", video: "/resources/spidermanLungesAngle2.mp4" }],
-                "Hard": [{ name: "Bicycle Crunches", video: "/resources/bicycleCrunchesAngle2.mp4" }, { name: "Jackknives - Level 2", video: "/resources/jackknivesLevel2.mp4" }, { name: "Mountain Climbers", video: "/resources/mountainClimbers.mp4" }, { name: "Plank Elbow to Knee Taps", video: "/resources/plankElbowToKneeTaps.mp4" }, { name: "Side Kickthroughs", video: "/resources/sideKickthroughs.mp4" }],
-                "Expert/Advanced": [{ name: "Twisting Piston Push-Ups", video: "/resources/twistingPistonPushUps.mp4"}]
-            },
-            "Core, No Cardio": {
-                "Beginner": [{ name: "Ab-Roller", video: "/resources/abRollerAngle1.mp4" }, { name: "Bird Dogs", video: "/resources/birdDogs.mp4" }, { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4" }, { name: "Swipers", video: "/resources/swipersAngle2.mp4" }],
-                "Medium": [{ name: "Plank Elbow Ups", video: "/resources/plankElbowUps.mp4" }, { name: "Shoulder Taps", video: "/resources/shoulderTapsAngle1.mp4" }],
-                "Hard": [],
-                "Expert/Advanced": []
-            },
-            "Cardio": {
-                "Beginner": [{ name: "Jump/Air Rope", video: "/resources/jumprope.mp4" }, { name: "Shadow Boxing", video: "/resources/shadowboxing.mp4" }, { name: "Toe Taps", video: "/resources/toeTaps.mp4" }],
-                "Medium": [{ name: "High Knees", video: "/resources/highknees.mp4" }, { name: "Jumping Jacks", video: "/resources/jumpingjacks.mp4" }, { name: "Skier Hops", video: "/resources/skierhops.mp4" }],
-                "Hard": [],
-                "Expert/Advanced": []
-            }
-        };
 
-        const focusAreas = Object.keys(exercises);
-        const difficultyLevels = ["Beginner", "Medium", "Hard", "Expert/Advanced"];
+    <button type="submit">Generate Workout</button>
+  </form>
 
-        function renderOptions(containerId, options, isMultiSelect = false, selectAll = false) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = ""; // Clear previous options
+  <h2>Generated Routine</h2>
+  <ul id="routine"></ul>
 
-            options.forEach(option => {
-                const div = document.createElement("div");
-                div.className = "option-card";
-                div.textContent = option;
-                div.addEventListener("click", () => {
-                    if (!isMultiSelect) {
-                        document.querySelectorAll(`#${containerId} .option-card`).forEach(el => el.classList.remove("selected"));
-                    }
-                    div.classList.toggle("selected");
-                });
-                container.appendChild(div);
-            });
+  <div class="floating-box" id="playerBox" style="display:none;">
+    <video id="exerciseVideo" muted playsinline loop></video>
+    <div id="timer">00</div>
+    <button id="startButton">Start Workout</button>
+  </div>
 
-            if (selectAll) {
-                document.querySelectorAll(`#${containerId} .option-card`).forEach(el => el.classList.add("selected"));
-            }
-        }
+  <audio id="beep" src="/sounds/beep.mp3"></audio>
 
-        document.getElementById("generate").addEventListener("click", () => {
-            const selectedAreas = [...document.querySelectorAll("#focusAreas .selected")].map(el => el.textContent);
-            const maxDifficulty = document.querySelector("#difficultyLevels .selected")?.textContent || "Beginner";
+  <script>
+    const exercises = {
+	  "Chest": {
+		"Beginner": [],
+		"Medium": [{ name: "Push-Ups", video: "/resources/pushupsAngle2.mp4" }],
+		"Hard": [],
+		"Expert/Advanced": [{ name: "One-Legged Skier Push-Ups", video: "/resources/onelegskierpushups.mp4" }]
+	  },
+	  "Legs": {
+		"Beginner": [{ name: "Squats", video: "/resources/squats.mp4" }, { name: "3-Way Lunges", video: "/resources/3wayLungesAngle2.mp4" }],
+		"Medium": [{ name: "Alternating Split Squats", video: "/resources/splitSquats.mp4" }, { name: "Frog Hops", video: "/resources/frogHops.mp4" }, { name: "Squat Jumps", video: "/resources/squatJumps.mp4" }],
+		"Hard": [{ name: "180° Squat Jumps", video: "/resources/180JumpSquats.mp4" }, { name: "Ninja Tuck Jumps", video: "/resources/ninjaTuckJumps.mp4" }, { name: "Prisoner Squat Jumps", video: "/resources/prisonerSquatJumps.mp4" }, { name: "3-Point Alternating Hops", video: "/resources/3pointAltHops.mp4" }],
+		"Expert/Advanced": [{ name: "Prisoner Ninja Tuck Jumps", video: "/resources/prisonerNinjaTuckJumps.mp4" }, { name: "Triple Skyfalls", video: "/resources/3xskyfalls.mp4" }]
+	  },
+	  "Legs, No Cardio": {
+	  	"Beginner": [{ name: "Reverse Lunge to High Knee", video: "/resources/reverseLungeHighKneeAngle2.mp4" }],
+	  	"Medium": [],
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  },
+	  "Shoulders": {
+	  	"Beginner": [],
+	  	"Medium": [{ name: "Pike Push-Ups", video: "/resources/pikePushups.mp4" }],
+	  	"Hard": [{ name: "Kneeling Spider-Man Push-Ups", video: "/resources/kneelingSpidermanPushups.mp4" }],
+	  	"Expert/Advanced": [{ name: "Spider-Man Push-Ups", video: "/resources/spidermanPushups.mp4" }]
+	  },
+	  "Triceps": {
+	  	"Beginner": [{ name: "Bench Dips", video: "/resources/benchDipsAngle1.mp4" }],
+	  	"Medium": [], //to be added later: "Diamond Cutter Push-Ups"
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  },
+	  "Glutes": {
+	  	"Beginner": [{ name: "Bridges", video: "/resources/bridgesAngle2.mp4" }, { name: "Hip Bucks", video: "/resources/hipBucks.mp4" }],
+	  	"Medium": [{ name: "Single Leg Hip Bucks", video: "/resources/singleLegHipBucks.mp4" }],
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  },
+	  "Core": {
+	  	"Beginner": [{ name: "Bear Taps", video: "/resources/bearTapsAngle2.mp4" }, { name: "Walking Marches", video: "/resources/walkingMarches.mp4" }],
+	  	"Medium": [{ name: "Jackknives - Level 1", video: "/resources/jackknivesLevel1.mp4" }, { name: "Russian V-Twists", video: "/resources/russianVTwistsAngle1.mp4" }, { name: "Spider-Man Lunges", video: "/resources/spidermanLungesAngle2.mp4" }],
+	  	"Hard": [{ name: "Bicycle Crunches", video: "/resources/bicycleCrunchesAngle2.mp4" }, { name: "Jackknives - Level 2", video: "/resources/jackknivesLevel2.mp4" }, { name: "Mountain Climbers", video: "/resources/mountainClimbers.mp4" }, { name: "Plank Elbow to Knee Taps", video: "/resources/plankElbowToKneeTaps.mp4" }, { name: "Side Kickthroughs", video: "/resources/sideKickthroughs.mp4" }],
+	  	"Expert/Advanced": [{ name: "Twisting Piston Push-Ups", video: "/resources/twistingPistonPushUps.mp4"}]
+	  },
+	  "Core, No Cardio": {
+	  	"Beginner": [{ name: "Ab-Roller", video: "/resources/abRollerAngle1.mp4" }, { name: "Bird Dogs", video: "/resources/birdDogs.mp4" }, { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4" }, { name: "Swipers", video: "/resources/swipersAngle2.mp4" }],
+	  	"Medium": [{ name: "Plank Elbow Ups", video: "/resources/plankElbowUps.mp4" }, { name: "Shoulder Taps", video: "/resources/shoulderTapsAngle1.mp4" }],
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  },
+	  "Cardio": {
+	  	"Beginner": [{ name: "Jump/Air Rope", video: "/resources/jumprope.mp4" }, { name: "Shadow Boxing", video: "/resources/shadowboxing.mp4" }, { name: "Toe Taps", video: "/resources/toeTaps.mp4" }],
+	  	"Medium": [{ name: "High Knees", video: "/resources/highknees.mp4" }, { name: "Jumping Jacks", video: "/resources/jumpingjacks.mp4" }, { name: "Skier Hops", video: "/resources/skierhops.mp4" }],
+	  	"Hard": [],
+	  	"Expert/Advanced": []
+	  }
+	  // Add other categories similarly
+	};
 
-            // Filter exercises based on selected focus areas and difficulty level
-            workoutExercises = [];
-            selectedAreas.forEach(area => {
-                difficultyLevels.forEach(level => {
-                    if (level === maxDifficulty || difficultyLevels.indexOf(level) <= difficultyLevels.indexOf(maxDifficulty)) {
-                        if (exercises[area] && exercises[area][level]) {
-                            workoutExercises = workoutExercises.concat(exercises[area][level]);
-                        }
-                    }
-                });
-            });
+    const focusAreasDiv = document.getElementById('focusAreas');
+    for (let area in exercises) {
+      const label = document.createElement('label');
+      label.innerHTML = `<input type="checkbox" name="focus" value="${area}" checked> ${area}`;
+      focusAreasDiv.appendChild(label);
+    }
 
-            // Shuffle the exercises array
-            workoutExercises = workoutExercises.sort(() => Math.random() - 0.5);
+    const form = document.getElementById('workoutForm');
+    const routineList = document.getElementById('routine');
+    const video = document.getElementById('exerciseVideo');
+    const timerDiv = document.getElementById('timer');
+    const beep = document.getElementById('beep');
+    const playerBox = document.getElementById('playerBox');
+    const startButton = document.getElementById('startButton');
+
+    const difficultyMap = {
+      'Beginner': ['Beginner'],
+      'Medium': ['Beginner', 'Medium'],
+      'Hard': ['Beginner', 'Medium', 'Hard'],
+      'Expert/Advanced': ['Beginner', 'Medium', 'Hard', 'Expert/Advanced']
+    };
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const selectedAreas = Array.from(document.querySelectorAll('input[name="focus"]:checked')).map(cb => cb.value);
+      const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+      const allowedLevels = difficultyMap[difficulty];
+      const totalMin = parseInt(document.getElementById('totalDuration').value);
+      const exerciseSec = parseInt(document.getElementById('exerciseDuration').value);
+      const restSec = parseInt(document.getElementById('restDuration').value);
+      const restEvery = parseInt(document.getElementById('restEvery').value);
+
+      let pool = [];
+      selectedAreas.forEach(area => {
+        allowedLevels.forEach(level => {
+          if (exercises[area][level]) {
+            pool.push(...exercises[area][level]);
+          }
         });
+      });
 
-        let timerInterval, currentExerciseIndex = 0;
-        let workoutExercises = [];
-        let isPaused = false;
+      if (pool.length === 0) return alert('No exercises match your filters.');
 
-        function playBeep() {
-            const beep = new Audio("/sounds/beep.mp3");
+      const fullCycle = exerciseSec + restSec;
+      const totalSecs = totalMin * 60;
+      const estimatedCycleCount = Math.floor(totalSecs / fullCycle);
+      const totalCount = Math.min(estimatedCycleCount, Math.floor(pool.length * 1.5));
+
+      const selected = [];
+      for (let i = 0; selected.length < totalCount; i++) {
+        const ex = pool[Math.floor(Math.random() * pool.length)];
+        if (!selected.some(e => e.name === ex.name)) {
+          selected.push(ex);
+        }
+      }
+
+      routineList.innerHTML = '';
+      const routine = [];
+      selected.forEach((ex, i) => {
+        routine.push({ ...ex, isRest: false });
+        routineList.innerHTML += `<li>${ex.name}</li>`;
+        if ((i + 1) % restEvery === 0 && i !== selected.length - 1) {
+          routine.push({ name: 'Rest', video: null, isRest: true });
+          routineList.innerHTML += `<li>Rest</li>`;
+        }
+      });
+
+      playerBox.style.display = 'block';
+      startButton.onclick = () => startRoutine(routine, exerciseSec, restSec);
+    });
+
+    function startRoutine(routine, exDur, restDur) {
+      let i = 0;
+      function playNext() {
+        if (i >= routine.length) {
+          timerDiv.textContent = 'Done!';
+          beep.play();
+          return;
+        }
+        const { name, video: vidPath, isRest } = routine[i++];
+        const dur = isRest ? restDur : exDur;
+        if (vidPath) {
+          video.src = vidPath;
+          video.load();
+          video.play();
+        } else {
+          video.pause();
+          video.removeAttribute('src');
+          video.load();
+        }
+        beep.play();
+        let t = dur;
+        timerDiv.textContent = t;
+        const interval = setInterval(() => {
+          t--;
+          timerDiv.textContent = t;
+          if (t <= 0) {
+            clearInterval(interval);
             beep.play();
-        }
-
-        function startTimer(duration, callback) {
-            let timeRemaining = duration;
-            document.getElementById("timer").textContent = `${timeRemaining}s`;
-
-            timerInterval = setInterval(() => {
-                if (!isPaused) {
-                    timeRemaining--;
-                    document.getElementById("timer").textContent = `${timeRemaining}s`;
-                    if (timeRemaining <= 0) {
-                        clearInterval(timerInterval);
-                        playBeep();
-                        callback();
-                    }
-                }
-            }, 1000);
-        }
-
-        function startRoutine() {
-            if (workoutExercises.length === 0) return;
-            document.getElementById("workoutModal").style.display = "block";
-            executeExercise();
-        }
-
-        function executeExercise() {
-            if (currentExerciseIndex >= workoutExercises.length) {
-                playBeep();
-                document.getElementById("workoutModal").style.display = "none";
-                return;
-            }
-
-            const exercise = workoutExercises[currentExerciseIndex];
-            document.getElementById("exerciseName").textContent = exercise.name;
-            document.getElementById("exerciseVideo").src = exercise.video;
-            document.getElementById("exerciseVideo").loop = true;
-
-            startTimer(parseInt(document.getElementById("exerciseDuration").value), () => {
-                currentExerciseIndex++;
-                // Check if a rest period should be inserted
-                if (currentExerciseIndex % parseInt(document.getElementById("restFrequency").value) === 0) {
-                    document.getElementById("exerciseName").textContent = "Rest Period";
-                    document.getElementById("exerciseVideo").pause();
-                    document.getElementById("exerciseVideo").src = ""; // Clear the video
-
-                    startTimer(parseInt(document.getElementById("restDuration").value), () => {
-                        executeExercise();
-                    });
-                } else {
-                    executeExercise();
-                }
-            });
-        }
-
-        function pauseRoutine() {
-            isPaused = !isPaused;
-            if (isPaused) {
-                document.getElementById("exerciseVideo").pause();
-                clearInterval(timerInterval);
-            } else {
-                document.getElementById("exerciseVideo").play();
-                startTimer(parseInt(document.getElementById("exerciseDuration").value), () => {
-                    currentExerciseIndex++;
-                    // Check if a rest period should be inserted
-                    if (currentExerciseIndex % parseInt(document.getElementById("restFrequency").value) === 0) {
-                        document.getElementById("exerciseName").textContent = "Rest Period";
-                        document.getElementById("exerciseVideo").pause();
-                        document.getElementById("exerciseVideo").src = ""; // Clear the video
-
-                        startTimer(parseInt(document.getElementById("restDuration").value), () => {
-                            executeExercise();
-                        });
-                    } else {
-                        executeExercise();
-                    }
-                });
-            }
-        }
-
-        document.getElementById("startRoutine").addEventListener("click", startRoutine);
-        document.getElementById("pauseRoutine").addEventListener("click", pauseRoutine);
-
-        // Populate the Focus Areas and Difficulty Levels on page load
-        renderOptions("focusAreas", focusAreas, true, true);  // Multi-select, preselect all
-        renderOptions("difficultyLevels", difficultyLevels, false);  // Single-select
-
-        // Automatically select the highest difficulty level by default
-        document.querySelector(`#difficultyLevels .option-card:last-child`).classList.add("selected");
-    </script>
+            playNext();
+          }
+        }, 1000);
+      }
+      playNext();
+    }
+  </script>
 </body>
 </html>
