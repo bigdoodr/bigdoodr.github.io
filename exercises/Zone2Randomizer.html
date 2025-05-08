@@ -1,552 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workout Randomizer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .instructions {
-            text-align: center;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 2px solid black;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            margin: 10px;
-        }
-
-        .controls label {
-            margin-right: 5px;
-            font-weight: bold;
-        }
-
-        .controls input, .controls button {
-            padding: 5px;
-            font-size: 14px;
-        }
-
-        .exercise-selection {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px;
-            padding: 0 10px 100px;
-        }
-
-        .exercise-card {
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            margin: 5px;
-        }
-
-        .exercise-card.selected {
-            border-color: #4caf50;
-        }
-
-        .exercise-card video {
-            width: 100px;
-            height: auto;
-        }
-
-        .exercise-card p {
-            margin: 0;
-            padding: 5px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 8px;
-        }
-
-        .floating-timer {
-            position: fixed;
-            top: 25%;
-            right: 10px;
-            zIndex: 1000;
-            transform: translateY(-50%);
-            background: #333;
-            color: white;
-            padding: 15px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .floating-timer video {
-            width: 250px;
-            height: auto;
-            display: block;
-            margin: 10px auto 0;
-        }
-
-        .exercise-list {
-            list-style: none;
-            padding: 0;
-            margin: 20px;
-        }
-
-        .exercise-list li.active {
-            font-weight: bold;
-            color: #4caf50;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workout Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+    }
+    h2 {
+      margin-top: 1em;
+    }
+    label {
+      margin-right: 10px;
+    }
+    .horizontal-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1em;
+      align-items: center;
+    }
+    .floating-box {
+      position: fixed;
+      bottom: 100px;
+      right: 10px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1em;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    .floating-box video {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      display: block;
+    }
+    .exercise-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5em;
+    }
+    .loading {
+      display: inline-block;
+      margin-left: 10px;
+      color: #666;
+    }
+    #routine li {
+      margin-bottom: 5px;
+    }
+    @media (max-width: 600px) {
+      .floating-box video {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Workout Randomizer</h1>
-    <p class="instructions">Click on exercises to deselect unwanted ones. By default, all are selected.</p>
-    <div class="controls">
-        <label for="duration">Workout Duration (minutes):</label>
-        <input type="number" id="duration" value="10" min="1" max="120">
-        
-        <label for="exerciseDuration">Exercise Duration (seconds):</label>
-        <input type="number" id="exerciseDuration" value="30" min="5" max="300">
-        
-        <label for="restDuration">Rest Duration (seconds):</label>
-        <input type="number" id="restDuration" value="60" min="10" max="300">
+  <h1>Workout Generator</h1>
+  <form id="workoutForm">
+    <h2>Focus Areas</h2>
+    <div class="horizontal-group" id="focusAreas"></div>
 
-        <label for="restFrequency">Rest After (exercises):</label>
-        <input type="number" id="restFrequency" value="4" min="1" max="10">
-        
-        <button id="generate">Generate Workout</button>
+    <h2>Difficulty</h2>
+    <div class="horizontal-group">
+      <label><input type="radio" name="difficulty" value="Beginner"> Beginner</label>
+      <label><input type="radio" name="difficulty" value="Medium"> Medium</label>
+      <label><input type="radio" name="difficulty" value="Hard"> Hard</label>
+      <label><input type="radio" name="difficulty" value="Expert/Advanced" checked> Expert/Advanced</label>
     </div>
-    <div class="exercise-selection" id="exerciseSelection"></div>
-    <ul class="exercise-list" id="exerciseList"></ul>
-    <div class="floating-timer" id="floatingTimer">
-        <div id="timerDisplay">00:00</div>
-        <button id="startTimer">Start</button>
-        <button id="pauseTimer">Pause</button>
-        <video id="currentExerciseVideo" autoplay loop muted playsinline></video>
+
+    <h2>Durations</h2>
+    <div class="horizontal-group">
+      <label>Total Duration (minutes): <input type="number" id="totalDuration" value="10" min="1" max="120"></label>
+      <label>Exercise Duration (seconds): <input type="number" id="exerciseDuration" value="20" min="1" max="120"></label>
+      <label>Rest Duration (seconds): <input type="number" id="restDuration" value="10" min="1" max="120"></label>
+      <label>Rest Every Nth Exercises: <input type="number" id="restEvery" value="1" min="1" max="20"></label>
     </div>
-	<table>
-	  <thead>
-		<tr>
-		  <th>Muscle Group</th>
-		  <th>Beginner</th>
-		  <th>Medium</th>
-		  <th>Hard</th>
-		  <th>Expert/Advanced</th>
-		</tr>
-	  </thead>
-	  <tbody id="exerciseTableBody">
-	  </tbody>
-	</table>
-    <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.58/darkreader.min.js"></script>
-    <script>
-        DarkReader.enable();
 
-	const categorizedExercises = {
-	  "Chest": {
-		"Beginner": [],
-		"Medium": [{ name: "Push-Ups", video: "/resources/pushupsAngle2.mp4" }],
-		"Hard": [],
-		"Expert/Advanced": [{ name: "One-Legged Skier Push-Ups", video: "/resources/onelegskierpushups.mp4" }]
-	  },
-	  "Legs": {
-		"Beginner": [{ name: "Squats", video: "/resources/squats.mp4" }, { name: "3-Way Lunges", video: "/resources/3wayLungesAngle2.mp4" }],
-		"Medium": [{ name: "Alternating Split Squats", video: "/resources/splitSquats.mp4" }, { name: "Frog Hops", video: "/resources/frogHops.mp4" }, { name: "Squat Jumps", video: "/resources/squatJumps.mp4" }],
-		"Hard": [{ name: "180° Squat Jumps", video: "/resources/180JumpSquats.mp4" }, { name: "Ninja Tuck Jumps", video: "/resources/ninjaTuckJumps.mp4" }, { name: "Prisoner Squat Jumps", video: "/resources/prisonerSquatJumps.mp4" }, { name: "3-Point Alternating Hops", video: "/resources/3pointAltHops.mp4" }],
-		"Expert/Advanced": [{ name: "Prisoner Ninja Tuck Jumps", video: "/resources/prisonerNinjaTuckJumps.mp4" }, { name: "Triple Skyfalls", video: "/resources/3xskyfalls.mp4" }]
-	  },
-	  "Legs, No Cardio": {
-	  	"Beginner": [{ name: "Reverse Lunge to High Knee", video: "/resources/reverseLungeHighKneeAngle2.mp4" }],
-	  	"Medium": [],
-	  	"Hard": [],
-	  	"Expert/Advanced": []
-	  },
-	  "Shoulders": {
-	  	"Beginner": [],
-	  	"Medium": [{ name: "Pike Push-Ups", video: "/resources/pikePushups.mp4" }],
-	  	"Hard": [{ name: "Kneeling Spider-Man Push-Ups", video: "/resources/kneelingSpidermanPushups.mp4" }],
-	  	"Expert/Advanced": [{ name: "Spider-Man Push-Ups", video: "/resources/spidermanPushups.mp4" }]
-	  },
-	  "Triceps": {
-	  	"Beginner": [{ name: "Bench Dips", video: "/resources/benchDipsAngle1.mp4" }],
-	  	"Medium": [], //to be added later: "Diamond Cutter Push-Ups"
-	  	"Hard": [],
-	  	"Expert/Advanced": []
-	  },
-	  "Glutes": {
-	  	"Beginner": [{ name: "Bridges", video: "/resources/bridgesAngle2.mp4" }, { name: "Hip Bucks", video: "/resources/hipBucks.mp4" }],
-	  	"Medium": [{ name: "Single Leg Hip Bucks", video: "/resources/singleLegHipBucks.mp4" }],
-	  	"Hard": [],
-	  	"Expert/Advanced": []
-	  },
-	  "Core": {
-	  	"Beginner": [{ name: "Bear Taps", video: "/resources/bearTapsAngle2.mp4" }, { name: "Walking Marches", video: "/resources/walkingMarches.mp4" }],
-	  	"Medium": [{ name: "Jackknives - Level 1", video: "/resources/jackknivesLevel1.mp4" }, { name: "Russian V-Twists", video: "/resources/russianVTwistsAngle1.mp4" }, { name: "Spider-Man Lunges", video: "/resources/spidermanLungesAngle2.mp4" }],
-	  	"Hard": [{ name: "Bicycle Crunches", video: "/resources/bicycleCrunchesAngle2.mp4" }, { name: "Jackknives - Level 2", video: "/resources/jackknivesLevel2.mp4" }, { name: "Mountain Climbers", video: "/resources/mountainClimbers.mp4" }, { name: "Plank Elbow to Knee Taps", video: "/resources/plankElbowToKneeTaps.mp4" }, { name: "Side Kickthroughs", video: "/resources/sideKickthroughs.mp4" }],
-	  	"Expert/Advanced": [{ name: "Twisting Piston Push-Ups", video: "/resources/twistingPistonPushUps.mp4"}]
-	  },
-	  "Core, No Cardio": {
-	  	"Beginner": [{ name: "Ab-Roller", video: "/resources/abRollerAngle1.mp4" }, { name: "Bird Dogs", video: "/resources/birdDogs.mp4" }, { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4" }, { name: "Swipers", video: "/resources/swipersAngle2.mp4" }],
-	  	"Medium": [{ name: "Plank Elbow Ups", video: "/resources/plankElbowUps.mp4" }, { name: "Shoulder Taps", video: "/resources/shoulderTapsAngle1.mp4" }],
-	  	"Hard": [],
-	  	"Expert/Advanced": []
-	  },
-	  "Cardio": {
-	  	"Beginner": [{ name: "Jump/Air Rope", video: "/resources/jumprope.mp4" }, { name: "Shadow Boxing", video: "/resources/shadowboxing.mp4" }, { name: "Toe Taps", video: "/resources/toeTaps.mp4" }],
-	  	"Medium": [{ name: "High Knees", video: "/resources/highknees.mp4" }, { name: "Jumping Jacks", video: "/resources/jumpingjacks.mp4" }, { name: "Skier Hops", video: "/resources/skierhops.mp4" }],
-	  	"Hard": [],
-	  	"Expert/Advanced": []
-	  }
-	  // Add other categories similarly
-	};
-		
-    const tableBody = document.getElementById("exerciseTableBody");
-    tableBody.innerHTML = "";
-	
-	  Object.entries(categorizedExercises).forEach(([muscleGroup, levels]) => {
-		const row = document.createElement("tr");
-		row.innerHTML = `<td>${muscleGroup}</td>`;
-		["Beginner", "Medium", "Hard", "Expert/Advanced"].forEach(level => {
-		  const exercises = levels[level] || [];
-		  const cell = document.createElement("td");
-		  exercises.forEach(({ name, video }) => {
-			const div = document.createElement("div");
-			div.className = "exercise-card selected";
-			div.innerHTML = `<video src="${video}" autoplay loop muted playsinline></video><p>${name}</p>`;
-			div.addEventListener("click", () => {
-			  div.classList.toggle("selected");
-			});
-			cell.appendChild(div);
-		  });
-		  row.appendChild(cell);
-		});
-		tableBody.appendChild(row);
-	  });
-	
-	function renderExerciseTable() {
-		const tableBody = document.getElementById("exerciseTableBody");
-		tableBody.innerHTML = "";
-	
-		Object.entries(categorizedExercises).forEach(([muscleGroup, levels]) => {
-			const row = document.createElement("tr");
-			row.innerHTML = `<td>${muscleGroup}</td>`;
-	
-			["Beginner", "Medium", "Hard", "Expert/Advanced"].forEach(level => {
-				const exercises = levels[level] || [];
-				const cell = document.createElement("td");
-	
-				exercises.forEach(({ name, video }) => {
-					const div = document.createElement("div");
-					div.className = "exercise-card selected";
-					div.innerHTML = `<video src="${video}" autoplay loop muted playsinline></video><p>${name}</p>`;
-					div.addEventListener("click", () => {
-						div.classList.toggle("selected");
-					});
-					cell.appendChild(div);
-				});
-	
-				row.appendChild(cell);
-			});
-	
-			tableBody.appendChild(row);
-		});
-	}
-	
-	// Call this function to populate the table
-	renderExerciseTable();
+    <button type="submit">Generate Workout</button>
+    <span id="loadingText" class="loading" style="display: none;">Generating workout...</span>
+  </form>
 
-        const exerciseSelection = document.getElementById('exerciseSelection');
-        const timerDisplay = document.getElementById('timerDisplay');
-        const currentExerciseVideo = document.getElementById('currentExerciseVideo');
-        
-        let audioContext;
-        let beepBuffer;
-        
-        // Initialize the audio context and load the beep sound
-        function initializeAudio() {
-	    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  <h2>Generated Routine</h2>
+  <ul id="routine"></ul>
 
-    	// Fetch and decode the audio file
-    	fetch("/sounds/beep.mp3")
-        	.then(response => response.arrayBuffer())
-        	.then(data => audioContext.decodeAudioData(data))
-        	.then(buffer => {
-            	beepBuffer = buffer; // Store the decoded audio buffer
-        	})
-        	.catch(err => console.error("Error loading beep sound:", err));
-		}
+  <div class="floating-box" id="playerBox" style="display:none;">
+    <div class="exercise-info">
+      <div id="exerciseName">Exercise</div>
+      <div id="timer">00</div>
+    </div>
+    <video id="exerciseVideo" muted playsinline loop></video>
+    <button id="startButton">Start Workout</button>
+    <button id="pauseButton" style="display:none;">Pause</button>
+    <button id="skipButton" style="display:none;">Skip</button>
+  </div>
 
-		// Call initializeAudio when the page is loaded or when the user interacts
-		document.body.addEventListener("click", () => {
-    		if (!audioContext) {
-        		initializeAudio();
-    		}
-		}, { once: true });
+  <audio id="beep" src="/sounds/beep.mp3"></audio>
 
-		function playBeepSound() {
-			if (!audioContext || !beepBuffer) {
-				console.error("Audio context or beep buffer is not initialized.");
-				return;
-			}
-		
-			// Resume audio context if suspended
-			if (audioContext.state === "suspended") {
-				audioContext.resume().then(() => {
-					const source = audioContext.createBufferSource();
-					source.buffer = beepBuffer;
-					source.connect(audioContext.destination);
-					source.start(0);
-				}).catch(err => console.error("Error resuming audio context:", err));
-			} else {
-				const source = audioContext.createBufferSource();
-				source.buffer = beepBuffer;
-				source.connect(audioContext.destination);
-				source.start(0);
-			}
-		}
+  <script>
+    const exercises = {
+      "Chest": {
+        "Beginner": [],
+        "Medium": [{ name: "Push-Ups", video: "/resources/pushupsAngle2.mp4" }],
+        "Hard": [],
+        "Expert/Advanced": [{ name: "One-Legged Skier Push-Ups", video: "/resources/onelegskierpushups.mp4" }]
+      },
+      "Legs": {
+        "Beginner": [{ name: "Squats", video: "/resources/squats.mp4" }, { name: "3-Way Lunges", video: "/resources/3wayLungesAngle2.mp4" }],
+        "Medium": [{ name: "Alternating Split Squats", video: "/resources/splitSquats.mp4" }, { name: "Frog Hops", video: "/resources/frogHops.mp4" }, { name: "Squat Jumps", video: "/resources/squatJumps.mp4" }],
+        "Hard": [{ name: "180° Squat Jumps", video: "/resources/180JumpSquats.mp4" }, { name: "Ninja Tuck Jumps", video: "/resources/ninjaTuckJumps.mp4" }, { name: "Prisoner Squat Jumps", video: "/resources/prisonerSquatJumps.mp4" }, { name: "3-Point Alternating Hops", video: "/resources/3pointAltHops.mp4" }],
+        "Expert/Advanced": [{ name: "Prisoner Ninja Tuck Jumps", video: "/resources/prisonerNinjaTuckJumps.mp4" }, { name: "Triple Skyfalls", video: "/resources/3xskyfalls.mp4" }]
+      },
+      "Legs, No Cardio": {
+        "Beginner": [{ name: "Reverse Lunge to High Knee", video: "/resources/reverseLungeHighKneeAngle2.mp4" }],
+        "Medium": [],
+        "Hard": [],
+        "Expert/Advanced": []
+      },
+      "Shoulders": {
+        "Beginner": [],
+        "Medium": [{ name: "Pike Push-Ups", video: "/resources/pikePushups.mp4" }],
+        "Hard": [{ name: "Kneeling Spider-Man Push-Ups", video: "/resources/kneelingSpidermanPushups.mp4" }],
+        "Expert/Advanced": [{ name: "Spider-Man Push-Ups", video: "/resources/spidermanPushups.mp4" }]
+      },
+      "Triceps": {
+        "Beginner": [{ name: "Bench Dips", video: "/resources/benchDipsAngle1.mp4" }],
+        "Medium": [], //to be added later: "Diamond Cutter Push-Ups"
+        "Hard": [],
+        "Expert/Advanced": []
+      },
+      "Glutes": {
+        "Beginner": [{ name: "Bridges", video: "/resources/bridgesAngle2.mp4" }, { name: "Hip Bucks", video: "/resources/hipBucks.mp4" }],
+        "Medium": [{ name: "Single Leg Hip Bucks", video: "/resources/singleLegHipBucks.mp4" }],
+        "Hard": [],
+        "Expert/Advanced": []
+      },
+      "Core": {
+        "Beginner": [{ name: "Bear Taps", video: "/resources/bearTapsAngle2.mp4" }, { name: "Walking Marches", video: "/resources/walkingMarches.mp4" }],
+        "Medium": [{ name: "Jackknives - Level 1", video: "/resources/jackknivesLevel1.mp4" }, { name: "Russian V-Twists", video: "/resources/russianVTwistsAngle1.mp4" }, { name: "Spider-Man Lunges", video: "/resources/spidermanLungesAngle2.mp4" }],
+        "Hard": [{ name: "Bicycle Crunches", video: "/resources/bicycleCrunchesAngle2.mp4" }, { name: "Jackknives - Level 2", video: "/resources/jackknivesLevel2.mp4" }, { name: "Mountain Climbers", video: "/resources/mountainClimbers.mp4" }, { name: "Plank Elbow to Knee Taps", video: "/resources/plankElbowToKneeTaps.mp4" }, { name: "Side Kickthroughs", video: "/resources/sideKickthroughs.mp4" }],
+        "Expert/Advanced": [{ name: "Twisting Piston Push-Ups", video: "/resources/twistingPistonPushUps.mp4"}]
+      },
+      "Core, No Cardio": {
+        "Beginner": [{ name: "Ab-Roller", video: "/resources/abRollerAngle1.mp4" }, { name: "Bird Dogs", video: "/resources/birdDogs.mp4" }, { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4" }, { name: "Swipers", video: "/resources/swipersAngle2.mp4" }],
+        "Medium": [{ name: "Plank Elbow Ups", video: "/resources/plankElbowUps.mp4" }, { name: "Shoulder Taps", video: "/resources/shoulderTapsAngle1.mp4" }],
+        "Hard": [],
+        "Expert/Advanced": []
+      },
+      "Cardio": {
+        "Beginner": [{ name: "Jump/Air Rope", video: "/resources/jumprope.mp4" }, { name: "Shadow Boxing", video: "/resources/shadowboxing.mp4" }, { name: "Toe Taps", video: "/resources/toeTaps.mp4" }],
+        "Medium": [{ name: "High Knees", video: "/resources/highknees.mp4" }, { name: "Jumping Jacks", video: "/resources/jumpingjacks.mp4" }, { name: "Skier Hops", video: "/resources/skierhops.mp4" }],
+        "Hard": [],
+        "Expert/Advanced": []
+      }
+    };
 
-		function runTimer(totalSeconds, label, onComplete) {
-    		const interval = setInterval(() => {
-        		if (totalSeconds <= 0) {
-            		clearInterval(interval);
-            		playBeepSound(); // Ensure sound plays at the end of each timer
-            		onComplete(); // Proceed to the next step
-            		return;
-        		}
+    // DOM elements
+    const form = document.getElementById('workoutForm');
+    const focusAreasDiv = document.getElementById('focusAreas');
+    const routineList = document.getElementById('routine');
+    const video = document.getElementById('exerciseVideo');
+    const timerDiv = document.getElementById('timer');
+    const exerciseNameDiv = document.getElementById('exerciseName');
+    const beep = document.getElementById('beep');
+    const playerBox = document.getElementById('playerBox');
+    const startButton = document.getElementById('startButton');
+    const pauseButton = document.getElementById('pauseButton');
+    const skipButton = document.getElementById('skipButton');
+    const loadingText = document.getElementById('loadingText');
 
-        		const minutes = Math.floor(totalSeconds / 60);
-        		const seconds = totalSeconds % 60;
-        		timerDisplay.textContent = `${label}: ${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-        		totalSeconds--;
-    		}, 1000);
-		}
+    // Create focus area checkboxes
+    for (let area in exercises) {
+      const label = document.createElement('label');
+      label.innerHTML = `<input type="checkbox" name="focus" value="${area}" checked> ${area}`;
+      focusAreasDiv.appendChild(label);
+    }
 
-		// Update the timer display
-		function updateTimerDisplay() {
-		    const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, "0");
-		    const seconds = (timeRemaining % 60).toString().padStart(2, "0");
-		    timerDisplay.textContent = `${minutes}:${seconds}`;
-		}
+    // Difficulty mapping
+    const difficultyMap = {
+      'Beginner': ['Beginner'],
+      'Medium': ['Beginner', 'Medium'],
+      'Hard': ['Beginner', 'Medium', 'Hard'],
+      'Expert/Advanced': ['Beginner', 'Medium', 'Hard', 'Expert/Advanced']
+    };
 
-        let selectedExercises = getSelectedExercises();
-        let workoutSequence = [];
-        let timerInterval;
-        let timeRemaining = 0;
-        let currentIndex = 0;
+    // Global variables for workout execution
+    let workoutRoutine = [];
+    let currentExerciseIndex = 0;
+    let timerInterval = null;
+    let isPaused = false;
+    let remainingTime = 0;
 
-        function renderExerciseSelection() {
-            const exerciseSelection = document.getElementById("exerciseSelection");
-            if (exerciseSelection) {
-                exerciseSelection.remove();
-            }
-            exerciseSelection.innerHTML = '';
-
-            Object.values(categorizedExercises).forEach(levels => {
-                Object.values(levels).forEach(exercises => {
-                    exercises.forEach(({ name, video }) => {
-                        const card = document.createElement("div");
-                        card.className = "exercise-card selected";
-                        card.innerHTML = `
-                            <video src="${video}" autoplay loop muted playsinline></video>
-                            <p>${name}</p>
-                        `;
-                        card.addEventListener("click", () => {
-                            card.classList.toggle("selected");
-                        });
-                        exerciseSelection.appendChild(card);
-                    });
-                });
-            });
+    // Form submission
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      
+      // Show loading indicator
+      loadingText.style.display = 'inline-block';
+      routineList.innerHTML = '';
+      
+      // Use setTimeout to allow the UI to update before heavy processing
+      setTimeout(() => {
+        try {
+          generateWorkout();
+          loadingText.style.display = 'none';
+        } catch (error) {
+          console.error("Error generating workout:", error);
+          loadingText.style.display = 'none';
+          alert('An error occurred while generating your workout. Please try with different parameters.');
         }
-
-        function getSelectedExercises() {
-            return [...document.querySelectorAll(".exercise-card.selected")].map(card => {
-                return {
-                    name: card.querySelector("p").textContent,
-                    video: card.querySelector("video").src
-                };
-            });
-        }
-
-        document.getElementById("generate").addEventListener("click", generateWorkout);
-    function renderExerciseTable() {
-    const tableBody = document.getElementById("exerciseTableBody");
-    tableBody.innerHTML = "";
-
-    Object.entries(categorizedExercises).forEach(([muscleGroup, levels]) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td>${muscleGroup}</td>`;
-
-        ["Beginner", "Medium", "Hard", "Expert/Advanced"].forEach(level => {
-            const exercises = levels[level] || [];
-            const cell = document.createElement("td");
-
-            exercises.forEach(({ name, video }) => {
-                const div = document.createElement("div");
-                div.className = "exercise-card selected";
-                div.innerHTML = `<video src="${video}" autoplay loop muted playsinline></video><p>${name}</p>`;
-                div.addEventListener("click", () => {
-                    div.classList.toggle("selected");
-                });
-                cell.appendChild(div);
-            });
-
-            row.appendChild(cell);
-        });
-
-        tableBody.appendChild(row);
+      }, 50);
     });
-}
 
-// Call function to populate the table on page load
-renderExerciseTable();
-
-    
+    // Generate the workout routine
     function generateWorkout() {
-        // Get user inputs
-        const workoutDuration = parseInt(document.getElementById('duration').value) * 60; // Convert minutes to seconds
-        const exerciseDuration = parseInt(document.getElementById('exerciseDuration').value);
-        const restDuration = parseInt(document.getElementById('restDuration').value);
-        const restFrequency = parseInt(document.getElementById('restFrequency').value);
+      // Get form values
+      const selectedAreas = Array.from(document.querySelectorAll('input[name="focus"]:checked')).map(cb => cb.value);
+      const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+      const allowedLevels = difficultyMap[difficulty];
+      const totalMin = Math.min(parseInt(document.getElementById('totalDuration').value), 120);
+      const exerciseSec = Math.min(parseInt(document.getElementById('exerciseDuration').value), 120);
+      const restSec = Math.min(parseInt(document.getElementById('restDuration').value), 120);
+      const restEvery = Math.min(parseInt(document.getElementById('restEvery').value), 20);
 
-        if (selectedExercises.length === 0) {
-            alert("Please select at least one exercise!");
-            return;
-        }
+      // Create exercise pool
+      let pool = [];
+      selectedAreas.forEach(area => {
+        allowedLevels.forEach(level => {
+          if (exercises[area] && exercises[area][level]) {
+            pool = pool.concat(exercises[area][level]);
+          }
+        });
+      });
 
-        // Calculate total number of exercise + rest periods
-        const totalPeriods = Math.floor(workoutDuration / (exerciseDuration + restDuration / restFrequency));
-        workoutSequence = [];
-
-        // Randomly select exercises and add rests
-        let exerciseCounter = 0;
-        for (let i = 0; i < totalPeriods; i++) {
-            // Add an exercise
-            const randomIndex = Math.floor(Math.random() * selectedExercises.length);
-            workoutSequence.push({
-                type: "categorizedExercises",
-                name: selectedExercises[randomIndex].name,
-                video: selectedExercises[randomIndex].video,
-                duration: exerciseDuration,
-            });
-
-            exerciseCounter++;
-
-            // Add a rest if necessary
-            if (exerciseCounter % restFrequency === 0 && exerciseCounter < totalPeriods) {
-                workoutSequence.push({
-                    type: "rest",
-                    name: "Rest",
-                    video: null,
-                    duration: restDuration,
-                });
-            }
-        }
-
-        // Display workout
-        const exerciseList = document.getElementById('exerciseList');
-        exerciseList.innerHTML = workoutSequence
-            .map((step, index) =>
-                `<li class="${step.type === 'categorizedExercises' ? 'active' : ''}" id="step-${index}">
-                    ${step.name} (${step.type === 'categorizedExercises' ? step.duration + 's' : ''})
-                </li>`
-            )
-            .join('');
-    }
-
-function startWorkout() {
-    if (workoutSequence.length === 0) {
-        alert("Please generate a workout first!");
+      if (pool.length === 0) {
+        alert('No exercises match your filters.');
         return;
-    }
+      }
 
-    currentIndex = 0;
-
-    function processStep() {
-        if (currentIndex >= workoutSequence.length) {
-            playBeepSound(); // Final sound for completion
-            alert("Workout complete!");
-            return;
+      // Calculate number of exercises needed
+      const fullCycle = exerciseSec + (restSec / restEvery);
+      const totalSecs = totalMin * 60;
+      const maxExercises = Math.ceil(totalSecs / fullCycle);
+      
+      // Create a balanced routine
+      const selected = createBalancedRoutine(pool, maxExercises);
+      
+      // Build the final routine with rests
+      workoutRoutine = [];
+      routineList.innerHTML = '';
+      
+      selected.forEach((ex, i) => {
+        // Add exercise
+        workoutRoutine.push({ ...ex, isRest: false });
+        const li = document.createElement('li');
+        li.textContent = ex.name;
+        routineList.appendChild(li);
+        
+        // Add rest if needed
+        if ((i + 1) % restEvery === 0 && i !== selected.length - 1) {
+          workoutRoutine.push({ name: 'Rest', video: null, isRest: true });
+          const restLi = document.createElement('li');
+          restLi.textContent = 'Rest';
+          routineList.appendChild(restLi);
         }
+      });
 
-        const currentStep = workoutSequence[currentIndex];
-        const label = currentStep.type === "categorizedExercises" ? "Exercise Time" : "Rest Time";
+      // Show player box
+      playerBox.style.display = 'block';
+      startButton.onclick = startWorkout;
+      pauseButton.onclick = togglePause;
+      skipButton.onclick = skipExercise;
+    }
 
-        // Update video and highlight
-        if (currentStep.video) {
-            currentExerciseVideo.src = currentStep.video;
-        } else {
-            currentExerciseVideo.src = ""; // Clear video for rest periods
+    // Create a balanced selection of exercises
+    function createBalancedRoutine(pool, maxCount) {
+      // Shuffle pool for randomness
+      const shuffled = [...pool].sort(() => 0.5 - Math.random());
+      
+      // Find unique exercises first
+      const uniqueExercises = [];
+      const seen = new Set();
+      
+      for (const exercise of shuffled) {
+        if (!seen.has(exercise.name) && uniqueExercises.length < maxCount) {
+          uniqueExercises.push(exercise);
+          seen.add(exercise.name);
         }
-
-        document.querySelectorAll(".exercise-list li").forEach((li, idx) => {
-            li.classList.toggle("active", idx === currentIndex);
-        });
-
-        // Run the timer for the current step
-        runTimer(currentStep.duration, label, () => {
-            currentIndex++;
-            processStep(); // Proceed to the next step
-        });
+      }
+      
+      // If we need more exercises, start repeating
+      const result = [...uniqueExercises];
+      
+      while (result.length < maxCount) {
+        // Reshuffle for variety in repeats
+        const reshuffled = [...uniqueExercises].sort(() => 0.5 - Math.random());
+        for (const exercise of reshuffled) {
+          if (result.length < maxCount) {
+            result.push(exercise);
+          } else {
+            break;
+          }
+        }
+      }
+      
+      return result;
     }
 
-    processStep(); // Start the first step
-}
-
-
-// Helper function to update the current step (video, highlight, etc.)
-function updateCurrentStep() {
-    // Update the video
-    if (workoutSequence[currentIndex].video) {
-        currentExerciseVideo.src = workoutSequence[currentIndex].video;
-    } else {
-        currentExerciseVideo.src = ""; // Clear video for rest periods
+    // Start the workout
+    function startWorkout() {
+      currentExerciseIndex = 0;
+      startButton.style.display = 'none';
+      pauseButton.style.display = 'inline-block';
+      skipButton.style.display = 'inline-block';
+      isPaused = false;
+      playCurrentExercise();
     }
 
-    // Highlight the current exercise in the list
-    document.querySelectorAll(".exercise-list li").forEach((li, idx) => {
-        li.classList.toggle("active", idx === currentIndex);
-    });
-}
+    // Play the current exercise
+    function playCurrentExercise() {
+      if (currentExerciseIndex >= workoutRoutine.length) {
+        endWorkout();
+        return;
+      }
 
+      const exercise = workoutRoutine[currentExerciseIndex];
+      exerciseNameDiv.textContent = exercise.name;
+      
+      // Set up video if available
+      if (exercise.video) {
+        video.src = exercise.video;
+        video.style.display = 'block';
+        video.load();
+        video.play().catch(e => console.error("Video playback error:", e));
+      } else {
+        video.pause();
+        video.style.display = 'none';
+        video.removeAttribute('src');
+      }
+      
+      // Get appropriate duration
+      const duration = exercise.isRest ? 
+        parseInt(document.getElementById('restDuration').value) : 
+        parseInt(document.getElementById('exerciseDuration').value);
+      
+      remainingTime = duration;
+      updateTimer();
+      
+      // Play beep sound
+      playBeep();
+      
+      // Start the timer
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (!isPaused) {
+          remainingTime--;
+          updateTimer();
+          
+          if (remainingTime <= 0) {
+            clearInterval(timerInterval);
+            currentExerciseIndex++;
+            setTimeout(playCurrentExercise, 500); // Short delay between exercises
+          }
+        }
+      }, 1000);
+    }
 
-// Ensure pauseWorkout stops the timer
-function pauseWorkout() {
-    clearInterval(timerInterval);
-}
+    // Update the timer display
+    function updateTimer() {
+      timerDiv.textContent = remainingTime;
+    }
 
-    // Render exercise selection
-    renderExerciseSelection();
+    // Toggle pause/resume
+    function togglePause() {
+      isPaused = !isPaused;
+      pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+      
+      if (isPaused) {
+        video.pause();
+      } else {
+        if (workoutRoutine[currentExerciseIndex].video) {
+          video.play().catch(e => console.error("Video resume error:", e));
+        }
+      }
+    }
 
-    // Event listeners
-    document.getElementById('generate').addEventListener('click', generateWorkout);
-    document.getElementById('startTimer').addEventListener('click', startWorkout);
-    document.getElementById('pauseTimer').addEventListener('click', pauseWorkout);
-</script>
+    // Skip current exercise
+    function skipExercise() {
+      clearInterval(timerInterval);
+      currentExerciseIndex++;
+      playCurrentExercise();
+    }
+
+    // End workout
+    function endWorkout() {
+      clearInterval(timerInterval);
+      timerDiv.textContent = 'Done!';
+      exerciseNameDiv.textContent = 'Workout Complete';
+      playBeep();
+      
+      video.pause();
+      video.style.display = 'none';
+      
+      startButton.style.display = 'inline-block';
+      startButton.textContent = 'Restart Workout';
+      pauseButton.style.display = 'none';
+      skipButton.style.display = 'none';
+    }
+
+    // Play beep sound
+    function playBeep() {
+      if (beep.readyState >= 2) { // Check if audio is loaded
+        try {
+          beep.currentTime = 0;
+          beep.play().catch(e => console.log("Beep playback error:", e));
+        } catch (e) {
+          console.error("Error playing beep:", e);
+        }
+      }
+    }
+  </script>
 </body>
 </html>
