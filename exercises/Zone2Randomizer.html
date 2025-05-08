@@ -99,7 +99,9 @@
     <button id="skipButton" style="display:none;">Skip</button>
   </div>
 
-  <audio id="beep" src="/sounds/beep.mp3"></audio>
+  <!-- Multiple audio elements for overlapping sounds -->
+  <audio id="beep1" src="/sounds/beep.mp3" preload="auto"></audio>
+  <audio id="beep2" src="/sounds/beep.mp3" preload="auto"></audio>
 
   <script>
     const exercises = {
@@ -166,7 +168,10 @@
     const video = document.getElementById('exerciseVideo');
     const timerDiv = document.getElementById('timer');
     const exerciseNameDiv = document.getElementById('exerciseName');
-    const beep = document.getElementById('beep');
+    const beeps = [
+      document.getElementById('beep1'),
+      document.getElementById('beep2')
+    ];
     const playerBox = document.getElementById('playerBox');
     const startButton = document.getElementById('startButton');
     const pauseButton = document.getElementById('pauseButton');
@@ -194,10 +199,41 @@
     let timerInterval = null;
     let isPaused = false;
     let remainingTime = 0;
+    let beepIndex = 0;  // To alternate between beep audio elements
+    let audioContext = null;
+
+    // Initialize Web Audio API on user interaction
+    document.addEventListener('click', initAudioContext, { once: true });
+
+    // Initialize audio context for more reliable sound playback
+    function initAudioContext() {
+      if (!audioContext) {
+        try {
+          // Create audio context
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioContext = new AudioContext();
+          
+          // Load and decode the beep sound
+          fetch('/sounds/beep.mp3')
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+            .then(audioBuffer => {
+              // Store the decoded audio buffer
+              window.beepBuffer = audioBuffer;
+            })
+            .catch(e => console.error("Error loading beep sound:", e));
+        } catch (e) {
+          console.error("Web Audio API not supported, falling back to HTML Audio:", e);
+        }
+      }
+    }
 
     // Form submission
     form.addEventListener('submit', async e => {
       e.preventDefault();
+      
+      // Initialize audio on first user interaction
+      initAudioContext();
       
       // Show loading indicator
       loadingText.style.display = 'inline-block';
@@ -318,6 +354,12 @@
       pauseButton.style.display = 'inline-block';
       skipButton.style.display = 'inline-block';
       isPaused = false;
+      
+      // Request wake lock to prevent device from sleeping
+      requestWakeLock();
+      
+      // Play initial beep and start the first exercise
+      playBeep();
       playCurrentExercise();
     }
 
@@ -351,7 +393,7 @@
       remainingTime = duration;
       updateTimer();
       
-      // Play beep sound
+      // Play beep sound at the start of each exercise/rest
       playBeep();
       
       // Start the timer
@@ -361,10 +403,20 @@
           remainingTime--;
           updateTimer();
           
+          // Warning beep when 3 seconds remaining
+          if (remainingTime === 3) {
+            playBeep();
+          }
+          
           if (remainingTime <= 0) {
             clearInterval(timerInterval);
+            
+            // Play ending beep for this exercise/rest
+            playBeep();
+            
+            // Move to next exercise after a short delay
             currentExerciseIndex++;
-            setTimeout(playCurrentExercise, 500); // Short delay between exercises
+            setTimeout(playCurrentExercise, 500);
           }
         }
       }, 1000);
@@ -386,12 +438,18 @@
         if (workoutRoutine[currentExerciseIndex].video) {
           video.play().catch(e => console.error("Video resume error:", e));
         }
+        // Play resume beep
+        playBeep();
       }
     }
 
     // Skip current exercise
     function skipExercise() {
       clearInterval(timerInterval);
+      
+      // Play skip beep
+      playBeep();
+      
       currentExerciseIndex++;
       playCurrentExercise();
     }
@@ -401,6 +459,8 @@
       clearInterval(timerInterval);
       timerDiv.textContent = 'Done!';
       exerciseNameDiv.textContent = 'Workout Complete';
+      
+      // Play final completion beep
       playBeep();
       
       video.pause();
@@ -410,19 +470,97 @@
       startButton.textContent = 'Restart Workout';
       pauseButton.style.display = 'none';
       skipButton.style.display = 'none';
+      
+      // Release wake lock
+      releaseWakeLock();
     }
 
-    // Play beep sound
+    // Play beep sound - trying multiple methods for cross-browser compatibility
     function playBeep() {
-      if (beep.readyState >= 2) { // Check if audio is loaded
+      // Try Web Audio API first (most reliable, works when tab not in focus)
+      if (audioContext && window.beepBuffer) {
         try {
-          beep.currentTime = 0;
-          beep.play().catch(e => console.log("Beep playback error:", e));
+          // Resume audio context if suspended (browser policy)
+          if (audioContext.state === 'suspended') {
+            audioContext.resume();
+          }
+          
+          // Create a new source for each sound
+          const source = audioContext.createBufferSource();
+          source.buffer = window.beepBuffer;
+          source.connect(audioContext.destination);
+          source.start(0);
+          return;
         } catch (e) {
-          console.error("Error playing beep:", e);
+          console.error("Web Audio API error:", e);
         }
       }
+      
+      // Fallback to HTML Audio API
+      try {
+        // Alternate between beep elements to allow overlapping sounds
+        const beep = beeps[beepIndex];
+        beepIndex = (beepIndex + 1) % beeps.length;
+        
+        // Make sure browser doesn't block audio
+        const playPromise = beep.play();
+        if (playPromise) {
+          playPromise.catch(e => {
+            console.log("HTML Audio play error, trying again:", e);
+            // Try again with user interaction requirement handling
+            beep.currentTime = 0;
+            document.addEventListener('click', () => beep.play(), { once: true });
+          });
+        }
+      } catch (e) {
+        console.error("Error playing beep:", e);
+      }
     }
+    
+    // Request wake lock to prevent screen from turning off
+    let wakeLock = null;
+    async function requestWakeLock() {
+      if ('wakeLock' in navigator) {
+        try {
+          wakeLock = await navigator.wakeLock.request('screen');
+          console.log('Wake Lock is active');
+          
+          // Handle wake lock release
+          wakeLock.addEventListener('release', () => {
+            console.log('Wake Lock was released');
+          });
+        } catch (err) {
+          console.error(`Wake Lock error: ${err.name}, ${err.message}`);
+        }
+      } else {
+        console.log('Wake Lock API not supported');
+      }
+    }
+    
+    // Release wake lock
+    function releaseWakeLock() {
+      if (wakeLock) {
+        wakeLock.release()
+          .then(() => {
+            wakeLock = null;
+          });
+      }
+    }
+
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && !isPaused) {
+        // Resume video playback when page becomes visible again
+        if (video.style.display !== 'none') {
+          video.play().catch(e => console.error("Video resume error after visibility change:", e));
+        }
+        
+        // Re-request wake lock if needed
+        if (wakeLock === null && !isPaused && currentExerciseIndex < workoutRoutine.length) {
+          requestWakeLock();
+        }
+      }
+    });
   </script>
 </body>
 </html>
