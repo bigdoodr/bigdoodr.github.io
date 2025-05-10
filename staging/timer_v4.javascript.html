@@ -1,0 +1,234 @@
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // State management
+      const state = {
+        exercises: [],
+        activeExerciseIndex: -1,
+        currentSet: 1,
+        isResting: false,
+        isWorkoutActive: false,
+        workoutStartTime: null,
+        elapsedTime: 0,
+        activeTime: 0,
+        restTime: 0,
+        timer: null,
+        remainingTime: 0,
+        isPaused: false,
+        completedExercises: 0,
+        completedSets: 0,
+        lastDraggedIndex: null
+      };
+
+      // DOM Elements
+      const exerciseList = document.getElementById('exerciseList');
+      const workoutExerciseList = document.getElementById('workoutExerciseList');
+      const addExerciseBtn = document.getElementById('addExerciseBtn');
+      const startWorkoutBtn = document.getElementById('startWorkoutBtn');
+      const pauseWorkoutBtn = document.getElementById('pauseWorkoutBtn');
+      const stopWorkoutBtn = document.getElementById('stopWorkoutBtn');
+      const timerDisplay = document.getElementById('timerDisplay');
+      const workoutStatus = document.getElementById('workoutStatus');
+      const elapsedTimeDisplay = document.getElementById('elapsedTime');
+      const completedExercisesDisplay = document.getElementById('completedExercises');
+      const totalTimeDisplay = document.getElementById('totalTime');
+      const totalExercisesDisplay = document.getElementById('totalExercises');
+      const totalSetsDisplay = document.getElementById('totalSets');
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const presetCards = document.querySelectorAll('.preset-card');
+      const beepSound = document.getElementById('beepSound');
+      const audioIndicator = document.getElementById('audioIndicator');
+      const importBtn = document.getElementById('importBtn');
+      const exportBtn = document.getElementById('exportBtn');
+      const fileInput = document.getElementById('fileInput');
+      const summaryModal = document.getElementById('summaryModal');
+      const closeSummaryModal = document.getElementById('closeSummaryModal');
+      const summaryDuration = document.getElementById('summaryDuration');
+      const summaryExercises = document.getElementById('summaryExercises');
+      const summarySets = document.getElementById('summarySets');
+      const summaryActiveTime = document.getElementById('summaryActiveTime');
+      const summaryRestTime = document.getElementById('summaryRestTime');
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      const closeToast = document.getElementById('closeToast');
+
+      // Helpers
+      function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+      }
+
+      function formatTimeWithUnit(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 1) {
+          return `${seconds} sec`;
+        }
+        return `${minutes} min`;
+      }
+
+      function playBeep() {
+        beepSound.currentTime = 0;
+        const playPromise = beepSound.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {
+            // Show audio indicator
+            audioIndicator.classList.add('active');
+            setTimeout(() => {
+              audioIndicator.classList.remove('active');
+            }, 500);
+          }).catch(error => {
+            showToast('Error playing sound. Please interact with the page first.', 'error');
+          });
+        }
+      }
+
+      function showToast(message, type = 'success') {
+        toastMessage.textContent = message;
+        toast.className = `toast ${type} active`;
+        
+        setTimeout(() => {
+          toast.classList.remove('active');
+        }, 3000);
+      }
+
+      closeToast.addEventListener('click', () => {
+        toast.classList.remove('active');
+      });
+
+      // Exercise management
+      function addExercise(exerciseData = null) {
+        const exercise = exerciseData || {
+          id: Date.now(),
+          name: `Exercise ${state.exercises.length + 1}`,
+          type: 'timed', // 'timed' or 'reps'
+          duration: 30,
+          rest: 15,
+          reps: 10,
+          sets: 3
+        };
+        
+        state.exercises.push(exercise);
+        renderExercises();
+        updateWorkoutInfo();
+      }
+
+      function updateExercise(id, updates) {
+        const index = state.exercises.findIndex(ex => ex.id === id);
+        if (index !== -1) {
+          state.exercises[index] = { ...state.exercises[index], ...updates };
+          renderExercises();
+          updateWorkoutInfo();
+        }
+      }
+
+      function removeExercise(id) {
+        const index = state.exercises.findIndex(ex => ex.id === id);
+        if (index !== -1) {
+          state.exercises.splice(index, 1);
+          renderExercises();
+          updateWorkoutInfo();
+        }
+      }
+
+      function moveExercise(fromIndex, toIndex) {
+        if (fromIndex === toIndex) return;
+        
+        const exercise = state.exercises.splice(fromIndex, 1)[0];
+        state.exercises.splice(toIndex, 0, exercise);
+        renderExercises();
+      }
+
+      function renderExercises() {
+        exerciseList.innerHTML = '';
+        
+        if (state.exercises.length === 0) {
+          exerciseList.innerHTML = '<p class="empty-state">No exercises added yet. Click "Add Exercise" to get started.</p>';
+          return;
+        }
+        
+        state.exercises.forEach((exercise, index) => {
+          const exerciseItem = document.createElement('div');
+          exerciseItem.className = 'exercise-item';
+          exerciseItem.dataset.id = exercise.id;
+          exerciseItem.dataset.index = index;
+          
+          exerciseItem.innerHTML = `
+            <div class="exercise-header">
+              <div class="drag-handle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21C13.6569 21 15 19.6569 15 18C15 16.3431 13.6569 15 12 15C10.3431 15 9 16.3431 9 18C9 19.6569 10.3431 21 12 21ZM12 9C13.6569 9 15 7.65685 15 6C15 4.34315 13.6569 3 12 3C10.3431 3 9 4.34315 9 6C9 7.65685 10.3431 9 12 9Z"></path></svg>
+              </div>
+              <span class="exercise-name" data-id="${exercise.id}">${exercise.name}</span>
+              <div class="exercise-controls">
+                <button class="exercise-action" data-action="edit" title="Edit name">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.8995 6.85431L17.1421 11.0969L7.24264 20.9963H3V16.7537L12.8995 6.85431ZM14.3137 5.44009L16.435 3.31877C17.0208 2.73299 17.9792 2.73299 18.565 3.31877L20.6863 5.44009C21.2721 6.02588 21.2721 6.98421 20.6863 7.57L18.565 9.69132L14.3137 5.44009Z"></path></svg>
+                </button>
+                <button class="exercise-action delete" data-action="delete" title="Delete exercise">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z"></path></svg>
+                </button>
+              </div>
+            </div>
+            <div class="exercise-detail">
+              <div class="exercise-type">
+                <label>
+                  <input type="radio" name="type-${exercise.id}" value="timed" 
+                    ${exercise.type === 'timed' ? 'checked' : ''}>
+                  Timed
+                </label>
+                <label>
+                  <input type="radio" name="type-${exercise.id}" value="reps"
+                    ${exercise.type === 'reps' ? 'checked' : ''}>
+                  Reps
+                </label>
+              </div>
+              ${exercise.type === 'timed' ? `
+                <div class="exercise-duration">
+                  <span>Duration:</span>
+                  <div class="input-group">
+                    <input type="number" min="1" max="300" value="${exercise.duration}" data-field="duration">
+                    <span>sec</span>
+                  </div>
+                </div>
+              ` : `
+                <div class="exercise-reps">
+                  <span>Reps:</span>
+                  <div class="input-group">
+                    <input type="number" min="1" max="100" value="${exercise.reps}" data-field="reps">
+                  </div>
+                </div>
+              `}
+              <div class="exercise-rest">
+                <span>Rest:</span>
+                <div class="input-group">
+                  <input type="number" min="0" max="300" value="${exercise.rest}" data-field="rest">
+                  <span>sec</span>
+                </div>
+              </div>
+              <div class="exercise-sets">
+                <span>Sets:</span>
+                <div class="input-group">
+                  <input type="number" min="1" max="20" value="${exercise.sets}" data-field="sets">
+                </div>
+              </div>
+            </div>
+          `;
+          
+          exerciseList.appendChild(exerciseItem);
+          
+          // Add event listeners for editing, deleting, and changing exercise properties
+          const typeRadios = exerciseItem.querySelectorAll('input[type="radio"]');
+          typeRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+              updateExercise(exercise.id, { type: e.target.value });
+            });
+          });
+          
+          const inputs = exerciseItem.querySelectorAll('input[type="number"]');
+          inputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+              const field = e.target.dataset.field;
+              const value = parseInt(e.target.value, 10);
+              
+              // Validate input
+              if (isNaN(value) || value < parseInt(e.target.min

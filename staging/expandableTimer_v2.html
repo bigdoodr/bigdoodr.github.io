@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Advanced Workout Timer</title>
+  <style>
+    :root {
+      --primary-color: #2e7d32;
+      --primary-light: #60ad5e;
+      --primary-dark: #005005;
+      --secondary-color: #00796b;
+      --secondary-light: #48a999;
+      --secondary-dark: #004c40;
+      --accent-color: #ffd600;
+      --text-on-primary: #ffffff;
+      --text-primary: #212121;
+      --text-secondary: #757575;
+      --background-light: #f9f9f9;
+      --background-white: #ffffff;
+      --error-color: #f44336;
+      --warning-color: #ff9800;
+      --success-color: #4CAF50;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: var(--background-light);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+
+    #workout-container {
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      border-radius: 8px;
+      background: var(--background-white);
+      position: relative;
+    }
+
+    .exercise {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 15px 0;
+      background: var(--background-white);
+      transition: all 0.3s;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.2em;
+      display: inline-block;
+      font-weight: 500;
+    }
+
+    button {
+      margin: 10px 5px 10px 0;
+      padding: 8px 15px;
+      background-color: var(--primary-color);
+      color: var(--text-on-primary);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    button:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    button:active {
+      transform: translateY(1px);
+      box-shadow: none;
+    }
+
+    button:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    button.delete-exercise {
+      background-color: var(--error-color);
+    }
+
+    button.delete-exercise:hover {
+      background-color: #d32f2f;
+    }
+
+    button.secondary-button {
+      background-color: var(--secondary-color);
+    }
+
+    button.secondary-button:hover {
+      background-color: var(--secondary-light);
+    }
+
+    button.warning-button {
+      background-color: var(--warning-color);
+    }
+
+    button.warning-button:hover {
+      background-color: #fb8c00;
+    }
+
+    .active {
+      background-color: #e0f7fa;
+      border-left: 4px solid var(--secondary-color);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 121, 107, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0); }
+    }
+
+    .dimmed {
+      opacity: 0.6;
+    }
+
+    #countdown-display {
+      text-align: center;
+      margin: 20px auto;
+      font-size: 2em;
+      color: var(--secondary-color);
+      padding: 15px;
+      background-color: #e0f7fa;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 80%;
+      font-weight: bold;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #countdown-display .timer-label {
+      font-size: 0.5em;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+    }
+
+    #countdown-display .timer-progress {
+      width: 90%;
+      height: 6px;
+      background-color: #b2ebf2;
+      border-radius: 3px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    #countdown-display .timer-progress-bar {
+      height: 100%;
+      width: 0;
+      background-color: var(--secondary-color);
+      transition: width 1s linear;
+    }
+
+    .exercise .countdown {
+      font-size: 1.3em;
+      color: var(--secondary-color);
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .editable-title {
+      display: inline-block;
+      padding: 5px 10px;
+      border: 1px dashed var(--secondary-color);
+      background-color: #f5f5f5;
+      color: var(--text-primary);
+      border-radius: 4px;
+      cursor: text;
+      min-width: 100px;
+    }
+
+    .editable-title:focus {
+      outline: none;
+      border-color: var(--secondary-dark);
+      background-color: #f0f0f0;
+      box-shadow: 0 0 0 2px #b2ebf2;
+    }
+
+    .drag-handle {
+      cursor: grab;
+      font-size: 1.2em;
+      color: #777;
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .drag-handle:active {
+      cursor: grabbing;
+    }
+
+    .time-input {
+      width: 40px;
+      text-align: center;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .exercise-type, .sets {
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+    }
+
+    .settings {
+      margin-top: 15px;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .settings label {
+      display: block;
+      margin: 10px 0;
+      font-weight: 500;
+    }
+
+    .settings input {
+      margin: 0 2px;
+    }
+
+    .dragging {
+      opacity: 0.5;
+      transform: scale(0.95);
+    }
+
+    .drop-target {
+      border: 2px dashed var(--secondary-color);
+    }
+
+    #controls {
+      margin: 20px 0;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    #status-message {
+      color: var(--error-color);
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #ffebee;
+      border-radius: 4px;
+      text-align: center;
+      display: none;
+    }
+
+    .sound-indicator {
+      display: inline-block;
+      font-size: 0.8em;
+      color: #777;
+      margin-left: 10px;
+    }
+
+    .fallback-beep {
+      display: none;
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .exercise-tools {
+      display: flex;
+      gap: 5px;
+    }
+
+    .time-input-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    .progress-container {
+      height: 8px;
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background-color: var(--primary-color);
+      transition: width 1s linear;
+    }
+
+    #workout-summary {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .validation-error {
+      border: 1px solid var(--error-color);
+      background-color: #ffebee;
+    }
+    
+    .error-tooltip {
+      color: var(--error-color);
+      font-size: 0.8em;
+      margin-top: 5px;
+    }
+
+    .completion-confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Theme toggle */
+    #theme-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.2em;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    #theme-toggle:hover {
+      color: var(--primary-color);
+    }
+
+    /* Dark mode styles */
+    .dark-mode {
+      --background-light: #121212;
+      --background-white: #1e1e1e;
+      --text-primary: #e0e0e0;
+      --text-secondary: #b0b0b0;
+      --primary-color: #81c784;
+      --primary-light: #b2fab4;
+      --primary-dark: #519657;
+      --secondary-color: #4db6ac;
+      --secondary-light: #82e9de;
+      --secondary-dark: #00867d;
+    }
+
+    .dark-mode .exercise {
+      border-color: #333;
+    }
+
+    .dark-mode .active {
+      background-color: rgba(0, 121, 107, 0.2);
+    }
+
+    .dark-mode #countdown-display {
+      background-color: rgba(0, 121, 107, 0.2);
+    }
+
+    .dark-mode .settings,
+    .dark-mode .editable-title {
+      background-color: #2a2a2a;
+      border-color: #444;
+    }
+
+    .dark-mode .time-input,
+    .dark-mode .exercise-type,
+    .dark-mode .sets {
+      background-color: #333;
+      border-color: #444;
+      color: var(--text-primary);
+    }
+
+    /* Presets panel */
+    #presets-panel {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #f0f0f0;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .preset-item {
+      padding: 10px;
+      margin: 8px 0;
+      background-color: var(--background-white);
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .preset-item:hover {
+      background-color: #e8f5e9;
+      border-color: var(--primary-color);
+    }
+
+    .preset-item .preset-title {
+      font-weight: 500;
+    }
+
+    .preset-item .preset-meta {
+      font-size: 0.8em;
+      color: var(--text-secondary);
+    }
+
+    /* Keyboard shortcuts info */
+    #shortcuts-info {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #e8f5e9;
+      border-radius: 4px;
+      font-size: 0.85em;
+      display: none;
+    }
+
+    #shortcuts-info kbd {
+      background-color: #e0e0e0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      padding: 2px 4px;
+      font-family: monospace;
+    }
+
+    .rep-complete-btn {
+      margin-top: 10px;
+      padding: 8px 15px;
+      background-color: var(--secondary-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .next-up {
+      background-color: rgba(0, 121, 107, 0.1);
+      border-left: 4px solid #b2dfdb;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .exercise {
+        padding: 10px;
+      }
+      .settings label {
+        font-size: 0.9em;
+      }
+      .time-input {
+        width: 30px;
+      }
+      #countdown-display {
+        font-size: 1.6em;
+        width: 90%;
+      }
+      #controls {
+        flex-direction: column;
+        align-items: center;
+      }
+      button {
+        width: 100%;
+        max-width: 300px;
+      }
+      .exercise-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .exercise-tools {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+  <div id="workout-container">
+    <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+    </button>
+    <h1>Advanced Workout Timer</h1>
+    <div id="status-message" role="alert"></div>
+    <div id="workout-summary"></div>
+    <div id="presets-panel">
+      <h3>Workout Presets</h3>
+      <div id="preset-list">
+        <!-- Preset items will be populated here -->
+      </div>
+    </div>
+    <div id="exercises" aria-live="polite">
+      <!-- Exercise blocks will be dynamically added here -->
+    </div>
+    <div id="shortcuts-info">
+      <h4>Keyboard Shortcuts</h4>
+      <p><kbd>Space</kbd> - Pause/Resume workout</p>
+      <p><kbd>Esc</kbd> - Stop workout</p>
+      <p><kbd>+</kbd> - Add new exercise</p>
+      <p><kbd>N</kbd> - Complete current rep and move to next (in rep mode)</p>
+    </div>
+    <div id="controls">
+      <button id="add-exercise" aria-label="Add Exercise">
+        <i class="fas fa-plus"></i> Add Exercise
+      </button>
+      <button id="start-workout" aria-label="Start Workout">
+        <i class="fas fa-play"></i> Start Workout
+      </button>
+      <button id="pause-workout" style="display: none;" aria-label="Pause Workout">
+        <i class="fas fa-pause"></i> Pause
+      </button>
+      <button id="resume-workout" style="display: none;" aria-label="Resume Workout">
+        <i class="fas fa-play"></i> Resume
+      </button>
+      <button id="stop-workout" style="display: none;" aria-label="Stop Workout" class="warning-button">
+        <i class="fas fa-stop"></i> Stop
+      </button>
+      <button id="presets-btn" aria-label="View Workout Presets" class="secondary-button">
+        <i class="fas fa-list"></i> Presets
+      </button>
+      <button id="import-btn" aria-label="Import Workout Routine" class="secondary-button">
+        <i class="fas fa-upload"></i> Import
+      </button>
+      <input type="file" id="import-routine" accept=".json" style="display: none;">
+      <button id="export-btn" aria-label="Export Workout Routine" class="secondary-button">
+        <i class="fas fa-download"></i> Export
+      </button>
+    </div>
+    <!-- Hidden audio elements -->
+    <audio id="fallback-beep" class="fallback-beep">
+      <source src="data:audio/wav;base64,UklGRigBAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQBAACBgIF/gn6Df4B+fn19fXx9fH18fX1+fn9/gICBgYKDg4SEhYaGh4iIiYqKi4uMjI2NjY6Pj5CQkZGSkpOTlJSVlZWWlpeXmJiZmZqam5ucnJ2dnp6fn6CgoaGioqOjpKSlpaamp6eoqKmqq6usrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urauqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAgA==" type="audio/wav">
+    </audio>
+    <audio id="complete-sound">
+      <source src="data:audio/wav;base64,UklGRqYEAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YYIEAACBgYKChIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/wADCBQwoMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8aNHDt6/AgypMiRJEuaPIkypcqVLFu6fAkzpsyZNGvavIkzp86dPHv6/Ak0qNChRIsaPYo0qdKlTJs6fQo1qtSpVKtavYo1q9atXLt6/Qo2rNixZMuaPYs2rdq1bNu6fQs3rty5dOvavYs3r969fPv6/Qs4sODBhAsaPow45eLFjBs7fgw5MksRQoRInky5suXLmDNr3sy5s+fPoEOLHk26tGnNQgQIOc26tevXsGPLnk27tu3buHPr3s27t+/fwIMLHz7cRmPFxJMrX868ufPn0KNLn069OvPCz51r3869u/fv4MOLHz+eend08+bTq1/Pvr379+jLq1/Pvr379/Djy28J1u5CAQAcgAIKOCCBBRp4IIIJKujQCkUtyOCDEEYo4YQUVmjhhRhmqKGBIUgYwIcghijiiCSWaOKJKKao4oostujiizDGKGMlBYxo44045qjjjjz26OOPQAYp5JBEFmnkkUgmqeSSTDbp5JNQRinllFRWaeWVWGap5ZZcdqnHCBKAKeaYZJZp5plopqnmmmy26eabcMYp55x01mnnnXjmqec7IoQAADs=" type="audio/wav">
+    </audio>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const exercisesDiv = document.getElementById('exercises');
+  const addExerciseBtn = document.getElementById('add-exercise');
+  const startWorkoutBtn = document.getElementById('start-workout');
+  const pauseWorkoutBtn = document.getElementById('pause-workout');
+  const resumeWorkoutBtn = document.getElementById('resume-workout');
+  const stopWorkoutBtn = document.getElementById('stop-workout');
+  const workoutContainer = document.getElementById('workout-container');
+  const exportRoutineBtn = document.getElementById('export-btn');
+  const importRoutineBtn = document.getElementById('import-btn');
+  const importRoutineInput = document.getElementById('import-routine');
+  const presetsBtn = document.getElementById('presets-btn');
+  const presetsPanel = document.getElementById('presets-panel');
+  const presetList = document.getElementById('preset-list');
+  const statusMessage = document.getElementById('status-message');
+  const fallbackBeep = document.getElementById('fallback-beep');
+  const completeSound = document.getElementById('complete-sound');
+  const workoutSummary = document.getElementById('workout-summary');
+  const shortcutsInfo = document.getElementById('shortcuts-info');
+  const themeToggle = document.getElementById('theme-toggle');
+  
+
+    // -- Global variables
+    let exercises = [];          // Array to store exercise data
+    let workoutRoutine = [];     // Array of exercise segments for the workout
+    let currentSegmentIndex = 0; // Current position in workout routine
+    let lastUpdateTime = 0;      // Last timer update timestamp
+    let workoutTimer = null;     // Global workout timer
+    let countdownTimer = null;   // Current exercise countdown timer
+    let repTimer = null;         // Timer for rep-based exercises
+    let workoutInProgress = false; // Flag to track if workout is in progress
+    let workoutPaused = false;   // Flag to track if workout is paused
+    let pauseStartTime = 0;      // When the workout was paused
+    let audioContext = null;     // Web Audio API context
+    let oscillator = null;       // Audio oscillator
+    let beepBuffer = null;       // Audio buffer for beep sound
+    let completeBuffer = null;   // Audio buffer for completion sound
+    
+    // Workout statistics
+    let workoutStats = {
+      startTime: 0,
+      totalDuration: 0,
+      completedExercises: 0,
+      completedSets: 0,
+    };
+
+  // Standard workout presets
+  const workoutPresets = [
+    {
+      name: "Quick HIIT",
+      description: "High intensity interval training - 20 seconds on, 10 seconds rest",
+      exercises: [
+        { title: "Jumping Jacks", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 20}, restTime: {hours: 0, minutes: 0, seconds: 10} },
+        { title: "Push-ups", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 20}, restTime: {hours: 0, minutes: 0, seconds: 10} },
+        { title: "Mountain Climbers", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 20}, restTime: {hours: 0, minutes: 0, seconds: 10} },
+        { title: "Squats", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 20}, restTime: {hours: 0, minutes: 0, seconds: 10} },
+        { title: "Plank", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 20}, restTime: {hours: 0, minutes: 0, seconds: 10} },
+      ]
+    },
+    {
+      name: "Strength Circuit",
+      description: "Full body strength training - 45 seconds work, 30 seconds rest",
+      exercises: [
+        { title: "Squats", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 45}, restTime: {hours: 0, minutes: 0, seconds: 30} },
+        { title: "Push-ups", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 45}, restTime: {hours: 0, minutes: 0, seconds: 30} },
+        { title: "Lunges", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 45}, restTime: {hours: 0, minutes: 0, seconds: 30} },
+        { title: "Dumbbell Rows", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 45}, restTime: {hours: 0, minutes: 0, seconds: 30} },
+        { title: "Plank", type: "timed", sets: 3, exerciseTime: {hours: 0, minutes: 0, seconds: 45}, restTime: {hours: 0, minutes: 0, seconds: 30} }
+      ]
+    },
+    {
+      name: "Tabata Protocol",
+      description: "Classic Tabata - 20 seconds work, 10 seconds rest, 8 rounds",
+      exercises: [
+        { title: "Exercise of Choice", type: "timed", sets: 8, exerciseTime: {hours: 0, minutes: 0, seconds: 20}, restTime: {hours: 0, minutes: 0, seconds: 10} }
+      ]
+    },
+    {
+      name: "5x5 Strength",
+      description: "5 sets of 5 reps for compound exercises",
+      exercises: [
+        { title: "Squats", type: "rep", sets: 5, restTime: {hours: 0, minutes: 2, seconds: 0} },
+        { title: "Bench Press", type: "rep", sets: 5, restTime: {hours: 0, minutes: 2, seconds: 0} },
+        { title: "Barbell Rows", type: "rep", sets: 5, restTime: {hours: 0, minutes: 2, seconds: 0} },
+        { title: "Overhead Press", type: "rep", sets: 5, restTime: {hours: 0, minutes: 2, seconds: 0} },
+        { title: "Deadlift", type: "rep", sets: 5, restTime: {hours: 0, minutes: 2, seconds: 0} }
+      ]
+    }
+  ];
+  
+  // Initialize the audio context with fallback and error handling
+  function initializeAudio() {
+    try {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // Create an oscillator-based beep
+      function createBeepBuffer() {
+        const sampleRate = audioContext.sampleRate;
+        const duration = 0.3; // seconds
+        const numSamples = duration * sampleRate;
+        const buffer = audioContext.createBuffer(1, numSamples, sampleRate);
+        const data = buffer.getChannelData(0);
+        
+        // Generate a simple beep tone
+        for (let i = 0; i < numSamples; i++) {
+          const t = i / sampleRate;
+          data[i] = Math.sin(2 * Math.PI * 440 * t) * 
+                   (i < 0.1 * numSamples ? i / (0.1 * numSamples) : 
+                   (i > 0.9 * numSamples ? (numSamples - i) / (0.1 * numSamples) : 1));
+        }
+        
+        return buffer;
+      }
+      
+// Create a completion sound (different tone)
+function createCompleteBuffer() {
+  const sampleRate = audioContext.sampleRate;
+  const duration = 0.8; // seconds
+  const numSamples = duration * sampleRate;
+  const buffer = audioContext.createBuffer(1, numSamples, sampleRate);
+  const data = buffer.getChannelData(0);
+  
+  // Generate a completion tone (higher pitched)
+  for (let i = 0; i < numSamples; i++) {
+    const t = i / sampleRate;
+    // Create a more complex sound with multiple frequencies
+    data[i] = 0.5 * Math.sin(2 * Math.PI * 880 * t) + 
+              0.3 * Math.sin(2 * Math.PI * 1320 * t) * 
+             (i < 0.1 * numSamples ? i / (0.1 * numSamples) : 
+             (i > 0.9 * numSamples ? (numSamples - i) / (0.1 * numSamples) : 1));
+  }
+  
+  return buffer;
+}
+
+// Initialize audio buffers
+beepBuffer = createBeepBuffer();
+completeBuffer = createCompleteBuffer();
+
+} catch (error) {
+  console.error('Web Audio API not supported or error initializing:', error);
+  // We'll fallback to HTML5 Audio elements
+}
+}
+
+// Function to play audio with fallbacks
+function playSound(type = 'beep') {
+  try {
+    if (audioContext) {
+      const buffer = type === 'beep' ? beepBuffer : completeBuffer;
+      const source = audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioContext.destination);
+      source.start();
+    } else {
+      // Fallback to HTML5 Audio
+      const audioElement = type === 'beep' ? fallbackBeep : completeSound;
+      audioElement.currentTime = 0;
+      audioElement.play().catch(e => {
+        console.warn('HTML5 Audio playback failed:', e);
+        // Try vibration API as last resort
+        if ('vibrate' in navigator) {
+          navigator.vibrate(type === 'beep' ? 200 : [100, 50, 100, 50, 100]);
+        }
+      });
+    }
+  } catch (e) {
+    console.error('Sound playback error:', e);
+    // Try vibration API as last resort
+    if ('vibrate' in navigator) {
+      navigator.vibrate(type === 'beep' ? 200 : [100, 50, 100, 50, 100]);
+    }
+  }
+}
+
+// Display error message
+function showError(message, duration = 5000) {
+  statusMessage.textContent = message;
+  statusMessage.style.display = 'block';
+  setTimeout(() => {
+    statusMessage.style.display = 'none';
+  }, duration);
+}
+
+// Format time in HH:MM:SS format
+function formatTime(timeObj) {
+  return `${timeObj.hours.toString().padStart(2, '0')}:${timeObj.minutes.toString().padStart(2, '0')}:${timeObj.seconds.toString().padStart(2, '0')}`;
+}
+
+// Convert time object to seconds
+function timeToSeconds(timeObj) {
+  return timeObj.hours * 3600 + timeObj.minutes * 60 + timeObj.seconds;
+}
+
+// Convert seconds to time object
+function secondsToTime(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = Math.floor(totalSeconds % 60);
+  return { hours, minutes, seconds };
+}
+
+// Generate a unique ID for each exercise
+function generateExerciseId() {
+  return 'exercise-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+}
+
+// Create new exercise element
+function createExerciseElement(exerciseData = null) {
+  const exerciseId = generateExerciseId();
+  const exerciseDiv = document.createElement('div');
+  exerciseDiv.className = 'exercise';
+  exerciseDiv.id = exerciseId;
+  
+  // Default values
+  const defaultData = {
+    title: 'New Exercise',
+    type: 'timed',
+    sets: 3,
+    exerciseTime: { hours: 0, minutes: 0, seconds: 30 },
+    restTime: { hours: 0, minutes: 0, seconds: 30 }
+  };
+  
+  // Use provided data or defaults
+  const data = exerciseData || defaultData;
+  
+  // Prepare HTML structure
+  exerciseDiv.innerHTML = `
+    <div class="exercise-header">
+      <div>
+        <span class="drag-handle" title="Drag to reorder"><i class="fas fa-grip-vertical"></i></span>
+        <h2 class="editable-title" contenteditable="true">${data.title}</h2>
+      </div>
+      <div class="exercise-tools">
+        <button class="duplicate-exercise" title="Duplicate Exercise">
+          <i class="fas fa-copy"></i>
+        </button>
+        <button class="delete-exercise" title="Delete Exercise">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+    <div class="settings">
+      <label>
+        Exercise Type:
+        <select class="exercise-type">
+          <option value="timed" ${data.type === 'timed' ? 'selected' : ''}>Timed</option>
+          <option value="rep" ${data.type === 'rep' ? 'selected' : ''}>Rep-based</option>
+        </select>
+      </label>
+      
+      <label>
+        Sets:
+        <input type="number" class="sets" value="${data.sets}" min="1" max="100">
+      </label>
+      
+      <div class="timed-settings" ${data.type === 'rep' ? 'style="display: none;"' : ''}>
+        <label>
+          Exercise Time:
+          <div class="time-input-group">
+            <input type="number" class="time-input exercise-hours" value="${data.exerciseTime.hours}" min="0" max="24"> h
+            <input type="number" class="time-input exercise-minutes" value="${data.exerciseTime.minutes}" min="0" max="59"> m
+            <input type="number" class="time-input exercise-seconds" value="${data.exerciseTime.seconds}" min="0" max="59"> s
+          </div>
+        </label>
+      </div>
+      
+      <label>
+        Rest Time:
+        <div class="time-input-group">
+          <input type="number" class="time-input rest-hours" value="${data.restTime.hours}" min="0" max="24"> h
+          <input type="number" class="time-input rest-minutes" value="${data.restTime.minutes}" min="0" max="59"> m
+          <input type="number" class="time-input rest-seconds" value="${data.restTime.seconds}" min="0" max="59"> s
+        </div>
+      </label>
+    </div>
+    <div class="countdown" style="display: none;"></div>
+    <div class="progress-container" style="display: none;">
+      <div class="progress-bar"></div>
+    </div>
+    <button class="rep-complete-btn" style="display: none;">Complete Rep</button>
+  `;
+  
+  // Add event listeners
+  const exerciseType = exerciseDiv.querySelector('.exercise-type');
+  const timedSettings = exerciseDiv.querySelector('.timed-settings');
+  const deleteBtn = exerciseDiv.querySelector('.delete-exercise');
+  const duplicateBtn = exerciseDiv.querySelector('.duplicate-exercise');
+  const repCompleteBtn = exerciseDiv.querySelector('.rep-complete-btn');
+  const editableTitle = exerciseDiv.querySelector('.editable-title');
+  
+  // Exercise type change
+  exerciseType.addEventListener('change', () => {
+    if (exerciseType.value === 'timed') {
+      timedSettings.style.display = 'block';
+    } else {
+      timedSettings.style.display = 'none';
+    }
+  });
+  
+  // Delete exercise
+  deleteBtn.addEventListener('click', () => {
+    if (workoutActive) {
+      showError('Cannot delete exercises during an active workout.');
+      return;
+    }
+    
+    if (exercises.length === 1) {
+      showError('You must have at least one exercise in your routine.');
+      return;
+    }
+    
+    exerciseDiv.remove();
+    exercises = exercises.filter(ex => ex.id !== exerciseId);
+    updateWorkoutRoutine();
+  });
+  
+  // Duplicate exercise
+  duplicateBtn.addEventListener('click', () => {
+    if (workoutActive) {
+      showError('Cannot duplicate exercises during an active workout.');
+      return;
+    }
+    
+    const exerciseData = getExerciseData(exerciseDiv);
+    const newExerciseElement = createExerciseElement(exerciseData);
+    exerciseDiv.insertAdjacentElement('afterend', newExerciseElement);
+    
+    // Add to exercises array
+    const newExerciseIndex = exercises.findIndex(ex => ex.id === exerciseId) + 1;
+    exercises.splice(newExerciseIndex, 0, {
+      id: newExerciseElement.id,
+      element: newExerciseElement,
+      ...exerciseData
+    });
+    
+    updateWorkoutRoutine();
+    setupDragAndDrop();
+  });
+  
+  // Handle rep completion
+  repCompleteBtn.addEventListener('click', () => {
+    if (workoutActive && !isPaused && currentExerciseIndex !== -1) {
+      completeCurrentExercise();
+    }
+  });
+  
+  // Add this exercise to our array
+  const exerciseObj = {
+    id: exerciseId,
+    element: exerciseDiv,
+    ...data
+  };
+  
+  exercises.push(exerciseObj);
+  
+  // Add to DOM
+  exercisesDiv.appendChild(exerciseDiv);
+  
+  // Set up drag-and-drop for this element
+  setupDragAndDrop();
+  
+  return exerciseDiv;
+}
+
+// Get exercise data from DOM element
+function getExerciseData(exerciseElement) {
+  const title = exerciseElement.querySelector('.editable-title').textContent;
+  const type = exerciseElement.querySelector('.exercise-type').value;
+  const sets = parseInt(exerciseElement.querySelector('.sets').value);
+  
+  // For timed exercise
+  const exerciseHours = parseInt(exerciseElement.querySelector('.exercise-hours').value) || 0;
+  const exerciseMinutes = parseInt(exerciseElement.querySelector('.exercise-minutes').value) || 0;
+  const exerciseSeconds = parseInt(exerciseElement.querySelector('.exercise-seconds').value) || 0;
+  
+  // Rest time
+  const restHours = parseInt(exerciseElement.querySelector('.rest-hours').value) || 0;
+  const restMinutes = parseInt(exerciseElement.querySelector('.rest-minutes').value) || 0;
+  const restSeconds = parseInt(exerciseElement.querySelector('.rest-seconds').value) || 0;
+  
+  return {
+    title,
+    type,
+    sets,
+    exerciseTime: { hours: exerciseHours, minutes: exerciseMinutes, seconds: exerciseSeconds },
+    restTime: { hours: restHours, minutes: restMinutes, seconds: restSeconds }
+  };
+}
+
+// Update workout routine array from the exercises DOM elements
+function updateWorkoutRoutine() {
+  workoutRoutine = [];
+  
+  exercises.forEach(exercise => {
+    // Update exercise data with current values from DOM
+    const updatedData = getExerciseData(exercise.element);
+    Object.assign(exercise, updatedData);
+    
+    // Add exercise to routine for each set
+    for (let set = 1; set <= exercise.sets; set++) {
+      // Add exercise period
+      if (exercise.type === 'timed') {
+        workoutRoutine.push({
+          id: exercise.id,
+          title: exercise.title,
+          type: 'exercise',
+          timeInSeconds: timeToSeconds(exercise.exerciseTime),
+          set,
+          totalSets: exercise.sets,
+          isRep: false
+        });
+      } else {
+        // Rep-based exercise
+        workoutRoutine.push({
+          id: exercise.id,
+          title: exercise.title,
+          type: 'exercise',
+          timeInSeconds: 0, // No time for rep-based
+          set,
+          totalSets: exercise.sets,
+          isRep: true
+        });
+      }
+      
+      // Add rest period after each set except the last one
+      if (set < exercise.sets || exercise.id !== exercises[exercises.length - 1].id) {
+        workoutRoutine.push({
+          id: exercise.id,
+          title: exercise.title,
+          type: 'rest',
+          timeInSeconds: timeToSeconds(exercise.restTime),
+          set,
+          totalSets: exercise.sets,
+          isRep: false
+        });
+      }
+    }
+  });
+  
+  // Calculate total workout duration
+  totalWorkoutDuration = workoutRoutine.reduce((total, segment) => {
+    return total + (segment.isRep ? 0 : segment.timeInSeconds);
+  }, 0);
+}
+
+// Set up drag and drop functionality
+function setupDragAndDrop() {
+  const draggables = document.querySelectorAll('.exercise');
+  let draggedItem = null;
+  
+  draggables.forEach(item => {
+    const dragHandle = item.querySelector('.drag-handle');
+    
+    dragHandle.addEventListener('mousedown', e => {
+      if (workoutActive) {
+        showError('Cannot reorder exercises during an active workout.');
+        return;
+      }
+      
+      draggedItem = item;
+      item.classList.add('dragging');
+      
+      // Prevent text selection during drag
+      e.preventDefault();
+    });
+    
+    item.addEventListener('dragover', e => {
+      e.preventDefault();
+      if (!draggedItem || draggedItem === item) return;
+      
+      const box = item.getBoundingClientRect();
+      const offsetY = e.clientY - box.top - box.height / 2;
+      
+      if (offsetY < 0) {
+        // Insert before
+        exercisesDiv.insertBefore(draggedItem, item);
+      } else {
+        // Insert after
+        exercisesDiv.insertBefore(draggedItem, item.nextSibling);
+      }
+      
+      // Update exercises array to match DOM order
+      updateExercisesOrder();
+    });
+    
+    item.addEventListener('mouseup', () => {
+      if (draggedItem) {
+        draggedItem.classList.remove('dragging');
+        draggedItem = null;
+        updateWorkoutRoutine();
+      }
+    });
+  });
+  
+  // Handle document mouseup to end drag even if outside elements
+  document.addEventListener('mouseup', () => {
+    if (draggedItem) {
+      draggedItem.classList.remove('dragging');
+      draggedItem = null;
+      updateWorkoutRoutine();
+    }
+  });
+}
+
+// Update exercises array to match DOM order
+function updateExercisesOrder() {
+  const newOrder = [];
+  const exerciseElements = document.querySelectorAll('.exercise');
+  
+  exerciseElements.forEach(element => {
+    const exerciseId = element.id;
+    const exercise = exercises.find(ex => ex.id === exerciseId);
+    if (exercise) {
+      newOrder.push(exercise);
+    }
+  });
+  
+  exercises = newOrder;
+}
+
+// Start the workout
+function startWorkout() {
+  if (exercises.length === 0) {
+    showError('Add at least one exercise to start a workout.');
+    return;
+  }
+  
+  // Validate all inputs first
+  if (!validateInputs()) {
+    showError('Please fix the errors in your workout routine before starting.');
+    return;
+  }
+  
+  // Update workout routine with current values
+  updateWorkoutRoutine();
+  
+  if (workoutRoutine.length === 0) {
+    showError('Your workout routine is empty. Add exercises with sets to begin.');
+    return;
+  }
+  
+  // Initialize workout
+  workoutActive = true;
+  isPaused = false;
+  currentExerciseIndex = 0;
+  currentSetIndex = 1;
+  elapsedWorkoutTime = 0;
+  startTime = Date.now();
+  lastTime = startTime;
+  
+  // Reset workout stats
+  workoutStats = {
+    totalExerciseTime: 0,
+    totalRestTime: 0,
+    totalSets: 0,
+    completedExercises: 0,
+    completedSets: 0
+  };
+  
+  // Count total sets
+  workoutStats.totalSets = workoutRoutine.filter(item => item.type === 'exercise').length;
+  
+  // Initialize audio if not already
+  if (!audioContext) {
+    initializeAudio();
+  }
+  
+  // Update UI
+  updateUIForWorkoutStart();
+  
+  // Start the first exercise
+  startCurrentExercise();
+  
+  // Start global timer
+  globalTimerInterval = setInterval(updateGlobalTimer, 1000);
+  
+  // Show keyboard shortcuts
+  shortcutsInfo.style.display = 'block';
+}
+
+// Update UI when starting workout
+function updateUIForWorkoutStart() {
+  // Update buttons
+  startWorkoutBtn.style.display = 'none';
+  pauseWorkoutBtn.style.display = 'inline-block';
+  stopWorkoutBtn.style.display = 'inline-block';
+  addExerciseBtn.disabled = true;
+  presetsBtn.disabled = true;
+  importRoutineBtn.disabled = true;
+  exportRoutineBtn.disabled = true;
+  
+  // Hide the workout summary
+  workoutSummary.style.display = 'none';
+  
+  // Dim all exercise elements initially
+  document.querySelectorAll('.exercise').forEach(ex => {
+    ex.classList.add('dimmed');
+    ex.classList.remove('active');
+    ex.classList.remove('next-up');
+    
+    // Disable editing during workout
+    const inputs = ex.querySelectorAll('input, select');
+    inputs.forEach(input => input.disabled = true);
+    
+    const editableTitle = ex.querySelector('.editable-title');
+    editableTitle.contentEditable = false;
+    
+    // Hide progress bars
+    const progressContainer = ex.querySelector('.progress-container');
+    progressContainer.style.display = 'none';
+  });
+  
+  // Create the global countdown display if it doesn't exist
+  if (!document.getElementById('countdown-display')) {
+    const countdownDisplay = document.createElement('div');
+    countdownDisplay.id = 'countdown-display';
+    countdownDisplay.innerHTML = `
+      <div class="timer-label">Current: <span id="current-exercise-name"></span></div>
+      <div id="timer-value">00:00:00</div>
+      <div class="timer-progress">
+        <div class="timer-progress-bar"></div>
+      </div>
+    `;
+    workoutContainer.insertBefore(countdownDisplay, exercisesDiv);
+  }
+}
+
+// Start the current exercise
+function startCurrentExercise() {
+  if (currentExerciseIndex >= workoutRoutine.length) {
+    completeWorkout();
+    return;
+  }
+  
+  const currentSegment = workoutRoutine[currentExerciseIndex];
+  const exerciseElement = document.getElementById(currentSegment.id);
+  
+  // Update visual state
+  document.querySelectorAll('.exercise').forEach(ex => {
+    ex.classList.add('dimmed');
+    ex.classList.remove('active');
+    ex.classList.remove('next-up');
+  });
+  
+  exerciseElement.classList.remove('dimmed');
+  exerciseElement.classList.add('active');
+  
+  // Highlight the next exercise if it exists
+  if (currentExerciseIndex + 1 < workoutRoutine.length) {
+    const nextSegment = workoutRoutine[currentExerciseIndex + 1];
+    if (nextSegment.id !== currentSegment.id) {
+      const nextElement = document.getElementById(nextSegment.id);
+      nextElement.classList.remove('dimmed');
+      nextElement.classList.add('next-up');
+    }
+  }
+  
+  // Update the countdown display
+  const countdownDisplay = document.getElementById('countdown-display');
+  const currentExerciseName = document.getElementById('current-exercise-name');
+  const timerValue = document.getElementById('timer-value');
+  const timerProgressBar = document.querySelector('.timer-progress-bar');
+  
+  // Scroll to the current exercise
+  exerciseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+  // Update exercise name in display
+  currentExerciseName.textContent = `${currentSegment.title} (${currentSegment.type === 'exercise' ? 'Work' : 'Rest'} - Set ${currentSegment.set}/${currentSegment.totalSets})`;
+  
+  if (currentSegment.isRep) {
+    // Rep-based exercise
+    timerValue.textContent = `Set ${currentSegment.set}/${currentSegment.totalSets}`;
+    timerProgressBar.style.width = '0%';
+    
+    // Show the rep completion button
+    const repCompleteBtn = exerciseElement.querySelector('.rep-complete-btn');
+    repCompleteBtn.style.display = 'block';
+    repCompleteBtn.textContent = `Complete Rep (Set ${currentSegment.set}/${currentSegment.totalSets})`;
+    
+    // Add a countup timer for rep-based exercises
+    startRepBasedTimer(exerciseElement);
+  } else {
+    // Timed exercise
+    const duration = currentSegment.timeInSeconds;
+    let timeLeft = duration;
+    
+    // Format and display the time
+    timerValue.textContent = formatTime(secondsToTime(timeLeft));
+    timerProgressBar.style.width = '0%';
+    
+    // Hide rep completion button
+    const repCompleteBtn = exerciseElement.querySelector('.rep-complete-btn');
+    repCompleteBtn.style.display = 'none';
+    
+    // Check if we need to play a sound
+    if (currentSegment.type === 'exercise') {
+      playSound('beep');
+    }
+    
+    // Show the progress container
+    const progressContainer = exerciseElement.querySelector('.progress-container');
+    const progressBar = exerciseElement.querySelector('.progress-bar');
+    progressContainer.style.display = 'block';
+    progressBar.style.width = '0%';
+    
+    // Set up the countdown timer
+    currentTimer = setInterval(() => {
+      if (isPaused) return;
+      
+      timeLeft--;
+      timerValue.textContent = formatTime(secondsToTime(timeLeft));
+      
+      // Update progress bar
+      const progressPercent = 100 - (timeLeft / duration * 100);
+      timerProgressBar.style.width = `${progressPercent}%`;
+      progressBar.style.width = `${progressPercent}%`;
+      
+      // Play sound at specific points
+      if (timeLeft === 3 || timeLeft === 2 || timeLeft === 1) {
+        playSound('beep');
+      }
+      
+      // Update workout stats
+      if (currentSegment.type === 'exercise') {
+        workoutStats.totalExerciseTime++;
+      } else {
+        workoutStats.totalRestTime++;
+      }
+      
+      if (timeLeft <= 0) {
+        clearInterval(currentTimer);
+        
+        // Play completion sound
+        playSound('complete');
+        
+        // Move to next exercise
+        completeCurrentExercise();
+      }
+    }, 1000);
+  }
+}
+
+// Start a rep-based timer (just counts up)
+function startRepBasedTimer(exerciseElement) {
+  const countdownDisplay = exerciseElement.querySelector('.countdown');
+  countdownDisplay.style.display = 'block';
+  
+  let seconds = 0;
+  currentTimer = setInterval(() => {
+    if (isPaused) return;
+    
+    seconds++;
+    const time = secondsToTime(seconds);
+    countdownDisplay.textContent = `Time elapsed: ${formatTime(time)}`;
+  }, 1000);
+}
+
+// Complete the current exercise and move to the next
+function completeCurrentExercise() {
+  clearInterval(currentTimer);
+  
+  // If it's an exercise (not rest), increment the completed exercises count
+  const currentSegment = workoutRoutine[currentExerciseIndex];
+  if (currentSegment.type === 'exercise') {
+    workoutStats.completedExercises++;
+    workoutStats.completedSets++;
+    
+    // Mark as completed visually
+    const exerciseElement = document.getElementById(currentSegment.id);
+    exerciseElement.classList.add('completed');
+  }
+  
+  // Move to the next segment
+  currentExerciseIndex++;
+  
+  // Start the next exercise or finish workout
+  if (currentExerciseIndex < workoutRoutine.length) {
+    startCurrentExercise();
+  } else {
+    completeWorkout();
+  }
+}
+
+// Complete the entire workout
+function completeWorkout() {
+  workoutActive = false;
+  clearInterval(currentTimer);
+  clearInterval(globalTimerInterval);
+  
+  // Final stats update
+  const endTime = Date.now();
+  const totalTimeSeconds = Math.round((endTime - startTime) / 1000);
+  const totalTime = secondsToTime(totalTimeSeconds);
+  
+  // Play completion sound
+  playSound('complete');
+  
+  // Show confetti effect
+  createConfetti();
+  
+  // Generate workout summary
+  const completionPercent = Math.round((workoutStats.completedSets / workoutStats.totalSets) * 100);
+  
+  workoutSummary.innerHTML = `
+    <h3>Workout Complete! 🎉</h3>
+    <p>Total Time: ${formatTime(totalTime)}</p>
+    <p>Completed: ${workoutStats.completedSets}/${workoutStats.totalSets} sets (${completionPercent}%)</p>
+    <p>Exercise Time: ${formatTime(secondsToTime(workoutStats.totalExerciseTime))}</p>
+    <p>Rest Time: ${formatTime(secondsToTime(workoutStats.totalRestTime))}</p>
+  `;
+  workoutSummary.style.display = 'block';
+  
+  // Reset UI
+  resetWorkoutUI();
+}
+
+// Reset UI after workout
+function resetWorkoutUI() {
+  // Hide countdown display
+  const countdownDisplay = document.getElementById('countdown-display');
+  if (countdownDisplay) {
+    countdownDisplay.remove();
+  }
+  
+  // Reset exercise elements
+  document.querySelectorAll('.exercise').forEach(ex => {
+    ex.classList.remove('dimmed');
+    ex.classList.remove('active');
+    ex.classList.remove('next-up');
+    ex.classList.remove('completed');
+    
+    // Re-enable editing
+    const inputs = ex.querySelectorAll('input, select');
+    inputs.forEach(input => input.disabled = false);
+    
+    const editableTitle = ex.querySelector('.editable-title');
+    editableTitle.contentEditable = true;
+    
+    // Hide countdown and progress bars
+    const countdown = ex.querySelector('.countdown');
+    if (countdown) countdown.style.display = 'none';
+    
+    const progressContainer = ex.querySelector('.progress-container');
+    if (progressContainer) progressContainer.style.display = 'none';
+    
+    // Hide rep completion button
+    const repCompleteBtn = ex.querySelector('.rep-complete-btn');
+    if (repCompleteBtn) repCompleteBtn.style.display = 'none';
+  });
+  
+  // Reset buttons
+  startWorkoutBtn.style.display = 'inline-block';
+  pauseWorkoutBtn.style.display = 'none';
+  resumeWorkoutBtn.style.display = 'none';
+  stopWorkoutBtn.style.display = 'none';
+  addExerciseBtn.disabled = false;
+  presetsBtn.disabled = false;
+  importRoutineBtn.disabled = false;
+  exportRoutineBtn.disabled = false;
+  
+  // Hide keyboard shortcuts
+  shortcutsInfo.style.display = 'none';
+}
+
+// Pause the workout
+function pauseWorkout() {
+  isPaused = true;
+  pauseWorkoutBtn.style.display = 'none';
+  resumeWorkoutBtn.style.display = 'inline-block';
+}
+
+// Resume the workout
+function resumeWorkout() {
+  isPaused = false;
+  resumeWorkoutBtn.style.display = 'none';
+  pauseWorkoutBtn.style.display = 'inline-block';
+  
+  // Update the last time to account for the pause duration
+  lastTime = Date.now();
+}
+
+// Stop the workout
+function stopWorkout() {
+  // Confirm before stopping
+  if (confirm('Are you sure you want to stop the workout? All progress will be lost.')) {
+    clearInterval(currentTimer);
+    clearInterval(globalTimerInterval);
+    workoutActive = false;
+    isPaused = false;
+    
+    // Calculate final stats
+    const endTime = Date.now();
+    const totalTimeSeconds = Math.round((endTime - startTime) / 1000);
+    const totalTime = secondsToTime(totalTimeSeconds);
+    
+    // Generate workout summary
+    const completionPercent = Math.round((workoutStats.completedSets / workoutStats.totalSets) * 100);
+    
+    workoutSummary.innerHTML = `
+      <h3>Workout Stopped</h3>
+      <p>Total Time: ${formatTime(totalTime)}</p>
+      <p>Completed: ${workoutStats.completedSets}/${workoutStats.totalSets} sets (${completionPercent}%)</p>
+      <p>Exercise Time: ${formatTime(secondsToTime(workoutStats.totalExerciseTime))}</p>
+      <p>Rest Time: ${formatTime(secondsToTime(workoutStats.totalRestTime))}</p>
+    `;
+    workoutSummary.style.display = 'block';
+    
+    // Reset UI
+    resetWorkoutUI();
+  }
+}
+
+// Update the global timer during workout
+function updateGlobalTimer() {
+  if (isPaused || !workoutActive) return;
+  
+  const now = Date.now();
+  elapsedWorkoutTime += Math.floor((now - lastTime) / 1000);
+  lastTime = now;
+}
+
+// Validate all inputs
+function validateInputs() {
+  let isValid = true;
+  
+  // Check each exercise
+  document.querySelectorAll('.exercise-item').forEach(exerciseElement => {
+    // Reset previous validation errors
+    exerciseElement.querySelectorAll('.validation-error').forEach(el => {
+      el.classList.remove('validation-error');
+    });
+    
+    exerciseElement.querySelectorAll('.error-tooltip').forEach(el => {
+      el.remove();
+    });
+    
+    // Validate exercise name
+    const nameInput = exerciseElement.querySelector('.exercise-name');
+    if (!nameInput.value.trim()) {
+      markInvalid(nameInput, 'Exercise name is required');
+      isValid = false;
+    }
+    
+    const exerciseType = exerciseElement.querySelector('.exercise-type').value;
+    
+    if (exerciseType === 'timed') {
+      // Validate exercise time
+      const timeInput = exerciseElement.querySelector('.exercise-time');
+      const timeValue = parseInt(timeInput.value, 10);
+      
+      if (isNaN(timeValue) || timeValue <= 0) {
+        markInvalid(timeInput, 'Please enter a valid time');
+        isValid = false;
+      }
+    } else {
+      // Validate rep count
+      const repsInput = exerciseElement.querySelector('.exercise-reps');
+      const repsValue = parseInt(repsInput.value, 10);
+      
+      if (isNaN(repsValue) || repsValue <= 0) {
+        markInvalid(repsInput, 'Please enter a valid number of reps');
+        isValid = false;
+      }
+    }
+    
+    // Validate sets
+    const setsInput = exerciseElement.querySelector('.exercise-sets');
+    const setsValue = parseInt(setsInput.value, 10);
+    
+    if (isNaN(setsValue) || setsValue <= 0) {
+      markInvalid(setsInput, 'Please enter a valid number of sets');
+      isValid = false;
+    }
+    
+    // Validate rest time
+    const restInput = exerciseElement.querySelector('.exercise-rest');
+    const restValue = parseInt(restInput.value, 10);
+    
+    if (isNaN(restValue) || restValue < 0) {
+      markInvalid(restInput, 'Please enter a valid rest time');
+      isValid = false;
+    }
+  });
+  
+  return isValid;
+}
+
+// Mark an input as invalid and show error tooltip
+function markInvalid(inputElement, message) {
+  inputElement.classList.add('validation-error');
+  
+  // Create tooltip
+  const tooltip = document.createElement('div');
+  tooltip.className = 'error-tooltip';
+  tooltip.textContent = message;
+  
+  // Position the tooltip
+  inputElement.parentNode.appendChild(tooltip);
+  
+  // Remove the tooltip after a few seconds
+  setTimeout(() => {
+    tooltip.remove();
+  }, 5000);
+}
+
+// Generate workout summary
+function generateWorkoutSummary() {
+  const summaryDiv = document.getElementById('workout-summary');
+  summaryDiv.style.display = 'block';
+  
+  // Calculate stats
+  const totalExercises = workoutStats.completedExercises;
+  const totalSets = workoutStats.completedSets;
+  const totalTime = Math.round((Date.now() - workoutStats.startTime) / 1000);
+  
+  // Format the time nicely
+  const timeFormatted = formatTime(totalTime);
+  
+  // Create summary content
+  let summaryHTML = `
+    <h3>Workout Completed!</h3>
+    <div class="summary-stats">
+      <div class="summary-stat">
+        <div class="stat-value">${timeFormatted}</div>
+        <div class="stat-label">Total Time</div>
+      </div>
+      <div class="summary-stat">
+        <div class="stat-value">${totalExercises}</div>
+        <div class="stat-label">Exercises</div>
+      </div>
+      <div class="summary-stat">
+        <div class="stat-value">${totalSets}</div>
+        <div class="stat-label">Sets</div>
+      </div>
+    </div>
+  `;
+  
+  summaryDiv.innerHTML = summaryHTML;
+}
+
+// Show confetti effect
+function showConfetti() {
+  const canvas = document.createElement('canvas');
+  canvas.id = 'confetti-canvas';
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  canvas.style.pointerEvents = 'none';
+  canvas.style.zIndex = '1000';
+  document.body.appendChild(canvas);
+  
+  const confetti = {
+    maxCount: 150,
+    speed: 2,
+    gravity: 0.5,
+    particles: [],
+    colors: ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'],
+  };
+  
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // Create particles
+  for (let i = 0; i < confetti.maxCount; i++) {
+    confetti.particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      r: Math.random() * 5 + 3, // radius
+      d: Math.random() * confetti.maxCount, // density
+      color: confetti.colors[Math.floor(Math.random() * confetti.colors.length)],
+      tilt: Math.floor(Math.random() * 10) - 10,
+      opacity: Math.random() + 0.5,
+      fadeOut: Math.random() * 3 + 2,
+    });
+  }
+  
+  // Animation loop
+  const animConfetti = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    let stillActive = false;
+    
+    for (let i = 0; i < confetti.particles.length; i++) {
+      const p = confetti.particles[i];
+      
+      // Move particles
+      p.y += confetti.speed + p.d;
+      p.tilt += Math.random() * 10 - 5;
+      
+      // Fade out
+      p.opacity -= 0.01;
+      
+      // Draw particle
+      ctx.beginPath();
+      ctx.lineWidth = p.r / 2;
+      ctx.strokeStyle = p.color;
+      ctx.moveTo(p.x + p.tilt + p.r / 4, p.y);
+      ctx.lineTo(p.x + p.tilt, p.y + p.r);
+      ctx.stroke();
+      
+      // Check if particle is still active
+      if (p.opacity > 0 && p.y < canvas.height) {
+        stillActive = true;
+      }
+    }
+    
+    // Continue animation or remove canvas
+    if (stillActive) {
+      requestAnimationFrame(animConfetti);
+    } else {
+      canvas.remove();
+    }
+  };
+  
+  // Start animation
+  animConfetti();
+}
+
+// Save workout routine
+function saveWorkout() {
+  // Update exercises array from DOM
+  updateExercisesArray();
+  
+  // Create workout object
+  const workout = {
+    name: document.getElementById('workout-name').value || 'My Workout',
+    exercises: exercises.map(ex => ({
+      name: ex.name,
+      type: ex.type,
+      time: ex.time,
+      reps: ex.reps,
+      sets: ex.sets,
+      rest: ex.rest,
+    })),
+    createdAt: new Date().toISOString(),
+  };
+  
+  // Convert to JSON string
+  const workoutJSON = JSON.stringify(workout, null, 2);
+  
+  // Create download link
+  const blob = new Blob([workoutJSON], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${workout.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Load workout routine
+function loadWorkout() {
+  // Create file input
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'application/json';
+  
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        // Parse JSON
+        const workout = JSON.parse(event.target.result);
+        
+        // Validate workout object
+        if (!workout.exercises || !Array.isArray(workout.exercises)) {
+          throw new Error('Invalid workout file');
+        }
+        
+        // Update workout name
+        document.getElementById('workout-name').value = workout.name || 'My Workout';
+        
+        // Clear existing exercises
+        document.getElementById('exercises-container').innerHTML = '';
+        exercises = [];
+        
+        // Add exercises from file
+        workout.exercises.forEach(ex => {
+          createExerciseElement({
+            name: ex.name,
+            type: ex.type || 'timed',
+            time: ex.time || 30,
+            reps: ex.reps || 10,
+            sets: ex.sets || 1,
+            rest: ex.rest || 30,
+          });
+        });
+        
+        // Show success message
+        showMessage('Workout loaded successfully!', 'success');
+      } catch (error) {
+        showMessage('Error loading workout file', 'error');
+        console.error(error);
+      }
+    };
+    
+    reader.readAsText(file);
+  });
+  
+  fileInput.click();
+}
+
+// Show temporary message
+function showMessage(message, type = 'info') {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${type}`;
+  messageDiv.textContent = message;
+  
+  document.body.appendChild(messageDiv);
+  
+  // Animate in
+  setTimeout(() => {
+    messageDiv.style.opacity = '1';
+    messageDiv.style.transform = 'translateY(0)';
+  }, 10);
+  
+  // Remove after delay
+  setTimeout(() => {
+    messageDiv.style.opacity = '0';
+    messageDiv.style.transform = 'translateY(-20px)';
+    
+    setTimeout(() => {
+      messageDiv.remove();
+    }, 300);
+  }, 3000);
+}
+
+// Handle keyboard shortcuts
+function setupKeyboardShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    // Only if workout is in progress
+    if (!workoutInProgress) return;
+    
+    switch(e.key) {
+      case ' ': // Space bar
+        e.preventDefault();
+        if (workoutPaused) {
+          resumeWorkout();
+        } else {
+          pauseWorkout();
+        }
+        break;
+      case 'Escape': // Escape key
+        e.preventDefault();
+        stopWorkout();
+        break;
+      case 'n': // N key - for rep-based exercises
+      case 'N':
+        e.preventDefault();
+        const repButton = document.querySelector('.rep-complete-button');
+        if (repButton && repButton.style.display !== 'none') {
+          repButton.click();
+        }
+        break;
+    }
+  });
+}
+
+// Initialize the application
+function initApp() {
+  // Set up initial exercise
+  createExerciseElement();
+  
+  // Add event listeners
+  document.getElementById('add-exercise-btn').addEventListener('click', () => {
+    createExerciseElement();
+  });
+  
+  document.getElementById('start-workout-btn').addEventListener('click', startWorkout);
+  document.getElementById('pause-workout-btn').addEventListener('click', pauseWorkout);
+  document.getElementById('resume-workout-btn').addEventListener('click', resumeWorkout);
+  document.getElementById('stop-workout-btn').addEventListener('click', stopWorkout);
+  document.getElementById('save-workout-btn').addEventListener('click', saveWorkout);
+  document.getElementById('load-workout-btn').addEventListener('click', loadWorkout);
+  
+  // Set up keyboard shortcuts
+  setupKeyboardShortcuts();
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>

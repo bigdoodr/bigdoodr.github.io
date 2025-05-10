@@ -1,0 +1,126 @@
+  // Standard workout presets
+  // Initialize the audio context with fallback and error handling
+      // Create an oscillator-based beep
+        const duration = 0.3; // seconds
+        // Generate a simple beep tone
+// Create a completion sound (different tone)
+  const duration = 0.8; // seconds
+  // Generate a completion tone (higher pitched)
+    // Create a more complex sound with multiple frequencies
+// Initialize audio buffers
+  // We'll fallback to HTML5 Audio elements
+// Function to play audio with fallbacks
+      // Fallback to HTML5 Audio
+        // Try vibration API as last resort
+    // Try vibration API as last resort
+// Display error message
+// Format time in HH:MM:SS format
+// Convert time object to seconds
+// Convert seconds to time object
+// Generate a unique ID for each exercise
+// Create new exercise element
+  // Default values
+  // Use provided data or defaults
+  // Prepare HTML structure
+  // Add event listeners
+  // Exercise type change
+  // Delete exercise
+  // Duplicate exercise
+    // Add to exercises array
+  // Handle rep completion
+  // Add this exercise to our array
+  // Add to DOM
+  // Set up drag-and-drop for this element
+// Get exercise data from DOM element
+  // For timed exercise
+  // Rest time
+// Update workout routine array from the exercises DOM elements
+    // Update exercise data with current values from DOM
+    // Add exercise to routine for each set
+      // Add exercise period
+        // Rep-based exercise
+          timeInSeconds: 0, // No time for rep-based
+      // Add rest period after each set except the last one
+  // Calculate total workout duration
+// Set up drag and drop functionality
+      // Prevent text selection during drag
+        // Insert before
+        // Insert after
+      // Update exercises array to match DOM order
+  // Handle document mouseup to end drag even if outside elements
+// Update exercises array to match DOM order
+// Start the workout
+  // Validate all inputs first
+  // Update workout routine with current values
+  // Initialize workout
+  // Reset workout stats
+  // Count total sets
+  // Initialize audio if not already
+  // Update UI
+  // Start the first exercise
+  // Start global timer
+  // Show keyboard shortcuts
+// Update UI when starting workout
+  // Update buttons
+  // Hide the workout summary
+  // Dim all exercise elements initially
+    // Disable editing during workout
+    // Hide progress bars
+  // Create the global countdown display if it doesn't exist
+// Start the current exercise
+  // Update visual state
+  // Highlight the next exercise if it exists
+  // Update the countdown display
+  // Scroll to the current exercise
+  // Update exercise name in display
+    // Rep-based exercise
+    // Show the rep completion button
+    // Add a countup timer for rep-based exercises
+    // Timed exercise
+    // Format and display the time
+    // Hide rep completion button
+    // Check if we need to play a sound
+    // Show the progress container
+    // Set up the countdown timer
+      // Update progress bar
+      // Play sound at specific points
+      // Update workout stats
+        // Play completion sound
+        // Move to next exercise
+// Start a rep-based timer (just counts up)
+// Complete the current exercise and move to the next
+  // If it's an exercise (not rest), increment the completed exercises count
+    // Mark as completed visually
+  // Move to the next segment
+  // Start the next exercise or finish workout
+// Complete the entire workout
+  // Final stats update
+  // Play completion sound
+  // Show confetti effect
+  // Generate workout summary
+  // Reset UI
+// Reset UI after workout
+  // Hide countdown display
+  // Reset exercise elements
+    // Re-enable editing
+    // Hide countdown and progress bars
+    // Hide rep completion button
+  // Reset buttons
+  // Hide keyboard shortcuts
+// Pause the workout
+// Resume the workout
+  // Update the last time to account for the pause duration
+// Stop the workout
+  // Confirm before stopping
+    // Calculate final stats
+    // Generate workout summary
+    // Reset UI
+// Update the global timer during workout
+// Validate all inputs
+  // Check each exercise
+    // Reset previous validation errors
+    exerciseElement.querySelectorAll('.validation-error').forEach(el => {
+      el.classList.remove('validation-error');
+    });
+    
+    exerciseElement.querySelectorAll('.error-tooltip').forEach(el =>
