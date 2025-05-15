@@ -1,0 +1,75 @@
+{
+  "name": "10 Minute Abs by Jeff Cavaliere",
+  "exercises": [
+    {
+      "name": "Crescent Tucks",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    },
+    {
+      "name": "Backward 7s",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    },
+    {
+      "name": "Swipers",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    },
+    {
+      "name": "Side Cycles - Left",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    },
+    {
+      "name": "Side Cycles - Right",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    },
+    {
+      "name": "Mountain Hip Dips",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    },
+    {
+      "name": "Frog V-Ups",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    },
+    {
+      "name": "Side Scissor Crunches - Left",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    },
+    {
+      "name": "Side Scissor Crunches - Right",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    },
+    {
+      "name": "Corpse Crunch",
+      "type": "time",
+      "duration": 45,
+      "rest": 15,
+      "sets": 1
+    }
+  ]
+}
