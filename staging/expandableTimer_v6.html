@@ -257,6 +257,7 @@
         let timeRemaining = 0;
         let timer = null;
         let isPaused = false;
+        let beepSound = new Audio('/sounds/beep.mp3');
 
         // Add exercise to plan
         addExerciseBtn.addEventListener('click', () => {
@@ -383,7 +384,7 @@
             updateTimer();
             
             // Play beep sound at the start of a new exercise/rest period
-            playBeepReliable(50);
+            playBeep();
             
             // Start the timer if it's time-based or a rest period
             if (currentExercise.type === 'time' || isResting) {
@@ -394,15 +395,11 @@
                     updateTimer();
                     updateProgressBar();
                     
-					if (timeRemaining <= 0) {
-						clearInterval(timer);
-						playBeepReliable(); // Play beep with no delay when timer expires
-						
-						// Add a small delay before advancing to ensure sound completes
-						setTimeout(() => {
-							advanceWorkout();
-						}, 100); // Small delay to prevent sound conflicts
-					}
+                    if (timeRemaining <= 0) {
+                        clearInterval(timer);
+                        playBeep(); // Play beep when timer expires
+                        advanceWorkout();
+                    }
                 }, 1000);
             }
             
@@ -411,31 +408,49 @@
         }
 
         // Play beep sound
-		function playBeepReliable(delayMs = 0) {
-			// Create a new audio element each time for more reliable playback
-			setTimeout(() => {
-				const tempAudio = new Audio('sounds/beep.mp3');
-				// Set volume if needed
-				tempAudio.volume = 1.0;
-				
-				// Use both methods for maximum compatibility
-				const playPromise = tempAudio.play();
-				if (playPromise !== undefined) {
-					playPromise.catch(err => {
-						console.error("Error playing sound:", err);
-						// Fallback if the promise-based approach fails
-						try {
-							// For older browsers
-							tempAudio.currentTime = 0;
-							tempAudio.play();
-						} catch (e) {
-							console.error("Fallback play failed:", e);
-						}
-					});
-				}
-			}, delayMs);
-		}
-
+function playBeep() {
+    // Initialize audio context if not already created
+    if (!audioCtx) {
+        try {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)({
+                // These options help prevent interruption of background audio
+                latencyHint: 'interactive',
+                sampleRate: 44100
+            });
+        } catch (error) {
+            console.log("Audio context initialization error:", error);
+            return; // Exit if we can't create the audio context
+        }
+    }
+    
+    try {
+        // Make sure the audio context is running (important for mobile)
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume().catch(e => console.log("Error resuming audio context:", e));
+        }
+        
+        // Create oscillator node
+        const oscillator = audioCtx.createOscillator();
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(440, audioCtx.currentTime); // Set frequency to 440 Hz (A4)
+        
+        // Create gain node with smoother transitions
+        const gainNode = audioCtx.createGain();
+        gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+        
+        // Connect the nodes
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        // Start and stop the oscillator
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.2); // Short beep sound
+    } catch (error) {
+        console.log("Error playing sound:", error);
+        // Fallback to silent operation if sound fails
+    }
+}
         // Update timer display
         function updateTimer() {
             const minutes = Math.floor(timeRemaining / 60);
@@ -519,7 +534,6 @@
         // End workout
         function endWorkout() {
             clearInterval(timer);
-            playBeepReliable();
             statusDisplay.textContent = 'Workout Complete!';
             timerDisplay.textContent = '00:00';
             pauseResumeBtn.style.display = 'none';
