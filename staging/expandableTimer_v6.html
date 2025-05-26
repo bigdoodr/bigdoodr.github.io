@@ -266,6 +266,12 @@ const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 // Initialize audio context and load beep sound
 async function initAudio() {
+    // Skip Web Audio API initialization on iOS entirely
+    if (isIOS) {
+        console.log('iOS detected - using HTML5 Audio only');
+        return;
+    }
+    
     try {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         
@@ -286,7 +292,7 @@ document.addEventListener('DOMContentLoaded', initAudio);
 
 // Also initialize audio on first user interaction (required by browsers)
 document.addEventListener('click', function initOnFirstClick() {
-    if (!audioContext) {
+    if (!audioContext && !isIOS) {
         initAudio();
     }
     document.removeEventListener('click', initOnFirstClick);
