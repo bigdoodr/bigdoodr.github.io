@@ -276,7 +276,7 @@ async function initAudio() {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         
         // Load the beep sound
-        const response = await fetch('https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/beep.mp3');
+        const response = await fetch('/sounds/beep.mp3');
         const arrayBuffer = await response.arrayBuffer();
         beepBuffer = await audioContext.decodeAudioData(arrayBuffer);
         
