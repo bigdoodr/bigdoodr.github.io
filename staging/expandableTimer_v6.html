@@ -261,29 +261,19 @@
 		let beepBuffer;
 		let beepSound = new Audio('/sounds/beep.mp3'); // Keep as fallback
 
-// Detect iOS
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 // Initialize audio context and load beep sound
 async function initAudio() {
-    // Skip Web Audio API initialization on iOS entirely
-    if (isIOS) {
-        console.log('iOS detected - using HTML5 Audio only');
-        return;
-    }
-    
+audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+// Try to configure audio context to not interrupt other audio (iOS)
+if (audioContext.audioWorklet) {
     try {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        
-        // Load the beep sound
-        const response = await fetch('/sounds/beep.mp3');
-        const arrayBuffer = await response.arrayBuffer();
-        beepBuffer = await audioContext.decodeAudioData(arrayBuffer);
-        
-        console.log('Audio initialized successfully');
-    } catch (error) {
-        console.error('Error initializing audio:', error);
-        // Fallback already exists as beepSound
+        // Set audio context to not interrupt background audio
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+    } catch (e) {
+        console.log('Could not configure audio context:', e);
     }
 }
 
@@ -292,7 +282,7 @@ document.addEventListener('DOMContentLoaded', initAudio);
 
 // Also initialize audio on first user interaction (required by browsers)
 document.addEventListener('click', function initOnFirstClick() {
-    if (!audioContext && !isIOS) {
+    if (!audioContext) {
         initAudio();
     }
     document.removeEventListener('click', initOnFirstClick);
@@ -449,12 +439,8 @@ document.addEventListener('click', function initOnFirstClick() {
         // Play beep sound
 function playBeep() {
     try {
-        // Use HTML5 Audio on iOS to avoid interrupting other audio
-        if (isIOS || !audioContext || !beepBuffer) {
-            beepSound.currentTime = 0;
-            beepSound.play().catch(e => console.error('Error playing fallback audio:', e));
-        } else {
-            // Use Web Audio API on other platforms
+        if (audioContext && beepBuffer) {
+            // Resume audio context if it's suspended (required by many browsers)
             if (audioContext.state === 'suspended') {
                 audioContext.resume();
             }
@@ -463,6 +449,10 @@ function playBeep() {
             source.buffer = beepBuffer;
             source.connect(audioContext.destination);
             source.start(0);
+        } else {
+            // Fallback to HTML5 Audio
+            beepSound.currentTime = 0;
+            beepSound.play().catch(e => console.error('Error playing fallback audio:', e));
         }
     } catch (error) {
         console.error('Error playing beep:', error);
