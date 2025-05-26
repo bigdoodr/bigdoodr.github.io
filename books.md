@@ -11,10 +11,10 @@ image: /resources/books.purple.png
 ## 2025 Reading
 
 <details open>
-<summary>2025 Books (15 books)</summary>
+<summary>Running Tally: 15 books</summary>
 
 | Title | Author | Month | Link |
-|-------|--------|-------|------|
+| ----- | ------ | ----- | ---- |
 | Heroic Hearts | Jim Butcher | May | [Book Details](https://openlibrary.org/works/OL24794467W) |
 | Moon Called | Patricia Briggs | May | [Book Details](https://openlibrary.org/works/OL5682781W) |
 | One Day in December | Josie Silver | April | [Book Details](https://openlibrary.org/works/OL19762562W) |
@@ -37,10 +37,10 @@ image: /resources/books.purple.png
 ## 2024 Reading
 
 <details>
-<summary>2024 Books (38 books)</summary>
+<summary>Final Count: 38 books</summary>
 
 | Title | Author | Month | Link |
-|-------|--------|-------|------|
+| ----- | ------ | ----- | ---- |
 | Rising Strong as a Spiritual Practice | Brené Brown | December | [Book Details](https://openlibrary.org/works/OL24343644W) |
 | The Ward Witch | Sarah Painter | December | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=The%20Ward%20Witch) |
 | C.S. Lewis | Alister McGrath | December | [Book Details](https://openlibrary.org/works/OL27033945W) |

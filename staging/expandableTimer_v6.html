@@ -257,7 +257,37 @@
         let timeRemaining = 0;
         let timer = null;
         let isPaused = false;
-        let beepSound = new Audio('/sounds/beep.mp3');
+        let audioContext;
+		let beepBuffer;
+		let beepSound = new Audio('/sounds/beep.mp3'); // Keep as fallback
+
+// Initialize audio context and load beep sound
+async function initAudio() {
+    try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Load the beep sound
+        const response = await fetch('https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/beep.mp3');
+        const arrayBuffer = await response.arrayBuffer();
+        beepBuffer = await audioContext.decodeAudioData(arrayBuffer);
+        
+        console.log('Audio initialized successfully');
+    } catch (error) {
+        console.error('Error initializing audio:', error);
+        // Fallback already exists as beepSound
+    }
+}
+
+// Initialize audio when page loads
+document.addEventListener('DOMContentLoaded', initAudio);
+
+// Also initialize audio on first user interaction (required by browsers)
+document.addEventListener('click', function initOnFirstClick() {
+    if (!audioContext) {
+        initAudio();
+    }
+    document.removeEventListener('click', initOnFirstClick);
+}, { once: true });
 
         // Add exercise to plan
         addExerciseBtn.addEventListener('click', () => {
@@ -409,48 +439,30 @@
 
         // Play beep sound
 function playBeep() {
-    // Initialize audio context if not already created
-    if (!audioCtx) {
-        try {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)({
-                // These options help prevent interruption of background audio
-                latencyHint: 'interactive',
-                sampleRate: 44100
-            });
-        } catch (error) {
-            console.log("Audio context initialization error:", error);
-            return; // Exit if we can't create the audio context
-        }
-    }
-    
     try {
-        // Make sure the audio context is running (important for mobile)
-        if (audioCtx.state === 'suspended') {
-            audioCtx.resume().catch(e => console.log("Error resuming audio context:", e));
+        if (audioContext && beepBuffer) {
+            // Resume audio context if it's suspended (required by many browsers)
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            const source = audioContext.createBufferSource();
+            source.buffer = beepBuffer;
+            source.connect(audioContext.destination);
+            source.start(0);
+        } else {
+            // Fallback to HTML5 Audio
+            beepSound.currentTime = 0;
+            beepSound.play().catch(e => console.error('Error playing fallback audio:', e));
         }
-        
-        // Create oscillator node
-        const oscillator = audioCtx.createOscillator();
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(440, audioCtx.currentTime); // Set frequency to 440 Hz (A4)
-        
-        // Create gain node with smoother transitions
-        const gainNode = audioCtx.createGain();
-        gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
-        
-        // Connect the nodes
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        
-        // Start and stop the oscillator
-        oscillator.start();
-        oscillator.stop(audioCtx.currentTime + 0.2); // Short beep sound
     } catch (error) {
-        console.log("Error playing sound:", error);
-        // Fallback to silent operation if sound fails
+        console.error('Error playing beep:', error);
+        // Final fallback
+        beepSound.currentTime = 0;
+        beepSound.play().catch(e => console.error('Error playing beep:', e));
     }
 }
+
         // Update timer display
         function updateTimer() {
             const minutes = Math.floor(timeRemaining / 60);
