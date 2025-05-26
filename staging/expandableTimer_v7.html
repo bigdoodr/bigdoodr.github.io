@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Workout Timer</title>
+  <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        .timer-display {
+            font-size: 6rem;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        .status {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .exercise-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .exercise-list {
+            margin-top: 30px;
+        }
+        .exercise-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .exercise-details {
+            flex: 1;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+            padding: 8px 12px;
+        }
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+        .complete-rep-btn {
+            background-color: #2ecc71;
+            padding: 12px 24px;
+            margin-top: 10px;
+        }
+        .complete-rep-btn:hover {
+            background-color: #27ae60;
+        }
+        .workout-progress {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2rem;
+        }
+        .current-exercise {
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .save-load-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        #save-workout {
+            background-color: #f39c12;
+        }
+        #save-workout:hover {
+            background-color: #d35400;
+        }
+        #load-workout {
+            background-color: #9b59b6;
+        }
+        #load-workout:hover {
+            background-color: #8e44ad;
+        }
+  </style>
+</head>
+<body>
+  <h1>Enhanced Workout Timer</h1>
+  <div class="exercise-form">
+    <h2>Add Exercise</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="exercise-name">Exercise Name</label> <input type="text" id="exercise-name" placeholder="e.g., Push-ups">
+      </div>
+      <div class="form-group">
+        <label for="exercise-type">Exercise Type</label> <select id="exercise-type">
+          <option value="time">
+            Time-based
+          </option>
+          <option value="rep">
+            Rep-based
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="exercise-duration">Exercise Duration (seconds)</label> <input type="number" id="exercise-duration" min="1" value="30">
+      </div>
+      <div class="form-group">
+        <label for="rest-duration">Rest Duration (seconds)</label> <input type="number" id="rest-duration" min="1" value="15">
+      </div>
+      <div class="form-group">
+        <label for="exercise-sets">Number of Sets</label> <input type="number" id="exercise-sets" min="1" value="3">
+      </div>
+    </div><button id="add-exercise">Add Exercise</button>
+  </div>
+  <div class="exercise-list">
+    <h2>Workout Plan</h2>
+    <div id="exercise-items-container"></div>
+  </div>
+  <div class="save-load-controls">
+    <button id="save-workout">Save Workout</button> <button id="load-workout">Load Workout</button> <input type="file" id="load-workout-file" accept=".json" style="display: none;">
+  </div><button id="start-workout" disabled>Start Workout</button>
+  <div id="workout-section" style="display: none;">
+    <div class="workout-progress">
+      <div id="progress-text">
+        Exercise 1/4 - Set 1/3
+      </div>
+      <div class="current-exercise" id="current-exercise-name">
+        Push-ups
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+    <div class="timer-display" id="timer">
+      00:00
+    </div>
+    <div class="status" id="status">
+      Get Ready!
+    </div>
+    <div class="controls">
+      <button id="pause-resume">Pause</button> <button id="skip">Skip</button> <button id="complete-rep" style="display: none;" class="complete-rep-btn">Mark Complete</button>
+    </div>
+  </div>
+  <script>
+        // Elements
+        const exerciseNameInput = document.getElementById('exercise-name');
+        const exerciseTypeSelect = document.getElementById('exercise-type');
+        const exerciseDurationInput = document.getElementById('exercise-duration');
+        const restDurationInput = document.getElementById('rest-duration');
+        const exerciseSetsInput = document.getElementById('exercise-sets');
+        const addExerciseBtn = document.getElementById('add-exercise');
+        const exerciseItemsContainer = document.getElementById('exercise-items-container');
+        const startWorkoutBtn = document.getElementById('start-workout');
+        const workoutSection = document.getElementById('workout-section');
+        const timerDisplay = document.getElementById('timer');
+        const statusDisplay = document.getElementById('status');
+        const pauseResumeBtn = document.getElementById('pause-resume');
+        const skipBtn = document.getElementById('skip');
+        const completeRepBtn = document.getElementById('complete-rep');
+        const progressText = document.getElementById('progress-text');
+        const currentExerciseName = document.getElementById('current-exercise-name');
+        const progressBar = document.getElementById('progress-bar');
+        const saveWorkoutBtn = document.getElementById('save-workout');
+        const loadWorkoutBtn = document.getElementById('load-workout');
+        const loadWorkoutFileInput = document.getElementById('load-workout-file');
+
+        // Workout data
+        let exercises = [];
+        let currentExerciseIndex = 0;
+        let currentSetIndex = 0;
+        let isResting = false;
+        let timeRemaining = 0;
+        let timer = null;
+        let isPaused = false;
+        let audioContext;
+                let beepBuffer;
+                let beepSound = new Audio('/sounds/beep.mp3'); // Keep as fallback
+
+  // Initialize audio context and load beep sound
+  async function initAudio() {
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  // Try to configure audio context to not interrupt other audio (iOS)
+  if (audioContext.audioWorklet) {
+    try {
+        // Set audio context to not interrupt background audio
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+    } catch (e) {
+        console.log('Could not configure audio context:', e);
+    }
+  }
+
+  // Initialize audio when page loads
+  document.addEventListener('DOMContentLoaded', initAudio);
+
+  // Also initialize audio on first user interaction (required by browsers)
+  document.addEventListener('click', function initOnFirstClick() {
+    if (!audioContext) {
+        initAudio();
+    }
+    document.removeEventListener('click', initOnFirstClick);
+  }, { once: true });
+
+        // Add exercise to plan
+        addExerciseBtn.addEventListener('click', () => {
+            const name = exerciseNameInput.value.trim();
+            const type = exerciseTypeSelect.value;
+            const duration = parseInt(exerciseDurationInput.value);
+            const rest = parseInt(restDurationInput.value);
+            const sets = parseInt(exerciseSetsInput.value);
+            
+            if (!name || isNaN(duration) || isNaN(rest) || isNaN(sets) || duration <= 0 || rest <= 0 || sets <= 0) {
+                alert('Please fill in all fields with valid values');
+                return;
+            }
+            
+            const exercise = {
+                name,
+                type,
+                duration,
+                rest,
+                sets
+            };
+            
+            exercises.push(exercise);
+            updateExerciseList();
+            resetExerciseForm();
+            updateStartButton();
+        });
+
+        // Update exercise list UI
+        function updateExerciseList() {
+            exerciseItemsContainer.innerHTML = '';
+            
+            exercises.forEach((exercise, index) => {
+                const exerciseItem = document.createElement('div');
+                exerciseItem.className = 'exercise-item';
+                
+                const details = document.createElement('div');
+                details.className = 'exercise-details';
+                details.innerHTML = `
+                    <h3>${exercise.name}</h3>
+                    <p>Type: ${exercise.type === 'time' ? 'Time-based' : 'Rep-based'}</p>
+                    <p>Duration: ${exercise.duration} seconds</p>
+                    <p>Rest: ${exercise.rest} seconds</p>
+                    <p>Sets: ${exercise.sets}</p>
+                `;
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.addEventListener('click', () => {
+                    exercises.splice(index, 1);
+                    updateExerciseList();
+                    updateStartButton();
+                });
+                
+                exerciseItem.appendChild(details);
+                exerciseItem.appendChild(deleteBtn);
+                exerciseItemsContainer.appendChild(exerciseItem);
+            });
+        }
+
+        // Reset exercise form after adding
+        function resetExerciseForm() {
+            exerciseNameInput.value = '';
+            exerciseTypeSelect.value = 'time';
+            exerciseDurationInput.value = '30';
+            restDurationInput.value = '15';
+            exerciseSetsInput.value = '3';
+        }
+
+        // Update start button state
+        function updateStartButton() {
+            startWorkoutBtn.disabled = exercises.length === 0;
+        }
+
+        // Start workout
+        startWorkoutBtn.addEventListener('click', () => {
+            if (exercises.length === 0) return;
+            
+            workoutSection.style.display = 'block';
+            startWorkoutBtn.style.display = 'none';
+            document.querySelector('.exercise-form').style.display = 'none';
+            document.querySelector('.exercise-list').style.display = 'none';
+            
+            currentExerciseIndex = 0;
+            currentSetIndex = 0;
+            isResting = false;
+            isPaused = false;
+            
+            startExerciseTimer();
+        });
+
+        // Start exercise timer
+        function startExerciseTimer() {
+            clearInterval(timer);
+            
+            const currentExercise = exercises[currentExerciseIndex];
+            
+            if (!currentExercise) {
+                endWorkout();
+                return;
+            }
+            
+            currentExerciseName.textContent = currentExercise.name;
+            
+            if (isResting) {
+                statusDisplay.textContent = 'Rest';
+                timeRemaining = currentExercise.rest;
+                completeRepBtn.style.display = 'none';
+            } else {
+                statusDisplay.textContent = currentExercise.type === 'time' ? 'Exercise' : 'Complete Reps';
+                timeRemaining = currentExercise.duration;
+                
+                if (currentExercise.type === 'rep') {
+                    completeRepBtn.style.display = 'block';
+                    // For rep-based exercises, we'll show the duration as guidance
+                    // but the user needs to click the button to continue
+                } else {
+                    completeRepBtn.style.display = 'none';
+                }
+            }
+            
+            updateProgressText();
+            updateTimer();
+            
+            // Play beep sound at the start of a new exercise/rest period
+            playBeep();
+            
+            // Start the timer if it's time-based or a rest period
+            if (currentExercise.type === 'time' || isResting) {
+                timer = setInterval(() => {
+                    if (isPaused) return;
+                    
+                    timeRemaining--;
+                    updateTimer();
+                    updateProgressBar();
+                    
+                    if (timeRemaining <= 0) {
+                        clearInterval(timer);
+                        playBeep(); // Play beep when timer expires
+                        advanceWorkout();
+                    }
+                }, 1000);
+            }
+            
+            // Initialize progress bar
+            resetProgressBar();
+        }
+
+        // Play beep sound
+  function playBeep() {
+    try {
+        if (audioContext && beepBuffer) {
+            // Resume audio context if it's suspended (required by many browsers)
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            const source = audioContext.createBufferSource();
+            source.buffer = beepBuffer;
+            source.connect(audioContext.destination);
+            source.start(0);
+        } else {
+            // Fallback to HTML5 Audio
+            beepSound.currentTime = 0;
+            beepSound.play().catch(e => console.error('Error playing fallback audio:', e));
+        }
+    } catch (error) {
+        console.error('Error playing beep:', error);
+        // Final fallback
+        beepSound.currentTime = 0;
+        beepSound.play().catch(e => console.error('Error playing beep:', e));
+    }
+  }
+
+        // Update timer display
+        function updateTimer() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Update progress text
+        function updateProgressText() {
+            const totalExercises = exercises.length;
+            const currentExercise = exercises[currentExerciseIndex];
+            progressText.textContent = `Exercise ${currentExerciseIndex + 1}/${totalExercises} - Set ${currentSetIndex + 1}/${currentExercise.sets}`;
+        }
+
+        // Reset progress bar
+        function resetProgressBar() {
+            progressBar.style.width = '0%';
+            const totalTime = isResting ? 
+                exercises[currentExerciseIndex].rest : 
+                exercises[currentExerciseIndex].duration;
+            
+            if (exercises[currentExerciseIndex].type === 'time' || isResting) {
+                progressBar.style.transition = `width ${totalTime}s linear`;
+                progressBar.style.width = '100%';
+            }
+        }
+
+        // Update progress bar manually for rep-based exercises
+        function updateProgressBar() {
+            if (exercises[currentExerciseIndex].type === 'rep' && !isResting) return;
+            
+            const totalTime = isResting ? 
+                exercises[currentExerciseIndex].rest : 
+                exercises[currentExerciseIndex].duration;
+            const percentage = 100 - ((timeRemaining / totalTime) * 100);
+            
+            // Using direct style setting for smoother updates
+            progressBar.style.transition = 'none';
+            progressBar.style.width = `${percentage}%`;
+        }
+
+        // Complete rep button handler
+        completeRepBtn.addEventListener('click', () => {
+            if (exercises[currentExerciseIndex].type === 'rep' && !isResting) {
+                clearInterval(timer);
+                playBeep();
+                advanceWorkout();
+            }
+        });
+
+        // Advance workout to next exercise/set
+        function advanceWorkout() {
+            const currentExercise = exercises[currentExerciseIndex];
+            
+            if (isResting) {
+                // After rest, go to next set or exercise
+                isResting = false;
+                
+                if (currentSetIndex + 1 < currentExercise.sets) {
+                    // Next set of current exercise
+                    currentSetIndex++;
+                } else {
+                    // Next exercise, first set
+                    currentExerciseIndex++;
+                    currentSetIndex = 0;
+                }
+            } else {
+                // After exercise, go to rest
+                isResting = true;
+            }
+            
+            // Check if workout is complete
+            if (currentExerciseIndex >= exercises.length) {
+                endWorkout();
+                return;
+            }
+            
+            startExerciseTimer();
+        }
+
+        // End workout
+        function endWorkout() {
+            clearInterval(timer);
+            statusDisplay.textContent = 'Workout Complete!';
+            timerDisplay.textContent = '00:00';
+            pauseResumeBtn.style.display = 'none';
+            skipBtn.style.display = 'none';
+            completeRepBtn.style.display = 'none';
+            progressBar.style.width = '100%';
+            currentExerciseName.textContent = 'Great job!';
+            
+            // Show reset button
+            const resetBtn = document.createElement('button');
+            resetBtn.textContent = 'New Workout';
+            resetBtn.addEventListener('click', resetWorkout);
+            document.querySelector('.controls').appendChild(resetBtn);
+        }
+
+        // Reset workout
+        function resetWorkout() {
+            workoutSection.style.display = 'none';
+            startWorkoutBtn.style.display = 'block';
+            document.querySelector('.exercise-form').style.display = 'block';
+            document.querySelector('.exercise-list').style.display = 'block';
+            
+            // Reset controls
+            pauseResumeBtn.style.display = 'inline-block';
+            pauseResumeBtn.textContent = 'Pause';
+            skipBtn.style.display = 'inline-block';
+            
+            // Remove reset button
+            const resetBtn = document.querySelector('.controls button:last-child');
+            if (resetBtn && resetBtn !== skipBtn && resetBtn !== pauseResumeBtn && resetBtn !== completeRepBtn) {
+                resetBtn.remove();
+            }
+        }
+
+        // Pause/Resume button handler
+        pauseResumeBtn.addEventListener('click', () => {
+            isPaused = !isPaused;
+            pauseResumeBtn.textContent = isPaused ? 'Resume' : 'Pause';
+            
+            if (!isPaused && (exercises[currentExerciseIndex].type === 'time' || isResting)) {
+                // Restart the progress bar animation
+                const remainingPercentage = (timeRemaining / (isResting ? 
+                    exercises[currentExerciseIndex].rest : 
+                    exercises[currentExerciseIndex].duration)) * 100;
+                
+                progressBar.style.transition = 'none';
+                progressBar.style.width = `${100 - remainingPercentage}%`;
+                
+                // Force reflow
+                void progressBar.offsetWidth;
+                
+                progressBar.style.transition = `width ${timeRemaining}s linear`;
+                progressBar.style.width = '100%';
+            }
+        });
+
+        // Skip button handler
+        skipBtn.addEventListener('click', () => {
+            clearInterval(timer);
+            advanceWorkout();
+        });
+
+        // Save workout plan as JSON file
+        saveWorkoutBtn.addEventListener('click', () => {
+            if (exercises.length === 0) {
+                alert('No exercises to save. Please add exercises to your workout plan first.');
+                return;
+            }
+            
+            const workoutPlan = {
+                name: prompt('Enter a name for this workout plan:', 'My Workout Plan'),
+                exercises: exercises
+            };
+            
+            if (!workoutPlan.name) return; // User cancelled
+            
+            const workoutJson = JSON.stringify(workoutPlan, null, 2);
+            const blob = new Blob([workoutJson], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${workoutPlan.name.replace(/\s+/g, '_')}.json`;
+            document.body.appendChild(a);
+            a.click();
+            
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        });
+        
+        // Load workout plan from JSON file
+        loadWorkoutBtn.addEventListener('click', () => {
+            loadWorkoutFileInput.click();
+        });
+        
+        loadWorkoutFileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const workoutPlan = JSON.parse(e.target.result);
+                    
+                    if (!workoutPlan.exercises || !Array.isArray(workoutPlan.exercises)) {
+                        throw new Error('Invalid workout plan format');
+                    }
+                    
+                    // Clear current exercises and load the new ones
+                    exercises = workoutPlan.exercises;
+                    updateExerciseList();
+                    updateStartButton();
+                    
+                    // Show success message
+                    alert(`Workout plan "${workoutPlan.name}" loaded successfully with ${exercises.length} exercises.`);
+                } catch (error) {
+                    alert('Error loading workout plan: ' + error.message);
+                }
+            };
+            
+            reader.readAsText(file);
+            
+            // Reset the file input for future loads
+            event.target.value = '';
+        });
+  </script>
+</body>
+</html>
