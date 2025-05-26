@@ -10,7 +10,6 @@ image: /resources/books.purple.png
 
 ## 2025 Reading
 
-<details open>
 <summary>Running Tally: 15 books</summary>
 
 | Title | Author | Month | Link |
@@ -31,12 +30,9 @@ image: /resources/books.purple.png
 | The Lost City of the Monkey God | Douglas Preston | January | [Book Details](https://openlibrary.org/works/OL17876084W) |
 | Something Wilder | Christina Lauren | January | [Book Details](https://openlibrary.org/works/OL26280333W) |
 
-</details>
-
 
 ## 2024 Reading
 
-<details>
 <summary>Final Count: 38 books</summary>
 
 | Title | Author | Month | Link |
@@ -79,5 +75,3 @@ image: /resources/books.purple.png
 | Soul Boom | Rainn Wilson | February | [Book Details](https://openlibrary.org/works/OL28763073W) |
 | Artificial Condition | Martha Wells | February | [Book Details](https://openlibrary.org/works/OL19747311W) |
 | All Systems Red | Martha Wells | January | [Book Details](https://openlibrary.org/works/OL17914663W) |
-
-</details>
