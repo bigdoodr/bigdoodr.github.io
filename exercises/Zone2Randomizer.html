@@ -49,6 +49,25 @@
       margin-left: 10px;
       color: #666;
     }
+        .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1em;
+    }
+    .nav-button {
+      padding: 0.6em 1em;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 0.9em;
+    }
+    .nav-button:hover {
+      background-color: #555;
+    }
     #routine li {
       margin-bottom: 5px;
     }
@@ -61,6 +80,11 @@
 </head>
 <body>
   <h1>Workout Generator</h1>
+  
+    <div class="nav-buttons">
+    <a href="Zone2Exercises.html" class="nav-button">See the Exercises</a>
+  </div>
+
   <form id="workoutForm">
     <h2>Focus Areas</h2>
     <div class="horizontal-group" id="focusAreas"></div>
