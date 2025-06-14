@@ -103,32 +103,61 @@ document.addEventListener('DOMContentLoaded', () => {
   const exportRoutineBtn = document.getElementById('export-btn');
   const importRoutineBtn = document.getElementById('import-btn');
   const importRoutineInput = document.getElementById('import-routine');
-  
-  let audioContext;
-  let beepBuffer;
-  
-  // Initialize the audio context and load the beep sound
-  function initializeAudio() {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-    // Fetch and decode the audio file
-    fetch("/sounds/beep.mp3")
+  // ---- AUDIO SETUP ----
+  let audioContext = null;
+  let beepBuffer = null;
+  let beepReadyPromise = null;
+
+  // Unlock/resume AudioContext on user interaction (handles iOS/Safari)
+  function unlockAudioContext() {
+    if (audioContext && audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+  }
+  ['click', 'touchstart', 'touchend', 'keydown', 'mousedown'].forEach(evt => {
+    document.body.addEventListener(evt, unlockAudioContext, { once: true, passive: true });
+  });
+
+  // Initialize audio context & beep buffer (only once)
+  function initializeAudio() {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (!beepReadyPromise) {
+      beepReadyPromise = fetch("/sounds/beep.mp3")
         .then(response => response.arrayBuffer())
         .then(data => audioContext.decodeAudioData(data))
-        .then(buffer => {
-            beepBuffer = buffer; // Store the decoded audio buffer
-        })
-        .catch(err => console.error("Error loading beep sound:", err));
-}
-
-  // Call initializeAudio when the page is loaded or when the user interacts
-  document.body.addEventListener("click", () => {
-    if (!audioContext) {
-        initializeAudio();
+        .then(buffer => { beepBuffer = buffer; })
+        .catch(err => {
+          beepBuffer = null;
+          console.error("Error loading beep sound:", err);
+        });
     }
-  }, { once: true });
+    return beepReadyPromise;
+  }
 
+  // Play beep (robust for iOS and desktop)
+  async function playBeepSound() {
+    await initializeAudio();
+    if (!audioContext || !beepBuffer) {
+      console.error("Audio context or beep buffer is not initialized.");
+      return;
+    }
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume();
+    }
+    try {
+      const source = audioContext.createBufferSource();
+      source.buffer = beepBuffer;
+      source.connect(audioContext.destination);
+      source.start(0);
+    } catch (err) {
+      console.error("Error playing beep sound:", err);
+    }
+  }
 
+  // ---- WORKOUT SETUP ----
   let exercises = [];
 
   function addExercise() {
@@ -136,10 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const exerciseDiv = document.createElement('div');
     exerciseDiv.classList.add('exercise');
     exerciseDiv.setAttribute('draggable', true);
-    exerciseDiv.addEventListener('dragstart', (e) => {
-      e.dataTransfer.setData('text/plain', exercises.indexOf(exerciseDiv));
-    });
-
 
     exerciseDiv.innerHTML = `
       <div class="drag-handle">
@@ -201,174 +226,169 @@ document.addEventListener('DOMContentLoaded', () => {
     exercises.push(exerciseDiv);
   }
 
-function startWorkout() {
-  const workoutRoutine = exercises.map((exerciseDiv) => {
-    const title = exerciseDiv.querySelector('h2').innerText;
-    const type = exerciseDiv.querySelector('.exercise-type').value;
-    const sets = parseInt(exerciseDiv.querySelector('.sets').value, 10);
-    const exerciseTime = type === 'timed' ? {
-      hours: parseInt(exerciseDiv.querySelector('.exercise-hours').value || 0, 10),
-      minutes: parseInt(exerciseDiv.querySelector('.exercise-minutes').value || 0, 10),
-      seconds: parseInt(exerciseDiv.querySelector('.exercise-seconds').value || 0, 10),
-    } : null;
-    const restTime = {
-      hours: parseInt(exerciseDiv.querySelector('.rest-hours').value || 0, 10),
-      minutes: parseInt(exerciseDiv.querySelector('.rest-minutes').value || 0, 10),
-      seconds: parseInt(exerciseDiv.querySelector('.rest-seconds').value || 0, 10),
+  function exportRoutine() {
+    const routine = exercises.map((exerciseDiv) => ({
+      title: exerciseDiv.querySelector('h2').innerText,
+      type: exerciseDiv.querySelector('.exercise-type').value,
+      sets: exerciseDiv.querySelector('.sets').value,
+      exerciseTime: {
+        hours: exerciseDiv.querySelector('.exercise-hours')?.value || 0,
+        minutes: exerciseDiv.querySelector('.exercise-minutes')?.value || 0,
+        seconds: exerciseDiv.querySelector('.exercise-seconds')?.value || 0,
+      },
+      restTime: {
+        hours: exerciseDiv.querySelector('.rest-hours')?.value || 0,
+        minutes: exerciseDiv.querySelector('.rest-minutes')?.value || 0,
+        seconds: exerciseDiv.querySelector('.rest-seconds')?.value || 0,
+      },
+    }));
+
+    const blob = new Blob([JSON.stringify(routine, null, 2)], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'routine.json';
+    link.click();
+  }
+
+  function importRoutine(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const routine = JSON.parse(reader.result);
+      exercisesDiv.innerHTML = ''; // Clear existing exercises
+      exercises = [];
+
+      routine.forEach((exerciseData) => {
+        addExercise();
+        const exerciseDiv = exercises[exercises.length - 1];
+        exerciseDiv.querySelector('h2').innerText = exerciseData.title;
+        exerciseDiv.querySelector('.exercise-type').value = exerciseData.type;
+        exerciseDiv.querySelector('.sets').value = exerciseData.sets;
+
+        if (exerciseData.type === 'timed') {
+          exerciseDiv.querySelector('.exercise-hours').value = exerciseData.exerciseTime.hours;
+          exerciseDiv.querySelector('.exercise-minutes').value = exerciseData.exerciseTime.minutes;
+          exerciseDiv.querySelector('.exercise-seconds').value = exerciseData.exerciseTime.seconds;
+        }
+
+        exerciseDiv.querySelector('.rest-hours').value = exerciseData.restTime.hours;
+        exerciseDiv.querySelector('.rest-minutes').value = exerciseData.restTime.minutes;
+        exerciseDiv.querySelector('.rest-seconds').value = exerciseData.restTime.seconds;
+      });
     };
-    return { title, type, sets, exerciseTime, restTime };
-  });
+    reader.readAsText(file);
+  }
 
-  const countdownDisplay = document.createElement('div');
-  countdownDisplay.id = 'countdown-display';
-  workoutContainer.insertBefore(countdownDisplay, exercisesDiv);
-
-  let currentExercise = 0;
-
-  function playBeepSound() {
-    if (!audioContext || !beepBuffer) {
-        console.error("Audio context or beep buffer is not initialized.");
-        return;
-    }
-
-    const source = audioContext.createBufferSource(); // Create a source node
-    source.buffer = beepBuffer; // Set the beep sound buffer
-    source.connect(audioContext.destination); // Connect to the audio context's output
-    source.start(0); // Play the sound immediately
-}
-
-  
-function runTimer(duration, label, callback) {
-  const currentExerciseDiv = exercises[currentExercise];
-  const countdownDiv = currentExerciseDiv.querySelector('.countdown');
-  let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
-
-  const interval = setInterval(() => {
+  // ---- TIMER LOGIC ----
+  function runTimer(duration, label, countdownDiv, callback) {
+    let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
+    // No need to run timer for 0s (skip directly to callback, but still beep)
     if (totalSeconds <= 0) {
-      clearInterval(interval);
-      playBeepSound(); // Play beep at every timer completion
+      playBeepSound();
       countdownDiv.textContent = `${label} Over`;
       setTimeout(() => {
-        countdownDiv.textContent = ''; // Clear message
+        countdownDiv.textContent = '';
         callback();
       }, 1000);
       return;
     }
-
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor(totalSeconds / 60) % 60;
-    const seconds = totalSeconds % 60;
-    countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    totalSeconds--;
-  }, 1000);
-}
-
-
-function processExercise() {
-  if (currentExercise >= exercises.length) {
-    playBeepSound(); // Final beep for routine completion
-    alert('Routine Complete!');
-    return;
+    const interval = setInterval(() => {
+      if (totalSeconds <= 0) {
+        clearInterval(interval);
+        playBeepSound();
+        countdownDiv.textContent = `${label} Over`;
+        setTimeout(() => {
+          countdownDiv.textContent = '';
+          callback();
+        }, 1000);
+        return;
+      }
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor(totalSeconds / 60) % 60;
+      const seconds = totalSeconds % 60;
+      countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      totalSeconds--;
+    }, 1000);
   }
 
-  const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExercise];
-  let currentSet = 1;
-
-  function nextSet() {
-    if (currentSet > sets) {
-      currentExercise++;
-      processExercise(); // Proceed to the next exercise
-      return;
-    }
-
-    const currentExerciseDiv = exercises[currentExercise];
-    const countdownDiv = currentExerciseDiv.querySelector('.countdown');
-    countdownDiv.textContent = `Set ${currentSet} of ${sets} (${type === 'timed' ? 'Timed Exercise' : 'Rep Counter'})`;
-
-    if (type === 'timed') {
-      // Pass "Exercise Time" and "Rest Time" as labels to `runTimer`
-      runTimer(exerciseTime, 'Exercise Time', () => {
-        runTimer(restTime, 'Rest Time', nextSet);
+  function startWorkout() {
+    // Wait for audio to be ready before starting timers
+    initializeAudio().then(() => {
+      const workoutRoutine = exercises.map((exerciseDiv) => {
+        const title = exerciseDiv.querySelector('h2').innerText;
+        const type = exerciseDiv.querySelector('.exercise-type').value;
+        const sets = parseInt(exerciseDiv.querySelector('.sets').value, 10);
+        const exerciseTime = type === 'timed' ? {
+          hours: parseInt(exerciseDiv.querySelector('.exercise-hours').value || 0, 10),
+          minutes: parseInt(exerciseDiv.querySelector('.exercise-minutes').value || 0, 10),
+          seconds: parseInt(exerciseDiv.querySelector('.exercise-seconds').value || 0, 10),
+        } : null;
+        const restTime = {
+          hours: parseInt(exerciseDiv.querySelector('.rest-hours').value || 0, 10),
+          minutes: parseInt(exerciseDiv.querySelector('.rest-minutes').value || 0, 10),
+          seconds: parseInt(exerciseDiv.querySelector('.rest-seconds').value || 0, 10),
+        };
+        return { title, type, sets, exerciseTime, restTime };
       });
-    } else if (type === 'rep') {
-      const proceed = confirm(`Complete Set ${currentSet} then press OK below to continue.`);
-      if (proceed) {
-        runTimer(restTime, 'Rest Time', nextSet);
+
+      const countdownDisplay = document.createElement('div');
+      countdownDisplay.id = 'countdown-display';
+      // Remove any existing display first
+      const prev = document.getElementById('countdown-display');
+      if (prev) prev.remove();
+      workoutContainer.insertBefore(countdownDisplay, exercisesDiv);
+
+      let currentExercise = 0;
+
+      function processExercise() {
+        if (currentExercise >= exercises.length) {
+          playBeepSound();
+          alert('Routine Complete!');
+          return;
+        }
+
+        const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExercise];
+        let currentSet = 1;
+
+        function nextSet() {
+          if (currentSet > sets) {
+            currentExercise++;
+            processExercise();
+            return;
+          }
+
+          const currentExerciseDiv = exercises[currentExercise];
+          const countdownDiv = currentExerciseDiv.querySelector('.countdown');
+          countdownDiv.textContent = `Set ${currentSet} of ${sets} (${type === 'timed' ? 'Timed Exercise' : 'Rep Counter'})`;
+
+          if (type === 'timed') {
+            runTimer(exerciseTime, 'Exercise Time', countdownDiv, () => {
+              runTimer(restTime, 'Rest Time', countdownDiv, nextSet);
+            });
+          } else if (type === 'rep') {
+            // Let user complete rep, then rest/timer
+            setTimeout(() => {
+              if (confirm(`Complete Set ${currentSet} then press OK below to continue.`)) {
+                runTimer(restTime, 'Rest Time', countdownDiv, nextSet);
+              }
+            }, 200); // Small delay for UI update
+          }
+          currentSet++;
+        }
+        nextSet();
       }
-    }
-    currentSet++;
+      processExercise();
+    });
   }
 
-  nextSet();
-}
-
-
-  processExercise();
-}
-
-function exportRoutine() {
-  const routine = exercises.map((exerciseDiv) => ({
-    title: exerciseDiv.querySelector('h2').innerText,
-    type: exerciseDiv.querySelector('.exercise-type').value,
-    sets: exerciseDiv.querySelector('.sets').value,
-    exerciseTime: {
-      hours: exerciseDiv.querySelector('.exercise-hours')?.value || 0,
-      minutes: exerciseDiv.querySelector('.exercise-minutes')?.value || 0,
-      seconds: exerciseDiv.querySelector('.exercise-seconds')?.value || 0,
-    },
-    restTime: {
-      hours: exerciseDiv.querySelector('.rest-hours')?.value || 0,
-      minutes: exerciseDiv.querySelector('.rest-minutes')?.value || 0,
-      seconds: exerciseDiv.querySelector('.rest-seconds')?.value || 0,
-    },
-  }));
-
-  const blob = new Blob([JSON.stringify(routine, null, 2)], { type: 'application/json' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'routine.json';
-  link.click();
-}
-
-function importRoutine(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    const routine = JSON.parse(reader.result);
-    exercisesDiv.innerHTML = ''; // Clear existing exercises
-    exercises = [];
-
-    routine.forEach((exerciseData) => {
-      addExercise();
-      const exerciseDiv = exercises[exercises.length - 1];
-      exerciseDiv.querySelector('h2').innerText = exerciseData.title;
-      exerciseDiv.querySelector('.exercise-type').value = exerciseData.type;
-      exerciseDiv.querySelector('.sets').value = exerciseData.sets;
-
-      if (exerciseData.type === 'timed') {
-        exerciseDiv.querySelector('.exercise-hours').value = exerciseData.exerciseTime.hours;
-        exerciseDiv.querySelector('.exercise-minutes').value = exerciseData.exerciseTime.minutes;
-        exerciseDiv.querySelector('.exercise-seconds').value = exerciseData.exerciseTime.seconds;
-      }
-
-      exerciseDiv.querySelector('.rest-hours').value = exerciseData.restTime.hours;
-      exerciseDiv.querySelector('.rest-minutes').value = exerciseData.restTime.minutes;
-      exerciseDiv.querySelector('.rest-seconds').value = exerciseData.restTime.seconds;
-    });
-  };
-  reader.readAsText(file);
-}
-
-addExerciseBtn.addEventListener('click', addExercise);
-startWorkoutBtn.addEventListener('click', () => {
-  initializeAudio(); // Ensure audio permissions are unlocked
-  startWorkout();
-});
-exportRoutineBtn.addEventListener('click', exportRoutine);
-importRoutineBtn.addEventListener('click', () => importRoutineInput.click());
-importRoutineInput.addEventListener('change', importRoutine);
+  // ---- HOOK UP EVENTS ----
+  addExerciseBtn.addEventListener('click', addExercise);
+  startWorkoutBtn.addEventListener('click', startWorkout);
+  exportRoutineBtn.addEventListener('click', exportRoutine);
+  importRoutineBtn.addEventListener('click', () => importRoutineInput.click());
+  importRoutineInput.addEventListener('change', importRoutine);
 
 });
 </script>
