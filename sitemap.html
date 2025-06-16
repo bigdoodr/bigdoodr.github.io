@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Map - bigdoodr.github.io</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #1e3c72;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .file-list {
+            list-style: none;
+        }
+
+        .file-item {
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            background: rgba(30, 60, 114, 0.05);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .file-item:hover {
+            background: rgba(30, 60, 114, 0.1);
+            border-left-color: #2a5298;
+            transform: translateX(5px);
+        }
+
+        .file-link {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-link:hover {
+            color: #2a5298;
+        }
+
+        .file-type {
+            font-size: 0.7rem;
+            background: #2a5298;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .file-path {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.3rem;
+        }
+
+        .generator-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .generator-section h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .command-box {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+            border: 1px solid #333;
+        }
+
+        .update-btn {
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .update-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .file-input {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            border: 2px dashed #2a5298;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .sitemap-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Site Map</h1>
+            <p>bigdoodr.github.io - Your playground for webpage editing</p>
+        </div>
+
+        <div class="sitemap-grid">
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🏠</div>
+                    Main Pages
+                </h2>
+                <ul class="file-list" id="main-pages">
+                    <li class="file-item">
+                        <a href="https://bigdoodr.github.io/" class="file-link">
+                            <span class="file-type">html</span>
+                            Home Page
+                        </a>
+                        <div class="file-path">index.html</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <div class="section-icon">📁</div>
+                    Documents & Content
+                </h2>
+                <ul class="file-list" id="documents">
+                    <!-- Documents will be populated here -->
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <div class="section-icon">🎨</div>
+                    Assets & Resources
+                </h2>
+                <ul class="file-list" id="assets">
+                    <!-- Assets will be populated here -->
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <div class="section-icon">⚙️</div>
+                    Configuration
+                </h2>
+                <ul class="file-list" id="config">
+                    <!-- Config files will be populated here -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="generator-section">
+            <h3>🚀 Sitemap Generator</h3>
+            <p>Use this terminal command on your Mac to generate a file list for your GitHub repository:</p>
+            
+            <div class="command-box">
+find . -type f -not -path "./.git/*" -not -name ".DS_Store" | head -50 | sort > sitemap-files.txt
+            </div>
+            
+            <p><strong>Or use this enhanced version that includes file types and sizes:</strong></p>
+            
+            <div class="command-box">
+find . -type f -not -path "./.git/*" -not -name ".DS_Store" -exec ls -la {} \; | awk '{print $9 " (" $5 " bytes)"}'| head -50 | sort > detailed-sitemap.txt
+            </div>
+
+            <div class="file-input" onclick="document.getElementById('fileInput').click()">
+                <p>📁 Click here to upload your generated sitemap file</p>
+                <input type="file" id="fileInput" accept=".txt" style="display: none;">
+            </div>
+
+            <button class="update-btn" onclick="generateSitemap()">Update Sitemap</button>
+        </div>
+    </div>
+
+    <script>
+        // File type mapping for icons and categories
+        const fileTypes = {
+            html: { icon: '🌐', category: 'main-pages', type: 'html' },
+            htm: { icon: '🌐', category: 'main-pages', type: 'html' },
+            md: { icon: '📝', category: 'documents', type: 'md' },
+            txt: { icon: '📄', category: 'documents', type: 'txt' },
+            pdf: { icon: '📕', category: 'documents', type: 'pdf' },
+            css: { icon: '🎨', category: 'assets', type: 'css' },
+            js: { icon: '⚡', category: 'assets', type: 'js' },
+            json: { icon: '🔧', category: 'config', type: 'json' },
+            yml: { icon: '⚙️', category: 'config', type: 'yml' },
+            yaml: { icon: '⚙️', category: 'config', type: 'yml' },
+            xml: { icon: '📋', category: 'config', type: 'xml' },
+            png: { icon: '🖼️', category: 'assets', type: 'img' },
+            jpg: { icon: '🖼️', category: 'assets', type: 'img' },
+            jpeg: { icon: '🖼️', category: 'assets', type: 'img' },
+            gif: { icon: '🖼️', category: 'assets', type: 'img' },
+            svg: { icon: '🎨', category: 'assets', type: 'svg' }
+        };
+
+        // Sample files to show the structure
+        const sampleFiles = [
+            './index.html',
+            './about.html',
+            './mastodon.html',
+            './ethics.html',
+            './google-disconnect.html',
+            './presentation.html',
+            './assets/style.css',
+            './assets/script.js',
+            './images/profile.jpg',
+            './docs/readme.md',
+            './_config.yml'
+        ];
+
+        function getFileExtension(filename) {
+            return filename.split('.').pop().toLowerCase();
+        }
+
+        function getFileInfo(filepath) {
+            const filename = filepath.split('/').pop();
+            const ext = getFileExtension(filename);
+            const info = fileTypes[ext] || { icon: '📄', category: 'documents', type: 'file' };
+            
+            return {
+                ...info,
+                filename,
+                filepath,
+                url: convertToGitHubPagesUrl(filepath)
+            };
+        }
+
+        function convertToGitHubPagesUrl(filepath) {
+            // Remove leading ./
+            let path = filepath.replace(/^\.\//, '');
+            
+            // Convert index.html to root
+            if (path === 'index.html') {
+                return 'https://bigdoodr.github.io/';
+            }
+            
+            // Remove .html extension for clean URLs (GitHub Pages handles this)
+            if (path.endsWith('.html')) {
+                path = path.replace(/\.html$/, '');
+            }
+            
+            return `https://bigdoodr.github.io/${path}`;
+        }
+
+        function createFileListItem(fileInfo) {
+            const li = document.createElement('li');
+            li.className = 'file-item';
+            
+            const isWebFile = ['html', 'htm', 'md'].includes(fileInfo.type);
+            const content = isWebFile 
+                ? `<a href="${fileInfo.url}" class="file-link" target="_blank">
+                     <span class="file-type">${fileInfo.type}</span>
+                     ${fileInfo.filename}
+                   </a>`
+                : `<div class="file-link">
+                     <span class="file-type">${fileInfo.type}</span>
+                     ${fileInfo.filename}
+                   </div>`;
+            
+            li.innerHTML = `
+                ${content}
+                <div class="file-path">${fileInfo.filepath}</div>
+            `;
+            
+            return li;
+        }
+
+        function populateSitemap(files) {
+            // Clear existing content
+            ['main-pages', 'documents', 'assets', 'config'].forEach(id => {
+                document.getElementById(id).innerHTML = '';
+            });
+
+            files.forEach(filepath => {
+                const fileInfo = getFileInfo(filepath);
+                const listItem = createFileListItem(fileInfo);
+                const container = document.getElementById(fileInfo.category);
+                if (container) {
+                    container.appendChild(listItem);
+                }
+            });
+
+            // Hide empty sections
+            ['main-pages', 'documents', 'assets', 'config'].forEach(id => {
+                const container = document.getElementById(id);
+                const section = container.closest('.section');
+                if (container.children.length === 0) {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                }
+            });
+        }
+
+        function generateSitemap() {
+            // For demo purposes, use sample files
+            populateSitemap(sampleFiles);
+        }
+
+        // File upload handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const content = e.target.result;
+                    const files = content.split('\n').filter(line => line.trim() !== '');
+                    populateSitemap(files);
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Initialize with sample data
+        generateSitemap();
+    </script>
+</body>
+</html>
