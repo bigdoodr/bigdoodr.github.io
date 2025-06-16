@@ -1,4 +1,0 @@
----
-# Front matter required for Jekyll to process SCSS
----
-@import "color-themes"; /* This assumes `_sass/color-themes.scss` */
