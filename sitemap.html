@@ -48,9 +48,58 @@
             color: #666;
         }
 
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #2a5298;
+            color: #1e3c72;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            background: #2a5298;
+            color: white;
+        }
+
+        .search-container {
+            max-width: 400px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            font-size: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
         .sitemap-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -69,13 +118,46 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .section h2 {
+        .section-header {
             font-size: 1.4rem;
             margin-bottom: 1rem;
             color: #1e3c72;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s ease;
+        }
+
+        .section-header:hover {
+            color: #2a5298;
+        }
+
+        .section-header::after {
+            content: '▼';
+            margin-left: auto;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .section.collapsed .section-header::after {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .section.collapsed .section-content {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .section:not(.collapsed) .section-content {
+            max-height: 2000px;
+            opacity: 1;
         }
 
         .section-icon {
@@ -88,6 +170,15 @@
             justify-content: center;
             color: white;
             font-size: 0.8rem;
+        }
+
+        .file-count {
+            font-size: 0.8rem;
+            background: rgba(42, 82, 152, 0.1);
+            color: #2a5298;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            margin-left: 0.5rem;
         }
 
         .file-list {
@@ -107,6 +198,10 @@
             background: rgba(30, 60, 114, 0.1);
             border-left-color: #2a5298;
             transform: translateX(5px);
+        }
+
+        .file-item.hidden {
+            display: none;
         }
 
         .file-link {
@@ -129,6 +224,8 @@
             padding: 0.2rem 0.5rem;
             border-radius: 12px;
             text-transform: uppercase;
+            min-width: 35px;
+            text-align: center;
         }
 
         .file-path {
@@ -162,30 +259,6 @@
             border: 1px solid #333;
         }
 
-        .update-btn {
-            background: linear-gradient(45deg, #1e3c72, #2a5298);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: transform 0.2s ease;
-        }
-
-        .update-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .file-input {
-            margin: 1rem 0;
-            padding: 0.5rem;
-            border: 2px dashed #2a5298;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-        }
-
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -197,6 +270,16 @@
             
             .sitemap-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -208,140 +291,115 @@
             <p>bigdoodr.github.io - Your playground for webpage editing</p>
         </div>
 
-        <div class="sitemap-grid">
-            <div class="section">
-                <h2>
-                    <div class="section-icon">🏠</div>
-                    Main Pages
-                </h2>
-                <ul class="file-list" id="main-pages">
-                    <li class="file-item">
-                        <a href="https://bigdoodr.github.io/" class="file-link">
-                            <span class="file-type">html</span>
-                            Home Page
-                        </a>
-                        <div class="file-path">index.html</div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="section">
-                <h2>
-                    <div class="section-icon">📁</div>
-                    Documents & Content
-                </h2>
-                <ul class="file-list" id="documents">
-                    <!-- Documents will be populated here -->
-                </ul>
-            </div>
-
-            <div class="section">
-                <h2>
-                    <div class="section-icon">🎨</div>
-                    Assets & Resources
-                </h2>
-                <ul class="file-list" id="assets">
-                    <!-- Assets will be populated here -->
-                </ul>
-            </div>
-
-            <div class="section">
-                <h2>
-                    <div class="section-icon">⚙️</div>
-                    Configuration
-                </h2>
-                <ul class="file-list" id="config">
-                    <!-- Config files will be populated here -->
-                </ul>
-            </div>
+        <div class="controls">
+            <button class="control-btn" onclick="expandAll()">Expand All</button>
+            <button class="control-btn" onclick="collapseAll()">Collapse All</button>
+            <button class="control-btn" onclick="expandImportant()">Show Main Content</button>
         </div>
 
-        <div class="generator-section">
-            <h3>🚀 Sitemap Generator</h3>
-            <p>Use this terminal command on your Mac to generate a file list for your GitHub repository:</p>
-            
-            <div class="command-box">
-find . -type f -not -path "./.git/*" -not -name ".DS_Store" | head -50 | sort > sitemap-files.txt
-            </div>
-            
-            <p><strong>Or use this enhanced version that includes file types and sizes:</strong></p>
-            
-            <div class="command-box">
-find . -type f -not -path "./.git/*" -not -name ".DS_Store" -exec ls -la {} \; | awk '{print $9 " (" $5 " bytes)"}'| head -50 | sort > detailed-sitemap.txt
-            </div>
-
-            <div class="file-input" onclick="document.getElementById('fileInput').click()">
-                <p>📁 Click here to upload your generated sitemap file</p>
-                <input type="file" id="fileInput" accept=".txt" style="display: none;">
-            </div>
-
-            <button class="update-btn" onclick="generateSitemap()">Update Sitemap</button>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Search files..." oninput="filterFiles(this.value)">
         </div>
+
+        <div class="sitemap-grid" id="sitemap-grid">
+            <!-- Sections will be dynamically generated here -->
+        </div>
+
     </div>
 
     <script>
-        // File type mapping for icons and categories
-        const fileTypes = {
-            html: { icon: '🌐', category: 'main-pages', type: 'html' },
-            htm: { icon: '🌐', category: 'main-pages', type: 'html' },
-            md: { icon: '📝', category: 'documents', type: 'md' },
-            txt: { icon: '📄', category: 'documents', type: 'txt' },
-            pdf: { icon: '📕', category: 'documents', type: 'pdf' },
-            css: { icon: '🎨', category: 'assets', type: 'css' },
-            js: { icon: '⚡', category: 'assets', type: 'js' },
-            json: { icon: '🔧', category: 'config', type: 'json' },
-            yml: { icon: '⚙️', category: 'config', type: 'yml' },
-            yaml: { icon: '⚙️', category: 'config', type: 'yml' },
-            xml: { icon: '📋', category: 'config', type: 'xml' },
-            png: { icon: '🖼️', category: 'assets', type: 'img' },
-            jpg: { icon: '🖼️', category: 'assets', type: 'img' },
-            jpeg: { icon: '🖼️', category: 'assets', type: 'img' },
-            gif: { icon: '🖼️', category: 'assets', type: 'img' },
-            svg: { icon: '🎨', category: 'assets', type: 'svg' }
+        // Folder icons and priorities
+        const folderConfig = {
+            'top-level': { icon: '🏠', priority: 1, important: true },
+            'posts': { icon: '📝', priority: 2, important: true },
+            '_posts': { icon: '📝', priority: 2, important: true },
+            'exercises': { icon: '💪', priority: 3, important: true },
+            'staging': { icon: '🚧', priority: 4, important: false },
+            'abandoned': { icon: '🗃️', priority: 5, important: false },
+            'retired files': { icon: '📦', priority: 6, important: false },
+            'retired-files': { icon: '📦', priority: 6, important: false }
         };
 
-        // Sample files to show the structure
-        const sampleFiles = [
-            './index.html',
+        const fileTypes = {
+            html: { icon: '🌐', type: 'html' },
+            htm: { icon: '🌐', type: 'html' },
+            md: { icon: '📝', type: 'md' }
+        };
+
+        const siteFiles = [
+            './_posts/2024-06-24-goodbye_google.md',
+            './_posts/2024-07-12-macpres.md',
+            './_posts/2024-09-08-privacy-security-actions.md',
+            './_posts/2024-09-12-org-actions.md',
+            './_posts/2024-12-18-workout-randomizer.md',
+            './_posts/2025-01-06-timers-and-webpage-audio.md',
+            './24macpres.html',
             './about.html',
-            './mastodon.html',
-            './ethics.html',
-            './google-disconnect.html',
-            './presentation.html',
-            './assets/style.css',
-            './assets/script.js',
-            './images/profile.jpg',
-            './docs/readme.md',
-            './_config.yml'
+            './archive.md',
+            './bookmarks.md',
+            './books.md',
+            './DailyExercises.md',
+            './exercises/expandableTimer.html',
+            './exercises/Zone2Exercises.html',
+            './exercises/Zone2Randomizer.html',
+            './index.md',
+            './readme.md',
+            './resume.html',
+            './staging/expandableTimer_v2.html',
+            './sitemap.html'
         ];
+
+        let sectionsData = [];
 
         function getFileExtension(filename) {
             return filename.split('.').pop().toLowerCase();
         }
 
+        function getFolderName(filepath) {
+            const parts = filepath.replace(/^\.\//, '').split('/');
+            return parts.length === 1 ? 'top-level' : parts[0].toLowerCase();
+        }
+
+        function getFolderDisplayName(folderName) {
+            if (folderName === 'top-level') return 'Top Level';
+            if (folderName.startsWith('_')) return folderName.substring(1).charAt(0).toUpperCase() + folderName.substring(2);
+            return folderName.split('-').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+        }
+
+        function getFolderConfig(folderName) {
+            return folderConfig[folderName] || folderConfig[folderName.replace(/\s+/g, '-').toLowerCase()] || 
+                   { icon: '📁', priority: 999, important: false };
+        }
+
         function getFileInfo(filepath) {
             const filename = filepath.split('/').pop();
             const ext = getFileExtension(filename);
-            const info = fileTypes[ext] || { icon: '📄', category: 'documents', type: 'file' };
+            const info = fileTypes[ext] || { icon: '📄', type: 'file' };
+            const folder = getFolderName(filepath);
             
             return {
                 ...info,
                 filename,
                 filepath,
+                folder,
                 url: convertToGitHubPagesUrl(filepath)
             };
         }
 
         function convertToGitHubPagesUrl(filepath) {
-            // Remove leading ./
             let path = filepath.replace(/^\.\//, '');
             
-            // Convert index.html to root
-            if (path === 'index.html') {
+            if (path === 'index.html' || path === 'index.md') {
                 return 'https://bigdoodr.github.io/';
             }
             
-            // Remove .html extension for clean URLs (GitHub Pages handles this)
+            if (path.endsWith('.md')) {
+                path = path.replace(/\.md$/, '.html');
+            }
+            
             if (path.endsWith('.html')) {
                 path = path.replace(/\.html$/, '');
             }
@@ -352,6 +410,8 @@ find . -type f -not -path "./.git/*" -not -name ".DS_Store" -exec ls -la {} \; |
         function createFileListItem(fileInfo) {
             const li = document.createElement('li');
             li.className = 'file-item';
+            li.dataset.filename = fileInfo.filename.toLowerCase();
+            li.dataset.filepath = fileInfo.filepath.toLowerCase();
             
             const isWebFile = ['html', 'htm', 'md'].includes(fileInfo.type);
             const content = isWebFile 
@@ -372,54 +432,138 @@ find . -type f -not -path "./.git/*" -not -name ".DS_Store" -exec ls -la {} \; |
             return li;
         }
 
-        function populateSitemap(files) {
-            // Clear existing content
-            ['main-pages', 'documents', 'assets', 'config'].forEach(id => {
-                document.getElementById(id).innerHTML = '';
+        function createSection(folderName, folderDisplayName, fileCount) {
+            const config = getFolderConfig(folderName);
+            const section = document.createElement('div');
+            section.className = 'section collapsed';
+            section.dataset.folder = folderName;
+            section.dataset.important = config.important;
+            
+            section.innerHTML = `
+                <h2 class="section-header">
+                    <div class="section-icon">${config.icon}</div>
+                    ${folderDisplayName}
+                    <span class="file-count">${fileCount}</span>
+                </h2>
+                <div class="section-content">
+                    <ul class="file-list" id="${folderName}">
+                    </ul>
+                </div>
+            `;
+            
+            const header = section.querySelector('.section-header');
+            header.addEventListener('click', () => {
+                section.classList.toggle('collapsed');
             });
+            
+            return section;
+        }
 
-            files.forEach(filepath => {
+        function populateSitemap() {
+            const sitemapGrid = document.getElementById('sitemap-grid');
+            sitemapGrid.innerHTML = '';
+            sectionsData = [];
+            
+            const filesByFolder = {};
+            
+            siteFiles.forEach(filepath => {
                 const fileInfo = getFileInfo(filepath);
-                const listItem = createFileListItem(fileInfo);
-                const container = document.getElementById(fileInfo.category);
-                if (container) {
-                    container.appendChild(listItem);
+                const folder = fileInfo.folder;
+                
+                if (!filesByFolder[folder]) {
+                    filesByFolder[folder] = [];
                 }
+                filesByFolder[folder].push(fileInfo);
             });
+            
+            // Sort folders by priority, then alphabetically
+            const sortedFolders = Object.keys(filesByFolder).sort((a, b) => {
+                const configA = getFolderConfig(a);
+                const configB = getFolderConfig(b);
+                
+                if (configA.priority !== configB.priority) {
+                    return configA.priority - configB.priority;
+                }
+                return a.localeCompare(b);
+            });
+            
+            sortedFolders.forEach(folderName => {
+                const folderDisplayName = getFolderDisplayName(folderName);
+                const files = filesByFolder[folderName];
+                const section = createSection(folderName, folderDisplayName, files.length);
+                const fileList = section.querySelector('.file-list');
+                
+                files.sort((a, b) => a.filename.localeCompare(b.filename))
+                     .forEach(fileInfo => {
+                         const listItem = createFileListItem(fileInfo);
+                         fileList.appendChild(listItem);
+                     });
+                
+                sitemapGrid.appendChild(section);
+                sectionsData.push({
+                    element: section,
+                    name: folderName,
+                    important: getFolderConfig(folderName).important
+                });
+            });
+        }
 
-            // Hide empty sections
-            ['main-pages', 'documents', 'assets', 'config'].forEach(id => {
-                const container = document.getElementById(id);
-                const section = container.closest('.section');
-                if (container.children.length === 0) {
-                    section.style.display = 'none';
+        function expandAll() {
+            sectionsData.forEach(({element}) => {
+                element.classList.remove('collapsed');
+            });
+        }
+
+        function collapseAll() {
+            sectionsData.forEach(({element}) => {
+                element.classList.add('collapsed');
+            });
+        }
+
+        function expandImportant() {
+            sectionsData.forEach(({element, important}) => {
+                if (important) {
+                    element.classList.remove('collapsed');
                 } else {
-                    section.style.display = 'block';
+                    element.classList.add('collapsed');
                 }
             });
         }
 
-        function generateSitemap() {
-            // For demo purposes, use sample files
-            populateSitemap(sampleFiles);
+        let searchTimeout;
+        function filterFiles(searchTerm) {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const term = searchTerm.toLowerCase().trim();
+                
+                if (!term) {
+                    document.querySelectorAll('.file-item').forEach(item => {
+                        item.classList.remove('hidden');
+                    });
+                    return;
+                }
+
+                document.querySelectorAll('.file-item').forEach(item => {
+                    const filename = item.dataset.filename;
+                    const filepath = item.dataset.filepath;
+                    
+                    if (filename.includes(term) || filepath.includes(term)) {
+                        item.classList.remove('hidden');
+                        // Auto-expand parent section if file matches
+                        const section = item.closest('.section');
+                        if (section) section.classList.remove('collapsed');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            }, 150);
         }
 
-        // File upload handler
-        document.getElementById('fileInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const content = e.target.result;
-                    const files = content.split('\n').filter(line => line.trim() !== '');
-                    populateSitemap(files);
-                };
-                reader.readAsText(file);
-            }
-        });
-
-        // Initialize with sample data
-        generateSitemap();
+        // Initialize
+        populateSitemap();
+        
+        // Start with important sections expanded
+        setTimeout(expandImportant, 100);
     </script>
 </body>
 </html>
