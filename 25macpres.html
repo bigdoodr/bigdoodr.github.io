@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources</title>
+    <style>
+        .fa {
+            font-size: 50px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .fa:hover {
+            color: darkblue;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff; /* Default background color */
+            color: #000; /* Default text color */
+            transition: background-color 0.5s;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4a82ed; /* Heading color */
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); /* Horizontal offset, vertical offset, blur radius, shadow color */
+            padding: 20px 0;
+            background-color: #e96d48;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        a {
+            color: #d64e83; /* Default link color for light mode */
+        }
+
+        /* Dark mode styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #000; /* Dark mode background color */
+                color: #fff; /* Dark mode text color */
+            }
+
+            a {
+                color: #d64e83; /* Link color for dark mode */
+            }
+        }
+
+        li {
+            margin-bottom: 10px; /* Adjust the value to control the spacing */
+        }
+    </style>
+</head>
+<body>
+    <h1>Resources</h1>
+    <h2>Session Notes: <a href="placeholder">placeholder</a></h2>
+    <p>Below are links to all of the items I referenced in the presentation, as well as items that have helped me along the way.</p>
+    <ul>
+        <li><a href="https://github.com/swiftDialog/swiftDialog/wiki">swiftDialog Wiki</a></li>
+        <li><a href="https://github.com/grahampugh/nice-updater">Graham Pugh’s Nice-Updater</a></li>
+        <li><a href="https://github.com/SecondSonConsulting/Renew">SecondSon/BigMacAdmin’s Renew</a></li>
+        <li><a href="https://512pixels.net/2025/06/inside-macintosh-screen-saver/">512 Pixels | Inside the Macintosh Screen Saver</a></li>
+        <li><a href="https://github.com/ParetoSecurity/pareto-mac">Pareto Security GH Repo</a></li>
+        <li><a href="https://it-training.apple.com/tutorials/compliance/sec001">Apple IT Training - Mac Security Compliance</a></li>
+        <li><a href="https://trusted.jamf.com/docs/establishing-compliance-baselines">Jamf Compliance Editor</a></li>
+        <li><a href="https://shellcheck.net">shellcheck.net</a></li>
+        <li><a href="https://carbon.now.sh">carbon.now.sh</a></li>
+    </ul>
+    <p>And, if you so desire, you can go through the presentation again below--or <a href="https://bigdoodr.github.io/BuildWithSwiftDialog">fullscreen</a>.</p>
+    <iframe width="560" height="315" src="placeholder" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe src="https://bigdoodr.github.io/BuildWithSwiftDialog" width="100%" height="600px" style="border:none;"></iframe>
+    <script>
+        // Check if prefers-color-scheme is supported
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.style.backgroundColor = '#000'; // Dark mode background color
+            document.body.style.color = '#fff'; // Dark mode text color
+        }
+
+        // Listen for changes in the color scheme preference
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.body.style.backgroundColor = '#000'; // Dark mode background color
+                document.body.style.color = '#fff'; // Dark mode text color
+            } else {
+                document.body.style.backgroundColor = '#fff'; // Light mode background color
+                document.body.style.color = '#000'; // Light mode text color
+            }
+        });
+    </script>
+</body>
+</html>
