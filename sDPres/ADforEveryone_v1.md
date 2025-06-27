@@ -1,9 +1,21 @@
 ---
-layout: page
+layout: pages
 title: AirDrop for Everyone Enabled Checker v1
 description: code blocks for building a script to detect and prompt if AirDrop is enabled for Everyone
 date: 2025-06-27T12:33:30-6:00
 ---
+
+<style>
+/* Override page container width */
+.page, .container, .post, .content {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+</style>
 
 ```
 #!/bin/zsh
