@@ -10,10 +10,13 @@ image: /resources/books.purple.png
 
 ## 2025 Reading
 
-<summary>Running Tally: 15 books</summary>
+<summary>Running Tally: 18 books</summary>
 
 | Title | Author | Month | Link |
 | ----- | ------ | ----- | ---- |
+| We Were Kings | Court Stevens | June | [Book Details](https://openlibrary.org/works/OL25448280W) |
+| Last Girl Breathing | Court Stevens | June | [Book Details](https://openlibrary.org/works/OL36121156W) |
+| Fairy Tale | Stephen King | June | [Book Details](https://openlibrary.org/works/OL27589863W) |
 | Heroic Hearts | Jim Butcher | May | [Book Details](https://openlibrary.org/works/OL24794467W) |
 | Moon Called | Patricia Briggs | May | [Book Details](https://openlibrary.org/works/OL5682781W) |
 | One Day in December | Josie Silver | April | [Book Details](https://openlibrary.org/works/OL19762562W) |
