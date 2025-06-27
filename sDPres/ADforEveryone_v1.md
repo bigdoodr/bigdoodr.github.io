@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: no-search
 title: AirDrop for Everyone Enabled Checker v1
 description: code blocks for building a script to detect and prompt if AirDrop is enabled for Everyone
 date: 2025-06-27T12:33:30-6:00
