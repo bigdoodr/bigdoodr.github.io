@@ -5,31 +5,33 @@ date: 2025-06-27T12:33:30-6:00
 ---
 
 <style>
-/* Existing container override */
+/* Make the main content area use flexbox */
 .page, .container, .post, .content {
-  max-width: 100vw !important;
-  width: 100vw !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
-/* Make code block fill the viewport */
-pre, pre > code {
-  height: 100vh !important;
-  min-height: 100vh !important;
+/* Make code blocks flexible */
+pre {
+  flex-grow: 1;
+  min-height: 0;     /* Allows shrinking if needed */
+  max-height: 100vh; /* Prevents overflow */
+  margin: 0;
+  width: 100vw;
   box-sizing: border-box;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  padding: 2rem !important;
   overflow: auto;
-  font-size: 1rem;
+}
+
+/* Optional: make code inside pre take full height */
+pre > code {
+  display: block;
+  height: 100%;
 }
 </style>
-
 
 ```
 #!/bin/zsh

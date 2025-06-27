@@ -8,7 +8,9 @@
     <div class="no-print">
       {%- include header.html -%}
     </div>
-	<form method="get" id="ddgSearch" action="https://duckduckgo.com/">
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+      	<form method="get" id="ddgSearch" action="https://duckduckgo.com/">
 		<input type="hidden" name="sites" value="https://bigdoodr.github.io"/>
 		<input type="hidden" name="k7" value="#4a4a4a"/>
 		<input type="hidden" name="k8" value="#ffffff"/>
@@ -18,9 +20,7 @@
 		<input type="hidden" name="kt" value="p"/>
 		<input type="text" name="q" placeholder="Search…" aria-label="Search https://bigdoodr.github.io on DuckDuckGo"/>
 		<button type="submit">Search</button>
-	</form>
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
+		</form>
         {{ content }}
       </div>
     </main>
