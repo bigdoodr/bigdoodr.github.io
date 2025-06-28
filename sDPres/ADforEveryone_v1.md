@@ -5,11 +5,8 @@ date: 2025-06-27T12:33:30-6:00
 ---
 
 <style>
-/* Make the main content area use flexbox */
+/* Remove container centering and padding */
 .page, .container, .post, .content {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   max-width: 100vw !important;
   width: 100vw !important;
   margin: 0 !important;
@@ -19,27 +16,19 @@ date: 2025-06-27T12:33:30-6:00
   position: relative !important;
 }
 
-/* Make code blocks flexible */
+/* Make the code block fill the viewport */
 pre, pre > code {
-  flex-grow: 1;
-  min-height: 0;     /* Allows shrinking if needed */
-  max-height: 100vh; /* Prevents overflow */
+  width: 100vw !important;
   max-width: 100vw !important;
   margin: 0 !important;
-  width: 100vw;
   border-radius: 0 !important;
   padding-left: 2rem !important; /* Optional: keep some inner padding for readability */
   padding-right: 2rem !important;
   box-sizing: border-box;
-  overflow: auto;
-}
-
-/* Optional: make code inside pre take full height */
-pre > code {
-  display: block;
-  height: 100%;
+  overflow-x: auto;
 }
 </style>
+
 
 ```
 #!/bin/zsh
