@@ -28,14 +28,11 @@ body.codeblock-fullwidth pre > code {
   flex-grow: 1;
   min-height: 0;
   max-height: 95vh;
-  width: 95vw !important;
   max-width: 95vw !important;
   margin: 0 !important;
   display: block;
   height: 100%;
   border-radius: 0 !important;
-  padding-left: 2rem !important;
-  padding-right: 2rem !important;
   box-sizing: border-box;
   overflow-x: auto;
 }

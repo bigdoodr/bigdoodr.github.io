@@ -12,10 +12,12 @@ body.codeblock-fullwidth .wrapper,
 body.codeblock-fullwidth .page-content,
 body.codeblock-fullwidth .post,
 body.codeblock-fullwidth .content {
+  display: flex;
+  flex-direction: column;
   max-width: 95vw !important;
   width: 95vw !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 5 !important;
+  padding: 5 !important;
   left: 0 !important;
   right: 0 !important;
   position: relative !important;
@@ -23,12 +25,14 @@ body.codeblock-fullwidth .content {
 
 body.codeblock-fullwidth pre,
 body.codeblock-fullwidth pre > code {
-  width: 95vw !important;
+  flex-grow: 1;
+  min-height: 0;
+  max-height: 95vh;
   max-width: 95vw !important;
   margin: 0 !important;
+  display: block;
+  height: 100%;
   border-radius: 0 !important;
-  padding-left: 2rem !important;
-  padding-right: 2rem !important;
   box-sizing: border-box;
   overflow-x: auto;
 }
