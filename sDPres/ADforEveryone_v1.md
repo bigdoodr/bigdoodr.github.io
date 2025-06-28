@@ -1,12 +1,17 @@
 ---
+layout: default
 title: AirDrop for Everyone Enabled Checker v1
 description: code blocks for building a script to detect and prompt if AirDrop is enabled for Everyone
 date: 2025-06-27T12:33:30-6:00
+body_class: codeblock-fullwidth
 ---
 
 <style>
-/* Remove container centering and padding */
-.page, .container, .post, .content {
+body.codeblock-fullwidth .container,
+body.codeblock-fullwidth .wrapper,
+body.codeblock-fullwidth .page-content,
+body.codeblock-fullwidth .post,
+body.codeblock-fullwidth .content {
   max-width: 100vw !important;
   width: 100vw !important;
   margin: 0 !important;
@@ -16,13 +21,13 @@ date: 2025-06-27T12:33:30-6:00
   position: relative !important;
 }
 
-/* Make the code block fill the viewport */
-pre, pre > code {
+body.codeblock-fullwidth pre,
+body.codeblock-fullwidth pre > code {
   width: 100vw !important;
   max-width: 100vw !important;
   margin: 0 !important;
   border-radius: 0 !important;
-  padding-left: 2rem !important; /* Optional: keep some inner padding for readability */
+  padding-left: 2rem !important;
   padding-right: 2rem !important;
   box-sizing: border-box;
   overflow-x: auto;
