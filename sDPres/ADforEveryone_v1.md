@@ -10,18 +10,26 @@ date: 2025-06-27T12:33:30-6:00
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
+  max-width: 100vw !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  position: relative !important;
 }
 
 /* Make code blocks flexible */
-pre {
+pre, pre > code {
   flex-grow: 1;
   min-height: 0;     /* Allows shrinking if needed */
   max-height: 100vh; /* Prevents overflow */
-  margin: 0;
+  max-width: 100vw !important;
+  margin: 0 !important;
   width: 100vw;
+  border-radius: 0 !important;
+  padding-left: 2rem !important; /* Optional: keep some inner padding for readability */
+  padding-right: 2rem !important;
   box-sizing: border-box;
   overflow: auto;
 }
