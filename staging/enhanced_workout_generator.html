@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zone2 Workout Generator</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+    }
+
+    .nav-button {
+      display: inline-block;
+      padding: 12px 24px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 25px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+
+    .form-container {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      font-size: 1.5rem;
+      color: #4a5568;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .focus-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 15px;
+      padding: 20px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      border: 3px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .focus-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+
+    .focus-card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .focus-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .focus-card.selected {
+      border-color: #ffd700;
+      box-shadow: 0 0 20px rgba(255,215,0,0.5);
+    }
+
+    .focus-card input[type="checkbox"] {
+      display: none;
+    }
+
+    .focus-card .icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .difficulty-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .difficulty-option {
+      background: #f7fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .difficulty-option:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .difficulty-option.selected {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-color: #667eea;
+    }
+
+    .difficulty-option input[type="radio"] {
+      display: none;
+    }
+
+    .duration-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .duration-input {
+      background: #f7fafc;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .duration-input label {
+      display: block;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 10px;
+    }
+
+    .duration-input input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      text-align: center;
+      transition: border-color 0.3s ease;
+    }
+
+    .duration-input input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .generate-button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .generate-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    .generate-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .loading-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .loading-content {
+      text-align: center;
+      color: white;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    .routine-container {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .routine-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .routine-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .routine-header h2 {
+      color: #4a5568;
+      margin: 0;
+    }
+
+    .routine-stats {
+      display: flex;
+      gap: 20px;
+      color: #667eea;
+      font-weight: 600;
+    }
+
+    .exercise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .exercise-card {
+      background: #f7fafc;
+      border-radius: 15px;
+      padding: 20px;
+      border-left: 4px solid #667eea;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .exercise-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .exercise-card.rest {
+      border-left-color: #48bb78;
+      background: #f0fff4;
+    }
+
+    .exercise-card h3 {
+      color: #4a5568;
+      margin-bottom: 5px;
+    }
+
+    .exercise-card p {
+      color: #718096;
+      font-size: 0.9rem;
+    }
+
+    .workout-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 350px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.5s ease;
+      z-index: 1000;
+    }
+
+    .workout-player.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .player-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .exercise-name {
+      font-weight: 600;
+      color: #4a5568;
+      font-size: 1.1rem;
+    }
+
+    .timer-display {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .video-container {
+      position: relative;
+      margin-bottom: 15px;
+      border-radius: 15px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .player-controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .control-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .control-btn.primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .control-btn.secondary {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+
+    .control-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .circular-progress {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 15px;
+    }
+
+    .circular-progress svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+
+    .circular-progress circle {
+      fill: none;
+      stroke-width: 6;
+      stroke-linecap: round;
+    }
+
+    .circular-progress .bg {
+      stroke: #e2e8f0;
+    }
+
+    .circular-progress .progress {
+      stroke: url(#gradient);
+      stroke-dasharray: 251.2;
+      stroke-dashoffset: 251.2;
+      transition: stroke-dashoffset 0.3s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .focus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .duration-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .workout-player {
+        width: calc(100vw - 40px);
+        right: 20px;
+        left: 20px;
+      }
+
+      .exercise-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-dumbbell"></i> Zone2 Workout Generator</h1>
+      <p>Create personalized workout routines tailored to your fitness goals</p>
+      <a href="#" class="nav-button">
+        <i class="fas fa-list"></i> View All Exercises
+      </a>
+    </div>
+
+    <div class="form-container">
+      <form id="workoutForm">
+        <div class="section">
+          <h2><i class="fas fa-target"></i> Focus Areas</h2>
+          <div class="focus-grid" id="focusAreas">
+            <!-- Focus areas will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="section">
+          <h2><i class="fas fa-chart-line"></i> Difficulty Level</h2>
+          <div class="difficulty-options">
+            <div class="difficulty-option">
+              <input type="radio" name="difficulty" value="Beginner" id="beginner">
+              <label for="beginner">
+                <i class="fas fa-seedling"></i>
+                <div>Beginner</div>
+              </label>
+            </div>
+            <div class="difficulty-option">
+              <input type="radio" name="difficulty" value="Medium" id="medium">
+              <label for="medium">
+                <i class="fas fa-fire"></i>
+                <div>Medium</div>
+              </label>
+            </div>
+            <div class="difficulty-option">
+              <input type="radio" name="difficulty" value="Hard" id="hard">
+              <label for="hard">
+                <i class="fas fa-bolt"></i>
+                <div>Hard</div>
+              </label>
+            </div>
+            <div class="difficulty-option selected">
+              <input type="radio" name="difficulty" value="Expert/Advanced" id="expert" checked>
+              <label for="expert">
+                <i class="fas fa-crown"></i>
+                <div>Expert</div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2><i class="fas fa-clock"></i> Workout Duration</h2>
+          <div class="duration-grid">
+            <div class="duration-input">
+              <label for="totalDuration">Total Duration</label>
+              <input type="number" id="totalDuration" value="10" min="1" max="120">
+              <small>minutes</small>
+            </div>
+            <div class="duration-input">
+              <label for="exerciseDuration">Exercise Duration</label>
+              <input type="number" id="exerciseDuration" value="20" min="1" max="120">
+              <small>seconds</small>
+            </div>
+            <div class="duration-input">
+              <label for="restDuration">Rest Duration</label>
+              <input type="number" id="restDuration" value="10" min="1" max="120">
+              <small>seconds</small>
+            </div>
+            <div class="duration-input">
+              <label for="restEvery">Rest Every</label>
+              <input type="number" id="restEvery" value="1" min="1" max="20">
+              <small>exercises</small>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="generate-button">
+          <i class="fas fa-magic"></i> Generate My Workout
+        </button>
+      </form>
+    </div>
+
+    <div class="routine-container" id="routineContainer">
+      <div class="routine-header">
+        <h2><i class="fas fa-list-check"></i> Your Workout Routine</h2>
+        <div class="routine-stats">
+          <span id="totalExercises">0 exercises</span>
+          <span id="estimatedTime">0 min</span>
+        </div>
+      </div>
+      <div class="exercise-grid" id="exerciseGrid">
+        <!-- Exercise cards will be populated here -->
+      </div>
+      <div class="text-center">
+        <button id="startWorkoutBtn" class="generate-button" style="max-width: 300px;">
+          <i class="fas fa-play"></i> Start Workout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <h3>Generating your perfect workout...</h3>
+      <p>Analyzing your preferences and creating a customized routine</p>
+    </div>
+  </div>
+
+  <div class="workout-player" id="workoutPlayer">
+    <div class="player-header">
+      <div class="exercise-name" id="currentExercise">Get Ready!</div>
+      <div class="timer-display" id="timerDisplay">00</div>
+    </div>
+    
+    <div class="circular-progress">
+      <svg>
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <circle class="bg" cx="40" cy="40" r="36"></circle>
+        <circle class="progress" cx="40" cy="40" r="36" id="progressCircle"></circle>
+      </svg>
+    </div>
+    
+    <div class="video-container">
+      <video id="exerciseVideo" muted playsinline loop style="display: none;"></video>
+      <div class="video-placeholder" id="videoPlaceholder">
+        <i class="fas fa-play-circle" style="font-size: 3rem;"></i>
+      </div>
+    </div>
+    
+    <div class="player-controls">
+      <button class="control-btn primary" id="startBtn">
+        <i class="fas fa-play"></i> Start
+      </button>
+      <button class="control-btn secondary" id="pauseBtn" style="display: none;">
+        <i class="fas fa-pause"></i> Pause
+      </button>
+      <button class="control-btn secondary" id="skipBtn" style="display: none;">
+        <i class="fas fa-forward"></i> Skip
+      </button>
+    </div>
+  </div>
+  
