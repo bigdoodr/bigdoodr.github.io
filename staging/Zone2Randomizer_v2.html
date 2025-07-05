@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workout Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+    }
+    h2 {
+      margin-top: 1em;
+    }
+    label {
+      margin-right: 10px;
+    }
+    .horizontal-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1em;
+      align-items: center;
+    }
+    .floating-box {
+      position: fixed;
+      bottom: 100px;
+      right: 10px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1em;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    .floating-box video {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      display: block;
+    }
+    .exercise-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5em;
+    }
+    .loading {
+      display: inline-block;
+      margin-left: 10px;
+      color: #666;
+    }
+        .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1em;
+    }
+    .nav-button {
+      padding: 0.6em 1em;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 0.9em;
+    }
+    .nav-button:hover {
+      background-color: #555;
+    }
+    #routine li {
+      margin-bottom: 5px;
+    }
+    @media (max-width: 600px) {
+      .floating-box video {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Workout Generator</h1>
+  
+    <div class="nav-buttons">
+    <a href="Zone2Exercises.html" class="nav-button">See the Exercises</a>
+  </div>
+
+  <form id="workoutForm">
+    <h2>Focus Areas</h2>
+    <div class="horizontal-group" id="focusAreas"></div>
+
+    <h2>Difficulty</h2>
+    <div class="horizontal-group">
+      <label><input type="radio" name="difficulty" value="Beginner"> Beginner</label>
+      <label><input type="radio" name="difficulty" value="Medium"> Medium</label>
+      <label><input type="radio" name="difficulty" value="Hard"> Hard</label>
+      <label><input type="radio" name="difficulty" value="Expert/Advanced" checked> Expert/Advanced</label>
+    </div>
+
+    <h2>Durations</h2>
+    <div class="horizontal-group">
+      <label>Total Duration (minutes): <input type="number" id="totalDuration" value="10" min="1" max="120"></label>
+      <label>Exercise Duration (seconds): <input type="number" id="exerciseDuration" value="20" min="1" max="120"></label>
+      <label>Rest Duration (seconds): <input type="number" id="restDuration" value="10" min="1" max="120"></label>
+      <label>Rest Every Nth Exercises: <input type="number" id="restEvery" value="1" min="1" max="20"></label>
+    </div>
+
+    <button type="submit">Generate Workout</button>
+    <span id="loadingText" class="loading" style="display: none;">Generating workout...</span>
+  </form>
+
+  <h2>Generated Routine</h2>
+  <ul id="routine"></ul>
+
+  <div class="floating-box" id="playerBox" style="display:none;">
+    <div class="exercise-info">
+      <div id="exerciseName">Exercise</div>
+      <div id="timer">00</div>
+    </div>
+    <video id="exerciseVideo" muted playsinline loop></video>
+    <button id="startButton">Start Workout</button>
+    <button id="pauseButton" style="display:none;">Pause</button>
+    <button id="skipButton" style="display:none;">Skip</button>
+  </div>
+
+  <!-- Multiple audio elements for overlapping sounds -->
+  <audio id="beep1" src="/sounds/beep.mp3" preload="auto"></audio>
+  <audio id="beep2" src="/sounds/beep.mp3" preload="auto"></audio>
+
+  <!-- Import the exercises from external file -->
+  <script src="/exercises/exercises.js"></script>
+  
+  <script>
+    // The exercises object is now loaded from exercises.js
+    // All the rest of your code remains the same...
+
+    // DOM elements
+    const form = document.getElementById('workoutForm');
+    const focusAreasDiv = document.getElementById('focusAreas');
+    const routineList = document.getElementById('routine');
+    const video = document.getElementById('exerciseVideo');
+    const timerDiv = document.getElementById('timer');
+    const exerciseNameDiv = document.getElementById('exerciseName');
+    const beeps = [
+      document.getElementById('beep1'),
+      document.getElementById('beep2')
+    ];
+    const playerBox = document.getElementById('playerBox');
+    const startButton = document.getElementById('startButton');
+    const pauseButton = document.getElementById('pauseButton');
+    const skipButton = document.getElementById('skipButton');
+    const loadingText = document.getElementById('loadingText');
+
+    // Create focus area checkboxes
+    for (let area in exercises) {
+      const label = document.createElement('label');
+      label.innerHTML = `<input type="checkbox" name="focus" value="${area}" checked> ${area}`;
+      focusAreasDiv.appendChild(label);
+    }
+
+    // Difficulty mapping
+    const difficultyMap = {
+      'Beginner': ['Beginner'],
+      'Medium': ['Beginner', 'Medium'],
+      'Hard': ['Beginner', 'Medium', 'Hard'],
+      'Expert/Advanced': ['Beginner', 'Medium', 'Hard', 'Expert/Advanced']
+    };
+
+    // Global variables for workout execution
+    let workoutRoutine = [];
+    let currentExerciseIndex = 0;
+    let timerInterval = null;
+    let isPaused = false;
+    let remainingTime = 0;
+    let beepIndex = 0;  // To alternate between beep audio elements
+    let audioContext = null;
+
+    // Initialize Web Audio API on user interaction
+    document.addEventListener('click', initAudioContext, { once: true });
+
+    // Initialize audio context for more reliable sound playback
+    function initAudioContext() {
+      if (!audioContext) {
+        try {
+          // Create audio context
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioContext = new AudioContext();
+          
+          // Load and decode the beep sound
+          fetch('/sounds/beep.mp3')
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+            .then(audioBuffer => {
+              // Store the decoded audio buffer
+              window.beepBuffer = audioBuffer;
+            })
+            .catch(e => console.error("Error loading beep sound:", e));
+        } catch (e) {
+          console.error("Web Audio API not supported, falling back to HTML Audio:", e);
+        }
+      }
+    }
+
+    // Form submission
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      
+      // Initialize audio on first user interaction
+      initAudioContext();
+      
+      // Show loading indicator
+      loadingText.style.display = 'inline-block';
+      routineList.innerHTML = '';
+      
+      // Use setTimeout to allow the UI to update before heavy processing
+      setTimeout(() => {
+        try {
+          generateWorkout();
+          loadingText.style.display = 'none';
+        } catch (error) {
+          console.error("Error generating workout:", error);
+          loadingText.style.display = 'none';
+          alert('An error occurred while generating your workout. Please try with different parameters.');
+        }
+      }, 50);
+    });
+
+    // Generate the workout routine
+    function generateWorkout() {
+      // Get form values
+      const selectedAreas = Array.from(document.querySelectorAll('input[name="focus"]:checked')).map(cb => cb.value);
+      const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+      const allowedLevels = difficultyMap[difficulty];
+      const totalMin = Math.min(parseInt(document.getElementById('totalDuration').value), 120);
+      const exerciseSec = Math.min(parseInt(document.getElementById('exerciseDuration').value), 120);
+      const restSec = Math.min(parseInt(document.getElementById('restDuration').value), 120);
+      const restEvery = Math.min(parseInt(document.getElementById('restEvery').value), 20);
+
+      // Create exercise pool
+      let pool = [];
+      selectedAreas.forEach(area => {
+        allowedLevels.forEach(level => {
+          if (exercises[area] && exercises[area][level]) {
+            pool = pool.concat(exercises[area][level]);
+          }
+        });
+      });
+
+      if (pool.length === 0) {
+        alert('No exercises match your filters.');
+        return;
+      }
+
+      // Calculate number of exercises needed
+      const fullCycle = exerciseSec + (restSec / restEvery);
+      const totalSecs = totalMin * 60;
+      const maxExercises = Math.ceil(totalSecs / fullCycle);
+      
+      // Create a balanced routine
+      const selected = createBalancedRoutine(pool, maxExercises);
+      
+      // Build the final routine with rests
+      workoutRoutine = [];
+      routineList.innerHTML = '';
+      
+      selected.forEach((ex, i) => {
+        // Add exercise
+        workoutRoutine.push({ ...ex, isRest: false });
+        const li = document.createElement('li');
+        li.textContent = ex.name;
+        routineList.appendChild(li);
+        
+        // Add rest if needed
+        if ((i + 1) % restEvery === 0 && i !== selected.length - 1) {
+          workoutRoutine.push({ name: 'Rest', video: null, isRest: true });
+          const restLi = document.createElement('li');
+          restLi.textContent = 'Rest';
+          routineList.appendChild(restLi);
+        }
+      });
+
+      // Show player box
+      playerBox.style.display = 'block';
+      startButton.onclick = startWorkout;
+      pauseButton.onclick = togglePause;
+      skipButton.onclick = skipExercise;
+    }
+
+    // Create a balanced selection of exercises
+    function createBalancedRoutine(pool, maxCount) {
+      // Shuffle pool for randomness
+      const shuffled = [...pool].sort(() => 0.5 - Math.random());
+      
+      // Find unique exercises first
+      const uniqueExercises = [];
+      const seen = new Set();
+      
+      for (const exercise of shuffled) {
+        if (!seen.has(exercise.name) && uniqueExercises.length < maxCount) {
+          uniqueExercises.push(exercise);
+          seen.add(exercise.name);
+        }
+      }
+      
+      // If we need more exercises, start repeating
+      const result = [...uniqueExercises];
+      
+      while (result.length < maxCount) {
+        // Reshuffle for variety in repeats
+        const reshuffled = [...uniqueExercises].sort(() => 0.5 - Math.random());
+        for (const exercise of reshuffled) {
+          if (result.length < maxCount) {
+            result.push(exercise);
+          } else {
+            break;
+          }
+        }
+      }
+      
+      return result;
+    }
+
+    // Start the workout
+    function startWorkout() {
+      currentExerciseIndex = 0;
+      startButton.style.display = 'none';
+      pauseButton.style.display = 'inline-block';
+      skipButton.style.display = 'inline-block';
+      isPaused = false;
+      
+      // Request wake lock to prevent device from sleeping
+      requestWakeLock();
+      
+      // Play initial beep and start the first exercise
+      playBeep();
+      playCurrentExercise();
+    }
+
+    // Play the current exercise
+    function playCurrentExercise() {
+      if (currentExerciseIndex >= workoutRoutine.length) {
+        endWorkout();
+        return;
+      }
+
+      const exercise = workoutRoutine[currentExerciseIndex];
+      exerciseNameDiv.textContent = exercise.name;
+      
+      // Set up video if available
+      if (exercise.video) {
+        video.src = exercise.video;
+        video.style.display = 'block';
+        video.load();
+        video.play().catch(e => console.error("Video playback error:", e));
+      } else {
+        video.pause();
+        video.style.display = 'none';
+        video.removeAttribute('src');
+      }
+      
+      // Get appropriate duration
+      const duration = exercise.isRest ? 
+        parseInt(document.getElementById('restDuration').value) : 
+        parseInt(document.getElementById('exerciseDuration').value);
+      
+      remainingTime = duration;
+      updateTimer();
+      
+      // Play beep sound at the start of each exercise/rest
+      playBeep();
+      
+      // Start the timer
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (!isPaused) {
+          remainingTime--;
+          updateTimer();
+          
+          // Warning beep when 3 seconds remaining
+          if (remainingTime === 3) {
+            playBeep();
+          }
+          
+          if (remainingTime <= 0) {
+            clearInterval(timerInterval);
+            
+            // Play ending beep for this exercise/rest
+            playBeep();
+            
+            // Move to next exercise after a short delay
+            currentExerciseIndex++;
+            setTimeout(playCurrentExercise, 500);
+          }
+        }
+      }, 1000);
+    }
+
+    // Update the timer display
+    function updateTimer() {
+      timerDiv.textContent = remainingTime;
+    }
+
+    // Toggle pause/resume
+    function togglePause() {
+      isPaused = !isPaused;
+      pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+      
+      if (isPaused) {
+        video.pause();
+      } else {
+        if (workoutRoutine[currentExerciseIndex].video) {
+          video.play().catch(e => console.error("Video resume error:", e));
+        }
+        // Play resume beep
+        playBeep();
+      }
+    }
+
+    // Skip current exercise
+    function skipExercise() {
+      clearInterval(timerInterval);
+      
+      // Play skip beep
+      playBeep();
+      
+      currentExerciseIndex++;
+      playCurrentExercise();
+    }
+
+    // End workout
+    function endWorkout() {
+      clearInterval(timerInterval);
+      timerDiv.textContent = 'Done!';
+      exerciseNameDiv.textContent = 'Workout Complete';
+      
+      // Play final completion beep
+      playBeep();
+      
+      video.pause();
+      video.style.display = 'none';
+      
+      startButton.style.display = 'inline-block';
+      startButton.textContent = 'Restart Workout';
+      pauseButton.style.display = 'none';
+      skipButton.style.display = 'none';
+      
+      // Release wake lock
+      releaseWakeLock();
+    }
+
+    // Play beep sound - trying multiple methods for cross-browser compatibility
+    function playBeep() {
+      // Try Web Audio API first (most reliable, works when tab not in focus)
+      if (audioContext && window.beepBuffer) {
+        try {
+          // Resume audio context if suspended (browser policy)
+          if (audioContext.state === 'suspended') {
+            audioContext.resume();
+          }
+          
+          // Create a new source for each sound
+          const source = audioContext.createBufferSource();
+          source.buffer = window.beepBuffer;
+          source.connect(audioContext.destination);
+          source.start(0);
+          return;
+        } catch (e) {
+          console.error("Web Audio API error:", e);
+        }
+      }
+      
+      // Fallback to HTML Audio API
+      try {
+        // Alternate between beep elements to allow overlapping sounds
+        const beep = beeps[beepIndex];
+        beepIndex = (beepIndex + 1) % beeps.length;
+        
+        // Make sure browser doesn't block audio
+        const playPromise = beep.play();
+        if (playPromise) {
+          playPromise.catch(e => {
+            console.log("HTML Audio play error, trying again:", e);
+            // Try again with user interaction requirement handling
+            beep.currentTime = 0;
+            document.addEventListener('click', () => beep.play(), { once: true });
+          });
+        }
+      } catch (e) {
+        console.error("Error playing beep:", e);
+      }
+    }
+    
+    // Request wake lock to prevent screen from turning off
+    let wakeLock = null;
+    async function requestWakeLock() {
+      if ('wakeLock' in navigator) {
+        try {
+          wakeLock = await navigator.wakeLock.request('screen');
+          console.log('Wake Lock is active');
+          
+          // Handle wake lock release
+          wakeLock.addEventListener('release', () => {
+            console.log('Wake Lock was released');
+          });
+        } catch (err) {
+          console.error(`Wake Lock error: ${err.name}, ${err.message}`);
+        }
+      } else {
+        console.log('Wake Lock API not supported');
+      }
+    }
+    
+    // Release wake lock
+    function releaseWakeLock() {
+      if (wakeLock) {
+        wakeLock.release()
+          .then(() => {
+            wakeLock = null;
+          });
+      }
+    }
+
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && !isPaused) {
+        // Resume video playback when page becomes visible again
+        if (video.style.display !== 'none') {
+          video.play().catch(e => console.error("Video resume error after visibility change:", e));
+        }
+        
+        // Re-request wake lock if needed
+        if (wakeLock === null && !isPaused && currentExerciseIndex < workoutRoutine.length) {
+          requestWakeLock();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
