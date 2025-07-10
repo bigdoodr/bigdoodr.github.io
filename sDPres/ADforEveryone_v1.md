@@ -39,6 +39,8 @@ body.codeblock-fullwidth pre > code {
 </style>
 
 
+[GH Raw Script here](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/sDPres/ADforEveryone_v1.sh)
+
 ```
 #!/bin/zsh
 
