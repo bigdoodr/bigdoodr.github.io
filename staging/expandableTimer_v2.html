@@ -800,39 +800,39 @@
                         const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExerciseIndex];
                         let currentSet = 1;
 
-                        function nextSet() {
-                            if (!workoutActive || currentSet > sets) {
-                                currentExerciseIndex++;
-                                processExercise();
-                                return;
-                            }
-
-                            const currentExerciseDiv = exercises[currentExerciseIndex];
-                            const countdownDiv = currentExerciseDiv.querySelector('.countdown');
-                            countdownDiv.textContent = `Set ${currentSet} of ${sets} (${type === 'timed' ? 'Timed Exercise' : 'Rep Counter'})`;
-
-                            if (type === 'timed') {
-                                runTimer(exerciseTime, 'Exercise Time', countdownDiv, () => {
-                                    if (workoutActive) {
-                                        runTimer(restTime, 'Rest Time', countdownDiv, nextSet);
-                                    }
-                                });
-                            } else if (type === 'rep') {
-                                setTimeout(() => {
-                                    if (workoutActive && confirm(`Complete Set ${currentSet} of ${title} then press OK to continue.`)) {
-                                        runTimer(restTime, 'Rest Time', countdownDiv, nextSet);
-                                    } else if (!workoutActive) {
-                                        return;
-                                    }
-                                }, 200);
-                            }
-                            currentSet++;
-                        }
-                        nextSet();
-                    }
-                    processExercise();
-                });
-            }
+						function nextSet() {
+							if (!workoutActive || currentSet > sets) {
+								currentExerciseIndex++;
+								processExercise();
+								return;
+							}
+						
+							const currentExerciseDiv = exercises[currentExerciseIndex];
+							const countdownDiv = currentExerciseDiv.querySelector('.countdown');
+							countdownDiv.textContent = `Set ${currentSet} of ${sets} (${type === 'timed' ? 'Timed Exercise' : 'Rep Counter'})`;
+						
+							if (type === 'timed') {
+								runTimer(exerciseTime, 'Exercise Time', countdownDiv, () => {
+									if (workoutActive) {
+										runTimer(restTime, 'Rest Time', countdownDiv, () => {
+											currentSet++;
+											nextSet();
+										});
+									}
+								});
+							} else if (type === 'rep') {
+								setTimeout(() => {
+									if (workoutActive && confirm(`Complete Set ${currentSet} of ${title} then press OK to continue.`)) {
+										runTimer(restTime, 'Rest Time', countdownDiv, () => {
+											currentSet++;
+											nextSet();
+										});
+									} else if (!workoutActive) {
+										return;
+									}
+								}, 200);
+							}
+						}
 
             // ---- HOOK UP EVENTS ----
             addExerciseBtn.addEventListener('click', addExercise);
