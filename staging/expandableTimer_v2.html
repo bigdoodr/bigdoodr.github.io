@@ -689,74 +689,13 @@
                 }
             }
 
-            // ---- TIMER LOGIC ----
-function runTimer(duration, label, countdownDiv, callback) {
-    let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
-    
-    if (totalSeconds <= 0) {
-        playBeepSound();
-        countdownDiv.textContent = `${label} Over`;
-        setTimeout(() => {
-            countdownDiv.textContent = '';
-            callback();
-        }, 1000);
-        return;
-    }
 
-    // Clear any existing interval
-    if (activeInterval) {
-        clearInterval(activeInterval);
-    }
-
-    let startTime = Date.now();
-    let elapsedPauseTime = 0;
-    let pauseStartTime = null;
-
-    activeInterval = setInterval(() => {
-        if (!workoutActive) {
-            clearInterval(activeInterval);
-            return;
-        }
-
-        if (isPaused) {
-            if (!pauseStartTime) {
-                pauseStartTime = Date.now();
-            }
-            return;
-        }
-
-        if (pauseStartTime) {
-            elapsedPauseTime += Date.now() - pauseStartTime;
-            pauseStartTime = null;
-        }
-
-        const elapsedTime = Math.floor((Date.now() - startTime - elapsedPauseTime) / 1000);
-        const remainingSeconds = totalSeconds - elapsedTime;
-
-        if (remainingSeconds <= 0) {
-            clearInterval(activeInterval);
-            playBeepSound();
-            countdownDiv.textContent = `${label} Over`;
-            setTimeout(() => {
-                countdownDiv.textContent = '';
-                callback();
-            }, 1000);
-            return;
-        }
-        
-        const hours = Math.floor(remainingSeconds / 3600);
-        const minutes = Math.floor(remainingSeconds / 60) % 60;
-        const seconds = remainingSeconds % 60;
-        countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }, 100); // Update more frequently for smoother pause/resume
-}
-
-            function startWorkout() {
-                if (exercises.length === 0) {
-                    alert('Please add some exercises first!');
-                    return;
-                }
-
+			function startWorkout() {
+				if (exercises.length === 0) {
+					alert('Please add some exercises first!');
+					return;
+				}
+			
 				if (workoutActive) {
 					if (isPaused) {
 						// Resume workout
@@ -771,102 +710,166 @@ function runTimer(duration, label, countdownDiv, callback) {
 					}
 					return;
 				}
+			
+				initializeAudio().then(() => {
+					workoutActive = true;
+					isPaused = false;
+					currentExerciseIndex = 0;
+					startWorkoutBtn.textContent = 'Pause Workout';
+					workoutStatus.textContent = 'Workout in progress...';
+			
+					const workoutRoutine = exercises.map((exerciseDiv) => {
+						const title = exerciseDiv.querySelector('.editable-title').innerText;
+						const type = exerciseDiv.querySelector('.exercise-type').value;
+						const sets = parseInt(exerciseDiv.querySelector('.sets').value, 10);
+						const exerciseTime = type === 'timed' ? {
+							hours: parseInt(exerciseDiv.querySelector('.exercise-hours').value || 0, 10),
+							minutes: parseInt(exerciseDiv.querySelector('.exercise-minutes').value || 0, 10),
+							seconds: parseInt(exerciseDiv.querySelector('.exercise-seconds').value || 0, 10),
+						} : null;
+						const restTime = {
+							hours: parseInt(exerciseDiv.querySelector('.rest-hours').value || 0, 10),
+							minutes: parseInt(exerciseDiv.querySelector('.rest-minutes').value || 0, 10),
+							seconds: parseInt(exerciseDiv.querySelector('.rest-seconds').value || 0, 10),
+						};
+						return { title, type, sets, exerciseTime, restTime };
+					});
+			
+					function processExercise() {
+						if (!workoutActive || currentExerciseIndex >= exercises.length) {
+							if (workoutActive) {
+								// Workout completed
+								playBeepSound();
+								workoutActive = false;
+								isPaused = false;
+								startWorkoutBtn.textContent = 'Start Workout';
+								workoutStatus.textContent = 'Workout completed! Great job! 🎉';
+								
+								exercises.forEach(ex => ex.classList.remove('active', 'dimmed'));
+								
+								setTimeout(() => {
+									workoutStatus.textContent = 'Ready to start your workout!';
+								}, 5000);
+							}
+							return;
+						}
+			
+						// Update exercise states
+						exercises.forEach((ex, index) => {
+							ex.classList.remove('active', 'dimmed');
+							if (index === currentExerciseIndex) {
+								ex.classList.add('active');
+							} else if (index > currentExerciseIndex) {
+								ex.classList.add('dimmed');
+							}
+						});
+			
+						scrollToActiveExercise();
+						updateProgress();
+			
+						const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExerciseIndex];
+						let currentSet = 1;
+			
+						function nextSet() {
+							if (!workoutActive || currentSet > sets) {
+								currentExerciseIndex++;
+								processExercise();
+								return;
+							}
+						
+							const currentExerciseDiv = exercises[currentExerciseIndex];
+							const countdownDiv = currentExerciseDiv.querySelector('.countdown');
+							countdownDiv.textContent = `Set ${currentSet} of ${sets} (${type === 'timed' ? 'Timed Exercise' : 'Rep Counter'})`;
+						
+							if (type === 'timed') {
+								runTimer(exerciseTime, 'Exercise Time', countdownDiv, () => {
+									if (workoutActive) {
+										runTimer(restTime, 'Rest Time', countdownDiv, () => {
+											currentSet++;
+											nextSet();
+										});
+									}
+								});
+							} else if (type === 'rep') {
+								setTimeout(() => {
+									if (workoutActive && confirm(`Complete Set ${currentSet} of ${title} then press OK to continue.`)) {
+										runTimer(restTime, 'Rest Time', countdownDiv, () => {
+											currentSet++;
+											nextSet();
+										});
+									} else if (!workoutActive) {
+										return;
+									}
+								}, 200);
+							}
+						}
+						nextSet(); // Start the first set
+					}
+					processExercise(); // Start processing the first exercise
+				});
+			}
+			
+			function runTimer(duration, label, countdownDiv, callback) {
+				let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
 				
-                initializeAudio().then(() => {
-                    workoutActive = true;
-                    currentExerciseIndex = 0;
-                    startWorkoutBtn.textContent = 'Stop Workout';
-                    workoutStatus.textContent = 'Workout in progress...';
+				if (totalSeconds <= 0) {
+					playBeepSound();
+					countdownDiv.textContent = `${label} Over`;
+					setTimeout(() => {
+						countdownDiv.textContent = '';
+						callback();
+					}, 1000);
+					return;
+				}
+			
+				// Clear any existing interval
+				if (activeInterval) {
+					clearInterval(activeInterval);
+				}
+			
+				let startTime = Date.now();
+				let elapsedPauseTime = 0;
+				let pauseStartTime = null;
+			
+				activeInterval = setInterval(() => {
+					if (!workoutActive) {
+						clearInterval(activeInterval);
+						return;
+					}
+			
+					if (isPaused) {
+						if (!pauseStartTime) {
+							pauseStartTime = Date.now();
+						}
+						return;
+					}
+			
+					if (pauseStartTime) {
+						elapsedPauseTime += Date.now() - pauseStartTime;
+						pauseStartTime = null;
+					}
+			
+					const elapsedTime = Math.floor((Date.now() - startTime - elapsedPauseTime) / 1000);
+					const remainingSeconds = totalSeconds - elapsedTime;
+			
+					if (remainingSeconds <= 0) {
+						clearInterval(activeInterval);
+						playBeepSound();
+						countdownDiv.textContent = `${label} Over`;
+						setTimeout(() => {
+							countdownDiv.textContent = '';
+							callback();
+						}, 1000);
+						return;
+					}
+					
+					const hours = Math.floor(remainingSeconds / 3600);
+					const minutes = Math.floor(remainingSeconds / 60) % 60;
+					const seconds = remainingSeconds % 60;
+					countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+				}, 100); // Update more frequently for smoother pause/resume
+			}
 
-                    const workoutRoutine = exercises.map((exerciseDiv) => {
-                        const title = exerciseDiv.querySelector('.editable-title').innerText;
-                        const type = exerciseDiv.querySelector('.exercise-type').value;
-                        const sets = parseInt(exerciseDiv.querySelector('.sets').value, 10);
-                        const exerciseTime = type === 'timed' ? {
-                            hours: parseInt(exerciseDiv.querySelector('.exercise-hours').value || 0, 10),
-                            minutes: parseInt(exerciseDiv.querySelector('.exercise-minutes').value || 0, 10),
-                            seconds: parseInt(exerciseDiv.querySelector('.exercise-seconds').value || 0, 10),
-                        } : null;
-                        const restTime = {
-                            hours: parseInt(exerciseDiv.querySelector('.rest-hours').value || 0, 10),
-                            minutes: parseInt(exerciseDiv.querySelector('.rest-minutes').value || 0, 10),
-                            seconds: parseInt(exerciseDiv.querySelector('.rest-seconds').value || 0, 10),
-                        };
-                        return { title, type, sets, exerciseTime, restTime };
-                    });
-
-                    function processExercise() {
-                        if (!workoutActive || currentExerciseIndex >= exercises.length) {
-                            if (workoutActive) {
-                                // Workout completed
-                                playBeepSound();
-                                workoutActive = false;
-                                startWorkoutBtn.textContent = 'Start Workout';
-                                workoutStatus.textContent = 'Workout completed! Great job! 🎉';
-                                
-                                exercises.forEach(ex => ex.classList.remove('active', 'dimmed'));
-                                
-                                setTimeout(() => {
-                                    workoutStatus.textContent = 'Ready to start your workout!';
-                                }, 5000);
-                            }
-                            return;
-                        }
-
-                        // Update exercise states
-                        exercises.forEach((ex, index) => {
-                            ex.classList.remove('active', 'dimmed');
-                            if (index === currentExerciseIndex) {
-                                ex.classList.add('active');
-                            } else if (index > currentExerciseIndex) {
-                                ex.classList.add('dimmed');
-                            }
-                        });
-
-                        scrollToActiveExercise();
-                        updateProgress();
-
-                        const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExerciseIndex];
-                        let currentSet = 1;
-
-                        function nextSet() {
-                            if (!workoutActive || currentSet > sets) {
-                                currentExerciseIndex++;
-                                processExercise();
-                                return;
-                            }
-                        
-                            const currentExerciseDiv = exercises[currentExerciseIndex];
-                            const countdownDiv = currentExerciseDiv.querySelector('.countdown');
-                            countdownDiv.textContent = `Set ${currentSet} of ${sets} (${type === 'timed' ? 'Timed Exercise' : 'Rep Counter'})`;
-                        
-                            if (type === 'timed') {
-                                runTimer(exerciseTime, 'Exercise Time', countdownDiv, () => {
-                                    if (workoutActive) {
-                                        runTimer(restTime, 'Rest Time', countdownDiv, () => {
-                                            currentSet++;
-                                            nextSet();
-                                        });
-                                    }
-                                });
-                            } else if (type === 'rep') {
-                                setTimeout(() => {
-                                    if (workoutActive && confirm(`Complete Set ${currentSet} of ${title} then press OK to continue.`)) {
-                                        runTimer(restTime, 'Rest Time', countdownDiv, () => {
-                                            currentSet++;
-                                            nextSet();
-                                        });
-                                    } else if (!workoutActive) {
-                                        return;
-                                    }
-                                }, 200);
-                            }
-                        }
-                        nextSet(); // Start the first set
-                    }
-                    processExercise(); // Start processing the first exercise
-                });
-            }
 			function restartWorkout() {
 				// Clear any active interval
 				if (activeInterval) {
