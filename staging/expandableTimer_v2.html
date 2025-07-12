@@ -393,6 +393,7 @@
     <div class="floating-sidebar">
         <button class="sidebar-button" id="add-exercise">Add Exercise</button>
         <button class="sidebar-button start-button" id="start-workout">Start Workout</button>
+		<button class="sidebar-button" id="restart-workout" style="display: none;">Restart Workout</button>
         <button class="sidebar-button" id="import-btn">Import Routine</button>
         <button class="sidebar-button" id="export-btn">Export Routine</button>
     </div>
@@ -415,6 +416,8 @@
             let exercises = [];
             let workoutActive = false;
             let currentExerciseIndex = 0;
+            let isPaused = false;
+            let activeInterval = null;
 
             // ---- AUDIO SETUP ----
             let audioContext = null;
@@ -687,38 +690,66 @@
             }
 
             // ---- TIMER LOGIC ----
-            function runTimer(duration, label, countdownDiv, callback) {
-                let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
-                
-                if (totalSeconds <= 0) {
-                    playBeepSound();
-                    countdownDiv.textContent = `${label} Over`;
-                    setTimeout(() => {
-                        countdownDiv.textContent = '';
-                        callback();
-                    }, 1000);
-                    return;
-                }
+function runTimer(duration, label, countdownDiv, callback) {
+    let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
+    
+    if (totalSeconds <= 0) {
+        playBeepSound();
+        countdownDiv.textContent = `${label} Over`;
+        setTimeout(() => {
+            countdownDiv.textContent = '';
+            callback();
+        }, 1000);
+        return;
+    }
 
-                const interval = setInterval(() => {
-                    if (totalSeconds <= 0) {
-                        clearInterval(interval);
-                        playBeepSound();
-                        countdownDiv.textContent = `${label} Over`;
-                        setTimeout(() => {
-                            countdownDiv.textContent = '';
-                            callback();
-                        }, 1000);
-                        return;
-                    }
-                    
-                    const hours = Math.floor(totalSeconds / 3600);
-                    const minutes = Math.floor(totalSeconds / 60) % 60;
-                    const seconds = totalSeconds % 60;
-                    countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    totalSeconds--;
-                }, 1000);
+    // Clear any existing interval
+    if (activeInterval) {
+        clearInterval(activeInterval);
+    }
+
+    let startTime = Date.now();
+    let elapsedPauseTime = 0;
+    let pauseStartTime = null;
+
+    activeInterval = setInterval(() => {
+        if (!workoutActive) {
+            clearInterval(activeInterval);
+            return;
+        }
+
+        if (isPaused) {
+            if (!pauseStartTime) {
+                pauseStartTime = Date.now();
             }
+            return;
+        }
+
+        if (pauseStartTime) {
+            elapsedPauseTime += Date.now() - pauseStartTime;
+            pauseStartTime = null;
+        }
+
+        const elapsedTime = Math.floor((Date.now() - startTime - elapsedPauseTime) / 1000);
+        const remainingSeconds = totalSeconds - elapsedTime;
+
+        if (remainingSeconds <= 0) {
+            clearInterval(activeInterval);
+            playBeepSound();
+            countdownDiv.textContent = `${label} Over`;
+            setTimeout(() => {
+                countdownDiv.textContent = '';
+                callback();
+            }, 1000);
+            return;
+        }
+        
+        const hours = Math.floor(remainingSeconds / 3600);
+        const minutes = Math.floor(remainingSeconds / 60) % 60;
+        const seconds = remainingSeconds % 60;
+        countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }, 100); // Update more frequently for smoother pause/resume
+}
 
             function startWorkout() {
                 if (exercises.length === 0) {
@@ -726,23 +757,21 @@
                     return;
                 }
 
-                if (workoutActive) {
-                    // Stop workout
-                    workoutActive = false;
-                    currentExerciseIndex = 0;
-                    startWorkoutBtn.textContent = 'Start Workout';
-                    workoutStatus.textContent = 'Workout stopped';
-                    
-                    // Clear all countdowns and active states
-                    exercises.forEach(ex => {
-                        ex.classList.remove('active', 'dimmed');
-                        ex.querySelector('.countdown').textContent = '';
-                    });
-                    
-                    updateProgress();
-                    return;
-                }
-
+				if (workoutActive) {
+					if (isPaused) {
+						// Resume workout
+						isPaused = false;
+						startWorkoutBtn.textContent = 'Pause Workout';
+						workoutStatus.textContent = 'Workout resumed...';
+					} else {
+						// Pause workout
+						isPaused = true;
+						startWorkoutBtn.textContent = 'Resume Workout';
+						workoutStatus.textContent = 'Workout paused';
+					}
+					return;
+				}
+				
                 initializeAudio().then(() => {
                     workoutActive = true;
                     currentExerciseIndex = 0;
@@ -838,8 +867,39 @@
                     processExercise(); // Start processing the first exercise
                 });
             }
-
+			function restartWorkout() {
+				// Clear any active interval
+				if (activeInterval) {
+					clearInterval(activeInterval);
+					activeInterval = null;
+				}
+				
+				// Reset all states
+				workoutActive = false;
+				isPaused = false;
+				currentExerciseIndex = 0;
+				
+				// Reset UI elements
+				startWorkoutBtn.textContent = 'Start Workout';
+				workoutStatus.textContent = 'Ready to start your workout!';
+				
+				// Clear all countdowns and active states
+				exercises.forEach(ex => {
+					ex.classList.remove('active', 'dimmed');
+					ex.querySelector('.countdown').textContent = '';
+				});
+				
+				updateProgress();
+			}
             // ---- HOOK UP EVENTS ----
+            const restartWorkoutBtn = document.getElementById('restart-workout');
+			restartWorkoutBtn.addEventListener('click', restartWorkout);
+			
+			// Modify the startWorkout event listener to show/hide the restart button
+			startWorkoutBtn.addEventListener('click', () => {
+				startWorkout();
+				restartWorkoutBtn.style.display = workoutActive ? 'block' : 'none';
+			});
             addExerciseBtn.addEventListener('click', addExercise);
             startWorkoutBtn.addEventListener('click', startWorkout);
             exportRoutineBtn.addEventListener('click', exportRoutine);
