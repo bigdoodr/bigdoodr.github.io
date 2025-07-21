@@ -49,7 +49,7 @@
       margin-left: 10px;
       color: #666;
     }
-        .nav-buttons {
+    .nav-buttons {
       display: flex;
       justify-content: space-between;
       margin-top: 1em;
@@ -81,7 +81,7 @@
 <body>
   <h1>Workout Generator</h1>
   
-    <div class="nav-buttons">
+  <div class="nav-buttons">
     <a href="Zone2Exercises.html" class="nav-button">See the Exercises</a>
   </div>
 
@@ -129,11 +129,8 @@
 
   <!-- Import the exercises from external file -->
   <script src="/exercises/exercises.js"></script>
-  
-  <script>
-    // The exercises object is now loaded from exercises.js
-    // All the rest of your code remains the same...
 
+  <script>
     // DOM elements
     const form = document.getElementById('workoutForm');
     const focusAreasDiv = document.getElementById('focusAreas');
@@ -151,7 +148,7 @@
     const skipButton = document.getElementById('skipButton');
     const loadingText = document.getElementById('loadingText');
 
-    // Create focus area checkboxes
+    // Create focus area checkboxes from the global exercises object
     for (let area in exercises) {
       const label = document.createElement('label');
       label.innerHTML = `<input type="checkbox" name="focus" value="${area}" checked> ${area}`;
