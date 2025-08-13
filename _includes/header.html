@@ -1,0 +1,101 @@
+<header class="site-header">
+  <nav class="header-nav">
+    <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+    <ul class="nav-list">
+      {% for page in site.header_pages %}
+        {% assign this_page = site.pages | where: "path", page | first %}
+        {% if this_page %}
+          <li>
+            <a href="{{ this_page.url | relative_url }}">{{ this_page.title | default: this_page.name }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+</header>
+
+<style>
+.site-header {
+    width: 100%;
+    background: var(--ai-gradient);
+    padding: 0;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 18px rgba(0, 122, 255, 0.08);
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 65px;
+}
+
+.site-title {
+    font-size: 1.7em;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    background: var(--ai-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
+
+.nav-list {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list li {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list a {
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 10px 3px;
+    border-radius: 5px;
+    transition: background 0.2s, color 0.2s;
+    font-size: 1.1em;
+    position: relative;
+}
+
+.nav-list a:hover, .nav-list a:focus {
+    background: rgba(255,255,255,0.13);
+    color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+    .site-header {
+        background: linear-gradient(135deg, #23234b 0%, #2b2b2e 100%);
+        box-shadow: 0 2px 20px rgba(175, 82, 222, 0.09);
+    }
+    .nav-list a {
+        color: #fff;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-nav {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 15px;
+    }
+    .nav-list {
+        gap: 15px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+    .site-title {
+        font-size: 1.3em;
+    }
+}
+</style>
