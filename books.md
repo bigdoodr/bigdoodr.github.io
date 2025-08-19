@@ -10,10 +10,19 @@ image: /resources/books.purple.png
 
 ## 2025 Reading
 
-<summary>Running Tally: 18 books</summary>
+<summary>Running Tally: 27 books</summary>
 
 | Title | Author | Month | Link |
 | ----- | ------ | ----- | ---- |
+| The Giver | Lois Lowry | August | [Book Details](https://openlibrary.org/works/OL1846076W) |
+| Alien: Covenant | Alan Dean Foster | August | [Book Details](https://openlibrary.org/works/OL24331912W) |
+| Oracle 2 | Andrew Pyper | July | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Oracle%202) |
+| Bookshops and Bonedust | Travis Baldree | July | [Book Details](https://openlibrary.org/works/OL34143972W) |
+| Harley Quinn: Reckoning | Rachael Allen | July | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Harley%20Quinn%3A%20Reckoning) |
+| Alien: Covenant Origins | Alan Dean Foster | June | [Book Details](https://openlibrary.org/works/OL20824279W) |
+| Oracle | Andrew Pyper | June | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Oracle) |
+| Grendel | John Gardner | June | [Book Details](https://openlibrary.org/works/OL280307W) |
+| Charity Shop Detective Agency | Peter Boland | June | [Book Details](https://openlibrary.org/works/OL33455170W) |
 | We Were Kings | Court Stevens | June | [Book Details](https://openlibrary.org/works/OL25448280W) |
 | Last Girl Breathing | Court Stevens | June | [Book Details](https://openlibrary.org/works/OL36121156W) |
 | Fairy Tale | Stephen King | June | [Book Details](https://openlibrary.org/works/OL27589863W) |
