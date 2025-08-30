@@ -6,9 +6,7 @@ tags: Fitness
 image: /resources/1.crescent-tucks.gif
 ---
 
-<h1>Daily Exercises</h1>
-
-<h2>10 Minute Abs by Jeff Cavaliere</h2>
+- 10 Minute Abs by Jeff Cavaliere
 
 <details>
   <summary>Show Ab Exercises</summary>
@@ -32,7 +30,7 @@ image: /resources/1.crescent-tucks.gif
   </ul>
 </details>
 
-<h2>Morning Stretches by Jeff Cavaliere</h2>
+- Morning Stretches by Jeff Cavaliere
 
 <details>
   <summary>Show Morning Stretches</summary>
