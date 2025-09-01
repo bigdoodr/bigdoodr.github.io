@@ -3,7 +3,7 @@ layout: post
 title: "Timers and Webpage Audio"
 description: "My trek through getting a sound to play in a webpage when a timer ends."
 date: 2025-01-20T17:10:39-6:00
-tags: Tech, Fitness
+tags: Tech Fitness
 image: /resources/stopwatch.png
 ---
 In my previous fitness post, I wrote about creating a randomized warmup routine. 

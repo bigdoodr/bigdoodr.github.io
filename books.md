@@ -14,6 +14,10 @@ image: /resources/books.purple.png
 
 | Title | Author | Month | Link |
 | ----- | ------ | ----- | ---- |
+| The Hiking Trip | Jenny Blackhurst | August | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=The%20Hiking%20Trip) |
+| Oracle 3 | Andrew Pyper | August | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Oracle%203) |
+| Horror Movie | Paul Tremblay | August | [Book Details](https://openlibrary.org/works/OL37615779W) |
+| June Boys | Court Stevens | August | [Book Details](https://openlibrary.org/works/OL20651363W) |
 | The Giver | Lois Lowry | August | [Book Details](https://openlibrary.org/works/OL1846076W) |
 | Alien: Covenant | Alan Dean Foster | August | [Book Details](https://openlibrary.org/works/OL24331912W) |
 | Oracle 2 | Andrew Pyper | July | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Oracle%202) |

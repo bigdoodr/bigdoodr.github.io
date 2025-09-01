@@ -1,5 +1,11 @@
 - role: Presenter
   activity: MacAdmins Conference
+  year: 2025
+  url: "https://macadmins.psu.edu"
+  description: "Delivered [Let's Build Something with swiftDialog](https://www.youtube.com/embed/aUiGLl_gbtU?si=x5BBslFbIisFqqNk) presentation, covering the basics of swiftDialog configuration options, and using them in realtime for detecting if AirDrop is enabled for Everyone, guiding the user how to remediate, and confirming the setting has been adjusted. Presentation references and slides available in [blog post here](/2025/07/18/macpres)."
+
+- role: Presenter
+  activity: MacAdmins Conference
   year: 2024
   url: "https://macadmins.psu.edu"
   description: "Delivered [Adopting an Active Update Cycle](https://www.youtube.com/embed/m2rdSycaACA) presentation, showcasing changes implemented under my guidance. Presentation notes and slides available in [blog post here](/2024/07/12/macpres)."
