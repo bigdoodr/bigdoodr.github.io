@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Custom Workout Routine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            padding-right: 200px; /* Space for floating sidebar */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        #countdown-display {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00796b;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Floating Sidebar */
+        .floating-sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 160px;
+            z-index: 1000;
+        }
+
+        .sidebar-button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .sidebar-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .sidebar-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .sidebar-button.start-button {
+            background: linear-gradient(135deg, #56ab2f, #a8e6cf);
+            font-size: 14px;
+            padding: 15px;
+        }
+
+        .sidebar-button.start-button:hover {
+            background: linear-gradient(135deg, #4a9a28, #98d6bf);
+        }
+
+        /* Exercise Cards */
+        .exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .exercise {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: move;
+        }
+
+        .exercise:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .exercise.active {
+            border: 3px solid #00796b;
+            box-shadow: 0 0 20px rgba(0, 121, 107, 0.3);
+            transform: scale(1.02);
+            background: #e0f7fa;
+        }
+
+        .exercise.dimmed {
+            opacity: 0.5;
+        }
+
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .drag-handle {
+            font-size: 1.5em;
+            color: #666;
+            cursor: grab;
+            transition: color 0.2s ease;
+        }
+
+        .drag-handle:hover {
+            color: #00796b;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .editable-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+            border: 2px dashed transparent;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: rgba(178, 223, 219, 0.3);
+            transition: all 0.2s ease;
+            min-width: 200px;
+        }
+
+        .editable-title:hover,
+        .editable-title:focus {
+            border-color: #00796b;
+            background: rgba(178, 223, 219, 0.6);
+            outline: none;
+        }
+
+        .delete-exercise {
+            margin-left: auto;
+            padding: 8px 16px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .delete-exercise:hover {
+            background: #ff3838;
+            transform: translateY(-1px);
+        }
+
+        .exercise-settings {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .setting-group {
+            background: rgba(240, 248, 255, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 121, 107, 0.1);
+        }
+
+        .setting-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .exercise-type {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+            transition: border-color 0.2s ease;
+        }
+
+        .exercise-type:focus {
+            border-color: #00796b;
+            outline: none;
+        }
+
+        .time-inputs {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .time-input {
+            width: 50px;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .time-input:focus {
+            border-color: #00796b;
+            outline: none;
+        }
+
+        .sets-input {
+            width: 80px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .sets-input:focus {
+            border-color: #00796b;
+            outline: none;
+        }
+
+        .countdown {
+            background: linear-gradient(135deg, #00796b, #4db6ac);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 15px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timed-options {
+            transition: all 0.3s ease;
+        }
+
+        .timed-options.hidden {
+            display: none;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            height: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #56ab2f, #a8e6cf);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .workout-status {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Hidden file input */
+        #import-routine {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .floating-sidebar {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                margin-bottom: 30px;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
+            }
+
+            .container {
+                padding-right: 20px;
+            }
+
+            .sidebar-button {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .exercise-settings {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-sidebar {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .exercise-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .delete-exercise {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+
+        /* Drag and drop visual feedback */
+        .exercise.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+        }
+
+        .exercise.drag-over {
+            border-top: 3px solid #00796b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Custom Workout Routine</h1>
+            <div class="workout-status" id="workoutStatus">Ready to start your workout!</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div id="exercises" class="exercise-list">
+            <!-- Exercise blocks will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Floating Sidebar -->
+    <div class="floating-sidebar">
+        <button class="sidebar-button" id="add-exercise">Add Exercise</button>
+        <button class="sidebar-button start-button" id="start-workout">Start Workout</button>
+		<button class="sidebar-button" id="restart-workout" style="display: none;">Restart Workout</button>
+        <button class="sidebar-button" id="import-btn">Import Routine</button>
+        <button class="sidebar-button" id="export-btn">Export Routine</button>
+    </div>
+
+    <!-- Hidden file input -->
+    <input type="file" id="import-routine" accept=".json">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const exercisesDiv = document.getElementById('exercises');
+            const addExerciseBtn = document.getElementById('add-exercise');
+            const startWorkoutBtn = document.getElementById('start-workout');
+            const workoutContainer = document.querySelector('.container');
+            const exportRoutineBtn = document.getElementById('export-btn');
+            const importRoutineBtn = document.getElementById('import-btn');
+            const importRoutineInput = document.getElementById('import-routine');
+            const workoutStatus = document.getElementById('workoutStatus');
+            const progressFill = document.getElementById('progressFill');
+
+            let exercises = [];
+            let workoutActive = false;
+            let currentExerciseIndex = 0;
+            let isPaused = false;
+            let activeInterval = null;
+            let wakeLock = null;
+
+
+            // ---- AUDIO SETUP ----
+            let audioContext = null;
+            let beepBuffer = null;
+            let beepReadyPromise = null;
+
+            function unlockAudioContext() {
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+            }
+            ['click', 'touchstart', 'touchend', 'keydown', 'mousedown'].forEach(evt => {
+                document.body.addEventListener(evt, unlockAudioContext, { once: true, passive: true });
+            });
+
+            function initializeAudio() {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (!beepReadyPromise) {
+                    beepReadyPromise = createBeepSound()
+                        .then(buffer => { beepBuffer = buffer; })
+                        .catch(err => {
+                            beepBuffer = null;
+                            console.warn("Using fallback beep sound");
+                        });
+                }
+                return beepReadyPromise;
+            }
+
+            function createBeepSound() {
+                return new Promise((resolve) => {
+                    const sampleRate = audioContext.sampleRate;
+                    const duration = 0.3;
+                    const frequency = 800;
+                    const buffer = audioContext.createBuffer(1, sampleRate * duration, sampleRate);
+                    const data = buffer.getChannelData(0);
+                    
+                    for (let i = 0; i < buffer.length; i++) {
+                        data[i] = Math.sin(2 * Math.PI * frequency * i / sampleRate) * 
+                                 Math.exp(-3 * i / buffer.length);
+                    }
+                    resolve(buffer);
+                });
+            }
+
+            async function playBeepSound() {
+                await initializeAudio();
+                if (!audioContext || !beepBuffer) {
+                    console.warn("Audio context or beep buffer is not initialized.");
+                    return;
+                }
+                if (audioContext.state === 'suspended') {
+                    await audioContext.resume();
+                }
+                try {
+                    const source = audioContext.createBufferSource();
+                    source.buffer = beepBuffer;
+                    source.connect(audioContext.destination);
+                    source.start(0);
+                } catch (err) {
+                    console.error("Error playing beep sound:", err);
+                }
+            }
+            
+            // Request wake lock
+			async function requestWakeLock() {
+				try {
+					if ('wakeLock' in navigator) {
+						wakeLock = await navigator.wakeLock.request('screen');
+						wakeLock.addEventListener('release', () => {
+							// Wake lock was released
+							wakeLock = null;
+						});
+					}
+				} catch (err) {
+					console.warn('Wake Lock request failed:', err);
+				}
+			}
+			
+			// Release wake lock
+			function releaseWakeLock() {
+				if (wakeLock) {
+					wakeLock.release();
+					wakeLock = null;
+				}
+			}
+			
+			// OPTIONAL: Re-acquire wake lock if visibility changes
+			document.addEventListener('visibilitychange', () => {
+				if (wakeLock !== null && document.visibilityState === 'visible') {
+					requestWakeLock();
+				}
+			});
+
+
+
+            function addExercise() {
+                const exerciseId = exercises.length + 1;
+                const exerciseDiv = document.createElement('div');
+                exerciseDiv.classList.add('exercise');
+                exerciseDiv.setAttribute('draggable', true);
+
+                exerciseDiv.innerHTML = `
+                    <div class="exercise-header">
+                        <div class="drag-handle">
+                            <i class="fas fa-grip-lines"></i>
+                        </div>
+                        <div contenteditable="true" class="editable-title">Exercise ${exerciseId}</div>
+                        <button class="delete-exercise">Delete</button>
+                    </div>
+                    
+                    <div class="exercise-settings">
+                        <div class="setting-group">
+                            <label>Exercise Type:</label>
+                            <select class="exercise-type">
+                                <option value="timed">Timed Exercise</option>
+                                <option value="rep">Rep Counter</option>
+                            </select>
+                            
+                            <label style="margin-top: 15px;">Sets:</label>
+                            <input type="number" min="1" max="10" value="1" class="sets sets-input">
+                        </div>
+                        
+                        <div class="setting-group">
+                            <div class="timed-options">
+                                <label>Exercise Time:</label>
+                                <div class="time-inputs">
+                                    <input type="number" class="exercise-hours time-input" placeholder="H" min="0" max="23" value="0">
+                                    <span>:</span>
+                                    <input type="number" class="exercise-minutes time-input" placeholder="M" min="0" max="59" value="1">
+                                    <span>:</span>
+                                    <input type="number" class="exercise-seconds time-input" placeholder="S" min="0" max="59" value="0">
+                                </div>
+                            </div>
+                            
+                            <label style="margin-top: 15px;">Rest Time:</label>
+                            <div class="time-inputs">
+                                <input type="number" class="rest-hours time-input" placeholder="H" min="0" max="23" value="0">
+                                <span>:</span>
+                                <input type="number" class="rest-minutes time-input" placeholder="M" min="0" max="59" value="0">
+                                <span>:</span>
+                                <input type="number" class="rest-seconds time-input" placeholder="S" min="0" max="59" value="30">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="countdown"></div>
+                `;
+
+                // Update visibility of inputs based on type
+                const exerciseType = exerciseDiv.querySelector('.exercise-type');
+                const timedOptions = exerciseDiv.querySelector('.timed-options');
+                
+                exerciseType.addEventListener('change', () => {
+                    if (exerciseType.value === 'timed') {
+                        timedOptions.classList.remove('hidden');
+                    } else {
+                        timedOptions.classList.add('hidden');
+                    }
+                });
+
+                // Delete functionality
+                const deleteBtn = exerciseDiv.querySelector('.delete-exercise');
+                deleteBtn.addEventListener('click', () => {
+                    exerciseDiv.remove();
+                    exercises = exercises.filter((el) => el !== exerciseDiv);
+                    updateProgress();
+                });
+
+                // Drag-and-drop functionality
+                exerciseDiv.addEventListener('dragstart', (e) => {
+                    exerciseDiv.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', exercises.indexOf(exerciseDiv));
+                });
+
+                exerciseDiv.addEventListener('dragend', () => {
+                    exerciseDiv.classList.remove('dragging');
+                    document.querySelectorAll('.exercise').forEach(ex => ex.classList.remove('drag-over'));
+                });
+
+                exerciseDiv.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    exerciseDiv.classList.add('drag-over');
+                });
+
+                exerciseDiv.addEventListener('dragleave', () => {
+                    exerciseDiv.classList.remove('drag-over');
+                });
+
+                exerciseDiv.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    exerciseDiv.classList.remove('drag-over');
+                    
+                    const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                    const toIndex = exercises.indexOf(exerciseDiv);
+                    
+                    if (fromIndex !== toIndex && fromIndex >= 0 && toIndex >= 0) {
+                        const [movedExercise] = exercises.splice(fromIndex, 1);
+                        exercises.splice(toIndex, 0, movedExercise);
+                        
+                        // Re-render exercises in new order
+                        exercisesDiv.innerHTML = '';
+                        exercises.forEach(ex => exercisesDiv.appendChild(ex));
+                    }
+                });
+
+                exercisesDiv.appendChild(exerciseDiv);
+                exercises.push(exerciseDiv);
+                updateProgress();
+                
+                // Scroll to new exercise
+                exerciseDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            function exportRoutine() {
+                const routine = exercises.map((exerciseDiv) => ({
+                    title: exerciseDiv.querySelector('.editable-title').innerText,
+                    type: exerciseDiv.querySelector('.exercise-type').value,
+                    sets: exerciseDiv.querySelector('.sets').value,
+                    exerciseTime: {
+                        hours: exerciseDiv.querySelector('.exercise-hours')?.value || 0,
+                        minutes: exerciseDiv.querySelector('.exercise-minutes')?.value || 0,
+                        seconds: exerciseDiv.querySelector('.exercise-seconds')?.value || 0,
+                    },
+                    restTime: {
+                        hours: exerciseDiv.querySelector('.rest-hours')?.value || 0,
+                        minutes: exerciseDiv.querySelector('.rest-minutes')?.value || 0,
+                        seconds: exerciseDiv.querySelector('.rest-seconds')?.value || 0,
+                    },
+                }));
+
+                const blob = new Blob([JSON.stringify(routine, null, 2)], { type: 'application/json' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'routine.json';
+                link.click();
+            }
+
+            function importRoutine(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = () => {
+                    try {
+                        const routine = JSON.parse(reader.result);
+                        exercisesDiv.innerHTML = '';
+                        exercises = [];
+
+                        routine.forEach((exerciseData) => {
+                            addExercise();
+                            const exerciseDiv = exercises[exercises.length - 1];
+                            exerciseDiv.querySelector('.editable-title').innerText = exerciseData.title;
+                            exerciseDiv.querySelector('.exercise-type').value = exerciseData.type;
+                            exerciseDiv.querySelector('.sets').value = exerciseData.sets;
+
+                            // Trigger the change event to show/hide timed options
+                            const event = new Event('change');
+                            exerciseDiv.querySelector('.exercise-type').dispatchEvent(event);
+
+                            if (exerciseData.type === 'timed') {
+                                exerciseDiv.querySelector('.exercise-hours').value = exerciseData.exerciseTime.hours;
+                                exerciseDiv.querySelector('.exercise-minutes').value = exerciseData.exerciseTime.minutes;
+                                exerciseDiv.querySelector('.exercise-seconds').value = exerciseData.exerciseTime.seconds;
+                            }
+
+                            exerciseDiv.querySelector('.rest-hours').value = exerciseData.restTime.hours;
+                            exerciseDiv.querySelector('.rest-minutes').value = exerciseData.restTime.minutes;
+                            exerciseDiv.querySelector('.rest-seconds').value = exerciseData.restTime.seconds;
+                        });
+
+                        workoutStatus.textContent = `Routine imported successfully! ${exercises.length} exercises loaded.`;
+                        setTimeout(() => {
+                            workoutStatus.textContent = 'Ready to start your workout!';
+                        }, 3000);
+                    } catch (error) {
+                        alert('Error importing routine. Please check your file format.');
+                    }
+                };
+                reader.readAsText(file);
+            }
+
+            function updateProgress() {
+                if (exercises.length === 0) {
+                    progressFill.style.width = '0%';
+                    return;
+                }
+                
+                const progress = workoutActive ? (currentExerciseIndex / exercises.length) * 100 : 0;
+                progressFill.style.width = `${progress}%`;
+            }
+
+            function scrollToActiveExercise() {
+                if (currentExerciseIndex < exercises.length) {
+                    const activeExercise = exercises[currentExerciseIndex];
+                    activeExercise.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }
+            }
+
+
+			function startWorkout() {
+				if (exercises.length === 0) {
+					alert('Please add some exercises first!');
+					return;
+				}
+			
+				if (workoutActive) {
+					if (isPaused) {
+						// Resume workout
+						isPaused = false;
+						startWorkoutBtn.textContent = 'Pause Workout';
+						workoutStatus.textContent = 'Workout resumed...';
+					} else {
+						// Pause workout
+						isPaused = true;
+						startWorkoutBtn.textContent = 'Resume Workout';
+						workoutStatus.textContent = 'Workout paused';
+					}
+					return;
+				}
+			
+				initializeAudio().then(() => {
+					workoutActive = true;
+					isPaused = false;
+					async function startWorkout() {
+						if (exercises.length === 0) {
+							alert('Please add some exercises first!');
+							return;
+						}
+
+					currentExerciseIndex = 0;
+					await requestWakeLock();
+					startWorkoutBtn.textContent = 'Pause Workout';
+					workoutStatus.textContent = 'Workout in progress...';
+			
+					const workoutRoutine = exercises.map((exerciseDiv) => {
+						const title = exerciseDiv.querySelector('.editable-title').innerText;
+						const type = exerciseDiv.querySelector('.exercise-type').value;
+						const sets = parseInt(exerciseDiv.querySelector('.sets').value, 10);
+						const exerciseTime = type === 'timed' ? {
+							hours: parseInt(exerciseDiv.querySelector('.exercise-hours').value || 0, 10),
+							minutes: parseInt(exerciseDiv.querySelector('.exercise-minutes').value || 0, 10),
+							seconds: parseInt(exerciseDiv.querySelector('.exercise-seconds').value || 0, 10),
+						} : null;
+						const restTime = {
+							hours: parseInt(exerciseDiv.querySelector('.rest-hours').value || 0, 10),
+							minutes: parseInt(exerciseDiv.querySelector('.rest-minutes').value || 0, 10),
+							seconds: parseInt(exerciseDiv.querySelector('.rest-seconds').value || 0, 10),
+						};
+						return { title, type, sets, exerciseTime, restTime };
+					});
+			
+					function processExercise() {
+						if (!workoutActive || currentExerciseIndex >= exercises.length) {
+							if (workoutActive) {
+								// Workout completed
+								playBeepSound();
+								workoutActive = false;
+								isPaused = false;
+								releaseWakeLock();
+								startWorkoutBtn.textContent = 'Start Workout';
+								workoutStatus.textContent = 'Workout completed! Great job! 🎉';
+								
+								exercises.forEach(ex => ex.classList.remove('active', 'dimmed'));
+								
+								setTimeout(() => {
+									workoutStatus.textContent = 'Ready to start your workout!';
+								}, 5000);
+							}
+							return;
+						}
+			
+						// Update exercise states
+						exercises.forEach((ex, index) => {
+							ex.classList.remove('active', 'dimmed');
+							if (index === currentExerciseIndex) {
+								ex.classList.add('active');
+							} else if (index > currentExerciseIndex) {
+								ex.classList.add('dimmed');
+							}
+						});
+			
+						scrollToActiveExercise();
+						updateProgress();
+			
+						const { title, type, sets, exerciseTime, restTime } = workoutRoutine[currentExerciseIndex];
+						let currentSet = 1;
+			
+						function nextSet() {
+							if (!workoutActive || currentSet > sets) {
+								currentExerciseIndex++;
+								processExercise();
+								return;
+							}
+						
+							const currentExerciseDiv = exercises[currentExerciseIndex];
+							const countdownDiv = currentExerciseDiv.querySelector('.countdown');
+							countdownDiv.textContent = `Set ${currentSet} of ${sets} (${type === 'timed' ? 'Timed Exercise' : 'Rep Counter'})`;
+						
+							if (type === 'timed') {
+								runTimer(exerciseTime, 'Exercise Time', countdownDiv, () => {
+									if (workoutActive) {
+										runTimer(restTime, 'Rest Time', countdownDiv, () => {
+											currentSet++;
+											nextSet();
+										});
+									}
+								});
+							} else if (type === 'rep') {
+								setTimeout(() => {
+									if (workoutActive && confirm(`Complete Set ${currentSet} of ${title} then press OK to continue.`)) {
+										runTimer(restTime, 'Rest Time', countdownDiv, () => {
+											currentSet++;
+											nextSet();
+										});
+									} else if (!workoutActive) {
+										return;
+									}
+								}, 200);
+							}
+						}
+						nextSet(); // Start the first set
+					}
+					processExercise(); // Start processing the first exercise
+				});
+			}
+			
+			function runTimer(duration, label, countdownDiv, callback) {
+				let totalSeconds = duration.hours * 3600 + duration.minutes * 60 + duration.seconds;
+				
+				if (totalSeconds <= 0) {
+					playBeepSound();
+					countdownDiv.textContent = `${label} Over`;
+					setTimeout(() => {
+						countdownDiv.textContent = '';
+						callback();
+					}, 1000);
+					return;
+				}
+			
+				// Clear any existing interval
+				if (activeInterval) {
+					clearInterval(activeInterval);
+				}
+			
+				let startTime = Date.now();
+				let elapsedPauseTime = 0;
+				let pauseStartTime = null;
+			
+				activeInterval = setInterval(() => {
+					if (!workoutActive) {
+						clearInterval(activeInterval);
+						return;
+					}
+			
+					if (isPaused) {
+						if (!pauseStartTime) {
+							pauseStartTime = Date.now();
+						}
+						return;
+					}
+			
+					if (pauseStartTime) {
+						elapsedPauseTime += Date.now() - pauseStartTime;
+						pauseStartTime = null;
+					}
+			
+					const elapsedTime = Math.floor((Date.now() - startTime - elapsedPauseTime) / 1000);
+					const remainingSeconds = totalSeconds - elapsedTime;
+			
+					if (remainingSeconds <= 0) {
+						clearInterval(activeInterval);
+						playBeepSound();
+						countdownDiv.textContent = `${label} Over`;
+						setTimeout(() => {
+							countdownDiv.textContent = '';
+							callback();
+						}, 1000);
+						return;
+					}
+					
+					const hours = Math.floor(remainingSeconds / 3600);
+					const minutes = Math.floor(remainingSeconds / 60) % 60;
+					const seconds = remainingSeconds % 60;
+					countdownDiv.textContent = `${label} Remaining: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+				}, 100); // Update more frequently for smoother pause/resume
+			}
+
+			function restartWorkout() {
+				// Clear any active interval
+				if (activeInterval) {
+					clearInterval(activeInterval);
+					activeInterval = null;
+				}
+				
+				// Reset all states
+				workoutActive = false;
+				isPaused = false;
+				currentExerciseIndex = 0;
+				
+				// Reset UI elements
+				startWorkoutBtn.textContent = 'Start Workout';
+				workoutStatus.textContent = 'Ready to start your workout!';
+				
+				// Clear all countdowns and active states
+				exercises.forEach(ex => {
+					ex.classList.remove('active', 'dimmed');
+					ex.querySelector('.countdown').textContent = '';
+				});
+				
+				updateProgress();
+				releaseWakeLock();
+			}
+            // ---- HOOK UP EVENTS ----
+            const restartWorkoutBtn = document.getElementById('restart-workout');
+			restartWorkoutBtn.addEventListener('click', restartWorkout);
+			
+			// Modify the startWorkout event listener to show/hide the restart button
+			startWorkoutBtn.addEventListener('click', () => {
+				startWorkout();
+				restartWorkoutBtn.style.display = workoutActive ? 'block' : 'none';
+			});
+            addExerciseBtn.addEventListener('click', addExercise);
+            exportRoutineBtn.addEventListener('click', exportRoutine);
+            importRoutineBtn.addEventListener('click', () => importRoutineInput.click());
+            importRoutineInput.addEventListener('change', importRoutine);
+
+            // Add initial exercise
+            addExercise();
+        });
+    </script>
+</body>
+</html>
