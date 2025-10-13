@@ -14,6 +14,13 @@ image: /resources/books.purple.png
 
 | Title | Author | Month | Link |
 | ----- | ------ | ----- | ---- |
+| The Staircase in the Woods | Chuck Wendig | October | [Book Details](https://openlibrary.org/works/OL42407317W) |
+| Meddling Kids | Edgar Cantero | September | [Book Details](https://openlibrary.org/works/OL19710811W) |
+| Mister Lullaby | J.H. Markert | September | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Mister%20Lullaby) |
+| Haunted Castles | Ray Russell | September | [Book Details](https://openlibrary.org/works/OL3004367W) |
+| Sleeping beauties | Stephen King<br>Owen King | September | [Book Details](https://openlibrary.org/works/OL17930363W) |
+| Nos4a2 | Joe Hill | September | [Book Details](https://openlibrary.org/works/OL16802476W) |
+| Thursday Murder Club | Richard Osman | September | [Book Details](https://openlibrary.org/works/OL20878311W) |
 | The Hiking Trip | Jenny Blackhurst | August | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=The%20Hiking%20Trip) |
 | Oracle 3 | Andrew Pyper | August | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Oracle%203) |
 | Horror Movie | Paul Tremblay | August | [Book Details](https://openlibrary.org/works/OL37615779W) |
