@@ -10,10 +10,15 @@ image: /resources/books.purple.png
 
 ## 2025 Reading
 
-<summary>Running Tally: 27 books</summary>
+<summary>Running Tally: 43 books</summary>
 
 | Title | Author | Month | Link |
 | ----- | ------ | ----- | ---- |
+| Play Nice | Rachel Harrison | November | [Book Details](https://openlibrary.org/works/OL42431897W) |
+| Unsettling of America | Wendell Berry | October | [Book Details](https://openlibrary.org/works/OL14862077W) |
+| Source Code | Bill Gates | October | [Book Details](https://openlibrary.org/works/OL42406623W) |
+| City of Ghosts | Victoria Schwab | October | [Book Details](https://openlibrary.org/works/OL19336182W) |
+| Impossible Creatures | Katherine Rundell | October | [Book Details](https://openlibrary.org/works/OL35708452W) |
 | The Staircase in the Woods | Chuck Wendig | October | [Book Details](https://openlibrary.org/works/OL42407317W) |
 | Meddling Kids | Edgar Cantero | September | [Book Details](https://openlibrary.org/works/OL19710811W) |
 | Mister Lullaby | J.H. Markert | September | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Mister%20Lullaby) |
