@@ -9,3 +9,11 @@ title: "Bookmarks"
    <a href="https://www.woot.com"><img src="https://d3rqdbvvokrlbl.cloudfront.net/lib/images/sites/header/woot-an-amazon-company.svg" width="70"></a></div>
 
 - [Daily Exercises](/DailyExercises.md)
+
+- [25 Things to Say to Your Children](https://cupofjo.com/2025/11/24/25-things-to-say-to-your-children/)
+
+- [Today, Explained to Kids](https://www.vox.com/today-explained-to-kids)
+
+- [Ballotpedia](https://ballotpedia.org)
+
+- [Smithsonian Institute - National Museum of the American Indian: Americans Exhibit](https://americanindian.si.edu/americans/)
