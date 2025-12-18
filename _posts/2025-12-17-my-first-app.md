@@ -7,6 +7,8 @@ tags: Tech Fitness
 image: /resources/clearback.png
 ---
 
+## My First App
+
 ## TL;DR
 I built a workout timer app for iOS/macOS/visionOS. It's currently in TestFlight beta testing. [Get TestFlight](https://apps.apple.com/us/app/testflight/id899247664) → [Download ExpandableExerciseTimer](https://testflight.apple.com/join/mRp4ySuZ)
 
@@ -48,37 +50,23 @@ If you're not familiar with TestFlight—it's Apple's pre-App Store testing plat
 ### To try my timer app:  
 1. First get [TestFlight](https://apps.apple.com/us/app/testflight/id899247664) if you don't have it already
 2. Then install my [ExpandableExerciseTimer](https://testflight.apple.com/join/mRp4ySuZ) app.
-  
-Here's a preview of what the app looks like:
-
-(Video/images)
-[![video of iPad Experience]({/resources/eet_ss/10-iPad_experience.png})]({/resources/eet_ss/iPadPro13in.mp4} "iPad Experience")
-![screenshot of app at launch](/resources/eet_ss/01-start.png "App at Launch")
-![screenshot of adding timed exercise to app](/resources/eet_ss/02-add_timed_exercise.png "Adding a Timed Exercise")
-![screenshot of adding a rep-based exercise](/resources/eet_ss/03-add_rep_exercise.png "Adding a Rep-Based Exercise")
-![screenshot of editing exercises](/resources/eet_ss/04-edit.png "Editing Exercises")
-![screenshot of time-based exercise beginning](/resources/eet_ss/05-begin_routine_.png "Routine Beginning")
-![screenshot of routine waiting for rep-based exercise](/resources/eet_ss/06-routine_reps_.png "Waiting for Completion of Rep-Based Exercise")
-![screenshot of confirmation prompt](/resources/eet_ss/07-confirm_rep_complete.png "Confirm Rep-Based Exercises are Complete")
-![screenshot of rest timer during routine](/resources/eet_ss/08-routine_rest_.png "Routine Rest Timer")
-![screenshot of completion of routine](/resources/eet_ss/09-routine_complete_.png "Routine Complete")
 
 ## Sample Routines to Get Started  
 If you want a starter set, here are routines I've made based on Jeff Cavaliere's YouTube Perfect PPL series:  
-- [Pull I](/exercises/Pull%20I.json)
-- [Push I](/exercises/Push%20I.json)
-- [Legs I](/exercises/Legs%20I.json)
-- [Pull II](/exercises/Pull%20II.json)
-- [Push II](/exercises/Push%20II.json)
-- [Legs II](/exercises/Legs%20II.json)
+- [Pull I](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/Pull%20I.json)
+- [Push I](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/Push%20I.json)
+- [Legs I](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/Legs%20I.json)
+- [Pull II](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/Pull%20II.json)
+- [Push II](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/Push%20II.json)
+- [Legs II](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/Legs%20II.json)
 
 [Full PPL Playlist on YouTube](https://www.youtube.com/playlist?list=PLRS2DE4P39EfbnnL23NnP-ne_BsnxrNPL)
 
 I'm a big fan of Jeff—and I've given him a fair amount of my money over the last few years. His Athlean-X programs are legit. But I thought I'd go cheap-o mode for a bit and try some of his free routines. I'm about a week into the Perfect PPL series and have been really impressed with it!
 
-Another YouTube video of his—[10 Minute Abs](https://www.youtube.com/embed/i27K2ry9jEo)—is another fantastic workout. [Download my routine for it](/exercises/10MinAbs.json).  
+Another YouTube video of his—[10 Minute Abs](https://www.youtube.com/embed/i27K2ry9jEo)—is another fantastic workout. [Download my routine for it](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/10MinAbs.json).  
 **Other routines:**  
-* [Slow-eating timer](/exercises/Food%20timer.json) - Eat slowly for 10 minutes, don't eat at all for 5 minutes, return to eating slowly for another 10 minutes. At the end you should feel "satisfied"—but not "full", which indicates you've overeaten.  
+* [Slow-eating timer](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/Food%20timer.json) - Eat slowly for 10 minutes, don't eat at all for 5 minutes, return to eating slowly for another 10 minutes. At the end you should feel "satisfied"—but not "full", which indicates you've overeaten.  
 
 ## Known Issues (Please Help Test!)  
 Before I move the app to the App Store, there's a bug that needs addressing:  
@@ -90,12 +78,12 @@ If you're looking for a solution for tracking your exercise journey, I've been u
 ![screenshot of workout routine tracking in Obsidian](/resources/obsidianExercises.png)  
 
 Here are some placeholder markdown templates you can add to Obsidian to help you get started:
-- [Daily Log](/resources/obsidianTemplates/DailyLogTemplate.md)
-- [Equipment](/resources/obsidianTemplates/EquipmentTemplate.md)
-- [Exercise](/resources/obsidianTemplates/ExerciseTemplate.md)
-- [Focus Area](/resources/obsidianTemplates/FocusTemplate.md)
-- [Routine](/resources/obsidianTemplates/RoutineTemplate.md)
-- [Dashboard](/resources/obsidianTemplates/WorkoutDashboard.md)
+- [Daily Log](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/resources/obsidianTemplates/DailyLogTemplate.md)
+- [Equipment](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/resources/obsidianTemplates/EquipmentTemplate.md)
+- [Exercise](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/resources/obsidianTemplates/ExerciseTemplate.md)
+- [Focus Area](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/resources/obsidianTemplates/FocusTemplate.md)
+- [Routine](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/resources/obsidianTemplates/RoutineTemplate.md)
+- [Dashboard](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/resources/obsidianTemplates/WorkoutDashboard.md)
 
 ## What's Next  
 I need to tackle the background notification issue before submitting to the App Store. Once that's done, if time permits and inspiration strikes during the break, I want to return to the workout randomizer page and turn it into an app. 🤞  
