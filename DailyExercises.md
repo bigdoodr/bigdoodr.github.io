@@ -29,6 +29,7 @@ image: /resources/1.crescent-tucks.gif
     <li><img src="/resources/8.corpse-crunch.gif" alt="Corpse Crunch"> Corpse Crunch</li>
   </ul>
 </details>
+[Download ExpandableExerciseTimer](https://testflight.apple.com/join/mRp4ySuZ) and load [this routine](/exercises/10MinAbs.json) into it.
 
 - Morning Stretches by Jeff Cavaliere
 

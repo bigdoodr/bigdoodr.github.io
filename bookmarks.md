@@ -8,7 +8,7 @@ title: "Bookmarks"
 - <div style="width: 80px; height: auto; display: inline-block; padding: 5px;">
    <a href="https://www.woot.com"><img src="https://d3rqdbvvokrlbl.cloudfront.net/lib/images/sites/header/woot-an-amazon-company.svg" width="70"></a></div>
 
-- [Daily Exercises](/DailyExercises.md)
+- [Daily Exercises](/DailyExercises)
 
 - [25 Things to Say to Your Children](https://cupofjo.com/2025/11/24/25-things-to-say-to-your-children/)
 
