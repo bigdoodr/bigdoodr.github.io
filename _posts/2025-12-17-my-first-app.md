@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "My First App"
+title: "My First App (Updated)"
 description: "My experience creating an app, with some AI assistance"
 date: 2025-12-17T14:19:00-6:00
 tags: Tech Fitness
@@ -10,9 +10,8 @@ image: /resources/clearback.png
 ## My First App
 
 ## TL;DR
-I built a workout timer app for iOS/macOS/visionOS. It's currently in TestFlight beta testing. [Get TestFlight](https://apps.apple.com/us/app/testflight/id899247664) → [Download ExpandableExerciseTimer](https://testflight.apple.com/join/mRp4ySuZ)
-
-<a href="https://testflight.apple.com/join/mRp4ySuZ" style="display:inline-block; padding:10px 20px; background:#007AFF; color:white; text-decoration:none; border-radius:8px; font-weight:bold;">Join TestFlight Beta</a>
+I built a workout timer app for iOS/macOS/visionOS, now available in the App Store  
+[![Download on the App Store](https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83)](https://apps.apple.com/us/app/expandableexercisetimer/id6756544631)
 
 ## Why I Built This  
 Each winter, my employer gives us a generous break. Last year I took the time off to create a couple of webpages ([Zone 2 Randomizer](/exercises/Zone2Randomizer), which has gone through quite a few iterations and [Expandable Timer](/exercises/expandableTimer)). For the last calendar year, I've been using the Expandable Timer page as my go-to fitness tool.
@@ -39,17 +38,7 @@ Xcode's embedded ChatGPT assistance (added earlier in 2025) was invaluable for f
 
 Granted, it wasn't really that simple. I spent multiple hours each day for about a week getting it to behave as desired—but the AI assistance absolutely streamlined the process SIGNIFICANTLY.
 
-## Navigating App Store Connect
-
-Next was getting the app into Apple's "AppStoreConnect" system. I think I spent as much time figuring that out as I did working in Xcode!
-I've still got a couple of errors with the "app previews" and screenshots I uploaded—but I don't have to worry about those until the app is actually in the App Store. For now, it's in TestFlight.
-
-## Try It in TestFlight  
-If you're not familiar with TestFlight—it's Apple's pre-App Store testing platform. You can't browse for apps; you have to be "invited" to test individual ones.
-
-### To try my timer app:  
-1. First get [TestFlight](https://apps.apple.com/us/app/testflight/id899247664) if you don't have it already
-2. Then install my [ExpandableExerciseTimer](https://testflight.apple.com/join/mRp4ySuZ) app.
+If you use the app and notice any oddities or undesired behaviors, please let me know! And if there's any extra functions you'd like to see added, let me know that too!  
 
 ## Sample Routines to Get Started  
 If you want a starter set, here are routines I've made based on Jeff Cavaliere's YouTube Perfect PPL series:  
@@ -68,11 +57,6 @@ Another YouTube video of his—[10 Minute Abs](https://www.youtube.com/embed/i27
 **Other routines:**  
 * [Slow-eating timer](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/exercises/Food%20timer.json) - Eat slowly for 10 minutes, don't eat at all for 5 minutes, return to eating slowly for another 10 minutes. At the end you should feel "satisfied"—but not "full", which indicates you've overeaten.  
 
-## Known Issues (Please Help Test!)  
-Before I move the app to the App Store, there's a bug that needs addressing:  
-**Background timer issue:** If the routine is started and then the app sleeps or loses focus, the timer keeps counting (as desired), but the audio alert doesn't trigger. A notification will appear in the Notification Center, but it doesn't show as an alert, so you don't notice when it's time to move to the next portion of the routine. Also, it won't advance to the next step in the routine until you return to the app. 😞  
-If you use the app and notice any oddities or undesired behaviors, please let me know! And if there's any extra functions you'd like to see added, let me know that too!  
-
 ## Tracking Your Progress  
 If you're looking for a solution for tracking your exercise journey, I've been using [Obsidian](https://obsidian.md) for the last 3+ months and find it incredibly robust and flexible.  
 ![screenshot of workout routine tracking in Obsidian](/resources/obsidianExercises.png)  
@@ -84,6 +68,3 @@ Here are some placeholder markdown templates you can add to Obsidian to help you
 - [Focus Area](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/resources/obsidianTemplates/FocusTemplate.md)
 - [Routine](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/resources/obsidianTemplates/RoutineTemplate.md)
 - [Dashboard](https://raw.githubusercontent.com/bigdoodr/bigdoodr.github.io/refs/heads/main/resources/obsidianTemplates/WorkoutDashboard.md)
-
-## What's Next  
-I need to tackle the background notification issue before submitting to the App Store. Once that's done, if time permits and inspiration strikes during the break, I want to return to the workout randomizer page and turn it into an app. 🤞  
