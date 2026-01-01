@@ -10,10 +10,17 @@ image: /resources/books.purple.png
 
 ## 2025 Reading
 
-<summary>Running Tally: 43 books</summary>
+<summary>Running Tally: 50 books</summary>
 
 | Title | Author | Month | Link |
 | ----- | ------ | ----- | ---- |
+| Killing Floor | Lee Child | December | [Book Details](https://openlibrary.org/works/OL52943W) |
+| Robin Williams When the Laughter Stops 1951-2014 | Emily Herbert | December | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Robin%20Williams%20When%20the%20Laughter%20Stops%201951-2014) |
+| Fear and Loathing in Las Vegas | Hunter S. Thompson | December | [Book Details](https://openlibrary.org/works/OL158041W) |
+| Miracle and Wonder | Malcom Galdwell | December | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Miracle%20and%20Wonder) |
+| Reacher the Stories Behind the Stories | Lee Child | December | [Book Details](https://www.librarything.com/search_works.php?searchType=title&search=Reacher%20the%20Stories%20Behind%20the%20Stories) |
+| Dolly Parton, Songteller | Dolly Parton | December | [Book Details](https://openlibrary.org/works/OL20869879W) |
+| Light of the Jedi | Charles Soule | November | [Book Details](https://openlibrary.org/works/OL24228313W) |
 | Play Nice | Rachel Harrison | November | [Book Details](https://openlibrary.org/works/OL42431897W) |
 | Unsettling of America | Wendell Berry | October | [Book Details](https://openlibrary.org/works/OL14862077W) |
 | Source Code | Bill Gates | October | [Book Details](https://openlibrary.org/works/OL42406623W) |

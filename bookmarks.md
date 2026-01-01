@@ -17,3 +17,11 @@ title: "Bookmarks"
 - [Ballotpedia](https://ballotpedia.org)
 
 - [Smithsonian Institute - National Museum of the American Indian: Americans Exhibit](https://americanindian.si.edu/americans/)
+
+- [Screen Sizes](https://screensizes.app)
+
+- [Scrabble Word Finder](https://scrabblewordfinder.org/)
+
+- [Mud Happens Annual Fundraiser](https://www.mudhappensfec.com/)
+
+- [Snow Flurry Scurry Annual Fundraiser](https://www.lostrivercave.org/event/snow-flurry-scurry/)
