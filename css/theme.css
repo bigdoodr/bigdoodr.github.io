@@ -8,6 +8,37 @@
     --ai-subtle-gradient: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(175, 82, 222, 0.1) 100%);
 }
 
+/* Site header - always use gradient */
+header {
+    background: var(--ai-gradient);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+}
+
+/* Website title with text outline for visibility */
+.site-title,
+header h1,
+header .title {
+    background: var(--ai-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+    text-shadow: 
+        -1px -1px 0 rgba(0, 0, 0, 0.3),
+        1px -1px 0 rgba(0, 0, 0, 0.3),
+        -1px 1px 0 rgba(0, 0, 0, 0.3),
+        1px 1px 0 rgba(0, 0, 0, 0.3),
+        0 0 3px rgba(0, 0, 0, 0.2);
+    /* Note: text-shadow doesn't work perfectly with -webkit-text-fill-color: transparent
+       Adding a filter as backup */
+    filter: drop-shadow(-1px -1px 0px rgba(0, 0, 0, 0.3))
+            drop-shadow(1px -1px 0px rgba(0, 0, 0, 0.3))
+            drop-shadow(-1px 1px 0px rgba(0, 0, 0, 0.3))
+            drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.3));
+}
+
 .fa {
     font-size: 50px;
     cursor: pointer;
@@ -143,6 +174,21 @@ iframe {
     body {
         background: linear-gradient(135deg, #1c1c1e 0%, #000000 100%);
         color: #f2f2f7;
+    }
+
+    /* Ensure header gradient is visible in dark mode */
+    header {
+        background: var(--ai-gradient);
+    }
+
+    /* Update site title outline for dark mode */
+    .site-title,
+    header h1,
+    header .title {
+        filter: drop-shadow(-1px -1px 0px rgba(0, 0, 0, 0.5))
+                drop-shadow(1px -1px 0px rgba(0, 0, 0, 0.5))
+                drop-shadow(-1px 1px 0px rgba(0, 0, 0, 0.5))
+                drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.5));
     }
 
     h2 {

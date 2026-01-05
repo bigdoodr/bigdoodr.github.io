@@ -38,6 +38,7 @@ header_pages:
   - about.html
   - archive.md
   - bookmarks.md
+  - books.md
 
 
 plugins:

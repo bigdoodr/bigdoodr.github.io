@@ -63,6 +63,37 @@ title: "Bookmarks"
   font-size: 0.95em;
   font-weight: 500;
   line-height: 1.3;
+  color: #007bff;  /* Always use the blue color */
+}
+
+/* Dark mode specific styles */
+@media (prefers-color-scheme: dark) {
+  .category-title {
+    border-bottom-color: #444;
+    color: #f2f2f7;
+  }
+  
+  .bookmark-card {
+    background-color: #1c1c1e;
+    border-color: #444;
+  }
+  
+  .bookmark-card:hover {
+    border-color: #007bff;
+    background-color: #2c2c2e;
+  }
+  
+  .bookmark-icon {
+    color: #007bff;
+  }
+  
+  .bookmark-card:hover .bookmark-icon {
+    color: #3392ff;
+  }
+  
+  .bookmark-label {
+    color: #007bff;  /* Keep blue color in dark mode too */
+  }
 }
 
 @media (max-width: 768px) {
