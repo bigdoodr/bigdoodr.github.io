@@ -164,6 +164,67 @@ iframe {
     margin-top: 30px;
 }
 
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+table th {
+    background: var(--ai-subtle-gradient);
+    color: var(--ai-blue);
+    font-weight: 600;
+    text-align: left;
+    padding: 15px 20px;
+    border-bottom: 2px solid var(--ai-blue);
+}
+
+table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(0, 122, 255, 0.1);
+    color: #1d1d1f;
+}
+
+table tbody tr {
+    transition: all 0.3s ease;
+}
+
+table tbody tr:hover {
+    background: rgba(0, 122, 255, 0.05);
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Dark mode table styles */
+@media (prefers-color-scheme: dark) {
+    table {
+        background: rgba(28, 28, 30, 0.8);
+    }
+    
+    table th {
+        background: linear-gradient(135deg, rgba(0, 122, 255, 0.2) 0%, rgba(175, 82, 222, 0.2) 100%);
+        color: var(--ai-purple);
+        border-bottom-color: var(--ai-purple);
+    }
+    
+    table td {
+        color: #f2f2f7;
+        border-bottom-color: rgba(175, 82, 222, 0.1);
+    }
+    
+    table tbody tr:hover {
+        background: rgba(175, 82, 222, 0.1);
+    }
+}
+
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
     body {

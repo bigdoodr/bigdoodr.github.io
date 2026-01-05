@@ -13,6 +13,7 @@ image: /resources/books.purple.png
 ### Final Count: 52 books
 
 | Title | Author | Month | Details | Series |
+| ----- | ------ | ----- | ------- | ------ |
 | Killing Floor | Lee Child | December | [View on LibraryThing](https://www.librarything.com/isbn/9788379856367) | [Jack Reacher](https://www.librarything.com/nseries/102/Jack-Reacher) |
 | Robin Williams When the Laughter Stops 1951-2014 | Emily Herbert | December | [View on LibraryThing](https://www.librarything.com/work/15552223/t/Robin-Williams-When-the-Laughter-Stops-1951–2014) | — |
 | Fear and Loathing in Las Vegas | Hunter S. Thompson | December | [View on LibraryThing](https://www.librarything.com/isbn/9788433912923) | — |
@@ -71,7 +72,7 @@ image: /resources/books.purple.png
 ### Final Count: 38 books
 
 | Title | Author | Month | Details | Series |
-| ----- | ------ | ----- | ---- | ---- |
+| ----- | ------ | ----- | ------- | ------ |
 | Rising Strong as a Spiritual Practice | Brené Brown | December | [View on LibraryThing](https://www.librarything.com/isbn/9781622037810) | — |
 | The Ward Witch | Sarah Painter | December | [View on LibraryThing](https://www.librarything.com/work/30534356/t/The-Ward-Witch) | [Unholy Island](https://www.librarything.com/nseries/358853/Unholy-Island) |
 | C.S. Lewis | Alister McGrath | December | [View on LibraryThing](https://www.librarything.com/isbn/9781444745528) | — |
