@@ -15,7 +15,7 @@ header {
     animation: gradientShift 8s ease infinite;
 }
 
-/* Website title with text outline for visibility */
+/* Website title with subtle text outline for visibility */
 .site-title,
 header h1,
 header .title {
@@ -25,18 +25,9 @@ header .title {
     -webkit-text-fill-color: transparent;
     background-size: 200% 200%;
     animation: gradientShift 8s ease infinite;
-    text-shadow: 
-        -1px -1px 0 rgba(0, 0, 0, 0.3),
-        1px -1px 0 rgba(0, 0, 0, 0.3),
-        -1px 1px 0 rgba(0, 0, 0, 0.3),
-        1px 1px 0 rgba(0, 0, 0, 0.3),
-        0 0 3px rgba(0, 0, 0, 0.2);
-    /* Note: text-shadow doesn't work perfectly with -webkit-text-fill-color: transparent
-       Adding a filter as backup */
-    filter: drop-shadow(-1px -1px 0px rgba(0, 0, 0, 0.3))
-            drop-shadow(1px -1px 0px rgba(0, 0, 0, 0.3))
-            drop-shadow(-1px 1px 0px rgba(0, 0, 0, 0.3))
-            drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.3));
+    /* Very subtle outline - just enough for legibility */
+    filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.4))
+            drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2));
 }
 
 .fa {
@@ -181,14 +172,12 @@ iframe {
         background: var(--ai-gradient);
     }
 
-    /* Update site title outline for dark mode */
+    /* Slightly stronger outline for dark mode, but still subtle */
     .site-title,
     header h1,
     header .title {
-        filter: drop-shadow(-1px -1px 0px rgba(0, 0, 0, 0.5))
-                drop-shadow(1px -1px 0px rgba(0, 0, 0, 0.5))
-                drop-shadow(-1px 1px 0px rgba(0, 0, 0, 0.5))
-                drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.5));
+        filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.6))
+                drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3));
     }
 
     h2 {
