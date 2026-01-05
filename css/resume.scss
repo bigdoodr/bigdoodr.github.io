@@ -14,6 +14,28 @@ ul, ol {
 }
 
 .page-content {
+    /* Override any theme.css gradient/animation effects */
+    background: none !important;
+    animation: none !important;
+
+    /* Ensure headers don't have gradient backgrounds */
+    header, .page-header, .section-header {
+        background: none !important;
+        animation: none !important;
+    }
+
+    /* Reset h1 styles that might be affected by theme.css */
+    h1, h2, h3, h4, h5 {
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
+        -webkit-text-fill-color: unset !important;
+        color: inherit !important;
+        filter: none !important;
+        text-shadow: none !important;
+        animation: none !important;
+    }
+
     .page-header {
         .avatar {
             width: 6rem;
@@ -30,6 +52,13 @@ ul, ol {
                 font-weight: 900;
                 line-height: 1;
                 letter-spacing: -.1rem;
+                /* Ensure no gradient effects */
+                background: none !important;
+                -webkit-background-clip: unset !important;
+                background-clip: unset !important;
+                -webkit-text-fill-color: unset !important;
+                filter: none !important;
+                color: #333 !important;
             }
 
             .header-name {
@@ -57,11 +86,13 @@ ul, ol {
             font-size: 1.75rem;
             font-weight: 300;
             margin-bottom: 1rem;
+            background: none !important;
 
             .job-title {
                 @include heading-font;
                 float: left;
                 letter-spacing: -0.08rem;
+                color: #333 !important;
             }
 
             .icon-links {
@@ -106,12 +137,18 @@ ul, ol {
             border-bottom: 2px solid #c7c7c7;
             padding: .1rem 0 .2rem;
             margin-bottom: 1rem;
+            background: none !important;
 
             h2 {
                 @include heading-font;
                 font-size: 1.75rem;
                 font-weight: 900;
                 letter-spacing: -0.05rem;
+                color: #333 !important;
+                background: none !important;
+                -webkit-background-clip: unset !important;
+                background-clip: unset !important;
+                -webkit-text-fill-color: unset !important;
             }
         }
 
@@ -217,6 +254,10 @@ ul, ol {
 
             .bottom-bar__text {
                 padding-right: 10px;
+
+                a {
+                    color: #ffffff;
+                }
             }
 
             .bottom-bar__close {
