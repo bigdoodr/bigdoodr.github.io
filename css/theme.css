@@ -25,9 +25,18 @@ header .title {
     -webkit-text-fill-color: transparent;
     background-size: 200% 200%;
     animation: gradientShift 8s ease infinite;
-    /* Very subtle outline - just enough for legibility */
-    filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.4))
-            drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2));
+    /* Light outline for light mode */
+    filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8))
+            drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.5));
+}
+
+/* Navigation menu links */
+header nav a,
+header a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .fa {
@@ -61,17 +70,12 @@ body {
 }
 
 h1 {
-    background: var(--ai-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #5856D6; /* Solid purple color instead of gradient */
     font-size: 3em;
     font-weight: 700;
     text-align: center;
     margin: 40px 0;
     position: relative;
-    background-size: 200% 200%;
-    animation: gradientShift 8s ease infinite;
 }
 
 h1::after {
@@ -172,12 +176,22 @@ iframe {
         background: var(--ai-gradient);
     }
 
-    /* Slightly stronger outline for dark mode, but still subtle */
+    /* White outline works in dark mode too */
     .site-title,
     header h1,
     header .title {
-        filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.6))
-                drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3));
+        filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8))
+                drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.5));
+    }
+
+    /* Menu links stay white in dark mode */
+    header nav a,
+    header a {
+        color: white;
+    }
+
+    h1 {
+        color: #AF52DE; /* Lighter purple for dark mode */
     }
 
     h2 {
