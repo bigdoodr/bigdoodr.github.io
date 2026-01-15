@@ -42,11 +42,11 @@ header a {
 header nav a:hover,
 header a:hover {
     color: #000000; /* Black text in light mode hover */
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.8),
-                 0px 0px 6px rgba(255, 255, 255, 0.5);
+    text-shadow: none; /* Remove shadow for clean black text */
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
 .fa {
@@ -246,9 +246,9 @@ table tbody tr:hover {
     header nav a:hover,
     header a:hover {
         color: white; /* Keep white text in dark mode */
-        background: rgba(0, 0, 0, 0.6);
-        text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9),
-                     0px 0px 6px rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.7);
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
 
     h1 {
