@@ -235,7 +235,8 @@ a {
     position: relative;
 }
 
-a:hover {
+/* General link hover - but NOT for nav links */
+a:not(.nav-list a):not(.site-title):hover {
     background: var(--ai-gradient);
     -webkit-background-clip: text;
     background-clip: text;
