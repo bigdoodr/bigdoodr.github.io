@@ -20,7 +20,7 @@ Below are links to all of the items referenced, or used, in the presentation.
    - [Disconnect](https://disconnect.me/disconnect)
    - [NoScript](https://noscript.net/getit/)
  - Take Control
-   - [Privacy Actions Guide](../2024/09/09/privacy-security-actions.html)
+   - [Privacy Actions Guide](../../../2024/09/09/privacy-security-actions.html)
    - [Meta Privacy Settings](https://johnoliverwantsyourraterotica.com)
    - [Turn Off Smart TV Snooping](https://www.consumerreports.org/electronics/privacy/how-to-turn-off-smart-tv-snooping-features-a4840102036/)
    - [ZDNet - Lock Down Your Home Wi-Fi](https://www.zdnet.com/article/your-home-wi-fi-isnt-nearly-as-private-as-it-should-be-6-free-ways-to-lock-it-down/)
@@ -39,6 +39,6 @@ Below are links to all of the items referenced, or used, in the presentation.
    - [Honest Security](https://honest.security)
    - [The Art of Invisibility by Kevin Mitnick](https://www.mitnicksecurity.com/the-art-of-invisibility-mitnick-security)
 
-And, if you so desire, you can go through the presentation below--or [fullscreen](../WKUProDevDay2026).
+And, if you so desire, you can go through the presentation below--or [fullscreen](../../../WKUProDevDay2026).
 
 <iframe src="/WKUProDevDay2026" width="100%" height="600px" style="border:none;"></iframe>
