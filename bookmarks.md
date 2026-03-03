@@ -174,7 +174,7 @@ title: "Bookmarks"
 <div class="bookmark-label">YouTube Playlist Manager</div>
 </a>
 
-<a href="https://platform.claude.com/settings/billing class="bookmark-card">
+<a href="https://platform.claude.com/settings/billing" class="bookmark-card">
 <div class="bookmark-icon"><i class="fas fa-terminal"></i></div>
 <div class="bookmark-label">Claude API Credits</div>
 </a>
