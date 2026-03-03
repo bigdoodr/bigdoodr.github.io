@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: page
 title: "Colophon"
 description: "How this website is built and maintained"
-date: 2025-01-26
+date: 2026-01-26
 permalink: /colophon/
 ---
 

@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: page
 title: "Death"
 description: "Instructions for family and friends in case of my demise"
-date: 2025-01-26
+date: 2026-01-26
 permalink: /death/
 ---
 

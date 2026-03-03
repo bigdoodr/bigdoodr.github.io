@@ -164,6 +164,26 @@ title: "Bookmarks"
 <div class="category-title">Reference & Tools</div>
 <div class="bookmarks-grid">
 
+<a href="https://scrabblewordfinder.org/" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-spell-check"></i></div>
+<div class="bookmark-label">Scrabble Word Finder</div>
+</a>
+
+<a href="https://ytmanager.vercel.app" class="bookmark-card">
+<div class="bookmark-icon"><i class="fa-brands fa-youtube"></i></div>
+<div class="bookmark-label">YouTube Playlist Manager</div>
+</a>
+
+<a href="https://platform.claude.com/settings/billing class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-terminal"></i></div>
+<div class="bookmark-label">Claude API Credits</div>
+</a>
+
+<a href="https://screensizes.app" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-mobile-alt"></i></div>
+<div class="bookmark-label">Screen Sizes</div>
+</a>
+
 <a href="https://ballotpedia.org" class="bookmark-card">
 <div class="bookmark-icon"><i class="fas fa-vote-yea"></i></div>
 <div class="bookmark-label">Ballotpedia</div>
@@ -172,16 +192,6 @@ title: "Bookmarks"
 <a href="https://americanindian.si.edu/americans/" class="bookmark-card">
 <div class="bookmark-icon"><i class="fas fa-landmark"></i></div>
 <div class="bookmark-label">Smithsonian NMAI: Americans Exhibit</div>
-</a>
-
-<a href="https://screensizes.app" class="bookmark-card">
-<div class="bookmark-icon"><i class="fas fa-mobile-alt"></i></div>
-<div class="bookmark-label">Screen Sizes</div>
-</a>
-
-<a href="https://scrabblewordfinder.org/" class="bookmark-card">
-<div class="bookmark-icon"><i class="fas fa-spell-check"></i></div>
-<div class="bookmark-label">Scrabble Word Finder</div>
 </a>
 
 </div>

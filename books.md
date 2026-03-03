@@ -12,16 +12,11 @@ image: /resources/books.purple.png
 - [ ] Code Name: Pale Horse: How I Went Undercover to Expose America's Nazis by Scott Payne
 - [ ] Party Discipline by Cory Doctrow
 - [ ] Dead Man Rising by Lilith Saintcrow
-- [ ] House of Sky and Breath by Sarah J. Maas
 - [ ] Darkness and Demon Song by M.R. Fournet
-- [ ] Butcher Game by Alaina Urquhart
 - [ ] Game of Stars by Sayantani Dasgupta
 - [ ] Rogue Command by Jack Mars
 - [ ] Book Keeper by Sarah Painter
 - [ ] Sea View Cottage Conspiracy by B.D. Churston
-- [ ] Fatal Grace by Louise Penny
-- [ ] Money Shot by Stuart Woods
-- [ ] Dearly Devoted Dexter by Jeff Lindsay
 - [ ] Archenemies by Marissa Meyer
 - [ ] Changeless by Gail Carriger
 - [ ] Blood Bound by Patricia Briggs
@@ -36,6 +31,26 @@ image: /resources/books.purple.png
 - [ ] Tunnel of Bones by Victoria Schwab
 - [ ] Star Wars High Republic Great Jedi Rescue by Cavan Scott
 - [ ] Die Trying by Lee Child
+
+## 2026 Reading
+
+### Running Tally: 12 books
+
+| Title | Author | Month | Details | Series |
+|-------|--------|-------|---------|--------|
+| End of Eternity | Isaac Asimov | February | [View on LibraryThing](https://www.librarything.com/isbn/9780586024409) | — |
+| House of Sky and Breath | Sarah J. Maas | February | [View on LibraryThing](https://www.librarything.com/work/26489076/t/House-of-Sky-and-Breath) | [Crescent City](https://www.librarything.com/nseries/49871/Crescent-City) |
+| Butcher Game | Alaina Urquhart | February | [View on LibraryThing](https://www.librarything.com/isbn/9781638933366) | [Dr Wren](https://www.librarything.com/nseries/377839/Dr-Wren) |
+| Clean Mess | Tiffany Jenkins | February | [View on LibraryThing](https://www.librarything.com/isbn/9780593232637) | — |
+| Careless People | Sarah Wynn-Williams | February | [View on LibraryThing](https://www.librarything.com/isbn/9781035065936) | — |
+| Dearly Devoted Dexter | Jeff Lindsey | February | [View on LibraryThing](https://www.librarything.com/work/2162/t/Dearly-Devoted-Dexter) | [Dexter](https://www.librarything.com/nseries/1024/Dexter) |
+| The Money Shot | Stuart Woods | January | [View on LibraryThing](https://www.librarything.com/isbn/9781432854201) | [Teddy Fay](https://www.librarything.com/nseries/44878/Teddy-Fay) |
+| A Fatal Grace | Louise Penny | January | [View on LibraryThing](https://www.librarything.com/isbn/9781529388183) | [Chief Inspector Armand Gamache](https://www.librarything.com/nseries/1069/Chief-Inspector-Armand-Gamache) |
+| Dark: Stories of Madness, Murder, and the Supernatural | Clint Willis | January | [View on LibraryThing](https://www.librarything.com/work/516248/t/Dark-Stories-of-Madness-Murder-and-the-Supernatural) | — |
+| Everything Belongs | Richard Rohr | January | [View on LibraryThing](https://www.librarything.com/isbn/0824519957) | — |
+| Great Gatsby | F. Scott Fitzgerald | January | [View on LibraryThing](https://www.librarything.com/isbn/9783730600009) | — |
+| Horns | Joe Hill | January | [View on LibraryThing](https://www.librarything.com/isbn/9788483651902) | — |
+
 
 ## 2025 Reading
 

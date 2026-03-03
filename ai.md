@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: page
 title: "AI Usage"
 description: "How I use artificial intelligence tools in my work and personal projects"
-date: 2025-01-26
+date: 2026-01-26
 permalink: /ai/
 ---
 

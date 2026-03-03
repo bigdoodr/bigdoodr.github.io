@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: page
 title: "Calendar"
 description: "Cultural and fictional dates I observe throughout the year"
-date: 2025-01-26
+date: 2026-01-26
 permalink: /calendar/
 ---
 

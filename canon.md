@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: page
 title: "Canon"
 description: "The things that have most shaped who I am"
-date: 2025-01-26
+date: 2026-01-26
 permalink: /canon/
 ---
 

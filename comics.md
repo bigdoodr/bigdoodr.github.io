@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: page
 title: "Comics"
 description: "Webcomics and classic comic strips I read regularly"
-date: 2025-01-26
+date: 2026-01-26
 permalink: /comics/
 ---
 

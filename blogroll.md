@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: page
 title: "Blogroll"
 description: "Blogs, publications, and sites I follow regularly"
-date: 2025-01-26
+date: 2026-01-26
 permalink: /blogroll/
 ---
 
