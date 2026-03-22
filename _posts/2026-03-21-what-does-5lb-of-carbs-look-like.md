@@ -3,7 +3,7 @@ layout: post
 title: What Does 5 Pounds of Carbs Look Like?
 description: Why you can find images of 5 pounds of fat or muscle all over the internet, but not carbs.
 date: 2026-03-21T19:26:19-6:00
-tags: fitness nutrition exercise
+tags: Fitness
 image:
 ---
 
