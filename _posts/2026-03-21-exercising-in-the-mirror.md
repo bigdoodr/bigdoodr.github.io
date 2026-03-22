@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Exercising in the Mirror in Your Underwear & Showing Yourself Grace
+title: Exercising in the Mirror in Your Underwear and Showing Yourself Grace
 description: A hotel room, a mirror I couldn't avoid, and a reminder that progress isn't always what you see in a snapshot.
 date: 2026-03-21T19:48:19-6:00
 tags: Fitness

@@ -2,7 +2,7 @@
 layout: post
 title: My Origin Story — How I First Got Interested in Tech
 description: How it all started -- VHS tapes, rental stores, and a piece of masking tape.
-date: 2026-03-21T20:15:39-6:00
+date: 2026-03-21T18:15:39-6:00
 tags: Tech
 image:
 ---
