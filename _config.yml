@@ -34,10 +34,10 @@ kramdown:
     disable: true
     
 header_pages:
-  - resume.html
   - about.html
+  - resume.html
   - archive.md
-  - bookmarks.md
+  - slashes.md
   - books.md
 
 

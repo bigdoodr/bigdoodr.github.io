@@ -16,7 +16,7 @@ For everything else that doesn't (or shouldn't) impact anyone else, I've got exa
 
 **Han shot first.**
 
-**U2's *The Joshua Tree* is a perfect album.** Not great. Not one of the best. *Perfect.*
+**U2's *The Joshua Tree* is a perfect album.** Not simply great. Not one of the best. *Perfect.*
 
 That's it. That's the list.
 

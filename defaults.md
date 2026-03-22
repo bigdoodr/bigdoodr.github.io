@@ -6,7 +6,7 @@ date: 2026-01-26
 permalink: /defaults/
 ---
 
-These are my default apps for common tasks - a snapshot of my digital toolkit as of January 2025.
+These are my default apps for common tasks - a snapshot of my digital toolkit as of January 2026.
 
 ## Communication
 

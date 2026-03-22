@@ -205,6 +205,11 @@ section {
   text-align: left;
 }
 
+#section-beyond {
+  background-color: #222222;
+  color: #FFFFFF;
+}
+
 /* Image Styling */
 img {
   max-width: 100%;
@@ -241,6 +246,20 @@ img {
 
 .text.right-aligned {
   text-align: right;
+}
+
+/* Image caption styling */
+.img-caption {
+  font-size: 0.9em;
+  font-style: italic;
+  opacity: 0.75;
+  margin-top: 0.5rem;
+  text-align: center;
+  padding: 0 0.5rem;
+}
+
+#section3 .img-caption {
+  color: #333;
 }
 
 a {
@@ -314,12 +333,14 @@ a {
   </div>
 </header>
   </div>
+
 <!-- Section 1 -->
 <section id="section1">
   <div class="container">
     <div class="text">
       <h1>CASEY SCRUGGS</h1>
       <h2>Endpoint Engineer</h2>
+      <p>I'm a Mac-focused endpoint engineer who believes IT should serve people — not the other way around. I got here through a genuine love of the Apple ecosystem (yes, I attend MacAdmins) and a conviction that the people with access to your devices and data should take that responsibility seriously. This page is my attempt to show my work on that front.</p>
       <p align="right">Do the best you can until you know better. Then when you know better, do better.</br>-MAYA ANGELOU</p>
     </div>
     <div id="img1-container">
@@ -332,11 +353,13 @@ a {
 <section id="section2">
   <div class="container">
     <div id="img2-container">
-      <img id="img2" src="/resources/mando.png" alt="Picture of a Mandolorian helmet with the words This is the way written below it.">
+      <img id="img2" src="/resources/mando.png" alt="Picture of a Mandalorian helmet with the words This is the way written below it.">
+      <p class="img-caption">This is the way. Not a slogan — a standard.</p>
     </div>
     <div class="text right-aligned">
       <h1 align="right">CODE OF ETHICS</h1>
       <p>The IT industry should be a force for good, but if not kept in check, can overreach the purpose it is intended to serve. I take the responsibility granted to me as an endpoint engineer very seriously, and offer this page as my commitment to both individuals and the institution I work for to keep personal privacy and the security of our work environment in focus simultaneously.</p>
+      <p>The Mandalorian's creed is about more than a catchphrase. It's about a code you follow even when no one is watching — especially when no one is watching. That's the standard I hold myself to.</p>
     </div>
   </div>
 </section>
@@ -352,6 +375,19 @@ a {
     </div>
     <div id="img3-container">
       <img id="img3" src="/resources/woz.png" alt="Caricature of Steve Wozniak">
+      <p class="img-caption">Steve Wozniak — built something world-changing, then walked away from the spotlight to just... be a good person. That's the goal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section: Beyond the Job -->
+<section id="section-beyond">
+  <div class="container">
+    <div class="text">
+      <h1>BEYOND THE JOB</h1>
+      <p>When I'm not thinking about endpoints, I'm probably thinking about my family — they're the whole reason any of the rest of this matters. Everything else I do exists in that context.</p>
+      <p>Outside of work, I'm deep in the Apple ecosystem (professionally <em>and</em> recreationally — yes, I build apps for fun), I play TTRPGs with people I care about, I work out because I want to stick around long enough to be an embarrassing grandpa someday, and I have strong opinions about Star Wars that I will share with you whether you asked or not.</p>
+      <p>I also have a complicated relationship with faith, a straightforward relationship with coffee, and a hill I will absolutely die on: <em>The Joshua Tree</em> is a perfect album. Not great. Perfect.</p>
     </div>
   </div>
 </section>
