@@ -1,7 +1,7 @@
 ---
 layout: post
 title: My Origin Story — How I First Got Interested in Tech
-description: My kid borrowed some DVDs from the library — even though we have streaming subscriptions — and it reminded me of where my interest in technology actually started: VHS tapes, rental stores, and a piece of masking tape.
+description: How it all started -- VHS tapes, rental stores, and a piece of masking tape.
 date: 2026-03-21T20:15:39-6:00
 tags: Tech
 image:
