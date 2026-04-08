@@ -1,12 +1,41 @@
 ---
 title: Exercise Utilities
-description: links to pages I've made for helping me achieve my fitness goals
+description: Fitness tools and apps I've built
 date: 2025-09-01T11:29:00-6:00
 tags: Fitness
 image: /resources/exercise.png
 ---
 
-- [Daily Exercises](/DailyExercises.md): gifs of exercises performed by Jeff Cavaliere that you can (or should) do everyday
-- [Zone 2 Exercises](/exercises/Zone2Exercises.html): a bunch of exercises, categorized by muscle group focus and difficulty level
-- [Zone 2 Randomizer](/exercises/Zone2Randomizer.html): the exercises linked above; lets you specify how long your workout will last, how long each exercise will last, how long your rest, how often you rest, which muscle group(s) to focus on and difficulty level(s) to include
-- [Expandable Timer](/exercises/expandableTimer.html): name each exercise, choose if it's time based or rep based, specify how many rounds to perform of each exercise you create, drag/drop/delete each exercise you create
+# Exercise Utilities
+
+Fitness tools I've built over time — starting as web experiments, some of which grew into iOS apps.
+
+---
+
+## 📱 iOS Apps
+
+### Bodyweight WorkoutRandomizer
+Randomly generates bodyweight workouts from a curated exercise library, with video examples of each movement. You can specify workout duration, exercise duration, rest intervals, muscle group focus, and difficulty level.
+
+[Join the TestFlight Beta](https://testflight.apple.com/join/FfJyugX3)
+
+### ExpandableExerciseTimer
+Build a custom workout routine by naming exercises, choosing time-based or rep-based sets, setting rounds, and reordering via drag and drop. Load pre-built routines from JSON files.
+
+[Download on the App Store](https://apps.apple.com/us/app/expandableexercisetimer/id6756544631) &nbsp;|&nbsp; [TestFlight Beta](https://testflight.apple.com/join/mRp4ySuZ)
+
+---
+
+## 🌐 Web Tools
+
+### [Zone 2 Exercises](/exercises/Zone2Exercises.html)
+A visual catalog of bodyweight exercises, organized by muscle group and difficulty level. The foundation the WorkoutRandomizer app was built on.
+
+### [Daily Exercises](/exercises/DailyExercises)
+GIF-based reference for the ab and stretching routines I do every day, sourced from Jeff Cavaliere / Athlean-X.
+
+### [Zone 2 Randomizer](/exercises/Zone2Randomizer.html) *(superseded)*
+The original web version of the workout randomizer. Replaced by the Bodyweight WorkoutRandomizer app.
+
+### [Expandable Timer](/exercises/expandableTimer.html) *(superseded)*
+The original web version of the custom workout timer. Replaced by the ExpandableExerciseTimer app.

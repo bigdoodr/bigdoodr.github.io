@@ -29,6 +29,11 @@ The hardware, software, and gear I use day to day.
 - **Microsoft Excel** — Spreadsheets.
 - **Microsoft Outlook** — Work email.
 - **Xcode** — App development, primarily for personal xOS projects but occasionally for professional use too.
+- **Rectangle Pro** — Window management for macOS.
+- **AdGuard** — Ad and tracker blocking.
+- **Passwords** — Apple's built-in password manager.
+- **GitHub Desktop** — GUI client for Git.
+- **Collections** — For collecting and organizing things I find on the web.
 
 ## 🎧 Audio & Accessories
 
@@ -44,6 +49,7 @@ The hardware, software, and gear I use day to day.
 - **PowerBlock Sport EXP** — Adjustable dumbbells. Compact and versatile.
 - **[Athlean-X](https://athleanx.com)** — My go-to resource for training programs and exercise science.
 - **Apple Fitness+** — Guided workouts, tracked on Apple Watch.
+- **Yazio** — Food tracking and calorie counting.
 
 ---
 

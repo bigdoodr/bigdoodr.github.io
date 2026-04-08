@@ -20,6 +20,7 @@ All the slash pages on this site, in one place.
 - [/comics](https://bigdoodr.github.io/comics/) — Comics I read
 - [/death](https://bigdoodr.github.io/death/) — Instructions for if I'm gone
 - [/defaults](https://bigdoodr.github.io/defaults/) — My default apps
+- [/follows](https://bigdoodr.github.io/follows/) — Who and what I follow on Mastodon
 - [/green](https://bigdoodr.github.io/green/) — How I try to help the environment
 - [/guy](https://bigdoodr.github.io/guy/) — I'm a ___ guy
 - [/hats](https://bigdoodr.github.io/hats/) — My hats
@@ -47,4 +48,4 @@ All the slash pages on this site, in one place.
 
 ---
 
-*Inspired by [slashpages.net](https://slashpages.net).*
+*I first learned about the concept of [slash pages](https://slashpages.net) from [this toot by Tim Perfitt](https://mastodon.twocanoes.com/@tperfitt/115951013145963174).*

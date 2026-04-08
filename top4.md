@@ -29,8 +29,8 @@ My definitive top 3 favorites — plus an honorable mention — across a bunch o
 ## 💿 Albums
 
 1. *The Joshua Tree* — U2
-2. *Time* — Third Day
-3. *Goldfly* — Guster
+2. *40 oz. to Freedom* — Sublime
+3. *Time* — Third Day
 4. ⭐ *Honorable Mention:* *The Great Milenko* — Insane Clown Posse
 
 ## 🎮 Video Games
@@ -52,7 +52,21 @@ My definitive top 3 favorites — plus an honorable mention — across a bunch o
 1. *The Eyes of the Dragon* — Stephen King
 2. *How to Be Perfect* — Michael Schur
 3. *Fart Quest* — Aaron Reynolds
-4. ⭐ *Honorable Mention:* *Superman: Secret Identity* — Kurt Busiek & Stuart Immonen
+4. ⭐ *Honorable Mention:* *The Strain Series* — Guillermo del Toro & Chuck Hogan
+
+## 💥 Graphic Novels & Comic Books
+
+1. *Superman: Secret Identity* — Kurt Busiek & Stuart Immonen
+2. *Watchmen* - Alan Moore & Dave Gibbons
+3. *Sin City* - Frank Miller
+4. ⭐ *Honorable Mention:* *V for Vendetta* - ALan Moore & David Lloyd
+
+## 📖 Spiritual Books
+
+1. *Sin of Certainty* — Peter Enns
+2. *Velvet Elvis* — Rob Bell
+3. *Soul Boom* — Rainn Wilson
+4. ⭐ *Honorable Mention:* *Comedy Sex God* — Pete Holmes
 
 ## ♟️ Board Games
 
@@ -74,6 +88,20 @@ My definitive top 3 favorites — plus an honorable mention — across a bunch o
 2. Spooked
 3. What's Ray Saying?
 4. ⭐ *Honorable Mention:* The Liturgists Podcast
+
+## 🎭 TV Shows
+
+1. Firefly
+2. Jericho
+3. Life
+4. ⭐ *Honorable Mention:* The Strain
+
+## 🎤 Spiritual Influences / Comedic Heroes
+
+1. Sam Kinison
+2. Bill Hicks
+3. Steve Moore *(Drop Dead Gorgeous)*
+4. ⭐ *Honorable Mention:* George Carlin
 
 ---
 

@@ -6,28 +6,94 @@ date: 2026-01-26
 permalink: /comics/
 ---
 
-These are the comics I read regularly - both modern webcomics and classic newspaper strips.
+These are the comics I read regularly.
 
-## Webcomics
+**[Andy Capp](https://www.gocomics.com/andycapp)** - Reg Smythe's lovable layabout
 
-**[Cat's Cafe Comics](https://www.catscafecomics.com)** - Wholesome comics about animals and friendship
+**[B.C.](https://www.gocomics.com/bc)** - Johnny Hart's caveman humor
 
-**[Homestar Runner / Strong Bad Emails](https://homestarrunner.com/sbemails)** - The masked wrestler answers emails
+**[Beetle Bailey](https://comicskingdom.com/beetle-bailey-1)** - Mort Walker's Army base antics
 
-**[Sarah's Scribbles](https://sarahcandersen.com)** - Relatable comics about life and anxiety
+**[Blondie](https://comicskingdom.com/blondie)** - Chic Young's classic domestic comedy
 
-**[xkcd](https://xkcd.com)** - Webcomic of romance, sarcasm, math, and language
-
-## Classic Strips
-
-**[BC](https://www.gocomics.com/bc)** - Johnny Hart's caveman humor
+**[Broom Hilda](https://www.gocomics.com/broomhilda)** - Russell Myers' witchy misadventures
 
 **[Calvin and Hobbes](https://www.gocomics.com/calvinandhobbes)** - Bill Watterson's timeless strip
 
+**[Cat's Cafe Comics](https://www.catscafecomics.com)** - Wholesome comics about animals and friendship
+
+**[Cathy](https://www.gocomics.com/cathy)** - Cathy Guisewite's relatable classic
+
+**[Close to Home](https://www.gocomics.com/closetohome)** - John McPherson's off-kilter single panels
+
+**[Dennis The Menace](https://comicskingdom.com/dennis-the-menace)** - Hank Ketcham's mischievous kid
+
+**[Doonesbury](https://www.gocomics.com/doonesbury)** - Garry Trudeau's political satire
+
+**[Family Tree](https://www.gocomics.com/familytree)** - Benita Epstein's family humor
+
+**[For Better or For Worse](https://www.gocomics.com/forbetterorforworse)** - Lynn Johnston's family life
+
+**[Frank and Ernest](https://www.gocomics.com/frank-and-ernest)** - Bob Thaves' wordplay-driven strip
+
+**[Funky Winkerbean](https://www.gocomics.com/funky-winkerbean)** - Tom Batiuk's long-running serial
+
 **[Garfield](https://www.gocomics.com/garfield)** - Jim Davis's lasagna-loving cat
+
+**[Get Fuzzy](https://www.gocomics.com/getfuzzy)** - Darby Conley's pet-owner chaos
+
+**[Hagar The Horrible](https://comicskingdom.com/hagar-the-horrible)** - Dik Browne's Viking comedy
+
+**[Heathcliff](https://www.gocomics.com/heathcliff)** - Peter Gallagher's street-smart cat
+
+**[Hi and Lois](https://comicskingdom.com/hi-and-lois)** - Suburban family life
+
+**[Home Free](https://www.gocomics.com/homefree)** - Suburban dad humor
+
+**[Homestar Runner / Strong Bad Emails](https://homestarrunner.com/sbemails)** - The masked wrestler answers emails
+
+**[Marmaduke](https://www.gocomics.com/marmaduke)** - Brad Anderson's oversized Great Dane
+
+**[Mother Goose and Grimm](https://www.gocomics.com/mother-goose-and-grimm)** - Mike Peters' dog-centric humor
+
+**[Never Been Deader](https://comicskingdom.com/never-been-deader)** - A fresh take on zombie comedy
+
+**[Non Sequitur](https://www.gocomics.com/nonsequitur)** - Wiley Miller's irreverent wit
+
+**[Over the Hedge](https://www.gocomics.com/overthehedge)** - T Lewis & Michael Fry's suburban wildlife
 
 **[Peanuts](https://www.gocomics.com/peanuts)** - Charles M. Schulz's beloved characters
 
+**[Perry Bible Fellowship](https://www.gocomics.com/perry-bible-fellowship)** - Nicholas Gurewitch's darkly surreal strips
+
+**[Poorly Drawn Lines](https://www.gocomics.com/poorly-drawn-lines)** - Reza Farazmand's absurdist humor
+
+**[Questionable Quotebook](https://www.gocomics.com/questionable-quotebook)** - Wit and wordplay in quote form
+
+**[Reality Check](https://www.gocomics.com/realitycheck)** - Dave Whamond's gag-a-day panel
+
+**[Sarah's Scribbles](https://sarahcandersen.com)** - Relatable comics about life and anxiety
+
+**[Saturday Morning Breakfast Cereal](https://www.gocomics.com/saturday-morning-breakfast-cereal)** - Zach Weinersmith's science-flavored humor
+
+**[Strange Brew](https://www.gocomics.com/strangebrew)** - John Deering's single-panel oddities
+
+**[The Family Circus](https://comicskingdom.com/family-circus)** - Bil Keane's wholesome family panels
+
+**[The Far Side - Daily Dose](https://www.thefarside.com/)** - Gary Larson's iconic single panels
+
+**[The New Yorker Daily Cartoon](https://www.newyorker.com/cartoons/daily-cartoon)** - The New Yorker's daily cartoon
+
+**[Wallace the Brave](https://www.gocomics.com/wallace-the-brave)** - Will Henry's adventures of a coastal kid
+
+**[Wizard of Id](https://www.gocomics.com/wizardofid)** - Parker & Hart's medieval kingdom
+
+**[xkcd](https://xkcd.com)** - Webcomic of romance, sarcasm, math, and language
+
+**[Ziggy](https://www.gocomics.com/ziggy)** - Tom Wilson's lovable everyman
+
+**[Zits](https://comicskingdom.com/zits)** - Jerry Scott & Jim Borgman's teenage life
+
 ---
 
-*Most classic strips are read via [GoComics](https://www.gocomics.com)*
+*Most strips are followed via [NetNewsWire](https://netnewswire.com) with RSS feeds generated by [ComicCaster](https://comiccaster.xyz) — a great tool for building your own comics OPML.*

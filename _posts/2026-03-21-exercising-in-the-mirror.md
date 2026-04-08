@@ -7,7 +7,7 @@ tags: Fitness
 image:
 ---
 
-# Exercising in the Mirror in Your Underwear & Showing Yourself Grace
+# Exercising in the Mirror in Your Underwear and Showing Yourself Grace
 
 I was on a trip. The day's workout was all cardio, so I cleared some space in the hotel room and got started.
 

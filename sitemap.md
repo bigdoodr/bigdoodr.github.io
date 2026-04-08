@@ -8,7 +8,7 @@ permalink: /sitemap/
 
 # /sitemap
 
-A map of everything on this site. Last updated March 7, 2026.
+A map of everything on this site. Last updated April 7, 2026.
 
 ## 🏠 Main Pages
 
@@ -30,6 +30,7 @@ A map of everything on this site. Last updated March 7, 2026.
 - [/comics](https://bigdoodr.github.io/comics/)
 - [/death](https://bigdoodr.github.io/death/)
 - [/defaults](https://bigdoodr.github.io/defaults/)
+- [/follows](https://bigdoodr.github.io/follows/)
 - [/green](https://bigdoodr.github.io/green/)
 - [/guy](https://bigdoodr.github.io/guy/)
 - [/hats](https://bigdoodr.github.io/hats/)
@@ -57,11 +58,11 @@ A map of everything on this site. Last updated March 7, 2026.
 
 ## 💪 Exercises
 
-- [Daily Exercises](https://bigdoodr.github.io/DailyExercises)
+- [Daily Exercises](https://bigdoodr.github.io/exercises/DailyExercises)
 - [Exercises](https://bigdoodr.github.io/exercises/)
 - [Zone 2 Exercises](https://bigdoodr.github.io/exercises/Zone2Exercises)
-- [Zone 2 Randomizer](https://bigdoodr.github.io/exercises/Zone2Randomizer)
-- [Expandable Timer](https://bigdoodr.github.io/exercises/expandableTimer)
+- [Zone 2 Randomizer](https://bigdoodr.github.io/exercises/Zone2Randomizer) *(superseded)*
+- [Expandable Timer](https://bigdoodr.github.io/exercises/expandableTimer) *(superseded)*
 
 ## 🎤 Presentations
 

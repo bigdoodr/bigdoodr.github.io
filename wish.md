@@ -18,6 +18,8 @@ Not a gift list. A world list.
 
 **I wish every person knew they were loved and didn't feel alone** — not as a platitude, but as a lived reality. That no one goes to sleep at night believing nobody would notice if they were gone.
 
+**I wish I didn't make assumptions about others.**
+
 ---
 
 *This page was inspired by [slashpages.net](https://slashpages.net).*

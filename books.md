@@ -34,10 +34,15 @@ image: /resources/books.purple.png
 
 ## 2026 Reading
 
-### Running Tally: 12 books
+### Running Tally: 17 books
 
 | Title | Author | Month | Details | Series |
 |-------|--------|-------|---------|--------|
+| Wholehearted Faith | Rachel Held Evans | April | [View on LibraryThing](https://www.librarything.com/isbn/9780062894489) | — |
+| I, Robot | Isaac Asimov | March | [View on LibraryThing](https://www.librarything.com/work/5196084/t/I-Robot-%5BAnthology%5D) | [Asimovs Universe](https://www.librarything.com/nseries/369342/Asimovs-Universe) |
+| Sin of Certainty | Peter Enns | March | [View on LibraryThing](https://www.librarything.com/isbn/9780062272102) | — |
+| Tragedy of True Crime | John J Lennon | March | [View on LibraryThing](https://www.librarything.com/isbn/9781250858245) | — |
+| X Minus One | Original Radio Broadcasts | March | [View on LibraryThing](https://www.librarything.com/work/14323900/t/X-Minus-One-Old-Time-Radio-Classic-Radio-Science-Fiction) | [X Minus One](https://www.librarything.com/nseries/183673/X-Minus-One) |
 | End of Eternity | Isaac Asimov | February | [View on LibraryThing](https://www.librarything.com/isbn/9780586024409) | — |
 | House of Sky and Breath | Sarah J. Maas | February | [View on LibraryThing](https://www.librarything.com/work/26489076/t/House-of-Sky-and-Breath) | [Crescent City](https://www.librarything.com/nseries/49871/Crescent-City) |
 | Butcher Game | Alaina Urquhart | February | [View on LibraryThing](https://www.librarything.com/isbn/9781638933366) | [Dr Wren](https://www.librarything.com/nseries/377839/Dr-Wren) |

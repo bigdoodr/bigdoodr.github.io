@@ -40,7 +40,9 @@ These are my default apps for common tasks - a snapshot of my digital toolkit as
 💻 **Code Editor:** BBEdit  
 ⌨️ **Terminal:** Terminal.app  
 🔐 **Password Manager:** Apple Passwords  
-📋 **Clipboard Manager:** Raycast Clipboard History
+📋 **Clipboard Manager:** Raycast Clipboard History  
+🛡️ **Privilege Escalation:** Privileges *(work)*  
+🖥️ **IT Support Portal:** SupportApp *(work)*
 
 ## Other
 
