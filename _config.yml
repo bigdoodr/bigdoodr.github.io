@@ -33,12 +33,52 @@ kramdown:
   syntax_highlighter_opts:
     disable: true
     
-header_pages:
-  - about.html
-  - resume.html
-  - archive.md
-  - slashes.md
-  - books.md
+nav:
+  - title: Me
+    children:
+      - title: About
+        url: /about.html
+      - title: Resume
+        url: /resume.html
+      - title: /guy
+        url: /guy/
+      - title: /interests
+        url: /interests/
+      - title: /canon
+        url: /canon/
+      - title: /now
+        url: /now/
+      - divider: true
+        label: "Site & Contact"
+      - title: /hello
+        url: /hello/
+      - title: /why
+        url: /why/
+  - title: Blog
+    url: /archive
+  - title: Talks
+    children:
+      - title: Adopting an Active Update Cycle
+        url: /2024/07/12/macpres/
+      - title: "Let's Build Something with swiftDialog"
+        url: /2025/07/18/macpres/
+      - title: "Stop Tracking Me! Tips for Enhancing Online Privacy"
+        url: /2026/01/15/wkuprodevday/
+  - title: Apps
+    url: /apps/
+  - title: Slashes
+    url: /slashes/
+    children:
+      - title: /bookmarks
+        url: /bookmarks
+      - title: /podroll
+        url: /podroll/
+      - title: /shoebox
+        url: /shoebox/
+      - title: /top4
+        url: /top4/
+      - title: View all slashes →
+        url: /slashes/
 
 
 plugins:
