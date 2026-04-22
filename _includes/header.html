@@ -29,3 +29,52 @@
     </ul>
   </nav>
 </header>
+<script>
+(function () {
+  // ── Desktop: timer-based hover so the cursor can cross from
+  //    the nav item into the dropdown without it disappearing ──
+  document.querySelectorAll('.nav-dropdown').forEach(function (li) {
+    var timer;
+    var menu = li.querySelector('.nav-dropdown-menu');
+
+    li.addEventListener('mouseenter', function () {
+      clearTimeout(timer);
+      li.classList.add('is-open');
+    });
+
+    li.addEventListener('mouseleave', function () {
+      timer = setTimeout(function () {
+        li.classList.remove('is-open');
+      }, 200);
+    });
+
+    // If the mouse re-enters the menu before the timer fires, keep it open
+    if (menu) {
+      menu.addEventListener('mouseenter', function () {
+        clearTimeout(timer);
+      });
+    }
+  });
+
+  // ── Mobile: tap on <span> toggles (items with no URL) opens/closes ──
+  document.querySelectorAll('span.nav-dropdown-toggle').forEach(function (span) {
+    span.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var li = span.closest('.nav-dropdown');
+      var isOpen = li.classList.contains('is-open');
+      // Close any other open dropdowns first
+      document.querySelectorAll('.nav-dropdown.is-open').forEach(function (el) {
+        el.classList.remove('is-open');
+      });
+      if (!isOpen) li.classList.add('is-open');
+    });
+  });
+
+  // ── Close all dropdowns when tapping/clicking outside ──
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.nav-dropdown.is-open').forEach(function (el) {
+      el.classList.remove('is-open');
+    });
+  });
+})();
+</script>
