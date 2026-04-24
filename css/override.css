@@ -153,10 +153,23 @@ hr {
   position: relative;
 }
 
-/* Dropdown toggle — span used when top-level item has no URL */
+/* Dropdown toggle — span used when top-level item has no URL.
+   Mirror the pill style that theme.css applies to <a> nav items. */
 .nav-dropdown-toggle {
   cursor: default;
   user-select: none;
+}
+
+span.nav-dropdown-toggle {
+  display: inline-block;
+  color: white !important;
+  font-weight: 500;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.13);
+  transition: all 0.3s ease;
+  font-size: 1em;
 }
 
 /* Add a subtle caret after dropdown labels */
@@ -190,19 +203,31 @@ hr {
   display: block;
 }
 
-/* Individual dropdown links */
+/* Individual dropdown links.
+   theme.css applies "header a { color: white !important; border-radius: 20px … }"
+   which reaches inside the dropdown. We have to use !important to override it. */
 .nav-dropdown-menu li a {
-  display: block;
-  padding: 6px 18px;
-  white-space: normal;  /* allow wrapping on narrow screens */
-  color: #333;
-  text-decoration: none;
-  font-size: 0.95em;
+  display: block !important;
+  padding: 6px 18px !important;
+  white-space: normal !important;
+  color: #111 !important;
+  text-decoration: none !important;
+  font-size: 0.95em !important;
+  font-weight: normal !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  text-shadow: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
 }
 
 .nav-dropdown-menu li a:hover {
-  background-color: #f5f5f5;
-  color: #000;
+  background: #f0f0f0 !important;
+  border-radius: 4px !important;
+  color: #000 !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* Visual divider with label */
@@ -227,12 +252,14 @@ hr {
   }
 
   .nav-dropdown-menu li a {
-    color: #ddd;
+    color: #e8e8e8 !important;
+    background: transparent !important;
   }
 
   .nav-dropdown-menu li a:hover {
-    background-color: #383838;
-    color: #fff;
+    background: #383838 !important;
+    border-radius: 4px !important;
+    color: #fff !important;
   }
 
   .nav-divider {

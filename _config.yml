@@ -48,14 +48,14 @@ nav:
         url: /canon/
       - title: /now
         url: /now/
+      - title: Blog
+        url: /archive
       - divider: true
         label: "Site & Contact"
       - title: /hello
         url: /hello/
       - title: /why
         url: /why/
-  - title: Blog
-    url: /archive
   - title: Talks
     children:
       - title: Adopting an Active Update Cycle
