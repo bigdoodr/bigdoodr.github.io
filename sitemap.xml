@@ -361,12 +361,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://bigdoodr.github.io/now/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://bigdoodr.github.io/podroll/</loc>
     <lastmod>2026-03-07</lastmod>
     <changefreq>monthly</changefreq>

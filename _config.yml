@@ -46,8 +46,6 @@ nav:
         url: /interests/
       - title: /canon
         url: /canon/
-      - title: /now
-        url: /now/
       - title: Blog
         url: /archive
       - divider: true
@@ -98,6 +96,7 @@ defaults:
 
 exclude:
   - "*.sh"
+  - vendor/
 
 
 # sass:
