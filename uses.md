@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /uses/
 ---
 
-# /uses
-
 The hardware, software, and gear I use day to day.
 
 ## 💻 Hardware

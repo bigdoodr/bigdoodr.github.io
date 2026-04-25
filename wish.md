@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /wish/
 ---
 
-# /wish
-
 Not a gift list. A world list.
 
 ---

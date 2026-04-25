@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /yep/
 ---
 
-# /yep
-
 Things I will always say yes to.
 
 ---

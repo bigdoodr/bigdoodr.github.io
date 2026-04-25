@@ -1,0 +1,80 @@
+name: Generate Resume PDF
+
+# Runs whenever a push to main touches resume-related files.
+# Builds the Jekyll site, renders the resume page to PDF via headless Chrome,
+# and commits the updated PDF back to the repo (with [skip ci] so it doesn't loop).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "_includes/resume.html"
+      - "_data/resume.yml"
+      - "_data/experience.yml"
+      - "_data/education.yml"
+      - "_data/skills.yml"
+      - "_data/ackandact.yml"
+      - "css/override.css"
+      - "resume.html"
+
+permissions:
+  contents: write   # needed to commit the PDF back
+
+jobs:
+  generate-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── 2. Ruby + Jekyll ─────────────────────────────────────────────────────
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true   # caches gems between runs for speed
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      # ── 3. Node + Puppeteer ───────────────────────────────────────────────────
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install Puppeteer
+        working-directory: scripts
+        run: npm ci
+
+      # ── 4. Serve built site locally, then render PDF ──────────────────────────
+      - name: Generate PDF
+        run: |
+          # Serve the built site on port 4000 in the background
+          python3 -m http.server 4000 --directory _site &
+          SERVER_PID=$!
+          # Give the server a moment to start
+          sleep 3
+          # Render the resume page to PDF
+          node scripts/generate-resume-pdf.js
+          # Clean up
+          kill $SERVER_PID
+
+      # ── 5. Commit the PDF if it changed ───────────────────────────────────────
+      - name: Commit updated PDF
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "assets/Casey Scruggs - Resume.pdf"
+          if git diff --staged --quiet; then
+            echo "PDF unchanged — nothing to commit"
+          else
+            git commit -m "chore: regenerate resume PDF [skip ci]"
+            git push
+          fi

@@ -59,6 +59,70 @@ p {
   text-decoration: underline;
 }
 
+/* About page dropdown nav */
+.about-nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.about-nav-toggle {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.about-nav-toggle:hover {
+  text-decoration: underline;
+}
+
+.about-nav-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  border: 1px solid #555;
+  border-radius: 4px;
+  min-width: 220px;
+  z-index: 200;
+  padding: 6px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.about-nav-dropdown:hover .about-nav-menu,
+.about-nav-dropdown.is-open .about-nav-menu {
+  display: block;
+}
+
+.about-nav-menu a {
+  display: block;
+  padding: 7px 16px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: normal;
+}
+
+.about-nav-menu a:hover {
+  background-color: #555;
+  text-decoration: none;
+}
+
+.about-nav-divider {
+  font-size: 0.68em;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #aaa;
+  padding: 8px 16px 4px;
+  margin-top: 4px;
+  border-top: 1px solid #555;
+  pointer-events: none;
+}
+
 /* Base styling for the header */
 header {
   position: relative;
@@ -317,19 +381,56 @@ a {
   </button>
   
   <!-- Navigation Links -->
-  <nav class="site-nav">
-    <a class="page-link" href="/resume">Resume</a>
-    <a class="page-link" href="/about">About Me</a>
-    <a class="page-link" href="/archive">Blog Archive</a>
-    <a class="page-link" href="/bookmarks">Bookmarks</a>
+  <nav class="site-nav" id="site-nav-links">
+    <!-- Me dropdown -->
+    <div class="about-nav-dropdown">
+      <span class="about-nav-toggle">Me ▾</span>
+      <div class="about-nav-menu">
+        <a href="/about">About</a>
+        <a href="/resume">Resume</a>
+        <a href="/guy/">‌/guy</a>
+        <a href="/interests/">‌/interests</a>
+        <a href="/canon/">‌/canon</a>
+        <a href="/archive">Blog</a>
+        <div class="about-nav-divider">Site &amp; Contact</div>
+        <a href="/hello/">‌/hello</a>
+        <a href="/why/">‌/why</a>
+      </div>
+    </div>
+    <!-- Talks dropdown -->
+    <div class="about-nav-dropdown">
+      <span class="about-nav-toggle">Talks ▾</span>
+      <div class="about-nav-menu">
+        <a href="/2024/07/12/macpres">Adopting an Active Update Cycle Resources</a>
+        <a href="/2025/07/18/macpres">Let&rsquo;s Build Something with swiftDialog Resources</a>
+        <a href="/2026/01/15/wkuprodevday">Stop Tracking Me! Resources</a>
+      </div>
+    </div>
+    <!-- Apps -->
+    <a class="page-link" href="/apps/">Apps</a>
+    <!-- Slashes dropdown -->
+    <div class="about-nav-dropdown">
+      <span class="about-nav-toggle">Slashes ▾</span>
+      <div class="about-nav-menu">
+        <a href="/bookmarks">‌/bookmarks</a>
+        <a href="/podroll/">‌/podroll</a>
+        <a href="/shoebox/">‌/shoebox</a>
+        <a href="/top4/">‌/top4</a>
+        <a href="/slashes/">View all slashes →</a>
+      </div>
+    </div>
   </nav>
-  
+
   <!-- Dropdown Menu Links (for Small Screens) -->
   <div id="menu-links">
+    <a href="/about">About</a>
     <a href="/resume">Resume</a>
-    <a href="/about">About Me</a>
-    <a href="/archive">Blog Archive</a>
-    <a href="/bookmarks">Bookmarks</a>
+    <a href="/archive">Blog</a>
+    <a href="/apps/">Apps</a>
+    <a href="/slashes/">Slashes</a>
+    <a href="/2024/07/12/macpres">Active Update Cycle Resources</a>
+    <a href="/2025/07/18/macpres">swiftDialog Resources</a>
+    <a href="/2026/01/15/wkuprodevday">Stop Tracking Me! Resources</a>
   </div>
 </header>
   </div>
@@ -453,8 +554,28 @@ a {
 <script>
   function toggleMenu() {
     const menu = document.getElementById('menu-links');
-    menu.classList.toggle('show'); // Toggles the 'show' class to display the dropdown
+    menu.classList.toggle('show');
   }
+
+  // Dropdown toggle for mobile (tap on span)
+  document.querySelectorAll('.about-nav-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var dropdown = toggle.closest('.about-nav-dropdown');
+      var isOpen = dropdown.classList.contains('is-open');
+      document.querySelectorAll('.about-nav-dropdown.is-open').forEach(function(el) {
+        el.classList.remove('is-open');
+      });
+      if (!isOpen) dropdown.classList.add('is-open');
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.about-nav-dropdown.is-open').forEach(function(el) {
+      el.classList.remove('is-open');
+    });
+  });
 </script>
 
 </body>

@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /interests/
 ---
 
-# /interests
-
 ## 👨‍👩‍👧‍👦 Family
 
 Everything else on this page exists in the context of this. My family is my anchor and my reason.

@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /hills/
 ---
 
-# /hills
-
 I genuinely try to live by *"don't yuck someone else's yum."* Life's too short to spend energy being negative about things other people enjoy. You do you.
 
 That said — if *yucking someone else's yum is your yum*? That's the one hill I'll die on every time. Not cool.

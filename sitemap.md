@@ -6,9 +6,7 @@ date: 2026-03-07
 permalink: /sitemap/
 ---
 
-# /sitemap
-
-A map of everything on this site. Last updated April 7, 2026.
+A map of everything on this site. Last updated April 25, 2026.
 
 ## 🏠 Main Pages
 
@@ -38,7 +36,6 @@ A map of everything on this site. Last updated April 7, 2026.
 - [/hills](https://bigdoodr.github.io/hills/)
 - [/interests](https://bigdoodr.github.io/interests/)
 - [/nope](https://bigdoodr.github.io/nope/)
-- [/now](https://bigdoodr.github.io/now/)
 - [/podroll](https://bigdoodr.github.io/podroll/)
 - [/posse](https://bigdoodr.github.io/posse/)
 - [/postroll](https://bigdoodr.github.io/postroll/)
@@ -66,13 +63,9 @@ A map of everything on this site. Last updated April 7, 2026.
 
 ## 🎤 Presentations
 
-- [MacAdmins 2024](https://bigdoodr.github.io/24macpres)
-- [MacAdmins 2025](https://bigdoodr.github.io/25macpres)
-- [WKU Pro Dev Day 2026](https://bigdoodr.github.io/26WKUProDevDay)
-- [Active Update Cycle](https://bigdoodr.github.io/ActiveUpdateCycleWebPage/)
-- [WKU Pro Dev Day 2026 Slides](https://bigdoodr.github.io/WKUProDevDay2026/)
-- [AD for Everyone v1](https://bigdoodr.github.io/sDPres/ADforEveryone_v1)
-- [AD for Everyone v2](https://bigdoodr.github.io/sDPres/ADforEveryone_v2)
+- [MacAdmins 2024](https://bigdoodr.github.io/24macpres) + [Active Update Cycle Resources](https://bigdoodr.github.io/ActiveUpdateCycleWebPage/)
+- [MacAdmins 2025](https://bigdoodr.github.io/25macpres) + [Let's Build Something with swiftDialog Resources](https://bigdoodr.github.io/BuildWithswiftDialog/) + [AD for Everyone v1](https://bigdoodr.github.io/sDPres/ADforEveryone_v1) + [AD for Everyone v2](https://bigdoodr.github.io/sDPres/ADforEveryone_v2)
+- [WKU Pro Dev Day 2026](https://bigdoodr.github.io/26WKUProDevDay) + [WKU Pro Dev Day 2026 Slides](https://bigdoodr.github.io/WKUProDevDay2026/)
 
 ## 📓 Obsidian Templates
 

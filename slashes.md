@@ -6,8 +6,6 @@ date: 2026-03-07
 permalink: /slashes/
 ---
 
-# /slashes
-
 All the slash pages on this site, in one place.
 
 - [/ai](https://bigdoodr.github.io/ai/) — How I use (or don't use) AI

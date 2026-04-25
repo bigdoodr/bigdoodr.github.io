@@ -58,12 +58,12 @@ nav:
         url: /why/
   - title: Talks
     children:
-      - title: Adopting an Active Update Cycle
-        url: /2024/07/12/macpres/
-      - title: "Let's Build Something with swiftDialog"
-        url: /2025/07/18/macpres/
-      - title: "Stop Tracking Me! Tips for Enhancing Online Privacy"
-        url: /2026/01/15/wkuprodevday/
+      - title: Adopting an Active Update Cycle Resources
+        url: /2024/07/12/macpres
+      - title: "Let's Build Something with swiftDialog Resources"
+        url: /2025/07/18/macpres
+      - title: "Stop Tracking Me! Resources"
+        url: /2026/01/15/wkuprodevday
   - title: Apps
     url: /apps/
   - title: Slashes

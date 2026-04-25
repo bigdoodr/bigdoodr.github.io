@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /why/
 ---
 
-# /why
-
 ## Why this site?
 
 Because I believe your corner of the internet should be *yours*. Not an algorithm's. Not a platform's. Yours.

@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /postroll/
 ---
 
-# /postroll
-
 A running list of blog posts that I've found interesting, impactful, or just worth remembering. This list is small right now — I wish I'd been keeping track all along — but it'll grow.
 
 ---

@@ -24,8 +24,9 @@
 
   // Remove the bottom-bar when X is clicked
   document.addEventListener("click", function(e) {
-    if (e.target.className.indexOf("bottom-bar__close") !== -1) {
-      document.getElementsByClassName("bottom-bar")[0].remove();
+    if (e.target.closest && e.target.closest(".bottom-bar__close")) {
+      var bar = document.querySelector(".bottom-bar");
+      if (bar) bar.remove();
     }
   });
 </script>

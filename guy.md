@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /guy/
 ---
 
-# /guy
-
 I'm a "I don't really care what you call me" guy.
 
 I'm a TTRPG guy. I'm a fitness guy. I'm a [DansGaming](https://www.twitch.tv/dansgaming) guy.

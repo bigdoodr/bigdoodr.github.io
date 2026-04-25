@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /posse/
 ---
 
-# /posse
-
 [POSSE](https://indieweb.org/POSSE) stands for **Publish on your Own Site, Syndicate Elsewhere** — the idea that your website is the source of truth and everything else is a copy. Here's where I syndicate and how.
 
 ## 📘 Facebook

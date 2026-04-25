@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /shoebox/
 ---
 
-# /shoebox
-
 Odds and ends. The stuff that doesn't fit anywhere else. More to come.
 
 ---

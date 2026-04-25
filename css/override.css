@@ -3,6 +3,37 @@ hr {
   margin-bottom: 20px;
 }
 
+/* Resume: Contact Me button — visible in light mode */
+.contact-button {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #007AFF;
+  color: #ffffff !important;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.contact-button:hover {
+  background: #005FCC;
+  transform: translateY(-1px);
+  color: #ffffff !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .contact-button {
+    background: #0A84FF;
+    color: #ffffff !important;
+  }
+  .contact-button:hover {
+    background: #409CFF;
+  }
+}
+
 /* Post navigation links */
 .post_navi {
   display: flex;
@@ -162,6 +193,7 @@ hr {
 
 span.nav-dropdown-toggle {
   display: inline-block;
+  vertical-align: middle;  /* align with the <a> pill buttons */
   color: white !important;
   font-weight: 500;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -170,6 +202,11 @@ span.nav-dropdown-toggle {
   background: rgba(255, 255, 255, 0.13);
   transition: all 0.3s ease;
   font-size: 1em;
+}
+
+/* Center all nav items on the cross axis so <a> and <span> sit at the same height */
+.nav-list {
+  align-items: center;
 }
 
 /* Add a subtle caret after dropdown labels */

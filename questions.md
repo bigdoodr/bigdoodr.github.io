@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /questions/
 ---
 
-# /questions
-
 Things I'm asking. Things I'm sitting with. Things I don't have answers to yet.
 
 ---

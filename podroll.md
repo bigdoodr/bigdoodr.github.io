@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /podroll/
 ---
 
-# /podroll
-
 I listen to a *lot* of podcasts. My full list is [over on PocketCasts](https://lists.pocketcasts.com/eb76f2a2-78fa-4568-83da-6cb06bd3c55b), but here are some highlights worth calling out.
 
 ## 📰 News & Current Events

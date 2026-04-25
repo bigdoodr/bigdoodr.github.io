@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /someday/
 ---
 
-# /someday
-
 A wishful, ever-growing checklist of things I want to do, see, and experience someday.
 
 ## 🎸 Concerts

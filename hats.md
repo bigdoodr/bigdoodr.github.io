@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /hats/
 ---
 
-# /hats
-
 I'm not a big hat person, but I've got a few good ones.
 
 **Scooby-Doo Mystery Machine Trucker Cap** — The crown jewel. It's groovy and I will not apologize.

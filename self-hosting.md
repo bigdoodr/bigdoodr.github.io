@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /self-hosting/
 ---
 
-# /self-hosting
-
 Services and tools I run and manage myself, because owning your own stuff matters.
 
 ## 🏠 Home Server / NAS

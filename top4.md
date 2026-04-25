@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /top4/
 ---
 
-# /top4
-
 My definitive top 3 favorites — plus an honorable mention — across a bunch of categories. Listed in order.
 
 ---

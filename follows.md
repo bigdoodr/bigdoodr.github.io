@@ -6,8 +6,6 @@ date: 2026-04-07
 permalink: /follows/
 ---
 
-# /follows
-
 Who and what I follow on Mastodon, organized by list.
 
 ---

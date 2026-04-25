@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /nope/
 ---
 
-# /nope
-
 Not a page about judging what other people are into — you do you. This is just an honest list of things that aren't for me.
 
 **Sushi.** I know. I know. But no.

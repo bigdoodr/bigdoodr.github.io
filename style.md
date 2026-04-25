@@ -6,8 +6,6 @@ date: 2026-02-25
 permalink: /style/
 ---
 
-# /style
-
 A reference for the design decisions behind this site.
 
 ## 🎨 Color Palette

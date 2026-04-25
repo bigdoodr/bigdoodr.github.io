@@ -28,6 +28,23 @@
     <div class="no-print">
       {%- include footer.html -%}
     </div>
+
+    <script>
+    // Make the full list-item pill clickable when it contains exactly one link
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".page-content li").forEach(function (li) {
+        var links = li.querySelectorAll("a");
+        if (links.length === 1) {
+          li.style.cursor = "pointer";
+          li.addEventListener("click", function (e) {
+            if (e.target.tagName !== "A") {
+              links[0].click();
+            }
+          });
+        }
+      });
+    });
+    </script>
   </body>
 
 </html>
