@@ -7,8 +7,11 @@ hr {
 .contact-button {
   display: inline-block;
   padding: 10px 24px;
-  background: #007AFF;
+  background: #007AFF !important;
   color: #ffffff !important;
+  -webkit-text-fill-color: white !important;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box !important;
   border-radius: 8px;
   font-weight: 600;
   font-size: 1em;
@@ -19,9 +22,14 @@ hr {
 }
 
 .contact-button:hover {
-  background: #005FCC;
+  background: #005FCC !important;
   transform: translateY(-1px);
   color: #ffffff !important;
+  /* theme.css sets -webkit-text-fill-color: transparent on all a:hover —
+     override it explicitly here or the button text vanishes */
+  -webkit-text-fill-color: white !important;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box !important;
 }
 
 @media (prefers-color-scheme: dark) {

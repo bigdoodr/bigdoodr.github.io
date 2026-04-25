@@ -13,16 +13,18 @@
 
       // Yeah, I know this is hacky, deal with it, I just threw it in real quick because I was tired of seeing "1 yrs 1 mos"
       var returnText = "";
-      if (years == 1) { returnText += ${years} yr  }
-      if (years > 1) { returnText += ${years} yrs  }
-      if (months == 1) { returnText += ${months} mo  }
-      if (months > 1) { returnText += ${months} mos  }
+      if (years == 1)  { returnText += `${years} yr `;  }
+      if (years > 1)   { returnText += `${years} yrs `; }
+      if (months == 1) { returnText += `${months} mo`;  }
+      if (months > 1)  { returnText += `${months} mos`; }
       returnText = returnText.trim();
 
       document.write(returnText);
   }
+</script>
 
-  // Remove the bottom-bar when X is clicked
+<!-- Close-button listener in its own block so a JS error elsewhere can't kill it -->
+<script>
   document.addEventListener("click", function(e) {
     if (e.target.closest && e.target.closest(".bottom-bar__close")) {
       var bar = document.querySelector(".bottom-bar");
