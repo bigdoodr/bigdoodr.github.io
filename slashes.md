@@ -26,7 +26,6 @@ All the slash pages on this site, in one place.
 - [/hills](https://bigdoodr.github.io/hills/) — Stupid hills I'll die on
 - [/interests](https://bigdoodr.github.io/interests/) — Things I'm passionate about
 - [/nope](https://bigdoodr.github.io/nope/) — Things that aren't for me
-- [/now](https://bigdoodr.github.io/now/) — What I'm focused on right now
 - [/podroll](https://bigdoodr.github.io/podroll/) — Podcasts I recommend
 - [/posse](https://bigdoodr.github.io/posse/) — My cross-posting strategy
 - [/postroll](https://bigdoodr.github.io/postroll/) — Blog posts that stuck with me
