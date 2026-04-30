@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enneagram Explorer</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f1a;
+  color: #e8e6f0;
+  min-height: 100vh;
+  padding: 20px;
+}
+h1 {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #c9b8ff;
+  margin-bottom: 4px;
+}
+.subtitle { text-align: center; color: #8880aa; font-size: 0.85rem; margin-bottom: 20px; }
+.layout { display: flex; gap: 24px; max-width: 980px; margin: 0 auto; align-items: flex-start; flex-wrap: wrap; }
+.diagram-wrap { flex: 0 0 320px; }
+svg.enneagram { width: 100%; height: auto; cursor: pointer; }
+.node circle { stroke-width: 3; transition: all 0.2s; cursor: pointer; }
+.node circle:hover { filter: brightness(1.4); }
+.node.active circle { stroke-width: 5; }
+.node text { pointer-events: none; font-size: 14px; font-weight: 800; }
+.panel { flex: 1; min-width: 280px; background: #1a1830; border-radius: 14px; padding: 22px; border: 1px solid #2e2a50; min-height: 400px; }
+.type-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.type-badge { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; flex-shrink: 0; border: 2px solid; }
+.type-name { font-size: 1.25rem; font-weight: 700; }
+.type-tagline { font-size: 0.8rem; color: #8880aa; }
+.section { margin-bottom: 13px; }
+.section-label { font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; color: #6a6490; margin-bottom: 4px; }
+.section p { font-size: 0.86rem; line-height: 1.6; color: #ccc8e8; }
+.traits { display: flex; flex-wrap: wrap; gap: 5px; }
+.trait { background: #252040; border-radius: 20px; padding: 3px 10px; font-size: 0.76rem; color: #b0aadd; }
+.wings-row { display: flex; gap: 10px; }
+.wing-card { flex: 1; border-radius: 10px; padding: 10px 12px; border: 1px solid #2e2a50; cursor: pointer; transition: all 0.2s; background: #12101e; }
+.wing-card:hover { background: #1f1c3a; }
+.wing-card .wnum { font-size: 0.95rem; font-weight: 800; }
+.wing-card .wname { font-size: 0.72rem; color: #8880aa; }
+.wing-card .wdesc { font-size: 0.76rem; color: #aaa8cc; margin-top: 4px; line-height: 1.4; }
+.prompt { display: flex; align-items: center; justify-content: center; min-height: 320px; flex-direction: column; gap: 12px; color: #5a5580; text-align: center; }
+.triad-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; margin-bottom: 8px; }
+.two-col { display: flex; gap: 12px; margin-bottom: 13px; }
+.two-col > div { flex: 1; border-radius: 8px; padding: 9px 10px; }
+</style>
+</head>
+<body>
+<h1>✦ ENNEAGRAM EXPLORER ✦</h1>
+<p class="subtitle">Click any number on the diagram to explore each type and its wings</p>
+<div class="layout">
+  <div class="diagram-wrap">
+    <svg class="enneagram" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" id="ennSvg">
+      <circle cx="160" cy="160" r="130" fill="none" stroke="#1e1c35" stroke-width="1.5"/>
+      <!-- inner lines -->
+      <g stroke="#1e1c35" stroke-width="1" fill="none">
+        <!-- triangle 3-6-9 -->
+        <line x1="160" y1="30" x2="283" y2="225"/>
+        <line x1="283" y1="225" x2="37" y2="225"/>
+        <line x1="37" y1="225" x2="160" y2="30"/>
+        <!-- hexad 1-4-2-8-5-7 -->
+        <line x1="237" y1="51" x2="120" y2="289"/>
+        <line x1="120" y1="289" x2="283" y2="148"/>
+        <line x1="283" y1="148" x2="83" y2="51"/>
+        <line x1="83" y1="51" x2="200" y2="289"/>
+        <line x1="200" y1="289" x2="37" y2="148"/>
+        <line x1="37" y1="148" x2="237" y2="51"/>
+      </g>
+      <g id="nodes"></g>
+    </svg>
+  </div>
+  <div class="panel" id="panel">
+    <div class="prompt">
+      <div style="font-size:3rem;">✦</div>
+      <div style="font-size:1rem;color:#7a70aa;font-weight:600;">Select a type to explore</div>
+      <div style="font-size:0.82rem;max-width:240px;">Click any number on the diagram to see its full description, core motivations, and wings.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const types = {
+  1: {
+    name:"The Reformer", tagline:"Principled · Purposeful · Self-Controlled",
+    triad:"Body", triadColor:"#e05a5a", color:"#e05a5a", bg:"#3a1a1a",
+    core:"Ones are driven by a deep need to be good, right, and ethical. They have a strong inner critic and hold themselves (and others) to high standards. At their best, they are wise, discerning advocates for positive change.",
+    desire:"To be good, ethical, and to have integrity",
+    fear:"Being corrupt, evil, or defective",
+    traits:["Principled","Orderly","Responsible","Self-disciplined","Critical","Idealistic"],
+    stress:"Type 4 — moody and withdrawn", growth:"Type 7 — spontaneous and joyful",
+    wings:{
+      "1w9":{ label:"1w9 · The Idealist", num:9, desc:"More detached and philosophical; quietly principled, less outwardly critical." },
+      "1w2":{ label:"1w2 · The Advocate", num:2, desc:"Warmer and more people-focused; actively helps others live up to high standards." }
+    }
+  },
+  2: {
+    name:"The Helper", tagline:"Caring · Interpersonal · Generous",
+    triad:"Heart", triadColor:"#e09a30", color:"#e09a30", bg:"#3a2a10",
+    core:"Twos are motivated by a deep need to be loved and needed. They are generous and attuned to others' feelings, but can struggle to acknowledge their own needs. At their best, they are genuinely altruistic and compassionate.",
+    desire:"To be loved and appreciated",
+    fear:"Being unloved or unwanted",
+    traits:["Generous","Empathetic","Caring","People-pleasing","Possessive","Nurturing"],
+    stress:"Type 8 — aggressive and dominating", growth:"Type 4 — self-aware and emotionally honest",
+    wings:{
+      "2w1":{ label:"2w1 · The Servant", num:1, desc:"More principled and reserved; motivated by duty as much as affection." },
+      "2w3":{ label:"2w3 · The Host", num:3, desc:"More charming and ambitious; driven to be both loved and admired." }
+    }
+  },
+  3: {
+    name:"The Achiever", tagline:"Success-Oriented · Pragmatic · Driven",
+    triad:"Heart", triadColor:"#e09a30", color:"#f0b040", bg:"#3a2a10",
+    core:"Threes are motivated by a need to succeed and be admired. They are highly adaptable and image-conscious, often becoming whoever they need to be to reach goals. At their best, they inspire others through authentic achievement.",
+    desire:"To be valuable and worthwhile",
+    fear:"Being worthless or a failure",
+    traits:["Driven","Adaptable","Ambitious","Image-focused","Competitive","Efficient"],
+    stress:"Type 9 — disengaged and checked out", growth:"Type 6 — loyal and committed",
+    wings:{
+      "3w2":{ label:"3w2 · The Charmer", num:2, desc:"More people-oriented and warm; wants to be liked AND successful." },
+      "3w4":{ label:"3w4 · The Professional", num:4, desc:"More introspective and refined; wants success with personal authenticity." }
+    }
+  },
+  4: {
+    name:"The Individualist", tagline:"Sensitive · Withdrawn · Expressive",
+    triad:"Heart", triadColor:"#e09a30", color:"#9b6ae0", bg:"#251a3a",
+    core:"Fours are driven by a need to be unique and to find their true identity. They experience emotions deeply and often feel fundamentally different from others. At their best, they are deeply creative and emotionally honest.",
+    desire:"To find themselves and their significance",
+    fear:"Having no identity or personal significance",
+    traits:["Creative","Sensitive","Melancholic","Self-aware","Withholding","Authentic"],
+    stress:"Type 2 — needy and dependent", growth:"Type 1 — principled and disciplined",
+    wings:{
+      "4w3":{ label:"4w3 · The Aristocrat", num:3, desc:"More achievement-oriented; wants to be unique AND recognized for it." },
+      "4w5":{ label:"4w5 · The Bohemian", num:5, desc:"More withdrawn and intellectual; deeply private, intense, and creative." }
+    }
+  },
+  5: {
+    name:"The Investigator", tagline:"Intense · Cerebral · Perceptive",
+    triad:"Head", triadColor:"#4a90d9", color:"#4a90d9", bg:"#0f1f30",
+    core:"Fives are motivated by a need to understand the world and conserve their inner resources. They prefer to observe rather than participate. At their best, they are visionary pioneers who offer profound insights.",
+    desire:"To be capable and competent",
+    fear:"Being helpless, useless, or overwhelmed",
+    traits:["Perceptive","Innovative","Secretive","Detached","Analytical","Private"],
+    stress:"Type 7 — scattered and impulsive", growth:"Type 8 — decisive and confident",
+    wings:{
+      "5w4":{ label:"5w4 · The Iconoclast", num:4, desc:"More creative and expressive; the most introverted and unconventional type." },
+      "5w6":{ label:"5w6 · The Problem Solver", num:6, desc:"More practical and team-oriented; analytical with a focus on real solutions." }
+    }
+  },
+  6: {
+    name:"The Loyalist", tagline:"Committed · Security-Oriented · Engaging",
+    triad:"Head", triadColor:"#4a90d9", color:"#6ab0e8", bg:"#0f1f30",
+    core:"Sixes are driven by a need for security and support. They are highly aware of potential threats and are deeply loyal to people and systems they trust. At their best, they are courageous, reliable, and deeply committed.",
+    desire:"To have security and support",
+    fear:"Being without support or guidance",
+    traits:["Loyal","Responsible","Vigilant","Warm","Anxious","Reliable"],
+    stress:"Type 3 — competitive and image-driven", growth:"Type 9 — relaxed and trusting",
+    wings:{
+      "6w5":{ label:"6w5 · The Defender", num:5, desc:"More cerebral and self-reliant; cautious and analytical in building trust." },
+      "6w7":{ label:"6w7 · The Buddy", num:7, desc:"More outgoing and fun-loving; uses humor to manage anxiety." }
+    }
+  },
+  7: {
+    name:"The Enthusiast", tagline:"Spontaneous · Versatile · Optimistic",
+    triad:"Head", triadColor:"#4a90d9", color:"#50c878", bg:"#0f2a18",
+    core:"Sevens are motivated by a need to be satisfied and to experience life fully. They avoid pain by staying busy and pursuing new experiences. At their best, they are joyful, grateful, and deeply focused on what truly fulfills them.",
+    desire:"To be satisfied and have their needs met",
+    fear:"Being deprived or trapped in pain",
+    traits:["Optimistic","Spontaneous","Fun-loving","Scattered","Acquisitive","Versatile"],
+    stress:"Type 1 — critical and perfectionistic", growth:"Type 5 — focused and depth-seeking",
+    wings:{
+      "7w6":{ label:"7w6 · The Entertainer", num:6, desc:"Warmer and more loyal; funnier and more people-focused, but more anxious." },
+      "7w8":{ label:"7w8 · The Realist", num:8, desc:"More assertive and entrepreneurial; adventurous with a harder, bolder edge." }
+    }
+  },
+  8: {
+    name:"The Challenger", tagline:"Powerful · Decisive · Self-Confident",
+    triad:"Body", triadColor:"#e05a5a", color:"#e07050", bg:"#3a1a10",
+    core:"Eights are driven by a need to be strong and to avoid vulnerability. They are direct, assertive, and fiercely protective of themselves and those they love. At their best, they are heroic, magnanimous, and deeply empowering.",
+    desire:"To protect themselves and be in control of their own life",
+    fear:"Being harmed, controlled, or violated by others",
+    traits:["Decisive","Assertive","Confrontational","Protective","Resourceful","Intense"],
+    stress:"Type 5 — withdrawn and secretive", growth:"Type 2 — open-hearted and caring",
+    wings:{
+      "8w7":{ label:"8w7 · The Maverick", num:7, desc:"More outgoing and pleasure-seeking; expansive, bold, and entrepreneurial." },
+      "8w9":{ label:"8w9 · The Bear", num:9, desc:"More calm and receptive; powerfully grounded with greater patience." }
+    }
+  },
+  9: {
+    name:"The Peacemaker", tagline:"Receptive · Reassuring · Agreeable",
+    triad:"Body", triadColor:"#e05a5a", color:"#a0c878", bg:"#1a2a10",
+    core:"Nines are motivated by a need to maintain inner peace and avoid conflict. They tend to merge with others' agendas, sometimes at the cost of their own. At their best, they are deeply inclusive, bringing harmony and stability to any environment.",
+    desire:"To have inner peace and stability",
+    fear:"Loss of connection and fragmentation",
+    traits:["Peaceful","Supportive","Receptive","Easygoing","Complacent","Conflict-avoidant"],
+    stress:"Type 6 — anxious and suspicious", growth:"Type 3 — engaged and self-developing",
+    wings:{
+      "9w8":{ label:"9w8 · The Referee", num:8, desc:"More assertive and earthy; will speak up when something truly matters." },
+      "9w1":{ label:"9w1 · The Dreamer", num:1, desc:"More idealistic and orderly; gently principled with a clear inner compass." }
+    }
+  }
+};
+
+// Positions: type→angle (degrees, 0=right, clockwise). 9 at top = -90deg
+const angles = { 9:-90, 1:-50, 2:-10, 3:30, 4:70, 5:110, 6:150, 7:190, 8:230 };
+const R=130, CX=160, CY=160;
+function pos(deg){ const r=deg*Math.PI/180; return {x:CX+R*Math.cos(r),y:CY+R*Math.sin(r)}; }
+
+const nodesG = document.getElementById('nodes');
+
+Object.entries(angles).forEach(([num,deg])=>{
+  const p = pos(deg), t = types[num];
+  const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.classList.add('node'); g.setAttribute('data-type',num);
+
+  const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  circle.setAttribute('cx',p.x); circle.setAttribute('cy',p.y); circle.setAttribute('r',21);
+  circle.setAttribute('fill',t.bg); circle.setAttribute('stroke',t.color);
+
+  const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+  txt.setAttribute('x',p.x); txt.setAttribute('y',p.y+5);
+  txt.setAttribute('text-anchor','middle'); txt.setAttribute('fill',t.color);
+  txt.textContent = num;
+
+  g.appendChild(circle); g.appendChild(txt);
+  g.addEventListener('click',()=>showType(parseInt(num)));
+  nodesG.appendChild(g);
+});
+
+function showType(num){
+  document.querySelectorAll('.node').forEach(n=>n.classList.remove('active'));
+  document.querySelector(`[data-type="${num}"]`).classList.add('active');
+  const t = types[num];
+  const wEntries = Object.entries(t.wings);
+  document.getElementById('panel').innerHTML = `
+    <div class="type-header">
+      <div class="type-badge" style="background:${t.bg};color:${t.color};border-color:${t.color}">${num}</div>
+      <div>
+        <div class="type-name" style="color:${t.color}">${t.name}</div>
+        <div class="type-tagline">${t.tagline}</div>
+      </div>
+    </div>
+    <span class="triad-badge" style="background:${t.triadColor}22;color:${t.triadColor};border:1px solid ${t.triadColor}44">${t.triad} Triad</span>
+    <div class="section"><div class="section-label">Core Description</div><p>${t.core}</p></div>
+    <div class="two-col">
+      <div style="background:#151228;">
+        <div class="section-label">Basic Desire</div>
+        <p style="font-size:0.82rem">${t.desire}</p>
+      </div>
+      <div style="background:#151228;">
+        <div class="section-label">Basic Fear</div>
+        <p style="font-size:0.82rem">${t.fear}</p>
+      </div>
+    </div>
+    <div class="section"><div class="section-label">Key Traits</div>
+      <div class="traits">${t.traits.map(tr=>`<span class="trait">${tr}</span>`).join('')}</div>
+    </div>
+    <div class="two-col">
+      <div style="background:#1a1028;">
+        <div class="section-label" style="color:#e05a5a88">Under Stress</div>
+        <p style="font-size:0.8rem;color:#e08080">→ ${t.stress}</p>
+      </div>
+      <div style="background:#101a14;">
+        <div class="section-label" style="color:#50c87888">In Growth</div>
+        <p style="font-size:0.8rem;color:#80c890">→ ${t.growth}</p>
+      </div>
+    </div>
+    <div class="section"><div class="section-label">Wings — click to navigate</div>
+      <div class="wings-row">
+        ${wEntries.map(([k,w])=>`
+          <div class="wing-card" onclick="showType(${w.num})" style="border-color:${types[w.num]?.color}44">
+            <div class="wnum" style="color:${types[w.num]?.color}">${w.label.split('·')[0].trim()}</div>
+            <div class="wname">${w.label.split('·').slice(1).join('·').trim()}</div>
+            <div class="wdesc">${w.desc}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
