@@ -9,10 +9,12 @@ permalink: /slashes/
 All the slash pages on this site, in one place.
 
 - [/ai](https://bigdoodr.github.io/ai/) — How I use (or don't use) AI
+- [/blindspots](https://bigdoodr.github.io/blindspots/) — Gaps between who I think I am and who I actually am
 - [/blogroll](https://bigdoodr.github.io/blogroll/) — Sites I read and recommend
 - [/bookmarks](https://bigdoodr.github.io/bookmarks/) — Links worth saving
 - [/calendar](https://bigdoodr.github.io/calendar/) — Dates I observe
 - [/canon](https://bigdoodr.github.io/canon/) — Things that have most shaped me
+- [/ceremony-scripts](https://bigdoodr.github.io/ceremony-scripts/) — Wedding ceremony scripts for officiants
 - [/changelog](https://bigdoodr.github.io/changelog/) — Changes to this site
 - [/colophon](https://bigdoodr.github.io/colophon/) — How this site is made
 - [/comics](https://bigdoodr.github.io/comics/) — Comics I read
@@ -25,6 +27,7 @@ All the slash pages on this site, in one place.
 - [/hello](https://bigdoodr.github.io/hello/) — How to reach me
 - [/hills](https://bigdoodr.github.io/hills/) — Stupid hills I'll die on
 - [/interests](https://bigdoodr.github.io/interests/) — Things I'm passionate about
+- [/mantras](https://bigdoodr.github.io/mantras/) — Words I return to
 - [/nope](https://bigdoodr.github.io/nope/) — Things that aren't for me
 - [/podroll](https://bigdoodr.github.io/podroll/) — Podcasts I recommend
 - [/posse](https://bigdoodr.github.io/posse/) — My cross-posting strategy
@@ -32,6 +35,7 @@ All the slash pages on this site, in one place.
 - [/questions](https://bigdoodr.github.io/questions/) — Things I'm sitting with
 - [/self-hosting](https://bigdoodr.github.io/self-hosting/) — Services I run myself
 - [/shoebox](https://bigdoodr.github.io/shoebox/) — Odds and ends
+- [/shortcuts](https://bigdoodr.github.io/shortcuts/) — Apple Shortcuts I've made
 - [/sitemap](https://bigdoodr.github.io/sitemap/) — Everything on this site
 - [/slashes](https://bigdoodr.github.io/slashes/) — You are here
 - [/someday](https://bigdoodr.github.io/someday/) — Things I want to do someday

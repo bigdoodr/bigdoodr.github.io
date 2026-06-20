@@ -8,6 +8,12 @@ permalink: /shoebox/
 
 Odds and ends. The stuff that doesn't fit anywhere else. More to come.
 
+## Ceremony Scripts
+
+Wedding ceremony scripts I've used as an officiant — offered as templates for anyone who needs a starting point. Three styles: traditional, quest/adventure-themed, and traditional with a unity ceremony.
+
+→ [View ceremony scripts](/ceremony-scripts/)
+
 ---
 
 ## An Invitation to a Brave Space
@@ -77,9 +83,97 @@ Homebrew and modding resources for Nintendo devices.
 
 ---
 
+## PDCA / PDSA (Plan–Do–Check–Act)
+
+*[MindTools](https://www.mindtools.com/as2l5i1/pdca-plan-do-check-act/)*
+
+A continuous improvement cycle developed by W. Edwards Deming. Also known as PDSA — Deming preferred "Study" over "Check," since studying results is about learning, not just verifying implementation.
+
+- **Plan**: Define the problem; explore the available information; develop a theory and measurable success criteria
+- **Do**: Test your solution at small scale (a department, a region, a sample group); gather data
+- **Check/Study**: Compare results against your criteria; repeat Do → Check as needed
+- **Act**: Implement the solution; the improved process becomes the new baseline — then loop back
+
+Best for quality initiatives, change management, and incremental improvement. Less suited to urgent problems or situations where radical innovation is needed.
+
+---
+
+## Adult Learning Theory (Andragogy)
+
+*[Learning Revolution — Jeff Cobb](https://www.learningrevolution.net/adult-learning-theory/)*
+
+Malcolm Knowles' framework for how adults learn differently from children. Adults aren't just big kids in classrooms — they bring experience, self-direction, and specific goals.
+
+- **Need to Know** — Adults want the "why" before committing; keep reinforcing it throughout, not just at the start
+- **Self-Concept** — Adults are self-directed; give them choices over format, pace, or path
+- **Prior Experience** — Their experience is a resource; invite them to connect new ideas to what they already know
+- **Readiness to Learn** — Learning sticks when it's relevant to a current role, challenge, or goal
+- **Orientation to Learning** — Problem-centered, not subject-centered; design around application, not information delivery
+- **Motivation to Learn** — Internal drivers (growth, mastery, satisfaction) outlast external rewards (grades, certificates, badges)
+
+---
+
 ## Podcast Episodes Worth Revisiting
 
 - [Father Greg Boyle Returns — You Made It Weird with Pete Holmes](https://omny.fm/shows/you-made-it-weird-with-pete-holmes/fathergreg-boyle-returns) — Father Greg Boyle (Homeboy Industries) on radical kinship, love without conditions, and what it means to be a mystic.
+
+---
+
+## PSUMac Session Notes
+
+Quick references for past [PSUMac](https://www.macadmins.psu.edu) sessions. Fuller cheat-sheet notes for some sessions live on the [Mac Admin Notes](/mac-admin-notes/) page.
+
+### 2024
+
+**Delving the Depths of DDM** *(Joseph Chilcote)*  
+DDM still uses MDM to deliver settings, but the device applies them immediately upon receipt and reports success or failure back to the server.  
+[Video](https://www.youtube.com/watch?v=fHBmAkqOTrQ) · [Community Notes](https://bit.ly/3VVOveO) · [apple/device-management](https://github.com/apple/device-management) · [ddm_testing](https://github.com/macadmins/ddm_testing) · [Apple DDM Docs](https://developer.apple.com/documentation/devicemanagement)
+
+**How Apple Rolls**  
+[Video](https://www.youtube.com/embed/zNL4GGERPLE) · [Community Notes](https://bit.ly/3Ly0hYp)
+
+**PowerShell on the Mac** *(John Welch)*  
+`Write-Output "\`n"` puts each item on its own line. Array Lists are deprecated — prefer Generic Lists.  
+[Community Notes](https://bit.ly/4cMGwaY) · [John's GitHub](https://github.com/johncwelch) · [bynkii.com](http://bynkii.com) · [learn.microsoft.com/powershell](https://learn.microsoft.com/en-us/powershell)
+
+**Platform SSO**  
+[Video](https://www.youtube.com/watch?v=rq9DcfBl2oU) · [Community Notes](https://bit.ly/4bx8UN9)
+
+**Managed Apple IDs** *(Tom Bridge)*  
+Profile-based user enrollment is not possible in macOS Sequoia and later. Account-driven enrollment (user or device) requires a Managed Apple Account and a WellKnown endpoint. Both enrollment types use APFS volume separation and unenroll cleanly on sign-out.  
+[Video](https://www.youtube.com/watch?v=xA0D6oVzcUk) · [Community Notes](https://bit.ly/3VL034I)
+
+**Securing the Keys to the Kingdom: PAM** *(Joel Rennich)*  
+PAM = Privileged Access Management. Core principle: Least Privilege — standard user is default. Watch for overly permissive `/etc/sudoers` rules and hardcoded credentials in scripts. Shared, static local admin passwords are a fleet-wide risk.  
+[Community Notes](https://bit.ly/46dIIby)
+
+**How the Personal Computer Peaked in 1984** *(Charles Mangin)*  
+[Session link](https://bit.ly/psumac-2024-29)
+
+**RFID Tags**  
+[twocanoes/tap — Ideas wiki](https://github.com/twocanoes/tap/wiki/Ideas)
+
+### 2025
+
+**Password Syncing History** *(Greg Neagle)*  
+[Community Notes](https://docs.google.com/document/d/1pnMjQW-8YaxEi0wdgI7pSCV0744GfSBWB9nDD0pTo0k/edit) · [Apple Dev: Implementing Platform SSO for Unattended Enrollment](https://developer.apple.com/documentation/devicemanagement/implementing-platform-sso-for-unattended-device-enrollment/)
+
+**SUPERMAN** *(Kevin White)*  
+[Community Notes](https://docs.google.com/document/d/1rEL8BRlA4s3whI9jqLITYvXoAlnwyF7KmRYZj47xR3s/edit)
+
+**These Things Run On Electricity?** *(Charles Mangin)*  
+[Community Notes](https://docs.google.com/document/d/1v4QPsX694QYnfKoGui2et_XycrJ2YSqQsH5uSMu7mT0/edit)
+
+**Command-Line Swift App**  
+[Community Notes](https://docs.google.com/document/d/1CRMZR8NxrTr4MODajvGjH-WOB-s7C-75GwsWRjhJ4fo/edit) · [Lab Guide](https://docs.google.com/document/d/1G0e1IaMoNmpbIjMFqxue7KgvlXQUWhJF5coM9a049CM/edit#heading=h.sj9u9168e9ud)
+
+**MacAdmin Mental Maintenance** *(Robert Hammen & Damien Barrett)*  
+People and process care for Mac admins. Recommended reads: *The Phoenix Project*, *The Unicorn Project*, *Atomic Habits*. Suggested tools: Flow (Pomodoro timer), Freeform (alternative to lists/docs), Journal app (keep professional and personal journals separate). Tip: build a responsibilities matrix mapping each team member to their primary and secondary projects.  
+[Community Notes](https://docs.google.com/document/d/1UkKYSjgDtmy2saVaLn7J6tmCKkweZ2Hfywc4U1bqmSU/edit)
+
+**swiftDialog for Overworked Mac Admins** *(Beth Johnson)*  
+Use `--button1text` with an empty value to hide the button entirely. Append `&` to background the dialog window. Beth's GitHub has ready-to-use examples.  
+[Community Notes](https://docs.google.com/document/d/1TsLkF3kkg0l6DYlHE0h5ecTV4oK1f9wr5AhNft7EMHA/edit) · [GitHub: bjohnson-MHC/swiftDialog-for-OMAs](https://github.com/bjohnson-MHC/swiftDialog-for-OMAs)
 
 ---
 

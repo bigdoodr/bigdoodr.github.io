@@ -6,7 +6,7 @@ date: 2026-03-07
 permalink: /sitemap/
 ---
 
-A map of everything on this site. Last updated April 25, 2026.
+A map of everything on this site. Last updated May 26, 2026.
 
 ## 🏠 Main Pages
 
@@ -20,6 +20,7 @@ A map of everything on this site. Last updated April 25, 2026.
 ## ✴️ Slash Pages
 
 - [/ai](https://bigdoodr.github.io/ai/)
+- [/blindspots](https://bigdoodr.github.io/blindspots/)
 - [/blogroll](https://bigdoodr.github.io/blogroll/)
 - [/calendar](https://bigdoodr.github.io/calendar/)
 - [/canon](https://bigdoodr.github.io/canon/)
@@ -35,6 +36,7 @@ A map of everything on this site. Last updated April 25, 2026.
 - [/hello](https://bigdoodr.github.io/hello/)
 - [/hills](https://bigdoodr.github.io/hills/)
 - [/interests](https://bigdoodr.github.io/interests/)
+- [/mantras](https://bigdoodr.github.io/mantras/)
 - [/nope](https://bigdoodr.github.io/nope/)
 - [/podroll](https://bigdoodr.github.io/podroll/)
 - [/posse](https://bigdoodr.github.io/posse/)
@@ -42,6 +44,7 @@ A map of everything on this site. Last updated April 25, 2026.
 - [/questions](https://bigdoodr.github.io/questions/)
 - [/self-hosting](https://bigdoodr.github.io/self-hosting/)
 - [/shoebox](https://bigdoodr.github.io/shoebox/)
+- [/shortcuts](https://bigdoodr.github.io/shortcuts/)
 - [/sitemap](https://bigdoodr.github.io/sitemap/)
 - [/slashes](https://bigdoodr.github.io/slashes/)
 - [/someday](https://bigdoodr.github.io/someday/)

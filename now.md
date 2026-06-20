@@ -9,13 +9,9 @@ published: false
 
 *Last updated: February 25, 2026*
 
-## 🙏 Lenten Commitment
-
-This year I'm giving up assumptions — specifically, assuming I know what another person is thinking or feeling. It's harder than it sounds.
-
 ## 💬 Mantra
 
-*"Dare greatly."* — Lindsey Vaughn
+*"Dare greatly."* — Lindsey Vaughn *(more on [/mantras](/mantras/))*
 
 ## 📱 Side Projects
 

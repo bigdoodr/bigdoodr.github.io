@@ -145,6 +145,11 @@ title: "Bookmarks"
 <div class="bookmark-label">Zone 2 Exercise Catalog</div>
 </a>
 
+<a href="https://www.menshealth.com/fitness/a18752276/best-ab-exercises/" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-fire"></i></div>
+<div class="bookmark-label">Men's Health: Best Ab Exercises</div>
+</a>
+
 </div>
 </div>
 
@@ -194,6 +199,16 @@ title: "Bookmarks"
 <div class="bookmark-label">Step 4: Moral Inventory Example</div>
 </a>
 
+<a href="https://www.snopes.com" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-magnifying-glass"></i></div>
+<div class="bookmark-label">Snopes</div>
+</a>
+
+<a href="https://archive.org" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-box-archive"></i></div>
+<div class="bookmark-label">Internet Archive</div>
+</a>
+
 </div>
 </div>
 
@@ -223,7 +238,7 @@ title: "Bookmarks"
 <div class="category-title">AI & Productivity</div>
 <div class="bookmarks-grid">
 
-<a href="https://block.github.io" class="bookmark-card">
+<a href="https://block.github.io/goose/" class="bookmark-card">
 <div class="bookmark-icon"><i class="fas fa-robot"></i></div>
 <div class="bookmark-label">Goose — Local Open Source AI Agent</div>
 </a>
@@ -275,7 +290,7 @@ title: "Bookmarks"
 <div class="bookmark-label">Managing Family Devices with Jamf Now</div>
 </a>
 
-<a href="https://macstories.net" class="bookmark-card">
+<a href="https://www.macstories.net/shortcuts/" class="bookmark-card">
 <div class="bookmark-icon"><i class="fas fa-cut"></i></div>
 <div class="bookmark-label">Shortcuts Archive — MacStories</div>
 </a>
@@ -302,9 +317,58 @@ title: "Bookmarks"
 <div class="bookmark-label">YouTube Playlist Manager</div>
 </a>
 
+</div>
+</div>
+
+<div class="category-section">
+<div class="category-title">Books & Reading</div>
+<div class="bookmarks-grid">
+
+<a href="https://apps.npr.org/best-books/#view=covers&year=2025" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-book-open"></i></div>
+<div class="bookmark-label">NPR Best Books</div>
+</a>
+
+<a href="https://bookshop.org" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-store"></i></div>
+<div class="bookmark-label">Bookshop.org</div>
+</a>
+
+<a href="https://libro.fm" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-headphones"></i></div>
+<div class="bookmark-label">Libro.fm</div>
+</a>
+
+</div>
+</div>
+
+<div class="category-section">
+<div class="category-title">Video Games</div>
+<div class="bookmarks-grid">
+
 <a href="https://www.eurogamer.net/dash-food-locations-mario-kart-world#section-12" class="bookmark-card">
 <div class="bookmark-icon"><i class="fas fa-gamepad"></i></div>
 <div class="bookmark-label">Mario Kart World: Dash Food Locations</div>
+</a>
+
+<a href="https://www.rockpapershotgun.com/starfield-outposts" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-satellite"></i></div>
+<div class="bookmark-label">Starfield: Outpost Guide</div>
+</a>
+
+<a href="https://www.pcgamer.com/starfield-cargo-link/" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-boxes-stacked"></i></div>
+<div class="bookmark-label">Starfield: Cargo Links Guide</div>
+</a>
+
+<a href="https://starfieldportal.com/article/starfield-pacifist-build" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-dove"></i></div>
+<div class="bookmark-label">Starfield: Pacifist Build</div>
+</a>
+
+<a href="https://www.reddit.com/r/Starfield/comments/16nqqux/my_pacifist_journey_through_starfield_tips_and/" class="bookmark-card">
+<div class="bookmark-icon"><i class="fa-brands fa-reddit"></i></div>
+<div class="bookmark-label">Starfield: Pacifist Journey Tips (Reddit)</div>
 </a>
 
 </div>
