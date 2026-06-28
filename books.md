@@ -9,7 +9,6 @@ image: /resources/books.purple.png
 
 
 ## 2026 Wish List / Queue
-- [ ] Code Name: Pale Horse: How I Went Undercover to Expose America's Nazis by Scott Payne
 - [ ] Party Discipline by Cory Doctrow
 - [ ] Dead Man Rising by Lilith Saintcrow
 - [ ] Darkness and Demon Song by M.R. Fournet
@@ -34,11 +33,20 @@ image: /resources/books.purple.png
 
 ## 2026 Reading
 
-### Running Tally: 17 books
+### Running Tally: 26 books
 
 | Title | Author | Month | Details | Series |
 |-------|--------|-------|---------|--------|
+| Born a Crime | Trevor Noah | May | [View on LibraryThing](https://www.librarything.com/work/18499935) | — |
+| As You Wish | Cary Elwis | May | [View on LibraryThing](https://www.librarything.com/work/15019536/t/As-You-Wish-Inconceivable-Tales-from-the-Making-of-The-Princess-Bride) | — |
+| Wizard of Oz | L. Frank Baum | May | [View on LibraryThing](https://www.librarything.com/work/20410) | [Oz](https://www.librarything.com/nseries/103/Oz) |
+| Alien: Out of the Shadows | Tim Lebbon | April | [View on LibraryThing](https://www.librarything.com/work/14318419) | [Aliens Novels](https://www.librarything.com/nseries/3231/Aliens-Novels) |
+| Love Wins | Rob Bell | April | [View on LibraryThing](https://www.librarything.com/work/11065908) | — |
+| Martian Chronicles | Ray Bradbury | April | [View on LibraryThing](https://www.librarything.com/work/31712) | — |
+| Code Name: Pale Horse: How I Went Undercover to Expose Americ'as Nazis | Scott Payne | April | [View on LibraryThing](https://www.librarything.com/work/33523552/t/Code-Name-Pale-Horse-How-I-Went-Undercover-to-Expose-Americas-Nazis) | — |
+| Blood Bound | Patricia Briggs | April | [View on LibraryThing](https://www.librarything.com/work/1244072) | [Mercy Thompson](https://www.librarything.com/nseries/159/Mercy-Thompson) |
 | Wholehearted Faith | Rachel Held Evans | April | [View on LibraryThing](https://www.librarything.com/isbn/9780062894489) | — |
+| Wolfpack | Abby Wombach | April | [View on LibraryThing](https://www.librarything.com/work/22777291/t/Wolfpack-How-to-Come-Together-Unleash-Our-Power-and-Change-the-Game) | — |
 | I, Robot | Isaac Asimov | March | [View on LibraryThing](https://www.librarything.com/work/5196084/t/I-Robot-%5BAnthology%5D) | [Asimovs Universe](https://www.librarything.com/nseries/369342/Asimovs-Universe) |
 | Sin of Certainty | Peter Enns | March | [View on LibraryThing](https://www.librarything.com/isbn/9780062272102) | — |
 | Tragedy of True Crime | John J Lennon | March | [View on LibraryThing](https://www.librarything.com/isbn/9781250858245) | — |
