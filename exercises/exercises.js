@@ -1,20 +1,20 @@
 // exercises.js - Centralized exercise data
 const exercises = {
   "Chest": {
-    "Beginner": [{ name: "Elevated Push-Ups", video: null, equipment: ["Chair/Box/Bench"] }],
-    "Medium": [{ name: "Push-Ups", video: "/resources/pushupsAngle2.mp4", equipment: ["None"] }, { name: "Decline Push-Ups", video: null, equipment: ["Chair/Box/Bench"] }],
+    "Beginner": [{ name: "Elevated Push-Ups", video: "/resources/inclinepushups.mp4", equipment: ["Chair/Box/Bench"] }],
+    "Medium": [{ name: "Push-Ups", video: "/resources/pushupsAngle2.mp4", equipment: ["None"] }, { name: "Decline Push-Ups", video: "/resources/declinepushups.mp4", equipment: ["Chair/Box/Bench"] }],
     "Hard": [],
     "Expert/Advanced": [{ name: "One-Legged Skier Push-Ups", video: "/resources/onelegskierpushups.mp4", equipment: ["None"] }]
   },
   "Legs": {
-    "Beginner": [{ name: "Squats", video: "/resources/squats.mp4", equipment: ["None"] }, { name: "3-Way Lunges", video: "/resources/3wayLungesAngle2.mp4", equipment: ["None"] }, { name: "Box Step-Ups", video: null, equipment: ["Chair/Box/Bench"] }],
+    "Beginner": [{ name: "Squats", video: "/resources/squats.mp4", equipment: ["None"] }, { name: "3-Way Lunges", video: "/resources/3wayLungesAngle2.mp4", equipment: ["None"] }, { name: "Box Step-Ups", video: "/resources/altstepups.mp4", equipment: ["Chair/Box/Bench"] }],
     "Medium": [{ name: "Alternating Split Squats", video: "/resources/splitSquats.mp4", equipment: ["None"] }, { name: "Frog Hops", video: "/resources/frogHops.mp4", equipment: ["None"] }, { name: "Squat Jumps", video: "/resources/squatJumps.mp4", equipment: ["None"] }],
-    "Hard": [{ name: "180° Squat Jumps", video: "/resources/180JumpSquats.mp4", equipment: ["None"] }, { name: "Ninja Tuck Jumps", video: "/resources/ninjaTuckJumps.mp4", equipment: ["None"] }, { name: "Prisoner Squat Jumps", video: "/resources/prisonerSquatJumps.mp4", equipment: ["None"] }, { name: "3-Point Alternating Hops", video: "/resources/3pointAltHops.mp4", equipment: ["None"] }, { name: "Box Jumps", video: null, equipment: ["Chair/Box/Bench"] }],
+    "Hard": [{ name: "180° Squat Jumps", video: "/resources/180JumpSquats.mp4", equipment: ["None"] }, { name: "Ninja Tuck Jumps", video: "/resources/ninjaTuckJumps.mp4", equipment: ["None"] }, { name: "Prisoner Squat Jumps", video: "/resources/prisonerSquatJumps.mp4", equipment: ["None"] }, { name: "3-Point Alternating Hops", video: "/resources/3pointAltHops.mp4", equipment: ["None"] }, { name: "Box Jumps", video: "/resources/boxjumps.mp4", equipment: ["Chair/Box/Bench"] }],
     "Expert/Advanced": [{ name: "Prisoner Ninja Tuck Jumps", video: "/resources/prisonerNinjaTuckJumps.mp4", equipment: ["None"] }, { name: "Triple Skyfalls", video: "/resources/3xskyfalls.mp4", equipment: ["None"] }]
   },
   "Legs, No Cardio": {
     "Beginner": [{ name: "Reverse Lunge to High Knee", video: "/resources/reverseLungeHighKneeAngle2.mp4", equipment: ["None"] }],
-    "Medium": [{ name: "Bulgarian Split Squats", video: null, equipment: ["Chair/Box/Bench"] }],
+    "Medium": [{ name: "Bulgarian Split Squats", video: "/resources/bulgsplitsquat.mp4", equipment: ["Chair/Box/Bench"] }],
     "Hard": [],
     "Expert/Advanced": []
   },
@@ -56,14 +56,14 @@ const exercises = {
   },
   "Morning Stretches": {
     "Beginner": [
-      { name: "Cat-Cow Stretch", video: null, equipment: ["None"] },
+      { name: "Cat-Cow Stretch", video: "/resources/cat-cow.mp4", equipment: ["None"] },
       { name: "World's Greatest Stretch", video: null, equipment: ["None"] },
-      { name: "Thread the Needle", video: null, equipment: ["None"] },
-      { name: "Seated Forward Fold", video: null, equipment: ["None"] },
-      { name: "Hip Flexor Lunge Stretch", video: null, equipment: ["None"] },
-      { name: "Thoracic Spine Extension", video: null, equipment: ["None"] },
-      { name: "Neck Side Stretch", video: null, equipment: ["None"] },
-      { name: "Cross-Body Shoulder Stretch", video: null, equipment: ["None"] }
+      { name: "Thread the Needle", video: "/resources/ThreadTheNeedle.mp4", equipment: ["None"] },
+      { name: "Seated Forward Fold", video: "/resources/seatedForwardFold.mp4", equipment: ["None"] },
+      { name: "Hip Flexor Lunge Stretch", video: "hipFlexorLungeStretch.mp4", equipment: ["None"] },
+      { name: "Thoracic Spine Extension", video: "/resources/thoracicSpineExtension.mp4", equipment: ["None"] },
+      { name: "Neck Side Stretch", video: "/resources/neckSideStretch.mp4", equipment: ["None"] },
+      { name: "Cross-Body Shoulder Stretch", video: "/resources/crossBodyShoulderStretch.mp4", equipment: ["None"] }
     ],
     "Medium": [],
     "Hard": [],

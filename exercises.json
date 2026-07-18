@@ -4,11 +4,11 @@
     "exercises": {
         "Chest": {
             "Beginner": [
-                { "name": "Elevated Push-Ups", "videoPath": null, "equipment": ["Chair/Box/Bench"] }
+                { "name": "Elevated Push-Ups", "videoPath": "/resources/inclinepushups.mp4", "equipment": ["Chair/Box/Bench"] }
             ],
             "Medium": [
                 { "name": "Push-Ups", "videoPath": "/resources/pushupsAngle2.mp4", "equipment": ["None"] },
-                { "name": "Decline Push-Ups", "videoPath": null, "equipment": ["Chair/Box/Bench"] }
+                { "name": "Decline Push-Ups", "videoPath": "/resources/declinepushups.mp4", "equipment": ["Chair/Box/Bench"] }
             ],
             "Expert/Advanced": [
                 { "name": "One-Legged Skier Push-Ups", "videoPath": "/resources/onelegskierpushups.mp4", "equipment": ["None"] }
@@ -18,7 +18,7 @@
             "Beginner": [
                 { "name": "Squats", "videoPath": "/resources/squats.mp4", "equipment": ["None"] },
                 { "name": "3-Way Lunges", "videoPath": "/resources/3wayLungesAngle2.mp4", "equipment": ["None"] },
-                { "name": "Box Step-Ups", "videoPath": null, "equipment": ["Chair/Box/Bench"] }
+                { "name": "Box Step-Ups", "videoPath": "/resources/altstepups.mp4", "equipment": ["Chair/Box/Bench"] }
             ],
             "Medium": [
                 { "name": "Alternating Split Squats", "videoPath": "/resources/splitSquats.mp4", "equipment": ["None"] },
@@ -30,7 +30,7 @@
                 { "name": "Ninja Tuck Jumps", "videoPath": "/resources/ninjaTuckJumps.mp4", "equipment": ["None"] },
                 { "name": "Prisoner Squat Jumps", "videoPath": "/resources/prisonerSquatJumps.mp4", "equipment": ["None"] },
                 { "name": "3-Point Alternating Hops", "videoPath": "/resources/3pointAltHops.mp4", "equipment": ["None"] },
-                { "name": "Box Jumps", "videoPath": null, "equipment": ["Chair/Box/Bench"] }
+                { "name": "Box Jumps", "videoPath": "/resources/boxjumps.mp4", "equipment": ["Chair/Box/Bench"] }
             ],
             "Expert/Advanced": [
                 { "name": "Prisoner Ninja Tuck Jumps", "videoPath": "/resources/prisonerNinjaTuckJumps.mp4", "equipment": ["None"] },
@@ -42,7 +42,7 @@
                 { "name": "Reverse Lunge to High Knee", "videoPath": "/resources/reverseLungeHighKneeAngle2.mp4", "equipment": ["None"] }
             ],
             "Medium": [
-                { "name": "Bulgarian Split Squats", "videoPath": null, "equipment": ["Chair/Box/Bench"] }
+                { "name": "Bulgarian Split Squats", "videoPath": "/resources/bulgsplitsquat.mp4", "equipment": ["Chair/Box/Bench"] }
             ]
         },
         "Shoulders": {
@@ -117,14 +117,14 @@
         },
         "Morning Stretches": {
             "Beginner": [
-                { "name": "Cat-Cow Stretch", "videoPath": null, "equipment": ["None"] },
+                { "name": "Cat-Cow Stretch", "videoPath": "/resources/cat-cow.mp4", "equipment": ["None"] },
                 { "name": "World's Greatest Stretch", "videoPath": null, "equipment": ["None"] },
-                { "name": "Thread the Needle", "videoPath": null, "equipment": ["None"], "singleSided": true },
-                { "name": "Seated Forward Fold", "videoPath": null, "equipment": ["None"] },
-                { "name": "Hip Flexor Lunge Stretch", "videoPath": null, "equipment": ["None"], "singleSided": true },
-                { "name": "Thoracic Spine Extension", "videoPath": null, "equipment": ["None"] },
-                { "name": "Neck Side Stretch", "videoPath": null, "equipment": ["None"], "singleSided": true },
-                { "name": "Cross-Body Shoulder Stretch", "videoPath": null, "equipment": ["None"], "singleSided": true }
+                { "name": "Thread the Needle", "videoPath": "/resources/ThreadTheNeedle.mp4", "equipment": ["None"], "singleSided": true },
+                { "name": "Seated Forward Fold", "videoPath": "/resources/seatedForwardFold.mp4", "equipment": ["None"] },
+                { "name": "Hip Flexor Lunge Stretch", "videoPath": "hipFlexorLungeStretch.mp4", "equipment": ["None"], "singleSided": true },
+                { "name": "Thoracic Spine Extension", "videoPath": "/resources/thoracicSpineExtension.mp4", "equipment": ["None"] },
+                { "name": "Neck Side Stretch", "videoPath": "/resources/neckSideStretch.mp4", "equipment": ["None"], "singleSided": true },
+                { "name": "Cross-Body Shoulder Stretch", "videoPath": "/resources/crossBodyShoulderStretch.mp4", "equipment": ["None"], "singleSided": true }
             ]
         },
         "Evening Recovery": {
