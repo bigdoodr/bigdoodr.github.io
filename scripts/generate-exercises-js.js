@@ -25,7 +25,8 @@ function esc(s) {
 }
 
 function formatExercise(e) {
-  const parts = [`name: "${esc(e.name)}"`, `video: "${e.videoPath}"`];
+  const videoStr = e.videoPath ? `"${e.videoPath}"` : 'null';
+  const parts = [`name: "${esc(e.name)}"`, `video: ${videoStr}`];
   const equipment = e.equipment || ['None'];
   parts.push(`equipment: [${equipment.map((x) => `"${esc(x)}"`).join(', ')}]`);
   if (e.singleSided) {

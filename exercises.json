@@ -1,5 +1,5 @@
 {
-    "focusAreas": ["Chest", "Legs", "Legs, No Cardio", "Shoulders", "Triceps", "Glutes", "Core", "Core, No Cardio", "Cardio", "Morning Stretches", "Evening Recovery", "Cool Down", "Warm-Up: Hips", "Warm-Up: Full Body"],
+    "focusAreas": ["Chest", "Legs", "Legs: Strength", "Shoulders", "Triceps", "Glutes", "Core", "Core: Strength", "Cardio", "Morning Stretches", "Evening Recovery", "Cool Down", "Warm-Up: Hips", "Warm-Up: Full Body"],
     "difficulties": ["Beginner", "Medium", "Hard", "Expert/Advanced"],
     "exercises": {
         "Chest": {
@@ -37,7 +37,7 @@
                 { "name": "Triple Skyfalls", "videoPath": "/resources/3xskyfalls.mp4", "equipment": ["None"] }
             ]
         },
-        "Legs, No Cardio": {
+        "Legs: Strength": {
             "Beginner": [
                 { "name": "Reverse Lunge to High Knee", "videoPath": "/resources/reverseLungeHighKneeAngle2.mp4", "equipment": ["None"] }
             ],
@@ -46,6 +46,9 @@
             ]
         },
         "Shoulders": {
+            "Beginner": [
+                { "name": "Wall Pike Push-Ups", "videoPath": null, "equipment": ["None"] }
+            ],
             "Medium": [
                 { "name": "Pike Push-Ups", "videoPath": "/resources/pikePushups.mp4", "equipment": ["None"] }
             ],
@@ -59,6 +62,12 @@
         "Triceps": {
             "Beginner": [
                 { "name": "Bench Dips", "videoPath": "/resources/benchDipsAngle1.mp4", "equipment": ["Chair/Box/Bench"] }
+            ],
+            "Medium": [
+                { "name": "Close-Grip Push-Ups", "videoPath": null, "equipment": ["None"] }
+            ],
+            "Hard": [
+                { "name": "Diamond Push-Ups", "videoPath": null, "equipment": ["None"] }
             ]
         },
         "Glutes": {
@@ -92,7 +101,7 @@
                 { "name": "Twisting Piston Push-Ups", "videoPath": "/resources/twistingPistonPushUps.mp4", "equipment": ["None"] }
             ]
         },
-        "Core, No Cardio": {
+        "Core: Strength": {
             "Beginner": [
                 { "name": "Ab-Roller", "videoPath": "/resources/abRollerAngle1.mp4", "equipment": ["Ab Roller"] },
                 { "name": "Bird Dogs", "videoPath": "/resources/birdDogs.mp4", "equipment": ["None"] },

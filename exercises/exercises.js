@@ -15,22 +15,22 @@ const exercises = {
     "Hard": [{ name: "180° Squat Jumps", video: "/resources/180JumpSquats.mp4", equipment: ["None"] }, { name: "Ninja Tuck Jumps", video: "/resources/ninjaTuckJumps.mp4", equipment: ["None"] }, { name: "Prisoner Squat Jumps", video: "/resources/prisonerSquatJumps.mp4", equipment: ["None"] }, { name: "3-Point Alternating Hops", video: "/resources/3pointAltHops.mp4", equipment: ["None"] }, { name: "Box Jumps", video: "/resources/boxjumps.mp4", equipment: ["Chair/Box/Bench"] }],
     "Expert/Advanced": [{ name: "Prisoner Ninja Tuck Jumps", video: "/resources/prisonerNinjaTuckJumps.mp4", equipment: ["None"] }, { name: "Triple Skyfalls", video: "/resources/3xskyfalls.mp4", equipment: ["None"] }]
   },
-  "Legs, No Cardio": {
+  "Legs: Strength": {
     "Beginner": [{ name: "Reverse Lunge to High Knee", video: "/resources/reverseLungeHighKneeAngle2.mp4", equipment: ["None"] }],
     "Medium": [{ name: "Bulgarian Split Squats", video: "/resources/bulgsplitsquat.mp4", equipment: ["Chair/Box/Bench"] }],
     "Hard": [],
     "Expert/Advanced": []
   },
   "Shoulders": {
-    "Beginner": [],
+    "Beginner": [{ name: "Wall Pike Push-Ups", video: null, equipment: ["None"] }],
     "Medium": [{ name: "Pike Push-Ups", video: "/resources/pikePushups.mp4", equipment: ["None"] }],
     "Hard": [{ name: "Kneeling Spider-Man Push-Ups", video: "/resources/kneelingSpidermanPushups.mp4", equipment: ["None"] }],
     "Expert/Advanced": [{ name: "Spider-Man Push-Ups", video: "/resources/spidermanPushups.mp4", equipment: ["None"] }]
   },
   "Triceps": {
     "Beginner": [{ name: "Bench Dips", video: "/resources/benchDipsAngle1.mp4", equipment: ["Chair/Box/Bench"] }],
-    "Medium": [],
-    "Hard": [],
+    "Medium": [{ name: "Close-Grip Push-Ups", video: null, equipment: ["None"] }],
+    "Hard": [{ name: "Diamond Push-Ups", video: null, equipment: ["None"] }],
     "Expert/Advanced": []
   },
   "Glutes": {
@@ -45,7 +45,7 @@ const exercises = {
     "Hard": [{ name: "Bicycle Crunches", video: "/resources/bicycleCrunchesAngle2.mp4", equipment: ["None"] }, { name: "Jackknives - Level 2", video: "/resources/jackknivesLevel2.mp4", equipment: ["None"] }, { name: "Mountain Climbers", video: "/resources/mountainClimbers.mp4", equipment: ["None"] }, { name: "Plank Elbow to Knee Taps", video: "/resources/plankElbowToKneeTaps.mp4", equipment: ["None"] }, { name: "Side Kickthroughs", video: "/resources/sideKickthroughs.mp4", equipment: ["None"] }, { name: "V-Sit Cross Punches", video: "/resources/vSitCrossPunches.mp4", equipment: ["None"] }],
     "Expert/Advanced": [{ name: "Twisting Piston Push-Ups", video: "/resources/twistingPistonPushUps.mp4", equipment: ["None"] }]
   },
-  "Core, No Cardio": {
+  "Core: Strength": {
     "Beginner": [{ name: "Ab-Roller", video: "/resources/abRollerAngle1.mp4", equipment: ["Ab Roller"] }, { name: "Bird Dogs", video: "/resources/birdDogs.mp4", equipment: ["None"] }, { name: "Good Mornings", video: "/resources/goodMorningsAngle2.mp4", equipment: ["None"] }, { name: "Swipers", video: "/resources/swipersAngle2.mp4", equipment: ["None"] }],
     "Medium": [{ name: "Plank Elbow Ups", video: "/resources/plankElbowUps.mp4", equipment: ["None"] }, { name: "Shoulder Taps", video: "/resources/shoulderTapsAngle1.mp4", equipment: ["None"] }],
     "Hard": [{ name: "Crescent Tucks", video: "/resources/CrescentTucks.mp4", equipment: ["None"] }, { name: "Backward 7s", video: "/resources/Backward7s.mp4", equipment: ["None"] }, { name: "Side Cycles", video: "/resources/SideCyclesRight.mp4", equipment: ["None"], singleSided: true }, { name: "Mountain Hip Dips", video: "/resources/MountainHipDips.mp4", equipment: ["None"] }, { name: "Frog V-Ups", video: "/resources/FrogVUps.mp4", equipment: ["None"] }, { name: "Side Scissor Crunches", video: "/resources/ScissorCrunchLeft.mp4", equipment: ["None"], singleSided: true }, { name: "Corpse Crunch", video: "/resources/CorpseCrunch.mp4", equipment: ["None"] }],
