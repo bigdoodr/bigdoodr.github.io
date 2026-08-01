@@ -6,3 +6,5 @@ _site/
 vendor/
 node_modules/
 Gemfile.lock
+__pycache__/bookListMaker.cpython-310.pyc
+bookListMaker.py
