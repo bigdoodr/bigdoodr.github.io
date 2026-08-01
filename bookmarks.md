@@ -317,6 +317,11 @@ title: "Bookmarks"
 <div class="bookmark-label">YouTube Playlist Manager</div>
 </a>
 
+<a href="https://www.npr.org/series/656281336/music-homepage-video-playlist" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-desktop"></i></div>
+<div class="bookmark-label">NPR Tiny Desk Concerts</div>
+</a>
+
 </div>
 </div>
 
@@ -356,6 +361,11 @@ title: "Bookmarks"
 <div class="bookmark-label">Starfield: Outpost Guide</div>
 </a>
 
+<a href="https://game8.co/games/Starfield/archives/424601" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-cube"></i></div>
+<div class="bookmark-label">Starfield: Ytterbium Guide</div>
+</a>
+
 <a href="https://www.pcgamer.com/starfield-cargo-link/" class="bookmark-card">
 <div class="bookmark-icon"><i class="fas fa-boxes-stacked"></i></div>
 <div class="bookmark-label">Starfield: Cargo Links Guide</div>
@@ -386,6 +396,11 @@ title: "Bookmarks"
 <a href="https://murdle.com" class="bookmark-card">
 <div class="bookmark-icon"><i class="fas fa-magnifying-glass"></i></div>
 <div class="bookmark-label">Murdle</div>
+</a>
+
+<a href="https://www.thewordfinder.com/wordle-solver/" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+<div class="bookmark-label">Wordle Solver</div>
 </a>
 
 <a href="https://apps.apple.com/us/app/stitch/id1581052096" class="bookmark-card">
