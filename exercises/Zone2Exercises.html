@@ -377,6 +377,19 @@
     }
 
     // Create an exercise card
+    function getSafeVideoSrc(rawSrc) {
+      if (!rawSrc) return null;
+
+      try {
+        const parsed = new URL(rawSrc, window.location.origin);
+        const isHttp = parsed.protocol === 'http:' || parsed.protocol === 'https:';
+        if (!isHttp) return null;
+        return parsed.href;
+      } catch (e) {
+        return null;
+      }
+    }
+
     function createExerciseCard(exercise, difficulty) {
       const card = document.createElement('div');
       card.className = 'exercise-card';
@@ -408,10 +421,16 @@
       // Add click event to play video
       placeholder.addEventListener('click', function() {
         const videoSrc = this.getAttribute('data-video');
+        const safeVideoSrc = getSafeVideoSrc(videoSrc);
         const exerciseName = this.getAttribute('data-name');
+
+        if (!safeVideoSrc) {
+          console.warn('Blocked unsafe video URL:', videoSrc);
+          return;
+        }
         
         modalTitle.textContent = exerciseName;
-        modalVideo.src = videoSrc;
+        modalVideo.src = safeVideoSrc;
         modalVideo.load();
         modal.style.display = 'block';
         
