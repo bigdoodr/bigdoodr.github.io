@@ -191,6 +191,17 @@
       border-radius: 8px;
       color: #666;
     }
+    .video-placeholder.no-video {
+      cursor: default;
+      background-color: #eee;
+    }
+    .video-placeholder.no-video::after {
+      content: "Video coming soon";
+      background-color: rgba(0,0,0,0.4);
+    }
+    .video-placeholder.no-video .play-icon {
+      display: none;
+    }
     .nav-buttons {
       display: flex;
       justify-content: space-between;
@@ -263,9 +274,6 @@
     <a href="Zone2Randomizer.html" class="nav-button">Back to Workout Generator</a>
   </div>
 
-  <!-- Import the exercises from external file -->
-  <script src="/exercises/exercises.js"></script>
-
   <script>
 
     // DOM elements
@@ -276,6 +284,10 @@
     const closeModal = document.getElementById('closeModal');
     const areaFilters = document.getElementById('area-filters');
     const difficultyFilters = document.getElementById('difficulty-filters');
+
+    // Exercise data, loaded from exercises.json (the single source of truth,
+    // also consumed by the companion iOS app)
+    let exercises = {};
 
     // Initialize filters
     function initializeFilters() {
@@ -382,11 +394,12 @@
       card.className = 'exercise-card';
       
       // Video placeholder
+      const hasVideo = Boolean(exercise.videoPath);
       const placeholder = document.createElement('div');
-      placeholder.className = 'video-placeholder';
-      placeholder.setAttribute('data-video', exercise.video);
+      placeholder.className = hasVideo ? 'video-placeholder' : 'video-placeholder no-video';
+      placeholder.setAttribute('data-video', exercise.videoPath || '');
       placeholder.setAttribute('data-name', exercise.name);
-      
+
       const playIcon = document.createElement('div');
       playIcon.className = 'play-icon';
       placeholder.appendChild(playIcon);
@@ -409,12 +422,17 @@
       placeholder.addEventListener('click', function() {
         const videoSrc = this.getAttribute('data-video');
         const exerciseName = this.getAttribute('data-name');
-        
+
+        if (!videoSrc) {
+          // No video uploaded yet for this exercise
+          return;
+        }
+
         modalTitle.textContent = exerciseName;
         modalVideo.src = videoSrc;
         modalVideo.load();
         modal.style.display = 'block';
-        
+
         // Autoplay the video
         modalVideo.play().catch(e => console.log("Video autoplay prevented:", e));
       });
@@ -438,10 +456,24 @@
       }
     });
 
-    // Initialize page
+    // Initialize page: load exercises.json (source of truth), then render
     document.addEventListener('DOMContentLoaded', function() {
-      initializeFilters();
-      renderCatalog('all', 'all');
+      fetch('/exercises.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Failed to load exercises.json: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          exercises = data.exercises;
+          initializeFilters();
+          renderCatalog('all', 'all');
+        })
+        .catch(error => {
+          console.error(error);
+          catalogDiv.innerHTML = '<div class="no-exercises">Unable to load exercise data. Please try again later.</div>';
+        });
     });
   </script>
 </body>
