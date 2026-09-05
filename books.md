@@ -48,6 +48,7 @@ image: /resources/books.purple.png
   - [Troy Stark](#series-troy-stark)
   - [Unholy Island](#series-unholy-island)
   - [Walkaway](#series-walkaway)
+  - [Warm Bodies](#series-warm-bodies)
   - [X Minus One](#series-x-minus-one)
 - [2025 Reading](#reading-2025)
 - [2024 Reading](#reading-2024)
@@ -77,10 +78,12 @@ image: /resources/books.purple.png
 <a id="reading-2026"></a>
 ## 2026 Reading
 
-### Running Tally: 36 books
+### Running Tally: 39 books
 
 | Title | Author | Month | Details | Series |
 |-------|--------|-------|---------|--------|
+| Doubters’ Club | Preston Ulmer | August | [View on LibraryThing](https://www.librarything.com/work/26468639/t/The-Doubters-039-Club-Good-Faith-Conversations-with-Skeptics-Atheists-and-the-Spiritually-Wounded) | — |
+| Vigil | George Saunders | August | [View on LibraryThing](https://www.librarything.com/isbn/9780525509622) | — |
 | Princess Bride | William Goldman | August | [View on LibraryThing](https://www.librarything.com/isbn/9780345916129) | — |
 | Think Again | Adam Grant | July | [View on LibraryThing](https://www.librarything.com/isbn/9780753553886) | — |
 | My Darkest Prayer | S.A. Cosby | July | [View on LibraryThing](https://www.librarything.com/isbn/9781940758862) | — |
@@ -715,6 +718,17 @@ image: /resources/books.purple.png
 |-------|-------|--------|------|
 | 1 | [Walkaway](https://www.librarything.com/isbn/9781538424254) | Cory Doctorow | ✅ April 2024 |
 | 1.1 | [Party Discipline](https://www.librarything.com/search.php?search=Party%20Discipline%20Cory%20Doctorow&searchtype=newwork_titles&sortchoice=0) | Cory Doctorow | ☐ |
+
+<a id="series-warm-bodies"></a>
+### [Warm Bodies](https://www.librarything.com/nseries/15292/Warm-Bodies)
+
+| Order | Title | Author | Read |
+|-------|-------|--------|------|
+| 0.5 | [The New Hunger](https://www.librarything.com/search.php?search=The%20New%20Hunger%20Isaac%20Marion&searchtype=newwork_titles&sortchoice=0) | Isaac Marion | ☐ |
+| 0.6 | [Boarded Window](https://www.librarything.com/search.php?search=Boarded%20Window%20Isaac%20Marion&searchtype=newwork_titles&sortchoice=0) | Isaac Marion | ☐ |
+| 1 | [Warm Bodies](https://www.librarything.com/isbn/9781476717463) | Isaac Marion | ✅ August 2026 |
+| 2 | [The Burning World](https://www.librarything.com/search.php?search=The%20Burning%20World%20Isaac%20Marion&searchtype=newwork_titles&sortchoice=0) | Isaac Marion | ☐ |
+| 3 | [The Living](https://www.librarything.com/search.php?search=The%20Living%20Isaac%20Marion&searchtype=newwork_titles&sortchoice=0) | Isaac Marion | ☐ |
 
 <a id="series-x-minus-one"></a>
 ### [X Minus One](https://www.librarything.com/nseries/183673/X-Minus-One)
