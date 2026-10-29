@@ -1,0 +1,229 @@
+{
+ "speaker": "BUCK",
+ "lines": [
+  {
+   "id": "kill_1",
+   "text": "Your contract's been terminated.",
+   "role": "kill",
+   "sub": 2.6,
+   "file": "voice/kill_1.mp3"
+  },
+  {
+   "id": "kill_2",
+   "text": "Disarming. Literally.",
+   "role": "kill",
+   "sub": 2.6,
+   "file": "voice/kill_2.mp3"
+  },
+  {
+   "id": "kill_3",
+   "text": "Ninety days late, and falling apart.",
+   "role": "kill",
+   "sub": 2.6,
+   "file": "voice/kill_3.mp3"
+  },
+  {
+   "id": "kill_4",
+   "text": "Should've read the fine print.",
+   "role": "kill",
+   "sub": 2.6,
+   "file": "voice/kill_4.mp3"
+  },
+  {
+   "id": "kill_5",
+   "text": "Hold still. I'm itemizing.",
+   "role": "kill",
+   "sub": 2.6,
+   "file": "voice/kill_5.mp3"
+  },
+  {
+   "id": "kill_6",
+   "text": "That's a limb-ited warranty.",
+   "role": "kill",
+   "sub": 2.6,
+   "file": "voice/kill_6.mp3"
+  },
+  {
+   "id": "kill_7",
+   "text": "Repossessed.",
+   "role": "kill",
+   "sub": 2.6,
+   "file": "voice/kill_7.mp3"
+  },
+  {
+   "id": "kill_8",
+   "text": "Nobody skips out on Gorgon. Not even the dead.",
+   "role": "kill",
+   "sub": 2.6,
+   "file": "voice/kill_8.mp3"
+  },
+  {
+   "id": "secret_first",
+   "text": "Every ship's got a junk drawer.",
+   "role": "secretFirst",
+   "sub": 2.8,
+   "file": "voice/secret_first.mp3"
+  },
+  {
+   "id": "secret_1",
+   "text": "Oh, hello... what's this?",
+   "role": "secret",
+   "sub": 2.8,
+   "file": "voice/secret_1.mp3"
+  },
+  {
+   "id": "secret_2",
+   "text": "Well, well. Somebody was hiding something.",
+   "role": "secret",
+   "sub": 2.8,
+   "file": "voice/secret_2.mp3"
+  },
+  {
+   "id": "secret_3",
+   "text": "Off the books. My favorite kind.",
+   "role": "secret",
+   "sub": 2.8,
+   "file": "voice/secret_3.mp3"
+  },
+  {
+   "id": "secret_4",
+   "text": "Finders keepers.",
+   "role": "secret",
+   "sub": 2.8,
+   "file": "voice/secret_4.mp3"
+  },
+  {
+   "id": "secret_5",
+   "text": "Don't mind if I do.",
+   "role": "secret",
+   "sub": 2.8,
+   "file": "voice/secret_5.mp3"
+  },
+  {
+   "id": "secret_6",
+   "text": "Hidden stash. The bank's gonna love this.",
+   "role": "secret",
+   "sub": 2.8,
+   "file": "voice/secret_6.mp3"
+  },
+  {
+   "id": "tag_1",
+   "text": "Tagged.",
+   "role": "tag",
+   "sub": 2,
+   "file": "voice/tag_1.mp3"
+  },
+  {
+   "id": "tag_2",
+   "text": "That's company property now.",
+   "role": "tag",
+   "sub": 2,
+   "file": "voice/tag_2.mp3"
+  },
+  {
+   "id": "tag_3",
+   "text": "Somebody's getting a nice auction.",
+   "role": "tag",
+   "sub": 2,
+   "file": "voice/tag_3.mp3"
+  },
+  {
+   "id": "headshot",
+   "text": "Huh. Didn't need that, apparently.",
+   "role": "headshot",
+   "sub": 3,
+   "file": "voice/headshot.mp3"
+  },
+  {
+   "id": "brute",
+   "text": "Oh. You must be the co-signer.",
+   "role": "enemyIntro",
+   "sub": 3,
+   "file": "voice/brute.mp3"
+  },
+  {
+   "id": "spitter",
+   "text": "Spitters. Great.",
+   "role": "enemyIntro",
+   "sub": 2.4,
+   "file": "voice/spitter.mp3"
+  },
+  {
+   "id": "bloater",
+   "text": "Oh, that's disgusting. Don't pop on me.",
+   "role": "enemyIntro",
+   "sub": 3,
+   "file": "voice/bloater.mp3"
+  },
+  {
+   "id": "low_hp",
+   "text": "Ouch! That's coming out of my commission.",
+   "role": "lowHp",
+   "sub": 3,
+   "file": "voice/low_hp.mp3"
+  },
+  {
+   "id": "death",
+   "text": "Great. Repossessed.",
+   "role": "death",
+   "sub": 3,
+   "file": "voice/death.mp3"
+  },
+  {
+   "id": "save_first",
+   "text": "Paperwork's filed.",
+   "role": "saveFirst",
+   "sub": 2.2,
+   "file": "voice/save_first.mp3"
+  },
+  {
+   "id": "stay_down",
+   "text": "Stay down this time.",
+   "role": "stayDown",
+   "sub": 2.2,
+   "file": "voice/stay_down.mp3"
+  },
+  {
+   "id": "deck_clear",
+   "text": "Ship's repossessed. Mostly.",
+   "role": "deckClear",
+   "sub": 3,
+   "file": "voice/deck_clear.mp3"
+  },
+  {
+   "id": "get_shotgun",
+   "text": "Now THIS is a payment plan.",
+   "role": "weapon",
+   "sub": 3,
+   "file": "voice/get_shotgun.mp3"
+  },
+  {
+   "id": "get_rivetgun",
+   "text": "Rivet driver. Let's nail this down.",
+   "role": "weapon",
+   "sub": 3,
+   "file": "voice/get_rivetgun.mp3"
+  },
+  {
+   "id": "get_satchel",
+   "text": "Charge bombs. Fire in the hole.",
+   "role": "weapon",
+   "sub": 3,
+   "file": "voice/get_satchel.mp3"
+  },
+  {
+   "id": "trailer_late",
+   "text": "Says here your payments are ninety days late.",
+   "role": "trailer",
+   "sub": 3.4,
+   "file": "voice/trailer_late.mp3"
+  },
+  {
+   "id": "trailer_limbs",
+   "text": "Guess I'll take payment in limbs.",
+   "role": "trailer",
+   "sub": 3.4,
+   "file": "voice/trailer_limbs.mp3"
+  }
+ ]
+}

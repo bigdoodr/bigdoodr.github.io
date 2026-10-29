@@ -1,0 +1,257 @@
+{
+ "note": "Play at gain x distance volume, panned at runtime, into a compressor (threshold -12 dB, knee 10, ratio 5). Variants like shriek_1_3 are pitch 1.3.",
+ "sounds": {
+  "ambient": {
+   "file": "sfx/ambient.wav",
+   "gain": 0.7167,
+   "seconds": 28.571,
+   "loop": true
+  },
+  "beep": {
+   "file": "sfx/beep.wav",
+   "gain": 0.1141,
+   "seconds": 0.067
+  },
+  "bounce": {
+   "file": "sfx/bounce.wav",
+   "gain": 0.3902,
+   "seconds": 0.136
+  },
+  "braam_2_5": {
+   "file": "sfx/braam_2_5.wav",
+   "gain": 2.8049,
+   "seconds": 2.648
+  },
+  "braam_3": {
+   "file": "sfx/braam_3.wav",
+   "gain": 2.8306,
+   "seconds": 3.153
+  },
+  "braam_4": {
+   "file": "sfx/braam_4.wav",
+   "gain": 2.8634,
+   "seconds": 4.153
+  },
+  "braam_4_5": {
+   "file": "sfx/braam_4_5.wav",
+   "gain": 2.8745,
+   "seconds": 4.645
+  },
+  "braam_5_5": {
+   "file": "sfx/braam_5_5.wav",
+   "gain": 2.8907,
+   "seconds": 5.65
+  },
+  "braam_6": {
+   "file": "sfx/braam_6.wav",
+   "gain": 2.8969,
+   "seconds": 6.152
+  },
+  "breaker": {
+   "file": "sfx/breaker.wav",
+   "gain": 0.932,
+   "seconds": 1.27
+  },
+  "clang": {
+   "file": "sfx/clang.wav",
+   "gain": 0.8275,
+   "seconds": 0.83
+  },
+  "cutter": {
+   "file": "sfx/cutter.wav",
+   "gain": 0.5692,
+   "seconds": 0.287
+  },
+  "death": {
+   "file": "sfx/death.wav",
+   "gain": 0.6698,
+   "seconds": 0.562
+  },
+  "denied": {
+   "file": "sfx/denied.wav",
+   "gain": 0.1374,
+   "seconds": 0.23
+  },
+  "door": {
+   "file": "sfx/door.wav",
+   "gain": 0.2866,
+   "seconds": 0.51
+  },
+  "drum": {
+   "file": "sfx/drum.wav",
+   "gain": 1.6527,
+   "seconds": 0.93
+  },
+  "dry": {
+   "file": "sfx/dry.wav",
+   "gain": 0.0519,
+   "seconds": 0.019
+  },
+  "explode": {
+   "file": "sfx/explode.wav",
+   "gain": 2.3396,
+   "seconds": 1.057
+  },
+  "groan": {
+   "file": "sfx/groan.wav",
+   "gain": 0.4909,
+   "seconds": 1.205
+  },
+  "heart": {
+   "file": "sfx/heart.wav",
+   "gain": 0.5753,
+   "seconds": 0.37
+  },
+  "hit": {
+   "file": "sfx/hit.wav",
+   "gain": 0.3572,
+   "seconds": 0.099
+  },
+  "hurt": {
+   "file": "sfx/hurt.wav",
+   "gain": 0.3851,
+   "seconds": 0.22
+  },
+  "key": {
+   "file": "sfx/key.wav",
+   "gain": 0.3037,
+   "seconds": 0.568
+  },
+  "kick": {
+   "file": "sfx/kick.wav",
+   "gain": 0.8598,
+   "seconds": 0.15
+  },
+  "klaxon": {
+   "file": "sfx/klaxon.wav",
+   "gain": 0.1706,
+   "seconds": 1.875
+  },
+  "music": {
+   "file": "sfx/music.wav",
+   "gain": 3.0513,
+   "seconds": 6.957,
+   "loop": true
+  },
+  "pickup": {
+   "file": "sfx/pickup.wav",
+   "gain": 0.1898,
+   "seconds": 0.194
+  },
+  "powerup": {
+   "file": "sfx/powerup.wav",
+   "gain": 1.2417,
+   "seconds": 3.35
+  },
+  "rivet": {
+   "file": "sfx/rivet.wav",
+   "gain": 0.5865,
+   "seconds": 0.078
+  },
+  "roar": {
+   "file": "sfx/roar.wav",
+   "gain": 1.4015,
+   "seconds": 1.446
+  },
+  "save": {
+   "file": "sfx/save.wav",
+   "gain": 0.2291,
+   "seconds": 0.444
+  },
+  "sever": {
+   "file": "sfx/sever.wav",
+   "gain": 0.5609,
+   "seconds": 0.238
+  },
+  "shotgun": {
+   "file": "sfx/shotgun.wav",
+   "gain": 1.8929,
+   "seconds": 0.683
+  },
+  "shriek_0_5": {
+   "file": "sfx/shriek_0_5.wav",
+   "gain": 0.3348,
+   "seconds": 0.84
+  },
+  "shriek_1": {
+   "file": "sfx/shriek_1.wav",
+   "gain": 0.3438,
+   "seconds": 0.841
+  },
+  "shriek_1_1": {
+   "file": "sfx/shriek_1_1.wav",
+   "gain": 0.3335,
+   "seconds": 0.872
+  },
+  "shriek_1_2": {
+   "file": "sfx/shriek_1_2.wav",
+   "gain": 0.3563,
+   "seconds": 0.863
+  },
+  "shriek_1_3": {
+   "file": "sfx/shriek_1_3.wav",
+   "gain": 0.4136,
+   "seconds": 0.849
+  },
+  "shriek_1_4": {
+   "file": "sfx/shriek_1_4.wav",
+   "gain": 0.3984,
+   "seconds": 0.855
+  },
+  "shriek_1_5": {
+   "file": "sfx/shriek_1_5.wav",
+   "gain": 0.3966,
+   "seconds": 0.859
+  },
+  "shriek_1_6": {
+   "file": "sfx/shriek_1_6.wav",
+   "gain": 0.4759,
+   "seconds": 0.861
+  },
+  "spit": {
+   "file": "sfx/spit.wav",
+   "gain": 0.3895,
+   "seconds": 0.197
+  },
+  "splat": {
+   "file": "sfx/splat.wav",
+   "gain": 0.1167,
+   "seconds": 0.145
+  },
+  "static": {
+   "file": "sfx/static.wav",
+   "gain": 0.1641,
+   "seconds": 5.601
+  },
+  "step": {
+   "file": "sfx/step.wav",
+   "gain": 0.0956,
+   "seconds": 0.032
+  },
+  "stinger": {
+   "file": "sfx/stinger.wav",
+   "gain": 1.5227,
+   "seconds": 1.751
+  },
+  "swap": {
+   "file": "sfx/swap.wav",
+   "gain": 0.0334,
+   "seconds": 0.129
+  },
+  "tick": {
+   "file": "sfx/tick.wav",
+   "gain": 0.0601,
+   "seconds": 0.014
+  },
+  "whisper": {
+   "file": "sfx/whisper.wav",
+   "gain": 0.078,
+   "seconds": 1.901
+  },
+  "whoosh": {
+   "file": "sfx/whoosh.wav",
+   "gain": 0.0366,
+   "seconds": 0.162
+  }
+ }
+}

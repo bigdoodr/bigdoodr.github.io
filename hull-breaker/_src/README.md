@@ -18,6 +18,21 @@ The series bible (story, characters, lore facts, deck outlines, rules for contin
 | `voice/logs_text.json` | Deck 01 log headers and scripts (the subtitles). |
 | `pages/lab_template.html` | Buck Voice Lab page (fill `__STEMS__` with `lab_stems.json`). Its `BuckDSP` script is the reference voice processor. |
 | `pages/review_template.html` | Log voice review page template. |
+| `pack/FORMAT.md` | The deck pack format (version 1): what the native apps download and the web game will read. Start here for engine or pack work. |
+| `pack/dump.py` | Runs the shipped `index.html` in headless Chromium and dumps its data, art, voices, logs and rendered sounds to a raw folder. |
+| `pack/extract.py` | Builds `../packs/` (catalog, `core`, `deck-01`) from the dump plus `pack/deck01.py`, Deck 01's rules written as data. |
+| `pack/validate_pack.py` | Checks hashes and cross-references, the map, and runs the deck's rules to prove a win and 100% on every difficulty. |
+| `pack/parity.py` | Starts the real game on every difficulty and checks it spawns exactly what the pack says. |
+
+## Deck packs
+
+`../packs/` is public (GitHub Pages serves it at `bigdoodr.github.io/hull-breaker/packs/`), so a deck's pack is pushed only when that deck ships. Rebuild and check Deck 01's pack with:
+
+```
+cd _src/pack
+python3 dump.py raw && python3 extract.py raw ../../packs
+python3 validate_pack.py && python3 parity.py
+```
 
 ## Buck's voice (locked)
 
@@ -33,4 +48,4 @@ Rules learned the hard way:
 
 ## Requirements
 
-Python 3 with `kokoro-onnx`, `soundfile`, `praat-parselmouth`, `scipy`, `numpy`, `faster-whisper` (clarity checks), `playwright` (Chromium), and `ffmpeg`. Kokoro model files: `kokoro-v1.0.onnx` and `voices-v1.0.bin` from the `thewh1teagle/kokoro-onnx` GitHub releases (`model-files-v1.0`), placed in `kok/`.
+Python 3 with `kokoro-onnx`, `soundfile`, `pillow`, `praat-parselmouth`, `scipy`, `numpy`, `faster-whisper` (clarity checks), `playwright` (Chromium), and `ffmpeg`. Kokoro model files: `kokoro-v1.0.onnx` and `voices-v1.0.bin` from the `thewh1teagle/kokoro-onnx` GitHub releases (`model-files-v1.0`), placed in `kok/`.

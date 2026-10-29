@@ -1,0 +1,476 @@
+{
+ "note": "Reference values from the JavaScript engine (index.html). Engines read these instead of hard-coding them.",
+ "difficulty": [
+  {
+   "name": "Very Easy",
+   "dmg": 0.45,
+   "hp": 0.7,
+   "spd": 0.85,
+   "ammo": 1.7,
+   "heal": 1.6,
+   "spawn": 0.5,
+   "cells": 30,
+   "save": "area",
+   "revive": 0,
+   "desc": "For the story and the scenery. Enemies are weak and slow, supplies are everywhere, and the game saves in every new area."
+  },
+  {
+   "name": "Easy",
+   "dmg": 0.7,
+   "hp": 0.85,
+   "spd": 0.93,
+   "ammo": 1.3,
+   "heal": 1.3,
+   "spawn": 0.75,
+   "cells": 24,
+   "save": "area",
+   "revive": 0.1,
+   "desc": "A relaxed run. Fewer enemies, extra ammo and health, and a save in every new area. Once in a while, a body gets back up."
+  },
+  {
+   "name": "Normal",
+   "dmg": 1.1,
+   "hp": 1,
+   "spd": 1,
+   "ammo": 1,
+   "heal": 1,
+   "spawn": 1,
+   "cells": 18,
+   "save": "events",
+   "revive": 0.33,
+   "desc": "The intended experience. Every enemy shows up, ammo has to be earned, and about a third of the bodies get back up. The game saves after big moments."
+  },
+  {
+   "name": "Hard",
+   "dmg": 1.5,
+   "hp": 1.25,
+   "spd": 1.12,
+   "ammo": 0.8,
+   "heal": 0.75,
+   "spawn": 1.35,
+   "cells": 14,
+   "save": "none",
+   "revive": 0.66,
+   "desc": "Extra enemies, tougher limbs, thinner supplies, and most bodies get back up. The game only saves at save stations."
+  },
+  {
+   "name": "Nightmare",
+   "dmg": 2.1,
+   "hp": 1.5,
+   "spd": 1.22,
+   "ammo": 0.6,
+   "heal": 0.55,
+   "spawn": 1.7,
+   "cells": 10,
+   "save": "none",
+   "revive": 1,
+   "desc": "Everything hits like a freight hauler and supplies are scarce. Save stations only. Every body gets back up unless you stomp it."
+  }
+ ],
+ "veryEasyThin": 0.3,
+ "player": {
+  "hp": 100,
+  "maxHp": 100,
+  "maxArmor": 100,
+  "radius": 0.22,
+  "armorAbsorb": 0.6,
+  "lowHp": 30
+ },
+ "enemies": {
+  "husk": {
+   "hp": 12,
+   "lhp": [
+    3,
+    3,
+    3,
+    4,
+    4
+   ],
+   "speed": 1.35,
+   "dmg": 13,
+   "reach": 0.95,
+   "wind": 0.42,
+   "r": 0.27,
+   "height": 1,
+   "limbs": [
+    "head",
+    "armL",
+    "armR",
+    "legL",
+    "legR"
+   ],
+   "sever": 3
+  },
+  "crawler": {
+   "hp": 5,
+   "lhp": [
+    2,
+    2,
+    2,
+    9,
+    9
+   ],
+   "speed": 2.5,
+   "dmg": 8,
+   "reach": 0.75,
+   "wind": 0.25,
+   "r": 0.24,
+   "height": 0.42,
+   "limbs": [
+    "head",
+    "armL",
+    "armR",
+    "legL",
+    "legR"
+   ],
+   "sever": 2
+  },
+  "brute": {
+   "hp": 42,
+   "lhp": [
+    8,
+    9,
+    9,
+    10,
+    10
+   ],
+   "speed": 1.3,
+   "dmg": 24,
+   "reach": 1.15,
+   "wind": 0.55,
+   "r": 0.36,
+   "height": 1.3,
+   "limbs": [
+    "head",
+    "armL",
+    "armR",
+    "legL",
+    "legR"
+   ],
+   "sever": 4
+  },
+  "spitter": {
+   "hp": 10,
+   "lhp": [
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "speed": 1.15,
+   "dmg": 9,
+   "reach": 0.9,
+   "wind": 0.4,
+   "r": 0.26,
+   "height": 1,
+   "limbs": [
+    "head",
+    "armL",
+    "armR",
+    "legL",
+    "legR"
+   ],
+   "sever": 3
+  },
+  "bloater": {
+   "hp": 8,
+   "lhp": [
+    2,
+    2,
+    2,
+    3,
+    3
+   ],
+   "speed": 0.95,
+   "dmg": 0,
+   "reach": 1.1,
+   "wind": 0.7,
+   "r": 0.3,
+   "height": 1.06,
+   "limbs": [
+    "head",
+    "armL",
+    "armR",
+    "legL",
+    "legR"
+   ],
+   "sever": 2
+  }
+ },
+ "enemyIntro": {
+  "brute": {
+   "line": "brute"
+  },
+  "spitter": {
+   "line": "spitter",
+   "msg": "TAKE A SPITTER'S HEAD TO STOP THE ACID."
+  },
+  "bloater": {
+   "line": "bloater",
+   "msg": "SHOOT THE BELLY FROM A DISTANCE."
+  }
+ },
+ "weapons": [
+  {
+   "id": "cutter",
+   "name": "CUTTER",
+   "ammo": "cells",
+   "cooldown": 0.5,
+   "limbDamage": 4,
+   "torsoDamage": 2,
+   "sfx": "cutter"
+  },
+  {
+   "id": "boomstick",
+   "name": "BOOMSTICK",
+   "ammo": "shells",
+   "cooldown": 0.9,
+   "pellets": 9,
+   "nearDamage": 2.6,
+   "farDamage": 1.8,
+   "sfx": "shotgun"
+  },
+  {
+   "id": "rivet",
+   "name": "RIVET DRIVER",
+   "ammo": "rivets",
+   "cooldown": 0.095,
+   "limbDamage": 1.25,
+   "torsoDamage": 1,
+   "sfx": "rivet"
+  },
+  {
+   "id": "charges",
+   "name": "CHARGES",
+   "ammo": "bombs",
+   "cooldown": 0.75,
+   "radius": 2.9,
+   "damage": 46,
+   "fuse": 1.9,
+   "sfx": "whoosh"
+  }
+ ],
+ "ammo": {
+  "cells": {
+   "max": 60
+  },
+  "shells": {
+   "max": 40
+  },
+  "rivets": {
+   "max": 200
+  },
+  "bombs": {
+   "max": 9
+  }
+ },
+ "kick": {
+  "cooldown": 0.6,
+  "range": 1.35,
+  "damage": 3.5,
+  "stomp": 11
+ },
+ "explosions": {
+  "barrel": {
+   "radius": 2.7,
+   "damage": 42
+  },
+  "bloater": {
+   "radius": 2.8,
+   "damage": 46
+  },
+  "bomb": {
+   "radius": 2.9,
+   "damage": 46
+  }
+ },
+ "revive": {
+  "after": [
+   12,
+   20
+  ],
+  "types": [
+   "husk",
+   "spitter"
+  ],
+  "becomes": "crawler",
+  "range": 16
+ },
+ "items": {
+  "med": {
+   "heal": 25,
+   "msg": "MED-GEL",
+   "sprite": "med",
+   "height": 0.26
+  },
+  "medbig": {
+   "heal": 50,
+   "msg": "TRAUMA KIT",
+   "sprite": "medbig",
+   "height": 0.3
+  },
+  "cells": {
+   "ammo": "cells",
+   "amount": 8,
+   "msg": "CUTTER CELLS",
+   "sprite": "cells",
+   "height": 0.28
+  },
+  "shells": {
+   "ammo": "shells",
+   "amount": 6,
+   "msg": "SHELLS",
+   "sprite": "shells",
+   "height": 0.24
+  },
+  "rivets": {
+   "ammo": "rivets",
+   "amount": 25,
+   "msg": "RIVETS",
+   "sprite": "rivets",
+   "height": 0.22
+  },
+  "bombs": {
+   "ammo": "bombs",
+   "amount": 2,
+   "minAmount": 1,
+   "msg": "CHARGE BOMBS",
+   "sprite": "bombs",
+   "height": 0.24
+  },
+  "armor": {
+   "armor": 60,
+   "msg": "RIG PLATING",
+   "sprite": "armor",
+   "height": 0.32
+  },
+  "shotgun": {
+   "weapon": 1,
+   "ammo": "shells",
+   "amount": 8,
+   "msg": "PICKED UP THE BOOMSTICK  [2]",
+   "line": "get_shotgun",
+   "sprite": "shotgun",
+   "height": 0.18,
+   "mapItem": true
+  },
+  "rivetgun": {
+   "weapon": 2,
+   "ammo": "rivets",
+   "amount": 40,
+   "msg": "PICKED UP THE RIVET DRIVER  [3]",
+   "line": "get_rivetgun",
+   "sprite": "rivetgun",
+   "height": 0.2,
+   "mapItem": true
+  },
+  "satchel": {
+   "weapon": 3,
+   "ammo": "bombs",
+   "amount": 3,
+   "minAmount": 2,
+   "msg": "PICKED UP CHARGE BOMBS  [4]",
+   "line": "get_satchel",
+   "sprite": "satchel",
+   "height": 0.26,
+   "mapItem": true
+  },
+  "keyB": {
+   "key": "B",
+   "sprite": "keyB",
+   "height": 0.2,
+   "mapItem": true
+  },
+  "keyY": {
+   "key": "Y",
+   "sprite": "keyY",
+   "height": 0.2,
+   "mapItem": true
+  },
+  "keyR": {
+   "key": "R",
+   "sprite": "keyR",
+   "height": 0.2,
+   "mapItem": true
+  },
+  "log": {
+   "log": true,
+   "sprite": "log",
+   "height": 0.24,
+   "mapItem": true
+  },
+  "asset": {
+   "asset": true,
+   "sprite": "asset",
+   "height": 0.32,
+   "glow": 1,
+   "float": 0.12,
+   "mapItem": true
+  }
+ },
+ "decor": {
+  "crate": {
+   "sprite": "crate",
+   "height": 0.62
+  },
+  "table": {
+   "sprite": "table",
+   "height": 0.42
+  },
+  "arcade": {
+   "sprite": "arcade",
+   "height": 0.95
+  },
+  "pile": {
+   "sprite": "pile",
+   "height": 0.22
+  },
+  "corpse": {
+   "sprite": "corpse",
+   "height": 1
+  },
+  "sign": {
+   "sprite": "sign",
+   "height": 0.3
+  },
+  "bunk": {
+   "sprite": "bunk",
+   "height": 0.62
+  }
+ },
+ "barrel": {
+  "sprite": "barrel",
+  "height": 0.55,
+  "hp": 2,
+  "radius": 0.22
+ },
+ "drops": {
+  "cells": 0.2,
+  "shells": 0.12,
+  "rivets": 0.12,
+  "med": 0.07
+ },
+ "ranks": [
+  [
+   100,
+   "REPO LEGEND"
+  ],
+  [
+   85,
+   "TOP COLLECTOR"
+  ],
+  [
+   65,
+   "SENIOR AGENT"
+  ],
+  [
+   40,
+   "FIELD AGENT"
+  ],
+  [
+   0,
+   "TEMP CONTRACTOR"
+  ]
+ ]
+}

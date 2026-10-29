@@ -1,0 +1,112 @@
+{
+ "format": 1,
+ "game": "hull-breaker",
+ "baseUrl": "https://bigdoodr.github.io/hull-breaker/packs/",
+ "packs": [
+  {
+   "id": "core",
+   "kind": "core",
+   "version": "1.0.0",
+   "minEngine": "1.0",
+   "bytes": 4989763,
+   "manifest": "core/manifest.json",
+   "manifestSha256": "6cea63dce9695a54205fe1c8b7bc0900622a0fc814af692c5b355c62ae4fc92e"
+  },
+  {
+   "id": "deck-01",
+   "kind": "deck",
+   "version": "1.0.0",
+   "minEngine": "1.0",
+   "bytes": 1100901,
+   "manifest": "deck-01/manifest.json",
+   "manifestSha256": "5b95edaea606e724a5fa3f415c5b05c06bec889c1cc2f30bb041faa72020c6de",
+   "deck": 1
+  }
+ ],
+ "decks": [
+  {
+   "deck": 1,
+   "title": "Repo Day",
+   "place": "Docking Ring",
+   "blurb": "Get aboard, restore power, collect three keycards, and trigger the tram override.",
+   "pack": "deck-01"
+  },
+  {
+   "deck": 2,
+   "title": "Hostile Tenancy",
+   "place": "Habitation Spine",
+   "blurb": "Crew quarters, chapel, and rec decks, where the dead still keep house.",
+   "pack": null
+  },
+  {
+   "deck": 3,
+   "title": "Root Cause",
+   "place": "Hydroponics and Life Support",
+   "blurb": "The farms have gone feral and the air is turning against you.",
+   "pack": null
+  },
+  {
+   "deck": 4,
+   "title": "Bedside Manner",
+   "place": "Medical and Research",
+   "blurb": "Dr. Okafor's labs, and the specs Gorgon sent before anyone reached Ruin.",
+   "pack": null
+  },
+  {
+   "deck": 5,
+   "title": "Cold Storage",
+   "place": "Cryo Vaults",
+   "blurb": "Twenty-eight hundred relief miners were sleeping here. Were.",
+   "pack": null
+  },
+  {
+   "deck": 6,
+   "title": "Overtime",
+   "place": "Engineering Core",
+   "blurb": "Something has clocked in at the reactor and it is not on the payroll.",
+   "pack": null
+  },
+  {
+   "deck": 7,
+   "title": "Lockdown",
+   "place": "Security and Brig",
+   "blurb": "Sergeant Pruitt locked the ship down. Then he went into the vents.",
+   "pack": null
+  },
+  {
+   "deck": 8,
+   "title": "Hostile Takeover",
+   "place": "Executive Deck",
+   "blurb": "Gorgon's liaison office, where the real contract is kept.",
+   "pack": null
+  },
+  {
+   "deck": 9,
+   "title": "Deep Pockets",
+   "place": "Mining Operations",
+   "blurb": "The drill platform and the tunnels it cut into Ruin.",
+   "pack": null
+  },
+  {
+   "deck": 10,
+   "title": "Gut Check",
+   "place": "The Biomass Decks",
+   "blurb": "The ship is becoming a body. You are inside it.",
+   "pack": null
+  },
+  {
+   "deck": 11,
+   "title": "Breach of Contract",
+   "place": "The Cavity Shaft",
+   "blurb": "Down the drill shaft, into whatever was waiting under Ruin.",
+   "pack": null
+  },
+  {
+   "deck": 12,
+   "title": "Final Notice",
+   "place": "The Choir",
+   "blurb": "Every account comes due.",
+   "pack": null
+  }
+ ]
+}

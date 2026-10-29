@@ -1,0 +1,1099 @@
+{
+ "w": 90,
+ "h": 78,
+ "geo": [
+  "##========#######################======###################################################",
+  "##=......=#######################=....=############################uuwwwwwwwwuOuwwwwwwwvuu",
+  "##=......=#######################=....=############################u.....................u",
+  "#ggggXggggggggggggggggggggvggg###qqqXqqqqqqqqqkkkkkkkkkkkkqqqqqqqqqq.....................u",
+  "#g...........................g###q...........q...........k.........t.....................u",
+  "#g...........................g###q...........q...........k.........q.....................u",
+  "#g...........................g###q...........b...........k.........q....nnnnnnnnnnnnn....u",
+  "#g...........................g###q...........q...........k.........q....nnnnnnnnnnnnn....u",
+  "#g....GGGGGGG..GGGGGGGGGG....g###q...........q...........D.........q.....................u",
+  "#g....GGGGGGG..GGGGGGGGGG....g###q...........q...........k.........q.....................u",
+  "#g...........................g###q...........D...........k.........v.........nnn.........u",
+  "#g...........................gqqqq...........q...........k.........q.........nnn.........u",
+  "#v...........................D...D...........q...........k.........q.....................u",
+  "#g....GGGGGGG..GGGGGGGGGG....gqqqq...........q...........kqXqqqqqqqq.....................u",
+  "#g....GGGGGGG..GGGGGGGGGG....g###q...........q...........k....=####u.....................u",
+  "#g...........................g###q...........q...........k....=####uuuvuuuDuuuuuuuuuuuuuuu",
+  "#g...........................g###q...........q...........k=====####u.............u.......u",
+  "#g...........................g###qqqqqqDqqqqqqkkkkkDkkktkk#########u.............u.......u",
+  "#g....GGGGGGG..GGGGGGGGGG....s###q.......................q#########u.............u.......u",
+  "#g....GGGGGGG..GGGGGGGGGG....g###q................kkkkkk.q#########Q....====.....u.......u",
+  "#g...........................g###q................kkkkkk.v#########u....====.....u.......t",
+  "#g...........................g###v.......................q#########u.............u.......u",
+  "#g...........................g###q.......................quuuuuuuuuu.............D.......u",
+  "#mmmmmmDmmvmmmmmmmmmmmmmmmgggg###q.......................q.........u.............u.......u",
+  "#m...........m...........m#######Q.......................3.........D.............u.......t",
+  "#m...........m...........m======#q.......................q.........u.............u.......u",
+  "#m...........m...........m.....=#q.......................quuuuuuuuuu.............s.......u",
+  "#b...........m...........m.....=#q.......................b#########b.............u.......u",
+  "#m...........m...........m.....=#q.......................q#########u.............u.......u",
+  "#m...........m...........X.....=#q.......................q#########uuuuuuuuuuuuuvuuuuuXuuu",
+  "#v...........s...........m.....=#qsqqqqqqqqqDqqvqqqqqqqqqq###pppZppppppt###########=.....=",
+  "#m...........m...........m.....=###########...###############p.........p.........##=.....=",
+  "#m...........m...........m.....=###########...###############t.........p.........##=.....=",
+  "#m...........m...........b======###########...###############p.........p.........t#=======",
+  "#m...........m...........m#################...###############p.........p.........#########",
+  "#mmmmmmDmmmmmmtmmmmDmmmtmm#################...###############p.........p.........#########",
+  "#m...........m...........m#################...###############p.........p.........#########",
+  "#m...........m...........m############v#####D###t#v##########pvpppDpppbppppp4ppppppppppppp",
+  "#m...........b...........Q#######.......................#####p...............p...........p",
+  "#m...........m...........m#######.......................#####p...............p...........p",
+  "#t...........m...........v#######.......................#####Z...............b...........p",
+  "#m...........D...........mmmmmmmm...##.............##...#####p...............p...........p",
+  "#m...........m...........D......D...##.............##...#####p....ppp........p...........p",
+  "#m...........m...........mmmmmmmm.......................#####p....ppp........p...........p",
+  "#t...........m...........m#######.......................s####s....ppp........p...rrrrr...p",
+  "#m...........m...........m#######.........ttQtt.........pppppp...............p...rrrrr...p",
+  "#m...........m...........m######b.........t...t.........p....p...............p...rrrrr...p",
+  "#mmmmmmmmmmmvmvmmmmmmmmmvm#######.........t...t.........1....D...............D...rrrrr...Z",
+  "##############ppppbpppppppppppppp.........t...t.........p....p...............p...rrrrr...p",
+  "##############p.................p.........ttXtt.........pppppp...............p...rrrrr...p",
+  "##############p.................D.......................#####p........ppp....p...rrrrr...p",
+  "##vt###t######p.................p.......................#####p........ppp....p...........p",
+  "##.......#####p...======ppppppppp...##.............##...#####Q........ppp....p...........s",
+  "##.......#####p...=....=#########...##.............##...v####p...............v...........p",
+  "#Q.......#####p...=....=########v.......................#####p...............p...........p",
+  "##.......#####p...=....=#########.......................#####p...............p...........p",
+  "##.......#####p...=....=#########.......................#####p...............p...........p",
+  "#hhhhDhhhbhhhhhhDhhhXhhhccccccQcccccccccvccc2ccccccccc##t####ppXpvppp5pppppppppppppppppppp",
+  "#h.....................h.............................c.......=....=h...h##################",
+  "#h.....................h.............................c.......=....=h...h#######==========#",
+  "#w.....................h.............................s.......t....=h...h#######=........=#",
+  "#w.....................s...cccc...CCCCCCC...ccccccc..c.......=....=Q...h#######=........=#",
+  "#w.....................h...cccc...CCCCCCC...ccccccc..D.......======h...h#######=........=#",
+  "#w.....................h...cccc.............ccccccc..c.......######h...h#######=........=#",
+  "#w.....................h.............................c.......TTTTTThhDhhTTTvTTTTTTTTXTTTTT",
+  "#w.....................h.............................c.......T...........................T",
+  "#w.....................h............ccccc............v.......T...........................T",
+  "#w.....................h...CCCCC....c...c...CCCCCC...ccccccccT...........................T",
+  "#w........======.......h...CCCCC....c...c...CCCCCC...c.......T...........................b",
+  "#w........======.......h...CCCCC....ccXcc...CCCCCC...c.......T...........................T",
+  "#w........======.......v...CCCCC............CCCCCC...c.......v...........................v",
+  "#w........======.......h....................CCCCCC...c.......T...........................T",
+  "#w........======.......h.............................D.......T...........................T",
+  "#h.....................h....ccccccc..................c.......s...........................T",
+  "#h.....................h....ccccccc.....CCCCCCCCC....c.......T.TTTTTTTTTTTTTTTTTTTTTTTTT.T",
+  "#hhhhhhhhhhhhhhhhhhhhhhb....ccccccc.....CCCCCCCCC....b.......T.TTTTTTTTTTTTTTTTTTTTTTTTT.T",
+  "#######################c.............................c.......T.TTTTTTTTTTTTTTTTTTTTTTTTT.T",
+  "#######################ccccccccccccvcccccccccccccccccccccccccTTTwTTwTTwTTwTTwTTwTTwTTwTTTT"
+ ],
+ "obj": [
+  "                                                                                          ",
+  "    e  $                           m $                                                    ",
+  "      i                             *                                                   $ ",
+  "                                                                     l                    ",
+  "              $                   $    +            $                 h               h   ",
+  "                           l                           S    l    B                        ",
+  "          s              S          d     d     h                                         ",
+  "                                                                                          ",
+  "                                   b  b  b  b                 $                 6         ",
+  "                                                 k                                        ",
+  "                                        6                     t H     8                   ",
+  "        8       x     s                        7           c                              ",
+  "                                           H          x           *           H        x  ",
+  "                                                                        S  +        S   * ",
+  "                                      h           H       e  +                            ",
+  "         k                         c        l e             $                             ",
+  "     h       a    H      e                              &           $           O e     & ",
+  "                                                                               l      $   ",
+  "                                                                      h             H     ",
+  "                                   !         6                                            ",
+  "    X                     c         h                                         H        a  ",
+  "   $        C       +      O                   k                                          ",
+  "                                          H       $    S                 *  5        i    ",
+  "                                                        l        S                        ",
+  "            +           a               t   t   t             H                         e ",
+  "   k       l                                                                              ",
+  "                c     c                         H                         s           x   ",
+  "                           l       8    t           h                S             o      ",
+  "    d   D        p                    c       +        e              i         e         ",
+  "                            *                           O                                 ",
+  "      6t   d       C                                                                $     ",
+  "                           e $                                i       $              & o  ",
+  "    D                                                                S   l                ",
+  "         d     7    $  x                    C                   h ?            Y          ",
+  "  $                                                                         $             ",
+  "                                                               7    c                     ",
+  "              $                                                       i i       *         ",
+  "   +    $              *                                                                  ",
+  "          x     h                                             $                         $ ",
+  "                                  O                            O           l   +          ",
+  "     d              l                 h         6                 s             s   6   O ",
+  "                                                                           x              ",
+  "      t           k                          k                                         H  ",
+  "                                                                                          ",
+  "         d            D                           h            h                          ",
+  "    H          + C                                                                        ",
+  "           a                                                            H                 ",
+  "                                       p                   h                    x         ",
+  "                                                                    6                 X   ",
+  "                                                                            O             ",
+  "                      k  h                            H        X          8               ",
+  "                                                                                       l  ",
+  "                H                                                 9            h          ",
+  "    l                                                                             7       ",
+  "                    &                   c                       C         s           s   ",
+  "       +             a                          S     O               c        O          ",
+  "                                                              +             i i         e ",
+  "                                                                                          ",
+  "                         l            K             a                                     ",
+  "   KK     O       a  K    h      O                7    l   R   i                          ",
+  "   K    d            K             9      h                     *                         ",
+  "                                                         D    $                  *    &   ",
+  "                        $                                                          $      ",
+  "              h                                           $                               ",
+  "                                 H    i             K                                     ",
+  "                               x           8  x                                           ",
+  "    @            p       S    O                   H         *   h     S O       x   O  i  ",
+  "                                     o $                       e                      c   ",
+  "                        K             l                                    z              ",
+  "                                                                                          ",
+  "                  d                                 O  o   o        5             Z       ",
+  "      k                          6      X                                                 ",
+  "                          c   +           c                    +                       *  ",
+  "  +                 O                                                                     ",
+  "            K            O                               %                                ",
+  "                                                   s   X      $                           ",
+  "                        e          C               $  e   x $                             ",
+  "                                                                                          "
+ ],
+ "zones": [
+  {
+   "id": "dock",
+   "name": "DOCKING BAY",
+   "x1": 2,
+   "y1": 58,
+   "x2": 22,
+   "y2": 74,
+   "floor": "grating",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.75,
+    0.85,
+    1
+   ]
+  },
+  {
+   "id": "dockoffice",
+   "name": "DOCK OFFICE",
+   "x1": 2,
+   "y1": 52,
+   "x2": 8,
+   "y2": 56,
+   "floor": "deckplate",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.95,
+    0.9,
+    0.75
+   ]
+  },
+  {
+   "id": "closet1",
+   "name": "MAINTENANCE CLOSET",
+   "x1": 19,
+   "y1": 53,
+   "x2": 22,
+   "y2": 56,
+   "floor": "deckplate",
+   "power": false,
+   "secret": true,
+   "dark": false
+  },
+  {
+   "id": "transit",
+   "name": "TRANSIT CORRIDOR",
+   "x1": 15,
+   "y1": 49,
+   "x2": 17,
+   "y2": 56,
+   "floor": "deckplate",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.7,
+    0.8,
+    1
+   ]
+  },
+  {
+   "id": "transit2",
+   "name": "TRANSIT CORRIDOR",
+   "x1": 18,
+   "y1": 49,
+   "x2": 31,
+   "y2": 51,
+   "floor": "deckplate",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.7,
+    0.8,
+    1
+   ]
+  },
+  {
+   "id": "hub",
+   "name": "CENTRAL ATRIUM",
+   "x1": 33,
+   "y1": 38,
+   "x2": 55,
+   "y2": 56,
+   "floor": "grating",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.85,
+    0.9,
+    1
+   ]
+  },
+  {
+   "id": "medcorr",
+   "name": "MED BAY",
+   "x1": 26,
+   "y1": 42,
+   "x2": 31,
+   "y2": 42,
+   "floor": "tile",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.8,
+    0.95,
+    1
+   ]
+  },
+  {
+   "id": "reception",
+   "name": "MED BAY",
+   "x1": 14,
+   "y1": 36,
+   "x2": 24,
+   "y2": 46,
+   "floor": "tile",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.8,
+    0.95,
+    1
+   ]
+  },
+  {
+   "id": "surgery",
+   "name": "SURGERY",
+   "x1": 2,
+   "y1": 36,
+   "x2": 12,
+   "y2": 46,
+   "floor": "tile",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.85,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "morgue",
+   "name": "MORGUE",
+   "x1": 2,
+   "y1": 24,
+   "x2": 12,
+   "y2": 34,
+   "floor": "tile",
+   "power": false,
+   "secret": false,
+   "dark": true,
+   "light": [
+    0.5,
+    0.72,
+    0.9
+   ]
+  },
+  {
+   "id": "quarantine",
+   "name": "QUARANTINE",
+   "x1": 14,
+   "y1": 24,
+   "x2": 24,
+   "y2": 34,
+   "floor": "tile",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.7,
+    1,
+    0.75
+   ]
+  },
+  {
+   "id": "lab",
+   "name": "HIDDEN LAB",
+   "x1": 26,
+   "y1": 26,
+   "x2": 30,
+   "y2": 32,
+   "floor": "deckplate",
+   "power": false,
+   "secret": true,
+   "dark": false
+  },
+  {
+   "id": "hydro",
+   "name": "HYDROPONICS",
+   "x1": 2,
+   "y1": 4,
+   "x2": 28,
+   "y2": 22,
+   "floor": "soil",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.95,
+    0.55,
+    1
+   ]
+  },
+  {
+   "id": "hydrocloset",
+   "name": "SEED VAULT",
+   "x1": 3,
+   "y1": 1,
+   "x2": 8,
+   "y2": 2,
+   "floor": "deckplate",
+   "power": false,
+   "secret": true,
+   "dark": false
+  },
+  {
+   "id": "hydrocorr",
+   "name": "CREW DECK",
+   "x1": 30,
+   "y1": 12,
+   "x2": 32,
+   "y2": 12,
+   "floor": "carpet",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.8,
+    0.6
+   ]
+  },
+  {
+   "id": "bunks",
+   "name": "CREW BUNKS",
+   "x1": 34,
+   "y1": 4,
+   "x2": 44,
+   "y2": 16,
+   "floor": "carpet",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.78,
+    0.55
+   ]
+  },
+  {
+   "id": "bunkcloset",
+   "name": "STORAGE NOOK",
+   "x1": 34,
+   "y1": 1,
+   "x2": 37,
+   "y2": 2,
+   "floor": "deckplate",
+   "power": false,
+   "secret": true,
+   "dark": false
+  },
+  {
+   "id": "showers",
+   "name": "LOCKER ROOM",
+   "x1": 46,
+   "y1": 4,
+   "x2": 56,
+   "y2": 16,
+   "floor": "tile",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.75,
+    0.9,
+    1
+   ]
+  },
+  {
+   "id": "captain",
+   "name": "CAPTAIN'S QUARTERS",
+   "x1": 58,
+   "y1": 4,
+   "x2": 66,
+   "y2": 12,
+   "floor": "carpet",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.75,
+    0.45
+   ]
+  },
+  {
+   "id": "capcloset",
+   "name": "CAPTAIN'S STASH",
+   "x1": 58,
+   "y1": 14,
+   "x2": 61,
+   "y2": 15,
+   "floor": "deckplate",
+   "power": false,
+   "secret": true,
+   "dark": false
+  },
+  {
+   "id": "crewcorr",
+   "name": "CREW DECK",
+   "x1": 43,
+   "y1": 31,
+   "x2": 45,
+   "y2": 36,
+   "floor": "deckplate",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.9,
+    0.88,
+    0.75
+   ]
+  },
+  {
+   "id": "commons",
+   "name": "CREW MESS",
+   "x1": 34,
+   "y1": 18,
+   "x2": 56,
+   "y2": 29,
+   "floor": "carpet",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.85,
+    0.6
+   ]
+  },
+  {
+   "id": "redcorr",
+   "name": "SECURITY CHECKPOINT",
+   "x1": 58,
+   "y1": 23,
+   "x2": 66,
+   "y2": 25,
+   "floor": "deckplate",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.35,
+    0.25
+   ]
+  },
+  {
+   "id": "security",
+   "name": "SECURITY",
+   "x1": 68,
+   "y1": 16,
+   "x2": 80,
+   "y2": 28,
+   "floor": "grating",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.6,
+    0.7,
+    1
+   ]
+  },
+  {
+   "id": "armory",
+   "name": "ARMORY",
+   "x1": 82,
+   "y1": 16,
+   "x2": 88,
+   "y2": 28,
+   "floor": "grating",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.7,
+    0.75,
+    1
+   ]
+  },
+  {
+   "id": "armcloset",
+   "name": "WEAPONS LOCKER",
+   "x1": 84,
+   "y1": 30,
+   "x2": 88,
+   "y2": 32,
+   "floor": "deckplate",
+   "power": false,
+   "secret": true,
+   "dark": false
+  },
+  {
+   "id": "bridge",
+   "name": "BRIDGE",
+   "x1": 68,
+   "y1": 2,
+   "x2": 88,
+   "y2": 14,
+   "floor": "grating",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.45,
+    0.65,
+    1
+   ]
+  },
+  {
+   "id": "engcorr",
+   "name": "ENGINEERING",
+   "x1": 57,
+   "y1": 46,
+   "x2": 60,
+   "y2": 48,
+   "floor": "deckplate",
+   "power": true,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.75,
+    0.4
+   ]
+  },
+  {
+   "id": "hall",
+   "name": "ENGINEERING",
+   "x1": 62,
+   "y1": 38,
+   "x2": 76,
+   "y2": 56,
+   "floor": "deckplate",
+   "power": true,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.72,
+    0.38
+   ]
+  },
+  {
+   "id": "coolant",
+   "name": "COOLANT PUMPS",
+   "x1": 62,
+   "y1": 31,
+   "x2": 70,
+   "y2": 36,
+   "floor": "deckplate",
+   "power": true,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.5,
+    0.85,
+    1
+   ]
+  },
+  {
+   "id": "chief",
+   "name": "CHIEF ENGINEER",
+   "x1": 72,
+   "y1": 31,
+   "x2": 80,
+   "y2": 36,
+   "floor": "grating",
+   "power": true,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.85,
+    0.6
+   ]
+  },
+  {
+   "id": "reactor",
+   "name": "REACTOR",
+   "x1": 78,
+   "y1": 38,
+   "x2": 88,
+   "y2": 56,
+   "floor": "grating",
+   "power": true,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.4,
+    1,
+    0.9
+   ]
+  },
+  {
+   "id": "engcloset",
+   "name": "PUMP CLOSET",
+   "x1": 62,
+   "y1": 58,
+   "x2": 65,
+   "y2": 61,
+   "floor": "deckplate",
+   "power": false,
+   "secret": true,
+   "dark": false
+  },
+  {
+   "id": "tramcorr",
+   "name": "TRAM ACCESS",
+   "x1": 68,
+   "y1": 58,
+   "x2": 70,
+   "y2": 63,
+   "floor": "deckplate",
+   "power": true,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.8,
+    0.5
+   ]
+  },
+  {
+   "id": "tram",
+   "name": "TRAM STATION",
+   "x1": 62,
+   "y1": 65,
+   "x2": 88,
+   "y2": 76,
+   "floor": "grating",
+   "power": true,
+   "secret": false,
+   "dark": false,
+   "light": [
+    1,
+    0.85,
+    0.5
+   ]
+  },
+  {
+   "id": "tramcloset",
+   "name": "BAGGAGE ROOM",
+   "x1": 80,
+   "y1": 60,
+   "x2": 87,
+   "y2": 63,
+   "floor": "deckplate",
+   "power": false,
+   "secret": true,
+   "dark": false
+  },
+  {
+   "id": "cargo",
+   "name": "CARGO HOLD",
+   "x1": 24,
+   "y1": 58,
+   "x2": 52,
+   "y2": 76,
+   "floor": "grating",
+   "power": false,
+   "secret": false,
+   "dark": true,
+   "light": [
+    0.85,
+    0.8,
+    0.7
+   ]
+  },
+  {
+   "id": "cargooffice",
+   "name": "CARGO OFFICE",
+   "x1": 54,
+   "y1": 58,
+   "x2": 60,
+   "y2": 66,
+   "floor": "deckplate",
+   "power": false,
+   "secret": false,
+   "dark": false,
+   "light": [
+    0.95,
+    0.9,
+    0.75
+   ]
+  },
+  {
+   "id": "annex",
+   "name": "CARGO ANNEX",
+   "x1": 54,
+   "y1": 68,
+   "x2": 60,
+   "y2": 76,
+   "floor": "grating",
+   "power": false,
+   "secret": false,
+   "dark": true,
+   "light": [
+    0.85,
+    0.8,
+    0.7
+   ]
+  },
+  {
+   "id": "kiosk",
+   "name": "KIOSK",
+   "x1": 43,
+   "y1": 46,
+   "x2": 45,
+   "y2": 48,
+   "floor": "grating",
+   "power": false,
+   "secret": true,
+   "dark": false
+  },
+  {
+   "id": "container",
+   "name": "SEALED CONTAINER",
+   "x1": 37,
+   "y1": 67,
+   "x2": 39,
+   "y2": 68,
+   "floor": "grating",
+   "power": false,
+   "secret": true,
+   "dark": true
+  }
+ ],
+ "logs": [
+  {
+   "x": 69,
+   "y": 3,
+   "log": "bridge"
+  },
+  {
+   "x": 27,
+   "y": 5,
+   "log": "hydro"
+  },
+  {
+   "x": 60,
+   "y": 5,
+   "log": "captain"
+  },
+  {
+   "x": 44,
+   "y": 15,
+   "log": "bunks"
+  },
+  {
+   "x": 79,
+   "y": 17,
+   "log": "security"
+  },
+  {
+   "x": 56,
+   "y": 23,
+   "log": "commons"
+  },
+  {
+   "x": 11,
+   "y": 25,
+   "log": "morgue"
+  },
+  {
+   "x": 27,
+   "y": 27,
+   "log": "lab"
+  },
+  {
+   "x": 73,
+   "y": 32,
+   "log": "chief"
+  },
+  {
+   "x": 75,
+   "y": 39,
+   "log": "hall"
+  },
+  {
+   "x": 20,
+   "y": 40,
+   "log": "reception"
+  },
+  {
+   "x": 87,
+   "y": 51,
+   "log": "reactor"
+  },
+  {
+   "x": 4,
+   "y": 53,
+   "log": "dockoffice"
+  },
+  {
+   "x": 25,
+   "y": 58,
+   "log": "cargo"
+  },
+  {
+   "x": 55,
+   "y": 59,
+   "log": "cargooffice"
+  },
+  {
+   "x": 38,
+   "y": 68,
+   "log": "container"
+  }
+ ],
+ "assets": [
+  {
+   "x": 7,
+   "y": 1,
+   "name": "Heirloom seed vault"
+  },
+  {
+   "x": 37,
+   "y": 1,
+   "name": "Vintage arcade board"
+  },
+  {
+   "x": 88,
+   "y": 2,
+   "name": "Bridge chronometer"
+  },
+  {
+   "x": 14,
+   "y": 4,
+   "name": "Hydroponic pump"
+  },
+  {
+   "x": 34,
+   "y": 4,
+   "name": "Bunk-room hi-fi"
+  },
+  {
+   "x": 52,
+   "y": 4,
+   "name": "Gold-plated shower head"
+  },
+  {
+   "x": 62,
+   "y": 8,
+   "name": "Captain's sextant"
+  },
+  {
+   "x": 60,
+   "y": 15,
+   "name": "Captain's whiskey"
+  },
+  {
+   "x": 68,
+   "y": 16,
+   "name": "Riot shield rack"
+  },
+  {
+   "x": 86,
+   "y": 17,
+   "name": "Targeting optic"
+  },
+  {
+   "x": 3,
+   "y": 21,
+   "name": "Prize orchid"
+  },
+  {
+   "x": 50,
+   "y": 22,
+   "name": "Galley espresso machine"
+  },
+  {
+   "x": 84,
+   "y": 30,
+   "name": "Officer's sidearm"
+  },
+  {
+   "x": 29,
+   "y": 31,
+   "name": "Lab centrifuge"
+  },
+  {
+   "x": 70,
+   "y": 31,
+   "name": "Coolant flow meter"
+  },
+  {
+   "x": 20,
+   "y": 33,
+   "name": "Biohazard analyzer"
+  },
+  {
+   "x": 2,
+   "y": 34,
+   "name": "Cryo drawer compressor"
+  },
+  {
+   "x": 76,
+   "y": 34,
+   "name": "Chief's tool chest"
+  },
+  {
+   "x": 14,
+   "y": 36,
+   "name": "Med scanner"
+  },
+  {
+   "x": 8,
+   "y": 37,
+   "name": "Surgical laser"
+  },
+  {
+   "x": 62,
+   "y": 38,
+   "name": "Engineering drone"
+  },
+  {
+   "x": 88,
+   "y": 38,
+   "name": "Reactor dosimeter"
+  },
+  {
+   "x": 62,
+   "y": 61,
+   "name": "Spare pump motor"
+  },
+  {
+   "x": 24,
+   "y": 62,
+   "name": "Loader battery"
+  },
+  {
+   "x": 83,
+   "y": 62,
+   "name": "Diplomatic luggage"
+  },
+  {
+   "x": 58,
+   "y": 63,
+   "name": "Manifest drive"
+  },
+  {
+   "x": 39,
+   "y": 67,
+   "name": "Ore sample case"
+  },
+  {
+   "x": 62,
+   "y": 75,
+   "name": "Conductor's cap"
+  },
+  {
+   "x": 51,
+   "y": 76,
+   "name": "Platinum ingot"
+  },
+  {
+   "x": 60,
+   "y": 76,
+   "name": "Forklift key"
+  }
+ ],
+ "doors": [
+  {
+   "x": 5,
+   "y": 3,
+   "tex": "crack_hydro"
+  },
+  {
+   "x": 36,
+   "y": 3,
+   "tex": "crack_crew"
+  },
+  {
+   "x": 59,
+   "y": 13,
+   "tex": "crack_crew"
+  },
+  {
+   "x": 25,
+   "y": 29,
+   "tex": "crack_med"
+  },
+  {
+   "x": 86,
+   "y": 29,
+   "tex": "crack_bridge"
+  },
+  {
+   "x": 44,
+   "y": 49,
+   "tex": "crack_hull"
+  },
+  {
+   "x": 20,
+   "y": 57,
+   "tex": "crack_haz"
+  },
+  {
+   "x": 63,
+   "y": 57,
+   "tex": "crack_pipe"
+  },
+  {
+   "x": 84,
+   "y": 64,
+   "tex": "crack_tram"
+  },
+  {
+   "x": 38,
+   "y": 69,
+   "tex": "crack_cargo"
+  }
+ ]
+}

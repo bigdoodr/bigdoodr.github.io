@@ -1,0 +1,446 @@
+{
+ "textureSize": 64,
+ "textures": {
+  "hull": {
+   "file": "textures/hull.png"
+  },
+  "haz": {
+   "file": "textures/haz.png"
+  },
+  "blood": {
+   "file": "textures/blood.png"
+  },
+  "term": {
+   "file": "textures/term.png",
+   "emissive": "textures/term.em.png"
+  },
+  "door": {
+   "file": "textures/door.png"
+  },
+  "lock": {
+   "file": "textures/lock.png",
+   "emissive": "textures/lock.em.png"
+  },
+  "win": {
+   "file": "textures/win.png",
+   "emissive": "textures/win.em.png"
+  },
+  "vent": {
+   "file": "textures/vent.png"
+  },
+  "scrawl": {
+   "file": "textures/scrawl.png"
+  },
+  "med": {
+   "file": "textures/med.png"
+  },
+  "secret": {
+   "file": "textures/secret.png"
+  },
+  "pipe": {
+   "file": "textures/pipe.png"
+  },
+  "tram": {
+   "file": "textures/tram.png"
+  },
+  "unlock": {
+   "file": "textures/unlock.png",
+   "emissive": "textures/unlock.em.png"
+  },
+  "hull2": {
+   "file": "textures/hull2.png"
+  },
+  "locker": {
+   "file": "textures/locker.png"
+  },
+  "reactor": {
+   "file": "textures/reactor.png",
+   "emissive": "textures/reactor.em.png"
+  },
+  "cargo": {
+   "file": "textures/cargo.png"
+  },
+  "cargo2": {
+   "file": "textures/cargo2.png"
+  },
+  "hydro": {
+   "file": "textures/hydro.png",
+   "emissive": "textures/hydro.em.png"
+  },
+  "planter": {
+   "file": "textures/planter.png"
+  },
+  "console": {
+   "file": "textures/console.png",
+   "emissive": "textures/console.em.png"
+  },
+  "crew": {
+   "file": "textures/crew.png"
+  },
+  "bridge": {
+   "file": "textures/bridge.png",
+   "emissive": "textures/bridge.em.png"
+  },
+  "save": {
+   "file": "textures/save.png",
+   "emissive": "textures/save.em.png"
+  },
+  "brk": {
+   "file": "textures/brk.png",
+   "emissive": "textures/brk.em.png"
+  },
+  "brkon": {
+   "file": "textures/brkon.png",
+   "emissive": "textures/brkon.em.png"
+  },
+  "blue": {
+   "file": "textures/blue.png",
+   "emissive": "textures/blue.em.png"
+  },
+  "yel": {
+   "file": "textures/yel.png",
+   "emissive": "textures/yel.em.png"
+  },
+  "pwr": {
+   "file": "textures/pwr.png",
+   "emissive": "textures/pwr.em.png"
+  },
+  "ovr": {
+   "file": "textures/ovr.png",
+   "emissive": "textures/ovr.em.png"
+  },
+  "ovrcon": {
+   "file": "textures/ovrcon.png",
+   "emissive": "textures/ovrcon.em.png"
+  },
+  "crack_hull": {
+   "file": "textures/crack_hull.png",
+   "crackOf": "hull"
+  },
+  "crack_haz": {
+   "file": "textures/crack_haz.png",
+   "crackOf": "haz"
+  },
+  "crack_blood": {
+   "file": "textures/crack_blood.png",
+   "crackOf": "blood"
+  },
+  "crack_win": {
+   "file": "textures/crack_win.png",
+   "crackOf": "win",
+   "emissive": "textures/crack_win.em.png"
+  },
+  "crack_scrawl": {
+   "file": "textures/crack_scrawl.png",
+   "crackOf": "scrawl"
+  },
+  "crack_med": {
+   "file": "textures/crack_med.png",
+   "crackOf": "med"
+  },
+  "crack_pipe": {
+   "file": "textures/crack_pipe.png",
+   "crackOf": "pipe"
+  },
+  "crack_tram": {
+   "file": "textures/crack_tram.png",
+   "crackOf": "tram"
+  },
+  "crack_hull2": {
+   "file": "textures/crack_hull2.png",
+   "crackOf": "hull2"
+  },
+  "crack_locker": {
+   "file": "textures/crack_locker.png",
+   "crackOf": "locker"
+  },
+  "crack_reactor": {
+   "file": "textures/crack_reactor.png",
+   "crackOf": "reactor",
+   "emissive": "textures/crack_reactor.em.png"
+  },
+  "crack_cargo": {
+   "file": "textures/crack_cargo.png",
+   "crackOf": "cargo"
+  },
+  "crack_cargo2": {
+   "file": "textures/crack_cargo2.png",
+   "crackOf": "cargo2"
+  },
+  "crack_hydro": {
+   "file": "textures/crack_hydro.png",
+   "crackOf": "hydro",
+   "emissive": "textures/crack_hydro.em.png"
+  },
+  "crack_planter": {
+   "file": "textures/crack_planter.png",
+   "crackOf": "planter"
+  },
+  "crack_console": {
+   "file": "textures/crack_console.png",
+   "crackOf": "console",
+   "emissive": "textures/crack_console.em.png"
+  },
+  "crack_crew": {
+   "file": "textures/crack_crew.png",
+   "crackOf": "crew"
+  },
+  "crack_bridge": {
+   "file": "textures/crack_bridge.png",
+   "crackOf": "bridge",
+   "emissive": "textures/crack_bridge.em.png"
+  },
+  "crack_brkon": {
+   "file": "textures/crack_brkon.png",
+   "crackOf": "brkon",
+   "emissive": "textures/crack_brkon.em.png"
+  },
+  "crack_ovrcon": {
+   "file": "textures/crack_ovrcon.png",
+   "crackOf": "ovrcon",
+   "emissive": "textures/crack_ovrcon.em.png"
+  }
+ },
+ "floors": {
+  "deckplate": {
+   "file": "floors/deckplate.png"
+  },
+  "tile": {
+   "file": "floors/tile.png"
+  },
+  "grating": {
+   "file": "floors/grating.png"
+  },
+  "soil": {
+   "file": "floors/soil.png"
+  },
+  "carpet": {
+   "file": "floors/carpet.png"
+  }
+ },
+ "ceilings": {
+  "ceiling": {
+   "file": "floors/ceiling.png"
+  },
+  "ceiling_lamp": {
+   "file": "floors/ceiling_lamp.png"
+  }
+ },
+ "sprites": {
+  "g_arm": {
+   "file": "sprites/g_arm.png",
+   "w": 20,
+   "h": 20
+  },
+  "g_leg": {
+   "file": "sprites/g_leg.png",
+   "w": 20,
+   "h": 20
+  },
+  "g_head": {
+   "file": "sprites/g_head.png",
+   "w": 16,
+   "h": 16
+  },
+  "blood": {
+   "file": "sprites/blood.png",
+   "w": 3,
+   "h": 3
+  },
+  "blood2": {
+   "file": "sprites/blood2.png",
+   "w": 2,
+   "h": 2
+  },
+  "splat": {
+   "file": "sprites/splat.png",
+   "w": 14,
+   "h": 3
+  },
+  "chunk": {
+   "file": "sprites/chunk.png",
+   "w": 6,
+   "h": 6
+  },
+  "spark": {
+   "file": "sprites/spark.png",
+   "w": 2,
+   "h": 2,
+   "emissive": "all"
+  },
+  "fire": {
+   "file": "sprites/fire.png",
+   "w": 8,
+   "h": 8,
+   "emissive": "all"
+  },
+  "cutfx": {
+   "file": "sprites/cutfx.png",
+   "w": 4,
+   "h": 2,
+   "emissive": "all"
+  },
+  "med": {
+   "file": "sprites/med.png",
+   "w": 24,
+   "h": 20
+  },
+  "medbig": {
+   "file": "sprites/medbig.png",
+   "w": 28,
+   "h": 22
+  },
+  "cells": {
+   "file": "sprites/cells.png",
+   "w": 24,
+   "h": 20,
+   "emissive": "sprites/cells.em.png"
+  },
+  "shells": {
+   "file": "sprites/shells.png",
+   "w": 22,
+   "h": 18
+  },
+  "shotgun": {
+   "file": "sprites/shotgun.png",
+   "w": 40,
+   "h": 14
+  },
+  "key": {
+   "file": "sprites/key.png",
+   "w": 16,
+   "h": 14,
+   "emissive": "sprites/key.em.png"
+  },
+  "armor": {
+   "file": "sprites/armor.png",
+   "w": 24,
+   "h": 24
+  },
+  "log": {
+   "file": "sprites/log.png",
+   "w": 16,
+   "h": 20,
+   "emissive": "sprites/log.em.png"
+  },
+  "barrel": {
+   "file": "sprites/barrel.png",
+   "w": 22,
+   "h": 30
+  },
+  "crate": {
+   "file": "sprites/crate.png",
+   "w": 32,
+   "h": 30
+  },
+  "pile": {
+   "file": "sprites/pile.png",
+   "w": 40,
+   "h": 16
+  },
+  "table": {
+   "file": "sprites/table.png",
+   "w": 48,
+   "h": 22
+  },
+  "arcade": {
+   "file": "sprites/arcade.png",
+   "w": 26,
+   "h": 48,
+   "emissive": "sprites/arcade.em.png"
+  },
+  "sign": {
+   "file": "sprites/sign.png",
+   "w": 30,
+   "h": 18,
+   "emissive": "all"
+  },
+  "corpse": {
+   "file": "sprites/corpse.png",
+   "w": 64,
+   "h": 96
+  },
+  "guide": {
+   "file": "sprites/guide.png",
+   "w": 6,
+   "h": 6,
+   "emissive": "sprites/guide.em.png"
+  },
+  "glob": {
+   "file": "sprites/glob.png",
+   "w": 8,
+   "h": 8,
+   "emissive": "all"
+  },
+  "glob2": {
+   "file": "sprites/glob2.png",
+   "w": 2,
+   "h": 2,
+   "emissive": "all"
+  },
+  "bombp": {
+   "file": "sprites/bombp.png",
+   "w": 8,
+   "h": 10
+  },
+  "rivets": {
+   "file": "sprites/rivets.png",
+   "w": 22,
+   "h": 16
+  },
+  "bombs": {
+   "file": "sprites/bombs.png",
+   "w": 22,
+   "h": 18
+  },
+  "rivetgun": {
+   "file": "sprites/rivetgun.png",
+   "w": 40,
+   "h": 18
+  },
+  "satchel": {
+   "file": "sprites/satchel.png",
+   "w": 28,
+   "h": 20
+  },
+  "keyB": {
+   "file": "sprites/keyB.png",
+   "w": 16,
+   "h": 14,
+   "emissive": "sprites/keyB.em.png"
+  },
+  "keyY": {
+   "file": "sprites/keyY.png",
+   "w": 16,
+   "h": 14,
+   "emissive": "sprites/keyY.em.png"
+  },
+  "keyR": {
+   "file": "sprites/keyR.png",
+   "w": 16,
+   "h": 14,
+   "emissive": "sprites/keyR.em.png"
+  },
+  "asset": {
+   "file": "sprites/asset.png",
+   "w": 20,
+   "h": 24,
+   "emissive": "all"
+  },
+  "bunk": {
+   "file": "sprites/bunk.png",
+   "w": 48,
+   "h": 40
+  }
+ },
+ "procedural": {
+  "note": "Drawn by the engine, not shipped as files: enemies (with severed limbs), weapon viewmodels, Buck's HUD face, the space backdrop.",
+  "enemies": [
+   "husk",
+   "crawler",
+   "brute",
+   "spitter",
+   "bloater"
+  ]
+ }
+}
