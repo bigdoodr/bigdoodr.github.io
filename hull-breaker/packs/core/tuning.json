@@ -49,7 +49,7 @@
    "heal": 0.75,
    "spawn": 1.35,
    "cells": 14,
-   "save": "none",
+   "save": "stations",
    "revive": 0.66,
    "desc": "Extra enemies, tougher limbs, thinner supplies, and most bodies get back up. The game only saves at save stations."
   },
@@ -62,9 +62,9 @@
    "heal": 0.55,
    "spawn": 1.7,
    "cells": 10,
-   "save": "none",
+   "save": "never",
    "revive": 1,
-   "desc": "Everything hits like a freight hauler and supplies are scarce. Save stations only. Every body gets back up unless you stomp it."
+   "desc": "Everything hits like a freight hauler and supplies are scarce. No saves: die and the deck starts over. Every body gets back up unless you stomp it."
   }
  ],
  "veryEasyThin": 0.3,

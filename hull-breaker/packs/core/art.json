@@ -113,6 +113,18 @@
    "file": "textures/ovrcon.png",
    "emissive": "textures/ovrcon.em.png"
   },
+  "lever": {
+   "file": "textures/lever.png",
+   "emissive": "textures/lever.em.png"
+  },
+  "leveron": {
+   "file": "textures/leveron.png",
+   "emissive": "textures/leveron.em.png"
+  },
+  "winmoon": {
+   "file": "textures/winmoon.png",
+   "emissive": "textures/winmoon.em.png"
+  },
   "crack_hull": {
    "file": "textures/crack_hull.png",
    "crackOf": "hull"

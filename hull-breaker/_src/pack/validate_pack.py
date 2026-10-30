@@ -15,10 +15,11 @@ SIGNALS = {  # combat and score events, with the fields their conditions may rea
     'kill': {'enemy', 'cause', 'boss'}, 'blast': {'source', 'kills'}, 'sever': {'enemy', 'limb', 'state'},
     'death': {'cause'}, 'secret': {'found', 'total'},
     'deckClear': {'percent', 'time', 'par', 'underPar', 'damageTaken', 'weapons', 'difficulty', 'deck'},
+    'cheat': {'command'},                                  # engine 1.2: a console cheat was used
 }
-STATS = {'kickKills', 'limbsSevered', 'deaths', 'bodiesKicked'}
+STATS = {'kickKills', 'limbsSevered', 'deaths', 'bodiesKicked', 'departStays'}
 EVENTS = {'start', 'enterZone', 'pickup', 'use', 'useDecor', 'doorUnlock', 'doorDenied', 'region'} | set(SIGNALS)
-ACTIONS = {'say', 'msg', 'objective', 'sfx', 'flash', 'shake', 'set', 'add', 'ambush', 'autosave', 'music', 'setTile', 'after', 'if', 'win', 'achieve'}
+ACTIONS = {'say', 'msg', 'objective', 'sfx', 'flash', 'shake', 'set', 'add', 'ambush', 'autosave', 'music', 'setTile', 'after', 'if', 'win', 'depart', 'achieve'}
 DIFFS = ['Very Easy', 'Easy', 'Normal', 'Hard', 'Nightmare']
 errors, warns = [], []
 err = errors.append
@@ -88,7 +89,7 @@ def validate_deck(pid, core, core_files):
         if 'decor' in o and o['decor'] not in decor: err(f'{pid}: object {ch} decor {o["decor"]} unknown')
     for z in level['zones']:
         if z['floor'] not in core['art']['floors']: err(f'{pid}: zone {z["id"]} floor {z["floor"]}')
-    uses = {w['use'] for w in leg['walls'].values() if 'use' in w}
+    uses = {w['use'] for w in leg['walls'].values() if 'use' in w} | {w['after']['use'] for w in leg['walls'].values() if 'use' in w.get('after', {})}
     for a in deck['ambushes'].values():
         for z in a['zones']:
             if z not in zones: err(f'{pid}: ambush zone {z} unknown')
@@ -201,6 +202,7 @@ def run_rules(pid, deck, level, start, diff=2):
             elif 'add' in a: S['counters'][a['add']] += a['value']; changed = True
             elif 'setTile' in a and cell: S['tiles'][cell] = 'after'; changed = True
             elif 'win' in a: S['won'] = True; changed = True; order.append('WIN')
+            elif 'depart' in a and not S['won']: S['won'] = True; changed = True; order.append('DEPART')  # the player may leave now
         return changed
 
     def fire(ev, **kw):
@@ -245,9 +247,11 @@ def run_rules(pid, deck, level, start, diff=2):
         for y in range(H):
             for x in range(W):
                 w = leg['walls'].get(G[y][x])
-                if not w or 'use' not in w or S['tiles'].get((x, y)) == 'after': continue
+                if not w: continue
+                u = w.get('after', {}).get('use') if S['tiles'].get((x, y)) == 'after' else w.get('use')
+                if not u: continue
                 if any((x + dx, y + dy) in seen for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
-                    if fire('use', target=w['use'], cell=(x, y)): progressed = True
+                    if fire('use', target=u, cell=(x, y)): progressed = True
         for r in deck['rules']:
             on = r['on']
             if on['event'] == 'region' and cond(r.get('if')) and not S['won']:
@@ -260,6 +264,13 @@ def run_rules(pid, deck, level, start, diff=2):
     if floor_cells - seen: err(f'{pid}: {len(floor_cells - seen)} floor cells unreachable, e.g. {sorted(floor_cells - seen)[:5]}')
     unreach = [(O[y][x], x, y) for y in range(H) for x in range(W) if O[y][x] != ' ' and (x, y) not in seen]
     if unreach: err(f'{pid}: objects unreachable: {unreach[:10]}')
+    # 100%: nothing that counts may sit where simply walking ends the deck (the Deck 01 tram tag bug)
+    for r in deck['rules']:
+        on = r['on']; acts = []; walk_actions(r['do'], acts.append)
+        if on['event'] != 'region' or not any('win' in a for a in acts): continue
+        trap = [(O[y][x], x, y) for y in range(H) for x in range(W) if O[y][x] != ' ' and zone_of(level, x, y) == on['zone']
+                and y + .5 >= on.get('minY', -1) and leg['objects'].get(O[y][x], {}).get('item') in ('log', 'asset')]
+        if trap: err(f'{pid}: 100% unreachable: walking to {trap[:5]} ends the deck (region win in {on["zone"]})')
     # every difficulty: same progression (only enemies differ); count what each one fields
     cnt = collections.Counter(c for r in O for c in r if c != ' ')
     res['enemies'] = {DIFFS[d]: sum(n for c, n in cnt.items() if 'enemy' in leg['objects'].get(c, {}) and leg['objects'][c]['min'] <= d) for d in range(5)}

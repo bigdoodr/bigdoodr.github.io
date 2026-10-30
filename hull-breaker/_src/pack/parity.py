@@ -21,7 +21,7 @@ PROBE = """
 window.__probe = di => { newGame(di);
   const ents = ENTS.map(e => ({kind:e.kind, t:e.type||e.t, sid:e.sid, x:e.x, y:e.y, dormant:e.state==='dormant', name:e.name||null, logId:e.logId||null}));
   const d = doors.map(d => ({x:d.x, y:d.y, lock:d.lock, tex:Object.keys(T).find(k=>T[k]===map[d.i])||('crack:'+map[d.i])}));
-  const brk = []; for (let i=0;i<MAPN;i++) if (map[i]===T.BRK||map[i]===T.OVRCON) brk.push([i%MW,(i/MW)|0,map[i]===T.BRK?'breaker':'override']);
+  const brk = []; for (let i=0;i<MAPN;i++) if (map[i]===T.BRK||map[i]===T.OVRCON||map[i]===T.LEVER) brk.push([i%MW,(i/MW)|0,map[i]===T.BRK?'breaker':map[i]===T.LEVER?'breakGlass':'override']);
   return {ents, doors:d, uses:brk, start:[P.x,P.y], totals:{assets:G.assetTotal, logs:G.logTotal, secrets:G.secretTotal}};
 };
 """

@@ -6,20 +6,20 @@
   {
    "id": "core",
    "kind": "core",
-   "version": "1.1.0",
-   "minEngine": "1.1",
-   "bytes": 5228349,
+   "version": "1.2.0",
+   "minEngine": "1.2",
+   "bytes": 5272070,
    "manifest": "core/manifest.json",
-   "manifestSha256": "a105b93e4bce2c241eb25acbfb2f453e36c8771bb0007811e97e5121fb7e9541"
+   "manifestSha256": "f1a487ec28b5956c62b8d4d1ab08fb433fada8d40afa0627f179643667415434"
   },
   {
    "id": "deck-01",
    "kind": "deck",
-   "version": "1.1.0",
-   "minEngine": "1.1",
-   "bytes": 1101351,
+   "version": "1.2.0",
+   "minEngine": "1.2",
+   "bytes": 1101869,
    "manifest": "deck-01/manifest.json",
-   "manifestSha256": "43e74d6b4efe1de60b466d63c8095f3c43c9ca8a34bbef4571406f1096ae67e5",
+   "manifestSha256": "0f9b3bd95c83381d3f6e31067ce9dac9b149e4c556b58fe5295623edb2cee12f",
    "deck": 1
   }
  ],

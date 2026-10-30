@@ -3,24 +3,24 @@
  "id": "deck-01",
  "kind": "deck",
  "deck": 1,
- "version": "1.1.0",
- "minEngine": "1.1",
+ "version": "1.2.0",
+ "minEngine": "1.2",
  "title": "Repo Day",
  "place": "Docking Ring",
  "requires": {
-  "core": "1.1.0"
+  "core": "1.2.0"
  },
- "bytes": 1101351,
+ "bytes": 1101869,
  "files": [
   {
    "path": "deck.json",
-   "bytes": 14224,
-   "sha256": "6627d3231c0143d05947b2682eefd1867ec2b3cf7b745ecc5f6cf5034363fc77"
+   "bytes": 14742,
+   "sha256": "66d204f644fe2a6c7c5da2c352a035071e9fb936457bbd89538afd08f141d1c3"
   },
   {
    "path": "level.json",
    "bytes": 27393,
-   "sha256": "faaffe96328e8c42f3b6d7b65c3a44ae4a90869be414d942b4845975bfe077a1"
+   "sha256": "cec1325d66ee1bbf033309cc7c396aae4d8655eec350c024777e252456d6b257"
   },
   {
    "path": "lines.json",

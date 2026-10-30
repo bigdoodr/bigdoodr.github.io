@@ -23,6 +23,7 @@ The series bible (story, characters, lore facts, deck outlines, rules for contin
 | `pack/extract.py` | Builds `../packs/` (catalog, `core`, `deck-01`) from the dump plus `pack/deck01.py`, Deck 01's rules written as data. |
 | `pack/validate_pack.py` | Checks hashes and cross-references, the map, and runs the deck's rules to prove a win and 100% on every difficulty. |
 | `pack/parity.py` | Starts the real game on every difficulty and checks it spawns exactly what the pack says. |
+| `pack/keep_unchanged.py` | After a re-extract, keeps unchanged media byte-for-byte from the last release and rewrites manifests and the catalog. |
 
 ## Deck packs
 
@@ -30,9 +31,13 @@ The series bible (story, characters, lore facts, deck outlines, rules for contin
 
 ```
 cd _src/pack
+cp -r ../../packs /tmp/packs_prev
 python3 dump.py raw && python3 extract.py raw ../../packs
+python3 keep_unchanged.py /tmp/packs_prev ../../packs
 python3 validate_pack.py && python3 parity.py
 ```
+
+The game draws its art and sounds with random grime and noise, so a fresh dump changes every PNG and WAV a little. `keep_unchanged.py` puts the previous release's bytes back for files that already existed, so apps only download what really changed. Name a file after the folders to keep its new version (a texture changed on purpose).
 
 ## Buck's voice (locked)
 

@@ -53,6 +53,10 @@
     "tex": "win",
     "map": "#3a5a7a"
    },
+   "W": {
+    "tex": "winmoon",
+    "map": "#3a5a7a"
+   },
    "s": {
     "tex": "scrawl"
    },
@@ -122,6 +126,21 @@
      1
     ],
     "map": "#b04dff"
+   },
+   "L": {
+    "tex": "lever",
+    "use": "breakGlass",
+    "light": [
+     1,
+     0.6,
+     0.2
+    ],
+    "map": "#ffb627",
+    "after": {
+     "tex": "leveron",
+     "map": "#ffb627",
+     "use": "lever"
+    }
    }
   },
   "doors": {
@@ -698,7 +717,7 @@
            ]
           },
           {
-           "objective": "Get to the tram. Back through the atrium, then south through Engineering."
+           "objective": "Get to the tram. Back through the atrium, then south through Engineering. Break the glass and pull the departure lever."
           },
           {
            "ambush": "override",
@@ -760,16 +779,35 @@
   },
   {
    "on": {
-    "event": "region",
-    "zone": "tram",
-    "minY": 71.6
-   },
-   "if": {
-    "flag": "override"
+    "event": "use",
+    "target": "breakGlass"
    },
    "do": [
     {
-     "win": true
+     "setTile": "after"
+    },
+    {
+     "sfx": "glass"
+    },
+    {
+     "shake": 0.25
+    },
+    {
+     "msg": "GLASS BROKEN"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "lever"
+   },
+   "do": [
+    {
+     "sfx": "breaker"
+    },
+    {
+     "depart": true
     }
    ]
   }
@@ -942,10 +980,7 @@
   },
   {
    "to": {
-    "cell": [
-     75,
-     72
-    ]
+    "use": "breakGlass"
    }
   }
  ],
@@ -968,7 +1003,7 @@
    "earned": "Deck 01 settled in full.",
    "points": 10,
    "hidden": false,
-   "status": "planned",
+   "status": "live",
    "on": {
     "event": "deckClear"
    },

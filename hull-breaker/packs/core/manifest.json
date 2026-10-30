@@ -2,20 +2,20 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.1.0",
- "minEngine": "1.1",
+ "version": "1.2.0",
+ "minEngine": "1.2",
  "title": "Hull Breaker shared content",
- "bytes": 5228349,
+ "bytes": 5272070,
  "files": [
   {
    "path": "achievements.json",
-   "bytes": 4858,
-   "sha256": "f993a6420eed8aa62afe1c306baaac7184649ee7eb9adb185264d82170616dfe"
+   "bytes": 5438,
+   "sha256": "3e2b5aa32900fb784397116efa84cf172ce124b67d06b0d5bda236da41cd9b0b"
   },
   {
    "path": "art.json",
-   "bytes": 8158,
-   "sha256": "381ef05ec0b4307581f998fcb397e6ffac15ec164f867da25d5abb1dd5e42cde"
+   "bytes": 8440,
+   "sha256": "b5423776ee7a7d1f638d5351bc9d7d7f9faef8db2f91b5f354523698f30d7e96"
   },
   {
    "path": "floors/carpet.png",
@@ -54,13 +54,13 @@
   },
   {
    "path": "lines.json",
-   "bytes": 6517,
-   "sha256": "50d4ee2fd79ee36fe7200255a5ad19cd46347b68ffb01eef867239ee89e1c5a3"
+   "bytes": 6665,
+   "sha256": "2c53820308aec0915b3061deffc85dc485c407ee4ddaff36f94317638f74e766"
   },
   {
    "path": "sfx.json",
-   "bytes": 4570,
-   "sha256": "b808ebba01862fde932111cbfc17b3b4a8255b09dee744fbfd7a4f4a89c29ca9"
+   "bytes": 4653,
+   "sha256": "4a4f93633ea38a1962f10d5480d2c16b289a5f8a5f03928e807ab2f0cc1360e8"
   },
   {
    "path": "sfx/ambient.wav",
@@ -151,6 +151,11 @@
    "path": "sfx/explode.wav",
    "bytes": 46658,
    "sha256": "64460c41eb21a4c101eef5157c4313d6c1d4166607a00528ef8eb9c299477cdb"
+  },
+  {
+   "path": "sfx/glass.wav",
+   "bytes": 22084,
+   "sha256": "2c439cec108904eb6acf4cd04a688a57cfc1f0370622869294c7142856f243fb"
   },
   {
    "path": "sfx/groan.wav",
@@ -744,8 +749,8 @@
   },
   {
    "path": "textures/crack_win.png",
-   "bytes": 1615,
-   "sha256": "019426c0fd9427c4e878fdcf673adcd6a18fbb6c340a29b2a4fae99910e3dee0"
+   "bytes": 991,
+   "sha256": "f70c9c994cbfb30e3d494a9fe23f89305aca765e1f271c1c12afef379f9eb784"
   },
   {
    "path": "textures/crew.png",
@@ -781,6 +786,26 @@
    "path": "textures/hydro.png",
    "bytes": 4070,
    "sha256": "eb301fb50773fe66210580c6d83cff0799df9887c2ec959c22796787a165974e"
+  },
+  {
+   "path": "textures/lever.em.png",
+   "bytes": 342,
+   "sha256": "e0fa4714ea86acf81f47cd638418b5f56337d49d8fc6bed589e7f980b2aa34ee"
+  },
+  {
+   "path": "textures/lever.png",
+   "bytes": 4591,
+   "sha256": "4f98681d7e25c1ba8518179cbefa422564ed8af65721874308ce216f53f3d737"
+  },
+  {
+   "path": "textures/leveron.em.png",
+   "bytes": 371,
+   "sha256": "f5d7f2d3fc0164fc7eef908f3bdda992dac4a6cf8736e8f8dc5c0bbe0387bb66"
+  },
+  {
+   "path": "textures/leveron.png",
+   "bytes": 4818,
+   "sha256": "8b68a38e51b42e6c89817194e338c55152c6cbf804b49cff42623ebe201b8243"
   },
   {
    "path": "textures/lock.em.png",
@@ -909,8 +934,18 @@
   },
   {
    "path": "textures/win.png",
-   "bytes": 1516,
-   "sha256": "f11e533c84edcdc8de6162edd90dd6dcc2728347d45ce2722f13356fb58c6dc3"
+   "bytes": 865,
+   "sha256": "f9a0ed8263994c057734ae69e87df8d911e1c0a297631ada41ed73e66e49ff8b"
+  },
+  {
+   "path": "textures/winmoon.em.png",
+   "bytes": 330,
+   "sha256": "6abf0eab08cadb4a388b6af06337ca94a9216c44f7c54deecc952c49fd0e4310"
+  },
+  {
+   "path": "textures/winmoon.png",
+   "bytes": 2033,
+   "sha256": "561b2a44495ba2c1a4c8c65352874a291b7e2025bebc11cdfd45a01439100087"
   },
   {
    "path": "textures/yel.em.png",
@@ -924,8 +959,8 @@
   },
   {
    "path": "tuning.json",
-   "bytes": 7453,
-   "sha256": "3fa8bc135d1202664aab752a2ea988607b7b54f47ec7b71fa5713e66295363de"
+   "bytes": 7478,
+   "sha256": "37852a991463239841bdc6151fd451eac9a75ece0ff9404442d55496d5631901"
   },
   {
    "path": "voice/ach_bad_credit.mp3",
@@ -1006,6 +1041,11 @@
    "path": "voice/deck_clear.mp3",
    "bytes": 18717,
    "sha256": "2c468a0f7eecba9aa40b609941ebc61cc7ac79142356987b997e25992c181aec"
+  },
+  {
+   "path": "voice/forgot_something.mp3",
+   "bytes": 9309,
+   "sha256": "74db63253308860ccd4398593adf58ec08c824797fa4717cdf414739eb34e377"
   },
   {
    "path": "voice/get_rivetgun.mp3",

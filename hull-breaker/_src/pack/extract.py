@@ -13,9 +13,9 @@ from scipy.signal import resample_poly
 import achievements, deck01
 
 FORMAT = 1
-ENGINE_MIN = '1.1'      # 1.1: achievements, combat signals, field conditions
-CORE_VERSION = '1.1.0'
-DECK_VERSION = '1.1.0'
+ENGINE_MIN = '1.2'      # 1.1: achievements, combat signals, field conditions; 1.2: depart, after.use, cheat event
+CORE_VERSION = '1.2.0'
+DECK_VERSION = '1.2.0'
 BASE_URL = 'https://bigdoodr.github.io/hull-breaker/packs/'
 
 RAW = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else 'raw')
@@ -56,6 +56,7 @@ def core_lines():
         'death': ('Great. Repossessed.', 'death', 3),
         'save_first': ("Paperwork's filed.", 'saveFirst', 2.2),
         'stay_down': ('Stay down this time.', 'stayDown', 2.2),
+        'forgot_something': ('Forgot something.', 'departStay', 2),
         'deck_clear': ("Ship's repossessed. Mostly.", 'deckClear', 3),
         'get_shotgun': ('Now THIS is a payment plan.', 'weapon', 3),
         'get_rivetgun': ("Rivet driver. Let's nail this down.", 'weapon', 3),
@@ -77,6 +78,7 @@ def achievement_json(a, deck=None):
     if 'progress' in a: o['progress'] = a['progress']
     if 'on' in a: o['on'] = a['on']
     if 'cond' in a: o['if'] = a['cond']
+    if a.get('cheat'): o['cheat'] = True
     if deck: o['deck'] = deck
     return o
 

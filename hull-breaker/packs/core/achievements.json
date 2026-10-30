@@ -248,6 +248,32 @@
     "stat": "deaths",
     "target": 100
    }
+  },
+  {
+   "id": "hb.second_thoughts",
+   "name": "Second Thoughts",
+   "desc": "Choose Stay at the departure screen 5 times.",
+   "earned": "Five second thoughts at the lever.",
+   "points": 5,
+   "hidden": false,
+   "status": "live",
+   "progress": {
+    "stat": "departStays",
+    "target": 5
+   }
+  },
+  {
+   "id": "hb.irregularities_noted",
+   "name": "Irregularities Noted",
+   "desc": "Use a cheat.",
+   "earned": "Irregularities noted. Commission withheld.",
+   "points": 5,
+   "hidden": false,
+   "status": "live",
+   "on": {
+    "event": "cheat"
+   },
+   "cheat": true
   }
  ]
 }

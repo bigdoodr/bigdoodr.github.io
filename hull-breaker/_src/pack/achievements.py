@@ -54,6 +54,13 @@ ACHIEVEMENTS = [
     dict(id='hb.bad_credit', name='Bad Credit', points=10,
          desc='Die 100 times.', earned='Written off a hundred times.',
          progress=dict(stat='deaths', target=100), line='bad_credit'),
+    # Engine 1.2: the departure lever and the console.
+    dict(id='hb.second_thoughts', name='Second Thoughts', points=5,
+         desc='Choose Stay at the departure screen 5 times.', earned='Five second thoughts at the lever.',
+         progress=dict(stat='departStays', target=5), line=None),
+    dict(id='hb.irregularities_noted', name='Irregularities Noted', points=5, cheat=True,
+         desc='Use a cheat.', earned='Irregularities noted. Commission withheld.',
+         on=dict(event='cheat'), line=None),
 ]
 
 # Buck's reactions, by line id: one short line each, recorded with BUCK-VOICE.

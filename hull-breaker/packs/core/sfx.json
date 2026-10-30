@@ -92,6 +92,11 @@
    "gain": 2.3396,
    "seconds": 1.057
   },
+  "glass": {
+   "file": "sfx/glass.wav",
+   "gain": 1.1373,
+   "seconds": 0.5
+  },
   "groan": {
    "file": "sfx/groan.wav",
    "gain": 0.4909,

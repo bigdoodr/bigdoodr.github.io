@@ -1,4 +1,4 @@
-# Hull Breaker deck pack format, version 1 (engine 1.1)
+# Hull Breaker deck pack format, version 1 (engine 1.2)
 
 A deck pack is everything one deck needs, as data and media files, with no code. The native apps download packs from GitHub Pages and the web game will read the same files. App Review guideline 2.5.2 forbids downloading code that changes features, so packs only describe a deck in a fixed vocabulary that the engine already understands. New mechanics (an enemy behavior, a weapon, a boss, a new rule verb) need an engine update, and a pack that uses them raises its `minEngine`.
 
@@ -94,7 +94,7 @@ For each zone: a secret zone gets one steady lamp at its center (`[1,.7,.4]`, ra
 ### legend
 
 - `floor`: the floor character (`.`).
-- `walls`: character → `{tex, role?, use?, light?, map?, after?}`. `tex` is a texture id. `role` is an engine role: `vent` (ambush spawn point) or `save` (save station). `use` makes the wall usable and names the `use` event it fires. `light` adds a small lamp. `map` is its automap color (default `#5d6873`). `after` is what the wall becomes when a rule runs `setTile: "after"`.
+- `walls`: character → `{tex, role?, use?, light?, map?, after?}`. `tex` is a texture id. `role` is an engine role: `vent` (ambush spawn point) or `save` (save station). `use` makes the wall usable and names the `use` event it fires. `light` adds a small lamp. `map` is its automap color (default `#5d6873`). `after` is what the wall becomes when a rule runs `setTile: "after"`: `{tex, map?, use?}`. Without `use` the cell can't be used again; with `use` (engine 1.2) it stays usable and fires that use name instead (the departure lever's glass cover becomes the lever).
 - `doors`: character → lock id (see `locks`).
 - `objects`: character → one of `{start}`, `{enemy, min, dormant?}`, `{item}`, `{decor, solid?, r?}`, `{barrel}`. `min` is the lowest difficulty index the enemy appears on (0 Very Easy … 4 Nightmare). On Very Easy, enemies with `min` 0 are skipped where `hash(cellIndex*.37) < tuning.veryEasyThin`, with `cellIndex = y*w + x`.
 
@@ -133,6 +133,7 @@ A rule is `{"on": event, "if": condition?, "once": bool?, "do": [actions]}`. Whe
 | `{"event":"sever"}` | A limb comes off. Fields: `enemy`, `limb` (`head`, `armL`, `armR`, `legL`, `legR`), `state` (`spit`, `attack`, `other`). Engine 1.1. |
 | `{"event":"death"}` | Buck dies. Field: `cause` (`enemy`, `spit`, `bomb`, `bloater`, `barrel`). Engine 1.1. |
 | `{"event":"secret"}` | A secret panel opens. Fields: `found`, `total`. Engine 1.1. |
+| `{"event":"cheat"}` | A console cheat is used (engine 1.2). Field: `command`. The run is already marked audited, so only `cheat` achievements can fire. |
 | `{"event":"deckClear"}` | The deck is won, before the outro. Fields: `percent`, `time` (seconds), `par`, `underPar` (bool), `damageTaken`, `weapons` (list of `cutter`, `boomstick`, `rivet`, `charges`, `kick` used), `difficulty` (0–4), `deck`. Engine 1.1. |
 
 Conditions: `{"flag":f}`, `{"key":"R"}`, `{"visited":zone}`, `{"counter":c,"gte":n}` (also `eq`, `lte`), `{"difficulty":{"gte":n}}`, `{"not":c}`, `{"all":[...]}`, `{"any":[...]}`.
@@ -156,6 +157,7 @@ Actions (one verb each):
 | `{"after":secs,"do":[...]}` | Run actions later (play time; pausing stops the clock). |
 | `{"if":cond,"then":[...],"else":[...]}` | Branch. |
 | `{"win":true}` | Clear the deck: records, carry-over, outro. |
+| `{"depart":true}` | Open the DEPART DECK NN? screen (engine 1.2): kills, secrets, audio logs and asset tags as found / total, incomplete ones highlighted, and the deck percent; at 100% the header reads ACCOUNT CLOSED IN FULL. **Stay** has the default focus (Back, Esc and Menu also mean Stay): it closes the screen, Buck says the core `departStay` line, the `departStays` total goes up, and the wall can be used again. **Depart** clears the deck exactly like `win`. Play is frozen while the screen is up. |
 | `{"achieve":id}` | Give an achievement (engine 1.1). Audited runs earn nothing except achievements marked `cheat`. |
 
 The engine does the rest on its own: secret doors, save stations, item pickups and their messages, logs, asset tags, enemy intro lines, kill quips, revives, death, low-health warnings.
@@ -175,7 +177,7 @@ The PATH button walks this list and routes to the first step whose `until` is fa
 ## logs.json and lines.json
 
 - Log: `{id, order, header, speaker, text, file, zone}`. `text` is the subtitle, typed out at 42 characters a second. `order` is the pause-menu archive order. Logs are played straight: Buck's quips stay quiet while one plays.
-- Line: `{id, text, file, [role, sub]}`. Core lines have a `role` the engine picks from (`kill`, `secretFirst`, `secret`, `tag`, `headshot`, `enemyIntro`, `lowHp`, `death`, `saveFirst`, `stayDown`, `deckClear`, `weapon`, `trailer`). Every Buck line is recorded with the locked BUCK-VOICE settings and whisper-checked before it ships.
+- Line: `{id, text, file, [role, sub]}`. Core lines have a `role` the engine picks from (`kill`, `secretFirst`, `secret`, `tag`, `headshot`, `enemyIntro`, `lowHp`, `death`, `saveFirst`, `stayDown`, `deckClear`, `weapon`, `trailer`, `departStay`). Every Buck line is recorded with the locked BUCK-VOICE settings and whisper-checked before it ships.
 - Audio is MP3 (Kokoro takes rendered through the voice lab DSP, and the log recorder filter).
 
 ## core/achievements.json (engine 1.1)
@@ -193,8 +195,8 @@ The PATH button walks this list and routes to the first step whose `until` is fa
 - `id`: `hb.` plus snake case; Paid in Full uses `hb.paid_in_full.NN`. IDs and points never change once live in Game Center.
 - `points` (1–100), `hidden` (Game Center's hidden setting; the pause menu shows REDACTED), `desc` (before), `earned` (after), `line` (a core line Buck says, at most once every 20 seconds and only if the player hasn't muted it).
 - `status`: `live` achievements can be earned with the current engine and are registered with the stores; `planned` ones are defined but can't happen yet (they get registered with the update that makes them earnable).
-- Earned either by a running total, `progress: {stat, target, minDifficulty?}`, counted across campaigns and difficulties (stats: `kickKills`, `limbsSevered`, `deaths`, `bodiesKicked`; `minDifficulty` counts only runs on that difficulty or harder), or by an event: `on` (one of the field-carrying events above) with an optional `if`. Rules can also give one with `achieve`.
-- Audited runs earn nothing unless the achievement has `"cheat": true`. Achievements and running totals are stored apart from the campaign (`hb-achievements` on the web), so New Game never erases them.
+- Earned either by a running total, `progress: {stat, target, minDifficulty?}`, counted across campaigns and difficulties (stats: `kickKills`, `limbsSevered`, `deaths`, `bodiesKicked`, and `departStays` from engine 1.2; `minDifficulty` counts only runs on that difficulty or harder), or by an event: `on` (one of the field-carrying events above) with an optional `if`. Rules can also give one with `achieve`.
+- Audited runs earn nothing unless the achievement has `"cheat": true` (Irregularities Noted, on the `cheat` event). Achievements and running totals are stored apart from the campaign (`hb-achievements` on the web), so New Game never erases them.
 - Game Center caps a game at 100 achievements and 1,000 points; the validator checks the total across all packs.
 
 ## core/art.json
@@ -213,7 +215,7 @@ World sizes come from `tuning.json` (`height` of items, decor, barrels, enemies,
 
 ## core/tuning.json
 
-Enemies may carry `"boss": true` (engine 1.1; read by the `kill` event). The numbers the JavaScript engine has hard-coded: the difficulty table (`dmg`, `hp`, `spd`, `ammo`, `heal`, `spawn`, `cells`, `save`, `revive`, `desc`), enemy stats (`hp`, `lhp` per limb, `speed`, `dmg`, `reach`, `wind`, `r`, `height`, limbs needed to kill), weapons, ammo caps, kick, explosions, revives, items (amounts scaled by the difficulty's ammo or heal factor), decor sizes, drop chances and end-of-deck ranks. Enemy types and weapon behaviors are engine code; their numbers live here so balance changes ship as a core pack update.
+A difficulty's `save` is `area` (checkpoints in every new area, plus events and stations), `events` (checkpoints after big moments, plus stations), `stations` (save stations only) or `never` (no mid-deck saves at all: stations refuse, and dying restarts the deck; engine 1.2, Nightmare). Enemies may carry `"boss": true` (engine 1.1; read by the `kill` event). The numbers the JavaScript engine has hard-coded: the difficulty table (`dmg`, `hp`, `spd`, `ammo`, `heal`, `spawn`, `cells`, `save`, `revive`, `desc`), enemy stats (`hp`, `lhp` per limb, `speed`, `dmg`, `reach`, `wind`, `r`, `height`, limbs needed to kill), weapons, ammo caps, kick, explosions, revives, items (amounts scaled by the difficulty's ammo or heal factor), decor sizes, drop chances and end-of-deck ranks. Enemy types and weapon behaviors are engine code; their numbers live here so balance changes ship as a core pack update.
 
 ## Tools
 

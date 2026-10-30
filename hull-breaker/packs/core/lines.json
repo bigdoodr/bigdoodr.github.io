@@ -184,6 +184,13 @@
    "file": "voice/stay_down.mp3"
   },
   {
+   "id": "forgot_something",
+   "text": "Forgot something.",
+   "role": "departStay",
+   "sub": 2,
+   "file": "voice/forgot_something.mp3"
+  },
+  {
    "id": "deck_clear",
    "text": "Ship's repossessed. Mostly.",
    "role": "deckClear",

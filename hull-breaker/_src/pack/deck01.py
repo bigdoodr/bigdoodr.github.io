@@ -38,7 +38,7 @@ DECK = {
         'walls': {
             '#': {'tex': 'hull'}, '=': {'tex': 'hull2'}, 'h': {'tex': 'haz'}, 'b': {'tex': 'blood'},
             't': {'tex': 'term'}, 'm': {'tex': 'med'}, 'v': {'tex': 'vent', 'role': 'vent'},
-            'w': {'tex': 'win', 'map': '#3a5a7a'}, 's': {'tex': 'scrawl'}, 'p': {'tex': 'pipe'},
+            'w': {'tex': 'win', 'map': '#3a5a7a'}, 'W': {'tex': 'winmoon', 'map': '#3a5a7a'}, 's': {'tex': 'scrawl'}, 'p': {'tex': 'pipe'},
             'T': {'tex': 'tram'}, 'k': {'tex': 'locker'}, 'r': {'tex': 'reactor'}, 'c': {'tex': 'cargo'},
             'C': {'tex': 'cargo2'}, 'g': {'tex': 'hydro'}, 'G': {'tex': 'planter'}, 'n': {'tex': 'console'},
             'q': {'tex': 'crew'}, 'u': {'tex': 'bridge'},
@@ -46,6 +46,10 @@ DECK = {
             'Z': {'tex': 'brk', 'use': 'breaker', 'light': [1, .35, .2], 'map': '#ff4030',
                   'after': {'tex': 'brkon', 'map': '#40ff80'}},
             'O': {'tex': 'ovrcon', 'use': 'override', 'light': [.35, .6, 1], 'map': '#b04dff'},
+            # The departure lever behind its glass cover (engine 1.2): the first Use breaks the glass,
+            # and the wall becomes its 'after' version, which is usable again as 'lever'.
+            'L': {'tex': 'lever', 'use': 'breakGlass', 'light': [1, .6, .2], 'map': '#ffb627',
+                  'after': {'tex': 'leveron', 'map': '#ffb627', 'use': 'lever'}},
         },
         'doors': {'D': 'none', '1': 'B', '2': 'Y', '3': 'R', '4': 'power', '5': 'override', 'X': 'secret'},
         # Enemies: 'min' is the lowest difficulty index they appear on
@@ -143,7 +147,7 @@ DECK = {
                                      {'msg': 'TRAM OVERRIDE ENGAGED'}, {'msg': 'WARNING: CONTAINMENT FAILURE ON DECK 1'},
                                      {'sfx': 'stinger'}, {'sfx': 'klaxon'}, {'music': 1},
                                      {'after': .9, 'do': [{'say': 'fine_print', 'sub': 3}]},
-                                     {'objective': 'Get to the tram. Back through the atrium, then south through Engineering.'},
+                                     {'objective': 'Get to the tram. Back through the atrium, then south through Engineering. Break the glass and pull the departure lever.'},
                                      {'ambush': 'override', 'delay': 1.2}, {'autosave': 'events'},
                                  ]}]}]},
         ]},
@@ -154,8 +158,12 @@ DECK = {
             {'msg': 'STAR REPO // HIGH SCORE: BUCK 999,990'}, {'sfx': 'pickup'}, {'say': 'still_got_it', 'sub': 2.2},
         ]},
 
-        # Leaving the deck. (The Deck 02 chat replaces this with the departure lever and confirm screen.)
-        {'on': {'event': 'region', 'zone': 'tram', 'minY': 71.6}, 'if': {'flag': 'override'}, 'do': [{'win': True}]},
+        # Leaving the deck (engine 1.2): break the glass, pull the lever, confirm on the DEPART screen.
+        # Stay closes the screen; the lever resets and the glass stays broken.
+        {'on': {'event': 'use', 'target': 'breakGlass'}, 'do': [
+            {'setTile': 'after'}, {'sfx': 'glass'}, {'shake': .25}, {'msg': 'GLASS BROKEN'},
+        ]},
+        {'on': {'event': 'use', 'target': 'lever'}, 'do': [{'sfx': 'breaker'}, {'depart': True}]},
     ],
 
     # Vent ambushes. Each spawn list is scaled by the difficulty's spawn multiplier.
@@ -180,16 +188,16 @@ DECK = {
         {'until': {'key': 'Y'}, 'to': {'item': 'keyY'}},
         {'until': {'key': 'R'}, 'to': {'item': 'keyR'}},
         {'until': {'flag': 'override'}, 'to': {'use': 'override'}},
-        {'to': {'cell': [75, 72]}},
+        {'to': {'use': 'breakGlass'}},
     ],
 
     # Par time for Rush Job, in seconds (measured on a clean route; see the Native engine chat).
     'par': 300,   # 5:00. Fast-clear route is 703 cells (2:32 of running); see the Native engine chat
 
-    # Deck-only achievements. Paid in Full needs 100%, which Deck 01 can't reach until the
-    # departure lever replaces the walk-on exit (Deck 02 chat), so it isn't registered yet.
+    # Deck-only achievements. Paid in Full went live with the departure lever (engine 1.2),
+    # which made the last asset tag on the tram platform collectable.
     'achievements': [
-        dict(id='hb.paid_in_full.01', name='Paid in Full: Deck 01', points=10, status='planned',
+        dict(id='hb.paid_in_full.01', name='Paid in Full: Deck 01', points=10,
              desc='Reach 100% on Deck 01.', earned='Deck 01 settled in full.',
              on=dict(event='deckClear'), cond={'all': [{'field': 'deck', 'eq': 1}, {'field': 'percent', 'gte': 100}]}, line=None),
     ],
