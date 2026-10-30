@@ -949,6 +949,7 @@
    }
   }
  ],
+ "par": 300,
  "mapLegend": [
   [
    "SAVE",
@@ -958,5 +959,32 @@
    "BREAKER",
    "#ff4030"
   ]
+ ],
+ "achievements": [
+  {
+   "id": "hb.paid_in_full.01",
+   "name": "Paid in Full: Deck 01",
+   "desc": "Reach 100% on Deck 01.",
+   "earned": "Deck 01 settled in full.",
+   "points": 10,
+   "hidden": false,
+   "status": "planned",
+   "on": {
+    "event": "deckClear"
+   },
+   "if": {
+    "all": [
+     {
+      "field": "deck",
+      "eq": 1
+     },
+     {
+      "field": "percent",
+      "gte": 100
+     }
+    ]
+   },
+   "deck": 1
+  }
  ]
 }

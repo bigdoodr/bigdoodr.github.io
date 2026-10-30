@@ -10,12 +10,12 @@ with a manifest listing every file's size and SHA-256. FORMAT.md describes it al
 import base64, hashlib, json, os, re, shutil, sys
 import numpy as np, soundfile as sf
 from scipy.signal import resample_poly
-import deck01
+import achievements, deck01
 
 FORMAT = 1
-ENGINE_MIN = '1.0'
-CORE_VERSION = '1.0.0'
-DECK_VERSION = '1.0.0'
+ENGINE_MIN = '1.1'      # 1.1: achievements, combat signals, field conditions
+CORE_VERSION = '1.1.0'
+DECK_VERSION = '1.1.0'
 BASE_URL = 'https://bigdoodr.github.io/hull-breaker/packs/'
 
 RAW = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else 'raw')
@@ -63,7 +63,22 @@ def core_lines():
         'trailer_late': ('Says here your payments are ninety days late.', 'trailer', 3.4),
         'trailer_limbs': ("Guess I'll take payment in limbs.", 'trailer', 3.4),
     })
+    for k, t in achievements.LINES.items(): L['ach_' + k] = (t, 'achievement', 2.6)
     return L
+
+
+BAKED = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'voice', 'baked')
+
+
+def achievement_json(a, deck=None):
+    o = {'id': a['id'], 'name': a['name'], 'desc': a['desc'], 'earned': a['earned'], 'points': a['points'],
+         'hidden': a.get('hidden', False), 'status': a.get('status', 'live')}
+    if a.get('line'): o['line'] = 'ach_' + a['line']
+    if 'progress' in a: o['progress'] = a['progress']
+    if 'on' in a: o['on'] = a['on']
+    if 'cond' in a: o['if'] = a['cond']
+    if deck: o['deck'] = deck
+    return o
 
 
 def tuning():
@@ -73,7 +88,7 @@ def tuning():
         'difficulty': [{k: v for k, v in d.items()} for d in D['DIFF']],
         'veryEasyThin': .3,
         'player': {'hp': 100, 'maxHp': 100, 'maxArmor': 100, 'radius': .22, 'armorAbsorb': .6, 'lowHp': 30},
-        'enemies': {k: dict(v, height=D['WH'][k], limbs=['head', 'armL', 'armR', 'legL', 'legR'],
+        'enemies': {k: dict(v, height=D['WH'][k], boss=False, limbs=['head', 'armL', 'armR', 'legL', 'legR'],
                             sever=4 if k == 'brute' else 2 if k in ('crawler', 'bloater') else 3)
                     for k, v in D['ETYPE'].items()},
         'enemyIntro': {
@@ -192,10 +207,12 @@ def build_core():
     lines = []
     os.makedirs(os.path.join(root, 'voice'), exist_ok=True)
     for lid, (text, role, sub) in core_lines().items():
-        src = vo_files[text]; shutil.copy(os.path.join(RAW, 'vo', src), os.path.join(root, 'voice', lid + '.mp3'))
+        src = os.path.join(BAKED, lid + '.mp3') if role == 'achievement' else os.path.join(RAW, 'vo', vo_files[text])
+        shutil.copy(src, os.path.join(root, 'voice', lid + '.mp3'))
         lines.append({'id': lid, 'text': text, 'role': role, 'sub': sub, 'file': f'voice/{lid}.mp3'})
     jdump(os.path.join(root, 'lines.json'), {'speaker': 'BUCK', 'lines': lines})
     jdump(os.path.join(root, 'tuning.json'), tuning())
+    jdump(os.path.join(root, 'achievements.json'), {'format': FORMAT, 'achievements': [achievement_json(a) for a in achievements.ACHIEVEMENTS]})
     jdump(os.path.join(root, 'strings.json'), STRINGS)
     return manifest(root, {'id': 'core', 'kind': 'core', 'version': CORE_VERSION, 'minEngine': ENGINE_MIN,
                            'title': 'Hull Breaker shared content'})
@@ -260,10 +277,11 @@ def build_deck():
     d = dict(deck01.DECK); n = d['deck']
     blurb = next(x['b'] for x in data['DECKS'] if x['n'] == n)
     deck = {'format': FORMAT, 'id': 'deck-01', 'deck': n, 'title': d['title'], 'place': d['place'], 'ship': d['ship'], 'blurb': blurb}
-    deck.update({k: v for k, v in d.items() if k not in ('deck', 'title', 'place', 'ship')})
+    deck.update({k: v for k, v in d.items() if k not in ('deck', 'title', 'place', 'ship', 'achievements')})
+    deck['achievements'] = [achievement_json(a, n) for a in d.get('achievements', [])]
     jdump(os.path.join(root, 'deck.json'), deck)
     return manifest(root, {'id': 'deck-01', 'kind': 'deck', 'deck': n, 'version': DECK_VERSION, 'minEngine': ENGINE_MIN,
-                           'title': d['title'], 'place': d['place'], 'requires': {'core': '1.0.0'}})
+                           'title': d['title'], 'place': d['place'], 'requires': {'core': CORE_VERSION}})
 
 
 # ------------------------------------------------------------------ manifests and catalog

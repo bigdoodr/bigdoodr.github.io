@@ -183,6 +183,17 @@ DECK = {
         {'to': {'cell': [75, 72]}},
     ],
 
+    # Par time for Rush Job, in seconds (measured on a clean route; see the Native engine chat).
+    'par': 300,   # 5:00. Fast-clear route is 703 cells (2:32 of running); see the Native engine chat
+
+    # Deck-only achievements. Paid in Full needs 100%, which Deck 01 can't reach until the
+    # departure lever replaces the walk-on exit (Deck 02 chat), so it isn't registered yet.
+    'achievements': [
+        dict(id='hb.paid_in_full.01', name='Paid in Full: Deck 01', points=10, status='planned',
+             desc='Reach 100% on Deck 01.', earned='Deck 01 settled in full.',
+             on=dict(event='deckClear'), cond={'all': [{'field': 'deck', 'eq': 1}, {'field': 'percent', 'gte': 100}]}, line=None),
+    ],
+
     # Map legend entries shown under the automap (besides cleared / items left / secret).
     'mapLegend': [['SAVE', '#30ff70'], ['BREAKER', '#ff4030']],
 }

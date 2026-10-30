@@ -11,8 +11,14 @@ import collections, hashlib, json, os, sys
 ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), '..', '..', 'packs'))
 ONLY = sys.argv[2:]
 ENGINE_FLAGS = {'power', 'lightsOut', 'alarm'}          # flags the engine itself reacts to
-EVENTS = {'start', 'enterZone', 'pickup', 'use', 'useDecor', 'doorUnlock', 'doorDenied', 'region'}
-ACTIONS = {'say', 'msg', 'objective', 'sfx', 'flash', 'shake', 'set', 'add', 'ambush', 'autosave', 'music', 'setTile', 'after', 'if', 'win'}
+SIGNALS = {  # combat and score events, with the fields their conditions may read (FORMAT.md)
+    'kill': {'enemy', 'cause', 'boss'}, 'blast': {'source', 'kills'}, 'sever': {'enemy', 'limb', 'state'},
+    'death': {'cause'}, 'secret': {'found', 'total'},
+    'deckClear': {'percent', 'time', 'par', 'underPar', 'damageTaken', 'weapons', 'difficulty', 'deck'},
+}
+STATS = {'kickKills', 'limbsSevered', 'deaths', 'bodiesKicked'}
+EVENTS = {'start', 'enterZone', 'pickup', 'use', 'useDecor', 'doorUnlock', 'doorDenied', 'region'} | set(SIGNALS)
+ACTIONS = {'say', 'msg', 'objective', 'sfx', 'flash', 'shake', 'set', 'add', 'ambush', 'autosave', 'music', 'setTile', 'after', 'if', 'win', 'achieve'}
 DIFFS = ['Very Easy', 'Easy', 'Normal', 'Hard', 'Nightmare']
 errors, warns = [], []
 err = errors.append
@@ -50,7 +56,7 @@ def cond_names(c, out):
     for k in ('all', 'any'):
         for s in c.get(k, []): cond_names(s, out)
     if 'not' in c: cond_names(c['not'], out)
-    for k in ('flag', 'key', 'visited', 'counter'):
+    for k in ('flag', 'key', 'visited', 'counter', 'field'):
         if k in c: out.append((k, c[k]))
 
 
@@ -264,7 +270,30 @@ def run_rules(pid, deck, level, start, diff=2):
 
 CAT = load('catalog.json'); CAT_ENTRIES = {p['id']: p for p in CAT['packs']}
 check_manifest('core', CAT_ENTRIES.get('core'))
-CORE = {k: load('core', k + '.json') for k in ('art', 'tuning', 'sfx', 'lines', 'strings')}
+CORE = {k: load('core', k + '.json') for k in ('art', 'tuning', 'sfx', 'lines', 'strings', 'achievements')}
+ACH_IDS = set()
+
+
+def check_achievements(pid, lst, core_line_ids, ev_ok=None):
+    for a in lst:
+        aid = a.get('id', '')
+        if not aid.startswith('hb.') or aid != aid.lower() or ' ' in aid: err(f'{pid}: achievement id {aid!r} must be hb.snake_case')
+        if aid in ACH_IDS: err(f'{pid}: achievement {aid} defined twice')
+        ACH_IDS.add(aid)
+        if not (1 <= a.get('points', 0) <= 100): err(f'{pid}: {aid} points must be 1-100')
+        for k in ('name', 'desc', 'earned'):
+            if not a.get(k): err(f'{pid}: {aid} needs {k}')
+        if a.get('status', 'live') not in ('live', 'planned'): err(f'{pid}: {aid} status')
+        if a.get('line') and a['line'] not in core_line_ids: err(f'{pid}: {aid} line {a["line"]} is not a core line')
+        if 'progress' in a:
+            if a['progress'].get('stat') not in STATS: err(f'{pid}: {aid} progress stat {a["progress"].get("stat")} unknown')
+        elif 'on' in a:
+            ev = a['on'].get('event')
+            if ev not in SIGNALS: err(f'{pid}: {aid} on event {ev} is not a combat/score signal')
+            names = []; cond_names(a.get('if'), names)
+            for k, v in names:
+                if k == 'field' and ev in SIGNALS and v not in SIGNALS[ev]: err(f'{pid}: {aid} reads field {v} that {ev} lacks')
+        else: err(f'{pid}: {aid} has neither progress nor on')
 _, core_files = check_manifest('core')
 for group in ('textures', 'floors', 'ceilings', 'sprites'):
     for k, v in CORE['art'][group].items():
@@ -274,6 +303,15 @@ for k, v in CORE['sfx']['sounds'].items():
     if v['file'] not in core_files: err(f'core: sfx {k} missing')
 for l in CORE['lines']['lines']:
     if l['file'] not in core_files: err(f'core: line {l["id"]} missing')
+core_line_ids = {l['id'] for l in CORE['lines']['lines']}
+check_achievements('core', CORE['achievements']['achievements'], core_line_ids)
+for p in CAT['packs']:
+    if p['kind'] == 'deck':
+        check_achievements(p['id'], load(p['id'], 'deck.json').get('achievements', []), core_line_ids)
+all_ach = CORE['achievements']['achievements'] + [a for p in CAT['packs'] if p['kind'] == 'deck' for a in load(p['id'], 'deck.json').get('achievements', [])]
+pts = sum(a['points'] for a in all_ach)
+print(f'achievements: {len(all_ach)} defined ({sum(a.get("status", "live") == "live" for a in all_ach)} live), {pts} points of 1,000')
+if len(all_ach) > 100 or pts > 1000: err('Game Center allows at most 100 achievements and 1,000 points')
 for p in CAT['packs']:
     if p['kind'] != 'deck' or (ONLY and p['id'] not in ONLY): continue
     r = validate_deck(p['id'], CORE, core_files)

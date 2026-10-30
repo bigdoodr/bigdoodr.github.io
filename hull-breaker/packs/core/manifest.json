@@ -2,11 +2,16 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.0.0",
- "minEngine": "1.0",
+ "version": "1.1.0",
+ "minEngine": "1.1",
  "title": "Hull Breaker shared content",
- "bytes": 4989763,
+ "bytes": 5228349,
  "files": [
+  {
+   "path": "achievements.json",
+   "bytes": 4858,
+   "sha256": "f993a6420eed8aa62afe1c306baaac7184649ee7eb9adb185264d82170616dfe"
+  },
   {
    "path": "art.json",
    "bytes": 8158,
@@ -49,8 +54,8 @@
   },
   {
    "path": "lines.json",
-   "bytes": 4539,
-   "sha256": "cc11f31a04af40630bd5b2567cb809272228ca63f6a7f94ca171b08c6ef412e2"
+   "bytes": 6517,
+   "sha256": "50d4ee2fd79ee36fe7200255a5ad19cd46347b68ffb01eef867239ee89e1c5a3"
   },
   {
    "path": "sfx.json",
@@ -919,8 +924,68 @@
   },
   {
    "path": "tuning.json",
-   "bytes": 7363,
-   "sha256": "8f0fe871e94bbfd67a0fe019a2bbb005c4b9f3acae7679b6aa5c6278538bb727"
+   "bytes": 7453,
+   "sha256": "3fa8bc135d1202664aab752a2ea988607b7b54f47ec7b71fa5713e66295363de"
+  },
+  {
+   "path": "voice/ach_bad_credit.mp3",
+   "bytes": 28125,
+   "sha256": "2aaff931f24b019abee03f5a4d99cc8a31f23432c3072593c19d1e88cb51325c"
+  },
+  {
+   "path": "voice/ach_budget_cuts.mp3",
+   "bytes": 20061,
+   "sha256": "957939c0c62f59f84f0e0be5f472462030b9dd574f4059800679e3fee6477850"
+  },
+  {
+   "path": "voice/ach_bulk_discount.mp3",
+   "bytes": 18213,
+   "sha256": "c5cac5c0adddc76890258cd7a73400cac81a65880569410c42daf8daf335b5f7"
+  },
+  {
+   "path": "voice/ach_clean_credit.mp3",
+   "bytes": 14013,
+   "sha256": "e33e4f3f5ef052d1e2f05a08081c4a46eeeb03d5779ab0b89324e0891a64d1a0"
+  },
+  {
+   "path": "voice/ach_collateral.mp3",
+   "bytes": 17205,
+   "sha256": "79ca8ae4f6f9ffa36c7f9526daa14fac45ded1b3a52d3861a43b8590d3398e70"
+  },
+  {
+   "path": "voice/ach_dnr.mp3",
+   "bytes": 15525,
+   "sha256": "385208056f85029b921f8240b6d8b799a7881feb20aaabd515cf5e0841206ee5"
+  },
+  {
+   "path": "voice/ach_footnote.mp3",
+   "bytes": 13341,
+   "sha256": "b591f11bb505e5fa2b9e1444e0ff051e2936adad14c18e0762191480ad7234f4"
+  },
+  {
+   "path": "voice/ach_hidden_fees.mp3",
+   "bytes": 16701,
+   "sha256": "a8d2711f1b376fd484cf562a07420f2830216e93ed3712780f6a59cfe2b64040"
+  },
+  {
+   "path": "voice/ach_line_items.mp3",
+   "bytes": 26109,
+   "sha256": "f817f93b80592e3af71c52ea5a456f50ec561c217e8e7ba7602307e00fcc6015"
+  },
+  {
+   "path": "voice/ach_no_head.mp3",
+   "bytes": 15357,
+   "sha256": "74d143212e247a0834514c75b21fb089de3d297ca26f35842f31b4920ea777cb"
+  },
+  {
+   "path": "voice/ach_rush_job.mp3",
+   "bytes": 23253,
+   "sha256": "1a68ec1ae71d58b41b5e9e7016193d84b840e39a6066e7dc70f0d7b49a9aeb4f"
+  },
+  {
+   "path": "voice/ach_steel_toed.mp3",
+   "bytes": 23757,
+   "sha256": "77a0b2da6ab8bdaabc321fd392c4b3d6749028b2b58a26a22ac2e080b001fe16"
   },
   {
    "path": "voice/bloater.mp3",

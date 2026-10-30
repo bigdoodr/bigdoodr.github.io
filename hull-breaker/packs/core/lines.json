@@ -224,6 +224,90 @@
    "role": "trailer",
    "sub": 3.4,
    "file": "voice/trailer_limbs.mp3"
+  },
+  {
+   "id": "ach_footnote",
+   "text": "Consider that a footnote.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_footnote.mp3"
+  },
+  {
+   "id": "ach_steel_toed",
+   "text": "Steel toes. Best investment I ever made.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_steel_toed.mp3"
+  },
+  {
+   "id": "ach_line_items",
+   "text": "Five hundred line items. That's a long invoice.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_line_items.mp3"
+  },
+  {
+   "id": "ach_dnr",
+   "text": "Stay down. That one's in writing.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_dnr.mp3"
+  },
+  {
+   "id": "ach_collateral",
+   "text": "Collateral. Gorgon loves collateral.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_collateral.mp3"
+  },
+  {
+   "id": "ach_bulk_discount",
+   "text": "Bulk discount. Volume pricing.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_bulk_discount.mp3"
+  },
+  {
+   "id": "ach_no_head",
+   "text": "Nothing to say? Didn't think so.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_no_head.mp3"
+  },
+  {
+   "id": "ach_hidden_fees",
+   "text": "Every hidden fee. Found them all.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_hidden_fees.mp3"
+  },
+  {
+   "id": "ach_clean_credit",
+   "text": "Not a scratch. Clean credit.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_clean_credit.mp3"
+  },
+  {
+   "id": "ach_rush_job",
+   "text": "Rush job. Bill them for overtime anyway.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_rush_job.mp3"
+  },
+  {
+   "id": "ach_budget_cuts",
+   "text": "Budget cuts. Still got the job done.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_budget_cuts.mp3"
+  },
+  {
+   "id": "ach_bad_credit",
+   "text": "A hundred times dead. My credit score's taken worse.",
+   "role": "achievement",
+   "sub": 2.6,
+   "file": "voice/ach_bad_credit.mp3"
   }
  ]
 }

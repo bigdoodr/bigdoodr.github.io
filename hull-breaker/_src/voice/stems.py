@@ -7,7 +7,8 @@ SR=24000
 SAY={"Now THIS is a payment plan.":"Now this... is a payment plan.","That's a limb-ited warranty.":"That's a limb... ited warranty.",
 "Brimstone Maiden. Ninety days overdue. Let's go collect.":"Brimstone Maiden. Ninety days overdue... Let's go collect.",
 "Guess I'll take payment in limbs.":"Guess I'll take payment... in limbs.","Ship's repossessed. Mostly.":"Ship's repossessed... Mostly.",
-"Huh. Didn't need that, apparently.":"Huh... Didn't need that, apparently.","Tram's open. Somebody's waiting, aren't they.":"Tram's open. Somebody's waiting... aren't they."}
+"Huh. Didn't need that, apparently.":"Huh... Didn't need that, apparently.","Tram's open. Somebody's waiting, aren't they.":"Tram's open. Somebody's waiting... aren't they.",
+"Consider that a footnote.":"Consider that... a footnote."}
 VOICES={ 'onyx_adam':('Onyx + Adam','Deep, smooth with a little edge. The base for the current game voice.',lambda: 0.8*k.get_voice_style('am_onyx')+0.2*k.get_voice_style('am_adam'),'en-us'),
  'onyx':('Onyx','The deepest American voice. Calm and even.',lambda:'am_onyx','en-us'),
  'adam':('Adam','Mid-range and naturally rough.',lambda:'am_adam','en-us'),

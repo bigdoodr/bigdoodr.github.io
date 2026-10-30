@@ -1,4 +1,4 @@
-# Hull Breaker deck pack format, version 1
+# Hull Breaker deck pack format, version 1 (engine 1.1)
 
 A deck pack is everything one deck needs, as data and media files, with no code. The native apps download packs from GitHub Pages and the web game will read the same files. App Review guideline 2.5.2 forbids downloading code that changes features, so packs only describe a deck in a fixed vocabulary that the engine already understands. New mechanics (an enemy behavior, a weapon, a boss, a new rule verb) need an engine update, and a pack that uses them raises its `minEngine`.
 
@@ -15,6 +15,7 @@ packs/
     sfx.json              sound effects and music loops
     lines.json            Buck's shared lines (kill quips, secrets, weapon pickups, deck clear...)
     tuning.json           difficulty table, enemies, weapons, items, ranks
+    achievements.json     series-wide achievements (engine 1.1)
     strings.json          engine messages (ACCESS GRANTED, CHECKPOINT SAVED...)
     textures/ floors/ sprites/ sfx/ voice/
   deck-01/
@@ -32,7 +33,7 @@ A deck may also ship its own `textures/`, `sprites/` and `sfx/` with an `art.jso
 
 - Every JSON file starts with `"format": 1` where it has a top-level object for it (`catalog`, `manifest`, `deck`). A reader rejects a higher major format.
 - `version` is semver per pack. Bump the patch for fixes (a typo, a re-recorded line), minor for added content, major for anything that breaks saves (moved objects, renamed zones).
-- `minEngine` (`"1.0"`) is the lowest engine version that can play the pack. An app that is older shows the deck as "Update required" instead of downloading it.
+- `minEngine` is the lowest engine version that can play the pack. An app that is older shows the deck as "Update required" instead of downloading it.
 - `requires` names the core version a deck was built against.
 - Download order: fetch `catalog.json`; for each pack whose `version` is newer than the cached one, fetch its `manifest.json`, check it against `manifestSha256`, then fetch each file whose `sha256` differs from the cached copy, verify it, and swap the pack in only when every file checks out. tvOS may purge the cache while the app is closed; the app re-downloads on next launch.
 
@@ -127,8 +128,16 @@ A rule is `{"on": event, "if": condition?, "once": bool?, "do": [actions]}`. Whe
 | `{"event":"doorUnlock","lock":id}` | A locked door of that lock opens. |
 | `{"event":"doorDenied","lock":id}` | The player is turned away by that lock. |
 | `{"event":"region","zone":id,"minY":n}` | Checked every frame: the player is in the zone (and `y >= minY` if given). |
+| `{"event":"kill"}` | An enemy dies. Fields: `enemy` (type), `cause` (`cutter`, `boomstick`, `rivet`, `kick`, `bomb`, `bloater`, `barrel`, `self`), `boss` (bool). Engine 1.1. |
+| `{"event":"blast"}` | An explosion finishes. Fields: `source` (`bomb`, `bloater`, `barrel`), `kills` (enemies it killed). Engine 1.1. |
+| `{"event":"sever"}` | A limb comes off. Fields: `enemy`, `limb` (`head`, `armL`, `armR`, `legL`, `legR`), `state` (`spit`, `attack`, `other`). Engine 1.1. |
+| `{"event":"death"}` | Buck dies. Field: `cause` (`enemy`, `spit`, `bomb`, `bloater`, `barrel`). Engine 1.1. |
+| `{"event":"secret"}` | A secret panel opens. Fields: `found`, `total`. Engine 1.1. |
+| `{"event":"deckClear"}` | The deck is won, before the outro. Fields: `percent`, `time` (seconds), `par`, `underPar` (bool), `damageTaken`, `weapons` (list of `cutter`, `boomstick`, `rivet`, `charges`, `kick` used), `difficulty` (0–4), `deck`. Engine 1.1. |
 
 Conditions: `{"flag":f}`, `{"key":"R"}`, `{"visited":zone}`, `{"counter":c,"gte":n}` (also `eq`, `lte`), `{"difficulty":{"gte":n}}`, `{"not":c}`, `{"all":[...]}`, `{"any":[...]}`.
+
+On the events that carry fields, `{"field":name, ...}` tests one of them (engine 1.1): `"eq"` (number, text or bool), `"gte"`, `"lte"`, `"in"` (list of text), `"subsetOf"` (a list field holds only these), `"eqField"`, `"gteField"`, `"lteField"` (compare with another field, e.g. `{"field":"found","eqField":"total"}`).
 
 Actions (one verb each):
 
@@ -147,8 +156,13 @@ Actions (one verb each):
 | `{"after":secs,"do":[...]}` | Run actions later (play time; pausing stops the clock). |
 | `{"if":cond,"then":[...],"else":[...]}` | Branch. |
 | `{"win":true}` | Clear the deck: records, carry-over, outro. |
+| `{"achieve":id}` | Give an achievement (engine 1.1). Audited runs earn nothing except achievements marked `cheat`. |
 
 The engine does the rest on its own: secret doors, save stations, item pickups and their messages, logs, asset tags, enemy intro lines, kill quips, revives, death, low-health warnings.
+
+### par and achievements (engine 1.1)
+
+`par` is the deck's target time in seconds (Rush Job). `achievements` lists the deck's own achievements, in the same shape as `core/achievements.json` below.
 
 ### ambushes
 
@@ -163,6 +177,25 @@ The PATH button walks this list and routes to the first step whose `until` is fa
 - Log: `{id, order, header, speaker, text, file, zone}`. `text` is the subtitle, typed out at 42 characters a second. `order` is the pause-menu archive order. Logs are played straight: Buck's quips stay quiet while one plays.
 - Line: `{id, text, file, [role, sub]}`. Core lines have a `role` the engine picks from (`kill`, `secretFirst`, `secret`, `tag`, `headshot`, `enemyIntro`, `lowHp`, `death`, `saveFirst`, `stayDown`, `deckClear`, `weapon`, `trailer`). Every Buck line is recorded with the locked BUCK-VOICE settings and whisper-checked before it ships.
 - Audio is MP3 (Kokoro takes rendered through the voice lab DSP, and the log recorder filter).
+
+## core/achievements.json (engine 1.1)
+
+`{"format":1, "achievements":[...]}`. Each achievement is a line item on Buck's invoice:
+
+```json
+{"id":"hb.foot_the_bill", "name":"Foot the Bill", "points":10, "hidden":false, "status":"live",
+ "desc":"Land the final blow with a kick, 50 times.", "earned":"Fifty kicks to settle accounts.",
+ "line":"ach_footnote", "progress":{"stat":"kickKills", "target":50}}
+{"id":"hb.bulk_discount", ..., "on":{"event":"blast"},
+ "if":{"all":[{"field":"source","eq":"bomb"},{"field":"kills","gte":5}]}}
+```
+
+- `id`: `hb.` plus snake case; Paid in Full uses `hb.paid_in_full.NN`. IDs and points never change once live in Game Center.
+- `points` (1–100), `hidden` (Game Center's hidden setting; the pause menu shows REDACTED), `desc` (before), `earned` (after), `line` (a core line Buck says, at most once every 20 seconds and only if the player hasn't muted it).
+- `status`: `live` achievements can be earned with the current engine and are registered with the stores; `planned` ones are defined but can't happen yet (they get registered with the update that makes them earnable).
+- Earned either by a running total, `progress: {stat, target, minDifficulty?}`, counted across campaigns and difficulties (stats: `kickKills`, `limbsSevered`, `deaths`, `bodiesKicked`; `minDifficulty` counts only runs on that difficulty or harder), or by an event: `on` (one of the field-carrying events above) with an optional `if`. Rules can also give one with `achieve`.
+- Audited runs earn nothing unless the achievement has `"cheat": true`. Achievements and running totals are stored apart from the campaign (`hb-achievements` on the web), so New Game never erases them.
+- Game Center caps a game at 100 achievements and 1,000 points; the validator checks the total across all packs.
 
 ## core/art.json
 
@@ -180,7 +213,7 @@ World sizes come from `tuning.json` (`height` of items, decor, barrels, enemies,
 
 ## core/tuning.json
 
-The numbers the JavaScript engine has hard-coded: the difficulty table (`dmg`, `hp`, `spd`, `ammo`, `heal`, `spawn`, `cells`, `save`, `revive`, `desc`), enemy stats (`hp`, `lhp` per limb, `speed`, `dmg`, `reach`, `wind`, `r`, `height`, limbs needed to kill), weapons, ammo caps, kick, explosions, revives, items (amounts scaled by the difficulty's ammo or heal factor), decor sizes, drop chances and end-of-deck ranks. Enemy types and weapon behaviors are engine code; their numbers live here so balance changes ship as a core pack update.
+Enemies may carry `"boss": true` (engine 1.1; read by the `kill` event). The numbers the JavaScript engine has hard-coded: the difficulty table (`dmg`, `hp`, `spd`, `ammo`, `heal`, `spawn`, `cells`, `save`, `revive`, `desc`), enemy stats (`hp`, `lhp` per limb, `speed`, `dmg`, `reach`, `wind`, `r`, `height`, limbs needed to kill), weapons, ammo caps, kick, explosions, revives, items (amounts scaled by the difficulty's ammo or heal factor), decor sizes, drop chances and end-of-deck ranks. Enemy types and weapon behaviors are engine code; their numbers live here so balance changes ship as a core pack update.
 
 ## Tools
 
