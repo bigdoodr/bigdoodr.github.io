@@ -1,23 +1,237 @@
-:root {
-    /* Apple Intelligence Color Palette */
-    --ai-blue: #007AFF;
-    --ai-purple: #AF52DE;
-    --ai-pink: #FF2D92;
-    --ai-orange: #FF9500;
-    --ai-gradient: linear-gradient(135deg, #007AFF 0%, #5856D6 25%, #AF52DE 50%, #FF2D92 75%, #FF9500 100%);
-    --ai-subtle-gradient: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(175, 82, 222, 0.1) 100%);
+/* ==========================================================================
+   bigDoodR Things — theme.css
+   All colors come from CSS variables so the theme picker can swap them.
+   Mode:    <html data-theme="light|dark">      (set by _includes/theme-init.html)
+   Palette: <html data-palette="aurora|sunset|forest|ocean|mono">
+   ========================================================================== */
+
+/* ---------- Palettes (accent colors + header gradient) ---------- */
+:root,
+:root[data-palette="aurora"] {
+    --accent: #007AFF;          /* links, h2 text, borders */
+    --accent-dk: #0A84FF;       /* link color in dark mode */
+    --accent-2: #AF52DE;        /* secondary accent (dark-mode borders) */
+    --grad: linear-gradient(135deg, #007AFF 0%, #5856D6 25%, #AF52DE 50%, #FF2D92 75%, #FF9500 100%);
+}
+:root[data-palette="sunset"] {
+    --accent: #C2410C;
+    --accent-dk: #FB923C;
+    --accent-2: #DB2777;
+    --grad: linear-gradient(135deg, #F59E0B 0%, #F97316 25%, #EF4444 50%, #DB2777 75%, #9333EA 100%);
+}
+:root[data-palette="forest"] {
+    --accent: #15803D;
+    --accent-dk: #4ADE80;
+    --accent-2: #0D9488;
+    --grad: linear-gradient(135deg, #65A30D 0%, #16A34A 25%, #059669 50%, #0D9488 75%, #0E7490 100%);
+}
+:root[data-palette="ocean"] {
+    --accent: #0369A1;
+    --accent-dk: #38BDF8;
+    --accent-2: #4F46E5;
+    --grad: linear-gradient(135deg, #06B6D4 0%, #0EA5E9 25%, #3B82F6 50%, #4F46E5 75%, #1E3A8A 100%);
+}
+:root[data-palette="mono"] {
+    --accent: #3A3A3C;
+    --accent-dk: #E5E5EA;
+    --accent-2: #8E8E93;
+    --grad: linear-gradient(135deg, #1C1C1E 0%, #48484A 25%, #8E8E93 50%, #48484A 75%, #1C1C1E 100%);
 }
 
-/* Site header - always use gradient */
-header,
+/* Legacy names — some pages still reference these */
+:root {
+    --ai-blue: var(--accent);
+    --ai-purple: var(--accent-2);
+    --ai-gradient: var(--grad);
+    --ai-subtle-gradient: var(--grad-subtle);
+}
+
+/* ---------- Light mode (default) ---------- */
+:root {
+    color-scheme: light;
+    --link: var(--accent);
+    --bg: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+    --bg-solid: #ffffff;
+    --text: #1d1d1f;
+    --muted: #6e6e73;
+    --h1: #000000;
+    --glow: 255, 255, 255;
+    --surface: rgba(255, 255, 255, 0.7);
+    --surface-hover: rgba(255, 255, 255, 0.9);
+    --border: #e0e0e0;
+    --grad-subtle: linear-gradient(135deg,
+        color-mix(in srgb, var(--accent) 10%, transparent) 0%,
+        color-mix(in srgb, var(--accent-2) 10%, transparent) 100%);
+    --edge: var(--accent);                 /* h2 / li-hover / table edge */
+    --stripe: color-mix(in srgb, var(--accent) 5%, transparent);
+    --row-hover: color-mix(in srgb, var(--accent) 10%, transparent);
+    --nav-hover-bg: rgba(255, 255, 255, 0.95);
+    --nav-hover-text: #000000;
+    --menu-bg: #ffffff;
+    --menu-border: #e8e8e8;
+    --menu-text: #111111;
+    --menu-hover: #f0f0f0;
+    --menu-label: #8a8a8e;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Dark mode ---------- */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --link: var(--accent-dk);
+    --bg: linear-gradient(135deg, #1c1c1e 0%, #000000 100%);
+    --bg-solid: #000000;
+    --text: #f2f2f7;
+    --muted: #98989d;
+    --h1: #ffffff;
+    --glow: 0, 0, 0;
+    --surface: rgba(28, 28, 30, 0.8);
+    --surface-hover: rgba(44, 44, 46, 0.95);
+    --border: #444444;
+    --grad-subtle: linear-gradient(135deg,
+        color-mix(in srgb, var(--accent) 22%, transparent) 0%,
+        color-mix(in srgb, var(--accent-2) 22%, transparent) 100%);
+    --edge: var(--accent-2);
+    --stripe: color-mix(in srgb, var(--accent-2) 10%, transparent);
+    --row-hover: color-mix(in srgb, var(--accent-2) 20%, transparent);
+    --nav-hover-bg: rgba(0, 0, 0, 0.7);
+    --nav-hover-text: #ffffff;
+    --menu-bg: #2a2a2a;
+    --menu-border: #484848;
+    --menu-text: #e8e8e8;
+    --menu-hover: #383838;
+    --menu-label: #8e8e93;
+    --shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* No-JS fallback: follow the OS setting */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        color-scheme: dark;
+        --link: var(--accent-dk);
+        --bg: linear-gradient(135deg, #1c1c1e 0%, #000000 100%);
+        --bg-solid: #000000;
+        --text: #f2f2f7;
+        --muted: #98989d;
+        --h1: #ffffff;
+        --glow: 0, 0, 0;
+        --surface: rgba(28, 28, 30, 0.8);
+        --surface-hover: rgba(44, 44, 46, 0.95);
+        --border: #444444;
+        --edge: var(--accent-2);
+        --nav-hover-bg: rgba(0, 0, 0, 0.7);
+        --nav-hover-text: #ffffff;
+        --menu-bg: #2a2a2a;
+        --menu-border: #484848;
+        --menu-text: #e8e8e8;
+        --menu-hover: #383838;
+        --shadow: rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* Printing (and the resume PDF) always uses light colors */
+@media print {
+    :root[data-theme="dark"],
+    :root:not([data-theme]) {
+        color-scheme: light;
+        --link: var(--accent);
+        --bg: #ffffff;
+        --bg-solid: #ffffff;
+        --text: #1d1d1f;
+        --muted: #444444;
+        --h1: #000000;
+        --glow: 255, 255, 255;
+        --surface: transparent;
+        --surface-hover: transparent;
+        --border: #e0e0e0;
+        --edge: var(--accent);
+        --shadow: transparent;
+    }
+    li { backdrop-filter: none; }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* minima's main.css isn't loaded, so define the content column here */
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.page-content {
+    padding-bottom: 40px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: 8px;
+    z-index: 1000;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: var(--menu-bg);
+    color: var(--menu-text);
+}
+.skip-link:focus {
+    left: 8px;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+header.site-header,
 .site-header {
     width: 100%;
-    background: var(--ai-gradient);
+    background: var(--grad);
     background-size: 200% 200%;
     animation: gradientShift 8s ease infinite;
     padding: 0;
     margin-bottom: 40px;
-    box-shadow: 0 2px 18px rgba(0, 122, 255, 0.08);
+    box-shadow: 0 2px 18px var(--shadow);
 }
 
 .header-nav {
@@ -27,39 +241,294 @@ header,
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px;
-    height: 65px;
+    min-height: 65px;
 }
 
-/* Website title with gradient text and glow effect */
+/* Site title: gradient text with a glow */
 .site-title {
     font-size: 1.7em;
     font-weight: 700;
     letter-spacing: 0.03em;
     text-decoration: none;
-    /* Keep the gradient text effect for site title in header */
-    background: var(--ai-gradient);
+    background: var(--grad);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 200%;
     animation: gradientShift 8s ease infinite;
-    /* White glow around the text */
-    filter: drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.9))
-            drop-shadow(0px 0px 6px rgba(255, 255, 255, 0.6))
-            drop-shadow(0px 0px 9px rgba(255, 255, 255, 0.3));
+    filter: drop-shadow(0 0 3px rgba(var(--glow), 0.9))
+            drop-shadow(0 0 6px rgba(var(--glow), 0.6))
+            drop-shadow(0 0 9px rgba(var(--glow), 0.3));
 }
 
-/* Page title (h1) - solid black with white glow in light mode */
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list > li,
+.nav-list > li:hover {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Header pills (links, dropdown toggles, theme button) */
+.nav-list > li > a,
+.nav-list > li > .nav-dropdown-toggle,
+.theme-toggle {
+    display: inline-block;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-decoration: none;
+    font: inherit;
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 1.6;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.13);
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.nav-list > li > a:hover,
+.nav-list > li > a:focus-visible,
+.nav-list > li > .nav-dropdown-toggle:hover,
+.nav-dropdown.is-open > .nav-dropdown-toggle,
+.theme-toggle:hover,
+.theme-toggle:focus-visible,
+.theme-picker.is-open .theme-toggle {
+    color: var(--nav-hover-text) !important;
+    -webkit-text-fill-color: var(--nav-hover-text) !important;
+    background: var(--nav-hover-bg) !important;
+    text-shadow: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.nav-dropdown-toggle {
+    user-select: none;
+}
+
+.nav-dropdown-toggle::after {
+    content: " ▾";
+    font-size: 0.7em;
+    opacity: 0.6;
+}
+
+/* ---------- Dropdown menus ---------- */
+.nav-dropdown,
+.theme-picker {
+    position: relative;
+}
+
+.nav-dropdown-menu,
+.theme-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 4px 0 0;
+    padding: 6px 0;
+    list-style: none;
+    min-width: 200px;
+    max-width: min(280px, calc(100vw - 1.5rem));
+    background-color: var(--menu-bg);
+    border: 1px solid var(--menu-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 14px var(--shadow);
+    z-index: 200;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.is-open .nav-dropdown-menu,
+.theme-picker.is-open .theme-panel {
+    display: block;
+}
+
+.nav-dropdown-menu li,
+.nav-dropdown-menu li:hover {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+    backdrop-filter: none;
+}
+
+.nav-dropdown-menu li a {
+    display: block;
+    padding: 6px 18px;
+    white-space: normal;
+    color: var(--menu-text) !important;
+    -webkit-text-fill-color: var(--menu-text) !important;
+    font-size: 0.95em;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.nav-dropdown-menu li a:hover,
+.nav-dropdown-menu li a:focus-visible {
+    background: var(--menu-hover) !important;
+    -webkit-text-fill-color: var(--menu-text) !important;
+}
+
+.nav-divider,
+.theme-panel legend {
+    font-size: 0.68em;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--menu-label);
+    padding: 10px 18px 4px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.nav-dropdown-menu .nav-divider {
+    padding: 10px 18px 4px;
+    margin-top: 4px;
+    border-top: 1px solid var(--menu-border);
+}
+
+/* ---------- Theme picker ---------- */
+.theme-picker {
+    margin: 0;
+    padding: 0;
+}
+
+.theme-toggle {
+    padding: 10px 14px;
+}
+
+.theme-toggle svg {
+    width: 1.1em;
+    height: 1.1em;
+    vertical-align: -0.18em;
+    fill: currentColor;
+}
+
+.theme-panel {
+    left: auto;
+    right: 0;
+    width: 230px;
+    padding: 4px 0 12px;
+    color: var(--menu-text);
+}
+
+.theme-panel fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0 14px;
+}
+
+.theme-panel legend {
+    padding: 10px 4px 6px;
+}
+
+.theme-modes {
+    display: flex;
+    gap: 4px;
+    padding: 3px;
+    border-radius: 10px;
+    background: var(--menu-hover);
+}
+
+.theme-modes label {
+    flex: 1;
+    text-align: center;
+    font-size: 0.85em;
+    padding: 5px 0;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.theme-modes input,
+.theme-swatches input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.theme-modes input:checked + span {
+    font-weight: 600;
+}
+
+.theme-modes label:has(input:checked) {
+    background: var(--menu-bg);
+    box-shadow: 0 1px 3px var(--shadow);
+}
+
+.theme-modes label:has(input:focus-visible),
+.theme-swatches label:has(input:focus-visible) {
+    outline: 2px solid var(--link);
+    outline-offset: 2px;
+}
+
+.theme-swatches {
+    display: flex;
+    gap: 10px;
+    padding: 2px 4px;
+}
+
+.theme-swatches label {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+    transition: transform 0.15s ease;
+}
+
+.theme-swatches label:hover {
+    transform: scale(1.1);
+}
+
+.theme-swatches label:has(input:checked) {
+    box-shadow: 0 0 0 2px var(--menu-bg), 0 0 0 4px var(--menu-text);
+}
+
+.swatch-aurora { background: linear-gradient(135deg, #007AFF, #AF52DE, #FF2D92, #FF9500); }
+.swatch-sunset { background: linear-gradient(135deg, #F59E0B, #EF4444, #DB2777, #9333EA); }
+.swatch-forest { background: linear-gradient(135deg, #65A30D, #059669, #0E7490); }
+.swatch-ocean  { background: linear-gradient(135deg, #06B6D4, #3B82F6, #1E3A8A); }
+.swatch-mono   { background: linear-gradient(135deg, #1C1C1E, #8E8E93, #E5E5EA); }
+
+.theme-current {
+    display: block;
+    padding: 8px 18px 0;
+    font-size: 0.75em;
+    color: var(--menu-label);
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
 h1 {
-    color: #000000;
+    color: var(--h1);
     font-size: 3em;
     font-weight: 700;
+    line-height: 1.2;
     text-align: center;
     margin: 40px 0;
     position: relative;
-    filter: drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.9))
-            drop-shadow(0px 0px 6px rgba(255, 255, 255, 0.6))
-            drop-shadow(0px 0px 9px rgba(255, 255, 255, 0.3));
+    filter: drop-shadow(0 0 3px rgba(var(--glow), 0.9))
+            drop-shadow(0 0 6px rgba(var(--glow), 0.6))
+            drop-shadow(0 0 9px rgba(var(--glow), 0.3));
 }
 
 h1::after {
@@ -70,136 +539,34 @@ h1::after {
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background: var(--ai-gradient);
+    background: var(--grad);
     border-radius: 2px;
 }
 
-/* Navigation list */
-.nav-list {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-list li {
-    margin: 0;
-    padding: 0;
-    background: none;
-    border: none;
-    border-left: none;
-    backdrop-filter: none;
-    box-shadow: none;
-    transform: none;
-}
-
-.nav-list li:hover {
-    background: none;
-    border-left: none;
-    transform: none;
-    box-shadow: none;
-}
-
-/* Navigation menu links */
-.nav-list a,
-header nav a,
-header a {
-    color: white !important;
-    text-decoration: none;
-    font-weight: 500;
-    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-    padding: 10px 18px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.13);
-    transition: all 0.3s ease;
-    font-size: 1em;
-    position: relative;
-    white-space: nowrap;
-}
-
-.nav-list a:hover,
-.nav-list a:focus,
-header nav a:hover,
-header a:hover {
-    color: #000000 !important; /* Black text in light mode hover */
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(10px);
-    text-shadow: none !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
-    filter: none !important;
-}
-
-/* Exception: site-title link should not have pill styling */
-.site-title:hover {
-    background: var(--ai-gradient) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    transform: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    filter: drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.9))
-            drop-shadow(0px 0px 6px rgba(255, 255, 255, 0.6))
-            drop-shadow(0px 0px 9px rgba(255, 255, 255, 0.3)) !important;
-}
-
-.fa {
-    font-size: 50px;
-    cursor: pointer;
-    user-select: none;
-    background: var(--ai-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: all 0.3s ease;
-}
-
-.fa:hover {
-    transform: scale(1.05);
-}
-
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-    color: #1d1d1f;
-    transition: all 0.5s ease;
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
 h2 {
-    color: var(--ai-blue);
+    color: var(--link);
     font-weight: 600;
     margin: 30px 0 20px 0;
     padding: 15px 25px;
-    background: var(--ai-subtle-gradient);
+    background: var(--grad-subtle);
     border-radius: 12px;
-    border-left: 4px solid var(--ai-blue);
+    border-left: 4px solid var(--edge);
 }
 
 h2 a {
     color: inherit;
     text-decoration: none;
-    transition: all 0.3s ease;
 }
 
 h2 a:hover {
-    background: var(--ai-gradient);
+    background: var(--grad);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 p {
-    color: #86868b;
+    color: var(--muted);
     font-size: 1.1em;
     margin: 20px 0;
 }
@@ -212,45 +579,94 @@ ul {
 li {
     margin-bottom: 15px;
     padding: 15px 20px;
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--surface);
     border-radius: 12px;
     border-left: 3px solid transparent;
     background-clip: padding-box;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     backdrop-filter: blur(10px);
 }
 
 li:hover {
-    background: rgba(255, 255, 255, 0.9);
-    border-left-color: var(--ai-blue);
+    background: var(--surface-hover);
+    border-left-color: var(--edge);
     transform: translateX(5px);
-    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.1);
+    box-shadow: 0 4px 20px var(--shadow);
 }
 
 a {
-    color: var(--ai-blue);
+    color: var(--link);
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
     position: relative;
 }
 
-/* General link hover - but NOT for nav links */
-a:not(.nav-list a):not(.site-title):hover {
-    background: var(--ai-gradient);
+/* Gradient text on hover — content links only (not header/menus/buttons) */
+.page-content a:not(.contact-button):not(.post_navi-item):not(.bookmark-card):hover {
+    background: var(--grad);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 2px;
+}
+
+code {
+    font-size: 0.9em;
+}
+
+blockquote {
+    margin: 20px 0;
+    padding: 4px 20px;
+    border-left: 4px solid var(--edge);
+    background: var(--grad-subtle);
+    border-radius: 0 12px 12px 0;
+}
+
 iframe {
     border: none;
     border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px var(--shadow);
     margin-top: 30px;
+    max-width: 100%;
 }
 
-/* Table styling */
+/* ---------- Search ---------- */
+#ddgSearch {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin: 0 0 10px;
+}
+
+#ddgSearch input[type="text"] {
+    width: min(260px, 60vw);
+    padding: 7px 12px;
+    font: inherit;
+    font-size: 0.9em;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+#ddgSearch button {
+    padding: 7px 14px;
+    font: inherit;
+    font-size: 0.9em;
+    color: #ffffff;
+    background: var(--accent);
+    border: 0;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+/* ---------- Tables ---------- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -258,11 +674,11 @@ table {
     font-size: 1em;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.1);
+    box-shadow: 0 4px 20px var(--shadow);
 }
 
 table thead tr {
-    background: var(--ai-gradient);
+    background: var(--grad);
     color: #ffffff;
     text-align: left;
     font-weight: 600;
@@ -274,151 +690,67 @@ table td {
 }
 
 table tbody tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.3s ease;
 }
 
 table tbody tr:nth-of-type(even) {
-    background-color: rgba(0, 122, 255, 0.05);
+    background-color: var(--stripe);
 }
 
 table tbody tr:last-of-type {
-    border-bottom: 2px solid var(--ai-blue);
+    border-bottom: 2px solid var(--edge);
 }
 
 table tbody tr:hover {
-    background-color: rgba(0, 122, 255, 0.1);
-    transform: scale(1.01);
+    background-color: var(--row-hover);
 }
 
-/* Dark mode styles */
-@media (prefers-color-scheme: dark) {
-    body {
-        background: linear-gradient(135deg, #1c1c1e 0%, #000000 100%);
-        color: #f2f2f7;
-    }
-
-    /* Ensure header gradient is visible in dark mode */
-    header,
-    .site-header {
-        background: var(--ai-gradient);
-        background-size: 200% 200%;
-        animation: gradientShift 8s ease infinite;
-        box-shadow: 0 2px 20px rgba(175, 82, 222, 0.09);
-    }
-
-    /* Site title in dark mode - keep gradient */
-    .site-title {
-        background: var(--ai-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.9))
-                drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.6))
-                drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.3));
-    }
-
-    
-    /* Page title (h1) in dark mode - solid white with black glow in dark mode */
-	h1 {
-		color: #ffffff;
-		font-size: 3em;
-		font-weight: 700;
-		text-align: center;
-		margin: 40px 0;
-		position: relative;
-		filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.9))
-				drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.6))
-				drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.3));
-	}
-
-    
-    
-
-    /* Menu links stay white in dark mode - gradient header provides contrast */
-    .nav-list a,
-    header nav a,
-    header a {
-        color: white !important;
-        background: rgba(255, 255, 255, 0.13);
-    }
-
-    .nav-list a:hover,
-    .nav-list a:focus,
-    header nav a:hover,
-    header a:hover {
-        color: white !important; /* Keep white text in dark mode */
-        background: rgba(0, 0, 0, 0.7) !important;
-        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5) !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        filter: none !important; /* Remove any filter effects causing washout */
-    }
-
-    /* Exception: site-title link should not have pill styling in dark mode */
-    .site-title:hover {
-        background: var(--ai-gradient) !important;
-        -webkit-background-clip: text !important;
-        background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        transform: none !important;
-        box-shadow: none !important;
-        filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.9))
-                drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.6))
-                drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.3)) !important;
-    }
-
-    h2 {
-        background: linear-gradient(135deg, rgba(0, 122, 255, 0.2) 0%, rgba(175, 82, 222, 0.2) 100%);
-        border-left-color: var(--ai-purple);
-    }
-
-    p {
-        color: #98989d;
-    }
-
-    li {
-        background: rgba(28, 28, 30, 0.8);
-        border-left-color: transparent;
-    }
-
-    li:hover {
-        background: rgba(28, 28, 30, 0.95);
-        border-left-color: var(--ai-purple);
-    }
-
-    a {
-        color: var(--ai-blue);
-    }
-
-    /* Dark mode table styling */
-    table tbody tr {
-        border-bottom: 1px solid #444;
-    }
-
-    table tbody tr:nth-of-type(even) {
-        background-color: rgba(175, 82, 222, 0.1);
-    }
-
-    table tbody tr:last-of-type {
-        border-bottom: 2px solid var(--ai-purple);
-    }
-
-    table tbody tr:hover {
-        background-color: rgba(175, 82, 222, 0.2);
-    }
+/* ---------- Font Awesome gradient icons ---------- */
+.fa {
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease;
 }
 
-/* Subtle animation for gradient elements */
+.fa:hover {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   Motion & responsiveness
+   ========================================================================== */
+
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Mobile responsiveness */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+    li:hover {
+        transform: none;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 15px;
+    }
+
+    .wrapper {
+        padding: 0 15px;
     }
 
     .header-nav {
@@ -428,23 +760,24 @@ table tbody tr:hover {
     }
 
     .nav-list {
-        gap: 15px;
+        gap: 10px;
         margin-top: 10px;
         flex-wrap: wrap;
+        justify-content: center;
     }
 
     .site-title {
         font-size: 1.3em;
     }
-    
+
     h1 {
-        font-size: 2.5em;
+        font-size: 2.2em;
     }
-    
+
     h2 {
         padding: 12px 20px;
     }
-    
+
     li {
         padding: 12px 15px;
     }
@@ -452,5 +785,9 @@ table tbody tr:hover {
     table th,
     table td {
         padding: 12px 15px;
+    }
+
+    #ddgSearch {
+        justify-content: center;
     }
 }

@@ -4,6 +4,7 @@ title: "Defaults"
 description: "The apps and tools I use for various tasks"
 date: 2026-01-26
 permalink: /defaults/
+blurb: "My default apps"
 ---
 
 These are my default apps for common tasks - a snapshot of my digital toolkit as of January 2026.

@@ -1,0 +1,16 @@
+<script>
+  /* Runs before CSS paints so there is no light/dark flash.
+     Mode: auto | light | dark   Palette: aurora | sunset | forest | ocean | mono */
+  (function () {
+    var root = document.documentElement, mode = "auto", palette = "aurora";
+    try {
+      mode = localStorage.getItem("theme-mode") || mode;
+      palette = localStorage.getItem("theme-palette") || palette;
+    } catch (e) {}
+    var dark = mode === "dark" ||
+      (mode === "auto" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
+    root.setAttribute("data-mode", mode);
+    root.setAttribute("data-theme", dark ? "dark" : "light");
+    root.setAttribute("data-palette", palette);
+  })();
+</script>

@@ -4,6 +4,7 @@ title: "Shortcuts"
 description: "Apple Shortcuts I've made."
 date: 2026-05-25
 permalink: /shortcuts/
+blurb: "Apple Shortcuts I've made"
 ---
 
 A collection of Apple Shortcuts I've built. Most of them lean heavily on existing material — I've tried to credit sources where they apply.

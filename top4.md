@@ -4,6 +4,7 @@ title: "Top 4"
 description: "My definitive top 3 favorites — plus an honorable mention — across a bunch of categories."
 date: 2026-02-25
 permalink: /top4/
+blurb: "My top 4s across various categories"
 ---
 
 My definitive top 3 favorites — plus an honorable mention — across a bunch of categories. Listed in order.

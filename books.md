@@ -739,6 +739,7 @@ image: /resources/books.purple.png
 | 2 | [X Minus One, Volume Two](https://www.librarything.com/search.php?search=X%20Minus%20One%2C%20Volume%20Two%20Radio%20Spirits&searchtype=newwork_titles&sortchoice=0) | Radio Spirits | ☐ |
 | — | [X Minus One](https://www.librarything.com/work/14323900/t/X-Minus-One-Old-Time-Radio-Classic-Radio-Science-Fiction) | Original Radio Broadcasts | ✅ March 2026 |
 
+<a id="reading-2025"></a>
 ## 2025 Reading
 
 ### Final Count: 52 books

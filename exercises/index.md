@@ -4,6 +4,7 @@ description: Fitness tools and apps I've built
 date: 2025-09-01T11:29:00-6:00
 tags: Fitness
 image: /resources/exercise.png
+slash: false
 ---
 
 # Exercise Utilities

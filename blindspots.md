@@ -4,6 +4,7 @@ title: "Blind Spots"
 description: "Things I know I need to work on. A page I'm still filling in."
 date: 2026-05-25
 permalink: /blindspots/
+blurb: "Gaps between who I think I am and who I actually am"
 ---
 
 A page about the gaps between who I think I am and who I actually am — at least some of the time. Naming something here doesn't excuse it. If I know it about myself, I'm working on it.

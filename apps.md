@@ -2,6 +2,7 @@
 layout: page
 title: My Apps
 permalink: /apps/
+slash: false
 ---
 
 A collection of apps I've built for Apple platforms. Where available, you'll find App Store links, TestFlight betas, and GitHub repos below.

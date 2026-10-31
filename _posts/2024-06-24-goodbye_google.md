@@ -28,7 +28,7 @@ I then started paying attention to how Google services I used/depended upon got 
 - **[Google Scanning Private Photos and Incorrectly Reporting CSAM](https://web.archive.org/web/20240119181216/https://www.eff.org/deeplinks/2022/08/googles-scans-private-photos-led-false-accusations-child-abuse)** - AI-driven scanning of photos seemed beneficial, but after cases where innocent family photos were wrongly flagged, I started doubting Google’s handling of private data.
 - **Chrome's Dubious "[Privacy Enhancements](https://web.archive.org/web/20240209182901/https://www.eff.org/deeplinks/2023/09/how-turn-googles-privacy-sandbox-ad-tracking-and-why-you-should)"** - Rather than safeguarding user privacy, Google’s new "Sandbox" merely shifts control over the advertising ecosystem to Google.
 - **[Web Environment Integrity](https://web.archive.org/web/20240118070109/https://en.m.wikipedia.org/wiki/Web_Environment_Integrity)** - Thankfully abandoned in November 2023.
-- **[Abandonment of Nest Renew Energy Impact Program](https://support.google.com/googlenest/answer/10956849?hl=en&ref_topic=11112728)** - The program was promising, but its quick demise shows the fleeting nature of Google's non-core initiatives.
+- **[Abandonment of Nest Renew Energy Impact Program](https://web.archive.org/web/20240529065837/https://support.google.com/googlenest/answer/10956849)** - The program was promising, but its quick demise shows the fleeting nature of Google's non-core initiatives.
 
 ![Energy Impact Program](https://web.archive.org/web/20240107144150oe_/https://static1.anpoimages.com/wordpress/wp-content/uploads/2022/10/nest-renew-energy-impact-program.jpg?q=50&fit=crop&w=1500&dpr=1.5)  
 Source: [Android Police](https://web.archive.org/web/20240107144150/https://www.androidpolice.com/nest-renew-explainer/)
@@ -49,7 +49,7 @@ The tough breakups were Google Domains, Google Home/Nest, YouTube, and YouTube T
 
 - **Google Domains:** Moved to CloudFlare, aligned with my values of simplicity.
 - **Google Home/Nest:** I still use these but also have them set up through [HomeBridge](https://homebridge.io).
-- **YouTube:** Using [Invidious](http://inv.tux.pizza/) as an alternative.
+- **YouTube:** Using [Invidious](https://invidious.io/) as an alternative.
 - **YouTube TV:** Retained for its robust live TV offerings.
 
 Now, it’s Gmail and Google Search left to address. I've started tracking migration progress and moving only essential contacts.

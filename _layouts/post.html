@@ -1,8 +1,7 @@
 ---
 layout: default
 ---
-<link href="/css/override.css" rel="stylesheet" type="text/css">
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="post h-entry" itemscope itemtype="https://schema.org/BlogPosting">
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
@@ -13,7 +12,7 @@ layout: default
       </time>
       {% assign author = page.author | default: site.author %}
       {%- if author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ author }}</span></span>
+        • <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ author }}</span></span>
       {%- endif -%}</p>
   </header>
 
@@ -26,13 +25,18 @@ layout: default
     {% include navlinks.html %}
   </div>
 
-  <section id="comments">
-    <script src="https://utteranc.es/client.js"
-          repo="bigdoodr/bigdoodr.github.io"
-          issue-term="pathname"
-          theme="photon-dark"
-          crossorigin="anonymous"
-          async>
+  <section id="comments" class="no-print">
+    <script>
+      (function () {
+        var s = document.createElement("script");
+        s.src = "https://utteranc.es/client.js";
+        s.setAttribute("repo", "bigdoodr/bigdoodr.github.io");
+        s.setAttribute("issue-term", "pathname");
+        s.setAttribute("theme", document.documentElement.getAttribute("data-theme") === "dark" ? "photon-dark" : "github-light");
+        s.setAttribute("crossorigin", "anonymous");
+        s.async = true;
+        document.currentScript.parentNode.appendChild(s);
+      })();
     </script>
   </section>
 

@@ -4,6 +4,7 @@ title: "Why"
 description: "Why this site exists and what I care about."
 date: 2026-02-25
 permalink: /why/
+blurb: "Why this site exists"
 ---
 
 ## Why this site?
