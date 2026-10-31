@@ -29,7 +29,7 @@ image: /resources/loops/1.crescent-tucks.jpg
     <li><video src="/resources/loops/8.corpse-crunch.mp4" poster="/resources/loops/8.corpse-crunch.jpg" autoplay loop muted playsinline aria-label="Corpse Crunch"></video> Corpse Crunch</li>
   </ul>
 </details>
-[Download ExpandableExerciseTimer](https://testflight.apple.com/join/mRp4ySuZ) and load [this routine](/exercises/10MinAbs.json) into it.
+Get ExpandableExerciseTimer on the [App Store](https://apps.apple.com/us/app/expandableexercisetimer/id6756544631) (or try what's next in the [TestFlight beta](https://testflight.apple.com/join/mRp4ySuZ)) and load [this routine](/exercises/10MinAbs.json) into it.
 
 - Morning Stretches by Jeff Cavaliere
 
