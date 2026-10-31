@@ -3,7 +3,7 @@ title: Daily Exercises
 description: Stretches and Core Exercises to Start the Day
 date: 2021-05-12T13:00:00-6:00
 tags: Fitness
-image: /resources/1.crescent-tucks.gif
+image: /resources/loops/1.crescent-tucks.jpg
 ---
 
 - 10 Minute Abs by Jeff Cavaliere
@@ -17,16 +17,16 @@ image: /resources/1.crescent-tucks.gif
   <p>Rest for 15 seconds</p>
 
   <ul>
-    <li><img src="/resources/1.crescent-tucks.gif" alt="Crescent Tucks"> Crescent Tucks</li>
-    <li><img src="/resources/2.backward-7s.gif" alt="Backward 7s"> Backward 7x</li>
-    <li><img src="/resources/3.swipers.gif" alt="Swipers"> Swipers</li>
-    <li><img src="/resources/4.side-cycles.gif" alt="Side Cycles"> Side Cycles - Left</li>
-    <li><img src="/resources/4.side-cycles.gif" alt="Side Cycles"> Side Cycles - Right</li>
-    <li><img src="/resources/5.mountain-hip-dips.gif" alt="Mountain Hip Dips"> Mountain Hip Dips</li>
-    <li><img src="/resources/6.frog-v-ups.gif" alt="Frog V-Ups"> Frog V-Ups</li>
-    <li><img src="/resources/7.side-scissor-crunch.gif" alt="Side Scissor Crunches"> Side Scissor Crunches - Left</li>
-    <li><img src="/resources/7.side-scissor-crunch.gif" alt="Side Scissor Crunches"> Side Scissor Crunches - Right</li>
-    <li><img src="/resources/8.corpse-crunch.gif" alt="Corpse Crunch"> Corpse Crunch</li>
+    <li><video src="/resources/loops/1.crescent-tucks.mp4" poster="/resources/loops/1.crescent-tucks.jpg" autoplay loop muted playsinline aria-label="Crescent Tucks"></video> Crescent Tucks</li>
+    <li><video src="/resources/loops/2.backward-7s.mp4" poster="/resources/loops/2.backward-7s.jpg" autoplay loop muted playsinline aria-label="Backward 7s"></video> Backward 7x</li>
+    <li><video src="/resources/loops/3.swipers.mp4" poster="/resources/loops/3.swipers.jpg" autoplay loop muted playsinline aria-label="Swipers"></video> Swipers</li>
+    <li><video src="/resources/loops/4.side-cycles.mp4" poster="/resources/loops/4.side-cycles.jpg" autoplay loop muted playsinline aria-label="Side Cycles"></video> Side Cycles - Left</li>
+    <li><video src="/resources/loops/4.side-cycles.mp4" poster="/resources/loops/4.side-cycles.jpg" autoplay loop muted playsinline aria-label="Side Cycles"></video> Side Cycles - Right</li>
+    <li><video src="/resources/loops/5.mountain-hip-dips.mp4" poster="/resources/loops/5.mountain-hip-dips.jpg" autoplay loop muted playsinline aria-label="Mountain Hip Dips"></video> Mountain Hip Dips</li>
+    <li><video src="/resources/loops/6.frog-v-ups.mp4" poster="/resources/loops/6.frog-v-ups.jpg" autoplay loop muted playsinline aria-label="Frog V-Ups"></video> Frog V-Ups</li>
+    <li><video src="/resources/loops/7.side-scissor-crunch.mp4" poster="/resources/loops/7.side-scissor-crunch.jpg" autoplay loop muted playsinline aria-label="Side Scissor Crunches"></video> Side Scissor Crunches - Left</li>
+    <li><video src="/resources/loops/7.side-scissor-crunch.mp4" poster="/resources/loops/7.side-scissor-crunch.jpg" autoplay loop muted playsinline aria-label="Side Scissor Crunches"></video> Side Scissor Crunches - Right</li>
+    <li><video src="/resources/loops/8.corpse-crunch.mp4" poster="/resources/loops/8.corpse-crunch.jpg" autoplay loop muted playsinline aria-label="Corpse Crunch"></video> Corpse Crunch</li>
   </ul>
 </details>
 [Download ExpandableExerciseTimer](https://testflight.apple.com/join/mRp4ySuZ) and load [this routine](/exercises/10MinAbs.json) into it.
@@ -39,10 +39,10 @@ image: /resources/1.crescent-tucks.gif
   <p>Source: <a href="https://www.youtube.com/embed/2X7LDuBcPMw">5 Stretches You Should Be Doing EVERY Morning!</a></p>
 
   <ul>
-    <li><img src="/resources/BridgeAndReachOver.gif" alt="Bridge and Reach Over"> Bridge and Reach Over</li>
-    <li><img src="/resources/QLSlide.gif" alt="QL Slide"> QL Slide</li>
-    <li><img src="/resources/SquatAndReach.gif" alt="Squat and Reach"> Squat and Reach</li>
-    <li><img src="/resources/KneelingLungeAndTorsoTwist.gif" alt="Kneeling Lunge and Torso Twist"> Kneeling Lunge and Torso Twist</li>
-    <li><img src="/resources/HipHingeAndTorsoBend.gif" alt="Hip Hinge and Torso Bend"> Hip Hinge and Torso Bend</li>
+    <li><video src="/resources/loops/BridgeAndReachOver.mp4" poster="/resources/loops/BridgeAndReachOver.jpg" autoplay loop muted playsinline aria-label="Bridge and Reach Over"></video> Bridge and Reach Over</li>
+    <li><video src="/resources/loops/QLSlide.mp4" poster="/resources/loops/QLSlide.jpg" autoplay loop muted playsinline aria-label="QL Slide"></video> QL Slide</li>
+    <li><video src="/resources/loops/SquatAndReach.mp4" poster="/resources/loops/SquatAndReach.jpg" autoplay loop muted playsinline aria-label="Squat and Reach"></video> Squat and Reach</li>
+    <li><video src="/resources/loops/KneelingLungeAndTorsoTwist.mp4" poster="/resources/loops/KneelingLungeAndTorsoTwist.jpg" autoplay loop muted playsinline aria-label="Kneeling Lunge and Torso Twist"></video> Kneeling Lunge and Torso Twist</li>
+    <li><video src="/resources/loops/HipHingeAndTorsoBend.mp4" poster="/resources/loops/HipHingeAndTorsoBend.jpg" autoplay loop muted playsinline aria-label="Hip Hinge and Torso Bend"></video> Hip Hinge and Torso Bend</li>
   </ul>
 </details>

@@ -202,7 +202,7 @@ Reserve a recurring block (e.g., Fridays) for no-risk work:
 
 ### Managing Macs with Intune
 
-*Sam Gibbs & Andrew Myers — [Community Notes](https://bit.ly/3VRu7LV) — [GitHub Repos](https://alectrona.com/MacAdmins2024)*
+*Sam Gibbs & Andrew Myers — [Community Notes](https://bit.ly/3VRu7LV) — [Slides](https://bpb-us-e1.wpmucdn.com/sites.psu.edu/dist/4/24696/files/2024/07/psumac2024-Managing-Macs-with-Microsoft-Intune-compressed.pdf)*
 
 #### Check-in Timing
 - At enrollment: every 15 min for first hour

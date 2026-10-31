@@ -34,7 +34,6 @@ labels:
 # Paths to leave off the human sitemap (prefix match).
 hide:
   - /404
-  - /staging/
   - /hull-breaker/packs/
   - /assets/
   - /js/

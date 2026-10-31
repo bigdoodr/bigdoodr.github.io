@@ -59,7 +59,7 @@ jobs:
             --ignore-empty-mailto \
             --allow-missing-href \
             --swap-urls "^https\:\/\/bigdoodr\.github\.io:" \
-            --ignore-files "/\/staging\//,/\/hull-breaker\/packs\//,/\/ActiveUpdateCycleWebPage\/assets\//,/\/BuildWithSwiftDialog\/assets\//,/\/WKUProDevDay2026\/assets\//"
+            --ignore-files "/\/hull-breaker\/packs\//,/\/ActiveUpdateCycleWebPage\/assets\//,/\/BuildWithSwiftDialog\/assets\//,/\/WKUProDevDay2026\/assets\//"
 
       # ── External links: weekly / manual only (slow, and other sites flake) ──
       - name: Check external links
@@ -73,7 +73,6 @@ jobs:
             --timeout 30
             --max-retries 2
             --accept 200..=299,403,429,999
-            --exclude-path _site/staging
             --exclude-path _site/hull-breaker/packs
             --exclude "^https?://(www\.)?(linkedin|facebook|twitter|x|instagram)\.com"
             --exclude "^https?://fonts\.(googleapis|gstatic)\.com"

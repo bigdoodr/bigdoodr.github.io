@@ -182,7 +182,8 @@ body {
     padding: 20px;
 }
 
-img {
+img,
+video {
     max-width: 100%;
     height: auto;
 }

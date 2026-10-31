@@ -97,10 +97,6 @@ defaults:
       tags: Other
   # Keep drafts and internals out of sitemap.xml and /sitemap/
   - scope:
-      path: "staging"
-    values:
-      sitemap: false
-  - scope:
       path: "hull-breaker/packs"
     values:
       sitemap: false
