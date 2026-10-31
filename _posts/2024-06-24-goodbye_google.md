@@ -49,7 +49,7 @@ The tough breakups were Google Domains, Google Home/Nest, YouTube, and YouTube T
 
 - **Google Domains:** Moved to CloudFlare, aligned with my values of simplicity.
 - **Google Home/Nest:** I still use these but also have them set up through [HomeBridge](https://homebridge.io).
-- **YouTube:** Using [Invidious](http://inv.tux.pizza/) as an alternative.
+- **YouTube:** Using [Invidious](https://invidious.io/) as an alternative.
 - **YouTube TV:** Retained for its robust live TV offerings.
 
 Now, it’s Gmail and Google Search left to address. I've started tracking migration progress and moving only essential contacts.

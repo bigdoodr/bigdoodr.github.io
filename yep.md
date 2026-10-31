@@ -4,6 +4,7 @@ title: "Yep"
 description: "Things I'm always on board with."
 date: 2026-02-25
 permalink: /yep/
+blurb: "Things I'll always say yes to"
 ---
 
 Things I will always say yes to.

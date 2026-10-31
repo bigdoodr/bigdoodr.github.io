@@ -4,6 +4,7 @@ title: "Colophon"
 description: "How this website is built and maintained"
 date: 2026-01-26
 permalink: /colophon/
+blurb: "How this site is made"
 ---
 
 This page documents the technical details behind this website - the tools, technologies, and design decisions that make it work.
@@ -32,7 +33,7 @@ This page documents the technical details behind this website - the tools, techn
 
 **[Font Awesome](https://fontawesome.com)** - Icons throughout the site  
 **Color Scheme:** Inspired by Apple Intelligence's colorful gradient style  
-**Theme Support:** Automatically responds to system light/dark mode preferences via CSS media queries
+**Theme Support:** A header theme picker offers Auto (follows your system), Light, or Dark, plus five color palettes. Your choice is saved in your browser and applied before the page paints, so there's no flash.
 
 ## Tools & Workflow
 

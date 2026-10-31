@@ -1,28 +1,12 @@
 <footer class="site-footer h-card">
-  <data class="u-url" href="{{ "/" | relative_url }}"></data>
-
+  <data class="u-url" value="{{ '/' | absolute_url }}"></data>
   <div class="wrapper">
-    <div class="footer-col-wrapper">
-      <div class="footer-col">
-        <ul class="social-icons">
-          <li>
-            <a href="{{ '/feed.xml' | relative_url }}" title="RSS Feed">
-              <i class="fas fa-rss orange"></i>
-            </a>
-          </li>
-          {%- include social.html -%}
-        </ul>
-        {%- if site.author %}
-        <ul class="contact-list">
-          {% if site.author.name -%}
-            <li class="p-name">{{ site.author.name | escape }}</li>
-          {% endif -%}
-          {% if site.author.email -%}
-            <li><a class="u-email" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
-          {%- endif %}
-        </ul>
-        {%- endif %}
-      </div>
-    </div>
+    {%- include social.html -%}
+    <p class="footer-meta">
+      <a href="{{ '/sitemap/' | relative_url }}">Sitemap</a> ·
+      <a href="{{ '/slashes/' | relative_url }}">Slashes</a> ·
+      <a href="{{ '/colophon/' | relative_url }}">Colophon</a> ·
+      <a href="{{ '/ai/' | relative_url }}">/ai</a>
+    </p>
   </div>
 </footer>

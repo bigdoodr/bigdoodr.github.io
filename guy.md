@@ -4,6 +4,7 @@ title: "Guy"
 description: "I'm a ___ guy."
 date: 2026-02-25
 permalink: /guy/
+blurb: "I'm a ___ guy"
 ---
 
 I'm a "I don't really care what you call me" guy.

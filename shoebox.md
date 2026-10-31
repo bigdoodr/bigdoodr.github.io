@@ -4,6 +4,7 @@ title: "Shoebox"
 description: "Odds and ends. The stuff that doesn't fit anywhere else."
 date: 2026-02-25
 permalink: /shoebox/
+blurb: "Odds and ends"
 ---
 
 Odds and ends. The stuff that doesn't fit anywhere else. More to come.

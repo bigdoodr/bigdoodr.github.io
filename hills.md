@@ -4,6 +4,7 @@ title: "Hills"
 description: "Stupid hills I'm willing to die on."
 date: 2026-02-25
 permalink: /hills/
+blurb: "Stupid hills I'll die on"
 ---
 
 I genuinely try to live by *"don't yuck someone else's yum."* Life's too short to spend energy being negative about things other people enjoy. You do you.

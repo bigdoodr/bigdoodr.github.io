@@ -1,15 +1,17 @@
+/* Site-wide component overrides. Colors come from theme.css variables. */
+
 hr {
   margin-top: 30px;
   margin-bottom: 20px;
 }
 
-/* Resume: Contact Me button — visible in light mode */
+/* Contact Me button (resume, /hello) */
 .contact-button {
   display: inline-block;
   padding: 10px 24px;
-  background: #007AFF !important;
+  background: var(--accent) !important;
   color: #ffffff !important;
-  -webkit-text-fill-color: white !important;
+  -webkit-text-fill-color: #ffffff !important;
   -webkit-background-clip: padding-box !important;
   background-clip: padding-box !important;
   border-radius: 8px;
@@ -18,38 +20,23 @@ hr {
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  transition: filter 0.2s ease, transform 0.1s ease;
 }
 
 .contact-button:hover {
-  background: #005FCC !important;
+  filter: brightness(1.15);
   transform: translateY(-1px);
-  color: #ffffff !important;
-  /* theme.css sets -webkit-text-fill-color: transparent on all a:hover —
-     override it explicitly here or the button text vanishes */
-  -webkit-text-fill-color: white !important;
-  -webkit-background-clip: padding-box !important;
-  background-clip: padding-box !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .contact-button {
-    background: #0A84FF;
-    color: #ffffff !important;
-  }
-  .contact-button:hover {
-    background: #409CFF;
-  }
 }
 
 /* Post navigation links */
 .post_navi {
   display: flex;
+  gap: 1em;
 }
 
 .post_navi-label {
   font-size: 0.8em;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .post_navi .post_navi-item {
@@ -59,21 +46,10 @@ hr {
   color: inherit !important;
 }
 
-.post_navi .nav_prev {
-  text-align: left;
-}
-
-.post_navi .nav_next {
-  text-align: right;
-}
-
-.post_navi .nav_prev .post_navi-arrow {
-  left: 0;
-}
-
-.post_navi .nav_next .post_navi-arrow {
-  right: 0;
-}
+.post_navi .nav_prev { text-align: left; }
+.post_navi .nav_next { text-align: right; }
+.post_navi .nav_prev .post_navi-arrow { left: 0; }
+.post_navi .nav_next .post_navi-arrow { right: 0; }
 
 .post_navi .post_navi-arrow {
   position: absolute;
@@ -86,45 +62,25 @@ hr {
 /* HighlightJS overrides */
 .hljs {
   max-height: 500px;
+  border-radius: 8px;
 }
 
 /* Copy code button */
 .copy-code-button {
-  color: #272822;
-  background-color: #FFF;
-  border-color: #272822;
-  border: 2px solid;
-  border-radius: 3px 3px 0px 0px;
-
-  /* right-align */
+  color: var(--text);
+  background-color: var(--surface-hover);
+  border: 2px solid var(--border);
+  border-radius: 3px 3px 0 0;
   display: block;
   margin-left: auto;
   margin-right: 0;
-
   margin-bottom: -2px;
   padding: 3px 8px;
   font-size: 0.8em;
-}
-
-.copy-code-button:hover {
   cursor: pointer;
-  background-color: #F2F2F2;
-}
-
-.copy-code-button:focus {
-  /* Avoid an ugly focus outline on click in Chrome,
-     but darken the button for accessibility.
-     See https://stackoverflow.com/a/25298082/1481479 */
-  background-color: #E6E6E6;
-  outline: 0;
-}
-
-.copy-code-button:active {
-  background-color: #D9D9D9;
 }
 
 .highlight pre {
-  /* Avoid pushing up the copy buttons. */
   margin: 0;
 }
 
@@ -135,180 +91,76 @@ hr {
 }
 
 .utterances {
-    margin-top: 40px; /* Space between post content and comments */
+  margin-top: 40px;
 }
 
-.utterances-frame {
-    border: none; /* Remove frame border */
+/* Footer */
+.site-footer {
+  padding: 30px 0 40px;
+  border-top: 1px solid var(--border);
 }
 
 .social-icons {
   display: flex;
-  gap: 15px; /* Space between icons */
+  justify-content: center;
+  gap: 15px;
+  margin: 0;
 }
 
-.social-icons li {
+.social-icons li,
+.social-icons li:hover {
   list-style: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  transform: none;
+  backdrop-filter: none;
 }
 
 .social-icons a {
-  color: #333; /* Default color */
-  font-size: 24px; /* Icon size */
+  color: var(--muted);
+  font-size: 24px;
   text-decoration: none;
 }
 
 .social-icons a:hover {
-  color: #0077b5; /* Example hover color */
+  color: var(--link);
+  -webkit-text-fill-color: var(--link) !important;
+  background: none !important;
 }
 
-.pdf-link {
-  position: fixed; /* Sticks to a fixed position on the page */
-  bottom: 1rem;    /* Distance from the bottom */
-  right: 1rem;     /* Distance from the right */
-  background-color: #333; /* Dark background for visibility */
-  color: #fff;     /* Light text for contrast */
-  padding: 0.5rem 1rem; /* Padding for a button-like appearance */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 0.9rem; /* Slightly smaller font */
+.social-icons .fa-rss {
+  color: #f26522;
+}
+
+.footer-meta {
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-  z-index: 1000; /* Ensures it stays above other content */
+  font-size: 0.85em;
+  margin: 12px 0 0;
+}
+
+/* Floating PDF link */
+.pdf-link {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 }
 
 .pdf-link a {
-  color: #fff; /* Ensures the link color matches the text */
-  text-decoration: none; /* Removes underline */
+  color: #fff;
+  text-decoration: none;
 }
 
 .pdf-link a:hover {
-  text-decoration: underline; /* Adds underline on hover for clarity */
-}
-
-/* ============================================================
-   Navigation dropdowns
-   ============================================================ */
-
-.nav-dropdown {
-  position: relative;
-}
-
-/* Dropdown toggle — span used when top-level item has no URL.
-   Mirror the pill style that theme.css applies to <a> nav items. */
-.nav-dropdown-toggle {
-  cursor: default;
-  user-select: none;
-}
-
-span.nav-dropdown-toggle {
-  display: inline-block;
-  vertical-align: middle;  /* align with the <a> pill buttons */
-  color: white !important;
-  font-weight: 500;
-  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-  padding: 10px 18px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.13);
-  transition: all 0.3s ease;
-  font-size: 1em;
-}
-
-/* Center all nav items on the cross axis so <a> and <span> sit at the same height */
-.nav-list {
-  align-items: center;
-}
-
-/* Add a subtle caret after dropdown labels */
-.nav-dropdown-toggle::after {
-  content: " ▾";
-  font-size: 0.7em;
-  opacity: 0.6;
-}
-
-/* The dropdown panel */
-.nav-dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;           /* flush with the nav item — no gap to cross */
-  left: 0;
-  background-color: #fff;
-  border: 1px solid #e8e8e8;
-  border-radius: 4px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  margin: 4px 0 0;     /* visual breathing room via margin, not gap */
-  padding: 6px 0;
-  min-width: 200px;
-  max-width: min(280px, calc(100vw - 1.5rem));  /* don't overflow on mobile */
-  z-index: 200;
-}
-
-/* Show on CSS hover (desktop fallback) OR JS-managed open state (mobile + gap fix) */
-.nav-dropdown:hover .nav-dropdown-menu,
-.nav-dropdown.is-open .nav-dropdown-menu {
-  display: block;
-}
-
-/* Individual dropdown links.
-   theme.css applies "header a { color: white !important; border-radius: 20px … }"
-   which reaches inside the dropdown. We have to use !important to override it. */
-.nav-dropdown-menu li a {
-  display: block !important;
-  padding: 6px 18px !important;
-  white-space: normal !important;
-  color: #111 !important;
-  text-decoration: none !important;
-  font-size: 0.95em !important;
-  font-weight: normal !important;
-  background: transparent !important;
-  border-radius: 0 !important;
-  text-shadow: none !important;
-  transform: none !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-}
-
-.nav-dropdown-menu li a:hover {
-  background: #f0f0f0 !important;
-  border-radius: 4px !important;
-  color: #000 !important;
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-/* Visual divider with label */
-.nav-divider {
-  font-size: 0.68em;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: #aaa;
-  padding: 10px 18px 4px;
-  margin-top: 4px;
-  border-top: 1px solid #e8e8e8;
-  pointer-events: none;
-  user-select: none;
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  .nav-dropdown-menu {
-    background-color: #2a2a2a;
-    border-color: #484848;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
-  }
-
-  .nav-dropdown-menu li a {
-    color: #e8e8e8 !important;
-    background: transparent !important;
-  }
-
-  .nav-dropdown-menu li a:hover {
-    background: #383838 !important;
-    border-radius: 4px !important;
-    color: #fff !important;
-  }
-
-  .nav-divider {
-    color: #777;
-    border-top-color: #484848;
-  }
+  text-decoration: underline;
 }

@@ -4,6 +4,7 @@ title: "Wish"
 description: "Things I wish for the world."
 date: 2026-02-25
 permalink: /wish/
+blurb: "Things I wish for the world"
 ---
 
 Not a gift list. A world list.

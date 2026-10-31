@@ -4,6 +4,7 @@ title: "Someday"
 description: "Things I want to do, see, and experience someday."
 date: 2026-02-25
 permalink: /someday/
+blurb: "Things I want to do someday"
 ---
 
 A wishful, ever-growing checklist of things I want to do, see, and experience someday.

@@ -4,6 +4,7 @@ title: "Follows"
 description: "Who and what I follow on Mastodon."
 date: 2026-04-07
 permalink: /follows/
+blurb: "Who and what I follow on Mastodon"
 ---
 
 Who and what I follow on Mastodon, organized by list.
@@ -35,7 +36,7 @@ Who and what I follow on Mastodon, organized by list.
 - [@rmondello@hachyderm.io](https://hachyderm.io/@rmondello)
 - [@BigMacAdmin@masto.ai](https://masto.ai/@BigMacAdmin)
 - [@AriX@mas.to](https://mas.to/@AriX)
-- [@justkwin@toot.community](https://toot.community/@justkwin)
+- [@justkwin@mastodon.scot](https://mastodon.scot/@justkwin)
 - [@markgurman@mastodon.social](https://mastodon.social/@markgurman)
 - [@macadminsconf@mastodon.social](https://mastodon.social/@macadminsconf)
 - [@MaclovinGuy@mastodon.social](https://mastodon.social/@MaclovinGuy)
@@ -53,7 +54,7 @@ Who and what I follow on Mastodon, organized by list.
 - [@verge@mastodon.social](https://mastodon.social/@verge)
 - [@macrumors@mastodon.social](https://mastodon.social/@macrumors)
 - [@briankrebs@infosec.exchange](https://infosec.exchange/@briankrebs)
-- [@macstories@macstories.net](https://macstories.net/@macstories)
+- [@macstories@macstories.net](https://mastodon.macstories.net/@macstories)
 - [@404mediaco@mastodon.social](https://mastodon.social/@404mediaco)
 - [@WIRED@flipboard.com](https://flipboard.com/@WIRED)
 

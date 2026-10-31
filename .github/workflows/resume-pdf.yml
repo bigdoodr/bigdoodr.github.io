@@ -15,7 +15,12 @@ on:
       - "_data/skills.yml"
       - "_data/ackandact.yml"
       - "css/override.css"
+      - "css/resume.scss"
+      - "css/theme.css"
+      - "_includes/head.html"
+      - "_layouts/default.html"
       - "resume.html"
+  workflow_dispatch:
 
 permissions:
   contents: write   # needed to commit the PDF back
@@ -40,6 +45,8 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
+          PAGES_REPO_NWO: ${{ github.repository }}
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # ── 3. Node + Puppeteer ───────────────────────────────────────────────────
       - name: Set up Node

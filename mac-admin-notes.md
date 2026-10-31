@@ -4,6 +4,7 @@ title: "Mac Admin Session Notes"
 description: "Cheat-sheet notes from PSUMac and other Mac admin sessions."
 date: 2026-05-18
 permalink: /mac-admin-notes/
+slash: false
 ---
 
 Cheat-sheet notes and references from past Mac admin sessions. Speaker credit and session links included where available.

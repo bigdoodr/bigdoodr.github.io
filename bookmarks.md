@@ -1,8 +1,10 @@
 ---
 title: "Bookmarks"
+blurb: "Links worth saving"
+slash: true
+description: "Links worth saving"
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 .bookmarks-container {
@@ -20,7 +22,7 @@ title: "Bookmarks"
   font-weight: bold;
   margin-bottom: 25px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid var(--border);
 }
 
 .bookmarks-grid {
@@ -35,9 +37,9 @@ title: "Bookmarks"
   align-items: center;
   text-align: center;
   padding: 25px 15px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: var(--surface-hover);
   transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
@@ -45,55 +47,25 @@ title: "Bookmarks"
 
 .bookmark-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-color: #007bff;
+  box-shadow: 0 4px 12px var(--shadow);
+  border-color: var(--link);
 }
 
 .bookmark-icon {
   font-size: 3em;
   margin-bottom: 15px;
-  color: #007bff;
+  color: var(--link);
 }
 
 .bookmark-card:hover .bookmark-icon {
-  color: #0056b3;
+  color: var(--accent-2);
 }
 
 .bookmark-label {
   font-size: 0.95em;
   font-weight: 500;
   line-height: 1.3;
-  color: #007bff;  /* Always use the blue color */
-}
-
-/* Dark mode specific styles */
-@media (prefers-color-scheme: dark) {
-  .category-title {
-    border-bottom-color: #444;
-    color: #f2f2f7;
-  }
-  
-  .bookmark-card {
-    background-color: #1c1c1e;
-    border-color: #444;
-  }
-  
-  .bookmark-card:hover {
-    border-color: #007bff;
-    background-color: #2c2c2e;
-  }
-  
-  .bookmark-icon {
-    color: #007bff;
-  }
-  
-  .bookmark-card:hover .bookmark-icon {
-    color: #3392ff;
-  }
-  
-  .bookmark-label {
-    color: #007bff;  /* Keep blue color in dark mode too */
-  }
+  color: var(--link);
 }
 
 @media (max-width: 768px) {

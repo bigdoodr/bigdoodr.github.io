@@ -4,6 +4,7 @@ title: "Calendar"
 description: "Cultural and fictional dates I observe throughout the year"
 date: 2026-01-26
 permalink: /calendar/
+blurb: "Dates I observe"
 ---
 
 These are dates from movies, TV shows, and culture that I celebrate or observe throughout the year.

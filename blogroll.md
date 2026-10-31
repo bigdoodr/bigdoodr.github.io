@@ -4,6 +4,7 @@ title: "Blogroll"
 description: "Blogs, publications, and sites I follow regularly"
 date: 2026-01-26
 permalink: /blogroll/
+blurb: "Sites I read and recommend"
 ---
 
 These are the blogs, publications, and websites I follow regularly. They inform my thinking, keep me up-to-date, and occasionally make me laugh.
