@@ -287,6 +287,11 @@
    "file": "sfx/bubbles.wav",
    "gain": 0.0786,
    "seconds": 0.349
+  },
+  "clank": {
+   "file": "sfx/clank.wav",
+   "gain": 1.1279,
+   "seconds": 0.176
   }
  }
 }

@@ -9,7 +9,7 @@ from playwright.sync_api import sync_playwright
 
 URL, PACKS = sys.argv[1], os.path.abspath(sys.argv[2])
 CORE = os.path.join(PACKS, 'core')
-SOUNDS = {'thud': .4, 'splash': .8, 'drain': 3.9, 'pour': 1.4, 'stamp': .45, 'bubbles': .55}
+SOUNDS = {'thud': .4, 'splash': .8, 'drain': 3.9, 'pour': 1.4, 'stamp': .45, 'bubbles': .55, 'clank': .4}
 SR = 22050
 
 JS = r"""async ([id, secs, sr]) => {

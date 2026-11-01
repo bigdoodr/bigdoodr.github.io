@@ -18,7 +18,7 @@ import deck02, build_level  # noqa: E402
 STAGE = os.path.abspath(sys.argv[1])
 SRC = os.path.abspath(sys.argv[sys.argv.index('--from') + 1]) if '--from' in sys.argv else os.path.join(HERE, '..', '..', 'packs-1.3')   # engine 1.3 packs (packs/ stays at 1.2 for the TestFlight app)
 assert os.path.abspath(STAGE) != os.path.abspath(SRC), 'refusing to overwrite the live packs'
-ENGINE, VERSION = '1.3', '1.3.0'
+ENGINE, VERSION = '1.3', '1.3.1'
 PLACEHOLDERS = []
 RAW = os.path.join(HERE, 'deck02_raw')   # recorded voice/logs and finished art land here (see voice/ tools)
 
@@ -60,6 +60,7 @@ tun['items']['keyM'] = dict(key='M', sprite='keyM', height=.2, mapItem=True)
 tun['decor']['pew'] = dict(sprite='pew', height=.5)
 tun['decor']['tap'] = dict(sprite='tap', height=.62)
 tun['kick']['stomp'] = dict(dmgMul=3, sleeperKill=True, keepsDown=True, reach=1.05)
+tun['kick']['boots'] = dict(dmgMul=2, push=1.5)   # standing kicks with the boots
 jsave(os.path.join(core, 'tuning.json'), tun)
 
 art = jload(os.path.join(core, 'art.json'))

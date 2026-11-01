@@ -381,6 +381,10 @@
    "sleeperKill": true,
    "keepsDown": true,
    "reach": 1.05
+  },
+  "boots": {
+   "dmgMul": 2,
+   "push": 1.5
   }
  },
  "explosions": {

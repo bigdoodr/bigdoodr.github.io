@@ -222,6 +222,8 @@ World sizes come from `tuning.json` (`height` of items, decor, barrels, enemies,
 
 A difficulty's `save` is `area` (checkpoints in every new area, plus events and stations), `events` (checkpoints after big moments, plus stations), `stations` (save stations only) or `never` (no mid-deck saves at all: stations refuse, and dying restarts the deck; engine 1.2, Nightmare). Enemies may carry `"boss": true` (engine 1.1; read by the `kill` event). The numbers the JavaScript engine has hard-coded: the difficulty table (`dmg`, `hp`, `spd`, `ammo`, `heal`, `spawn`, `cells`, `save`, `revive`, `desc`), enemy stats (`hp`, `lhp` per limb, `speed`, `dmg`, `reach`, `wind`, `r`, `height`, limbs needed to kill), weapons, ammo caps, kick, explosions, revives, items (amounts scaled by the difficulty's ammo or heal factor), decor sizes, drop chances and end-of-deck ranks. Enemy types and weapon behaviors are engine code; their numbers live here so balance changes ship as a core pack update.
 
+The kick (engine 1.3): `kick.damage` is a standing kick and a plain stomp does `damage × 3.2`. With the stomp boots (an item with `"boots": true`), `kick.stomp` applies: `dmgMul` multiplies the stomp, `sleeperKill` kills a sleeper playing dead outright, `keepsDown` means a body killed by a stomp never revives, and `reach` is how close a body on the floor must be. `kick.boots` (core 1.3.1) is the standing kick with the boots: `dmgMul` multiplies `kick.damage` and `push` multiplies the knockback. Kicks with the boots play the `clank` sound.
+
 ## Tools
 
 | Script | Use |

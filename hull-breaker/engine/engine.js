@@ -911,12 +911,13 @@ function applyKick(){
     const dx=e.x-P.x,dy=e.y-P.y,d=Math.hypot(dx,dy);if(d>1.35||d<.01)continue;if((dx*fx+dy*fy)/d<.5)continue;
     if(e.kind==='enemy'&&e.state!=='dead'){hitAny=true;
       if(e.type==='bloater'){damageEnemy(e,'torso',1,.5);continue;}
-      if(e.crawl||e.type==='crawler'||e.state==='dormant'||e.state==='rise'){pop('STOMP');damageEnemy(e,'torso',11,.15);}
-      else{damageEnemy(e,'torso',3.5,.5);e.kx+=fx*2.2;e.ky+=fy*2.2;if(e.state!=='dead'&&e.type!=='brute'){e.state='stagger';e.t=.55;}}}
+      if(e.crawl||e.type==='crawler'||e.state==='dormant'||e.state==='rise'){pop('STOMP');damageEnemy(e,'torso',((PACKS.core.tuning.kick||{}).damage||3.5)*3.2,.15);}
+      else{const K=PACKS.core.tuning.kick||{},B=P.boots&&K.boots||{};damageEnemy(e,'torso',(K.damage||3.5)*(B.dmgMul||1),.5);
+        e.kx+=fx*2.2*(B.push||1);e.ky+=fy*2.2*(B.push||1);if(e.state!=='dead'&&e.type!=='brute'){e.state='stagger';e.t=.55;}}}
     else if(e.kind==='decor'&&(e.t==='pile'||e.t==='corpse')){hitAny=true;gibs(e.x,e.y,.1,10);e.gone=true;addStat('bodiesKicked');if(e.revive&&!G.said.stay){G.said.stay=1;say("Stay down this time.",2.2,true);}}
     else if(e.kind==='barrel'){hitAny=true;moveEnt(e,fx*.4,fy*.4,e.r);}
   }
-  if(hitAny){S.kick();G.shake=Math.max(G.shake,.15);}
+  if(hitAny){if(P.boots&&S.clank)S.clank();else S.kick();G.shake=Math.max(G.shake,P.boots?.2:.15);}
 }
 function explode(b,o){
   o=o||{};const r=o.r||2.7,dmg=o.dmg||42,src=o.src||'barrel',outer=G.blastKills;G.blastKills=0;HITCAUSE=src;

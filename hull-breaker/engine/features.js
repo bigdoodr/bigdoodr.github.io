@@ -11,6 +11,9 @@ Object.assign(S,{
     const s=osc('sine',70,t,3.4,vca(t,.3,.6,3,o));s.frequency.exponentialRampToValueAtTime(30,t+3.3);for(let k=0;k<8;k++)nz(t+.3+k*.35,.08,filt('bandpass',600+k*90,6,vca(t+.3+k*.35,.005,.5,.07,o)));},
   pour(){if(!AOK())return;const t=A.c.currentTime,o=dest(0,.35);const f=filt('bandpass',1200,3,vca(t,.05,.7,1.1,o));f.frequency.linearRampToValueAtTime(2200,t+1.1);nz(t,1.2,f);},
   stamp(){if(!AOK())return;const t=A.c.currentTime,o=dest(0,.9);const s=osc('sine',110,t,.25,vca(t,.002,1.2,.22,o));s.frequency.exponentialRampToValueAtTime(45,t+.2);nz(t,.06,filt('highpass',1200,1,vca(t,.001,.9,.05,o)));},
+  // the kick with the steel-toe boots: the usual thump plus a ring of steel
+  clank(){if(!AOK())return;const t=A.c.currentTime,o=dest(0,.85);const s=osc('sine',120,t,.18,vca(t,.003,1,.15,o));s.frequency.exponentialRampToValueAtTime(40,t+.15);
+    for(const [f,v,d] of [[1180,.32,.22],[1730,.22,.16],[2610,.14,.1]])osc('square',f,t,d,filt('bandpass',f,9,vca(t,.001,v,d,o)));nz(t,.04,filt('highpass',3000,1,vca(t,.001,.6,.03,o)));},
   bubbles(){if(!AOK())return;const t=A.c.currentTime,o=dest(0,.2);for(let k=0;k<5;k++){const tt=t+k*.07+R()*.04,s=osc('sine',500+R()*500,tt,.06,vca(tt,.004,.4,.05,o));s.frequency.exponentialRampToValueAtTime(1400+R()*600,tt+.05);}},
 });
 
@@ -385,7 +388,9 @@ const _killEnemy=killEnemy;
 killEnemy=function(e,hz,big){
   const boss=e.type==='super'&&e.state!=='dead';
   if(boss){G.lastBoss={x:e.x,y:e.y};G.bossBar=null;}
+  const stomped=HITCAUSE==='stomp'&&P&&P.boots&&(PACKS.core.tuning.kick.stomp||{}).keepsDown;
   _killEnemy(e,hz,big);
+  if(stomped)for(const d of ENTS)if(d.kind==='decor'&&d.t==='pile'&&d.x===e.x&&d.y===e.y)d.revive=0;
   // The Super leaves his body (and his head) for the payoff scene.
   if(boss){for(const d of ENTS)if(d.kind==='decor'&&d.t==='pile'&&d.x===e.x&&d.y===e.y)d.gone=true;bossBodyArt();decor('superbody',e.x,e.y,false,.5);}
 };
@@ -428,8 +433,9 @@ function bossBodyArt(){
   for(const [k,mask] of [['superbody',0],['superbody_nohead',1]]){const r=drawHusk({mask,f:0,atk:0,pose:'lie',flash:0,kind:'super',brute:false});
     const c2=canvasOf(96,110),g2=c2.getContext('2d');g2.imageSmoothingEnabled=false;g2.drawImage(r.c,0,0,96,110);IMG[k]=imgFrom(c2);}
 }
-// Kicks with the stomp boots: a body on the floor gets stomped (three times the damage, and a
-// sleeper playing dead dies outright). Without the boots, a kick only wakes a sleeper.
+// Kicks with the stomp boots: a body on the floor gets stomped (three times the stomp damage, and a
+// sleeper playing dead dies outright). Without the boots, a kick only wakes a sleeper. A body killed
+// by a stomp stays down (no revive). Standing kicks with the boots are in applyKick (engine.js).
 const _applyKick=applyKick;
 applyKick=function(){
   if(P.boots&&G.water!==2){
@@ -438,13 +444,19 @@ applyKick=function(){
       if(e.gone||e.kind!=='enemy'||e.state==='dead')continue;
       const dx=e.x-P.x,dy=e.y-P.y,d=Math.hypot(dx,dy);if(d>(st.reach||1.05)+.3||d<.01||(dx*fx+dy*fy)/d<.5)continue;
       if(e.type==='sleeper'&&e.state==='playdead'&&WATER[I(e.x|0,e.y|0)]!==2){HITCAUSE='stomp';G.used.kick=1;e.killState='playingDead';pop('STOMP','#ffb627');
-        S.kick();G.shake=Math.max(G.shake,.25);addStat('sleepersStomped');gibs(e.x,e.y,.1,8);killEnemy(e,.1,false);return;}
+        S.clank();G.shake=Math.max(G.shake,.25);addStat('sleepersStomped');gibs(e.x,e.y,.1,8);killEnemy(e,.1,false);return;}
       if(e.crawl||e.type==='crawler'||e.state==='dormant'||e.state==='rise'||e.type==='lurker'&&e.z<=0){HITCAUSE='stomp';G.used.kick=1;pop('STOMP','#ffb627');
-        damageEnemy(e,'torso',(PACKS.core.tuning.kick.damage||3.5)*3.2*(st.dmgMul||3)/3,.15);if(!e.gone&&e.state!=='dead'&&e.type!=='super')HITCAUSE='stomp';S.kick();G.shake=Math.max(G.shake,.2);return;}
+        damageEnemy(e,'torso',(PACKS.core.tuning.kick.damage||3.5)*3.2*(st.dmgMul||3),.15);if(!e.gone&&e.state!=='dead'&&e.type!=='super')HITCAUSE='stomp';S.clank();G.shake=Math.max(G.shake,.25);return;}
     }
   }
   _applyKick();
 };
+// The HUD mark for the boots, beside the keycards: a boot with a steel toe cap (11x8).
+function drawBootIcon(g,x,y){
+  g.fillStyle='#6b4a32';g.fillRect(x+1,y,4,5);g.fillRect(x+1,y+4,9,2);
+  g.fillStyle='#c9d4dc';g.fillRect(x+6,y+4,4,2);g.fillRect(x,y+6,11,1);
+  g.fillStyle='#ffb627';g.fillRect(x+1,y+1,4,1);
+}
 // drawing
 const _enemyImg=enemyImg;
 enemyImg=function(e){
@@ -474,6 +486,8 @@ enemyImg=function(e){
 const _drawHUD=drawHUD;
 drawHUD=function(dt){
   _drawHUD(dt);
+  if(P.boots&&!G.mapOn){const nk=Object.keys(DK&&DK.deck.keys||{}).length,touch=IN.touchMode;
+    drawBootIcon(ctx,touch?RW-52:(RW>>1)+20+nk*11+2,touch?46:RH-21+11);}
   const b=G.bossBar;if(!b||b.e.gone||b.e.state==='dead'||G.mapOn||Math.hypot(b.e.x-P.x,b.e.y-P.y)>18){G.bossBar=null;return;}
   const g=ctx,w=RW*.5,x=(RW-w)/2,y=IN.touchMode?RH-26:RH-32,k=clamp(b.e.hp/(ETYPE.super.hp*D.hp),0,1);
   g.fillStyle='rgba(4,6,10,.8)';g.fillRect(x-2,y-10,w+4,16);txt(g,b.name,RW/2,y-9,'#ff3048','8px Silkscreen, monospace','center');
