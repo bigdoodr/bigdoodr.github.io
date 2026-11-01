@@ -121,7 +121,7 @@ DECK = {
         {'on': {'event': 'start'}, 'do': [
             {'say': 'start', 'sub': 3},
             {'after': 3.2, 'do': [{'say': 'moss_hello', 'sub': 3.4}]},
-            {'after': 7, 'do': [{'say': 'moss_reply', 'sub': 2.4}]},
+            {'after': 7, 'do': [{'say': 'moss_reply', 'sub': 4.4}]},
             {'objective': 'Head south into the Arrivals Concourse.', 'show': 7},
             {'hint': 'move'},
         ]},
@@ -305,7 +305,7 @@ DECK = {
 # Lines this deck uses: id -> text (Buck unless a speaker is given).
 LINES = {
     'start': "Habitation spine. Rent's due.",
-    'moss_reply': 'Orange jumpsuit. Noted.',
+    'moss_reply': 'Orange jumpsuit?? Oh, sure... that really narrows it down.',   # most of the crew wear orange (Casey, Oct 31)
     'shopping': 'Commissary. Somebody left a tab open.',
     'pool': "No lifeguard on duty. Swim at your own risk.",
     'deep_end': "So that's what's in the deep end.",

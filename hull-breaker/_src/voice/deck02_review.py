@@ -44,7 +44,7 @@ for lid, t in deck02.MOSS.items():
 
 TAKES = json.load(open('/tmp/takes/takes.json')) if os.path.exists('/tmp/takes/takes.json') else {}
 for tid, t in TAKES.items():
-    logs.append({'id': tid, 'grp': 'take', 'who': 'TAKE ' + t['tag'] + ' · ' + vo.LOGS[t['log']]['speaker'], 'where': t['desc'], 'voice': t['voice'],
+    logs.append({'id': tid, 'grp': 'take', 'who': t.get('who') or ('TAKE ' + t['tag'] + ' · ' + vo.LOGS[t['log']]['speaker']), 'where': t['desc'], 'voice': t['voice'],
                  'text': t['text'], 'a': b64(t['path']), 'dur': dur(t['path'])})
 
 pool = []
@@ -73,7 +73,7 @@ R = [
     ("return lines.length?'LOG VOICE FEEDBACK\\n'", "return lines.length?'DECK 02 VOICE FEEDBACK\\n'"),
     ("k?k+' of 16 logs have notes'", "k?k+' of '+DATA.logs.length+' clips have notes'"),
 ]
-if TAKES: R.append(('<h2>AUDIO LOGS</h2>', '<h2>PICK A TAKE</h2>\n  <p class="lede">Take B for "valve" with the trailing "uh" trimmed three ways. Note the one that sounds right. Put a note on the one that sounds right (or on none, if none do), and it goes into that log.</p>\n  <ol class="logs" id="g-take"></ol>\n  <h2>AUDIO LOGS</h2>'))
+if TAKES: R.append(('<h2>AUDIO LOGS</h2>', '<h2>PICK A TAKE</h2>\n  <p class="lede">Buck\'s longer reply to Moss, two endings, both through his locked voice settings. Note the one that lands, or none. Put a note on the one that sounds right (or on none, if none do), and it goes into that log.</p>\n  <ol class="logs" id="g-take"></ol>\n  <h2>AUDIO LOGS</h2>'))
 R.append(("<ol class=\"logs\" id=\"logs\"></ol>", "<ol class=\"logs\" id=\"logs\"></ol>") if TAKES else ('<h2>AUDIO LOGS</h2>', '<h2>AUDIO LOGS</h2>\n  <ol class="logs" id="g-take" hidden></ol>'))
 for a, b in R:
     assert a in tpl, a[:60]

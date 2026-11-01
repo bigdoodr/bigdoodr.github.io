@@ -33,7 +33,7 @@ def ff(inp, out, af=None, extra=()):
 # Segments: text, or a pause in seconds. Lines not listed are recorded whole.
 BUCKSEG = {
     "Habitation spine. Rent's due.": ["Habitation.", .12, "Spine.", .5, "Rent's due."],
-    'Orange jumpsuit. Noted.': ["Orange jumpsuit.", .45, "Noted."],
+    'Orange jumpsuit?? Oh, sure... that really narrows it down.': ["Orange jumpsuit?", .5, "Oh, sure.", .4, ('ph', 'ðæt ɹˈiəli nˈæɹoʊz ɪt dˈaʊn.', .82)],   # Casey's take E (Oct 31)
     'Commissary. Somebody left a tab open.': [('ph', 'kˈɑːməsˌɛɹi.', .95), .4, "Somebody left a tab open."],
     'Flushing out the tenants.': ["Flushing out the tennants."],
     'No lifeguard on duty. Swim at your own risk.': ["No lifeguard on duty.", .4, "Swim at your own risk."],
