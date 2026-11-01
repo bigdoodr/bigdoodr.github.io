@@ -352,6 +352,7 @@ updateEnemy=function(e,dt,d){
 };
 function superTick(e,dt,d){
   const sd=ETYPE.super.def.super||{};
+  if((e.mask&6)===6&&!e.bufferDropped){e.bufferDropped=true;bufferArt();decor('buffer',e.x+Math.cos(P.ang+1.2)*.5,e.y+Math.sin(P.ang+1.2)*.5,false,.3);S.thud();}
   if(e.state!=='chase'&&e.state!=='attack')return;
   G.bossBar={e,name:'THE SUPER'};
   e.steamT-=dt;
@@ -388,6 +389,40 @@ killEnemy=function(e,hz,big){
   // The Super leaves his body (and his head) for the payoff scene.
   if(boss){for(const d of ENTS)if(d.kind==='decor'&&d.t==='pile'&&d.x===e.x&&d.y===e.y)d.gone=true;bossBodyArt();decor('superbody',e.x,e.y,false,.5);}
 };
+// The Super's rig, painted over the husk body (64x96 canvas, before the 1.5x scale):
+// a riveted boiler tank strapped to his chest with pipes over his shoulders, and the floor buffer
+// held in whichever hand he still has. With both arms gone the buffer is dropped (a loose prop).
+function superRig(g,mask,pose,atk,tankOpen,fl,phase){
+  if(pose==='lie')return;
+  const oy=pose==='crouch'?20:0,Y=v=>v+oy,armL=!(mask&2),armR=!(mask&4);
+  // the buffer: handle from the hand down to the pad on the floor beside his foot
+  if(armL||armR){const sd=armR?1:-1,sx=sd>0?43:21,hang=[sx+sd*7,Y(58)],up=[sx+sd*5,Y(-1)];
+    const hx=hang[0]+(up[0]-hang[0])*atk,hy=hang[1]+(up[1]-hang[1])*atk,px=32+sd*20+(hx+sd*4-(32+sd*20))*atk,py=Y(91)+(hy-26-Y(91))*atk;   // on a swing the pad comes up overhead
+    g.strokeStyle=fl?'#fff':'#c9662e';g.lineWidth=2.4;g.lineCap='round';g.beginPath();g.moveTo(hx,hy-3);g.lineTo(px,py-2);g.stroke();
+    g.strokeStyle=fl?'#fff':'#2a2d30';g.lineWidth=2;g.beginPath();g.moveTo(hx-3,hy-3);g.lineTo(hx+3,hy-3);g.stroke();   // grip bar
+    g.fillStyle=fl?'#fff':'#3a3f45';ell(g,px,py,9,3);g.fillStyle=fl?'#ddd':'#7d8a95';ell(g,px,py-1,8,2.2);
+    g.fillStyle=fl?'#fff':'#c9662e';g.fillRect(px-3,py-4,6,3);}
+  // pipes from the tank up over both shoulders
+  g.strokeStyle=fl?'#fff':'#8a6a3a';g.lineWidth=2;g.lineCap='butt';
+  for(const sd of [-1,1]){g.beginPath();g.moveTo(32+sd*7,Y(32));g.lineTo(32+sd*9,Y(25));g.lineTo(32+sd*12,Y(23));g.stroke();}
+  // the tank: a riveted pressure vessel, banded, with a gauge
+  const tx=22,ty=Y(31),tw=20,th=22;
+  g.fillStyle=fl?'#fff':'#4f575f';g.fillRect(tx,ty+2,tw,th-4);g.fillRect(tx+2,ty,tw-4,th);
+  g.fillStyle=fl?'#eee':'#68727b';g.fillRect(tx+2,ty+2,tw-4,th-4);
+  g.fillStyle=fl?'#ddd':'#3a4148';g.fillRect(tx,ty+7,tw,2);g.fillRect(tx,ty+th-8,tw,2);
+  g.fillStyle=fl?'#fff':'#a9b3bb';for(const [rx,ry] of [[2,3],[tw-3,3],[2,th-4],[tw-3,th-4],[tw/2,1],[tw/2,th-2]])g.fillRect(tx+rx,ty+ry,1,1);
+  if(tankOpen){const pulse=(phase|0)%4<2?1:0;
+    g.fillStyle=fl?'#fff':(pulse>.5?'#ffd200':'#ff8c1a');g.fillRect(tx+4,ty+10,tw-8,6);
+    g.fillStyle=fl?'#fff':'#ff8c1a';g.fillRect(tx,ty+7,tw,2);g.fillRect(tx,ty+th-8,tw,2);g.fillRect(tx+tw/2-1,ty+3,2,4);g.fillRect(tx+6,ty+16,1,4);g.fillRect(tx+13,ty+15,1,5);}
+  else{g.fillStyle=fl?'#fff':'#e8e2c8';circ(g,32,ty+12,3.2);g.fillStyle='#2a2d30';circ(g,32,ty+12,2.2);g.fillStyle='#d0142f';g.fillRect(32,ty+11,2,1);}
+  // straps over the shoulders
+  g.fillStyle=fl?'#fff':'#5a3f22';g.fillRect(tx+1,ty-6,3,7);g.fillRect(tx+tw-4,ty-6,3,7);
+}
+function bufferArt(){
+  if(IMG.buffer)return;DWH.buffer=.3;
+  IMG.buffer=art(48,20,g=>{g.strokeStyle='#c9662e';g.lineWidth=3;g.beginPath();g.moveTo(4,6);g.lineTo(34,15);g.stroke();
+    g.fillStyle='#2a2d30';g.fillRect(2,3,3,7);g.fillStyle='#3a3f45';ell(g,38,16,10,3.5);g.fillStyle='#7d8a95';ell(g,38,15,9,2.5);g.fillStyle='#c9662e';g.fillRect(35,11,6,3);});
+}
 function bossBodyArt(){
   if(IMG.superbody)return;DWH.superbody=DWH.superbody_nohead=1.55;
   for(const [k,mask] of [['superbody',0],['superbody_nohead',1]]){const r=drawHusk({mask,f:0,atk:0,pose:'lie',flash:0,kind:'super',brute:false});
@@ -429,10 +464,7 @@ enemyImg=function(e){
       if(ceil){const c2=canvasOf(r.c.width,r.c.height),g2=c2.getContext('2d');g2.translate(0,r.c.height);g2.scale(1,-1);g2.drawImage(r.c,0,0);r={c:c2,regs:r.regs.map(q=>({p:q.p,x0:q.x0,x1:q.x1,y0:1-q.y1,y1:1-q.y0}))};}}
     else{r=drawHusk(o);
       if(pose==='lie2'){const g=r.c.getContext('2d'),C=SLPAL(fl);seg(g,22,84,18,74,3,2,C.skin);}   // the twitch: a hand comes up
-      if(e.type==='super'){const g=r.c.getContext('2d'),C=SUPAL(fl);
-        g.fillStyle='#c9a227';g.fillRect(22,30,20,3);
-        if(pose!=='lie'){g.fillStyle='#3a3f45';ell(g,32,90,24,5);g.fillStyle='#8a96a1';ell(g,32,88,22,4);g.fillStyle='#d8743a';g.fillRect(28,58,8,30);}
-        g.fillStyle=e.tankDone?(fl?'#fff':'#ff8c1a'):'#5a646d';ell(g,32,44,9,11);g.fillStyle=e.tankDone?'#ffd200':'#3a434c';ell(g,32,44,5,6);
+      if(e.type==='super'){const g=r.c.getContext('2d');superRig(g,e.mask,pose,aq/3,e.tankDone,fl,f);
         const c2=canvasOf(96,110),g2=c2.getContext('2d');g2.imageSmoothingEnabled=false;g2.drawImage(r.c,0,0,96,110);r={c:c2,regs:r.regs};}}
     v=imgFrom(r.c);v.regs=r.regs;if(ECACHE.size>900)ECACHE.clear();ECACHE.set(key,v);
   }

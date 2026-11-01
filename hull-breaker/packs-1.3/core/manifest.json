@@ -5,7 +5,7 @@
  "version": "1.3.0",
  "minEngine": "1.3",
  "title": "Hull Breaker shared content",
- "bytes": 5329311,
+ "bytes": 5638473,
  "files": [
   {
    "path": "achievements.json",
@@ -14,8 +14,8 @@
   },
   {
    "path": "art.json",
-   "bytes": 10901,
-   "sha256": "742e6e7faf2fcebf995fccd10bc72e5d68e4ac9c049ded7373db949a84a60435"
+   "bytes": 12093,
+   "sha256": "a83c7f18a375652845ca0da3539d14c6eae7654c90a7857c3c91ad7065f63c69"
   },
   {
    "path": "floors/carpet.png",
@@ -38,6 +38,11 @@
    "sha256": "678c5a876322950879ee0a22e540c02f93ddc7fd6093691948b0598f4d115ec0"
   },
   {
+   "path": "floors/deepwater.png",
+   "bytes": 909,
+   "sha256": "fb773c9428bc0c2f3ce627f8c4d6cea4cc2a1901bf338890950448e8348472c2"
+  },
+  {
    "path": "floors/grating.png",
    "bytes": 2777,
    "sha256": "f91db519f2f893bd7433a2185f1800197e16acbc7d0ef2ea750d0e70763f3260"
@@ -53,14 +58,19 @@
    "sha256": "56c006413a67abce12098261b4d470112326a25af1334bbfa48f028996fcc71f"
   },
   {
+   "path": "floors/water.png",
+   "bytes": 897,
+   "sha256": "1fd6bed96e8d515384093cb17d2fa24d5dbb822e801b71591b328db39adcbe82"
+  },
+  {
    "path": "lines.json",
    "bytes": 7049,
    "sha256": "ed699baf76e0ab983a99832a393094ec0e4a49658668aa96ff63ffc4ad84f65b"
   },
   {
    "path": "sfx.json",
-   "bytes": 4994,
-   "sha256": "512cf6243700805652bc9b86bdae3180cc497ce914a0330a89ea45e554e6982d"
+   "bytes": 5162,
+   "sha256": "d3e2a3bdb2384c99defdab0fb6534a70609e1e97351226b54bb757496e12fde6"
   },
   {
    "path": "sfx/ambient.wav",
@@ -113,6 +123,11 @@
    "sha256": "ff5d495b66236cd8544ecf27468a3f0fd11c99da8a58681ecbba2383af6c9ccc"
   },
   {
+   "path": "sfx/bubbles.wav",
+   "bytes": 15448,
+   "sha256": "f2e1d2b4a978763ab18151ceefbae9f032ba8f05f6113a33adfffd701bb4db4a"
+  },
+  {
    "path": "sfx/clang.wav",
    "bytes": 36652,
    "sha256": "a9d5c8ee65ea29429a52a505d060bbc3cca46316d3e37c25d5bf4c0a66b2afe7"
@@ -136,6 +151,11 @@
    "path": "sfx/door.wav",
    "bytes": 22522,
    "sha256": "5c28ce65864a26a982e0fdd6604c288810d65eb8dc15013b23e6b958db960ccf"
+  },
+  {
+   "path": "sfx/drain.wav",
+   "bytes": 124218,
+   "sha256": "e961571dcf200c9521a700a0c038d466bc3f250a1d72299da141f615ed240026"
   },
   {
    "path": "sfx/drum.wav",
@@ -201,6 +221,11 @@
    "path": "sfx/pickup.wav",
    "bytes": 8596,
    "sha256": "d8c196c99ec80d417cc386a8efe4120a425d8ca0876aa88a4597f4249785c1da"
+  },
+  {
+   "path": "sfx/pour.wav",
+   "bytes": 42974,
+   "sha256": "c0bb2fae900c81e4b2e978522e33e0836e7b71887264e305674c2930fbea5f57"
   },
   {
    "path": "sfx/powerup.wav",
@@ -278,9 +303,19 @@
    "sha256": "f80ff06bc0e2ba9bb2c1fd856f4492671817f9c03647c9f65616d912cac4003e"
   },
   {
+   "path": "sfx/splash.wav",
+   "bytes": 15368,
+   "sha256": "24fa7879584be95913d9db54da03615d4abee9522af19e296f25cfa9a308bd00"
+  },
+  {
    "path": "sfx/splat.wav",
    "bytes": 6420,
    "sha256": "f0719e5b101b315be9394dab15412de96dc684071653abe8e94fc8219df6f653"
+  },
+  {
+   "path": "sfx/stamp.wav",
+   "bytes": 7408,
+   "sha256": "63e61c465368a69a991fdc64ba63c9413d861117b91f03bef9842feb11463fcb"
   },
   {
    "path": "sfx/static.wav",
@@ -301,6 +336,11 @@
    "path": "sfx/swap.wav",
    "bytes": 5730,
    "sha256": "166af90833bd2f5f5964903951ead06a14d8ee766bd2ae0688fbd1c38d9fba5a"
+  },
+  {
+   "path": "sfx/thud.wav",
+   "bytes": 5064,
+   "sha256": "c5df5ba09b89c678b9ca1365ab8c136cc824094b407ff299efaaade78211f523"
   },
   {
    "path": "sfx/tick.wav",
@@ -361,6 +401,16 @@
    "path": "sprites/bombs.png",
    "bytes": 212,
    "sha256": "29f5dc2f34fc91e94b1b387a24b26a5c3672279293066e9b4b34456847c0e3c1"
+  },
+  {
+   "path": "sprites/boots.png",
+   "bytes": 267,
+   "sha256": "8729a7aff477e199c23589b854ff475d574ba39b27076f46719609b546cefb17"
+  },
+  {
+   "path": "sprites/buffer.png",
+   "bytes": 676,
+   "sha256": "ad43ea4c55a2d975a903e847fe533ebaf4510b794d96747ff4c625439c43b242"
   },
   {
    "path": "sprites/bunk.png",
@@ -458,6 +508,11 @@
    "sha256": "8f76dc7a7cee89f5f3a009fad883ba392a11c46d254328dc546d0b2fa447e024"
   },
   {
+   "path": "sprites/keyM.png",
+   "bytes": 178,
+   "sha256": "905d9f00db7b601b079c184bb02108a2143072573b76ae2fa912374a93bd93bc"
+  },
+  {
    "path": "sprites/keyR.em.png",
    "bytes": 143,
    "sha256": "eca3c17fdc66dc71370a47f98a4b2ee54e6c4ee200063de5a68cd0f22def887f"
@@ -496,6 +551,11 @@
    "path": "sprites/medbig.png",
    "bytes": 236,
    "sha256": "349afa21fc9867641c3cb7e1c6236f42af640bd389bdf79ee9732f07b68c0f22"
+  },
+  {
+   "path": "sprites/pew.png",
+   "bytes": 196,
+   "sha256": "95b6c0ed582462a7a1051bf10ba8691dc3ff5f59272aeb08d01c51f73a1ece5a"
   },
   {
    "path": "sprites/pile.png",
@@ -548,9 +608,19 @@
    "sha256": "cd12620b4000c0b3a931c704e645e2d244b3d117be3daa62a03a4561c41fbf54"
   },
   {
+   "path": "sprites/tap.png",
+   "bytes": 218,
+   "sha256": "c8b099cd8e2a934c226e88b4cda2225a661b1115d068f6996f8eefdbba7082ce"
+  },
+  {
    "path": "strings.json",
    "bytes": 573,
    "sha256": "972a16f499277683467d589b1fc86a628f0cb99af5a43eb3041b148d7a97f1b1"
+  },
+  {
+   "path": "textures/apartment.png",
+   "bytes": 2436,
+   "sha256": "c05880f1cbbbf7e4b7aa2ed0c612ffa0d3defdc5ccf205e6b2fac74ac581fb11"
   },
   {
    "path": "textures/blood.png",
@@ -598,6 +668,16 @@
    "sha256": "98ff9a7352c4f4db1c347fe8acb7a89b852e7e3b176277066366343ded0e464f"
   },
   {
+   "path": "textures/bulkhead.em.png",
+   "bytes": 310,
+   "sha256": "f2e32daa4d66b1fc713d2e436ad6f7928e0a6b09cb0e6342b8e310f32f879026"
+  },
+  {
+   "path": "textures/bulkhead.png",
+   "bytes": 6015,
+   "sha256": "1246d287f1fcbc1bd0b7951ea0973f135a4a2f671576aef372b5f6c68efb69a6"
+  },
+  {
    "path": "textures/cargo.png",
    "bytes": 3948,
    "sha256": "69913898df6ab9ed98242e4bae048529f79ce77f6bb6c41c5fd0bf8d0d00826f"
@@ -606,6 +686,16 @@
    "path": "textures/cargo2.png",
    "bytes": 3899,
    "sha256": "28ca92c8bb21629862ab48bbb3e842a1624c02867ddf6b5a538a2028bdc8beaa"
+  },
+  {
+   "path": "textures/chapel.em.png",
+   "bytes": 324,
+   "sha256": "0c4e0d46f8a683d91e87fcdeda6b80f9c3c0a7bb75b81b4fd2bb171bd3d9071e"
+  },
+  {
+   "path": "textures/chapel.png",
+   "bytes": 1883,
+   "sha256": "765b8d9ed85d0181a2ccd0bbf16c49bd8c4875952259f82e43b9dacbe2794d0c"
   },
   {
    "path": "textures/console.em.png",
@@ -618,139 +708,274 @@
    "sha256": "9293df5a1afb7522f1bc28a48646cc129f1c5a208c8a7a49c7024f4e2b3a8514"
   },
   {
+   "path": "textures/crack_apartment.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
+  },
+  {
+   "path": "textures/crack_apartment.png",
+   "bytes": 2545,
+   "sha256": "e7a4b37227055d7c60451f37da27d99c93f89f2a1e04df41d3fd558b1668659a"
+  },
+  {
+   "path": "textures/crack_blood.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
+  },
+  {
    "path": "textures/crack_blood.png",
-   "bytes": 6296,
-   "sha256": "b35288050ba68233f21d21a8d66fdb22778c014cd7521765a7af82336cc15531"
+   "bytes": 6351,
+   "sha256": "37370d8df6171e02423481061694c9cd5b42afc920a346545bb3044991bbe345"
   },
   {
    "path": "textures/crack_bridge.em.png",
-   "bytes": 319,
-   "sha256": "52da09b413f65cb88e32e27fa0a360c53b65f190702330c49676ba6eb09e17f1"
+   "bytes": 369,
+   "sha256": "804cbc354ce6163005c9174ffd38ea1574b36879151bb55617ae38733205294c"
   },
   {
    "path": "textures/crack_bridge.png",
-   "bytes": 2059,
-   "sha256": "221385983fe8a2b3d938fec7535fa6dadd07b61f54d6cabd8317d7138352527f"
+   "bytes": 2097,
+   "sha256": "b083f41c22e23ff51eeb16a24b9e3aab3536f69e554f6c0c60744033e44db0c5"
   },
   {
    "path": "textures/crack_brkon.em.png",
-   "bytes": 307,
-   "sha256": "6e3c59ae3ac654f1597997b5d76670e48c9a7195e587d5a06cf66c5b8247d91a"
+   "bytes": 362,
+   "sha256": "2abe4f07b2059e7de8851a6d9b6820dfe2a8e323534277986e961feee46d2a89"
   },
   {
    "path": "textures/crack_brkon.png",
-   "bytes": 4466,
-   "sha256": "303e7ed7a05e3eab903e2f40aa8c20ad343f20634bad182593cceaa15668f3d2"
+   "bytes": 4459,
+   "sha256": "949c7f974395785b9bcc3032a1d6ec47752a92df6fd92fd119d35703a91f6d0a"
+  },
+  {
+   "path": "textures/crack_cargo.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_cargo.png",
-   "bytes": 4049,
-   "sha256": "25aec4f47dfa92668c8200775f85d13738d1a986591403b41b45216bf38d13cc"
+   "bytes": 4044,
+   "sha256": "6c16dd902562ccee4102d8f856c277f725ee84878269a8cf1b8d02b153162b6a"
+  },
+  {
+   "path": "textures/crack_cargo2.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_cargo2.png",
-   "bytes": 3976,
-   "sha256": "9bc222405385c9f53e8d084478f3b2db514fbacbdf129a22a334771dd7355f60"
+   "bytes": 3928,
+   "sha256": "013ad3b6a12b0b231333784991774f9f9c3db98f06f7e5fafde2c8f7c678710c"
+  },
+  {
+   "path": "textures/crack_chapel.em.png",
+   "bytes": 444,
+   "sha256": "ee942193de52a436549a7c9a4e903eeb53c93baea499943f6748a043af3890ba"
+  },
+  {
+   "path": "textures/crack_chapel.png",
+   "bytes": 2049,
+   "sha256": "06365cd52a7f5ae7eb956dcafbcb74c491f59b19352e90a738ab272729688183"
   },
   {
    "path": "textures/crack_console.em.png",
-   "bytes": 387,
-   "sha256": "fc816559aae7920406063af45175a4e6072b8516e041ad64a8bf2bfef19d4f5a"
+   "bytes": 429,
+   "sha256": "a651f75c2b730985ebacb91f2475100c291316e768cd977f3901f05f30445a86"
   },
   {
    "path": "textures/crack_console.png",
-   "bytes": 713,
-   "sha256": "d7f9e60ab75ca3cb8d02e0cc14bf277887dceb792c7883ac6975fd5e5d34da47"
+   "bytes": 751,
+   "sha256": "028b1e92494efa97d44cdd7f885126033579c7e0f23631b9c73fc17c226de2b3"
+  },
+  {
+   "path": "textures/crack_crew.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_crew.png",
-   "bytes": 2480,
-   "sha256": "45488b9fb137aaea2f4a3c9e21174fe91ebcf83cdd59ed5c2d6602b14642e680"
+   "bytes": 2506,
+   "sha256": "9ab4c529d628e7b596426a605a43cb34a260bba0698ce2b632565ca4d3584736"
+  },
+  {
+   "path": "textures/crack_daycare.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
+  },
+  {
+   "path": "textures/crack_daycare.png",
+   "bytes": 2192,
+   "sha256": "f58dbed932deff4ee4bc585288e4fbf1fd0b2ceb66222dee76c553186dd7ba3a"
+  },
+  {
+   "path": "textures/crack_gym.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
+  },
+  {
+   "path": "textures/crack_gym.png",
+   "bytes": 2380,
+   "sha256": "a120cc1d43780e35916a7b77238c4195883837b14c79a180770646d7a45d1c26"
+  },
+  {
+   "path": "textures/crack_haz.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_haz.png",
-   "bytes": 5590,
-   "sha256": "e6bc2af6e0df2ded77498fd6a5304cd8ce61a033d770fb2496f165cc99d83253"
+   "bytes": 5493,
+   "sha256": "4cb6a6254ee2486a281cf48b0e3ae204a0f6c1a5b8a55a7e6b12d0212f3d9c5f"
+  },
+  {
+   "path": "textures/crack_hull.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_hull.png",
-   "bytes": 5628,
-   "sha256": "507e40c76b850443c014785247b963c5c81a94561799e3785112768ed06d4d15"
+   "bytes": 5901,
+   "sha256": "ecbce854646a0ec9313c5e169481153a84fdb7e905c1a5a2a13a0fdcbabe62e9"
+  },
+  {
+   "path": "textures/crack_hull2.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_hull2.png",
-   "bytes": 5497,
-   "sha256": "575e8b50a794d436135f1a4f2c692c40bc2f4930b6353e6ab47b2f39f803179c"
+   "bytes": 5620,
+   "sha256": "15b21b2fb110f5c8d4c07e1d6e083da2fde91467bdfc8ad40ecf4d8cec98713e"
   },
   {
    "path": "textures/crack_hydro.em.png",
-   "bytes": 326,
-   "sha256": "0642b713bffbce5918a9c2319218933171a2de8d5b93562c982185ca84dbe9cb"
+   "bytes": 365,
+   "sha256": "13f73f3ac62c131c6afc38bca8e7f0440742a0249835b4fdf453f276e58653f2"
   },
   {
    "path": "textures/crack_hydro.png",
-   "bytes": 4129,
-   "sha256": "ff64b2c2e3b8f05996d5dd49a9779e32bd70567f032cf87c9f06866b38dfe270"
+   "bytes": 4161,
+   "sha256": "3c1f488ac21ba605ef8fd4592d26dadc8290585068187fb788c912bf6a081b70"
+  },
+  {
+   "path": "textures/crack_locker.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_locker.png",
-   "bytes": 2623,
-   "sha256": "4621bc6883b984f41565cae1272e87afab45f11ad36a907466f1a3c4db2c9bc5"
+   "bytes": 2587,
+   "sha256": "2de0940ec29490110168bfcf027ae104d16802806c5dfc631340eec03b05dad8"
+  },
+  {
+   "path": "textures/crack_med.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_med.png",
-   "bytes": 2283,
-   "sha256": "686e976273621df1903f48d0a94f7fb6a9e2f7b5876ca61b2d095aa97c86a6dc"
+   "bytes": 2280,
+   "sha256": "30d0a00eb5627a35df5ef97a2c4a8faaaeaf67ca4e51322fa3e06e51986de743"
   },
   {
    "path": "textures/crack_ovrcon.em.png",
-   "bytes": 383,
-   "sha256": "bcec6f244f4681d8a62514089611d4c498134abd3ee6a55e6f8a26cab21eb2af"
+   "bytes": 452,
+   "sha256": "4acbca960472b4741d43cd8b0a9c7c1170a8a222c70388976554eb00e2b7feba"
   },
   {
    "path": "textures/crack_ovrcon.png",
-   "bytes": 5057,
-   "sha256": "86dc04ad23baf8dab4c639f7e7e0904abdc72e6014e8cf9d592e39720e043189"
+   "bytes": 4977,
+   "sha256": "5c71c8db4a3c038604695013be037cb8d91686878aa66b9778ff9b0ab9cc6c9c"
+  },
+  {
+   "path": "textures/crack_pipe.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_pipe.png",
-   "bytes": 4039,
-   "sha256": "d033964d78a83de3320a9994057dd4744823ac5ded22e22d042eeda2d4d4f161"
+   "bytes": 3974,
+   "sha256": "956c43d0f5760738f9c9c8e4d9c99f6f669e5631e30e14e29b1047a8beaed1a9"
+  },
+  {
+   "path": "textures/crack_planter.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_planter.png",
-   "bytes": 5907,
-   "sha256": "1529c3fd8a61992ebf01a31aa3726f3e23c8d51f7a871e6fd6816859f953482a"
+   "bytes": 5805,
+   "sha256": "9a386bd102a4adbdb7682f8b0f00c2e0af96af6efdcc8735d0eed67edc252446"
+  },
+  {
+   "path": "textures/crack_pooltile.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
+  },
+  {
+   "path": "textures/crack_pooltile.png",
+   "bytes": 2576,
+   "sha256": "96989786dfe2880b9f4a6479ec924e11cb206d9f96cb6f0a6f749c4f9a025f85"
   },
   {
    "path": "textures/crack_reactor.em.png",
-   "bytes": 402,
-   "sha256": "6036da761fbcccde0e09549d9f7b99a5a9e0d06ed285add4ad65b8be089026d5"
+   "bytes": 460,
+   "sha256": "cdc9399349875ca35b79e4a7f78aa4c04e088b55d455e38205e39fd1a3d9aa74"
   },
   {
    "path": "textures/crack_reactor.png",
-   "bytes": 1856,
-   "sha256": "bfcb7c8c8806b1af9791c9aa006f74c4de1b347471c0514a151fc1f8775e8e98"
+   "bytes": 1804,
+   "sha256": "13f5723bdce0e964d530f514e9cb90127cce424ab17d2e7fbea1c1a4b66f529c"
+  },
+  {
+   "path": "textures/crack_scrawl.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_scrawl.png",
-   "bytes": 7262,
-   "sha256": "5c75a4a0676a156b697b782d0af94016dfe45601370eee7dac19737c814b6b87"
+   "bytes": 7189,
+   "sha256": "eba14ab45afce0d530feacdc3be2314a3abfbcfbc2a3e2ac76d1257c826d4fe7"
+  },
+  {
+   "path": "textures/crack_shelf.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
+  },
+  {
+   "path": "textures/crack_shelf.png",
+   "bytes": 2726,
+   "sha256": "1b286022cf8c9bf8d14a13d96c37ee08d83ecad685e8aca1468d818930713fa3"
+  },
+  {
+   "path": "textures/crack_theater.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
+  },
+  {
+   "path": "textures/crack_theater.png",
+   "bytes": 1965,
+   "sha256": "57ef6c191a7ee1acf75862317799c4d1cafa0bb1c41be0a9c46a3a3862363eca"
+  },
+  {
+   "path": "textures/crack_tram.em.png",
+   "bytes": 329,
+   "sha256": "01ded4235fec4bfdca6f062f19ddec460b7bf9cef01db6aeb32d26bbf27ffabc"
   },
   {
    "path": "textures/crack_tram.png",
-   "bytes": 5797,
-   "sha256": "b499544d2ba9830a31f5880c781cb3ea970e75b189d3fa436566ab7dbc1d24ae"
+   "bytes": 5995,
+   "sha256": "0ce26752420f5b2a0fad11a591c9a89aaa5a8322fa958f23708e907bc88a38b3"
   },
   {
    "path": "textures/crack_win.em.png",
-   "bytes": 387,
-   "sha256": "4fb2a24b7b6a3cbb42eaf1aa05412e5aaeb07cdb08693dc6b8dc04df2f1c51da"
+   "bytes": 457,
+   "sha256": "c021f90b9247549f221a30e59dc449cba7302723d347870e2b6e19e3c8a5c52d"
   },
   {
    "path": "textures/crack_win.png",
-   "bytes": 991,
-   "sha256": "f70c9c994cbfb30e3d494a9fe23f89305aca765e1f271c1c12afef379f9eb784"
+   "bytes": 1062,
+   "sha256": "094d08f680263fe9ff2bcef91e7b8a267b33607dd83d4043f6581a633b435f6b"
   },
   {
    "path": "textures/crew.png",
@@ -758,9 +983,44 @@
    "sha256": "d36df6afbae67b1ba98900dde42e5341bd9f110da0301e4a91aaf1afee349da2"
   },
   {
+   "path": "textures/daycare.png",
+   "bytes": 2038,
+   "sha256": "3698bbc77ec6499c382f6c75d37cba2caf439c2704d5e8e34384b72ead3ed9af"
+  },
+  {
    "path": "textures/door.png",
    "bytes": 6165,
    "sha256": "a9b8e54dbb006c3c1f9d032585a4f76c826e5c1646104e1550ef62c992894c4e"
+  },
+  {
+   "path": "textures/flooded.em.png",
+   "bytes": 314,
+   "sha256": "fe34cb19d39b9ef92bc9b3082ba5ea09ebbc6fcd289b68216081ec7ed0100fc6"
+  },
+  {
+   "path": "textures/flooded.png",
+   "bytes": 5642,
+   "sha256": "5490b545f982d02ede27e60087d65a1c750a803a1e61db80cf843db821f0821c"
+  },
+  {
+   "path": "textures/floorplan.em.png",
+   "bytes": 317,
+   "sha256": "91dd1fda2f81fdf2399434480666e41fa7b1c66b22c8335f860c8392e002b601"
+  },
+  {
+   "path": "textures/floorplan.png",
+   "bytes": 4352,
+   "sha256": "b0c9a51482e8e99e80ed65cfd24a5b83c4b26ffdc963c0b3d0e1d982b3d50af8"
+  },
+  {
+   "path": "textures/gorgonseal.png",
+   "bytes": 5594,
+   "sha256": "898b7a4e989f49e7c29dfd44cb4c8ed6ae2359fa45bce663a360d71876c2921e"
+  },
+  {
+   "path": "textures/gym.png",
+   "bytes": 2270,
+   "sha256": "7f57dcc3bfb735ef446c710867dbfbd35343ec89a8df0cfc73d0b34ddcf8474b"
   },
   {
    "path": "textures/haz.png",
@@ -786,6 +1046,36 @@
    "path": "textures/hydro.png",
    "bytes": 4070,
    "sha256": "eb301fb50773fe66210580c6d83cff0799df9887c2ec959c22796787a165974e"
+  },
+  {
+   "path": "textures/intercom.em.png",
+   "bytes": 359,
+   "sha256": "95813d6b955250cde34546ecdec6e493cd0ee63c8d313f91916cbfcf0a93dd4a"
+  },
+  {
+   "path": "textures/intercom.png",
+   "bytes": 5024,
+   "sha256": "e4ea0005391f66d6ec0d92b9e6cc8e18db72293b81752d55d55c50566eeb3559"
+  },
+  {
+   "path": "textures/junction.em.png",
+   "bytes": 348,
+   "sha256": "61839f59ac8b41695400cbccdf60a65a51e997d0def572bc43238411ddb3f51a"
+  },
+  {
+   "path": "textures/junction.png",
+   "bytes": 4287,
+   "sha256": "adedd96781853a34c4feafbcd3cfff1ee91eb0ad5dd2f3fb72c7a6118d6dbaf8"
+  },
+  {
+   "path": "textures/junctionon.em.png",
+   "bytes": 348,
+   "sha256": "61839f59ac8b41695400cbccdf60a65a51e997d0def572bc43238411ddb3f51a"
+  },
+  {
+   "path": "textures/junctionon.png",
+   "bytes": 4282,
+   "sha256": "3eecb436cb2abb1ef5cb14ee7284845892ae3a8028f20d29be23eb04fd0c5232"
   },
   {
    "path": "textures/lever.em.png",
@@ -823,6 +1113,16 @@
    "sha256": "9c815d4a9e78979083bf5040722b414d47d041ea3c8684ca06f403a7a89941da"
   },
   {
+   "path": "textures/masterdoor.em.png",
+   "bytes": 310,
+   "sha256": "f2e32daa4d66b1fc713d2e436ad6f7928e0a6b09cb0e6342b8e310f32f879026"
+  },
+  {
+   "path": "textures/masterdoor.png",
+   "bytes": 6331,
+   "sha256": "a2e0d51acd9899fb30b86b923871ea4b7361e9a0747162e4664d6429593382b7"
+  },
+  {
    "path": "textures/med.png",
    "bytes": 2156,
    "sha256": "699205be5a450cb0f2a0114f3009784a1a1d553e53528abd700c0b77916ea357"
@@ -856,6 +1156,21 @@
    "path": "textures/planter.png",
    "bytes": 5815,
    "sha256": "5cb29cc0bd1e43420d97d242b39c9d4352a5f193229dc9e59e5fc4ecbea1654c"
+  },
+  {
+   "path": "textures/pooltile.png",
+   "bytes": 2385,
+   "sha256": "477c62da73f3759a7f1252f180b0ac2bfd840e224362ff672be07c707473e5b3"
+  },
+  {
+   "path": "textures/poster.em.png",
+   "bytes": 319,
+   "sha256": "276df7f0c23a9c80b69e18f64f8443abe97fcd63df313ae11652f26b477e5922"
+  },
+  {
+   "path": "textures/poster.png",
+   "bytes": 2185,
+   "sha256": "c16d3abbafea076b4393630dc8b54820bb6c812f120dcb3f504967a9390a4d2b"
   },
   {
    "path": "textures/pwr.em.png",
@@ -898,6 +1213,11 @@
    "sha256": "db44750afa4b8960a47af00e3d56d274ce5928ad778d6be4027f809b335f428c"
   },
   {
+   "path": "textures/shelf.png",
+   "bytes": 2539,
+   "sha256": "87da3997000619fe8d71847dd0d8d8542cec1c4aad6a5f68b4d282158ca1a163"
+  },
+  {
    "path": "textures/term.em.png",
    "bytes": 355,
    "sha256": "586c9ba09b87bce17d5b5de4eecbb143c5121010bc9449e4a923f1c83e3cd307"
@@ -906,6 +1226,11 @@
    "path": "textures/term.png",
    "bytes": 4154,
    "sha256": "ea669872898f7213e2e2566a68ba413f0a596f3dae99a02d416da78d260ccadd"
+  },
+  {
+   "path": "textures/theater.png",
+   "bytes": 1846,
+   "sha256": "b75171d78b3441397d355a1308d3b7c392603c075240b24ceffe7dc10d3b8940"
   },
   {
    "path": "textures/tram.png",
@@ -923,9 +1248,39 @@
    "sha256": "6930d62dcc6c6be8ad17bd9adcddc263ebcea8a3ac021c22a625afdb993b3558"
   },
   {
+   "path": "textures/valve.em.png",
+   "bytes": 315,
+   "sha256": "b0c99d187d4a4e7214ca97f493135ab945dd5045faeba9eb53c72ba0ee31b268"
+  },
+  {
+   "path": "textures/valve.png",
+   "bytes": 2102,
+   "sha256": "915eb698551f5316df17fc4cafa4d5d0bc60662a03ac0b2d0d84752fb643c6c8"
+  },
+  {
+   "path": "textures/valveopen.em.png",
+   "bytes": 315,
+   "sha256": "b0c99d187d4a4e7214ca97f493135ab945dd5045faeba9eb53c72ba0ee31b268"
+  },
+  {
+   "path": "textures/valveopen.png",
+   "bytes": 2152,
+   "sha256": "1d3247ebd9050176bfcf06cee770ae7f1847040e6636fa96eb937a65c7816e94"
+  },
+  {
    "path": "textures/vent.png",
    "bytes": 2149,
    "sha256": "ce71555ce0332b9b5f9b37551ef2926911d89412fb962dc5b9d5c6a7a4f9424c"
+  },
+  {
+   "path": "textures/washer.em.png",
+   "bytes": 325,
+   "sha256": "34decb101cdbdf716826c526f6ffc0fb66a7ff3816fbbeb6c33b18320c616f47"
+  },
+  {
+   "path": "textures/washer.png",
+   "bytes": 2917,
+   "sha256": "0e458196b3c661f4224b7352da5b095821b62858c0491d43155afda37a5880e5"
   },
   {
    "path": "textures/win.em.png",

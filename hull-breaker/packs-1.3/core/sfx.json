@@ -259,24 +259,34 @@
    "seconds": 0.162
   },
   "splash": {
-   "file": "sfx/whoosh.wav",
-   "gain": 0.0366,
-   "seconds": 0.162
+   "file": "sfx/splash.wav",
+   "gain": 0.3401,
+   "seconds": 0.347
   },
   "drain": {
-   "file": "sfx/whoosh.wav",
-   "gain": 0.0366,
-   "seconds": 0.162
+   "file": "sfx/drain.wav",
+   "gain": 0.5292,
+   "seconds": 2.816
   },
   "pour": {
-   "file": "sfx/pickup.wav",
-   "gain": 0.1898,
-   "seconds": 0.194
+   "file": "sfx/pour.wav",
+   "gain": 0.091,
+   "seconds": 0.973
   },
   "stamp": {
-   "file": "sfx/drum.wav",
-   "gain": 1.6527,
-   "seconds": 0.93
+   "file": "sfx/stamp.wav",
+   "gain": 1.78,
+   "seconds": 0.167
+  },
+  "thud": {
+   "file": "sfx/thud.wav",
+   "gain": 0.4078,
+   "seconds": 0.114
+  },
+  "bubbles": {
+   "file": "sfx/bubbles.wav",
+   "gain": 0.0786,
+   "seconds": 0.349
   }
  }
 }

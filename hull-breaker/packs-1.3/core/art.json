@@ -127,189 +127,210 @@
   },
   "crack_hull": {
    "file": "textures/crack_hull.png",
+   "emissive": "textures/crack_hull.em.png",
    "crackOf": "hull"
   },
   "crack_haz": {
    "file": "textures/crack_haz.png",
+   "emissive": "textures/crack_haz.em.png",
    "crackOf": "haz"
   },
   "crack_blood": {
    "file": "textures/crack_blood.png",
+   "emissive": "textures/crack_blood.em.png",
    "crackOf": "blood"
   },
   "crack_win": {
    "file": "textures/crack_win.png",
-   "crackOf": "win",
-   "emissive": "textures/crack_win.em.png"
+   "emissive": "textures/crack_win.em.png",
+   "crackOf": "win"
   },
   "crack_scrawl": {
    "file": "textures/crack_scrawl.png",
+   "emissive": "textures/crack_scrawl.em.png",
    "crackOf": "scrawl"
   },
   "crack_med": {
    "file": "textures/crack_med.png",
+   "emissive": "textures/crack_med.em.png",
    "crackOf": "med"
   },
   "crack_pipe": {
    "file": "textures/crack_pipe.png",
+   "emissive": "textures/crack_pipe.em.png",
    "crackOf": "pipe"
   },
   "crack_tram": {
    "file": "textures/crack_tram.png",
+   "emissive": "textures/crack_tram.em.png",
    "crackOf": "tram"
   },
   "crack_hull2": {
    "file": "textures/crack_hull2.png",
+   "emissive": "textures/crack_hull2.em.png",
    "crackOf": "hull2"
   },
   "crack_locker": {
    "file": "textures/crack_locker.png",
+   "emissive": "textures/crack_locker.em.png",
    "crackOf": "locker"
   },
   "crack_reactor": {
    "file": "textures/crack_reactor.png",
-   "crackOf": "reactor",
-   "emissive": "textures/crack_reactor.em.png"
+   "emissive": "textures/crack_reactor.em.png",
+   "crackOf": "reactor"
   },
   "crack_cargo": {
    "file": "textures/crack_cargo.png",
+   "emissive": "textures/crack_cargo.em.png",
    "crackOf": "cargo"
   },
   "crack_cargo2": {
    "file": "textures/crack_cargo2.png",
+   "emissive": "textures/crack_cargo2.em.png",
    "crackOf": "cargo2"
   },
   "crack_hydro": {
    "file": "textures/crack_hydro.png",
-   "crackOf": "hydro",
-   "emissive": "textures/crack_hydro.em.png"
+   "emissive": "textures/crack_hydro.em.png",
+   "crackOf": "hydro"
   },
   "crack_planter": {
    "file": "textures/crack_planter.png",
+   "emissive": "textures/crack_planter.em.png",
    "crackOf": "planter"
   },
   "crack_console": {
    "file": "textures/crack_console.png",
-   "crackOf": "console",
-   "emissive": "textures/crack_console.em.png"
+   "emissive": "textures/crack_console.em.png",
+   "crackOf": "console"
   },
   "crack_crew": {
    "file": "textures/crack_crew.png",
+   "emissive": "textures/crack_crew.em.png",
    "crackOf": "crew"
   },
   "crack_bridge": {
    "file": "textures/crack_bridge.png",
-   "crackOf": "bridge",
-   "emissive": "textures/crack_bridge.em.png"
+   "emissive": "textures/crack_bridge.em.png",
+   "crackOf": "bridge"
   },
   "crack_brkon": {
    "file": "textures/crack_brkon.png",
-   "crackOf": "brkon",
-   "emissive": "textures/crack_brkon.em.png"
+   "emissive": "textures/crack_brkon.em.png",
+   "crackOf": "brkon"
   },
   "crack_ovrcon": {
    "file": "textures/crack_ovrcon.png",
-   "crackOf": "ovrcon",
-   "emissive": "textures/crack_ovrcon.em.png"
+   "emissive": "textures/crack_ovrcon.em.png",
+   "crackOf": "ovrcon"
   },
   "shelf": {
-   "file": "textures/locker.png"
+   "file": "textures/shelf.png"
   },
   "apartment": {
-   "file": "textures/crew.png"
+   "file": "textures/apartment.png"
   },
   "chapel": {
-   "file": "textures/hull2.png"
+   "file": "textures/chapel.png",
+   "emissive": "textures/chapel.em.png"
   },
   "daycare": {
-   "file": "textures/med.png"
+   "file": "textures/daycare.png"
   },
   "poster": {
-   "file": "textures/console.png",
-   "emissive": "textures/console.em.png"
+   "file": "textures/poster.png",
+   "emissive": "textures/poster.em.png"
   },
   "theater": {
-   "file": "textures/hull2.png"
+   "file": "textures/theater.png"
   },
   "washer": {
-   "file": "textures/locker.png"
+   "file": "textures/washer.png",
+   "emissive": "textures/washer.em.png"
   },
   "water": {
    "file": "textures/win.png",
    "emissive": "textures/win.em.png"
   },
   "gym": {
-   "file": "textures/bridge.png",
-   "emissive": "textures/bridge.em.png"
+   "file": "textures/gym.png"
   },
   "pooltile": {
-   "file": "textures/med.png"
+   "file": "textures/pooltile.png"
   },
   "intercom": {
-   "file": "textures/term.png",
-   "emissive": "textures/term.em.png"
+   "file": "textures/intercom.png",
+   "emissive": "textures/intercom.em.png"
   },
   "junction": {
-   "file": "textures/brk.png",
-   "emissive": "textures/brk.em.png"
+   "file": "textures/junction.png",
+   "emissive": "textures/junction.em.png"
   },
   "junctionon": {
-   "file": "textures/brkon.png",
-   "emissive": "textures/brkon.em.png"
+   "file": "textures/junctionon.png",
+   "emissive": "textures/junctionon.em.png"
   },
   "valve": {
-   "file": "textures/ovrcon.png",
-   "emissive": "textures/ovrcon.em.png"
+   "file": "textures/valve.png",
+   "emissive": "textures/valve.em.png"
   },
   "valveopen": {
-   "file": "textures/brkon.png",
-   "emissive": "textures/brkon.em.png"
+   "file": "textures/valveopen.png",
+   "emissive": "textures/valveopen.em.png"
   },
   "floorplan": {
-   "file": "textures/term.png",
-   "emissive": "textures/term.em.png"
+   "file": "textures/floorplan.png",
+   "emissive": "textures/floorplan.em.png"
   },
   "gorgonseal": {
-   "file": "textures/hull2.png"
+   "file": "textures/gorgonseal.png"
   },
   "bulkhead": {
-   "file": "textures/blue.png",
-   "emissive": "textures/blue.em.png"
+   "file": "textures/bulkhead.png",
+   "emissive": "textures/bulkhead.em.png"
   },
   "masterdoor": {
-   "file": "textures/lock.png",
-   "emissive": "textures/lock.em.png"
+   "file": "textures/masterdoor.png",
+   "emissive": "textures/masterdoor.em.png"
   },
   "flooded": {
-   "file": "textures/win.png",
-   "emissive": "textures/win.em.png"
+   "file": "textures/flooded.png",
+   "emissive": "textures/flooded.em.png"
   },
   "crack_apartment": {
-   "file": "textures/crack_hull.png",
+   "file": "textures/crack_apartment.png",
+   "emissive": "textures/crack_apartment.em.png",
    "crackOf": "apartment"
   },
   "crack_theater": {
-   "file": "textures/crack_hull.png",
+   "file": "textures/crack_theater.png",
+   "emissive": "textures/crack_theater.em.png",
    "crackOf": "theater"
   },
   "crack_pooltile": {
-   "file": "textures/crack_hull.png",
+   "file": "textures/crack_pooltile.png",
+   "emissive": "textures/crack_pooltile.em.png",
    "crackOf": "pooltile"
   },
   "crack_shelf": {
-   "file": "textures/crack_hull.png",
+   "file": "textures/crack_shelf.png",
+   "emissive": "textures/crack_shelf.em.png",
    "crackOf": "shelf"
   },
   "crack_chapel": {
-   "file": "textures/crack_hull.png",
+   "file": "textures/crack_chapel.png",
+   "emissive": "textures/crack_chapel.em.png",
    "crackOf": "chapel"
   },
   "crack_daycare": {
-   "file": "textures/crack_hull.png",
+   "file": "textures/crack_daycare.png",
+   "emissive": "textures/crack_daycare.em.png",
    "crackOf": "daycare"
   },
   "crack_gym": {
-   "file": "textures/crack_hull.png",
+   "file": "textures/crack_gym.png",
+   "emissive": "textures/crack_gym.em.png",
    "crackOf": "gym"
   }
  },
@@ -328,6 +349,12 @@
   },
   "carpet": {
    "file": "floors/carpet.png"
+  },
+  "water": {
+   "file": "floors/water.png"
+  },
+  "deepwater": {
+   "file": "floors/deepwater.png"
   }
  },
  "ceilings": {
@@ -545,26 +572,29 @@
    "h": 40
   },
   "boots": {
-   "file": "sprites/armor.png",
-   "w": 24,
+   "file": "sprites/boots.png",
+   "w": 32,
    "h": 24
   },
   "keyM": {
-   "file": "sprites/key.png",
-   "w": 16,
-   "h": 14,
-   "emissive": "sprites/key.em.png"
+   "file": "sprites/keyM.png",
+   "w": 20,
+   "h": 12
   },
   "pew": {
-   "file": "sprites/bunk.png",
-   "w": 48,
-   "h": 40
+   "file": "sprites/pew.png",
+   "w": 40,
+   "h": 22
   },
   "tap": {
-   "file": "sprites/sign.png",
-   "w": 30,
-   "h": 18,
-   "emissive": "all"
+   "file": "sprites/tap.png",
+   "w": 20,
+   "h": 28
+  },
+  "buffer": {
+   "file": "sprites/buffer.png",
+   "w": 48,
+   "h": 20
   }
  },
  "procedural": {
