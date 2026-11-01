@@ -1,0 +1,1628 @@
+{
+ "format": 1,
+ "id": "deck-02",
+ "deck": 2,
+ "title": "Hostile Tenancy",
+ "place": "Habitation Spine",
+ "ship": "BRIMSTONE MAIDEN",
+ "intro": {
+  "objective": "Get through the housing blocks with Moss on the radio.\nFind the Super. Drain Block B. Catch the down line.",
+  "tips": [
+   "Stomp boots are in the Commissary. Kick a body on the floor to stomp it.",
+   "Stomp boots are in the Commissary. Kick a body on the floor to stomp it.",
+   "Not every corpse is a corpse. Stomp the ones that twitch, and watch the ceilings.",
+   "Not every corpse is a corpse. Stomp the ones that twitch. Saves only happen at save stations.",
+   "Not every corpse is a corpse. No saves on this deck: dying starts it over."
+  ],
+  "music": "braam_2_5"
+ },
+ "outro": {
+  "heading": "DECK 02 OF 12 CLEARED",
+  "body": "The down line drops Buck through the spine toward the farms. Ten decks to go.",
+  "tease": "Deck 03: Root Cause. Hydroponics and Life Support.",
+  "music": "braam_4",
+  "line": "core:deck_clear"
+ },
+ "legend": {
+  "floor": ".",
+  "floors": {
+   ",": {
+    "water": "wade"
+   },
+   "~": {
+    "water": "swim"
+   }
+  },
+  "walls": {
+   "#": {
+    "tex": "hull"
+   },
+   "=": {
+    "tex": "hull2"
+   },
+   "h": {
+    "tex": "haz"
+   },
+   "b": {
+    "tex": "blood"
+   },
+   "s": {
+    "tex": "scrawl"
+   },
+   "v": {
+    "tex": "vent",
+    "role": "vent"
+   },
+   "p": {
+    "tex": "pipe"
+   },
+   "T": {
+    "tex": "tram"
+   },
+   "w": {
+    "tex": "win",
+    "map": "#3a5a7a"
+   },
+   "W": {
+    "tex": "winmoon",
+    "map": "#3a5a7a"
+   },
+   "k": {
+    "tex": "shelf"
+   },
+   "q": {
+    "tex": "apartment"
+   },
+   "c": {
+    "tex": "chapel"
+   },
+   "y": {
+    "tex": "daycare"
+   },
+   "m": {
+    "tex": "theater"
+   },
+   "o": {
+    "tex": "poster",
+    "use": "poster",
+    "map": "#9a5ac8"
+   },
+   "U": {
+    "tex": "washer"
+   },
+   "g": {
+    "tex": "gym"
+   },
+   "l": {
+    "tex": "pooltile"
+   },
+   "G": {
+    "tex": "gorgonseal",
+    "use": "sealedHall",
+    "map": "#a08a4a"
+   },
+   "F": {
+    "tex": "floorplan",
+    "use": "floorplan",
+    "light": [
+     0.35,
+     0.95,
+     1
+    ],
+    "map": "#5ff6ff"
+   },
+   "Q": {
+    "tex": "save",
+    "role": "save",
+    "light": [
+     0.2,
+     1,
+     0.45
+    ],
+    "map": "#30ff70"
+   },
+   "A": {
+    "tex": "intercom",
+    "use": "intercomA",
+    "light": [
+     1,
+     0.55,
+     0.15
+    ],
+    "map": "#ff8c1a"
+   },
+   "B": {
+    "tex": "intercom",
+    "use": "intercomB",
+    "light": [
+     1,
+     0.55,
+     0.15
+    ],
+    "map": "#ff8c1a"
+   },
+   "J": {
+    "tex": "junction",
+    "use": "junction",
+    "light": [
+     1,
+     0.35,
+     0.2
+    ],
+    "map": "#ff4030",
+    "after": {
+     "tex": "junctionon",
+     "map": "#40ff80"
+    }
+   },
+   "V": {
+    "tex": "valve",
+    "use": "flush",
+    "light": [
+     0.35,
+     0.6,
+     1
+    ],
+    "map": "#3cb4ff",
+    "after": {
+     "tex": "valveopen",
+     "map": "#40ff80"
+    }
+   },
+   "L": {
+    "tex": "lever",
+    "use": "breakGlass",
+    "light": [
+     1,
+     0.6,
+     0.2
+    ],
+    "map": "#ffb627",
+    "after": {
+     "tex": "leveron",
+     "map": "#ffb627",
+     "use": "lever"
+    }
+   }
+  },
+  "doors": {
+   "D": "none",
+   "X": "secret",
+   "1": "wingA",
+   "2": "wingB",
+   "3": "maint",
+   "4": "M",
+   "5": "flushed"
+  },
+  "objects": {
+   "@": {
+    "start": true
+   },
+   "h": {
+    "enemy": "husk",
+    "min": 0
+   },
+   "c": {
+    "enemy": "crawler",
+    "min": 0
+   },
+   "s": {
+    "enemy": "spitter",
+    "min": 0
+   },
+   "x": {
+    "enemy": "bloater",
+    "min": 0
+   },
+   "z": {
+    "enemy": "brute",
+    "min": 0
+   },
+   "d": {
+    "enemy": "husk",
+    "min": 0,
+    "dormant": true
+   },
+   "r": {
+    "enemy": "lurker",
+    "min": 0
+   },
+   "y": {
+    "enemy": "sleeper",
+    "min": 0
+   },
+   "W": {
+    "enemy": "super",
+    "min": 0
+   },
+   "H": {
+    "enemy": "husk",
+    "min": 2
+   },
+   "C": {
+    "enemy": "crawler",
+    "min": 2
+   },
+   "S": {
+    "enemy": "spitter",
+    "min": 2
+   },
+   "X": {
+    "enemy": "bloater",
+    "min": 2
+   },
+   "Z": {
+    "enemy": "brute",
+    "min": 2
+   },
+   "D": {
+    "enemy": "husk",
+    "min": 2,
+    "dormant": true
+   },
+   "R": {
+    "enemy": "lurker",
+    "min": 2
+   },
+   "Y": {
+    "enemy": "sleeper",
+    "min": 2
+   },
+   "6": {
+    "enemy": "husk",
+    "min": 3
+   },
+   "7": {
+    "enemy": "crawler",
+    "min": 3
+   },
+   "8": {
+    "enemy": "spitter",
+    "min": 3
+   },
+   "9": {
+    "enemy": "bloater",
+    "min": 3
+   },
+   "5": {
+    "enemy": "brute",
+    "min": 3
+   },
+   "4": {
+    "enemy": "lurker",
+    "min": 3
+   },
+   "3": {
+    "enemy": "sleeper",
+    "min": 3
+   },
+   "+": {
+    "item": "med"
+   },
+   "*": {
+    "item": "medbig"
+   },
+   "a": {
+    "item": "cells"
+   },
+   "e": {
+    "item": "shells"
+   },
+   "i": {
+    "item": "rivets"
+   },
+   "o": {
+    "item": "bombs"
+   },
+   "&": {
+    "item": "armor"
+   },
+   "b": {
+    "item": "boots"
+   },
+   "M": {
+    "item": "keyM"
+   },
+   "l": {
+    "item": "log"
+   },
+   "$": {
+    "item": "asset"
+   },
+   "O": {
+    "barrel": true
+   },
+   "K": {
+    "decor": "crate",
+    "solid": true,
+    "r": 0.38
+   },
+   "t": {
+    "decor": "table",
+    "solid": true,
+    "r": 0.42
+   },
+   "k": {
+    "decor": "corpse"
+   },
+   "p": {
+    "decor": "pile"
+   },
+   "n": {
+    "decor": "bunk",
+    "solid": true,
+    "r": 0.42
+   },
+   "P": {
+    "decor": "pew",
+    "solid": true,
+    "r": 0.4
+   },
+   "T": {
+    "decor": "tap",
+    "solid": true,
+    "r": 0.3
+   }
+  }
+ },
+ "locks": {
+  "none": {
+   "tex": "door"
+  },
+  "secret": {
+   "secret": true
+  },
+  "wingA": {
+   "tex": "bulkhead",
+   "needs": {
+    "flag": "wingA"
+   },
+   "denied": "BULKHEAD SEALED. USE THE INTERCOM.",
+   "map": "#ff8c1a"
+  },
+  "wingB": {
+   "tex": "bulkhead",
+   "needs": {
+    "flag": "wingB"
+   },
+   "denied": "BULKHEAD SEALED. USE THE INTERCOM.",
+   "map": "#ff8c1a"
+  },
+  "maint": {
+   "tex": "pwr",
+   "needs": {
+    "counter": "junctions",
+    "gte": 2
+   },
+   "denied": "LOCKDOWN. RESET THE JUNCTION BOX IN EACH HOUSING BLOCK.",
+   "map": "#ff4030"
+  },
+  "M": {
+   "tex": "masterdoor",
+   "needs": {
+    "key": "M"
+   },
+   "denied": "LOCKED. NEEDS THE SUPER'S MASTER KEY.",
+   "map": "#c0c8d0"
+  },
+  "flushed": {
+   "tex": "flooded",
+   "needs": {
+    "flag": "flushed"
+   },
+   "denied": "FLOODED, LIVE CURRENT. DRAIN BLOCK B FROM THE BOILER ROOM.",
+   "map": "#2a6a9a"
+  }
+ },
+ "keys": {
+  "M": {
+   "color": "#c0c8d0"
+  }
+ },
+ "state": {
+  "flags": {
+   "wingA": false,
+   "wingB": false,
+   "superDown": false,
+   "flushed": false,
+   "floorplan": false,
+   "sealedHall": false
+  },
+  "counters": {
+   "junctions": 0
+  }
+ },
+ "schematic": {
+  "hide": [
+   [
+    43,
+    30,
+    49,
+    41
+   ],
+   [
+    33,
+    41,
+    59,
+    54
+   ],
+   [
+    39,
+    54,
+    53,
+    62
+   ],
+   [
+    29,
+    62,
+    59,
+    77
+   ],
+   [
+    59,
+    60,
+    93,
+    71
+   ]
+  ],
+  "add": [
+   [
+    66,
+    30,
+    66,
+    71
+   ]
+  ]
+ },
+ "rules": [
+  {
+   "on": {
+    "event": "use",
+    "target": "sealedHall"
+   },
+   "do": [
+    {
+     "if": {
+      "flag": "sealedHall"
+     },
+     "then": [
+      {
+       "msg": "WELDED SHUT. GORGON ASSET PROTECTION."
+      }
+     ],
+     "else": [
+      {
+       "set": "sealedHall",
+       "value": true
+      },
+      {
+       "say": "moss_sealed",
+       "sub": 4.6
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "floorplan"
+   },
+   "do": [
+    {
+     "if": {
+      "flag": "floorplan"
+     },
+     "then": [
+      {
+       "msg": "FLOOR PLAN ALREADY DOWNLOADED"
+      }
+     ],
+     "else": [
+      {
+       "set": "floorplan",
+       "value": true
+      },
+      {
+       "floorplan": true
+      },
+      {
+       "sfx": "pickup"
+      },
+      {
+       "msg": "FLOOR PLAN DOWNLOADED"
+      },
+      {
+       "say": "floorplan",
+       "sub": 3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "start"
+   },
+   "do": [
+    {
+     "say": "start",
+     "sub": 3
+    },
+    {
+     "after": 3.2,
+     "do": [
+      {
+       "say": "moss_hello",
+       "sub": 3.4
+      }
+     ]
+    },
+    {
+     "after": 7,
+     "do": [
+      {
+       "say": "moss_reply",
+       "sub": 2.4
+      }
+     ]
+    },
+    {
+     "objective": "Head south into the Arrivals Concourse.",
+     "show": 7
+    },
+    {
+     "hint": "move"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "concourse"
+   },
+   "do": [
+    {
+     "say": "moss_bulkheads",
+     "sub": 5
+    },
+    {
+     "objective": "Pick a wing. Use the intercom beside the Block A (west) or Block B (east) bulkhead."
+    },
+    {
+     "ambush": "concourse",
+     "delay": 3
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "commissary"
+   },
+   "once": true,
+   "do": [
+    {
+     "say": "shopping",
+     "sub": 2.6
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "theater"
+   },
+   "do": [
+    {
+     "ambush": "theater",
+     "delay": 2
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "pool"
+   },
+   "do": [
+    {
+     "say": "pool",
+     "sub": 2.4
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "water",
+    "depth": "wade"
+   },
+   "once": true,
+   "do": [
+    {
+     "sfx": "splash"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "water",
+    "depth": "swim"
+   },
+   "once": true,
+   "do": [
+    {
+     "sfx": "splash"
+    },
+    {
+     "hint": "swim"
+    },
+    {
+     "after": 0.8,
+     "do": [
+      {
+       "say": "liquid_assets",
+       "sub": 2
+      }
+     ]
+    },
+    {
+     "achieve": "hb.liquid_assets"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "underpool"
+   },
+   "do": [
+    {
+     "say": "deep_end",
+     "sub": 2.6
+    },
+    {
+     "achieve": "hb.deep_end"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "intercomA"
+   },
+   "do": [
+    {
+     "if": {
+      "flag": "wingA"
+     },
+     "then": [
+      {
+       "msg": "BLOCK A BULKHEAD IS OPEN"
+      }
+     ],
+     "else": [
+      {
+       "if": {
+        "not": {
+         "flag": "wingB"
+        }
+       },
+       "then": [
+        {
+         "set": "wingA",
+         "value": true
+        },
+        {
+         "sfx": "static"
+        },
+        {
+         "say": "moss_openA",
+         "sub": 3.6
+        },
+        {
+         "objective": "Block A is open. Reset the lockdown junction box at the south end of its hall."
+        },
+        {
+         "ambush": "blockA",
+         "delay": 4
+        },
+        {
+         "autosave": "events"
+        }
+       ],
+       "else": [
+        {
+         "if": {
+          "counter": "junctions",
+          "gte": 1
+         },
+         "then": [
+          {
+           "set": "wingA",
+           "value": true
+          },
+          {
+           "sfx": "static"
+          },
+          {
+           "say": "moss_second",
+           "sub": 3
+          },
+          {
+           "objective": "Block A is open. Reset its junction box at the south end of the hall."
+          },
+          {
+           "ambush": "blockA",
+           "delay": 4
+          },
+          {
+           "autosave": "events"
+          }
+         ],
+         "else": [
+          {
+           "sfx": "static"
+          },
+          {
+           "say": "moss_cycled",
+           "sub": 4
+          },
+          {
+           "msg": "LOCKDOWN CYCLING"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "intercomB"
+   },
+   "do": [
+    {
+     "if": {
+      "flag": "wingB"
+     },
+     "then": [
+      {
+       "msg": "BLOCK B BULKHEAD IS OPEN"
+      }
+     ],
+     "else": [
+      {
+       "if": {
+        "not": {
+         "flag": "wingA"
+        }
+       },
+       "then": [
+        {
+         "set": "wingB",
+         "value": true
+        },
+        {
+         "sfx": "static"
+        },
+        {
+         "say": "moss_openB",
+         "sub": 3.6
+        },
+        {
+         "objective": "Block B is open. Reset the lockdown junction box at the south end of its hall."
+        },
+        {
+         "ambush": "blockB",
+         "delay": 4
+        },
+        {
+         "autosave": "events"
+        }
+       ],
+       "else": [
+        {
+         "if": {
+          "counter": "junctions",
+          "gte": 1
+         },
+         "then": [
+          {
+           "set": "wingB",
+           "value": true
+          },
+          {
+           "sfx": "static"
+          },
+          {
+           "say": "moss_second",
+           "sub": 3
+          },
+          {
+           "objective": "Block B is open. Reset its junction box at the south end of the hall."
+          },
+          {
+           "ambush": "blockB",
+           "delay": 4
+          },
+          {
+           "autosave": "events"
+          }
+         ],
+         "else": [
+          {
+           "sfx": "static"
+          },
+          {
+           "say": "moss_cycled",
+           "sub": 4
+          },
+          {
+           "msg": "LOCKDOWN CYCLING"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "junction"
+   },
+   "do": [
+    {
+     "setTile": "after"
+    },
+    {
+     "add": "junctions",
+     "value": 1
+    },
+    {
+     "sfx": "breaker"
+    },
+    {
+     "shake": 0.2
+    },
+    {
+     "msg": "JUNCTION RESET ({junctions}/2)"
+    },
+    {
+     "if": {
+      "counter": "junctions",
+      "gte": 2
+     },
+     "then": [
+      {
+       "sfx": "powerup"
+      },
+      {
+       "say": "moss_maint",
+       "sub": 4.2
+      },
+      {
+       "objective": "Maintenance is open, south side of the concourse. Find the Super's master key in his office."
+      },
+      {
+       "ambush": "maint",
+       "delay": 3
+      },
+      {
+       "autosave": "events"
+      }
+     ],
+     "else": [
+      {
+       "say": "moss_junction",
+       "sub": 3.6
+      },
+      {
+       "objective": "Moss can reach the other bulkhead now. Go back to the concourse and use its intercom."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorDenied",
+    "lock": "maint"
+   },
+   "once": true,
+   "do": [
+    {
+     "say": "moss_maint_locked",
+     "sub": 3.4
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "laundry"
+   },
+   "do": [
+    {
+     "ambush": "laundry",
+     "delay": 2.5
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "pickup",
+    "item": "boots"
+   },
+   "do": [
+    {
+     "sfx": "key"
+    },
+    {
+     "hint": "stomp"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "pickup",
+    "item": "keyM"
+   },
+   "do": [
+    {
+     "msg": "MASTER KEY ACQUIRED"
+    },
+    {
+     "sfx": "key"
+    },
+    {
+     "say": "master_key",
+     "sub": 3
+    },
+    {
+     "objective": "The Boiler Room is through the south door of the Super's Office."
+    },
+    {
+     "ambush": "office",
+     "delay": 2
+    },
+    {
+     "autosave": "events"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorDenied",
+    "lock": "M"
+   },
+   "once": true,
+   "do": [
+    {
+     "say": "need_key",
+     "sub": 2.4
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorUnlock",
+    "lock": "M"
+   },
+   "do": [
+    {
+     "say": "moss_boiler",
+     "sub": 3.6
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "boiler"
+   },
+   "do": [
+    {
+     "say": "boss_check",
+     "sub": 3.2
+    },
+    {
+     "music": 1
+    },
+    {
+     "objective": "Take down the Super."
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "kill"
+   },
+   "if": {
+    "field": "enemy",
+    "eq": "super"
+   },
+   "do": [
+    {
+     "set": "superDown",
+     "value": true
+    },
+    {
+     "music": 0.3
+    },
+    {
+     "scene": "super_payoff"
+    },
+    {
+     "after": 1,
+     "do": [
+      {
+       "say": "moss_super",
+       "sub": 3.6
+      }
+     ]
+    },
+    {
+     "objective": "Open the flush valve on the Boiler Room's south wall to drain Block B."
+    },
+    {
+     "autosave": "events"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "flush"
+   },
+   "do": [
+    {
+     "if": {
+      "not": {
+       "flag": "superDown"
+      }
+     },
+     "then": [
+      {
+       "msg": "THE SUPER'S RIG IS CLAMPED TO THE VALVE"
+      },
+      {
+       "sfx": "denied"
+      }
+     ],
+     "else": [
+      {
+       "setTile": "after"
+      },
+      {
+       "set": "flushed",
+       "value": true
+      },
+      {
+       "sfx": "drain"
+      },
+      {
+       "shake": 0.6
+      },
+      {
+       "msg": "BLOCK B DRAINING"
+      },
+      {
+       "after": 1.2,
+       "do": [
+        {
+         "say": "flush",
+         "sub": 2.6
+        }
+       ]
+      },
+      {
+       "objective": "Block B is drained. Go down through Block B's lower level to the down-line platform."
+      },
+      {
+       "ambush": "lower",
+       "delay": 5
+      },
+      {
+       "autosave": "events"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorDenied",
+    "lock": "flushed"
+   },
+   "once": true,
+   "do": [
+    {
+     "say": "flooded",
+     "sub": 2.8
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "downline"
+   },
+   "do": [
+    {
+     "say": "moss_downline",
+     "sub": 3.6
+    },
+    {
+     "objective": "Break the glass and pull the departure lever."
+    },
+    {
+     "ambush": "downline",
+     "delay": 2
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "poster"
+   },
+   "do": [
+    {
+     "msg": "NOW SHOWING: NIGHT OF THE LIVING DEADBEATS // THE THING FROM UNIT 9 // CREATURE FROM THE BLACK MOLD"
+    },
+    {
+     "say": "double_feature",
+     "sub": 2.4
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "useDecor",
+    "decor": "tap"
+   },
+   "do": [
+    {
+     "msg": "YOU POUR ONE. SOMETHING RATTLES THE DOOR."
+    },
+    {
+     "sfx": "pour"
+    },
+    {
+     "say": "last_call",
+     "sub": 3
+    },
+    {
+     "achieve": "hb.last_call"
+    },
+    {
+     "ambush": "pub",
+     "delay": 1.5
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "breakGlass"
+   },
+   "do": [
+    {
+     "setTile": "after"
+    },
+    {
+     "sfx": "glass"
+    },
+    {
+     "shake": 0.25
+    },
+    {
+     "msg": "GLASS BROKEN"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "lever"
+   },
+   "do": [
+    {
+     "sfx": "breaker"
+    },
+    {
+     "depart": true
+    }
+   ]
+  }
+ ],
+ "ambushes": {
+  "concourse": {
+   "zones": [
+    "concourse"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "crawler"
+   ]
+  },
+  "blockA": {
+   "zones": [
+    "blockA",
+    "blockA2"
+   ],
+   "spawns": [
+    "husk",
+    "crawler",
+    "husk",
+    "spitter"
+   ]
+  },
+  "blockB": {
+   "zones": [
+    "blockB",
+    "blockB2"
+   ],
+   "spawns": [
+    "husk",
+    "crawler",
+    "husk",
+    "spitter"
+   ]
+  },
+  "theater": {
+   "zones": [
+    "theater"
+   ],
+   "spawns": [
+    "crawler",
+    "crawler",
+    "husk"
+   ]
+  },
+  "maint": {
+   "zones": [
+    "maint",
+    "concourse"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "crawler",
+    "crawler",
+    "spitter",
+    "bloater"
+   ]
+  },
+  "laundry": {
+   "zones": [
+    "laundry"
+   ],
+   "spawns": [
+    "husk",
+    "crawler",
+    "spitter"
+   ]
+  },
+  "office": {
+   "zones": [
+    "office",
+    "laundry"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "crawler",
+    "bloater"
+   ]
+  },
+  "pub": {
+   "zones": [
+    "commissary"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "crawler"
+   ]
+  },
+  "lower": {
+   "zones": [
+    "lower",
+    "blockB2"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "crawler",
+    "spitter",
+    "bloater",
+    "crawler"
+   ]
+  },
+  "downline": {
+   "zones": [
+    "downline"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "husk",
+    "crawler",
+    "spitter"
+   ]
+  }
+ },
+ "guide": [
+  {
+   "until": {
+    "visited": "concourse"
+   },
+   "to": {
+    "cell": [
+     48,
+     17
+    ]
+   }
+  },
+  {
+   "until": {
+    "any": [
+     {
+      "flag": "wingA"
+     },
+     {
+      "flag": "wingB"
+     }
+    ]
+   },
+   "to": {
+    "use": "intercomA"
+   }
+  },
+  {
+   "until": {
+    "counter": "junctions",
+    "gte": 1
+   },
+   "to": {
+    "nearestUse": "junction"
+   }
+  },
+  {
+   "until": {
+    "flag": "wingA"
+   },
+   "to": {
+    "use": "intercomA"
+   }
+  },
+  {
+   "until": {
+    "flag": "wingB"
+   },
+   "to": {
+    "use": "intercomB"
+   }
+  },
+  {
+   "until": {
+    "counter": "junctions",
+    "gte": 2
+   },
+   "to": {
+    "nearestUse": "junction"
+   }
+  },
+  {
+   "until": {
+    "key": "M"
+   },
+   "to": {
+    "item": "keyM"
+   }
+  },
+  {
+   "until": {
+    "flag": "superDown"
+   },
+   "to": {
+    "cell": [
+     46,
+     69
+    ]
+   }
+  },
+  {
+   "until": {
+    "flag": "flushed"
+   },
+   "to": {
+    "use": "flush"
+   }
+  },
+  {
+   "to": {
+    "use": "breakGlass"
+   }
+  }
+ ],
+ "scenes": {
+  "super_payoff": {
+   "target": "lastBossKill",
+   "steps": [
+    {
+     "t": 0,
+     "camera": "faceTarget",
+     "dur": 0.6
+    },
+    {
+     "t": 0.6,
+     "camera": "lookDown",
+     "dur": 0.4
+    },
+    {
+     "t": 1,
+     "boot": "raise",
+     "dur": 0.35
+    },
+    {
+     "t": 1.35,
+     "boot": "stomp",
+     "dur": 0.15,
+     "sfx": "splat",
+     "shake": 0.7,
+     "gib": "head"
+    },
+    {
+     "t": 1.8,
+     "say": "payoff_super",
+     "sub": 2.6
+    },
+    {
+     "t": 2,
+     "stamp": "REPOSSESSED",
+     "sfx": "stamp"
+    },
+    {
+     "t": 3.6,
+     "end": true
+    }
+   ]
+  }
+ },
+ "par": 600,
+ "achievements": [
+  {
+   "id": "hb.paid_in_full.02",
+   "name": "Paid in Full: Deck 02",
+   "points": 10,
+   "desc": "Reach 100% on Deck 02.",
+   "earned": "Deck 02 settled in full.",
+   "on": {
+    "event": "deckClear"
+   },
+   "if": {
+    "all": [
+     {
+      "field": "deck",
+      "eq": 2
+     },
+     {
+      "field": "percent",
+      "gte": 100
+     }
+    ]
+   }
+  },
+  {
+   "id": "hb.wake_up_call",
+   "name": "Wake-Up Call",
+   "points": 10,
+   "desc": "Stomp 10 sleepers before they get up.",
+   "earned": "Ten sleepers, stomped awake. Briefly.",
+   "progress": {
+    "stat": "sleepersStomped",
+    "target": 10
+   },
+   "line": "ach_wake_up_call"
+  },
+  {
+   "id": "hb.overhead_costs",
+   "name": "Overhead Costs",
+   "points": 10,
+   "desc": "Kill a lurker before it drops from the ceiling.",
+   "earned": "Cut overhead.",
+   "on": {
+    "event": "kill"
+   },
+   "line": "ach_overhead_costs",
+   "if": {
+    "all": [
+     {
+      "field": "enemy",
+      "eq": "lurker"
+     },
+     {
+      "field": "state",
+      "eq": "ceiling"
+     }
+    ]
+   }
+  },
+  {
+   "id": "hb.eviction_notice",
+   "name": "Eviction Notice",
+   "points": 10,
+   "desc": "Beat the Super.",
+   "earned": "Evicted the Super.",
+   "on": {
+    "event": "kill"
+   },
+   "if": {
+    "field": "enemy",
+    "eq": "super"
+   }
+  },
+  {
+   "id": "hb.deep_end",
+   "name": "Deep End",
+   "points": 5,
+   "hidden": true,
+   "desc": "Find what's under the pool.",
+   "earned": "Went off the deep end.",
+   "rule": true
+  },
+  {
+   "id": "hb.liquid_assets",
+   "name": "Liquid Assets",
+   "points": 5,
+   "desc": "Go for a swim in the Rec Center pool.",
+   "earned": "Assets: liquid.",
+   "rule": true
+  },
+  {
+   "id": "hb.last_call",
+   "name": "Last Call",
+   "points": 5,
+   "desc": "Pour yourself one at the Commissary bar.",
+   "earned": "Last call. Something else came to drink.",
+   "rule": true
+  }
+ ],
+ "mapLegend": [
+  [
+   "WATER",
+   "#2a6a9a"
+  ],
+  [
+   "SAVE",
+   "#30ff70"
+  ],
+  [
+   "INTERCOM",
+   "#ff8c1a"
+  ],
+  [
+   "JUNCTION",
+   "#ff4030"
+  ],
+  [
+   "VALVE",
+   "#3cb4ff"
+  ],
+  [
+   "FLOOR PLAN",
+   "#5ff6ff"
+  ]
+ ],
+ "blurb": "Crew quarters, chapel, and rec decks, where the dead still keep house."
+}

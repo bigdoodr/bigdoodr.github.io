@@ -10,4 +10,5 @@ __pycache__/bookListMaker.cpython-310.pyc
 bookListMaker.py
 
 # Hull Breaker voice tools: Kokoro model files (download from the kokoro-onnx releases)
-hull-breaker/_src/voice/kok/
+hull-breaker/_src/voice/kok
+hull-breaker/_src/**/__pycache__/

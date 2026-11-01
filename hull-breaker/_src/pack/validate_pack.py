@@ -12,14 +12,18 @@ ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.pat
 ONLY = sys.argv[2:]
 ENGINE_FLAGS = {'power', 'lightsOut', 'alarm'}          # flags the engine itself reacts to
 SIGNALS = {  # combat and score events, with the fields their conditions may read (FORMAT.md)
-    'kill': {'enemy', 'cause', 'boss'}, 'blast': {'source', 'kills'}, 'sever': {'enemy', 'limb', 'state'},
+    # engine 1.3: kill gains state (ceiling, playingDead) and the stomp cause
+    'kill': {'enemy', 'cause', 'boss', 'state'}, 'blast': {'source', 'kills'}, 'sever': {'enemy', 'limb', 'state'},
     'death': {'cause'}, 'secret': {'found', 'total'},
     'deckClear': {'percent', 'time', 'par', 'underPar', 'damageTaken', 'weapons', 'difficulty', 'deck'},
     'cheat': {'command'},                                  # engine 1.2: a console cheat was used
 }
-STATS = {'kickKills', 'limbsSevered', 'deaths', 'bodiesKicked', 'departStays'}
-EVENTS = {'start', 'enterZone', 'pickup', 'use', 'useDecor', 'doorUnlock', 'doorDenied', 'region'} | set(SIGNALS)
-ACTIONS = {'say', 'msg', 'objective', 'sfx', 'flash', 'shake', 'set', 'add', 'ambush', 'autosave', 'music', 'setTile', 'after', 'if', 'win', 'depart', 'achieve'}
+STATS = {'kickKills', 'limbsSevered', 'deaths', 'bodiesKicked', 'departStays', 'sleepersStomped'}
+EVENTS = {'start', 'enterZone', 'pickup', 'use', 'useDecor', 'doorUnlock', 'doorDenied', 'region', 'water'} | set(SIGNALS)   # water: engine 1.3
+ACTIONS = {'say', 'msg', 'objective', 'sfx', 'flash', 'shake', 'set', 'add', 'ambush', 'autosave', 'music', 'setTile', 'after', 'if', 'win', 'depart', 'achieve',
+           'scene', 'hint', 'floorplan'}   # engine 1.3: scene, hint, floorplan (swap Gorgon's schematic for the real map)
+HINTS = {'move', 'limbs', 'kick', 'stayDown', 'map', 'guide', 'stomp', 'lurker', 'swim'}   # engine 1.3 tutorial prompts
+SPEAKERS = {'moss'}
 DIFFS = ['Very Easy', 'Easy', 'Normal', 'Hard', 'Nightmare']
 errors, warns = [], []
 err = errors.append
@@ -65,10 +69,18 @@ def validate_deck(pid, core, core_files):
     deck, level = load(pid, 'deck.json'), load(pid, 'level.json')
     logs = {l['id']: l for l in load(pid, 'logs.json')['logs']}
     lines = {l['id'] for l in load(pid, 'lines.json')['lines']}
+    for l in load(pid, 'lines.json')['lines']:
+        if l.get('speaker', 'buck') not in SPEAKERS | {'buck'}: err(f'{pid}: line {l["id"]} speaker {l["speaker"]} unknown')
     _, files = check_manifest(pid, CAT_ENTRIES.get(pid))
     for l in load(pid, 'lines.json')['lines'] + list(logs.values()):
         if l['file'] not in files: err(f'{pid}: audio {l["file"]} missing')
     leg = deck['legend']; W, H, G, O = level['w'], level['h'], level['geo'], level['obj']
+    xf = leg.get('floors', {})   # engine 1.3: extra floor characters (water) count as floor everywhere
+    for ch, fd in xf.items():
+        if ch == leg['floor'] or ch in leg['walls'] or ch in leg['doors']: err(f'{pid}: floor char {ch!r} clashes')
+        if fd.get('water') not in (None, 'wade', 'swim'): err(f'{pid}: floor {ch!r} water must be wade or swim')
+    if xf:
+        tr = str.maketrans({c: leg['floor'] for c in xf}); G = [r.translate(tr) for r in G]; level = dict(level, geo=G)
     zones = {z['id']: z for z in level['zones']}
     tex, items, enemies, decor = core['art']['textures'], core['tuning']['items'], core['tuning']['enemies'], core['tuning']['decor']
     sfx, core_lines = core['sfx']['sounds'], {l['id'] for l in core['lines']['lines']}
@@ -89,6 +101,11 @@ def validate_deck(pid, core, core_files):
         if 'decor' in o and o['decor'] not in decor: err(f'{pid}: object {ch} decor {o["decor"]} unknown')
     for z in level['zones']:
         if z['floor'] not in core['art']['floors']: err(f'{pid}: zone {z["id"]} floor {z["floor"]}')
+    sch = deck.get('schematic')                                   # engine 1.3
+    if sch is not None:
+        for k in sch: assert k in ('hide', 'add'), ('schematic key', k)
+        for r in sch.get('hide', []) + sch.get('add', []):
+            assert len(r) == 4 and 0 <= r[0] <= r[2] < level['w'] and 0 <= r[1] <= r[3] < level['h'], ('schematic rect', r)
     uses = {w['use'] for w in leg['walls'].values() if 'use' in w} | {w['after']['use'] for w in leg['walls'].values() if 'use' in w.get('after', {})}
     for a in deck['ambushes'].values():
         for z in a['zones']:
@@ -106,6 +123,9 @@ def validate_deck(pid, core, core_files):
         if k == 'set' and a['set'] not in flags: err(f'{pid}: set {a["set"]} is not a declared flag')
         if k == 'add' and a['add'] not in counters: err(f'{pid}: add {a["add"]} is not a declared counter')
         if k == 'ambush' and a['ambush'] not in deck['ambushes']: err(f'{pid}: ambush {a["ambush"]} undefined')
+        if k == 'scene' and a['scene'] not in deck.get('scenes', {}): err(f'{pid}: scene {a["scene"]} undefined')
+        if k == 'hint' and a['hint'] not in HINTS: err(f'{pid}: hint {a["hint"]} unknown')
+        if k == 'achieve': RULE_ACH.add(a['achieve'])
         if k == 'if': names = []; cond_names(a['if'], names); check_names(names)
     def check_names(names):
         for k, v in names:
@@ -119,6 +139,7 @@ def validate_deck(pid, core, core_files):
         if 'zone' in r['on'] and r['on']['zone'] not in zones: err(f'{pid}: rule zone {r["on"]["zone"]} unknown')
         if ev == 'use' and r['on']['target'] not in uses: err(f'{pid}: no wall offers use {r["on"]["target"]}')
         if ev == 'pickup' and r['on']['item'] not in items: err(f'{pid}: pickup rule item {r["on"]["item"]}')
+        if ev == 'water' and r['on'].get('depth') not in ('wade', 'swim'): err(f'{pid}: water rule needs depth wade or swim')
         names = []; cond_names(r.get('if'), names); check_names(names)
         walk_actions(r['do'], check_action)
     for step in deck['guide']:
@@ -164,6 +185,12 @@ def validate_deck(pid, core, core_files):
     return res
 
 
+def hashf(n):  # the engines' hash(): decides Very Easy thinning (FORMAT.md)
+    import math
+    s = math.sin(n * 127.1 + 311.7) * 43758.5453
+    return s - math.floor(s)
+
+
 def zone_of(level, x, y):
     for z in level['zones'][::-1]:  # later zones sit on top of earlier ones, as in the game
         if z['x1'] <= x <= z['x2'] and z['y1'] <= y <= z['y2']: return z['id']
@@ -178,8 +205,17 @@ def run_rules(pid, deck, level, start, diff=2):
     for f in ENGINE_FLAGS: S['flags'].setdefault(f, False)
     order = []
 
+    ctx = {}
+
     def cond(c):
         if not c: return True
+        if 'field' in c:
+            v = ctx.get(c['field'])
+            if 'eq' in c: return v == c['eq']
+            if 'in' in c: return v in c['in']
+            if 'gte' in c: return v is not None and v >= c['gte']
+            if 'lte' in c: return v is not None and v <= c['lte']
+            return False
         if 'all' in c: return all(cond(s) for s in c['all'])
         if 'any' in c: return any(cond(s) for s in c['any'])
         if 'not' in c: return not cond(c['not'])
@@ -205,8 +241,9 @@ def run_rules(pid, deck, level, start, diff=2):
             elif 'depart' in a and not S['won']: S['won'] = True; changed = True; order.append('DEPART')  # the player may leave now
         return changed
 
-    def fire(ev, **kw):
+    def fire(ev, fields=None, **kw):
         any_change = False
+        ctx.clear(); ctx.update(fields or {})
         for i, r in enumerate(deck['rules']):
             on = r['on']
             if on['event'] != ev or any(on.get(k) != v for k, v in kw.items() if k in on and k != 'cell'): continue
@@ -252,6 +289,13 @@ def run_rules(pid, deck, level, start, diff=2):
                 if not u: continue
                 if any((x + dx, y + dy) in seen for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
                     if fire('use', target=u, cell=(x, y)): progressed = True
+        # a boss the player can reach is assumed beaten (the engine fires kill with boss: true)
+        for (x, y) in sorted(seen):
+            od = leg['objects'].get(O[y][x], {})
+            thin = diff == 0 and od.get('min') == 0 and not CORE['tuning']['enemies'].get(od.get('enemy'), {}).get('boss') and hashf((y * W + x) * .37) < CORE['tuning']['veryEasyThin']
+            if 'enemy' in od and od['min'] <= diff and not thin and CORE['tuning']['enemies'][od['enemy']].get('boss') and (x, y) not in S['taken']:
+                S['taken'].add((x, y)); order.append('beat ' + od['enemy'])
+                fire('kill', fields=dict(enemy=od['enemy'], boss=True, cause='cutter', state='other')); progressed = True
         for r in deck['rules']:
             on = r['on']
             if on['event'] == 'region' and cond(r.get('if')) and not S['won']:
@@ -283,6 +327,7 @@ CAT = load('catalog.json'); CAT_ENTRIES = {p['id']: p for p in CAT['packs']}
 check_manifest('core', CAT_ENTRIES.get('core'))
 CORE = {k: load('core', k + '.json') for k in ('art', 'tuning', 'sfx', 'lines', 'strings', 'achievements')}
 ACH_IDS = set()
+RULE_ACH, RULE_ACH_DEF = set(), set()
 
 
 def check_achievements(pid, lst, core_line_ids, ev_ok=None):
@@ -304,7 +349,8 @@ def check_achievements(pid, lst, core_line_ids, ev_ok=None):
             names = []; cond_names(a.get('if'), names)
             for k, v in names:
                 if k == 'field' and ev in SIGNALS and v not in SIGNALS[ev]: err(f'{pid}: {aid} reads field {v} that {ev} lacks')
-        else: err(f'{pid}: {aid} has neither progress nor on')
+        elif a.get('rule'): RULE_ACH_DEF.add(aid)   # engine 1.3: given only by an achieve action
+        else: err(f'{pid}: {aid} has neither progress nor on nor rule')
 _, core_files = check_manifest('core')
 for group in ('textures', 'floors', 'ceilings', 'sprites'):
     for k, v in CORE['art'][group].items():
@@ -330,6 +376,8 @@ for p in CAT['packs']:
         print(f"{p['id']}: progression {' -> '.join(r['order'])}")
         print(f"  floor cells reachable {r['reached']}/{r['floor']}; secrets {r['secrets']}, logs {r['logs']}, asset tags {r['assets']}")
         print('  enemies placed by difficulty:', r['enemies'])
+for aid in RULE_ACH_DEF - RULE_ACH: err(f'{aid} is a rule achievement but no rule gives it')
+for aid in RULE_ACH - ACH_IDS: err(f'achieve {aid}: no such achievement')
 for w in warns: print('WARN', w)
 for e in errors: print('ERROR', e)
 print('OK' if not errors else f'{len(errors)} error(s)')

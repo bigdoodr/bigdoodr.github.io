@@ -1,0 +1,157 @@
+{
+ "lines": [
+  {
+   "id": "start",
+   "text": "Habitation spine. Rent's due.",
+   "file": "voice/start.mp3"
+  },
+  {
+   "id": "moss_reply",
+   "text": "Orange jumpsuit. Noted.",
+   "file": "voice/moss_reply.mp3"
+  },
+  {
+   "id": "shopping",
+   "text": "Commissary. Somebody left a tab open.",
+   "file": "voice/shopping.mp3"
+  },
+  {
+   "id": "pool",
+   "text": "No lifeguard on duty. Swim at your own risk.",
+   "file": "voice/pool.mp3"
+  },
+  {
+   "id": "deep_end",
+   "text": "So that's what's in the deep end.",
+   "file": "voice/deep_end.mp3"
+  },
+  {
+   "id": "master_key",
+   "text": "Master key. The Super won't mind. Much.",
+   "file": "voice/master_key.mp3"
+  },
+  {
+   "id": "need_key",
+   "text": "Locked. The Super's got the key.",
+   "file": "voice/need_key.mp3"
+  },
+  {
+   "id": "floorplan",
+   "text": "That's not the floor plan Gorgon sent over.",
+   "file": "voice/floorplan.mp3"
+  },
+  {
+   "id": "boss_check",
+   "text": "Your face wrote a check that my boot's gonna cash.",
+   "file": "voice/boss_check.mp3"
+  },
+  {
+   "id": "payoff_super",
+   "text": "Consider your lease terminated.",
+   "file": "voice/payoff_super.mp3"
+  },
+  {
+   "id": "flush",
+   "text": "Flushing out the tenants.",
+   "file": "voice/flush.mp3"
+  },
+  {
+   "id": "flooded",
+   "text": "Live wires in that water. Hard pass.",
+   "file": "voice/flooded.mp3"
+  },
+  {
+   "id": "liquid_assets",
+   "text": "Liquid assets.",
+   "file": "voice/liquid_assets.mp3"
+  },
+  {
+   "id": "double_feature",
+   "text": "Double feature. I've seen how both of them end.",
+   "file": "voice/double_feature.mp3"
+  },
+  {
+   "id": "last_call",
+   "text": "One cold one. Then I let this all blow over.",
+   "file": "voice/last_call.mp3"
+  },
+  {
+   "id": "moss_hello",
+   "text": "Don't shoot the guy in the orange suit. That's me.",
+   "file": "voice/moss_hello.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_bulkheads",
+   "text": "You're the repo guy? Okay. I can pop the wing bulkheads from here, one at a time. Use the intercom by the one you want.",
+   "file": "voice/moss_bulkheads.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_openA",
+   "text": "Block A's open. The lockdown's going to cycle on me, so find the junction box at the south end and reset it.",
+   "file": "voice/moss_openA.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_openB",
+   "text": "Block B's open. Stay out of the flooded part, the wiring's live down there. Junction box is at the south end of the hall. Reset it for me.",
+   "file": "voice/moss_openB.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_cycled",
+   "text": "Lockdown cycled. I can't reach that bulkhead until you reset the junction box in the block you're in.",
+   "file": "voice/moss_cycled.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_junction",
+   "text": "Got it. I can reach the other bulkhead now. Use the intercom on the far side of the concourse.",
+   "file": "voice/moss_junction.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_second",
+   "text": "Other side's open. Same deal. Junction box at the south end.",
+   "file": "voice/moss_second.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_maint",
+   "text": "That's both. Maintenance just unlocked, south side of the concourse. The Super keeps his master key in his office.",
+   "file": "voice/moss_maint.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_maint_locked",
+   "text": "Maintenance is on the lockdown circuit. Reset the junction box in each housing block.",
+   "file": "voice/moss_maint_locked.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_boiler",
+   "text": "That's the Boiler Room. The Super went in there after the lockdown. He didn't come out.",
+   "file": "voice/moss_boiler.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_super",
+   "text": "Was that the Super? He used to fix my shower. The valve's on the south wall. Drain it.",
+   "file": "voice/moss_super.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_sealed",
+   "text": "Forget the service hall. Gorgon welded it shut the day of the lockdown.",
+   "file": "voice/moss_sealed.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_downline",
+   "text": "Down-line platform. The tram's yours. Break the glass when you're ready.",
+   "file": "voice/moss_downline.mp3",
+   "speaker": "moss"
+  }
+ ]
+}

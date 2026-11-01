@@ -96,7 +96,7 @@ For each zone: a secret zone gets one steady lamp at its center (`[1,.7,.4]`, ra
 - `floor`: the floor character (`.`).
 - `walls`: character → `{tex, role?, use?, light?, map?, after?}`. `tex` is a texture id. `role` is an engine role: `vent` (ambush spawn point) or `save` (save station). `use` makes the wall usable and names the `use` event it fires. `light` adds a small lamp. `map` is its automap color (default `#5d6873`). `after` is what the wall becomes when a rule runs `setTile: "after"`: `{tex, map?, use?}`. Without `use` the cell can't be used again; with `use` (engine 1.2) it stays usable and fires that use name instead (the departure lever's glass cover becomes the lever).
 - `doors`: character → lock id (see `locks`).
-- `objects`: character → one of `{start}`, `{enemy, min, dormant?}`, `{item}`, `{decor, solid?, r?}`, `{barrel}`. `min` is the lowest difficulty index the enemy appears on (0 Very Easy … 4 Nightmare). On Very Easy, enemies with `min` 0 are skipped where `hash(cellIndex*.37) < tuning.veryEasyThin`, with `cellIndex = y*w + x`.
+- `objects`: character → one of `{start}`, `{enemy, min, dormant?}`, `{item}`, `{decor, solid?, r?}`, `{barrel}`. `min` is the lowest difficulty index the enemy appears on (0 Very Easy … 4 Nightmare). On Very Easy, enemies with `min` 0 are skipped where `hash(cellIndex*.37) < tuning.veryEasyThin`, with `cellIndex = y*w + x`. Bosses (`"boss": true` in the tuning) are never skipped (engine 1.3).
 
 ### locks
 
@@ -159,8 +159,13 @@ Actions (one verb each):
 | `{"win":true}` | Clear the deck: records, carry-over, outro. |
 | `{"depart":true}` | Open the DEPART DECK NN? screen (engine 1.2): kills, secrets, audio logs and asset tags as found / total, incomplete ones highlighted, and the deck percent; at 100% the header reads ACCOUNT CLOSED IN FULL. **Stay** has the default focus (Back, Esc and Menu also mean Stay): it closes the screen, Buck says the core `departStay` line, the `departStays` total goes up, and the wall can be used again. **Depart** clears the deck exactly like `win`. Play is frozen while the screen is up. |
 | `{"achieve":id}` | Give an achievement (engine 1.1). Audited runs earn nothing except achievements marked `cheat`. |
+| `{"floorplan":true}` | Swap Gorgon's schematic on the automap for the real layout (engine 1.3; a floor-plan terminal's `use` rule). Saved with the deck. |
 
 The engine does the rest on its own: secret doors, save stations, item pickups and their messages, logs, asset tags, enemy intro lines, kill quips, revives, death, low-health warnings.
+
+### schematic (engine 1.3)
+
+What the automap knows before Buck explores. `{"hide":[[x1,y1,x2,y2],...], "add":[[x1,y1,x2,y2],...]}`, rectangles inclusive. Gorgon's copy is the real layout (every floor cell outside secret rooms and secret doors), minus `hide`, plus `add`, which may cover solid wall (a hallway on the plan that isn't there). Until the `floorplan` action runs, cells Buck hasn't seen are drawn as faint dots with a faint outline, labeled GORGON'S PLAN. After it runs, and from the start on Very Easy and Easy, the real layout is drawn dimly instead. Secret rooms never appear either way, and the `?` hints don't change. `{}` means Gorgon's copy matches; no `schematic` key means no plan at all (only what Buck has seen).
 
 ### par and achievements (engine 1.1)
 

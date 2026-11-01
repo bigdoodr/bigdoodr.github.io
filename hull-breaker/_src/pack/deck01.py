@@ -27,7 +27,7 @@ DECK = {
     'outro': {
         'heading': 'DECK 01 OF 12 CLEARED',
         'body': 'The tram groans to life and carries Buck down to Deck 02. Eleven decks to go.',
-        'tease': 'Decks 02 through 12 continue the contract in the full game.',
+        'tease': 'Deck 02: Hostile Tenancy. The Habitation Spine.',
         'music': 'braam_4',
         'line': 'core:deck_clear',
     },
@@ -37,7 +37,7 @@ DECK = {
         'floor': '.',
         'walls': {
             '#': {'tex': 'hull'}, '=': {'tex': 'hull2'}, 'h': {'tex': 'haz'}, 'b': {'tex': 'blood'},
-            't': {'tex': 'term'}, 'm': {'tex': 'med'}, 'v': {'tex': 'vent', 'role': 'vent'},
+            't': {'tex': 'term'}, 'F': {'tex': 'floorplan', 'use': 'floorplan', 'light': [0.35, 0.95, 1], 'map': '#5ff6ff'}, 'm': {'tex': 'med'}, 'v': {'tex': 'vent', 'role': 'vent'},
             'w': {'tex': 'win', 'map': '#3a5a7a'}, 'W': {'tex': 'winmoon', 'map': '#3a5a7a'}, 's': {'tex': 'scrawl'}, 'p': {'tex': 'pipe'},
             'T': {'tex': 'tram'}, 'k': {'tex': 'locker'}, 'r': {'tex': 'reactor'}, 'c': {'tex': 'cargo'},
             'C': {'tex': 'cargo2'}, 'g': {'tex': 'hydro'}, 'G': {'tex': 'planter'}, 'n': {'tex': 'console'},
@@ -86,10 +86,15 @@ DECK = {
     'keys': {'B': {'color': '#3c78ff'}, 'Y': {'color': '#ffd200'}, 'R': {'color': '#ff3030'}},
 
     # ---- state the rules read and write ----
-    'state': {'flags': {'power': False, 'override': False}, 'counters': {'breakers': 0}},
+    'state': {'flags': {'power': False, 'override': False, 'floorplan': False}, 'counters': {'breakers': 0}},
+
+    # engine 1.3: Gorgon's schematic matches this deck exactly (secret rooms are never on it), so the floor-plan
+    # terminal in the Dock Office changes nothing but the faint lines. Deck 02 is where the plans stop matching.
+    'schematic': {},
 
     # ---- rules: when something happens, check a condition, run actions ----
     'rules': [
+        {'on': {'event': 'use', 'target': 'floorplan'}, 'do': [{'if': {'flag': 'floorplan'}, 'then': [{'msg': 'FLOOR PLAN ALREADY DOWNLOADED'}], 'else': [{'set': 'floorplan', 'value': True}, {'floorplan': True}, {'sfx': 'pickup'}, {'msg': 'FLOOR PLAN DOWNLOADED. IT MATCHES THE WORK ORDER.'}]}]},
         {'on': {'event': 'start'}, 'do': [
             {'say': 'start', 'sub': 3.6},
             {'objective': 'Get inside the ship. Take the transit corridor north out of the docking bay.', 'show': 7},
@@ -203,7 +208,7 @@ DECK = {
     ],
 
     # Map legend entries shown under the automap (besides cleared / items left / secret).
-    'mapLegend': [['SAVE', '#30ff70'], ['BREAKER', '#ff4030']],
+    'mapLegend': [['SAVE', '#30ff70'], ['BREAKER', '#ff4030'], ['FLOOR PLAN', '#5ff6ff']],
 }
 
 # Buck lines that only this deck uses: id -> (text, subtitle seconds).

@@ -1,0 +1,171 @@
+{
+ "format": 1,
+ "id": "deck-01",
+ "kind": "deck",
+ "deck": 1,
+ "version": "1.2.2",
+ "minEngine": "1.3",
+ "title": "Repo Day",
+ "place": "Docking Ring",
+ "requires": {
+  "core": "1.2.0"
+ },
+ "bytes": 1102556,
+ "files": [
+  {
+   "path": "deck.json",
+   "bytes": 15429,
+   "sha256": "6fe8c293b982802e93f347f61d23197b1410437f335d71493e5feb73c2b071b5"
+  },
+  {
+   "path": "level.json",
+   "bytes": 27393,
+   "sha256": "d6f82798339a828fe1c5e9cacaa802ec4f2f7dafca58c64cd9b018f277fc118d"
+  },
+  {
+   "path": "lines.json",
+   "bytes": 1270,
+   "sha256": "76acb54731212b676870f8cb582de3a07e8c8710091262a71e84b16d6e946a31"
+  },
+  {
+   "path": "logs.json",
+   "bytes": 6212,
+   "sha256": "b548cddd9b2cc6f9937d7abf7d7259ee584b68dfe49f312775c5c191c1da75db"
+  },
+  {
+   "path": "logs/bridge.mp3",
+   "bytes": 63443,
+   "sha256": "f9779b3d1fc88ba2823ddb8fad0b9da446aff5a289874ca5f79962083bf2e99a"
+  },
+  {
+   "path": "logs/bunks.mp3",
+   "bytes": 43068,
+   "sha256": "b8e37e56c7ae3bfad40322edf03eca071fd6868f5797fd6e783748777527b0c7"
+  },
+  {
+   "path": "logs/captain.mp3",
+   "bytes": 59891,
+   "sha256": "c63e4bc888e1b782fa8cf0a589a90e30e38063fea10496fe7bd8fe9539f05235"
+  },
+  {
+   "path": "logs/cargo.mp3",
+   "bytes": 61040,
+   "sha256": "05b2bf235a9916287b9db3c77889f22ec908d518bd6f2ba58b7e3e55d6727bd2"
+  },
+  {
+   "path": "logs/cargooffice.mp3",
+   "bytes": 42232,
+   "sha256": "5b9c3737c7bacdd7ac27404c24d80b9edac3f5cb8d5d3d471c38cecf7801308d"
+  },
+  {
+   "path": "logs/chief.mp3",
+   "bytes": 51636,
+   "sha256": "ed6a0fae0efd44ea9953ededcc01551c0eee58b63150a390300d28b85a1bb443"
+  },
+  {
+   "path": "logs/commons.mp3",
+   "bytes": 43590,
+   "sha256": "45ef1f35944621218f11c0aca7f14dd2ed6baa5b15104f0851932a38df73e34c"
+  },
+  {
+   "path": "logs/container.mp3",
+   "bytes": 40665,
+   "sha256": "5b2aa1efbc86bd68b6a71535edfaa7a56711b3160c8704b7c775847c4fee87a1"
+  },
+  {
+   "path": "logs/dockoffice.mp3",
+   "bytes": 71594,
+   "sha256": "342542828bea76c1cb71efa7a2e2ed5d0374c791a7baa235e1a91a2a328b5d7a"
+  },
+  {
+   "path": "logs/hall.mp3",
+   "bytes": 39411,
+   "sha256": "3d94ec04b7de5d7a182bc448805694f28b81246ee37520662fcf090ba8863ce0"
+  },
+  {
+   "path": "logs/hydro.mp3",
+   "bytes": 47456,
+   "sha256": "9fbfeb2fc8f3a7552393171290f24e42570dacfe6eb25160b928fa361b2d1384"
+  },
+  {
+   "path": "logs/lab.mp3",
+   "bytes": 35336,
+   "sha256": "d5b3c2a8907d5c88311d400f74b40b64aa7273a032661f93d915c1e74468d3ae"
+  },
+  {
+   "path": "logs/morgue.mp3",
+   "bytes": 42232,
+   "sha256": "20c0e00bb59a957a21b004251121d5fa48edcf91c6970cd2bf4b2b1164eba0b4"
+  },
+  {
+   "path": "logs/reactor.mp3",
+   "bytes": 54144,
+   "sha256": "357d192aa8ad2ebb3fed5361b8a688d198dd318dbaf1dcf61369cba5c538edfb"
+  },
+  {
+   "path": "logs/reception.mp3",
+   "bytes": 101687,
+   "sha256": "f777fce6d76317a0edf3c720e195cf39ac4235243c17a17644beb6856ad3c9c1"
+  },
+  {
+   "path": "logs/security.mp3",
+   "bytes": 61876,
+   "sha256": "09e95009b9e8ae4d4751a0d5c6a2cefef1fef6370c4227ee1ea988c47fab7bec"
+  },
+  {
+   "path": "voice/blue_card.mp3",
+   "bytes": 16869,
+   "sha256": "7c1889070cd195cb2046e9389f870475a9f64ec6003e4e118794347519841b76"
+  },
+  {
+   "path": "voice/fine_print.mp3",
+   "bytes": 11661,
+   "sha256": "9889c71e7093dbbf6c38c463eeb9a37c3f28ff9a781b0b76a9aefa497ad4c6ba"
+  },
+  {
+   "path": "voice/lights_on.mp3",
+   "bytes": 22749,
+   "sha256": "5411070c67b176d659312404ac136be64cccec056d6afa36dc1feaa2c0a2f70f"
+  },
+  {
+   "path": "voice/no_power.mp3",
+   "bytes": 20901,
+   "sha256": "71ad8761a4fcc2c8e17026f80e4162c6b8d3242c0a67a7b82b4a66d012b5af41"
+  },
+  {
+   "path": "voice/one_down.mp3",
+   "bytes": 7125,
+   "sha256": "40592f4be9c4f343406b475ed013d5998e517089d52705ec8c36f278a4c25d64"
+  },
+  {
+   "path": "voice/red_card.mp3",
+   "bytes": 17373,
+   "sha256": "45041ac3df82db086d270253951b7e030f7278383e27c0383b8b9824d8a6758b"
+  },
+  {
+   "path": "voice/salad_bar.mp3",
+   "bytes": 18717,
+   "sha256": "f0a371ca7d32505b3972834eb8b96f4623779eb09df1d0b95698ce44371221fe"
+  },
+  {
+   "path": "voice/start.mp3",
+   "bytes": 30141,
+   "sha256": "8154501b70ab16d9b37ac5442cc3152b1e0d416a34537d5e253fc7465ed65255"
+  },
+  {
+   "path": "voice/still_got_it.mp3",
+   "bytes": 8637,
+   "sha256": "e5fe9b2546a90f00d420c278aada2c9189dc2b5e7562997c720725204b3d1662"
+  },
+  {
+   "path": "voice/tram_open.mp3",
+   "bytes": 21405,
+   "sha256": "20536377919d914ac78df3a2123654374a917fa9b7bb1294960baf1d898e1195"
+  },
+  {
+   "path": "voice/yellow_card.mp3",
+   "bytes": 17373,
+   "sha256": "58e78048954d134dfce7d83e501bd27184a7defe1c43e1cefe330471d4783c6e"
+  }
+ ]
+}
