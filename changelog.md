@@ -4,6 +4,7 @@ title: "Changelog"
 description: "A history of changes and updates to this website"
 date: 2026-01-26
 permalink: /changelog/
+blurb: "Changes to this site"
 ---
 
 This website is hosted on GitHub, which automatically tracks all changes, updates, and improvements made over time.

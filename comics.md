@@ -4,6 +4,7 @@ title: "Comics"
 description: "Webcomics and classic comic strips I read regularly"
 date: 2026-01-26
 permalink: /comics/
+blurb: "Comics I read"
 ---
 
 These are the comics I read regularly.

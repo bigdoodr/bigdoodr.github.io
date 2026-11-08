@@ -4,6 +4,7 @@ title: "AI Usage"
 description: "How I use artificial intelligence tools in my work and personal projects"
 date: 2026-01-26
 permalink: /ai/
+blurb: "How I use (or don't use) AI"
 ---
 
 ## My Approach to AI

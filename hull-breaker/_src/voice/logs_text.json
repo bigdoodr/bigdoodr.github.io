@@ -1,0 +1,66 @@
+{
+ "dockoffice": [
+  "AUDIO LOG // DOCKMASTER J. FELL",
+  "Shuttle traffic's frozen. The captain locked down the ring after the drill crew came back from Ruin. That strands four thousand crew on twelve decks, plus twenty-eight hundred relief miners asleep in cryo. Somebody keeps knocking on the inside of cargo container nine. Nobody is in container nine."
+ ],
+ "reception": [
+  "AUDIO LOG // NURSE T. ADEYEMI",
+  "Forty patients and no beds. They all say it's singing before they go quiet. The ones that come back with swollen throats spit acid. Take the head and they can't spit, but they keep coming. The ones with swollen bellies burst. Don't let them get close."
+ ],
+ "morgue": [
+  "AUDIO LOG // DR. N. OKAFOR",
+  "The dead don't stay down. Tissue re-knits around the bone, like it's being rebuilt by something that only read about people. Destroying the brain does nothing. Take the LIMBS."
+ ],
+ "lab": [
+  "AUDIO LOG // DR. N. OKAFOR, PRIVATE",
+  "Gorgon sent the specs for this lab before we ever reached Ruin. They knew what was down there. We were never mining. We were delivering it a body."
+ ],
+ "hydro": [
+  "AUDIO LOG // TECH L. MARQUEZ",
+  "The plants grow toward the vents now instead of the lamps. I pulled one up and the roots were warm. I sealed the seed vault behind the cracked panel in the north wall. Don't tell the captain."
+ ],
+ "bunks": [
+  "AUDIO LOG // CREWMAN P. ODUYA",
+  "Night shift says Miller got up after the medics bagged him and walked right out of the morgue. I told them they were drunk. Then I heard him. In the vent over my bunk."
+ ],
+ "captain": [
+  "AUDIO LOG // CAPT. ILSE VARGA",
+  "Day 3. The drill broke into the cavity under Ruin at 0400. Gorgon wants samples, not questions. My blue card opens Engineering. If I don't make it, get the power up and get my people on that tram."
+ ],
+ "commons": [
+  "AUDIO LOG // COOK R. DELACROIX",
+  "Twelve hundred meals a day out of this galley alone and not one complaint till now. Now they don't eat at all. They just stand at the windows facing Ruin. I'm barricading the galley."
+ ],
+ "security": [
+  "AUDIO LOG // SGT. D. PRUITT",
+  "Red card stays with the cargo master so nobody hits the tram override in a panic. The override needs main power and that card. If you're hearing this, I'm the one in the vents now. I'm so sorry."
+ ],
+ "bridge": [
+  "AUDIO LOG // FIRST OFFICER K. SHAW",
+  "Distress beacon's on a loop. Gorgon replied in four minutes: maintain quarantine, asset recovery team en route. Asset recovery. They're sending someone for the ship... Not for us."
+ ],
+ "hall": [
+  "AUDIO LOG // CHIEF ENGINEER B. TANAKA",
+  "I dropped the breakers to starve whatever's nesting in the reactor ducts. Three of them: this hall, the coolant pumps, and the reactor room. Put them back and you'll wake up the whole deck."
+ ],
+ "chief": [
+  "AUDIO LOG // CHIEF ENGINEER B. TANAKA",
+  "If you're in my office, the power's back. Good. That means they're awake too. The yellow card opens Cargo. Rhee has the red one. Stay away from the containers."
+ ],
+ "reactor": [
+  "AUDIO LOG // TECH S. VOLKOV",
+  "The reactor's fine. The reactor's always fine. It's the shielding. Something is growing on the inside of the shielding, and it's warm, and it's moving toward the core like it wants to be fed."
+ ],
+ "cargo": [
+  "AUDIO LOG // LOADER M. IBARRA",
+  "The manifest says four thousand crew. It leaves off the twenty-eight hundred relief miners sleeping in the cryo racks under the holds. Last night half the racks on this deck were open and the floor was wet. Container nine started bulging around midnight, like it was breathing."
+ ],
+ "container": [
+  "AUDIO LOG // UNKNOWN",
+  "(Static. Something like singing. Then a man's voice, very calm.) It's warm in here. It's warm and it's kind. Open the door, Ibarra. Open the door."
+ ],
+ "cargooffice": [
+  "AUDIO LOG // CARGO MASTER J. RHEE",
+  "Pruitt gave me the red card and told me to guard it. Then Pruitt went into the vents. The card is on my desk. If you work for Gorgon, take it. Just take me off the manifest."
+ ]
+}

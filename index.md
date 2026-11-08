@@ -4,7 +4,7 @@
 		   margin-left: auto;
 		   margin-right: auto;
 		   width: 30%"
-	src="/resources/doodatar.png"
+	src="/resources/doodatar.webp"
 	alt="Artwork of the Dude holding a White Russian from The Big Lebowski movie">
 
 ---

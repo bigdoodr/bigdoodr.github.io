@@ -1,0 +1,150 @@
+<title>Deck 01 Log Voices</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Silkscreen&family=Teko:wght@500;700&family=VT323&display=swap">
+<style>
+/* Layout: a casting sheet. A numbered column of log cards (play, script, notes), then a grid of voice samples, then a sticky bar that gathers notes into one paste. Single dark look to match the game. */
+:root{
+  --void:#07090c; --rack:#0f1418; --rack2:#141b21; --line:#26313a; --steel:#8b98a5; --dim:#5d6873; --ink:#e8edf1;
+  --amber:#ffb627; --blood:#d0142f; --rig:#3fe0c5; --term:#6dff9a;
+  --f-d:'Teko','Arial Narrow',Impact,sans-serif; --f-ui:'Chakra Petch','Segoe UI',system-ui,sans-serif; --f-p:'Silkscreen','Courier New',monospace; --f-t:'VT323','Courier New',monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--void);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.45;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 0}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:20px;padding-bottom:24px}
+.k{font-family:var(--f-p);font-size:10px;letter-spacing:.24em;color:var(--steel)}
+h1{margin:0;font-family:var(--f-d);font-weight:700;font-size:clamp(40px,6vw,60px);line-height:.85;text-wrap:balance}
+h2{margin:8px 0 0;font-family:var(--f-p);font-weight:400;font-size:11px;letter-spacing:.2em;color:var(--amber)}
+.lede{margin:0;color:var(--steel);max-width:68ch}
+.logs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.log{background:var(--rack);border:1px solid var(--line);padding:14px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;min-width:0}
+.log.on{border-color:var(--amber)}
+.play{grid-row:span 2;width:44px;height:44px;border-radius:50%;border:1px solid var(--steel);background:transparent;display:grid;place-items:center;cursor:pointer;flex:none}
+.play:hover{border-color:var(--ink)}
+.play:focus-visible,.chip:focus-visible,textarea:focus-visible,select:focus-visible,.b:focus-visible{outline:2px dashed var(--amber);outline-offset:2px}
+.ic{width:0;height:0;border-left:13px solid var(--ink);border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
+.play.on{border-color:var(--blood);background:rgba(208,20,47,.18)}
+.play.on .ic{width:11px;height:11px;border:0;background:var(--blood);margin:0}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;min-width:0}
+.n{font-family:var(--f-p);font-size:10px;color:var(--dim)}
+.who{font-weight:600;font-size:16px}
+.where{color:var(--steel);font-size:13px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:13px;color:var(--steel)}
+.vchip{font-family:var(--f-p);font-size:10px;letter-spacing:.08em;color:var(--rig);border:1px solid rgba(63,224,197,.4);padding:2px 6px}
+.upd{font-family:var(--f-p);font-size:10px;letter-spacing:.08em;color:var(--void);background:var(--amber);padding:2px 6px}
+.dur{font-family:var(--f-p);font-size:10px;color:var(--dim);font-variant-numeric:tabular-nums}
+.script{grid-column:2;margin:6px 0 0;font-family:var(--f-t);font-size:20px;line-height:1.05;color:var(--term);max-width:70ch}
+.fb{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:8px;margin-top:8px}
+@media (max-width:620px){.fb{grid-template-columns:minmax(0,1fr)}.script{grid-column:1/-1}}
+select,textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--rack2);border:1px solid var(--line);padding:7px 9px;width:100%;border-radius:0}
+textarea{resize:vertical;min-height:38px}
+.pool{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:8px}
+.chip{display:flex;align-items:center;gap:10px;background:var(--rack);border:1px solid var(--line);padding:8px 10px;cursor:pointer;text-align:left;color:var(--ink);font:inherit;min-width:0}
+.chip:hover{border-color:var(--steel)}
+.chip.on{border-color:var(--blood)}
+.chip .ic{border-left-width:10px;border-top-width:6px;border-bottom-width:6px;flex:none}
+.chip.on .ic{width:9px;height:9px;border:0;background:var(--blood);margin:0}
+.chip b{font-weight:600;display:block}
+.chip span{display:block;font-size:12px;color:var(--steel)}
+.chip em{display:block;font-style:normal;font-size:11px;color:var(--rig)}
+.chip>div{min-width:0}
+.bar{position:sticky;bottom:0;z-index:5;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(7,9,12,.95);border-top:1px solid var(--line);backdrop-filter:blur(6px)}
+.bar .in{max-width:1040px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.b{font:600 14px var(--f-ui);color:#fff;background:var(--blood);border:1px solid var(--blood);padding:9px 14px;cursor:pointer;border-radius:0}
+.b.ghost{background:var(--rack2);border-color:var(--line);color:var(--ink);font-weight:500}
+.count{color:var(--steel);font-size:13px;flex:1 1 160px}
+.status{font-family:var(--f-p);font-size:10px;letter-spacing:.12em;color:var(--rig)}
+#out{width:100%;min-height:120px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:12px}
+</style>
+
+<div class="wrap">
+  <div class="k">HULL BREAKER // CASTING DESK</div>
+  <h1>Deck 01 log voices</h1>
+  <p class="lede">All 16 audio logs, in roughly the order you'd find them. Logs marked Updated include your latest round of notes. Play any one, then use the box under it to pick a different voice or describe what to change. When you're done, press Copy feedback at the bottom and paste it to Claude. Your notes stay saved on this device until then.</p>
+
+  <h2>AUDIO LOGS</h2>
+  <ol class="logs" id="logs"></ol>
+
+  <h2>CASTING POOL</h2>
+  <p class="lede">Every available English voice reading the same line through the recorder filter. Voices already cast are marked.</p>
+  <div class="pool" id="pool"></div>
+  <textarea id="out" readonly hidden aria-label="Feedback text"></textarea>
+</div>
+
+<div class="bar"><div class="in">
+  <button class="b" id="copy" type="button">Copy feedback</button>
+  <button class="b ghost" id="clear" type="button">Clear notes</button>
+  <span class="count" id="count"></span>
+  <span class="status" id="status" role="status"></span>
+</div></div>
+
+<script>
+(function(){
+'use strict';
+const DATA=__DATA__;
+const $=s=>document.querySelector(s);
+let notes={};try{notes=JSON.parse(localStorage.getItem('hb-log-voice-notes-v5')||'{}')||{};}catch(e){}
+const save=()=>{try{localStorage.setItem('hb-log-voice-notes-v5',JSON.stringify(notes));}catch(e){}count();};
+const poolById={};DATA.pool.forEach(p=>poolById[p.id]=p);
+const castBy={};DATA.logs.forEach(l=>{(castBy[l.voice]=castBy[l.voice]||[]).push(l.who);});
+const vlabel=id=>{const p=poolById[id];return p?p.name+' · '+p.kind:id;};
+let cur=null,curBtn=null;
+function stop(){if(cur){cur.pause();cur=null;}if(curBtn){curBtn.classList.remove('on');const c=curBtn.closest('.log');if(c)c.classList.remove('on');curBtn=null;}}
+function play(btn,b64){const same=curBtn===btn;stop();if(same)return;
+  const a=new Audio('data:audio/mpeg;base64,'+b64);cur=a;curBtn=btn;btn.classList.add('on');const c=btn.closest('.log');if(c)c.classList.add('on');
+  a.onended=()=>{if(cur===a)stop();};const p=a.play();if(p&&p.catch)p.catch(()=>stop());}
+// logs
+const ol=$('#logs');
+DATA.logs.forEach((l,i)=>{
+  const li=document.createElement('li');li.className='log';
+  li.innerHTML=`<button class="play" type="button" aria-label="Play log ${i+1}"><span class="ic"></span></button>
+    <div class="head"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="who"></span><span class="where"></span></div>
+    <div class="meta"><span class="vchip"></span><span class="dur">${l.dur.toFixed(1)} S</span>${l.changed?'<span class="upd">UPDATED</span>':''}</div>
+    <p class="script"></p>
+    <div class="fb"><select aria-label="Voice for this log"></select><textarea rows="1" placeholder="Notes: too young, wrong accent, slower, more scared…" aria-label="Notes for this log"></textarea></div>`;
+  li.querySelector('.who').textContent=l.who;li.querySelector('.where').textContent=l.where;
+  li.querySelector('.vchip').textContent=vlabel(l.voice).toUpperCase();li.querySelector('.script').textContent=l.text;
+  const sel=li.querySelector('select');
+  const o0=document.createElement('option');o0.value='';o0.textContent='Keep '+poolById[l.voice].name;sel.appendChild(o0);
+  DATA.pool.forEach(p=>{if(p.id===l.voice)return;const o=document.createElement('option');o.value=p.id;o.textContent='Recast: '+p.name+' · '+p.kind;sel.appendChild(o);});
+  const n=notes[l.id]||{};sel.value=n.v||'';const ta=li.querySelector('textarea');ta.value=n.t||'';
+  sel.addEventListener('change',()=>{notes[l.id]=Object.assign(notes[l.id]||{},{v:sel.value});save();});
+  ta.addEventListener('input',()=>{notes[l.id]=Object.assign(notes[l.id]||{},{t:ta.value});save();});
+  li.querySelector('.play').addEventListener('click',e=>play(e.currentTarget,l.a));
+  ol.appendChild(li);
+});
+// pool
+const pool=$('#pool');
+DATA.pool.forEach(p=>{
+  const b=document.createElement('button');b.type='button';b.className='chip';
+  b.innerHTML='<span class="ic"></span><div><b></b><span></span><em></em></div>';
+  b.querySelector('b').textContent=p.name;b.querySelector('span:not(.ic)').textContent=p.kind;
+  b.querySelector('em').textContent=castBy[p.id]?'Cast: '+castBy[p.id].join(', '):'';
+  b.setAttribute('aria-label','Play sample: '+p.name+', '+p.kind);
+  b.addEventListener('click',()=>play(b,p.a));pool.appendChild(b);
+});
+function feedback(){
+  const lines=[];
+  DATA.logs.forEach(l=>{const n=notes[l.id];if(!n||(!n.v&&!(n.t||'').trim()))return;
+    let s='- '+l.who+' ('+l.where+', '+l.voice+')';if(n.v)s+=' → recast to '+n.v+' ('+vlabel(n.v)+')';if((n.t||'').trim())s+=': '+n.t.trim();lines.push(s);});
+  return lines.length?'LOG VOICE FEEDBACK\n'+lines.join('\n'):'';
+}
+function count(){const k=DATA.logs.filter(l=>{const n=notes[l.id];return n&&(n.v||(n.t||'').trim());}).length;$('#count').textContent=k?k+' of 16 logs have notes':'No notes yet';}
+function status(t){$('#status').textContent=t;clearTimeout(status.t);status.t=setTimeout(()=>$('#status').textContent='',3500);}
+$('#copy').addEventListener('click',()=>{
+  const t=feedback();if(!t){status('ADD A NOTE OR RECAST FIRST');return;}
+  const out=$('#out');out.value=t;
+  const fallback=()=>{out.hidden=false;out.focus();out.select();status('SELECTED. COPY IT FROM THE BOX ABOVE.');};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>status('COPIED. PASTE IT TO CLAUDE.'),fallback);else fallback();
+});
+let armed=false;
+$('#clear').addEventListener('click',e=>{
+  if(!armed){armed=true;e.currentTarget.textContent='Tap again to clear';setTimeout(()=>{armed=false;$('#clear').textContent='Clear notes';},3000);return;}
+  notes={};save();document.querySelectorAll('.log select').forEach(s=>s.value='');document.querySelectorAll('.log textarea').forEach(t=>t.value='');
+  armed=false;$('#clear').textContent='Clear notes';status('NOTES CLEARED');
+});
+count();
+})();
+</script>

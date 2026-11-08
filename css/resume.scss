@@ -1,6 +1,40 @@
 ---
 ---
 
+/* Resume colors: light by default, dark when the site theme is dark,
+   and always light when printing / generating the PDF. */
+:root {
+    --resume-ink: #333333;
+    --resume-rule: #c7c7c7;
+    --resume-soft: #666666;
+    --resume-track: #e0e0e0;
+    --resume-btn-bg: #efefef;
+    --resume-btn-hover-text: #ffffff;
+}
+:root[data-theme="dark"] {
+    --resume-ink: #f2f2f7;
+    --resume-rule: #48484a;
+    --resume-soft: #a1a1a6;
+    --resume-track: #3a3a3c;
+    --resume-btn-bg: #2c2c2e;
+    --resume-btn-hover-text: #000000;
+}
+@media print {
+    :root, :root[data-theme="dark"] {
+        --resume-ink: #333333;
+        --resume-rule: #c7c7c7;
+        --resume-soft: #666666;
+        --resume-track: #e0e0e0;
+        --resume-btn-bg: #efefef;
+        --resume-btn-hover-text: #ffffff;
+        --text: #1d1d1f;
+        --muted: #444444;
+        --h1: #000000;
+        --link: #0055cc;
+    }
+    body { background: #ffffff !important; color: #1d1d1f; }
+}
+
 @mixin heading-font {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;    
 }
@@ -58,7 +92,7 @@ ul, ol {
                 background-clip: unset !important;
                 -webkit-text-fill-color: unset !important;
                 filter: none !important;
-                color: #333 !important;
+                color: var(--resume-ink) !important;
             }
 
             .header-name {
@@ -81,8 +115,8 @@ ul, ol {
         }
 
         .title-bar {
-            border-top: 4px solid #c7c7c7;
-            border-bottom: 2px solid #c7c7c7;
+            border-top: 4px solid var(--resume-rule);
+            border-bottom: 2px solid var(--resume-rule);
             font-size: 1.75rem;
             font-weight: 300;
             margin-bottom: 1rem;
@@ -92,7 +126,7 @@ ul, ol {
                 @include heading-font;
                 float: left;
                 letter-spacing: -0.08rem;
-                color: #333 !important;
+                color: var(--resume-ink) !important;
             }
 
             .icon-links {
@@ -114,27 +148,27 @@ ul, ol {
             width: 220px;
             line-height: 55px;
             border-radius: 0.2rem;
-            background-color: #efefef;
+            background-color: var(--resume-btn-bg);
             margin: 1rem auto;
             text-align: center;
             text-decoration: none;
             @include heading-font;
             font-size: 1.375rem;
             font-weight: 300;
-            color: #333333;
+            color: var(--resume-ink);
             transition: all 0.2s ease;
 
             &:hover {
-                background-color: #333333;
-                color: #ffffff;
+                background-color: var(--resume-ink);
+                color: var(--resume-btn-hover-text);
             }
         }
     }
 
     .content-section {
         .section-header {
-            border-top: 4px solid #c7c7c7;
-            border-bottom: 2px solid #c7c7c7;
+            border-top: 4px solid var(--resume-rule);
+            border-bottom: 2px solid var(--resume-rule);
             padding: .1rem 0 .2rem;
             margin-bottom: 1rem;
             background: none !important;
@@ -144,7 +178,7 @@ ul, ol {
                 font-size: 1.75rem;
                 font-weight: 900;
                 letter-spacing: -0.05rem;
-                color: #333 !important;
+                color: var(--resume-ink) !important;
                 background: none !important;
                 -webkit-background-clip: unset !important;
                 background-clip: unset !important;
@@ -157,7 +191,7 @@ ul, ol {
 
             .resume-item-title, .resume-item-copy, .resume-item-list {
                 a {
-                    color: #333;
+                    color: var(--resume-ink);
                     text-decoration: none;
                     border-bottom: 1px solid;
                 }
@@ -225,7 +259,7 @@ ul, ol {
 
             .ackandact-details {
                 font-style: italic;
-                color: #666666;
+                color: var(--resume-soft);
             }
 
             .ackandact-description {
@@ -316,8 +350,8 @@ ul, ol {
     
         .content-section {
             .section-header {
-                border-top: 1px solid #c7c7c7;
-                border-bottom: 1px solid #c7c7c7;
+                border-top: 1px solid var(--resume-rule);
+                border-bottom: 1px solid var(--resume-rule);
                 margin-bottom: 0.5rem;
 
                 h2 {
@@ -357,7 +391,7 @@ ul, ol {
 }
 
 .skill-bar {
-    background-color: #e0e0e0;
+    background-color: var(--resume-track);
     border-radius: 5px;
     overflow: hidden;
     position: relative;
@@ -367,7 +401,7 @@ ul, ol {
 }
 
 .skill-bar-fill {
-    background-color: #007bff;
+    background-color: var(--accent);
     height: 100%;
     width: 0%;
     transition: width 0.5s ease;
@@ -376,14 +410,14 @@ ul, ol {
 .skill-level span {
     margin-left: 10px;
     font-size: 0.9em;
-    color: #555555;
+    color: var(--resume-soft);
 }
 
 .skill-list {
   margin-top: 0.5rem;
   padding-left: 1.5rem; /* Adds indentation for the bullets */
   font-size: 0.9em;
-  color: #555555;
+  color: var(--resume-soft);
   list-style-type: disc; /* Default bullet style */
 }
 

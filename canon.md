@@ -4,6 +4,7 @@ title: "Canon"
 description: "The things that have most shaped who I am"
 date: 2026-01-26
 permalink: /canon/
+blurb: "Things that have most shaped me"
 ---
 
 This is my personal canon - the books, films, music, games, experiences, and other media that have significantly shaped who I am. It's an ongoing work, capturing the influences that have left lasting marks on my thinking, values, and perspective.

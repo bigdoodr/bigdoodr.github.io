@@ -5,7 +5,9 @@ date: 2026-04-27 08:00:00 +0000
 author: bigDoodR
 description: "Key takeaways from Katie English's JNUC 2025 talk on Apple and Jamf device security, layered from the silicon all the way up to Jamf Protect."
 image: https://img.youtube.com/vi/vo8M2V-98kI/hqdefault.jpg
-categories: [tech, career]
+tags: Tech Career
+redirect_from:
+  - /tech/career/2026/04/27/jnuc25-device-security.html
 ---
 
 My org isn't a Jamf customer. But I really appreciate that they film their annual Jamf Nation User Conference sessions and host them on YouTube for anyone to watch. So, once they've been posted, I start making the time to review what was presented and block off my calendar to go through topics that I think will be relevant for me/my org. One of those that immediately stuck out was Katie English's *Apple and Jamf Device Security from the Silicon Up*. And as I was watching it, I knew it was worth revisiting. If you've ever had to defend your Apple fleet's security posture to an infosec team armed with a spreadsheet, this one gives you the vocabulary and the framework to have that conversation confidently.

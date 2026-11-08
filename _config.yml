@@ -82,6 +82,8 @@ nav:
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-redirect-from
 
 titles_from_headings:
   strip_title: true
@@ -93,10 +95,34 @@ defaults:
       type: posts
     values:
       tags: Other
+  # Keep drafts and internals out of sitemap.xml and /sitemap/
+  - scope:
+      path: "hull-breaker/packs"
+    values:
+      sitemap: false
+  - scope:
+      path: "ActiveUpdateCycleWebPage/assets"
+    values:
+      sitemap: false
+  - scope:
+      path: "BuildWithSwiftDialog/assets"
+    values:
+      sitemap: false
+  - scope:
+      path: "WKUProDevDay2026/assets"
+    values:
+      sitemap: false
 
 exclude:
   - "*.sh"
   - vendor/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - readme.md
+  - CLAUDE.md
+  - scripts/
+  - node_modules/
 
 
 # sass:

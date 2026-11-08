@@ -4,6 +4,7 @@ title: "Nope"
 description: "A few things that are just not for me."
 date: 2026-02-25
 permalink: /nope/
+blurb: "Things that aren't for me"
 ---
 
 Not a page about judging what other people are into — you do you. This is just an honest list of things that aren't for me.

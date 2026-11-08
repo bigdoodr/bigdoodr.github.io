@@ -4,6 +4,7 @@ title: "Mantras"
 description: "Words I return to."
 date: 2026-05-25
 permalink: /mantras/
+blurb: "Words I return to"
 ---
 
 Words I return to — some timeless, some tied to a particular season.

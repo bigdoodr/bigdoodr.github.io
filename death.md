@@ -4,6 +4,7 @@ title: "Death"
 description: "Instructions for family and friends in case of my demise"
 date: 2026-01-26
 permalink: /death/
+blurb: "Instructions for if I'm gone"
 ---
 
 If you're reading this page because I've died, I'm sorry for your loss. Let me help make this process a little easier.

@@ -4,6 +4,7 @@ title: "Shoebox"
 description: "Odds and ends. The stuff that doesn't fit anywhere else."
 date: 2026-02-25
 permalink: /shoebox/
+blurb: "Odds and ends"
 ---
 
 Odds and ends. The stuff that doesn't fit anywhere else. More to come.
@@ -115,7 +116,7 @@ Malcolm Knowles' framework for how adults learn differently from children. Adult
 
 ## Podcast Episodes Worth Revisiting
 
-- [Father Greg Boyle Returns — You Made It Weird with Pete Holmes](https://omny.fm/shows/you-made-it-weird-with-pete-holmes/fathergreg-boyle-returns) — Father Greg Boyle (Homeboy Industries) on radical kinship, love without conditions, and what it means to be a mystic.
+- [Father Greg Boyle Returns — You Made It Weird with Pete Holmes](https://podcasts.apple.com/us/podcast/father-greg-boyle-returns/id475878118?i=1000729164365) — Father Greg Boyle (Homeboy Industries) on radical kinship, love without conditions, and what it means to be a mystic.
 
 ---
 

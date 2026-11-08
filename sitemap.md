@@ -2,95 +2,109 @@
 layout: page
 title: "Sitemap"
 description: "A map of everything on this site."
+blurb: "Everything on this site"
 date: 2026-03-07
 permalink: /sitemap/
 ---
+{%- comment -%}
+  This page is generated at build time from the site's own files, so it never
+  goes stale. Friendly names / emoji / hidden paths live in _data/sitemap.yml.
+  Hide any page with `sitemap: false` in its front matter.
+{%- endcomment -%}
+{%- assign cfg = site.data.sitemap -%}
+{%- assign hide = cfg.hide | default: empty -%}
 
-A map of everything on this site. Last updated May 26, 2026.
+{%- comment -%} ---------- collect every page + plain .html file ---------- {%- endcomment -%}
+{%- assign items = "" | split: "" -%}
+{%- for p in site.html_pages -%}
+  {%- if p.sitemap == false or p.redirect or p.url == "/" -%}{%- continue -%}{%- endif -%}
+  {%- assign items = items | push: p.url -%}
+{%- endfor -%}
+{%- for f in site.static_files -%}
+  {%- if f.extname != ".html" or f.sitemap == false -%}{%- continue -%}{%- endif -%}
+  {%- assign u = f.path | replace: "/index.html", "/" -%}
+  {%- assign items = items | push: u -%}
+{%- endfor -%}
+{%- assign items = items | uniq | sort -%}
 
-## 🏠 Main Pages
+{%- comment -%} ---------- drop hidden paths and redirect stubs ---------- {%- endcomment -%}
+{%- assign kept = "" | split: "" -%}
+{%- for u in items -%}
+  {%- assign skip = false -%}
+  {%- for h in hide -%}
+    {%- assign head = u | slice: 0, h.size -%}
+    {%- if head == h -%}{%- assign skip = true -%}{%- break -%}{%- endif -%}
+  {%- endfor -%}
+  {%- unless skip -%}{%- assign kept = kept | push: u -%}{%- endunless -%}
+{%- endfor -%}
 
-- [Home](https://bigdoodr.github.io/)
-- [About](https://bigdoodr.github.io/about)
-- [Archive](https://bigdoodr.github.io/archive)
-- [Bookmarks](https://bigdoodr.github.io/bookmarks)
-- [Books](https://bigdoodr.github.io/books)
-- [Resume](https://bigdoodr.github.io/resume)
+{%- comment -%} ---------- which top-level folders get their own section ---------- {%- endcomment -%}
+{%- assign folders = "" | split: "" -%}
+{%- for u in kept -%}
+  {%- assign parts = u | split: "/" -%}
+  {%- assign last = u | slice: -1, 1 -%}
+  {%- if parts.size > 2 -%}
+    {%- assign folders = folders | push: parts[1] -%}
+  {%- elsif last == "/" -%}
+    {%- assign p = site.html_pages | where: "url", u | first -%}
+    {%- unless p -%}{%- assign folders = folders | push: parts[1] -%}{%- endunless -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign folders = folders | uniq -%}
 
-## ✴️ Slash Pages
+A map of everything on this site, rebuilt automatically every time the site is published. Last built {{ site.time | date: "%B %-d, %Y" }}.
 
-- [/ai](https://bigdoodr.github.io/ai/)
-- [/blindspots](https://bigdoodr.github.io/blindspots/)
-- [/blogroll](https://bigdoodr.github.io/blogroll/)
-- [/calendar](https://bigdoodr.github.io/calendar/)
-- [/canon](https://bigdoodr.github.io/canon/)
-- [/changelog](https://bigdoodr.github.io/changelog/)
-- [/colophon](https://bigdoodr.github.io/colophon/)
-- [/comics](https://bigdoodr.github.io/comics/)
-- [/death](https://bigdoodr.github.io/death/)
-- [/defaults](https://bigdoodr.github.io/defaults/)
-- [/follows](https://bigdoodr.github.io/follows/)
-- [/green](https://bigdoodr.github.io/green/)
-- [/guy](https://bigdoodr.github.io/guy/)
-- [/hats](https://bigdoodr.github.io/hats/)
-- [/hello](https://bigdoodr.github.io/hello/)
-- [/hills](https://bigdoodr.github.io/hills/)
-- [/interests](https://bigdoodr.github.io/interests/)
-- [/mantras](https://bigdoodr.github.io/mantras/)
-- [/nope](https://bigdoodr.github.io/nope/)
-- [/podroll](https://bigdoodr.github.io/podroll/)
-- [/posse](https://bigdoodr.github.io/posse/)
-- [/postroll](https://bigdoodr.github.io/postroll/)
-- [/questions](https://bigdoodr.github.io/questions/)
-- [/self-hosting](https://bigdoodr.github.io/self-hosting/)
-- [/shoebox](https://bigdoodr.github.io/shoebox/)
-- [/shortcuts](https://bigdoodr.github.io/shortcuts/)
-- [/sitemap](https://bigdoodr.github.io/sitemap/)
-- [/slashes](https://bigdoodr.github.io/slashes/)
-- [/someday](https://bigdoodr.github.io/someday/)
-- [/style](https://bigdoodr.github.io/style/)
-- [/top4](https://bigdoodr.github.io/top4/)
-- [/uses](https://bigdoodr.github.io/uses/)
-- [/verify](https://bigdoodr.github.io/verify/)
-- [/why](https://bigdoodr.github.io/why/)
-- [/wish](https://bigdoodr.github.io/wish/)
-- [/yep](https://bigdoodr.github.io/yep/)
+<h2>🏠 Pages</h2>
+<ul>
+  <li><a href="{{ '/' | relative_url }}">Home</a></li>
+{%- for u in kept -%}
+  {%- assign parts = u | split: "/" -%}
+  {%- assign dir = parts[1] -%}
+  {%- if parts.size != 2 or folders contains dir -%}{%- continue -%}{%- endif -%}
+  {%- assign p = site.html_pages | where: "url", u | first -%}
+  {%- assign last = u | slice: -1, 1 -%}
+  {%- if p.slash == true -%}{%- continue -%}{%- endif -%}
+  {%- if p and last == "/" and p.slash != false -%}{%- continue -%}{%- endif -%}
+  {%- assign label = cfg.labels[u] | default: p.title | default: u -%}
+  <li><a href="{{ u | relative_url }}">{{ label }}</a></li>
+{%- endfor -%}
+</ul>
 
-## 💪 Exercises
+<h2>✴️ Slash Pages</h2>
+{% include slash-pages.html %}
 
-- [Daily Exercises](https://bigdoodr.github.io/exercises/DailyExercises)
-- [Exercises](https://bigdoodr.github.io/exercises/)
-- [Zone 2 Exercises](https://bigdoodr.github.io/exercises/Zone2Exercises)
-- [Zone 2 Randomizer](https://bigdoodr.github.io/exercises/Zone2Randomizer) *(superseded)*
-- [Expandable Timer](https://bigdoodr.github.io/exercises/expandableTimer) *(superseded)*
+{%- comment -%} group folders that share a heading in _data/sitemap.yml {%- endcomment -%}
+{%- assign headings = "" | split: "" -%}
+{%- for d in folders -%}
+  {%- assign heading = cfg.sections[d] | default: d -%}
+  {%- assign headings = headings | push: heading -%}
+{%- endfor -%}
+{%- assign headings = headings | uniq | sort -%}
 
-## 🎤 Presentations
+{%- for heading in headings %}
+<h2>{{ heading }}</h2>
+<ul>
+  {%- for u in kept -%}
+    {%- assign parts = u | split: "/" -%}
+    {%- assign dir = parts[1] -%}
+    {%- unless folders contains dir -%}{%- continue -%}{%- endunless -%}
+    {%- assign this_heading = cfg.sections[dir] | default: dir -%}
+    {%- if this_heading != heading -%}{%- continue -%}{%- endif -%}
+    {%- assign p = site.html_pages | where: "url", u | first -%}
+    {%- assign fallback = u | split: "/" | last | remove: ".html" -%}
+    {%- assign label = cfg.labels[u] | default: p.title | default: fallback -%}
+  <li><a href="{{ u | relative_url }}">{{ label }}</a></li>
+  {%- endfor -%}
+</ul>
+{%- endfor %}
 
-- [MacAdmins 2024](https://bigdoodr.github.io/24macpres) + [Active Update Cycle Resources](https://bigdoodr.github.io/ActiveUpdateCycleWebPage/)
-- [MacAdmins 2025](https://bigdoodr.github.io/25macpres) + [Let's Build Something with swiftDialog Resources](https://bigdoodr.github.io/BuildWithswiftDialog/) + [AD for Everyone v1](https://bigdoodr.github.io/sDPres/ADforEveryone_v1) + [AD for Everyone v2](https://bigdoodr.github.io/sDPres/ADforEveryone_v2)
-- [WKU Pro Dev Day 2026](https://bigdoodr.github.io/26WKUProDevDay) + [WKU Pro Dev Day 2026 Slides](https://bigdoodr.github.io/WKUProDevDay2026/)
-
-## 📓 Obsidian Templates
-
-- [Daily Log Template](https://bigdoodr.github.io/resources/obsidianTemplates/DailyLogTemplate)
-- [Equipment Template](https://bigdoodr.github.io/resources/obsidianTemplates/EquipmentTemplate)
-- [Exercise Template](https://bigdoodr.github.io/resources/obsidianTemplates/ExerciseTemplate)
-- [Focus Template](https://bigdoodr.github.io/resources/obsidianTemplates/FocusTemplate)
-- [Routine Template](https://bigdoodr.github.io/resources/obsidianTemplates/RoutineTemplate)
-- [Workout Dashboard](https://bigdoodr.github.io/resources/obsidianTemplates/WorkoutDashboard)
-
-## ✍️ Blog Posts
-
-- [Goodbye Google](https://bigdoodr.github.io/2024/06/23/goodbye_google.html) *(June 2024)*
-- [MacAdmins Presentation 2024](https://bigdoodr.github.io/2024/07/12/macpres) *(July 2024)*
-- [Privacy & Security Actions](https://bigdoodr.github.io/2024/09/09/privacy-security-actions.html) *(September 2024)*
-- [Org Actions](https://bigdoodr.github.io/2024/09/12/org-actions) *(September 2024)*
-- [Workout Randomizer](https://bigdoodr.github.io/2024/12/18/workout-randomizer) *(December 2024)*
-- [Timers and Webpage Audio](https://bigdoodr.github.io/2025/01/20/timers-and-webpage-audio.html) *(January 2025)*
-- [MacAdmins Presentation 2025](https://bigdoodr.github.io/2025/07/18/macpres) *(July 2025)*
-- [My First App](https://bigdoodr.github.io/2025/12/17/my-first-app) *(December 2025)*
-- [WKU Pro Dev Day](https://bigdoodr.github.io/2026/01/15/wkuprodevday) *(January 2026)*
+<h2>✍️ Blog Posts</h2>
+<ul>
+{%- for post in site.posts -%}
+  <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> <em>({{ post.date | date: "%B %Y" }})</em></li>
+{%- endfor -%}
+</ul>
 
 ---
 
-*An XML version of this sitemap is also available at [/sitemap.xml](https://bigdoodr.github.io/sitemap.xml).*
+*A machine-readable version is at [/sitemap.xml]({{ '/sitemap.xml' | relative_url }}), generated by the jekyll-sitemap plugin.*

@@ -5,7 +5,9 @@ date: 2026-04-27 08:00:00 +0000
 author: bigDoodR
 description: "Key takeaways from Josh Perlman's JNUC 2025 talk on crafting end-user notifications that actually work, using the journalist's 5W1H framework."
 image: https://img.youtube.com/vi/fwE2DDbWy_U/hqdefault.jpg
-categories: [tech, career]
+tags: Tech Career
+redirect_from:
+  - /tech/career/2026/04/27/jnuc25-notifications.html
 ---
 
 Getting end users to actually respond to IT notifications is one of those problems that sounds trivial until you're staring at compliance numbers that aren't moving. Josh Perlman, an endpoints engineer at Booking.com, gave a talk at JNUC 2025 called *Think Like a Journalist: Strategies for End User Notifications* that I found genuinely useful — not because it has magic answers, but because it offers a real framework for thinking about communication design.

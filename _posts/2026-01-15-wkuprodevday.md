@@ -4,6 +4,9 @@ title: "Stop Tracking Me! Tips for Enhancing Online Privacy"
 description: links to all the things referenced in the presentation
 date: 2026-01-15T15:00:00-6:00
 tags: Career Tech
+redirect_from:
+  - /26WKUProDevDay.html
+  - /26WKUProDevDay
 ---
 
 Below are links to all of the items referenced, or used, in the presentation.

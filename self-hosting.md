@@ -4,6 +4,7 @@ title: "Self-Hosting"
 description: "Services and tools I run and manage myself."
 date: 2026-02-25
 permalink: /self-hosting/
+blurb: "Services I run myself"
 ---
 
 Services and tools I run and manage myself, because owning your own stuff matters.

@@ -1,0 +1,44 @@
+# Optional extras for /sitemap/. Everything is discovered automatically at build
+# time; this file only adds friendly names, emoji and ordering.
+
+# Top-level folders → section heading. Folders not listed here still appear,
+# under their folder name.
+sections:
+  exercises: "💪 Exercises"
+  resources: "📓 Resources"
+  sDPres: "🎤 Talk extras"
+  ActiveUpdateCycleWebPage: "🎤 Talk slides"
+  BuildWithSwiftDialog: "🎤 Talk slides"
+  WKUProDevDay2026: "🎤 Talk slides"
+  hull-breaker: "🎮 Projects"
+  voice-booth: "🎮 Projects"
+
+# Friendly names for plain .html files that have no front matter (and so no title).
+labels:
+  /enneagram.html: "Enneagram"
+  /hull-breaker/: "Hull Breaker (game)"
+  /voice-booth/: "Voice Booth"
+  /ActiveUpdateCycleWebPage/: "Adopting an Active Update Cycle — slides"
+  /BuildWithSwiftDialog/: "Let's Build Something with swiftDialog — slides"
+  /WKUProDevDay2026/: "Stop Tracking Me! — slides"
+  /exercises/Zone2Exercises.html: "Zone 2 Exercises"
+  /exercises/Zone2Randomizer.html: "Zone 2 Randomizer (superseded)"
+  /exercises/expandableTimer.html: "Expandable Timer (superseded)"
+  /resources/obsidianTemplates/DailyLogTemplate.html: "Obsidian template: Daily Log"
+  /resources/obsidianTemplates/EquipmentTemplate.html: "Obsidian template: Equipment"
+  /resources/obsidianTemplates/ExerciseTemplate.html: "Obsidian template: Exercise"
+  /resources/obsidianTemplates/FocusTemplate.html: "Obsidian template: Focus"
+  /resources/obsidianTemplates/RoutineTemplate.html: "Obsidian template: Routine"
+  /resources/obsidianTemplates/WorkoutDashboard.html: "Obsidian template: Workout Dashboard"
+
+# Paths to leave off the human sitemap (prefix match).
+hide:
+  - /404
+  - /hull-breaker/packs/
+  - /assets/
+  - /js/
+  - /css/
+  - /feed.xml
+  - /README
+  - /readme
+  - /index.md

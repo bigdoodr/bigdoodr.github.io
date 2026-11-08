@@ -1,80 +1,107 @@
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header class="site-header">
-  <nav class="header-nav">
+  <nav class="header-nav" aria-label="Main">
     <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
     <ul class="nav-list">
-      {% for item in site.nav %}
-        {% if item.children %}
+      {%- for item in site.nav %}
+        {%- if item.children %}
           <li class="nav-dropdown">
-            {% if item.url %}
-              <a href="{{ item.url | relative_url }}" class="nav-dropdown-toggle">{{ item.title }}</a>
-            {% else %}
-              <span class="nav-dropdown-toggle">{{ item.title }}</span>
-            {% endif %}
+            {%- if item.url %}
+              <a href="{{ item.url | relative_url }}" class="nav-dropdown-toggle" aria-haspopup="true">{{ item.title }}</a>
+            {%- else %}
+              <span class="nav-dropdown-toggle" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">{{ item.title }}</span>
+            {%- endif %}
             <ul class="nav-dropdown-menu">
-              {% for child in item.children %}
-                {% if child.divider %}
-                  <li class="nav-divider">{{ child.label }}</li>
-                {% else %}
+              {%- for child in item.children %}
+                {%- if child.divider %}
+                  <li class="nav-divider" role="presentation">{{ child.label }}</li>
+                {%- else %}
                   <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
-                {% endif %}
-              {% endfor %}
+                {%- endif %}
+              {%- endfor %}
             </ul>
           </li>
-        {% else %}
-          <li>
-            <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
-          </li>
-        {% endif %}
-      {% endfor %}
+        {%- else %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+        {%- endif %}
+      {%- endfor %}
+      <li class="theme-picker">
+        <button type="button" class="theme-toggle" aria-expanded="false" aria-controls="theme-panel" title="Theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18V4a8 8 0 0 1 0 16Z"/></svg>
+          <span class="sr-only">Theme</span>
+        </button>
+        <div class="theme-panel" id="theme-panel">
+          <fieldset>
+            <legend>Appearance</legend>
+            <div class="theme-modes">
+              <label><input type="radio" name="theme-mode" value="auto"><span>Auto</span></label>
+              <label><input type="radio" name="theme-mode" value="light"><span>Light</span></label>
+              <label><input type="radio" name="theme-mode" value="dark"><span>Dark</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Color</legend>
+            <div class="theme-swatches">
+              <label class="swatch-aurora" title="Aurora"><input type="radio" name="theme-palette" value="aurora"><span class="sr-only">Aurora</span></label>
+              <label class="swatch-sunset" title="Sunset"><input type="radio" name="theme-palette" value="sunset"><span class="sr-only">Sunset</span></label>
+              <label class="swatch-forest" title="Forest"><input type="radio" name="theme-palette" value="forest"><span class="sr-only">Forest</span></label>
+              <label class="swatch-ocean" title="Ocean"><input type="radio" name="theme-palette" value="ocean"><span class="sr-only">Ocean</span></label>
+              <label class="swatch-mono" title="Mono"><input type="radio" name="theme-palette" value="mono"><span class="sr-only">Mono</span></label>
+            </div>
+          </fieldset>
+          <span class="theme-current" aria-live="polite"></span>
+        </div>
+      </li>
     </ul>
   </nav>
 </header>
 <script>
 (function () {
-  // ── Desktop: timer-based hover so the cursor can cross from
-  //    the nav item into the dropdown without it disappearing ──
+  function closeAll(except) {
+    document.querySelectorAll('.nav-dropdown.is-open').forEach(function (el) {
+      if (el !== except) {
+        el.classList.remove('is-open');
+        var t = el.querySelector('span.nav-dropdown-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Desktop: delayed close so the cursor can cross into the menu
   document.querySelectorAll('.nav-dropdown').forEach(function (li) {
     var timer;
-    var menu = li.querySelector('.nav-dropdown-menu');
-
-    li.addEventListener('mouseenter', function () {
-      clearTimeout(timer);
-      li.classList.add('is-open');
-    });
-
+    li.addEventListener('mouseenter', function () { clearTimeout(timer); li.classList.add('is-open'); });
     li.addEventListener('mouseleave', function () {
       timer = setTimeout(function () {
         li.classList.remove('is-open');
+        var t = li.querySelector('span.nav-dropdown-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
       }, 200);
     });
-
-    // If the mouse re-enters the menu before the timer fires, keep it open
-    if (menu) {
-      menu.addEventListener('mouseenter', function () {
-        clearTimeout(timer);
-      });
-    }
+    // Keyboard: open when focus enters, close when it leaves
+    li.addEventListener('focusin', function () { closeAll(li); li.classList.add('is-open'); });
+    li.addEventListener('focusout', function (e) {
+      if (!li.contains(e.relatedTarget)) li.classList.remove('is-open');
+    });
   });
 
-  // ── Mobile: tap on <span> toggles (items with no URL) opens/closes ──
+  // Tap / Enter / Space on <span> toggles
   document.querySelectorAll('span.nav-dropdown-toggle').forEach(function (span) {
-    span.addEventListener('click', function (e) {
+    function toggle(e) {
+      e.preventDefault();
       e.stopPropagation();
       var li = span.closest('.nav-dropdown');
-      var isOpen = li.classList.contains('is-open');
-      // Close any other open dropdowns first
-      document.querySelectorAll('.nav-dropdown.is-open').forEach(function (el) {
-        el.classList.remove('is-open');
-      });
-      if (!isOpen) li.classList.add('is-open');
-    });
+      // Use aria-expanded (not the class) because focusin may already have opened it
+      var open = span.getAttribute('aria-expanded') !== 'true';
+      closeAll(li);
+      li.classList.toggle('is-open', open);
+      span.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    span.addEventListener('click', toggle);
+    span.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') toggle(e); });
   });
 
-  // ── Close all dropdowns when tapping/clicking outside ──
-  document.addEventListener('click', function () {
-    document.querySelectorAll('.nav-dropdown.is-open').forEach(function (el) {
-      el.classList.remove('is-open');
-    });
-  });
+  document.addEventListener('click', function () { closeAll(null); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(null); });
 })();
 </script>

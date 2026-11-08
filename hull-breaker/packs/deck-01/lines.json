@@ -1,0 +1,60 @@
+{
+ "speaker": "BUCK",
+ "lines": [
+  {
+   "id": "start",
+   "text": "Brimstone Maiden. Ninety days overdue. Let's go collect.",
+   "file": "voice/start.mp3"
+  },
+  {
+   "id": "salad_bar",
+   "text": "Smells like a salad bar died in here.",
+   "file": "voice/salad_bar.mp3"
+  },
+  {
+   "id": "blue_card",
+   "text": "Blue card. Now we're getting somewhere.",
+   "file": "voice/blue_card.mp3"
+  },
+  {
+   "id": "yellow_card",
+   "text": "Yellow card. Cargo, here I come.",
+   "file": "voice/yellow_card.mp3"
+  },
+  {
+   "id": "red_card",
+   "text": "Red card. Let's go see the bridge.",
+   "file": "voice/red_card.mp3"
+  },
+  {
+   "id": "one_down",
+   "text": "One down.",
+   "file": "voice/one_down.mp3"
+  },
+  {
+   "id": "lights_on",
+   "text": "Lights are on. Now I can see what's eating me.",
+   "file": "voice/lights_on.mp3"
+  },
+  {
+   "id": "no_power",
+   "text": "No power, no tram. Figures.",
+   "file": "voice/no_power.mp3"
+  },
+  {
+   "id": "fine_print",
+   "text": "And there's the fine print.",
+   "file": "voice/fine_print.mp3"
+  },
+  {
+   "id": "tram_open",
+   "text": "Tram's open. Somebody's waiting, aren't they.",
+   "file": "voice/tram_open.mp3"
+  },
+  {
+   "id": "still_got_it",
+   "text": "Still got it.",
+   "file": "voice/still_got_it.mp3"
+  }
+ ]
+}

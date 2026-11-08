@@ -1,0 +1,27 @@
+{%- comment -%}
+  Lists every slash page, generated at build time — no manual upkeep.
+  A page counts as a slash page when its URL is a single segment ("/why/")
+  or it sets `slash: true`. Opt a page out with `slash: false`.
+  Each entry shows `blurb:` (falls back to `description:`).
+  Usage: {% include slash-pages.html %}            → name + blurb
+         {% include slash-pages.html compact=true %} → names only
+{%- endcomment -%}
+{%- assign all_pages = site.pages | sort: "url" -%}
+<ul class="slash-list">
+{%- for p in all_pages -%}
+  {%- if p.slash == false or p.sitemap == false or p.redirect -%}{%- continue -%}{%- endif -%}
+  {%- assign parts = p.url | split: "/" -%}
+  {%- assign is_slash = false -%}
+  {%- if p.slash == true -%}
+    {%- assign is_slash = true -%}
+  {%- elsif parts.size == 2 and p.url != "/" -%}
+    {%- assign last = p.url | slice: -1, 1 -%}
+    {%- if last == "/" -%}{%- assign is_slash = true -%}{%- endif -%}
+  {%- endif -%}
+  {%- if is_slash -%}
+    {%- assign name = p.url | remove: ".html" | remove: "/" -%}
+    {%- assign blurb = p.blurb | default: p.description -%}
+  <li><a href="{{ p.url | relative_url }}">/{{ name }}</a>{% unless include.compact %}{% if blurb %} — {{ blurb }}{% endif %}{% if p.url == page.url %} <em>(you are here)</em>{% endif %}{% endunless %}</li>
+  {%- endif -%}
+{%- endfor -%}
+</ul>

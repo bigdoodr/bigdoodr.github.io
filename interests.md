@@ -4,6 +4,7 @@ title: "Interests"
 description: "Things I'm passionate about and why."
 date: 2026-02-25
 permalink: /interests/
+blurb: "Things I'm passionate about"
 ---
 
 ## 👨‍👩‍👧‍👦 Family

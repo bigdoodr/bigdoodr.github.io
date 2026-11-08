@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Character Voice Booth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one column "booth" — tape deck on top, a grid of character cards, fine-tune sliders, then export. */
+:root{
+  --bg:#eef1ee; --panel:#ffffff; --ink:#1d2523; --muted:#5d6b67; --line:#d5dcd8;
+  --accent:#0f7a6b; --accent-ink:#ffffff; --rec:#d6452f; --amber:#e3a21a; --wave:#0f7a6b; --wave2:#9fb5ae;
+  --display:"Bagel Fat One", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --body:"Figtree", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141a19; --panel:#1d2524; --ink:#e7eeeb; --muted:#9aaaa5; --line:#2e3a38;
+  --accent:#3fc1ab; --accent-ink:#0c1312; --rec:#f0644d; --amber:#f2b53a; --wave:#3fc1ab; --wave2:#4a5c58;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#141a19; --panel:#1d2524; --ink:#e7eeeb; --muted:#9aaaa5; --line:#2e3a38;
+  --accent:#3fc1ab; --accent-ink:#0c1312; --rec:#f0644d; --amber:#f2b53a; --wave:#3fc1ab; --wave2:#4a5c58;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);padding:28px max(16px,env(safe-area-inset-left)) 48px}
+.wrap{max-width:860px;margin:0 auto;display:grid;gap:22px}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font:400 clamp(30px,6vw,44px)/1 var(--display);margin:0;letter-spacing:.5px;text-wrap:balance}
+h1 span{color:var(--accent)}
+.sub{color:var(--muted);margin:6px 0 0}
+h2{font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 10px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.deck{display:grid;gap:14px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button,.btn{font:600 15px var(--body);border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:10px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+button:hover:not(:disabled),.btn:hover{border-color:var(--accent)}
+button:focus-visible,.btn:focus-within,input:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.rec{background:var(--rec);border-color:var(--rec);color:#fff;padding:12px 22px;font-size:16px}
+.rec .dot{width:12px;height:12px;border-radius:50%;background:#fff}
+.rec.on .dot{border-radius:2px;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn input{display:none}
+.time{font:600 15px var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);margin-left:auto}
+canvas{width:100%;height:96px;display:block;border-radius:10px;background:color-mix(in srgb,var(--bg) 70%,var(--panel))}
+.drop{border:2px dashed transparent;border-radius:14px;transition:border-color .15s}
+.drop.over{border-color:var(--accent)}
+.note{color:var(--muted);font-size:13px;margin:0}
+.note.err{color:var(--rec)}
+.chars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.chars{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.char{text-align:left;border-radius:12px;padding:14px;display:grid;gap:4px;align-content:start;background:var(--panel)}
+.char b{font:400 20px/1.1 var(--display);letter-spacing:.3px}
+.char small{color:var(--muted);font-size:13px;line-height:1.35}
+.char code{font:400 11px var(--mono);color:var(--muted);margin-top:4px}
+.char[aria-pressed="true"]{border:2px solid var(--accent);padding:13px;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.sliders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 26px}
+@media (max-width:640px){.sliders{grid-template-columns:1fr}}
+.sl{display:grid;gap:4px}
+.sl label{display:flex;justify-content:space-between;font-weight:600;font-size:14px}
+.sl output{font:400 13px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.check{display:flex;gap:8px;align-items:center;font-weight:600;font-size:14px}
+.check input{accent-color:var(--accent);width:18px;height:18px}
+.out{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.name{font:400 13px var(--mono);color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.rec.on .dot{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Voice <span>Booth</span></h1>
+      <p class="sub">Record a line, pick a character, download the WAV.</p>
+    </div>
+  </header>
+
+  <section class="panel deck drop" id="deck" aria-label="Recording">
+    <div class="controls">
+      <button class="rec" id="recBtn"><span class="dot"></span><span id="recLabel">Record</span></button>
+      <label class="btn">Open audio file<input type="file" id="fileIn" accept="audio/*,.m4a,.mp4,.aac,.caf,.wav,.mp3,.aiff,.ogg,.webm"></label>
+      <button id="playOrig" disabled>Play original</button>
+      <span class="time" id="time">0:00.0</span>
+    </div>
+    <canvas id="wave" width="1600" height="192" aria-label="Waveform"></canvas>
+    <p class="note" id="msg">Press Record and say your line, or drop an audio file here.</p>
+  </section>
+
+  <section aria-label="Characters">
+    <h2>Character</h2>
+    <div class="chars" id="chars"></div>
+  </section>
+
+  <section class="panel" aria-label="Fine-tune">
+    <h2>Fine-tune</h2>
+    <div class="sliders">
+      <div class="sl"><label for="pitch">Pitch <output id="pitchV"></output></label><input type="range" id="pitch" min="-12" max="12" step="1" value="0"></div>
+      <div class="sl"><label for="low">Bass boost <output id="lowV"></output></label><input type="range" id="low" min="0" max="12" step="1" value="0"></div>
+      <div class="sl"><label for="robot">Robot <output id="robotV"></output></label><input type="range" id="robot" min="0" max="100" step="5" value="0"></div>
+      <div class="sl"><label for="wobble">Wobble <output id="wobbleV"></output></label><input type="range" id="wobble" min="0" max="100" step="5" value="0"></div>
+      <div class="sl"><label for="echo">Echo <output id="echoV"></output></label><input type="range" id="echo" min="0" max="100" step="5" value="0"></div>
+      <div class="sl"><label for="reverb">Reverb <output id="reverbV"></output></label><input type="range" id="reverb" min="0" max="100" step="5" value="0"></div>
+      <div class="sl"><label for="drive">Grit <output id="driveV"></output></label><input type="range" id="drive" min="0" max="100" step="5" value="0"></div>
+      <label class="check"><input type="checkbox" id="radio"> Radio / phone filter</label>
+    </div>
+  </section>
+
+  <section class="panel out" aria-label="Output">
+    <button class="primary" id="playFx" disabled>▶ Play character</button>
+    <button id="stop" disabled>Stop</button>
+    <button id="save" disabled>Download WAV</button>
+    <span class="name" id="fname"></span>
+  </section>
+</div>
+
+<script>
+const CHARS = [
+  {id:"ogre",   name:"Ogre",      blurb:"Huge, slow, rumbling.",       p:{pitch:-7,low:8,robot:0,wobble:0,echo:0,reverb:15,drive:25,radio:false}},
+  {id:"gremlin",name:"Gremlin",   blurb:"Tiny, fast-talking pest.",    p:{pitch:8,low:0,robot:0,wobble:0,echo:0,reverb:0,drive:10,radio:false}},
+  {id:"robot",  name:"Robot",     blurb:"Metallic, buzzing machine.",  p:{pitch:-1,low:0,robot:90,wobble:0,echo:15,reverb:10,drive:10,radio:false,ring:55}},
+  {id:"radio",  name:"Dispatcher",blurb:"Crackly radio or phone.",     p:{pitch:0,low:0,robot:0,wobble:0,echo:0,reverb:0,drive:40,radio:true}},
+  {id:"ghost",  name:"Ghost",     blurb:"Airy, wavering, far away.",   p:{pitch:3,low:0,robot:0,wobble:60,echo:40,reverb:80,drive:0,radio:false}},
+  {id:"alien",  name:"Alien",     blurb:"High and strangely ringing.", p:{pitch:5,low:0,robot:55,wobble:20,echo:10,reverb:20,drive:0,radio:false,ring:220}},
+  {id:"wizard", name:"Old Wizard",blurb:"Creaky, shaky, wise.",        p:{pitch:-3,low:2,robot:0,wobble:40,echo:0,reverb:30,drive:10,radio:false}},
+  {id:"narrator",name:"Narrator", blurb:"Deep movie-trailer voice.",   p:{pitch:-3,low:6,robot:0,wobble:0,echo:0,reverb:35,drive:0,radio:false}},
+];
+const KEYS=["pitch","low","robot","wobble","echo","reverb","drive"];
+const $=id=>document.getElementById(id);
+let actx, srcBuf=null, fxBuf=null, playing=null, current=CHARS[0], ring=55, dirty=true;
+
+// Let iPhone play sound even when the ring/silent switch is on silent.
+try{ if(navigator.audioSession) navigator.audioSession.type="playback"; }catch(e){}
+function ctx(){ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)(); return actx; }
+let downloads=null;
+(async()=>{ try{ if(window.claude?.use) downloads=await window.claude.use("downloads"); }catch(e){} })();
+
+/* ---------- character cards ---------- */
+function summary(p){
+  const s=[]; if(p.pitch) s.push((p.pitch>0?"+":"")+p.pitch+" st");
+  if(p.robot) s.push("robot"); if(p.radio) s.push("radio"); if(p.wobble) s.push("wobble");
+  if(p.reverb>=30) s.push("reverb"); if(p.echo>=30) s.push("echo"); return s.join(" · ");
+}
+CHARS.forEach(c=>{
+  const b=document.createElement("button"); b.className="char"; b.dataset.id=c.id;
+  b.innerHTML=`<b>${c.name}</b><small>${c.blurb}</small><code>${summary(c.p)}</code>`;
+  b.onclick=()=>{selectChar(c); if(srcBuf) playFx();};
+  $("chars").appendChild(b);
+});
+function selectChar(c){
+  current=c; ring=c.p.ring||55;
+  KEYS.forEach(k=>$(k).value=c.p[k]); $("radio").checked=c.p.radio;
+  document.querySelectorAll(".char").forEach(b=>b.setAttribute("aria-pressed",b.dataset.id===c.id));
+  labels(); dirty=true; updateName();
+}
+function labels(){
+  const v=k=>+$(k).value;
+  $("pitchV").textContent=(v("pitch")>0?"+":"")+v("pitch")+" semitones";
+  $("lowV").textContent=v("low")+" dB";
+  ["robot","wobble","echo","reverb","drive"].forEach(k=>$(k+"V").textContent=v(k)+"%");
+}
+[...KEYS,"radio"].forEach(k=>$(k).addEventListener("input",()=>{labels();dirty=true;}));
+function params(){const o={}; KEYS.forEach(k=>o[k]=+$(k).value); o.radio=$("radio").checked; o.ring=ring; return o;}
+function updateName(){ $("fname").textContent=srcBuf?`${current.id}-line.wav`:""; }
+
+/* ---------- recording / loading ---------- */
+let rec=null, chunks=[], recStart=0, tick=null;
+$("recBtn").onclick=async()=>{
+  if(rec){ rec.stop(); return; }
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:true,autoGainControl:true}});
+    rec=new MediaRecorder(stream); chunks=[];
+    rec.ondataavailable=e=>chunks.push(e.data);
+    rec.onstop=async()=>{
+      stream.getTracks().forEach(t=>t.stop()); clearInterval(tick);
+      $("recBtn").classList.remove("on"); $("recLabel").textContent="Record"; rec=null;
+      await loadBlob(new Blob(chunks,{type:chunks[0]?.type||"audio/webm"}));
+    };
+    rec.start(); recStart=performance.now(); stopAudio();
+    $("recBtn").classList.add("on"); $("recLabel").textContent="Stop recording";
+    setMsg("Recording… press Stop when you finish the line.");
+    tick=setInterval(()=>$("time").textContent=fmt((performance.now()-recStart)/1000),100);
+  }catch(e){
+    setMsg("The microphone isn't available here. Record your line in Voice Memos (or any recorder), then tap Open audio file.",true);
+  }
+};
+$("fileIn").onchange=e=>{ if(e.target.files[0]) loadBlob(e.target.files[0]); e.target.value=""; };
+const deck=$("deck");
+deck.addEventListener("dragover",e=>{e.preventDefault();deck.classList.add("over");});
+deck.addEventListener("dragleave",()=>deck.classList.remove("over"));
+deck.addEventListener("drop",e=>{e.preventDefault();deck.classList.remove("over"); const f=e.dataTransfer.files[0]; if(f) loadBlob(f);});
+
+function decode(ab){
+  const a=ctx();
+  return new Promise((res,rej)=>{ const p=a.decodeAudioData(ab,res,rej); if(p&&p.then) p.then(res,rej); });
+}
+// Fallback: let the browser's media player decode it, and capture it as it plays.
+function decodeByPlaying(blob){
+  return new Promise((res,rej)=>{
+    const a=ctx(), el=new Audio(), url=URL.createObjectURL(blob); el.src=url; el.preload="auto";
+    el.onerror=()=>{URL.revokeObjectURL(url); rej(new Error("unsupported"));};
+    el.oncanplaythrough=async()=>{
+      el.oncanplaythrough=null;
+      try{
+        await a.resume();
+        const src=a.createMediaElementSource(el), proc=a.createScriptProcessor(4096,1,1), parts=[];
+        const mute=a.createGain(); mute.gain.value=0;
+        proc.onaudioprocess=e=>parts.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+        src.connect(proc); proc.connect(mute); mute.connect(a.destination);
+        setMsg("Reading the file… this takes as long as the recording.");
+        el.onended=()=>{ src.disconnect(); proc.disconnect(); URL.revokeObjectURL(url);
+          const n=parts.reduce((s,p)=>s+p.length,0), d=new Float32Array(n); let o=0; parts.forEach(p=>{d.set(p,o);o+=p.length;});
+          const b=a.createBuffer(1,n||1,a.sampleRate); if(n) b.copyToChannel(d,0); res(b); };
+        await el.play();
+      }catch(e){ rej(e); }
+    };
+  });
+}
+async function loadBlob(blob){
+  try{
+    setMsg("Opening…");
+    let buf;
+    try{ buf=await decode(await blob.arrayBuffer()); }
+    catch(e){ buf=await decodeByPlaying(blob); }
+    // mix to mono
+    const n=buf.length, mono=new Float32Array(n);
+    for(let c=0;c<buf.numberOfChannels;c++){const d=buf.getChannelData(c); for(let i=0;i<n;i++) mono[i]+=d[i]/buf.numberOfChannels;}
+    srcBuf={data:trimSilence(mono,buf.sampleRate),sr:buf.sampleRate}; dirty=true;
+    $("time").textContent=fmt(srcBuf.data.length/srcBuf.sr);
+    ["playOrig","playFx","stop","save"].forEach(id=>$(id).disabled=false);
+    drawWave(srcBuf.data); updateName();
+    setMsg("Got it. Tap a character to hear your line in that voice.");
+  }catch(e){ setMsg("That file couldn't be read as audio. Try a WAV, M4A or MP3 recording.",true); }
+}
+function trimSilence(d,sr){
+  const th=0.01, pad=Math.floor(sr*0.08); let a=0,b=d.length-1;
+  while(a<d.length&&Math.abs(d[a])<th)a++; while(b>a&&Math.abs(d[b])<th)b--;
+  if(a>=b) return d; return d.slice(Math.max(0,a-pad),Math.min(d.length,b+pad));
+}
+function setMsg(t,err){ $("msg").textContent=t; $("msg").classList.toggle("err",!!err); }
+function fmt(s){const m=Math.floor(s/60); return m+":"+(s%60).toFixed(1).padStart(4,"0");}
+
+/* ---------- waveform ---------- */
+function drawWave(d,overlay){
+  const c=$("wave"), g=c.getContext("2d"), W=c.width, H=c.height, cs=getComputedStyle(document.documentElement);
+  g.clearRect(0,0,W,H);
+  const draw=(arr,col)=>{ g.fillStyle=col; const step=arr.length/W;
+    for(let x=0;x<W;x++){let mx=0; const s=Math.floor(x*step), e=Math.floor((x+1)*step); for(let i=s;i<e;i++){const v=Math.abs(arr[i]); if(v>mx)mx=v;}
+      const h=Math.max(2,mx*H*0.92); g.fillRect(x,(H-h)/2,1,h);} };
+  if(overlay){ draw(d,cs.getPropertyValue("--wave2")); draw(overlay,cs.getPropertyValue("--wave")); }
+  else draw(d,cs.getPropertyValue("--wave"));
+}
+
+/* ---------- pitch shift (WSOLA time-stretch + resample) ---------- */
+function stretch(x,s,sr){
+  const N=Math.round(sr*0.04)&~1, Hs=N>>1, Ha=Hs/s, T=Math.round(N/4), L=Math.round(N/2);
+  const win=new Float32Array(N); for(let i=0;i<N;i++) win[i]=0.5-0.5*Math.cos(2*Math.PI*i/N);
+  const outLen=Math.ceil(x.length*s)+N, y=new Float32Array(outLen), w=new Float32Array(outLen);
+  let prev=0;
+  for(let k=0;;k++){
+    const target=Math.round(k*Ha), oPos=k*Hs; if(target+N>=x.length||oPos+N>=outLen) break;
+    let best=target;
+    if(k>0){ const nat=prev+Hs; let bestC=-Infinity;
+      for(let dlt=-T;dlt<=T;dlt+=2){ const p=target+dlt; if(p<0||p+N>=x.length) continue; let c=0;
+        for(let i=0;i<L;i+=6) c+=x[p+i]*x[nat+i]; if(c>bestC){bestC=c;best=p;} } }
+    for(let i=0;i<N;i++){ y[oPos+i]+=x[best+i]*win[i]; w[oPos+i]+=win[i]; }
+    prev=best;
+  }
+  for(let i=0;i<outLen;i++) if(w[i]>1e-3) y[i]/=w[i];
+  return y;
+}
+function pitchShift(x,semis,sr){
+  if(!semis) return x;
+  const r=Math.pow(2,semis/12), st=stretch(x,r,sr), out=new Float32Array(x.length);
+  for(let i=0;i<out.length;i++){ const p=i*r, j=Math.floor(p), f=p-j; out[i]=j+1<st.length?st[j]*(1-f)+st[j+1]*f:0; }
+  return out;
+}
+
+/* ---------- effect chain ---------- */
+function curve(amount){ const k=amount*60, n=2048, c=new Float32Array(n);
+  for(let i=0;i<n;i++){const x=i*2/n-1; c[i]=(1+k)*x/(1+k*Math.abs(x));} return c; }
+function impulse(oc,sec){ const len=Math.floor(oc.sampleRate*sec), b=oc.createBuffer(2,len,oc.sampleRate);
+  for(let ch=0;ch<2;ch++){const d=b.getChannelData(ch); for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6);} return b; }
+
+async function render(){
+  const p=params(), sr=srcBuf.sr;
+  const shifted=pitchShift(srcBuf.data,p.pitch,sr);
+  const tail=(p.echo||p.reverb)?2.5:0.1;
+  const oc=new OfflineAudioContext(1,Math.ceil(shifted.length+sr*tail),sr);
+  const b=oc.createBuffer(1,shifted.length,sr); b.copyToChannel(shifted,0);
+  const src=oc.createBufferSource(); src.buffer=b;
+  let node=src; const chain=n=>{node.connect(n); node=n; return n;};
+
+  if(p.low){ const f=chain(oc.createBiquadFilter()); f.type="lowshelf"; f.frequency.value=220; f.gain.value=p.low; }
+  if(p.radio){ const hp=chain(oc.createBiquadFilter()); hp.type="highpass"; hp.frequency.value=450; hp.Q.value=0.9;
+    const lp=chain(oc.createBiquadFilter()); lp.type="lowpass"; lp.frequency.value=2800; lp.Q.value=1.2;
+    const pk=chain(oc.createBiquadFilter()); pk.type="peaking"; pk.frequency.value=1500; pk.gain.value=6; }
+  if(p.drive){ const ws=chain(oc.createWaveShaper()); ws.curve=curve(p.drive/100); ws.oversample="2x";
+    const g=chain(oc.createGain()); g.gain.value=1/(1+p.drive/60); }
+  if(p.robot){ const mix=oc.createGain(), dry=oc.createGain(), ringG=oc.createGain(), osc=oc.createOscillator();
+    osc.frequency.value=p.ring; osc.type="sine"; ringG.gain.value=0; osc.connect(ringG.gain); osc.start();
+    dry.gain.value=1-p.robot/100; const wet=oc.createGain(); wet.gain.value=(p.robot/100)*1.4;
+    node.connect(dry); node.connect(ringG); ringG.connect(wet); dry.connect(mix); wet.connect(mix); node=mix; }
+  if(p.wobble){ const d=chain(oc.createDelay(0.1)); d.delayTime.value=0.012;
+    const lfo=oc.createOscillator(), depth=oc.createGain(); lfo.frequency.value=5.5; depth.gain.value=0.0035*p.wobble/100;
+    lfo.connect(depth); depth.connect(d.delayTime); lfo.start(); }
+
+  const master=oc.createGain(); node.connect(master);
+  if(p.echo){ const d=oc.createDelay(1), fb=oc.createGain(), wet=oc.createGain();
+    d.delayTime.value=0.28; fb.gain.value=0.25+0.3*p.echo/100; wet.gain.value=0.6*p.echo/100;
+    node.connect(d); d.connect(fb); fb.connect(d); d.connect(wet); wet.connect(master); }
+  if(p.reverb){ const cv=oc.createConvolver(), wet=oc.createGain(); cv.buffer=impulse(oc,0.8+2*p.reverb/100);
+    wet.gain.value=0.9*p.reverb/100; node.connect(cv); cv.connect(wet); wet.connect(master); }
+  const comp=oc.createDynamicsCompressor(); comp.threshold.value=-18; comp.ratio.value=3;
+  master.connect(comp); comp.connect(oc.destination);
+  src.start();
+  const out=(await oc.startRendering()).getChannelData(0);
+  let peak=0; for(const v of out) if(Math.abs(v)>peak) peak=Math.abs(v);
+  const g=peak>0?0.9/peak:1; for(let i=0;i<out.length;i++) out[i]*=g;
+  return trimSilence(out,sr);
+}
+async function ensureFx(){ if(dirty||!fxBuf){ setMsg("Processing…"); fxBuf=await render(); dirty=false; drawWave(srcBuf.data,fxBuf); setMsg(`Showing ${current.name}. Adjust the sliders to tweak it, or download the WAV.`);} return fxBuf; }
+
+/* ---------- playback ---------- */
+function stopAudio(){ if(playing){ try{playing.stop();}catch(e){} playing=null; } }
+function play(data){ stopAudio(); const a=ctx(); if(a.state==="suspended") a.resume();
+  const b=a.createBuffer(1,data.length,srcBuf.sr); b.copyToChannel(data,0);
+  const s=a.createBufferSource(); s.buffer=b; s.connect(a.destination); s.start(); playing=s; s.onended=()=>{if(playing===s)playing=null;}; }
+async function playFx(){ play(await ensureFx()); }
+$("playOrig").onclick=()=>play(srcBuf.data);
+$("playFx").onclick=playFx;
+$("stop").onclick=stopAudio;
+document.addEventListener("keydown",e=>{ if(e.code==="Space"&&srcBuf&&e.target.tagName!=="INPUT"&&e.target.tagName!=="BUTTON"){e.preventDefault(); playFx();} });
+
+/* ---------- WAV export ---------- */
+function wav(data,sr){
+  const buf=new ArrayBuffer(44+data.length*2), v=new DataView(buf), w=(o,s)=>[...s].forEach((c,i)=>v.setUint8(o+i,c.charCodeAt(0)));
+  w(0,"RIFF"); v.setUint32(4,36+data.length*2,true); w(8,"WAVE"); w(12,"fmt "); v.setUint32(16,16,true);
+  v.setUint16(20,1,true); v.setUint16(22,1,true); v.setUint32(24,sr,true); v.setUint32(28,sr*2,true);
+  v.setUint16(32,2,true); v.setUint16(34,16,true); w(36,"data"); v.setUint32(40,data.length*2,true);
+  for(let i=0;i<data.length;i++){const s=Math.max(-1,Math.min(1,data[i])); v.setInt16(44+i*2,s<0?s*0x8000:s*0x7fff,true);}
+  return new Blob([buf],{type:"audio/wav"});
+}
+// Hosted page: saving goes through Claude's download prompt, which takes .m4a-style .mp4 audio or .webm (not WAV).
+// The browser records the processed line as it plays silently, so this takes as long as the clip.
+function encodeCompressed(data,sr){
+  return new Promise(async(res,rej)=>{
+    try{
+      const a=ctx(); await a.resume();
+      const mime=["audio/mp4","audio/webm;codecs=opus","audio/webm"].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m));
+      if(!mime) return rej(new Error("no encoder"));
+      const dest=a.createMediaStreamDestination(), b=a.createBuffer(1,data.length,sr); b.copyToChannel(data,0);
+      const s=a.createBufferSource(); s.buffer=b; s.connect(dest);
+      const r=new MediaRecorder(dest.stream,{mimeType:mime}), parts=[];
+      r.ondataavailable=e=>{ if(e.data.size) parts.push(e.data); };
+      r.onstop=()=>res({blob:new Blob(parts,{type:mime}),ext:mime.includes("mp4")?"mp4":"webm"});
+      s.onended=()=>setTimeout(()=>r.stop(),250);
+      r.start(); s.start();
+    }catch(e){ rej(e); }
+  });
+}
+$("save").onclick=async()=>{
+  const data=await ensureFx();
+  if(downloads){
+    try{
+      $("save").disabled=true; setMsg("Preparing your file… this takes as long as the clip.");
+      const {blob,ext}=await encodeCompressed(data,srcBuf.sr);
+      await downloads.save({filename:`${current.id}-line.${ext}`,data:blob});
+      setMsg("Saved.");
+    }catch(e){
+      setMsg(e&&e.code==="declined"?"Download cancelled.":"This view couldn't save the file. Open the page in a browser to download a WAV.",e?.code!=="declined");
+    }finally{ $("save").disabled=false; }
+    return;
+  }
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(wav(data,srcBuf.sr)); a.download=`${current.id}-line.wav`;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+};
+
+selectChar(CHARS[0]);
+</script>
+</body>
+</html>

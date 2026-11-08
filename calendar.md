@@ -4,6 +4,7 @@ title: "Calendar"
 description: "Cultural and fictional dates I observe throughout the year"
 date: 2026-01-26
 permalink: /calendar/
+blurb: "Dates I observe"
 ---
 
 These are dates from movies, TV shows, and culture that I celebrate or observe throughout the year.
@@ -16,7 +17,7 @@ These are dates from movies, TV shows, and culture that I celebrate or observe t
 
 ## April
 
-**April 8** - [Rex Manning Day](https://www.empireonline.com/movies/features/rex-manning-day-empire-records-explained/) - From the cult classic film Empire Records
+**April 8** - [Rex Manning Day](https://collider.com/rex-manning-day-explained/) - From the cult classic film Empire Records
 
 ## May
 

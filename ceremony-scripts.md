@@ -4,6 +4,7 @@ title: "Ceremony Scripts"
 description: "Wedding ceremony scripts I've officiated — offered as starting points for anyone who needs them."
 date: 2026-05-26
 permalink: /ceremony-scripts/
+blurb: "Wedding ceremony scripts for officiants"
 ---
 
 I've had the honor of officiating a few weddings over the years. These are the scripts I used, cleaned up and de-personalized so they might serve as a starting point for someone else.

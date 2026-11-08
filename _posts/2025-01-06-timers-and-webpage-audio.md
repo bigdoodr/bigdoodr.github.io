@@ -29,4 +29,4 @@ In addition to having both an AMRAP and Sets timers, some other features of the 
 
 One big caveat that I still need to fix: if the browser loses focus on mobile, the sound won't play for the rest of the routine. 
 
-As an example of how to make use of the page, here's a json file of [Jeff Cavaliere's 10 minute abs YouTube video](/exercises/10MinuteAbsByJeffCavaliere.json). You can find a gif guide of the routine on my [Daily Exercises page](/DailyExercises.html).
+As an example of how to make use of the page, here's a json file of [Jeff Cavaliere's 10 minute abs YouTube video](/exercises/10MinuteAbsByJeffCavaliere.json). You can find a gif guide of the routine on my [Daily Exercises page](/exercises/DailyExercises).

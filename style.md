@@ -4,6 +4,7 @@ title: "Style"
 description: "The design style guide for this site."
 date: 2026-02-25
 permalink: /style/
+blurb: "This site's design guide"
 ---
 
 A reference for the design decisions behind this site.
@@ -33,11 +34,21 @@ The site uses the system font stack: `-apple-system, BlinkMacSystemFont, 'Segoe 
 
 ## 🌗 Light & Dark Mode
 
-The site fully supports `prefers-color-scheme` for automatic light/dark switching.
+The theme picker (the ◐ button in the header) lets visitors choose **Auto**, **Light**, or **Dark**. Auto follows the operating system's `prefers-color-scheme` and switches live when it changes.
 
 - **Light mode:** White/near-white background (`#f8f9ff → #ffffff`), black H1s, grey body text
 - **Dark mode:** Dark background (`#1c1c1e → #000000`), white H1s, slightly lighter grey body text
-- The header gradient and animated site title remain consistent in both modes
+- Every color is a CSS variable in `css/theme.css`, keyed off `<html data-theme>` and `<html data-palette>`
+
+## 🎨 Color Palettes
+
+| Palette | Accent | Gradient |
+|---|---|---|
+| Aurora (default) | `#007AFF` | blue → indigo → purple → pink → orange |
+| Sunset | `#C2410C` | amber → orange → red → pink → purple |
+| Forest | `#15803D` | lime → green → emerald → teal → cyan |
+| Ocean | `#0369A1` | cyan → sky → blue → indigo → navy |
+| Mono | `#3A3A3C` | greys |
 
 ## 📐 Layout
 

@@ -1,0 +1,333 @@
+<title>Buck Voice Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Silkscreen&family=Teko:wght@500;700&display=swap">
+<style>
+/* Layout: a mixing-desk page. Left rack holds voice, lines, scope and settings code; right rack holds three fader banks. Stacks to one column on phones with a sticky transport bar. Single dark look to match the game. */
+:root{
+  --void:#07090c; --rack:#0f1418; --rack2:#141b21; --line:#26313a; --steel:#8b98a5; --dim:#5d6873; --ink:#e8edf1;
+  --amber:#ffb627; --blood:#d0142f; --rig:#3fe0c5;
+  --f-d:'Teko','Arial Narrow',Impact,sans-serif; --f-ui:'Chakra Petch','Segoe UI',system-ui,sans-serif; --f-p:'Silkscreen','Courier New',monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--void);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.4;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 0}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.k{font-family:var(--f-p);font-size:10px;letter-spacing:.24em;color:var(--steel)}
+h1{margin:0;font-family:var(--f-d);font-weight:700;font-size:clamp(40px,6vw,60px);line-height:.85;text-wrap:balance}
+.lede{margin:0;color:var(--steel);max-width:68ch}
+.desk{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.desk{grid-template-columns:minmax(0,1fr)}}
+.rack{background:var(--rack);border:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.rack h2{margin:0;font-family:var(--f-p);font-weight:400;font-size:11px;letter-spacing:.2em;color:var(--amber)}
+.stack{display:flex;flex-direction:column;gap:16px;min-width:0}
+select,textarea,input[type=text]{font:inherit;color:var(--ink);background:var(--rack2);border:1px solid var(--line);padding:8px 10px;width:100%;border-radius:0}
+select:focus-visible,textarea:focus-visible,button:focus-visible,input:focus-visible{outline:2px dashed var(--amber);outline-offset:2px}
+.vdesc{margin:0;color:var(--steel);font-size:13px}
+.lines{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.lines button{all:unset;cursor:pointer;display:flex;gap:10px;align-items:baseline;padding:8px 6px;border-top:1px solid var(--line);width:100%;box-sizing:border-box;color:var(--steel)}
+.lines button .n{font-family:var(--f-p);font-size:10px;color:var(--dim);flex:none;width:18px}
+.lines button[aria-pressed=true]{color:var(--ink);background:var(--rack2)}
+.lines button[aria-pressed=true] .n{color:var(--amber)}
+.lines button:focus-visible{outline:2px dashed var(--amber);outline-offset:-2px}
+canvas{display:block;width:100%;height:84px;background:#05070a;border:1px solid var(--line)}
+.meta{display:flex;justify-content:space-between;gap:8px;font-family:var(--f-p);font-size:10px;letter-spacing:.12em;color:var(--dim);font-variant-numeric:tabular-nums}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.b{font:500 14px var(--f-ui);color:var(--ink);background:var(--rack2);border:1px solid var(--line);padding:9px 14px;cursor:pointer;letter-spacing:.02em;border-radius:0}
+.b:hover{border-color:var(--steel)}
+.b.go{background:var(--blood);border-color:var(--blood);color:#fff;font-weight:600}
+.b.go:hover{filter:brightness(1.12)}
+.b.on{border-color:var(--rig);color:var(--rig)}
+.chip{font:500 13px var(--f-ui);color:var(--steel);background:transparent;border:1px solid var(--line);padding:6px 10px;cursor:pointer;border-radius:0}
+.chip:hover{color:var(--ink);border-color:var(--steel)}
+.chip[aria-pressed=true]{color:var(--void);background:var(--amber);border-color:var(--amber)}
+.bank{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:4px 22px}
+.f{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;padding:8px 0;border-top:1px solid var(--line)}
+.f label{font-weight:600;font-size:14px}
+.f output{font-family:var(--f-p);font-size:11px;color:var(--amber);font-variant-numeric:tabular-nums;text-align:right;min-width:7ch}
+.f small{grid-column:1/-1;color:var(--dim);font-size:12px;line-height:1.3}
+.f input[type=range]{grid-column:1/-1;width:100%;margin:6px 0 2px;accent-color:var(--amber);height:24px}
+.code{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:12px;line-height:1.35;min-height:76px;resize:vertical;word-break:break-all}
+.note{margin:0;color:var(--dim);font-size:12px}
+.status{font-family:var(--f-p);font-size:10px;letter-spacing:.12em;color:var(--rig);min-height:1.2em}
+.transport{position:sticky;bottom:0;z-index:5;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(7,9,12,.94);border-top:1px solid var(--line);backdrop-filter:blur(6px)}
+.transport .in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.transport .now{flex:1 1 200px;min-width:0;color:var(--steel);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tog{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--steel);cursor:pointer}
+.tog input{accent-color:var(--rig);width:18px;height:18px}
+@media (prefers-reduced-motion:no-preference){.b,.chip{transition:border-color .12s,color .12s,background .12s}}
+</style>
+
+<div class="wrap">
+  <div class="k">HULL BREAKER // CASTING DESK</div>
+  <h1>Buck Voice Lab</h1>
+  <p class="lede">Pick a base voice, then shape it with the faders. Changes play back as soon as you let go of a slider. When it sounds right, copy the settings code at the bottom left and paste it to Claude. Every game line gets rendered with exactly these settings.</p>
+
+  <div class="desk">
+    <div class="stack">
+      <section class="rack" aria-labelledby="h-voice">
+        <h2 id="h-voice">BASE VOICE</h2>
+        <select id="voice" aria-label="Base voice"></select>
+        <p class="vdesc" id="vdesc"></p>
+      </section>
+      <section class="rack" aria-labelledby="h-lines">
+        <h2 id="h-lines">TEST LINE</h2>
+        <ul class="lines" id="lines"></ul>
+        <canvas id="scope" width="720" height="168" aria-label="Waveform of the processed line"></canvas>
+        <div class="meta"><span id="m-len">—</span><span id="m-f0">—</span></div>
+      </section>
+      <section class="rack" aria-labelledby="h-pre">
+        <h2 id="h-pre">STARTING POINTS</h2>
+        <div class="btns" id="presets"></div>
+        <p class="note">Takes A, B and C are close matches to the three takes you heard earlier. Clean is the unprocessed voice.</p>
+      </section>
+      <section class="rack" aria-labelledby="h-code">
+        <h2 id="h-code">SETTINGS CODE</h2>
+        <textarea id="code" class="code" aria-label="Settings code. Paste a code here to load it." spellcheck="false"></textarea>
+        <div class="btns"><button class="b go" id="copy" type="button">Copy settings</button><button class="b" id="load" type="button">Load pasted code</button></div>
+        <div class="status" id="status" role="status"></div>
+      </section>
+    </div>
+
+    <div class="stack" id="banks"></div>
+  </div>
+</div>
+
+<div class="transport">
+  <div class="in">
+    <button class="b go" id="play" type="button">▶ Play</button>
+    <button class="b" id="dry" type="button" title="Play the unprocessed base voice">Original</button>
+    <button class="b" id="all" type="button">Play all lines</button>
+    <label class="tog"><input type="checkbox" id="auto" checked> Auto-play changes</label>
+    <span class="now" id="now"></span>
+  </div>
+</div>
+
+<script id="stems" type="application/json">__STEMS__</script>
+
+<script id="dsp">
+/* Buck voice DSP. Pure JS, deterministic (seeded), 24 kHz mono. The same code renders the game's lines. */
+var BuckDSP=(function(){
+  var SR=24000;
+  function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function hashStr(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+  function gauss(r){var u=Math.max(1e-9,r()),v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+  function decodeClip(c){
+    var bin=atob(c.pcm),n=bin.length,x=new Float32Array(n);
+    for(var i=0;i<n;i++){var y=bin.charCodeAt(i)/255*2-1;x[i]=(y<0?-1:1)*(Math.pow(256,Math.abs(y))-1)/255;}
+    var m=[];if(c.marks){var d=c.marks.split(','),acc=0;for(var j=0;j<d.length;j++){acc+=+d[j];m.push(acc);}}
+    return {x:x,marks:m};
+  }
+  // TD-PSOLA: pitch factor, intonation exponent, jitter, time factor (>1 = slower)
+  function psola(x,marks,pf,flat,jit,tf,rnd){
+    var uv=Math.round(SR*0.01),maxGap=Math.round(SR/55),M=[],V=[],prev=0,i;
+    for(i=0;i<marks.length;i++){var m=marks[i];if(m-prev>maxGap){for(var t=prev+uv;t<m-uv*0.5;t+=uv){M.push(t);V.push(0);}}M.push(m);V.push(1);prev=m;}
+    for(var t2=prev+uv;t2<x.length;t2+=uv){M.push(t2);V.push(0);}
+    if(!M.length){M.push(0);V.push(0);}
+    var P=new Float32Array(M.length),f0s=[];
+    for(i=0;i<M.length;i++){
+      if(!V[i]){P[i]=uv;continue;}
+      var a=(i>0&&V[i-1]&&M[i]-M[i-1]<=maxGap)?M[i]-M[i-1]:0,b=(i+1<M.length&&V[i+1]&&M[i+1]-M[i]<=maxGap)?M[i+1]-M[i]:0;
+      var p=a&&b?(a+b)/2:(a||b||uv);P[i]=Math.min(Math.max(p,SR/400),SR/50);f0s.push(SR/P[i]);
+    }
+    f0s.sort(function(a,b){return a-b;});var med=f0s.length?f0s[f0s.length>>1]:120;
+    var outLen=Math.ceil(x.length*tf)+Math.round(SR*0.05),out=new Float32Array(outLen),ts=0,k=0;
+    while(ts<outLen-1){
+      var ta=ts/tf;while(k+1<M.length&&Math.abs(M[k+1]-ta)<=Math.abs(M[k]-ta))k++;
+      var Pa=P[k],c=M[k],Ps;
+      if(V[k]){var f=SR/Pa,ft=pf*med*Math.pow(f/med,flat)*(1+jit*gauss(rnd));ft=Math.min(Math.max(ft,30),600);Ps=SR/ft;}else Ps=Pa;
+      var L=Math.round(Pa),o=Math.round(ts);
+      for(var j=-L;j<=L;j++){var si=c+j,oi=o+j;if(si<0||si>=x.length||oi<0||oi>=outLen)continue;out[oi]+=x[si]*(0.5+0.5*Math.cos(Math.PI*j/(L+1)));}
+      ts+=Ps;
+    }
+    return out;
+  }
+  function biquad(x,type,f,Q,g){
+    var A=Math.pow(10,g/40),w=2*Math.PI*Math.min(f,SR*0.49)/SR,cs=Math.cos(w),sn=Math.sin(w),al=sn/(2*Q),b0,b1,b2,a0,a1,a2;
+    if(type==='lp'){b0=(1-cs)/2;b1=1-cs;b2=(1-cs)/2;a0=1+al;a1=-2*cs;a2=1-al;}
+    else if(type==='hp'){b0=(1+cs)/2;b1=-(1+cs);b2=(1+cs)/2;a0=1+al;a1=-2*cs;a2=1-al;}
+    else{b0=1+al*A;b1=-2*cs;b2=1-al*A;a0=1+al/A;a1=-2*cs;a2=1-al/A;}
+    b0/=a0;b1/=a0;b2/=a0;a1/=a0;a2/=a0;
+    var y=new Float32Array(x.length),x1=0,x2=0,y1=0,y2=0;
+    for(var n=0;n<x.length;n++){var v=b0*x[n]+b1*x1+b2*x2-a1*y1-a2*y2;x2=x1;x1=x[n];y2=y1;y1=v;y[n]=v;}
+    return y;
+  }
+  function rev(x){var y=new Float32Array(x.length);for(var i=0;i<x.length;i++)y[i]=x[x.length-1-i];return y;}
+  function zlp(x,f){return rev(biquad(rev(biquad(x,'lp',f,0.707,0)),'lp',f,0.707,0));}
+  function peak(x){var m=0;for(var i=0;i<x.length;i++){var a=Math.abs(x[i]);if(a>m)m=a;}return m||1e-9;}
+  // FFT (radix-2, in place)
+  function fft(re,im,inv){
+    var n=re.length,i,j=0,k,l;
+    for(i=1;i<n;i++){var bit=n>>1;for(;j&bit;bit>>=1)j^=bit;j^=bit;if(i<j){var t=re[i];re[i]=re[j];re[j]=t;t=im[i];im[i]=im[j];im[j]=t;}}
+    for(l=2;l<=n;l<<=1){var ang=(inv?2:-2)*Math.PI/l,wr=Math.cos(ang),wi=Math.sin(ang);
+      for(i=0;i<n;i+=l){var cr=1,ci=0;for(k=0;k<l/2;k++){var ar=re[i+k+l/2]*cr-im[i+k+l/2]*ci,ai=re[i+k+l/2]*ci+im[i+k+l/2]*cr;
+        re[i+k+l/2]=re[i+k]-ar;im[i+k+l/2]=im[i+k]-ai;re[i+k]+=ar;im[i+k]+=ai;var nr=cr*wr-ci*wi;ci=cr*wi+ci*wr;cr=nr;}}}
+    if(inv)for(i=0;i<n;i++){re[i]/=n;im[i]/=n;}
+  }
+  // whisper: same words, random phase (keeps the mouth shape, drops the pitch)
+  function whisper(x,rnd){
+    var N=512,H=128,win=new Float32Array(N),i,out=new Float32Array(x.length+N),ws=new Float32Array(x.length+N);
+    for(i=0;i<N;i++)win[i]=0.5-0.5*Math.cos(2*Math.PI*i/N);
+    var re=new Float32Array(N),im=new Float32Array(N);
+    for(var s=-N;s<x.length;s+=H){
+      for(i=0;i<N;i++){var xi=s+i;re[i]=(xi>=0&&xi<x.length?x[xi]:0)*win[i];im[i]=0;}
+      fft(re,im,false);
+      for(i=1;i<N/2;i++){var mag=Math.hypot(re[i],im[i]),ph=rnd()*2*Math.PI;re[i]=mag*Math.cos(ph);im[i]=mag*Math.sin(ph);re[N-i]=re[i];im[N-i]=-im[i];}
+      re[0]=Math.abs(re[0]);im[0]=0;re[N/2]=Math.abs(re[N/2]);im[N/2]=0;
+      fft(re,im,true);
+      for(i=0;i<N;i++){var oi=s+i;if(oi<0||oi>=x.length)continue;out[oi]+=re[i]*win[i];ws[oi]+=win[i]*win[i];}
+    }
+    var y=new Float32Array(x.length);for(i=0;i<x.length;i++)y[i]=ws[i]>1e-6?out[i]/ws[i]:0;
+    y=biquad(biquad(y,'hp',700,0.707,0),'lp',6500,0.707,0);var p=peak(y);for(i=0;i<y.length;i++)y[i]/=p;return y;
+  }
+  function resample(x,r){var n=Math.floor((x.length-2)/r),y=new Float32Array(n);
+    for(var i=0;i<n;i++){var p=i*r,i0=p|0,t=p-i0,xm=x[i0-1]||0,x0=x[i0],x1=x[i0+1]||0,x2=x[i0+2]||0;
+      y[i]=x0+0.5*t*(x1-xm+t*(2*xm-5*x0+4*x1-x2+t*(3*(x0-x1)+x2-xm)));}return y;}
+  function compress(x,amt){
+    if(amt<=0)return x;var thr=-14-amt*0.16,ratio=1+amt*0.07,at=Math.exp(-1/(SR*0.006)),rl=Math.exp(-1/(SR*0.15)),env=0,y=new Float32Array(x.length);
+    var p=peak(x);for(var i=0;i<x.length;i++){var a=Math.abs(x[i])/p;env=a>env?at*env+(1-at)*a:rl*env+(1-rl)*a;
+      var db=20*Math.log10(env+1e-9),gr=db>thr?(thr-db)*(1-1/ratio):0;y[i]=x[i]*Math.pow(10,gr/20);}return y;
+  }
+  function trim(x){var p=peak(x),th=p*Math.pow(10,-45/20),a=0,b=x.length-1;
+    while(a<b&&Math.abs(x[a])<th)a++;while(b>a&&Math.abs(x[b])<th)b--;
+    a=Math.max(0,a-48);b=Math.min(x.length-1,b+240);var pad=Math.round(SR*0.12),y=new Float32Array(b-a+1+pad);y.set(x.subarray(a,b+1));return y;}
+  var DEFAULTS={voice:'onyx_adam',pitch:0,pace:100,size:100,inton:100,hoarse:0,growl:0,breath:0,grit:0,low:0,mud:0,pres:0,bright:11000,comp:40};
+  function render(clip,P,seedText){
+    P=Object.assign({},DEFAULTS,P);
+    var rnd=mulberry(hashStr(seedText||'buck')),x=clip.x,marks=clip.marks;
+    var r=P.size/100,pitchTotal=Math.pow(2,P.pitch/12),durTotal=100/P.pace;
+    var p1=pitchTotal/r,d1=durTotal*r,flat=P.inton/100,jit=P.hoarse/1000;
+    var v=psola(x,marks,p1,flat,jit,d1,rnd),i,vp=peak(v);for(i=0;i<v.length;i++)v[i]/=vp;
+    var y=new Float32Array(v.length);y.set(v);
+    if(P.growl>0){var g=psola(x,marks,p1*0.5,flat,jit,d1,rnd);g=biquad(biquad(g,'lp',1400,0.707,0),'lp',1400,0.707,0);var gp=peak(g),gm=P.growl/100;for(i=0;i<y.length&&i<g.length;i++)y[i]+=gm*g[i]/gp;}
+    if(P.breath>0){var w=whisper(v,rnd),env=new Float32Array(v.length);for(i=0;i<v.length;i++)env[i]=Math.abs(v[i]);env=zlp(env,30);var ep=peak(env),bm=P.breath/100;
+      for(i=0;i<y.length;i++)y[i]+=bm*w[i]*Math.sqrt(Math.max(0,env[i]/ep));}
+    var pk=peak(y),dr=P.grit/100,k=2.5,tk=Math.tanh(k);
+    for(i=0;i<y.length;i++){var s=y[i]/pk;y[i]=(1-dr)*s+dr*Math.tanh(k*s)/tk;}
+    if(r!==1)y=resample(y,r);
+    y=biquad(y,'hp',60,0.707,0);
+    if(P.low)y=biquad(y,'pk',115,0.9,P.low);
+    if(P.mud)y=biquad(y,'pk',450,1.0,P.mud);
+    if(P.pres)y=biquad(y,'pk',2200,1.3,P.pres);
+    if(P.bright<11000)y=biquad(biquad(y,'lp',P.bright,0.707,0),'lp',P.bright,0.707,0);
+    y=compress(y,P.comp);y=trim(y);
+    pk=peak(y);for(i=0;i<y.length;i++)y[i]=y[i]/pk*0.84;
+    return y;
+  }
+  function f0Of(clip){var m=clip.marks,d=[];for(var i=1;i<m.length;i++){var p=m[i]-m[i-1];if(p<SR/55)d.push(SR/p);}d.sort(function(a,b){return a-b;});return d.length?d[d.length>>1]:0;}
+  return {SR:SR,render:render,decodeClip:decodeClip,DEFAULTS:DEFAULTS,f0Of:f0Of};
+})();
+</script>
+
+<script>
+(function(){
+'use strict';
+var STEMS=JSON.parse(document.getElementById('stems').textContent),SR=STEMS.sr,D=BuckDSP;
+var $=function(s){return document.querySelector(s);};
+var FADERS=[
+ {bank:'PITCH & TIMING',items:[
+  {id:'pitch',label:'Pitch',min:-12,max:4,step:0.5,fmt:function(v){return (v>0?'+':'')+v+' st';},help:'How low the voice sits. Each step is a semitone.'},
+  {id:'pace',label:'Pace',min:60,max:120,step:1,fmt:function(v){return v+'%';},help:'Speaking speed. Lower drags out every word.'},
+  {id:'size',label:'Chest size',min:70,max:115,step:1,fmt:function(v){return v+'%';},help:'Lower sounds like a bigger chest and throat. Doesn\'t change pitch or pace.'},
+  {id:'inton',label:'Intonation',min:0,max:150,step:5,fmt:function(v){return v+'%';},help:'0% is a dead monotone, 100% is natural. Low values can sound robotic.'}]},
+ {bank:'TEXTURE',items:[
+  {id:'hoarse',label:'Hoarseness',min:0,max:80,step:1,fmt:function(v){return v;},help:'Unsteady vocal cords. A little adds wear. A lot makes him warble.'},
+  {id:'growl',label:'Growl',min:0,max:60,step:1,fmt:function(v){return v;},help:'A low rumble an octave under the voice.'},
+  {id:'breath',label:'Breath',min:0,max:80,step:1,fmt:function(v){return v;},help:'Whispered air riding on every word. This is most of the smoker sound.'},
+  {id:'grit',label:'Grit',min:0,max:80,step:1,fmt:function(v){return v;},help:'Throat distortion. Rougher edges on loud syllables.'}]},
+ {bank:'TONE',items:[
+  {id:'low',label:'Low end',min:-6,max:12,step:0.5,fmt:function(v){return (v>0?'+':'')+v+' dB';},help:'Boom around 115 Hz.'},
+  {id:'mud',label:'Muddiness',min:-12,max:6,step:0.5,fmt:function(v){return (v>0?'+':'')+v+' dB';},help:'Around 450 Hz. Cut it if he sounds boxy.'},
+  {id:'pres',label:'Presence',min:-6,max:10,step:0.5,fmt:function(v){return (v>0?'+':'')+v+' dB';},help:'Around 2.2 kHz. Pushes the rasp forward and helps him cut through gunfire.'},
+  {id:'bright',label:'Brightness',min:2500,max:11000,step:100,fmt:function(v){return v>=11000?'Open':(v/1000).toFixed(1)+' kHz';},help:'Rolls off the top. Lower sounds muffled, like an old radio or a helmet.'},
+  {id:'comp',label:'Compression',min:0,max:100,step:1,fmt:function(v){return v;},help:'Evens out loud and quiet parts so every word lands.'}]}
+];
+var PRESETS={
+ 'Clean':{voice:'onyx_adam',pitch:0,pace:100,size:100,inton:100,hoarse:0,growl:0,breath:0,grit:0,low:0,mud:0,pres:0,bright:11000,comp:40},
+ 'Take A':{voice:'onyx_adam',pitch:-2.5,pace:85,size:90,inton:100,hoarse:15,growl:10,breath:22,grit:18,low:4,mud:-2.5,pres:2,bright:7000,comp:50},
+ 'Take B':{voice:'onyx_adam',pitch:-4,pace:79,size:86,inton:100,hoarse:25,growl:17,breath:32,grit:25,low:4,mud:-2.5,pres:2,bright:7000,comp:50},
+ 'Take C':{voice:'onyx_adam',pitch:-5.5,pace:74,size:82,inton:100,hoarse:35,growl:24,breath:42,grit:32,low:4,mud:-2.5,pres:2,bright:7000,comp:50}
+};
+var S=Object.assign({},PRESETS['Take C']),lineIdx=0,cache={},rendered=null,ctx=null,src=null,playingAll=false;
+try{var saved=JSON.parse(localStorage.getItem('buck-voice-lab')||'null');if(saved&&typeof saved==='object')S=Object.assign({},D.DEFAULTS,saved);}catch(e){}
+
+function clipFor(v,i){var key=v+'|'+i;if(!cache[key])cache[key]=D.decodeClip(STEMS.voices[v].clips[i]);return cache[key];}
+// voice picker
+var vsel=$('#voice');
+Object.keys(STEMS.voices).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=STEMS.voices[k].name;vsel.appendChild(o);});
+vsel.addEventListener('change',function(){S.voice=vsel.value;changed();});
+// lines
+var ul=$('#lines');
+STEMS.lines.forEach(function(t,i){var li=document.createElement('li'),b=document.createElement('button');b.type='button';b.innerHTML='<span class="n">0'+(i+1)+'</span><span></span>';b.lastChild.textContent=t;
+  b.addEventListener('click',function(){lineIdx=i;markLines();stopAll();renderNow();play();});li.appendChild(b);ul.appendChild(li);});
+function markLines(){ul.querySelectorAll('button').forEach(function(b,i){b.setAttribute('aria-pressed',i===lineIdx?'true':'false');});$('#now').textContent='Line '+(lineIdx+1)+': '+STEMS.lines[lineIdx];}
+// faders
+var banks=$('#banks');
+FADERS.forEach(function(g){
+  var sec=document.createElement('section');sec.className='rack';var h=document.createElement('h2');h.textContent=g.bank;sec.appendChild(h);
+  var bank=document.createElement('div');bank.className='bank';
+  g.items.forEach(function(f){
+    var d=document.createElement('div');d.className='f';
+    d.innerHTML='<label for="f-'+f.id+'">'+f.label+'</label><output id="o-'+f.id+'" for="f-'+f.id+'"></output><input type="range" id="f-'+f.id+'" min="'+f.min+'" max="'+f.max+'" step="'+f.step+'"><small></small>';
+    d.querySelector('small').textContent=f.help;
+    var inp=d.querySelector('input');
+    inp.addEventListener('input',function(){S[f.id]=+inp.value;$('#o-'+f.id).textContent=f.fmt(S[f.id]);markPreset();writeCode();});
+    inp.addEventListener('change',function(){S[f.id]=+inp.value;changed();});
+    bank.appendChild(d);
+  });
+  sec.appendChild(bank);banks.appendChild(sec);
+});
+// presets
+var pre=$('#presets');
+Object.keys(PRESETS).forEach(function(n){var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=n;b.dataset.p=n;
+  b.addEventListener('click',function(){S=Object.assign({},PRESETS[n]);syncUI();changed();});pre.appendChild(b);});
+function same(a,b){return Object.keys(D.DEFAULTS).every(function(k){return a[k]===b[k];});}
+function markPreset(){pre.querySelectorAll('.chip').forEach(function(b){b.setAttribute('aria-pressed',same(S,PRESETS[b.dataset.p])?'true':'false');});}
+function syncUI(){
+  vsel.value=S.voice;$('#vdesc').textContent=STEMS.voices[S.voice].desc;
+  FADERS.forEach(function(g){g.items.forEach(function(f){$('#f-'+f.id).value=S[f.id];$('#o-'+f.id).textContent=f.fmt(S[f.id]);});});
+  markPreset();writeCode();
+}
+// settings code
+function codeOf(){var o={};Object.keys(D.DEFAULTS).forEach(function(k){o[k]=S[k];});return 'BUCK-VOICE '+JSON.stringify(o);}
+function writeCode(){if(document.activeElement!==$('#code'))$('#code').value=codeOf();try{localStorage.setItem('buck-voice-lab',JSON.stringify(S));}catch(e){}}
+function status(t){$('#status').textContent=t;clearTimeout(status.t);status.t=setTimeout(function(){$('#status').textContent='';},3200);}
+$('#copy').addEventListener('click',function(){
+  var t=codeOf(),ta=$('#code');ta.value=t;
+  var fallback=function(){ta.focus();ta.select();try{ta.setSelectionRange(0,t.length);}catch(e){}status('CODE SELECTED. PRESS COPY ON YOUR KEYBOARD OR MENU.');};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){status('COPIED. PASTE IT TO CLAUDE.');},fallback);}else fallback();
+});
+$('#load').addEventListener('click',function(){
+  var t=$('#code').value,i=t.indexOf('{'),o=null;try{o=JSON.parse(t.slice(i));}catch(e){}
+  if(!o||typeof o!=='object'){status('THAT CODE COULD NOT BE READ. PASTE THE WHOLE LINE, STARTING WITH BUCK-VOICE.');return;}
+  var n=Object.assign({},D.DEFAULTS);Object.keys(n).forEach(function(k){if(k in o)n[k]=k==='voice'?(STEMS.voices[o[k]]?o[k]:n[k]):+o[k];});
+  S=n;$('#code').blur();syncUI();changed();status('SETTINGS LOADED.');
+});
+// audio
+function ac(){if(!ctx){var C=window.AudioContext||window.webkitAudioContext;ctx=new C();}if(ctx.state!=='running')ctx.resume();return ctx;}
+function toBuf(y){var c=ac(),b=c.createBuffer(1,y.length,SR);b.getChannelData(0).set(y);return b;}
+function stopAll(){playingAll=false;if(src){try{src.onended=null;src.stop();}catch(e){}src=null;}setPlayLabel(false);}
+function setPlayLabel(on){$('#play').textContent=on?'■ Stop':'▶ Play';}
+function playBuf(y,done){if(src){try{src.onended=null;src.stop();}catch(e){}}var c=ac(),s=c.createBufferSource();s.buffer=toBuf(y);s.connect(c.destination);s.start();src=s;setPlayLabel(true);
+  s.onended=function(){if(src===s){src=null;setPlayLabel(false);if(done)done();}};}
+function renderNow(){var c=clipFor(S.voice,lineIdx);rendered=D.render(c,S,STEMS.lines[lineIdx]);drawScope(rendered);
+  var f0=D.f0Of(c)*Math.pow(2,S.pitch/12);$('#m-len').textContent=(rendered.length/SR).toFixed(1)+' S';$('#m-f0').textContent=f0?'PITCH ≈ '+Math.round(f0)+' HZ':'';}
+function play(){if(!rendered)renderNow();playBuf(rendered);}
+var deb=null;
+function changed(){
+  syncUI();rendered=null;clearTimeout(deb);
+  deb=setTimeout(function(){renderNow();if($('#auto').checked&&ctx){stopAll();play();}},60);
+}
+$('#play').addEventListener('click',function(){if(src){stopAll();return;}ac();play();});
+$('#dry').addEventListener('click',function(){stopAll();var c=clipFor(S.voice,lineIdx),y=new Float32Array(c.x.length);for(var i=0;i<y.length;i++)y[i]=c.x[i]*0.84;playBuf(y);});
+$('#all').addEventListener('click',function(){stopAll();ac();playingAll=true;var i=0;
+  (function next(){if(!playingAll||i>=STEMS.lines.length){playingAll=false;return;}lineIdx=i++;markLines();renderNow();playBuf(rendered,function(){setTimeout(next,450);});})();});
+document.addEventListener('keydown',function(e){if(e.code==='Space'&&!/INPUT|TEXTAREA|SELECT|BUTTON/.test(e.target.tagName)){e.preventDefault();$('#play').click();}});
+// scope
+function drawScope(y){var cv=$('#scope'),g=cv.getContext('2d'),W=cv.width,H=cv.height;g.fillStyle='#05070a';g.fillRect(0,0,W,H);
+  g.fillStyle='rgba(63,224,197,.18)';g.fillRect(0,H/2,W,1);var step=y.length/W;g.fillStyle='#ffb627';
+  for(var x=0;x<W;x++){var a=0,b=0,s=Math.floor(x*step),e=Math.floor((x+1)*step);for(var i=s;i<e;i++){if(y[i]>a)a=y[i];if(y[i]<b)b=y[i];}g.fillRect(x,H/2-a*H/2,1,Math.max(1,(a-b)*H/2));}}
+markLines();syncUI();renderNow();
+})();
+</script>

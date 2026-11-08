@@ -4,6 +4,7 @@ title: "Hello"
 description: "How to get in touch with me."
 date: 2026-02-25
 permalink: /hello/
+blurb: "How to reach me"
 ---
 
 The best way to reach me if you don't already know me is on Mastodon: **[@bigdoodr@mastodon.social](https://mastodon.social/@bigdoodr)**

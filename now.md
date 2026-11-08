@@ -5,6 +5,7 @@ description: "What I'm focused on right now."
 date: 2026-02-25
 permalink: /now/
 published: false
+blurb: "What I'm focused on right now"
 ---
 
 *Last updated: February 25, 2026*

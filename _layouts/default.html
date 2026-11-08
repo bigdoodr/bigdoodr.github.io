@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
-<head>
   {%- include head.html -%}
-</head>
   <body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
 
     <div class="no-print">
       {%- include header.html -%}
     </div>
-    <main class="page-content" aria-label="Content">
+
+    <main class="page-content" id="main-content" aria-label="Content">
       <div class="wrapper">
-      	<form method="get" id="ddgSearch" action="https://duckduckgo.com/">
-		<input type="hidden" name="sites" value="https://bigdoodr.github.io"/>
-		<input type="hidden" name="k7" value="#4a4a4a"/>
-		<input type="hidden" name="k8" value="#ffffff"/>
-		<input type="hidden" name="k9" value="#4a90e2"/>
-		<input type="hidden" name="kx" value="#4a90e2"/>
-		<input type="hidden" name="kj" value="#d2d2d2"/>
-		<input type="hidden" name="kt" value="p"/>
-		<input type="text" name="q" placeholder="Search…" aria-label="Search https://bigdoodr.github.io on DuckDuckGo"/>
-		<button type="submit">Search</button>
-		</form>
+        {%- unless page.hide_search %}
+        <form method="get" id="ddgSearch" class="no-print" action="https://duckduckgo.com/" role="search">
+          <input type="hidden" name="sites" value="{{ site.url | remove: 'https://' }}">
+          <input type="text" name="q" placeholder="Search this site…" aria-label="Search this site on DuckDuckGo">
+          <button type="submit">Search</button>
+        </form>
+        {%- endunless %}
         {{ content }}
       </div>
     </main>
@@ -37,14 +32,11 @@
         if (links.length === 1) {
           li.style.cursor = "pointer";
           li.addEventListener("click", function (e) {
-            if (e.target.tagName !== "A") {
-              links[0].click();
-            }
+            if (!e.target.closest("a")) links[0].click();
           });
         }
       });
     });
     </script>
   </body>
-
 </html>

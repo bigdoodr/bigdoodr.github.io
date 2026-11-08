@@ -4,6 +4,7 @@ description: "How I try to tread a little lighter on the planet."
 permalink: /green/
 layout: page
 date: 2026-02-25
+blurb: "How I try to help the environment"
 ---
 
 I'm not perfect, and I'm definitely not going to pretend otherwise. But I do try to make choices that are a little kinder to the planet where I can. Here's where I'm at.
