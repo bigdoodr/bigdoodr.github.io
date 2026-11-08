@@ -22,6 +22,7 @@ image: /resources/books.purple.png
   - [Crescent City](#series-crescent-city)
   - [Dante Valentine](#series-dante-valentine)
   - [DC Icons](#series-dc-icons)
+  - [Detective Elin Warner](#series-detective-elin-warner)
   - [Dexter](#series-dexter)
   - [Dr Wren](#series-dr-wren)
   - [Holly Gibney](#series-holly-gibney)
@@ -66,22 +67,25 @@ image: /resources/books.purple.png
 - [ ] Blood Bound by Patricia Briggs
 - [ ] Aliens: Original Sin by Michael Jan Friedman
 - [ ] Wonder Woman: Warbringer by Leigh Bardugo
-- [ ] Brigands & Breadknives by Travis Baldree
 - [ ] Gathering Blue by Lois Lowry
 - [ ] Man Who Died Twice by Richard Osman
 - [ ] American Supernatural Tales by S.T. Joshi
 - [ ] Blumhouse Book of Nightmares: Haunted City by Jason Blum
 - [ ] Poisoned King by Katherine Rundell
 - [ ] Star Wars High Republic Great Jedi Rescue by Cavan Scott
-- [ ] Die Trying by Lee Child
 
 <a id="reading-2026"></a>
 ## 2026 Reading
 
-### Running Tally: 39 books
+### Running Tally: 47 books
 
 | Title | Author | Month | Details | Series |
 |-------|--------|-------|---------|--------|
+| Something in the Walls | Daisy Pearce | October | [View on LibraryThing](https://www.librarything.com/isbn/9781250334381) | — |
+| Haunting of Hill House | Shirley Jackson | October | [View on LibraryThing](https://www.librarything.com/isbn/9780606038041) | — |
+| The Southern Book Club’s Guide to Slaying Vampires | Grady Hendrix | October | [View on LibraryThing](https://www.librarything.com/isbn/9781683692515) | — |
+| The Man Who Died Seven Times | Yasuhiko Nishizawa | September | [View on LibraryThing](https://www.librarything.com/search.php?search=The%20Man%20Who%20Died%20Seven%20Times%20Yasuhiko%20Nishizawa&searchtype=newwork_titles&sortchoice=0) | — |
+| Babel | R.F. Kuang | September | [View on LibraryThing](https://www.librarything.com/isbn/9780008669867) | — |
 | Doubters’ Club | Preston Ulmer | August | [View on LibraryThing](https://www.librarything.com/work/26468639/t/The-Doubters-039-Club-Good-Faith-Conversations-with-Skeptics-Atheists-and-the-Spiritually-Wounded) | — |
 | Vigil | George Saunders | August | [View on LibraryThing](https://www.librarything.com/isbn/9780525509622) | — |
 | Princess Bride | William Goldman | August | [View on LibraryThing](https://www.librarything.com/isbn/9780345916129) | — |
@@ -104,8 +108,8 @@ image: /resources/books.purple.png
 | Careless People | Sarah Wynn-Williams | February | [View on LibraryThing](https://www.librarything.com/isbn/9781035065936) | — |
 | Dark: Stories of Madness, Murder, and the Supernatural | Clint Willis | January | [View on LibraryThing](https://www.librarything.com/work/516248/t/Dark-Stories-of-Madness-Murder-and-the-Supernatural) | — |
 | Everything Belongs | Richard Rohr | January | [View on LibraryThing](https://www.librarything.com/isbn/0824519957) | — |
-| Great Gatsby | F. Scott Fitzgerald | January | [View on LibraryThing](https://www.librarything.com/isbn/9783730600009) | — |
-| Horns | Joe Hill | January | [View on LibraryThing](https://www.librarything.com/isbn/9788483651902) | — |
+| Great Gatsby | F. Scott Fitzgerald | January | [View on LibraryThing](https://www.librarything.com/isbn/9780743273565) | — |
+| Horns | Joe Hill | January | [View on LibraryThing](https://www.librarything.com/isbn/9780061147968) | — |
 
 <a id="series-progress"></a>
 
@@ -184,7 +188,7 @@ image: /resources/books.purple.png
 
 | Order | Title | Author | Read |
 |-------|-------|--------|------|
-| 1 | [Assistant to the Villain](https://www.librarything.com/isbn/9788419988003) | Hannah Nicole Maehrer | ✅ July 2026 |
+| 1 | [Assistant to the Villain](https://www.librarything.com/isbn/9781804993385) | Hannah Nicole Maehrer | ✅ July 2026 |
 | 1 | [audiobook](https://www.librarything.com/search.php?search=audiobook%20Audiobook%20Has&searchtype=newwork_titles&sortchoice=0) | Audiobook Has | ☐ |
 | 2 | [Apprentice to the Villain](https://www.librarything.com/search.php?search=Apprentice%20to%20the%20Villain%20Hannah%20Nicole%20Maehrer&searchtype=newwork_titles&sortchoice=0) | Hannah Nicole Maehrer | ☐ |
 | 3 | [Accomplice to the Villain](https://www.librarything.com/search.php?search=Accomplice%20to%20the%20Villain%20Hannah%20Nicole%20Maehrer&searchtype=newwork_titles&sortchoice=0) | Hannah Nicole Maehrer | ☐ |
@@ -211,8 +215,8 @@ image: /resources/books.purple.png
 
 | Order | Title | Author | Read |
 |-------|-------|--------|------|
-| 1 | [City of Ghosts](https://www.librarything.com/isbn/9789022599501) | Victoria Schwab | ✅ October 2025 |
-| 2 | [Tunnel of Bones](https://www.librarything.com/isbn/9788367176323) | Victoria Schwab | ✅ July 2026 |
+| 1 | [City of Ghosts](https://www.librarything.com/isbn/9781407194073) | Victoria Schwab | ✅ October 2025 |
+| 2 | [Tunnel of Bones](https://www.librarything.com/isbn/9780702300691) | Victoria Schwab | ✅ July 2026 |
 | 3 | [Bridge of Souls](https://www.librarything.com/search.php?search=Bridge%20of%20Souls%20Victoria%20Schwab&searchtype=newwork_titles&sortchoice=0) | Victoria Schwab | ☐ |
 
 <a id="series-charity-shop-detective-agency"></a>
@@ -260,7 +264,7 @@ image: /resources/books.purple.png
 
 | Order | Title | Author | Read |
 |-------|-------|--------|------|
-| 1 | [House of Earth and Blood](https://www.librarything.com/isbn/9788410190108) | Sarah J. Maas | ✅ June 2024 |
+| 1 | [House of Earth and Blood](https://www.librarything.com/isbn/9781526638922) | Sarah J. Maas | ✅ June 2024 |
 | 1.1 | [House of Earth and Blood (Part 1 of 2)](https://www.librarything.com/search.php?search=House%20of%20Earth%20and%20Blood%20%28Part%201%20of%202%29%20Sarah%20J.%20Maas&searchtype=newwork_titles&sortchoice=0) | Sarah J. Maas | ☐ |
 | 1.1 | [House of Earth and Blood (Part 1 of 2) (Dramatized Adaptation)](https://www.librarything.com/search.php?search=House%20of%20Earth%20and%20Blood%20%28Part%201%20of%202%29%20%28Dramatized%20Adaptation%29%20Sarah%20J.%20Maas&searchtype=newwork_titles&sortchoice=0) | Sarah J. Maas | ☐ |
 | 1.2 | [House of Earth and Blood (Part 2 of 2)](https://www.librarything.com/search.php?search=House%20of%20Earth%20and%20Blood%20%28Part%202%20of%202%29%20Sarah%20J.%20Maas&searchtype=newwork_titles&sortchoice=0) | Sarah J. Maas | ☐ |
@@ -299,6 +303,15 @@ image: /resources/books.purple.png
 | 8 | [Harley Quinn: Redemption](https://www.librarything.com/search.php?search=Harley%20Quinn%3A%20Redemption%20Rachael%20Allen&searchtype=newwork_titles&sortchoice=0) | Rachael Allen | ☐ |
 | 8 | [goodreads](https://www.librarything.com/search.php?search=goodreads%20goodreads%20import&searchtype=newwork_titles&sortchoice=0) | goodreads import | ☐ |
 
+<a id="series-detective-elin-warner"></a>
+### [Detective Elin Warner](https://www.librarything.com/nseries/344807/Detective-Elin-Warner)
+
+| Order | Title | Author | Read |
+|-------|-------|--------|------|
+| 1 | [The Sanatorium](https://www.librarything.com/search.php?search=The%20Sanatorium%20Sarah%20Pearse&searchtype=newwork_titles&sortchoice=0) | Sarah Pearse | ✅ October 2026 |
+| 2 | [The Retreat](https://www.librarything.com/search.php?search=The%20Retreat%20Sarah%20Pearse&searchtype=newwork_titles&sortchoice=0) | Sarah Pearse | ☐ |
+| 3 | [The Wilds](https://www.librarything.com/search.php?search=The%20Wilds%20Sarah%20Pearse&searchtype=newwork_titles&sortchoice=0) | Sarah Pearse | ☐ |
+
 <a id="series-dexter"></a>
 ### [Dexter](https://www.librarything.com/nseries/1024/Dexter)
 
@@ -331,7 +344,7 @@ image: /resources/books.purple.png
 | 1 | [Mr. Mercedes](https://www.librarything.com/search.php?search=Mr.%20Mercedes%20Stephen%20King&searchtype=newwork_titles&sortchoice=0) | Stephen King | ☐ |
 | 2 | [Finders Keepers](https://www.librarything.com/search.php?search=Finders%20Keepers%20Stephen%20King&searchtype=newwork_titles&sortchoice=0) | Stephen King | ☐ |
 | 3 | [End of Watch](https://www.librarything.com/search.php?search=End%20of%20Watch%20Stephen%20King&searchtype=newwork_titles&sortchoice=0) | Stephen King | ☐ |
-| 4 | [The Outsider](https://www.librarything.com/isbn/9788556510679) | Stephen King | ✅ September 2024 |
+| 4 | [The Outsider](https://www.librarything.com/isbn/9781473676435) | Stephen King | ✅ September 2024 |
 | 4.5 | [If It Bleeds: Four Novellas](https://www.librarything.com/search.php?search=If%20It%20Bleeds%3A%20Four%20Novellas%20Stephen%20King&searchtype=newwork_titles&sortchoice=0) | Stephen King | ☐ |
 | 5 | [Holly](https://www.librarything.com/search.php?search=Holly%20Stephen%20King&searchtype=newwork_titles&sortchoice=0) | Stephen King | ☐ |
 | 6 | [Never Flinch](https://www.librarything.com/search.php?search=Never%20Flinch%20Stephen%20King&searchtype=newwork_titles&sortchoice=0) | Stephen King | ☐ |
@@ -350,8 +363,8 @@ image: /resources/books.purple.png
 
 | Order | Title | Author | Read |
 |-------|-------|--------|------|
-| 1 | [Killing Floor](https://www.librarything.com/isbn/9788379856367) | Lee Child | ✅ December 2025 |
-| 2 | [Die Trying](https://www.librarything.com/search.php?search=Die%20Trying%20Lee%20Child&searchtype=newwork_titles&sortchoice=0) | Lee Child | ☐ |
+| 1 | [Killing Floor](https://www.librarything.com/isbn/9780515141429) | Lee Child | ✅ December 2025 |
+| 2 | [Die Trying](https://www.librarything.com/search.php?search=Die%20Trying%20Lee%20Child&searchtype=newwork_titles&sortchoice=0) | Lee Child | ✅ October 2026 |
 | 3 | [Tripwire](https://www.librarything.com/search.php?search=Tripwire%20Lee%20Child&searchtype=newwork_titles&sortchoice=0) | Lee Child | ☐ |
 | 4 | [Running Blind](https://www.librarything.com/search.php?search=Running%20Blind%20Lee%20Child&searchtype=newwork_titles&sortchoice=0) | Lee Child | ☐ |
 | 5 | [Echo Burning](https://www.librarything.com/search.php?search=Echo%20Burning%20Lee%20Child&searchtype=newwork_titles&sortchoice=0) | Lee Child | ☐ |
@@ -433,10 +446,10 @@ image: /resources/books.purple.png
 | Order | Title | Author | Read |
 |-------|-------|--------|------|
 | 0 | [Bookshops & Bonedust](https://www.librarything.com/search.php?search=Bookshops%20%26%20Bonedust%20Travis%20Baldree&searchtype=newwork_titles&sortchoice=0) | Travis Baldree | ☐ |
-| 1 | [Legends & Lattes](https://www.librarything.com/isbn/9789020555523) | Travis Baldree | ✅ April 2025 |
+| 1 | [Legends & Lattes](https://www.librarything.com/isbn/9781955252690) | Travis Baldree | ✅ April 2025 |
 | 1 | [Pages to Fill](https://www.librarything.com/search.php?search=Pages%20to%20Fill%20Travis%20Baldree&searchtype=newwork_titles&sortchoice=0) | Travis Baldree | ☐ |
-| 2 | [Bookshops and Bonedust](https://www.librarything.com/isbn/9783423263795) | Travis Baldree | ✅ July 2025 |
-| 2 | [Brigands & Breadknives](https://www.librarything.com/search.php?search=Brigands%20%26%20Breadknives%20Travis%20Baldree&searchtype=newwork_titles&sortchoice=0) | Travis Baldree | ☐ |
+| 2 | [Bookshops and Bonedust](https://www.librarything.com/isbn/9781250407955) | Travis Baldree | ✅ July 2025 |
+| 2 | [Brigands & Breadknives](https://www.librarything.com/search.php?search=Brigands%20%26%20Breadknives%20Travis%20Baldree&searchtype=newwork_titles&sortchoice=0) | Travis Baldree | ✅ September 2026 |
 | 2 | [Goblins & Greatcoats](https://www.librarything.com/search.php?search=Goblins%20%26%20Greatcoats%20Travis%20Baldree&searchtype=newwork_titles&sortchoice=0) | Travis Baldree | ☐ |
 | 3 | [Tales from the Territory: A Cosy Collection of Legends & Lattes Short Stories](https://www.librarything.com/search.php?search=Tales%20from%20the%20Territory%3A%20A%20Cosy%20Collection%20of%20Legends%20%26%20Lattes%20Short%20Stories%20Travis%20Baldree&searchtype=newwork_titles&sortchoice=0) | Travis Baldree | ☐ |
 
@@ -476,7 +489,7 @@ image: /resources/books.purple.png
 
 | Order | Title | Author | Read |
 |-------|-------|--------|------|
-| 1 | [Nos4a2](https://www.librarything.com/isbn/9786555110043) | Joe Hill | ✅ September 2025 |
+| 1 | [Nos4a2](https://www.librarything.com/isbn/9780062222992) | Joe Hill | ✅ September 2025 |
 | 2 | [The Wraith](https://www.librarything.com/search.php?search=The%20Wraith%20Joe%20Hill&searchtype=newwork_titles&sortchoice=0) | Joe Hill | ☐ |
 
 <a id="series-oracle-nate-russo"></a>
@@ -645,7 +658,7 @@ image: /resources/books.purple.png
 
 | Order | Title | Author | Read |
 |-------|-------|--------|------|
-| 1 | [The Giver](https://www.librarything.com/isbn/9788804738794) | Lois Lowry | ✅ August 2025 |
+| 1 | [The Giver](https://www.librarything.com/isbn/9780786271542) | Lois Lowry | ✅ August 2025 |
 | 2 | [Gathering Blue](https://www.librarything.com/search.php?search=Gathering%20Blue%20Lois%20Lowry&searchtype=newwork_titles&sortchoice=0) | Lois Lowry | ☐ |
 | 3 | [Messenger](https://www.librarything.com/search.php?search=Messenger%20Lois%20Lowry&searchtype=newwork_titles&sortchoice=0) | Lois Lowry | ☐ |
 | 4 | [Son](https://www.librarything.com/search.php?search=Son%20Lois%20Lowry&searchtype=newwork_titles&sortchoice=0) | Lois Lowry | ☐ |
@@ -746,7 +759,7 @@ image: /resources/books.purple.png
 | Title | Author | Month | Details | Series |
 | ----- | ------ | ----- | ------- | ------ |
 | Robin Williams When the Laughter Stops 1951-2014 | Emily Herbert | December | [View on LibraryThing](https://www.librarything.com/work/15552223/t/Robin-Williams-When-the-Laughter-Stops-1951–2014) | — |
-| Fear and Loathing in Las Vegas | Hunter S. Thompson | December | [View on LibraryThing](https://www.librarything.com/isbn/9788433912923) | — |
+| Fear and Loathing in Las Vegas | Hunter S. Thompson | December | [View on LibraryThing](https://www.librarything.com/isbn/9781417665884) | — |
 | Miracle and Wonder | Malcom Galdwell | December | [View on LibraryThing](https://www.librarything.com/work/27254346/t/Miracle-and-Wonder-Conversations-with-Paul-Simon) | — |
 | Reacher the Stories Behind the Stories | Lee Child | December | [View on LibraryThing](https://www.librarything.com/work/33548538/t/Reacher-The-Stories-Behind-the-Stories) | — |
 | Dolly Parton, Songteller | Dolly Parton | December | [View on LibraryThing](https://www.librarything.com/isbn/9781529349795) | — |
@@ -762,13 +775,13 @@ image: /resources/books.purple.png
 | Grendel | John Gardner | June | [View on LibraryThing](https://www.librarything.com/isbn/9780345236517) | — |
 | We Were Kings | Court Stevens | June | [View on LibraryThing](https://www.librarything.com/isbn/9780785238577) | — |
 | Last Girl Breathing | Court Stevens | June | [View on LibraryThing](https://www.librarything.com/isbn/9780840707109) | — |
-| Fairy Tale | Stephen King | June | [View on LibraryThing](https://www.librarything.com/isbn/9788401027710) | — |
+| Fairy Tale | Stephen King | June | [View on LibraryThing](https://www.librarything.com/isbn/9781668052679) | — |
 | Heroic Hearts | Jim Butcher | May | [View on LibraryThing](https://www.librarything.com/isbn/9780593099186) | — |
 | One Day in December | Josie Silver | April | [View on LibraryThing](https://www.librarything.com/isbn/9781984827128) | — |
 | The Guest List | Lucy Foley | March | [View on LibraryThing](https://www.librarything.com/work/23927322/t/The-Guest-List) | — |
-| The God of the Woods | Liz Moore | March | [View on LibraryThing](https://www.librarything.com/isbn/9789028453524) | — |
+| The God of the Woods | Liz Moore | March | [View on LibraryThing](https://www.librarything.com/isbn/9780593418925) | — |
 | James | Percival Everett | February | [View on LibraryThing](https://www.librarything.com/isbn/9781035031245) | — |
-| The Lost City of the Monkey God | Douglas Preston | January | [View on LibraryThing](https://www.librarything.com/isbn/9783641203924) | — |
+| The Lost City of the Monkey God | Douglas Preston | January | [View on LibraryThing](https://www.librarything.com/isbn/9781538760833) | — |
 | Something Wilder | Christina Lauren | January | [View on LibraryThing](https://www.librarything.com/isbn/9798885783378) | — |
 
 <a id="reading-2024"></a>
@@ -786,15 +799,15 @@ image: /resources/books.purple.png
 | You Shouldn’t Have Come Here | Jeneva Rose | October | [View on LibraryThing](https://www.librarything.com/isbn/9798212187800) | — |
 | Brick Dust and Bones | M. R. Fournet | October | [View on LibraryThing](https://www.librarything.com/work/29628447/t/Brick-Dust-and-Bones-Marius-Grey-1) | — |
 | Yellowface | R.F. Kuang | October | [View on LibraryThing](https://www.librarything.com/isbn/9780008532802) | — |
-| Digital Minimalism | Cal Newport | August | [View on LibraryThing](https://www.librarything.com/isbn/9783868817256) | — |
+| Digital Minimalism | Cal Newport | August | [View on LibraryThing](https://www.librarything.com/isbn/9780241341131) | — |
 | A Winter in New York | Josie Silver | August | [View on LibraryThing](https://www.librarything.com/work/30427969/t/A-Winter-in-New-York) | — |
 | Bookworm to Badass | Dustin Tigner | July | [View on LibraryThing](https://www.librarything.com/work/31132611/t/Bookworm-to-Badass) | — |
 | The Kill Factor | Ben Oliver | June | [View on LibraryThing](https://www.librarything.com/work/31232169/t/The-Kill-Factor) | — |
 | The Last Murder at the End of the World | Stuart Turton | May | [View on LibraryThing](https://www.librarything.com/isbn/9781526680969) | — |
-| Tell No One | Harlan Coben | May | [View on LibraryThing](https://www.librarything.com/isbn/9783442452514) | — |
+| Tell No One | Harlan Coben | May | [View on LibraryThing](https://www.librarything.com/isbn/0752844717) | — |
 | Where the Light Fell | Philip Yancey | April | [View on LibraryThing](https://www.librarything.com/isbn/9780593238509) | — |
 | This is How it Always Is | Laurie Frankel | April | [View on LibraryThing](https://www.librarything.com/isbn/9781250088543) | — |
 | Good Omens | Terry Pratchett<br>Neil Gaiman | March | [View on LibraryThing](https://www.librarything.com/isbn/9788674360170) | — |
-| Erasure | Percival Everett | March | [View on LibraryThing](https://www.librarything.com/isbn/9782742747641) | — |
+| Erasure | Percival Everett | March | [View on LibraryThing](https://www.librarything.com/isbn/9780571370894) | — |
 | Full Throttle | Joe Hill | March | [View on LibraryThing](https://www.librarything.com/isbn/9780062200693) | — |
 | Soul Boom: Why We Need a Spiritual Revolution | Rainn Wilson | February | [View on LibraryThing](https://www.librarything.com/work/29657241/t/Soul-Boom-Why-We-Need-a-Spiritual-Revolution) | — |

@@ -278,6 +278,11 @@ title: "Bookmarks"
 <div class="bookmark-label">0email</div>
 </a>
 
+<a href="https://tools.simonwillison.net/colophon" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+<div class="bookmark-label">Simon Willison: AI Tools Colophon</div>
+</a>
+
 </div>
 </div>
 
@@ -379,6 +384,11 @@ title: "Bookmarks"
 <a href="https://www.reddit.com/r/Starfield/comments/16nqqux/my_pacifist_journey_through_starfield_tips_and/" class="bookmark-card">
 <div class="bookmark-icon"><i class="fa-brands fa-reddit"></i></div>
 <div class="bookmark-label">Starfield: Pacifist Journey Tips (Reddit)</div>
+</a>
+
+<a href="https://www.videogameconsolelibrary.com/history-of-video-game-consoles/" class="bookmark-card">
+<div class="bookmark-icon"><i class="fas fa-clock-rotate-left"></i></div>
+<div class="bookmark-label">History of Video Game Consoles</div>
 </a>
 
 </div>
