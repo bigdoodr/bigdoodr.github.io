@@ -13,7 +13,7 @@ def clean(t):
     t=re.sub(r'\([^)]*\)\s*','',t); t=t.replace('LIMBS','limbs'); return t
 
 SEGS={
- 'dockoffice':["Shuttle traffic's frozen. The captain locked down the ring after the drill crew came back from Ruin. That strands four thousand crew on twelve decks, plus twenty-eight hundred relief miners asleep in cryo. Somebody keeps knocking on the inside of cargo container nine.",1.0,'GASP',.3,("Nobody is in container nine.",1.0,1.0,{'trem':(6,.12),'breathy':.16})],
+ 'dockoffice':["Shuttle traffic's frozen. The captain locked down the ring after the drill crew came back from Ruin. That strands four thousand crew on twelve decks, plus twenty-eight hundred relief miners asleep in cryo. Somebody keeps knocking on the inside of cargo container nine.",1.0,'GASP',.3,("…but there's nobody in container nine.",1.0,1.0,{'trem':(6,.12),'breathy':.16})],
  'hydro':["The plants grow toward the vents now instead of the lamps. I pulled one up and the roots were warm.",1.1,"I sealed the seed vault behind the cracked panel in the north wall.",1.0,"Don't tell the captain."],
  'bunks':["Night shift says Miller got up after the medics bagged him and walked right out of the morgue. I told them they were drunk.",.35,'BREATH',.25,("Then I heard him.",1.0,1.0,{'trem':(6,.08),'breathy':.14,'gain':.9}),.35,("In the vent over my bunk.",1.02,1.0,{'trem':(6,.1),'breathy':.16,'gain':.85})],
  'captain':["Day three. The drill broke into the cavity under Ruin at oh four hundred. Gorgon wants samples, not questions.",1.2,"My blue card opens Engineering.",.55,("If I don't make it, get the power up and get my people on that tram.",.93,1.0,{'trem':(5,.1),'breathy':.14,'gain':.92})],

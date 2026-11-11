@@ -3,19 +3,19 @@
  "id": "deck-01",
  "kind": "deck",
  "deck": 1,
- "version": "1.2.2",
+ "version": "1.2.3",
  "minEngine": "1.3",
  "title": "Repo Day",
  "place": "Docking Ring",
  "requires": {
   "core": "1.2.0"
  },
- "bytes": 1102556,
+ "bytes": 1139482,
  "files": [
   {
    "path": "deck.json",
-   "bytes": 15429,
-   "sha256": "6fe8c293b982802e93f347f61d23197b1410437f335d71493e5feb73c2b071b5"
+   "bytes": 15494,
+   "sha256": "41ed04ee3984fd4e381e0427834445bec6ae39dff8890a4e4f9b1825927cb44b"
   },
   {
    "path": "level.json",
@@ -24,13 +24,13 @@
   },
   {
    "path": "lines.json",
-   "bytes": 1270,
-   "sha256": "76acb54731212b676870f8cb582de3a07e8c8710091262a71e84b16d6e946a31"
+   "bytes": 1388,
+   "sha256": "23ce83a9723be4d7376dabea2a42d68b196f893c405deb85e9645acf5120a4af"
   },
   {
    "path": "logs.json",
-   "bytes": 6212,
-   "sha256": "b548cddd9b2cc6f9937d7abf7d7259ee584b68dfe49f312775c5c191c1da75db"
+   "bytes": 6229,
+   "sha256": "ed4380d6b47eee8c83e5e829e4e675b61d112538915ab9f55f611d1b9daedcf7"
   },
   {
    "path": "logs/bridge.mp3",
@@ -74,8 +74,8 @@
   },
   {
    "path": "logs/dockoffice.mp3",
-   "bytes": 71594,
-   "sha256": "342542828bea76c1cb71efa7a2e2ed5d0374c791a7baa235e1a91a2a328b5d7a"
+   "bytes": 78231,
+   "sha256": "11a37d424606b0dda90217bf5b958b655676417820a0cdc9691991016aaf52c0"
   },
   {
    "path": "logs/hall.mp3",
@@ -94,8 +94,8 @@
   },
   {
    "path": "logs/morgue.mp3",
-   "bytes": 42232,
-   "sha256": "20c0e00bb59a957a21b004251121d5fa48edcf91c6970cd2bf4b2b1164eba0b4"
+   "bytes": 48138,
+   "sha256": "693aa6305030587e83b319ba05591d6d479afc6a45c7769f7d4b22afe9a1125e"
   },
   {
    "path": "logs/reactor.mp3",
@@ -166,6 +166,11 @@
    "path": "voice/yellow_card.mp3",
    "bytes": 17373,
    "sha256": "58e78048954d134dfce7d83e501bd27184a7defe1c43e1cefe330471d4783c6e"
+  },
+  {
+   "path": "voice/schematic_ok.mp3",
+   "bytes": 24183,
+   "sha256": "a61f4978d30a148692ffae5eee3b16d1b5ccbbf57396fc2d2901341ed200077e"
   }
  ]
 }

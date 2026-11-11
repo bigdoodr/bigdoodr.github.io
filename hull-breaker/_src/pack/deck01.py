@@ -94,7 +94,7 @@ DECK = {
 
     # ---- rules: when something happens, check a condition, run actions ----
     'rules': [
-        {'on': {'event': 'use', 'target': 'floorplan'}, 'do': [{'if': {'flag': 'floorplan'}, 'then': [{'msg': 'FLOOR PLAN ALREADY DOWNLOADED'}], 'else': [{'set': 'floorplan', 'value': True}, {'floorplan': True}, {'sfx': 'pickup'}, {'msg': 'FLOOR PLAN DOWNLOADED. IT MATCHES THE WORK ORDER.'}]}]},
+        {'on': {'event': 'use', 'target': 'floorplan'}, 'do': [{'if': {'flag': 'floorplan'}, 'then': [{'msg': 'FLOOR PLAN ALREADY DOWNLOADED'}], 'else': [{'set': 'floorplan', 'value': True}, {'floorplan': True}, {'sfx': 'pickup'}, {'msg': 'FLOOR PLAN DOWNLOADED. IT MATCHES THE WORK ORDER.'}, {'say': 'schematic_ok', 'sub': 2.8}]}]},
         {'on': {'event': 'start'}, 'do': [
             {'say': 'start', 'sub': 3.6},
             {'objective': 'Get inside the ship. Take the transit corridor north out of the docking bay.', 'show': 7},

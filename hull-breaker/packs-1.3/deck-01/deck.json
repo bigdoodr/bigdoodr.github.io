@@ -410,6 +410,10 @@
       },
       {
        "msg": "FLOOR PLAN DOWNLOADED. IT MATCHES THE WORK ORDER."
+      },
+      {
+       "say": "schematic_ok",
+       "sub": 2.8
       }
      ]
     }

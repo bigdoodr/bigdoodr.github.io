@@ -5,7 +5,7 @@
    "order": 1,
    "header": "AUDIO LOG // DOCKMASTER J. FELL",
    "speaker": "DOCKMASTER J. FELL",
-   "text": "Shuttle traffic's frozen. The captain locked down the ring after the drill crew came back from Ruin. That strands four thousand crew on twelve decks, plus twenty-eight hundred relief miners asleep in cryo. Somebody keeps knocking on the inside of cargo container nine. Nobody is in container nine.",
+   "text": "Shuttle traffic's frozen. The captain locked down the ring after the drill crew came back from Ruin. That strands four thousand crew on twelve decks, plus twenty-eight hundred relief miners asleep in cryo. Somebody keeps knocking on the inside of cargo container nine. …but there's nobody in container nine.",
    "file": "logs/dockoffice.mp3",
    "zone": "dockoffice"
   },
@@ -23,7 +23,7 @@
    "order": 3,
    "header": "AUDIO LOG // DR. N. OKAFOR",
    "speaker": "DR. N. OKAFOR",
-   "text": "The dead don't stay down. Tissue re-knits around the bone, like it's being rebuilt by something that only read about people. Destroying the brain does nothing. Take the LIMBS.",
+   "text": "The dead don't stay down. Tissue re-knits around the bone, like it's being rebuilt by something that has only 'red' about people. Destroying the brain does nothing. Take the LIMBS.",
    "file": "logs/morgue.mp3",
    "zone": "morgue"
   },

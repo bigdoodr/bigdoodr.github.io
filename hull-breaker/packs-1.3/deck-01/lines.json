@@ -55,6 +55,11 @@
    "id": "still_got_it",
    "text": "Still got it.",
    "file": "voice/still_got_it.mp3"
+  },
+  {
+   "id": "schematic_ok",
+   "text": "Schematic checks out. Easy money.",
+   "file": "voice/schematic_ok.mp3"
   }
  ]
 }
