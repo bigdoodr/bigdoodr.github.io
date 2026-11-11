@@ -191,10 +191,11 @@ DECK = {
         ]},
         {'on': {'event': 'doorDenied', 'lock': 'M'}, 'once': True, 'do': [{'say': 'need_key', 'sub': 2.4}]},
         {'on': {'event': 'doorUnlock', 'lock': 'M'}, 'do': [{'say': 'moss_boiler', 'sub': 3.6}]},
-        {'on': {'event': 'enterZone', 'zone': 'boiler'}, 'do': [
+        # Skipped when the Super is already dead (killed through the door before Buck walked in).
+        {'on': {'event': 'enterZone', 'zone': 'boiler'}, 'do': [{'if': {'not': {'flag': 'superDown'}}, 'then': [
             {'say': 'boss_check', 'sub': 3.2}, {'music': 1},
             {'objective': 'Take down the Super.'},
-        ]},
+        ]}]},
         # The Super falls: the payoff scene, then the valve.
         {'on': {'event': 'kill'}, 'if': {'field': 'enemy', 'eq': 'super'}, 'do': [
             {'set': 'superDown', 'value': True}, {'music': .3}, {'scene': 'super_payoff'},

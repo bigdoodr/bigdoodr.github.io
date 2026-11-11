@@ -1029,14 +1029,23 @@
    },
    "do": [
     {
-     "say": "boss_check",
-     "sub": 3.2
-    },
-    {
-     "music": 1
-    },
-    {
-     "objective": "Take down the Super."
+     "if": {
+      "not": {
+       "flag": "superDown"
+      }
+     },
+     "then": [
+      {
+       "say": "boss_check",
+       "sub": 3.2
+      },
+      {
+       "music": 1
+      },
+      {
+       "objective": "Take down the Super."
+      }
+     ]
     }
    ]
   },
