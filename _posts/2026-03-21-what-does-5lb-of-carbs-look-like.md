@@ -77,4 +77,4 @@ That's something worth appreciating, not panicking about.
 *Further reading:*
 - [Fundamentals of glycogen metabolism for coaches and athletes (PMC)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6019055/)
 - [How Much Glycogen Can Your Body Store? — Cathe Friedrich](https://cathe.com/how-much-glycogen-can-your-body-store/)
-- [Losing Water Weight: How Carbs Really Work — 8fit](https://8fit.com/nutrition/glycogen-gluconeogenesis-and-water-weight/)
+- [Losing Water Weight: How Carbs Really Work — 8fit](https://web.archive.org/web/20260114021556/https://8fit.com/nutrition/glycogen-gluconeogenesis-and-water-weight/)
