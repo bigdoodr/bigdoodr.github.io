@@ -426,7 +426,8 @@
    "superDown": false,
    "flushed": false,
    "floorplan": false,
-   "sealedHall": false
+   "sealedHall": false,
+   "superSeen": false
   },
   "counters": {
    "junctions": 0
@@ -1024,17 +1025,24 @@
   },
   {
    "on": {
-    "event": "enterZone",
-    "zone": "boiler"
+    "event": "bossSight"
+   },
+   "if": {
+    "field": "enemy",
+    "eq": "super"
    },
    "do": [
     {
      "if": {
       "not": {
-       "flag": "superDown"
+       "flag": "superSeen"
       }
      },
      "then": [
+      {
+       "set": "superSeen",
+       "value": true
+      },
       {
        "say": "boss_check",
        "sub": 3.2

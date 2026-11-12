@@ -16,6 +16,7 @@ SIGNALS = {  # combat and score events, with the fields their conditions may rea
     'kill': {'enemy', 'cause', 'boss', 'state'}, 'blast': {'source', 'kills'}, 'sever': {'enemy', 'limb', 'state'},
     'death': {'cause'}, 'secret': {'found', 'total'},
     'deckClear': {'percent', 'time', 'par', 'underPar', 'damageTaken', 'weapons', 'difficulty', 'deck'},
+    'bossSight': {'enemy'},                                # engine 1.3: Buck first sees a boss (the boss bar appears)
     'cheat': {'command'},                                  # engine 1.2: a console cheat was used
 }
 STATS = {'kickKills', 'limbsSevered', 'deaths', 'bodiesKicked', 'departStays', 'sleepersStomped'}

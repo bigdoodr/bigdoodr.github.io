@@ -97,7 +97,7 @@ DECK = {
     },
     'keys': {'M': {'color': '#c0c8d0'}},
 
-    'state': {'flags': {'wingA': False, 'wingB': False, 'superDown': False, 'flushed': False, 'floorplan': False, 'sealedHall': False},
+    'state': {'flags': {'wingA': False, 'wingB': False, 'superDown': False, 'superSeen': False, 'flushed': False, 'floorplan': False, 'sealedHall': False},
               'counters': {'junctions': 0}},
 
     # engine 1.3: Gorgon's copy of the deck, drawn faintly on the automap until a floor-plan terminal is used.
@@ -191,8 +191,10 @@ DECK = {
         ]},
         {'on': {'event': 'doorDenied', 'lock': 'M'}, 'once': True, 'do': [{'say': 'need_key', 'sub': 2.4}]},
         {'on': {'event': 'doorUnlock', 'lock': 'M'}, 'do': [{'say': 'moss_boiler', 'sub': 3.6}]},
-        # Skipped when the Super is already dead (killed through the door before Buck walked in).
-        {'on': {'event': 'enterZone', 'zone': 'boiler'}, 'do': [{'if': {'not': {'flag': 'superDown'}}, 'then': [
+        # Buck's line, the music and the objective come when he first sees the Super (engine 1.3 bossSight event),
+        # not when he enters the room: the Super may already be dead, or still out of sight.
+        {'on': {'event': 'bossSight'}, 'if': {'field': 'enemy', 'eq': 'super'}, 'do': [{'if': {'not': {'flag': 'superSeen'}}, 'then': [
+            {'set': 'superSeen', 'value': True},
             {'say': 'boss_check', 'sub': 3.2}, {'music': 1},
             {'objective': 'Take down the Super.'},
         ]}]},
