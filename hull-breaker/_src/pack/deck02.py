@@ -63,7 +63,7 @@ DECK = {
             'L': {'tex': 'lever', 'use': 'breakGlass', 'light': [1, .6, .2], 'map': '#ffb627',
                   'after': {'tex': 'leveron', 'map': '#ffb627', 'use': 'lever'}},
         },
-        'doors': {'D': 'none', 'X': 'secret', '1': 'wingA', '2': 'wingB', '3': 'maint', '4': 'M', '5': 'flushed'},
+        'doors': {'D': 'none', 'X': 'secret', '1': 'wingA', '2': 'wingB', '3': 'maint', '4': 'M', '5': 'flushed', '6': 'office', '7': 'chapel'},
         'objects': {
             '@': {'start': True},
             'h': {'enemy': 'husk', 'min': 0}, 'c': {'enemy': 'crawler', 'min': 0}, 's': {'enemy': 'spitter', 'min': 0},
@@ -77,7 +77,7 @@ DECK = {
             '3': {'enemy': 'sleeper', 'min': 3},
             '+': {'item': 'med'}, '*': {'item': 'medbig'}, 'a': {'item': 'cells'}, 'e': {'item': 'shells'},
             'i': {'item': 'rivets'}, 'o': {'item': 'bombs'}, '&': {'item': 'armor'}, 'b': {'item': 'boots'},
-            'M': {'item': 'keyM'}, 'l': {'item': 'log'}, '$': {'item': 'asset'},
+            'M': {'item': 'keyM'}, 'j': {'item': 'keyC'}, 'u': {'item': 'medmax'}, 'l': {'item': 'log'}, '$': {'item': 'asset'},
             'O': {'barrel': True},
             'K': {'decor': 'crate', 'solid': True, 'r': .38}, 't': {'decor': 'table', 'solid': True, 'r': .42},
             'k': {'decor': 'corpse'}, 'p': {'decor': 'pile'}, 'n': {'decor': 'bunk', 'solid': True, 'r': .42},
@@ -93,11 +93,14 @@ DECK = {
         'maint': {'tex': 'pwr', 'needs': {'counter': 'junctions', 'gte': 2},
                   'denied': 'LOCKDOWN. RESET THE JUNCTION BOX IN EACH HOUSING BLOCK.', 'map': '#ff4030'},
         'M': {'tex': 'masterdoor', 'needs': {'key': 'M'}, 'denied': "LOCKED. NEEDS THE SUPER'S MASTER KEY.", 'map': '#c0c8d0'},
+        'office': {'tex': 'lock', 'needs': {'key': 'C'}, 'denied': "SUPER'S OFFICE. LOCKED. THE CHAPLAIN HOLDS THE SPARE.", 'map': '#d4a64a'},
+        'chapel': {'tex': 'pwr', 'needs': {'counter': 'junctions', 'gte': 2},
+                   'denied': 'LOCKDOWN. RESET THE JUNCTION BOX IN EACH HOUSING BLOCK.', 'map': '#ff4030'},
         'flushed': {'tex': 'flooded', 'needs': {'flag': 'flushed'}, 'denied': 'FLOODED, LIVE CURRENT. DRAIN BLOCK B FROM THE BOILER ROOM.', 'map': '#2a6a9a'},
     },
-    'keys': {'M': {'color': '#c0c8d0'}},
+    'keys': {'M': {'color': '#c0c8d0'}, 'C': {'color': '#d4a64a'}},
 
-    'state': {'flags': {'wingA': False, 'wingB': False, 'superDown': False, 'superSeen': False, 'flushed': False, 'floorplan': False, 'sealedHall': False},
+    'state': {'flags': {'wingA': False, 'wingB': False, 'superDown': False, 'superSeen': False, 'flushed': False, 'floorplan': False, 'sealedHall': False, 'chapelKey': False},
               'counters': {'junctions': 0}},
 
     # engine 1.3: Gorgon's copy of the deck, drawn faintly on the automap until a floor-plan terminal is used.
@@ -172,7 +175,7 @@ DECK = {
             {'msg': 'JUNCTION RESET ({junctions}/2)'},
             {'if': {'counter': 'junctions', 'gte': 2}, 'then': [
                 {'sfx': 'powerup'}, {'say': 'moss_maint', 'sub': 4.2},
-                {'objective': "Maintenance is open, south side of the concourse. Find the Super's master key in his office."},
+                {'objective': "Maintenance is open (south side of the concourse), and so is the Chapel. Find the Super's master key in his office."},
                 {'ambush': 'maint', 'delay': 3}, {'autosave': 'events'}],
              'else': [
                 {'say': 'moss_junction', 'sub': 3.6},
@@ -180,6 +183,17 @@ DECK = {
         ]},
         {'on': {'event': 'doorDenied', 'lock': 'maint'}, 'once': True, 'do': [{'say': 'moss_maint_locked', 'sub': 3.4}]},
         {'on': {'event': 'enterZone', 'zone': 'laundry'}, 'do': [{'ambush': 'laundry', 'delay': 2.5}]},
+        # The Super's office is locked. The chaplain's spare is in the Chapel, so Buck has to walk the spine twice,
+        # and every area he crossed on the way in fills up again on the way back (one-off ambushes, run once each).
+        {'on': {'event': 'doorDenied', 'lock': 'office'}, 'once': True, 'do': [
+            {'objective': "The Super's office is locked. The chaplain kept a spare: try the Chapel, north-east of the concourse."}]},
+        {'on': {'event': 'pickup', 'item': 'keyC'}, 'do': [
+            {'msg': "OFFICE KEY ACQUIRED"}, {'sfx': 'key'}, {'set': 'chapelKey', 'value': True},
+            {'objective': "Back to the Super's Office, south of the Laundry and Recycling."},
+            {'ambush': 'chapel', 'delay': 2}, {'autosave': 'events'}]},
+        {'on': {'event': 'enterZone', 'zone': 'concourse'}, 'if': {'flag': 'chapelKey'}, 'once': True, 'do': [{'ambush': 'concourse2', 'delay': 2.5}]},
+        {'on': {'event': 'enterZone', 'zone': 'maint'}, 'if': {'flag': 'chapelKey'}, 'once': True, 'do': [{'ambush': 'maint2', 'delay': 2}]},
+        {'on': {'event': 'enterZone', 'zone': 'laundry'}, 'if': {'flag': 'chapelKey'}, 'once': True, 'do': [{'ambush': 'laundry2', 'delay': 2.5}]},
 
         {'on': {'event': 'pickup', 'item': 'boots'}, 'do': [
             {'sfx': 'key'}, {'hint': 'stomp'},
@@ -245,6 +259,10 @@ DECK = {
         'maint': {'zones': ['maint', 'concourse'], 'spawns': ['husk', 'husk', 'crawler', 'crawler', 'spitter', 'bloater']},
         'laundry': {'zones': ['laundry'], 'spawns': ['husk', 'crawler', 'spitter']},
         'office': {'zones': ['office', 'laundry'], 'spawns': ['husk', 'husk', 'crawler', 'bloater']},
+        'chapel': {'zones': ['chapel'], 'spawns': ['husk', 'husk', 'crawler', 'crawler', 'spitter', 'husk']},
+        'concourse2': {'zones': ['concourse'], 'spawns': ['husk', 'husk', 'husk', 'crawler', 'crawler', 'spitter', 'bloater', 'husk']},
+        'maint2': {'zones': ['maint'], 'spawns': ['crawler', 'crawler', 'husk', 'husk', 'bloater', 'spitter']},
+        'laundry2': {'zones': ['laundry'], 'spawns': ['husk', 'husk', 'husk', 'crawler', 'spitter', 'bloater', 'husk']},
         'pub': {'zones': ['commissary'], 'spawns': ['husk', 'husk', 'crawler']},
         'lower': {'zones': ['lower', 'blockB2'], 'spawns': ['husk', 'husk', 'crawler', 'spitter', 'bloater', 'crawler']},
         'downline': {'zones': ['downline'], 'spawns': ['husk', 'husk', 'husk', 'crawler', 'spitter']},
@@ -257,6 +275,7 @@ DECK = {
         {'until': {'flag': 'wingA'}, 'to': {'use': 'intercomA'}},
         {'until': {'flag': 'wingB'}, 'to': {'use': 'intercomB'}},
         {'until': {'counter': 'junctions', 'gte': 2}, 'to': {'nearestUse': 'junction'}},
+        {'until': {'key': 'C'}, 'to': {'item': 'keyC'}},
         {'until': {'key': 'M'}, 'to': {'item': 'keyM'}},
         {'until': {'flag': 'superDown'}, 'to': {'cell': [46, 69]}},
         {'until': {'flag': 'flushed'}, 'to': {'use': 'flush'}},

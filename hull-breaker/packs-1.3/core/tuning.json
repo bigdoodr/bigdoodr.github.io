@@ -426,6 +426,12 @@
    "sprite": "medbig",
    "height": 0.3
   },
+  "medmax": {
+   "heal": 100,
+   "msg": "REVIVAL KIT",
+   "sprite": "medmax",
+   "height": 0.34
+  },
   "cells": {
    "ammo": "cells",
    "amount": 8,
@@ -535,6 +541,12 @@
   "keyM": {
    "key": "M",
    "sprite": "keyM",
+   "height": 0.2,
+   "mapItem": true
+  },
+  "keyC": {
+   "key": "C",
+   "sprite": "keyC",
    "height": 0.2,
    "mapItem": true
   }

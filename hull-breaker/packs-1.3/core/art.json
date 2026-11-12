@@ -421,13 +421,18 @@
   },
   "med": {
    "file": "sprites/med.png",
-   "w": 24,
-   "h": 20
+   "w": 20,
+   "h": 16
   },
   "medbig": {
    "file": "sprites/medbig.png",
    "w": 28,
    "h": 22
+  },
+  "medmax": {
+   "file": "sprites/medmax.png",
+   "w": 36,
+   "h": 28
   },
   "cells": {
    "file": "sprites/cells.png",
@@ -578,6 +583,11 @@
   },
   "keyM": {
    "file": "sprites/keyM.png",
+   "w": 20,
+   "h": 12
+  },
+  "keyC": {
+   "file": "sprites/keyC.png",
    "w": 20,
    "h": 12
   },

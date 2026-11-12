@@ -192,7 +192,9 @@
    "2": "wingB",
    "3": "maint",
    "4": "M",
-   "5": "flushed"
+   "5": "flushed",
+   "6": "office",
+   "7": "chapel"
   },
   "objects": {
    "@": {
@@ -323,6 +325,12 @@
    "M": {
     "item": "keyM"
    },
+   "j": {
+    "item": "keyC"
+   },
+   "u": {
+    "item": "medmax"
+   },
    "l": {
     "item": "log"
    },
@@ -405,6 +413,23 @@
    "denied": "LOCKED. NEEDS THE SUPER'S MASTER KEY.",
    "map": "#c0c8d0"
   },
+  "office": {
+   "tex": "lock",
+   "needs": {
+    "key": "C"
+   },
+   "denied": "SUPER'S OFFICE. LOCKED. THE CHAPLAIN HOLDS THE SPARE.",
+   "map": "#d4a64a"
+  },
+  "chapel": {
+   "tex": "pwr",
+   "needs": {
+    "counter": "junctions",
+    "gte": 2
+   },
+   "denied": "LOCKDOWN. RESET THE JUNCTION BOX IN EACH HOUSING BLOCK.",
+   "map": "#ff4030"
+  },
   "flushed": {
    "tex": "flooded",
    "needs": {
@@ -417,6 +442,9 @@
  "keys": {
   "M": {
    "color": "#c0c8d0"
+  },
+  "C": {
+   "color": "#d4a64a"
   }
  },
  "state": {
@@ -424,10 +452,11 @@
    "wingA": false,
    "wingB": false,
    "superDown": false,
+   "superSeen": false,
    "flushed": false,
    "floorplan": false,
    "sealedHall": false,
-   "superSeen": false
+   "chapelKey": false
   },
   "counters": {
    "junctions": 0
@@ -909,7 +938,7 @@
        "sub": 4.2
       },
       {
-       "objective": "Maintenance is open, south side of the concourse. Find the Super's master key in his office."
+       "objective": "Maintenance is open (south side of the concourse), and so is the Chapel. Find the Super's master key in his office."
       },
       {
        "ambush": "maint",
@@ -952,6 +981,94 @@
    "do": [
     {
      "ambush": "laundry",
+     "delay": 2.5
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorDenied",
+    "lock": "office"
+   },
+   "once": true,
+   "do": [
+    {
+     "objective": "The Super's office is locked. The chaplain kept a spare: try the Chapel, north-east of the concourse."
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "pickup",
+    "item": "keyC"
+   },
+   "do": [
+    {
+     "msg": "OFFICE KEY ACQUIRED"
+    },
+    {
+     "sfx": "key"
+    },
+    {
+     "set": "chapelKey",
+     "value": true
+    },
+    {
+     "objective": "Back to the Super's Office, south of the Laundry and Recycling."
+    },
+    {
+     "ambush": "chapel",
+     "delay": 2
+    },
+    {
+     "autosave": "events"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "concourse"
+   },
+   "if": {
+    "flag": "chapelKey"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "concourse2",
+     "delay": 2.5
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "maint"
+   },
+   "if": {
+    "flag": "chapelKey"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "maint2",
+     "delay": 2
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "laundry"
+   },
+   "if": {
+    "flag": "chapelKey"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "laundry2",
      "delay": 2.5
     }
    ]
@@ -1341,6 +1458,61 @@
     "bloater"
    ]
   },
+  "chapel": {
+   "zones": [
+    "chapel"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "crawler",
+    "crawler",
+    "spitter",
+    "husk"
+   ]
+  },
+  "concourse2": {
+   "zones": [
+    "concourse"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "husk",
+    "crawler",
+    "crawler",
+    "spitter",
+    "bloater",
+    "husk"
+   ]
+  },
+  "maint2": {
+   "zones": [
+    "maint"
+   ],
+   "spawns": [
+    "crawler",
+    "crawler",
+    "husk",
+    "husk",
+    "bloater",
+    "spitter"
+   ]
+  },
+  "laundry2": {
+   "zones": [
+    "laundry"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "husk",
+    "crawler",
+    "spitter",
+    "bloater",
+    "husk"
+   ]
+  },
   "pub": {
    "zones": [
     "commissary"
@@ -1437,6 +1609,14 @@
    },
    "to": {
     "nearestUse": "junction"
+   }
+  },
+  {
+   "until": {
+    "key": "C"
+   },
+   "to": {
+    "item": "keyC"
    }
   },
   {

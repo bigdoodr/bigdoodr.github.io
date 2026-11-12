@@ -2,10 +2,10 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.3.1",
+ "version": "1.3.2",
  "minEngine": "1.3",
  "title": "Hull Breaker shared content",
- "bytes": 5646421,
+ "bytes": 5647233,
  "files": [
   {
    "path": "achievements.json",
@@ -14,8 +14,8 @@
   },
   {
    "path": "art.json",
-   "bytes": 12093,
-   "sha256": "a83c7f18a375652845ca0da3539d14c6eae7654c90a7857c3c91ad7065f63c69"
+   "bytes": 12239,
+   "sha256": "55dbb3184178680d7d6f3e01bde053c81d0b627b09c0582dbc91b6dc60bc6cd4"
   },
   {
    "path": "floors/carpet.png",
@@ -513,6 +513,11 @@
    "sha256": "8f76dc7a7cee89f5f3a009fad883ba392a11c46d254328dc546d0b2fa447e024"
   },
   {
+   "path": "sprites/keyC.png",
+   "bytes": 161,
+   "sha256": "ae70996eee0da33ca9349cccc0ae77aa953c471daa2799f50351a46fe5752324"
+  },
+  {
    "path": "sprites/keyM.png",
    "bytes": 178,
    "sha256": "905d9f00db7b601b079c184bb02108a2143072573b76ae2fa912374a93bd93bc"
@@ -549,13 +554,18 @@
   },
   {
    "path": "sprites/med.png",
-   "bytes": 247,
-   "sha256": "2cf887dcd0d96fdfde98978809ec71bfd3ace69b2f540b74915571aca5899180"
+   "bytes": 203,
+   "sha256": "ee865855367c7eb1ea38bb5562ea32798bd3ecf7e91228c6f2047b75234eaa06"
   },
   {
    "path": "sprites/medbig.png",
-   "bytes": 236,
-   "sha256": "349afa21fc9867641c3cb7e1c6236f42af640bd389bdf79ee9732f07b68c0f22"
+   "bytes": 249,
+   "sha256": "6866cfdc0d0f8352655b02ea1a97003a258534b19bd4661854eddbc77478343c"
+  },
+  {
+   "path": "sprites/medmax.png",
+   "bytes": 345,
+   "sha256": "4dd37f21ce5dd4f5630659b3ff517a291d85ddb5047f8120811158da17a62d36"
   },
   {
    "path": "sprites/pew.png",
@@ -1319,8 +1329,8 @@
   },
   {
    "path": "tuning.json",
-   "bytes": 9265,
-   "sha256": "621614f17cda2406ade62abd0d2e7e8662ec0e4dd36f605b02529820d838157c"
+   "bytes": 9456,
+   "sha256": "a3fd96a4b671b396978a3a164c83fb7eb717284924597ad2dbdd656ca530fde5"
   },
   {
    "path": "voice/ach_bad_credit.mp3",

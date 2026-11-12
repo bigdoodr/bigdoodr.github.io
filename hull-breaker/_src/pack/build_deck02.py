@@ -57,6 +57,7 @@ E['super'] = dict(E['brute'], hp=220, lhp=[20, 40, 40, 999, 999], speed=.85, dmg
 tun.setdefault('enemyIntro', {})
 tun['items']['boots'] = dict(boots=True, msg='STOMP BOOTS', line='get_boots', sprite='boots', height=.24, mapItem=True)
 tun['items']['keyM'] = dict(key='M', sprite='keyM', height=.2, mapItem=True)
+tun['items']['keyC'] = dict(key='C', sprite='keyC', height=.2, mapItem=True)   # the chaplain's spare office key (Chapel)
 tun['decor']['pew'] = dict(sprite='pew', height=.5)
 tun['decor']['tap'] = dict(sprite='tap', height=.62)
 tun['kick']['stomp'] = dict(dmgMul=3, sleeperKill=True, keepsDown=True, reach=1.05)
