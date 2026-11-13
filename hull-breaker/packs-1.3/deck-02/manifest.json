@@ -3,14 +3,14 @@
  "id": "deck-02",
  "kind": "deck",
  "deck": 2,
- "version": "1.1.4",
+ "version": "1.1.5",
  "minEngine": "1.4",
  "title": "Hostile Tenancy",
  "place": "Habitation Spine",
  "requires": {
   "core": "1.3.2"
  },
- "bytes": 1856633,
+ "bytes": 1864282,
  "files": [
   {
    "path": "deck.json",
@@ -29,8 +29,8 @@
   },
   {
    "path": "logs.json",
-   "bytes": 7125,
-   "sha256": "613c39dd10912efa909dba44ee5be23afbcd2715cc757cd08bee59ec810cdf30"
+   "bytes": 7146,
+   "sha256": "1f733cbe0a3d31da128e0ce889fe234dd08025591343735d20beb9577fceec9d"
   },
   {
    "path": "logs/chaplain.mp3",
@@ -84,8 +84,8 @@
   },
   {
    "path": "logs/resident_b2.mp3",
-   "bytes": 59786,
-   "sha256": "79e628fd583d1be2c09370fbe4add7b1aba951b95bbdddac29871dac2fcbf41d"
+   "bytes": 67414,
+   "sha256": "c175202a7684a1a43de3fefa7e4c63b8ace31bbe8e20cac1945c5f8977d94636"
   },
   {
    "path": "logs/resident_b9.mp3",

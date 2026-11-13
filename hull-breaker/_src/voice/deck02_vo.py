@@ -208,6 +208,7 @@ EMOTION = {   # log -> {sentence index: fx}; logs stay straight, the feeling com
     'oduya_laundry': {-2: SHAKY, -1: QUIET},
     'chaplain': {-1: {'breathy': .12, 'gain': .92}},
     'mother_a3': {-1: SHAKY},
+    'resident_b2': {-1: QUIET},   # the fish line lands quietly (Nov 13)
 }
 
 
