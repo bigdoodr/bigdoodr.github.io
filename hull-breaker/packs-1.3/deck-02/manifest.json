@@ -3,7 +3,7 @@
  "id": "deck-02",
  "kind": "deck",
  "deck": 2,
- "version": "1.1.1",
+ "version": "1.1.2",
  "minEngine": "1.4",
  "title": "Hostile Tenancy",
  "place": "Habitation Spine",
@@ -15,7 +15,7 @@
   {
    "path": "deck.json",
    "bytes": 26196,
-   "sha256": "47f09464768e2e24ef5b8dd6b5eecf79be1c9694afcf9ab62cd3a8632e1d4839"
+   "sha256": "5688091046b1bac0b6b152fc7fb83e2f93a486dcf9529c7dc664920c3d6be292"
   },
   {
    "path": "level.json",

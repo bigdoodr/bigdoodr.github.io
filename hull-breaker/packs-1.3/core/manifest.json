@@ -2,10 +2,10 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.3.2",
+ "version": "1.3.3",
  "minEngine": "1.3",
  "title": "Hull Breaker shared content",
- "bytes": 5647233,
+ "bytes": 5648904,
  "files": [
   {
    "path": "achievements.json",
@@ -624,8 +624,8 @@
   },
   {
    "path": "sprites/tap.png",
-   "bytes": 218,
-   "sha256": "c8b099cd8e2a934c226e88b4cda2225a661b1115d068f6996f8eefdbba7082ce"
+   "bytes": 309,
+   "sha256": "a0611f9b2ea3ab93b2c1005de04cd3c971f1e08f897a02bd4a74cb78e3a28fb4"
   },
   {
    "path": "strings.json",
@@ -1229,8 +1229,8 @@
   },
   {
    "path": "textures/shelf.png",
-   "bytes": 2539,
-   "sha256": "87da3997000619fe8d71847dd0d8d8542cec1c4aad6a5f68b4d282158ca1a163"
+   "bytes": 4119,
+   "sha256": "32d31be5cb05c101e5087005066724803bae6926ac86d739f5aebd2c0b276bfa"
   },
   {
    "path": "textures/term.em.png",

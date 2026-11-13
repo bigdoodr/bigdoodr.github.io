@@ -296,7 +296,7 @@ DECK = {
         ]},
     },
 
-    'par': 600,   # placeholder until measured on a clean route
+    'par': 720,   # placeholder until measured on a clean route
 
     'achievements': [
         dict(id='hb.paid_in_full.02', name='Paid in Full: Deck 02', points=10,
