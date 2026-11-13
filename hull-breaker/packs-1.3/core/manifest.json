@@ -2,10 +2,10 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.3.3",
+ "version": "1.3.4",
  "minEngine": "1.3",
  "title": "Hull Breaker shared content",
- "bytes": 5648904,
+ "bytes": 5664020,
  "files": [
   {
    "path": "achievements.json",
@@ -14,8 +14,8 @@
   },
   {
    "path": "art.json",
-   "bytes": 12239,
-   "sha256": "55dbb3184178680d7d6f3e01bde053c81d0b627b09c0582dbc91b6dc60bc6cd4"
+   "bytes": 13007,
+   "sha256": "325ccf2631e90bf967d106c84df23cc00f24a43e2f98ffe077b86723aa74b0ec"
   },
   {
    "path": "floors/carpet.png",
@@ -1179,13 +1179,53 @@
   },
   {
    "path": "textures/poster.em.png",
-   "bytes": 319,
-   "sha256": "276df7f0c23a9c80b69e18f64f8443abe97fcd63df313ae11652f26b477e5922"
+   "bytes": 814,
+   "sha256": "143f955dcc8f546df74fd2503ddca4ea619ae4fb26b3c9798d88fb4e713d8ac0"
   },
   {
    "path": "textures/poster.png",
-   "bytes": 2185,
-   "sha256": "c16d3abbafea076b4393630dc8b54820bb6c812f120dcb3f504967a9390a4d2b"
+   "bytes": 1396,
+   "sha256": "faeef21e05f6ff18b48e133f55ddffaa0c44e09f897029dc6ad0c7b9407e6f2e"
+  },
+  {
+   "path": "textures/poster2.em.png",
+   "bytes": 752,
+   "sha256": "51d468b84ff4074792cc76239b93063384466f509ae4277c7796f0a6b1f05a23"
+  },
+  {
+   "path": "textures/poster2.png",
+   "bytes": 1332,
+   "sha256": "1bee05a1b46e2830ec711554ca3674da0cf66231ca3045945981e87709416b00"
+  },
+  {
+   "path": "textures/poster3.em.png",
+   "bytes": 950,
+   "sha256": "c9be346d343ce48f19d4db0d76fe4c1415e69dea9bc9068a24f741d743cc36b8"
+  },
+  {
+   "path": "textures/poster3.png",
+   "bytes": 1525,
+   "sha256": "35cea65775ec71f3585e524da519e3276f785c96366729d58d27b79627f15b89"
+  },
+  {
+   "path": "textures/poster4.em.png",
+   "bytes": 704,
+   "sha256": "e61690e4e12e7cb3b56da597a2f4e33b3d8c3290041ecba3c294921c69043c84"
+  },
+  {
+   "path": "textures/poster4.png",
+   "bytes": 1312,
+   "sha256": "a7fffe057f0adff2742721944e0b7f00be3069f0cd6a431c8feb7f90f326ee0e"
+  },
+  {
+   "path": "textures/poster5.em.png",
+   "bytes": 617,
+   "sha256": "d5d2703f9ddaffe5ffcb3c0fede5c850b1bc62ca569a165ae5ec0a7383cb8827"
+  },
+  {
+   "path": "textures/poster5.png",
+   "bytes": 1223,
+   "sha256": "d105dd664cf3f73248f08d53fe009ad71bc180090b1dbcdf5788f8b698da31b8"
   },
   {
    "path": "textures/pwr.em.png",
@@ -1221,6 +1261,46 @@
    "path": "textures/scrawl.png",
    "bytes": 7208,
    "sha256": "cedc710470c290e9e0c2a89f4580d666d0000466f44e99dbceb132eca52cf013"
+  },
+  {
+   "path": "textures/screenC.em.png",
+   "bytes": 1031,
+   "sha256": "00c5e23ef4ccfc3a1f7c83bbc84351d872325b8ab0012427edb35360be19ff4e"
+  },
+  {
+   "path": "textures/screenC.png",
+   "bytes": 1042,
+   "sha256": "8da0db9b4b91a26b71fbeebff0f82a1d9bbefb12e3649963c08c6ffb0b3415f1"
+  },
+  {
+   "path": "textures/screenL.em.png",
+   "bytes": 698,
+   "sha256": "1fc99fa30a26c2be508599896f633fb2581d44e2707ed34f84fc8373afbd5e69"
+  },
+  {
+   "path": "textures/screenL.png",
+   "bytes": 700,
+   "sha256": "4070da157d68bdde6f94bbe46d0264b2e524335c3838d552f9c00b9f75fc9c60"
+  },
+  {
+   "path": "textures/screenM.em.png",
+   "bytes": 637,
+   "sha256": "6e2c813bc0a4d90a5b8443a21316f394294bb6139d65ae33976c6f5106540e1b"
+  },
+  {
+   "path": "textures/screenM.png",
+   "bytes": 650,
+   "sha256": "3a818ab70350de4796d7861505388a4ed8341b8383e58527cedcb7cc20f02a04"
+  },
+  {
+   "path": "textures/screenR.em.png",
+   "bytes": 665,
+   "sha256": "ae3e296a3c61810e7334318979f5e2833036495d19d40fb45bd59d5551e3ae78"
+  },
+  {
+   "path": "textures/screenR.png",
+   "bytes": 804,
+   "sha256": "9424bb7507330d8ba28c1cb496938ec91058599ff488bcb635f1f6e53d1fdd7b"
   },
   {
    "path": "textures/secret.png",

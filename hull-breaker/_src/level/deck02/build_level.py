@@ -3,7 +3,7 @@
 #   python3 build_level.py [out.json]
 # Legend (meanings live in _src/pack/deck02.py):
 #  walls  # hull  = hull2  h haz  b blood  s scrawl  v vent  w window  W window with moon  p pipe  T tram
-#         k shelf  q apartment  c chapel  y daycare  m theater  o movie poster (usable)  U washer  ~ pool water  g gym  l pool tile
+#         k shelf  q apartment  c chapel  y daycare  m theater  o e f i n movie posters (usable)  r t u z theater screen  U washer  ~ pool water  g gym  l pool tile
 #         G Gorgon's weld over the old service hall (usable)  F floor-plan terminal  Q save  A intercom (Block A)  B intercom (Block B)  J junction box  V flush valve  L departure lever
 #  water  , shallow (wade)  ~ deep (swim, breath meter)   -- both are floor
 #  doors  D open  X secret  1 Block A bulkhead  2 Block B bulkhead  3 maintenance (both junctions)
@@ -112,7 +112,10 @@ for (x, y, c) in [(48, 10, 'D'), (29, 12, 'D'), (32, 10, 'D'), (16, 15, 'X'), (6
 for x in range(37, 60):
     if G[2][x] == 'h': wall(x, 2, 'w')
 wall(48, 2, 'W')                                                 # one window with Ruin in it
-for x in range(17, 31, 3): wall(x, 42, 'o')                      # theater posters along the north wall (wall row y42)
+# theater: the screen fills the north wall (r L end, t middle, u centre INTERMISSION, z R end); five B-movie posters on the east wall
+wall(18, 42, 'r'); wall(23, 42, 'u'); wall(28, 42, 'z')
+for x in list(range(19, 23)) + list(range(24, 28)): wall(x, 42, 't')
+for y, ch in zip((44, 46, 48, 50, 54), 'oefin'): wall(31, y, ch)
 for (x, y) in [(35, 7), (67, 17), (11, 44), (85, 36), (35, 41), (39, 58), (93, 76)]: wall(x, y, 'Q')
 wall(66, 30, 'G')                                                 # the service hall Gorgon welded shut (still on Gorgon's plan)
 wall(32, 3, 'F')                                                  # floor-plan terminal (the real layout)

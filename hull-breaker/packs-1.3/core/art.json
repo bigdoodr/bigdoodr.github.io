@@ -332,6 +332,38 @@
    "file": "textures/crack_gym.png",
    "emissive": "textures/crack_gym.em.png",
    "crackOf": "gym"
+  },
+  "poster2": {
+   "file": "textures/poster2.png",
+   "emissive": "textures/poster2.em.png"
+  },
+  "poster3": {
+   "file": "textures/poster3.png",
+   "emissive": "textures/poster3.em.png"
+  },
+  "poster4": {
+   "file": "textures/poster4.png",
+   "emissive": "textures/poster4.em.png"
+  },
+  "poster5": {
+   "file": "textures/poster5.png",
+   "emissive": "textures/poster5.em.png"
+  },
+  "screenL": {
+   "file": "textures/screenL.png",
+   "emissive": "textures/screenL.em.png"
+  },
+  "screenM": {
+   "file": "textures/screenM.png",
+   "emissive": "textures/screenM.em.png"
+  },
+  "screenC": {
+   "file": "textures/screenC.png",
+   "emissive": "textures/screenC.em.png"
+  },
+  "screenR": {
+   "file": "textures/screenR.png",
+   "emissive": "textures/screenR.em.png"
   }
  },
  "floors": {

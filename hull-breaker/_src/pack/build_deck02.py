@@ -18,8 +18,8 @@ import deck02, build_level  # noqa: E402
 STAGE = os.path.abspath(sys.argv[1])
 SRC = os.path.abspath(sys.argv[sys.argv.index('--from') + 1]) if '--from' in sys.argv else os.path.join(HERE, '..', '..', 'packs-1.3')   # engine 1.3 packs (packs/ stays at 1.2 for the TestFlight app)
 assert os.path.abspath(STAGE) != os.path.abspath(SRC), 'refusing to overwrite the live packs'
-ENGINE, VERSION = '1.3', '1.3.3'
-DECK2_ENGINE, DECK2_VERSION = '1.4', '1.1.2'   # 1.4 added the bossSight event, which Deck 02's boss rule uses
+ENGINE, VERSION = '1.3', '1.3.4'
+DECK2_ENGINE, DECK2_VERSION = '1.4', '1.1.3'   # 1.4 added the bossSight event, which Deck 02's boss rule uses
 PLACEHOLDERS = []
 RAW = os.path.join(HERE, 'deck02_raw')   # recorded voice/logs and finished art land here (see voice/ tools)
 
@@ -76,6 +76,9 @@ for k in ['crack_apartment', 'crack_theater', 'crack_pooltile', 'crack_shelf', '
     if k not in art['textures']: art['textures'][k] = dict(art['textures']['crack_hull'], crackOf=k[6:]); PLACEHOLDERS.append(f'texture: {k} (copy of crack_hull)')
 for k, src in NEW_SPR.items():
     if k not in art['sprites']: art['sprites'][k] = dict(art['sprites'][src]); PLACEHOLDERS.append(f'sprite: {k} (copy of {src})')
+for k in ['poster2', 'poster3', 'poster4', 'poster5', 'screenL', 'screenM', 'screenC', 'screenR']:   # drawn by art_theater.py
+    art['textures'][k] = dict(file=f'textures/{k}.png', emissive=f'textures/{k}.em.png')
+art['textures']['poster'] = dict(file='textures/poster.png', emissive='textures/poster.em.png')
 jsave(os.path.join(core, 'art.json'), art)
 
 sfx = jload(os.path.join(core, 'sfx.json'))

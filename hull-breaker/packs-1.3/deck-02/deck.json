@@ -84,8 +84,45 @@
    },
    "o": {
     "tex": "poster",
-    "use": "poster",
+    "use": "poster1",
     "map": "#9a5ac8"
+   },
+   "e": {
+    "tex": "poster2",
+    "use": "poster2",
+    "map": "#9a5ac8"
+   },
+   "f": {
+    "tex": "poster3",
+    "use": "poster3",
+    "map": "#9a5ac8"
+   },
+   "i": {
+    "tex": "poster4",
+    "use": "poster4",
+    "map": "#9a5ac8"
+   },
+   "n": {
+    "tex": "poster5",
+    "use": "poster5",
+    "map": "#9a5ac8"
+   },
+   "r": {
+    "tex": "screenL"
+   },
+   "t": {
+    "tex": "screenM"
+   },
+   "u": {
+    "tex": "screenC",
+    "light": [
+     0.45,
+     0.8,
+     1
+    ]
+   },
+   "z": {
+    "tex": "screenR"
    },
    "U": {
     "tex": "washer"
@@ -456,7 +493,8 @@
    "flushed": false,
    "floorplan": false,
    "sealedHall": false,
-   "chapelKey": false
+   "chapelKey": false,
+   "sawPoster": false
   },
   "counters": {
    "junctions": 0
@@ -1305,15 +1343,140 @@
   {
    "on": {
     "event": "use",
-    "target": "poster"
+    "target": "poster1"
    },
    "do": [
     {
-     "msg": "NOW SHOWING: NIGHT OF THE LIVING DEADBEATS // THE THING FROM UNIT 9 // CREATURE FROM THE BLACK MOLD"
+     "msg": "NIGHT OF THE LIVING DEADBEATS: THEY'RE BEHIND ON RENT. AND ON LIFE."
     },
     {
-     "say": "double_feature",
-     "sub": 2.4
+     "if": {
+      "not": {
+       "flag": "sawPoster"
+      }
+     },
+     "then": [
+      {
+       "set": "sawPoster",
+       "value": true
+      },
+      {
+       "say": "double_feature",
+       "sub": 2.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "poster2"
+   },
+   "do": [
+    {
+     "msg": "THE THING FROM UNIT 9: SOMETHING'S IN THE WALLS. IT'S NOT THE PIPES."
+    },
+    {
+     "if": {
+      "not": {
+       "flag": "sawPoster"
+      }
+     },
+     "then": [
+      {
+       "set": "sawPoster",
+       "value": true
+      },
+      {
+       "say": "double_feature",
+       "sub": 2.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "poster3"
+   },
+   "do": [
+    {
+     "msg": "CREATURE FROM THE BLACK MOLD: NOW WITH 40% MORE SPORES."
+    },
+    {
+     "if": {
+      "not": {
+       "flag": "sawPoster"
+      }
+     },
+     "then": [
+      {
+       "set": "sawPoster",
+       "value": true
+      },
+      {
+       "say": "double_feature",
+       "sub": 2.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "poster4"
+   },
+   "do": [
+    {
+     "msg": "SECURITY DEPOSIT: YOU'LL NEVER SEE IT AGAIN."
+    },
+    {
+     "if": {
+      "not": {
+       "flag": "sawPoster"
+      }
+     },
+     "then": [
+      {
+       "set": "sawPoster",
+       "value": true
+      },
+      {
+       "say": "double_feature",
+       "sub": 2.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "poster5"
+   },
+   "do": [
+    {
+     "msg": "RETURN OF THE ROOMMATE: HE STILL OWES YOU HALF."
+    },
+    {
+     "if": {
+      "not": {
+       "flag": "sawPoster"
+      }
+     },
+     "then": [
+      {
+       "set": "sawPoster",
+       "value": true
+      },
+      {
+       "say": "double_feature",
+       "sub": 2.4
+      }
+     ]
     }
    ]
   },

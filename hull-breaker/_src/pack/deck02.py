@@ -15,6 +15,15 @@ take the Super's master key, beat the Super in the Boiler Room, open the flush v
 go down through drained Block B to the down-line platform, break the glass, pull the lever.
 """
 
+# The five posters in the Holo-Theater (art in art_theater.py): original B-movie titles in the deck's pun style.
+POSTERS = [
+    ('NIGHT OF THE LIVING DEADBEATS', "THEY'RE BEHIND ON RENT. AND ON LIFE."),
+    ('THE THING FROM UNIT 9', "SOMETHING'S IN THE WALLS. IT'S NOT THE PIPES."),
+    ('CREATURE FROM THE BLACK MOLD', 'NOW WITH 40% MORE SPORES.'),
+    ('SECURITY DEPOSIT', "YOU'LL NEVER SEE IT AGAIN."),
+    ('RETURN OF THE ROOMMATE', 'HE STILL OWES YOU HALF.'),
+]
+
 DECK = {
     'deck': 2,
     'title': 'Hostile Tenancy',
@@ -49,7 +58,10 @@ DECK = {
             's': {'tex': 'scrawl'}, 'v': {'tex': 'vent', 'role': 'vent'}, 'p': {'tex': 'pipe'}, 'T': {'tex': 'tram'},
             'w': {'tex': 'win', 'map': '#3a5a7a'}, 'W': {'tex': 'winmoon', 'map': '#3a5a7a'},
             'k': {'tex': 'shelf'}, 'q': {'tex': 'apartment'}, 'c': {'tex': 'chapel'}, 'y': {'tex': 'daycare'},
-            'm': {'tex': 'theater'}, 'o': {'tex': 'poster', 'use': 'poster', 'map': '#9a5ac8'}, 'U': {'tex': 'washer'},
+            'm': {'tex': 'theater'}, 'o': {'tex': 'poster', 'use': 'poster1', 'map': '#9a5ac8'}, 'e': {'tex': 'poster2', 'use': 'poster2', 'map': '#9a5ac8'},
+            'f': {'tex': 'poster3', 'use': 'poster3', 'map': '#9a5ac8'}, 'i': {'tex': 'poster4', 'use': 'poster4', 'map': '#9a5ac8'},
+            'n': {'tex': 'poster5', 'use': 'poster5', 'map': '#9a5ac8'},
+            'r': {'tex': 'screenL'}, 't': {'tex': 'screenM'}, 'u': {'tex': 'screenC', 'light': [.45, .8, 1]}, 'z': {'tex': 'screenR'}, 'U': {'tex': 'washer'},
             'g': {'tex': 'gym'}, 'l': {'tex': 'pooltile'},
             'G': {'tex': 'gorgonseal', 'use': 'sealedHall', 'map': '#a08a4a'},
             'F': {'tex': 'floorplan', 'use': 'floorplan', 'light': [.35, .95, 1], 'map': '#5ff6ff'},
@@ -100,7 +112,7 @@ DECK = {
     },
     'keys': {'M': {'color': '#c0c8d0'}, 'C': {'color': '#d4a64a'}},
 
-    'state': {'flags': {'wingA': False, 'wingB': False, 'superDown': False, 'superSeen': False, 'flushed': False, 'floorplan': False, 'sealedHall': False, 'chapelKey': False},
+    'state': {'flags': {'wingA': False, 'wingB': False, 'superDown': False, 'superSeen': False, 'flushed': False, 'floorplan': False, 'sealedHall': False, 'chapelKey': False, 'sawPoster': False},
               'counters': {'junctions': 0}},
 
     # engine 1.3: Gorgon's copy of the deck, drawn faintly on the automap until a floor-plan terminal is used.
@@ -235,10 +247,11 @@ DECK = {
         ]},
 
         # Homage and gags.
-        {'on': {'event': 'use', 'target': 'poster'}, 'do': [
-            {'msg': "NOW SHOWING: NIGHT OF THE LIVING DEADBEATS // THE THING FROM UNIT 9 // CREATURE FROM THE BLACK MOLD"},
-            {'say': 'double_feature', 'sub': 2.4},
-        ]},
+        # Five posters on the theater's east wall. The first one read plays Buck's quip; each shows its own tagline.
+        *[{'on': {'event': 'use', 'target': f'poster{i + 1}'}, 'do': [
+            {'msg': f'{title}: {tag}'},
+            {'if': {'not': {'flag': 'sawPoster'}}, 'then': [{'set': 'sawPoster', 'value': True}, {'say': 'double_feature', 'sub': 2.4}]},
+        ]} for i, (title, tag) in enumerate(POSTERS)],
         {'on': {'event': 'useDecor', 'decor': 'tap'}, 'do': [
             {'msg': 'YOU POUR ONE. SOMETHING RATTLES THE DOOR.'}, {'sfx': 'pour'}, {'say': 'last_call', 'sub': 3},
             {'achieve': 'hb.last_call'}, {'ambush': 'pub', 'delay': 1.5},
