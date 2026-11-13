@@ -134,7 +134,7 @@ A rule is `{"on": event, "if": condition?, "once": bool?, "do": [actions]}`. Whe
 | `{"event":"death"}` | Buck dies. Field: `cause` (`enemy`, `spit`, `bomb`, `bloater`, `barrel`). Engine 1.1. |
 | `{"event":"secret"}` | A secret panel opens. Fields: `found`, `total`. Engine 1.1. |
 | `{"event":"cheat"}` | A console cheat is used (engine 1.2). Field: `command`. The run is already marked audited, so only `cheat` achievements can fire. |
-| `{"event":"bossSight"}` | Buck first sees a boss in line of sight, the moment its boss bar appears (engine 1.3). Field: `enemy` (type). Fires once per run; use a flag in the rule if a loaded save must not repeat it. |
+| `{"event":"bossSight"}` | Buck first sees a boss in line of sight, the moment its boss bar appears (engine 1.4: an older app shows the deck as "Update required"). Field: `enemy` (type). Fires once per run; use a flag in the rule if a loaded save must not repeat it. |
 | `{"event":"deckClear"}` | The deck is won, before the outro. Fields: `percent`, `time` (seconds), `par`, `underPar` (bool), `damageTaken`, `weapons` (list of `cutter`, `boomstick`, `rivet`, `charges`, `kick` used), `difficulty` (0–4), `deck`. Engine 1.1. |
 
 Conditions: `{"flag":f}`, `{"key":"R"}`, `{"visited":zone}`, `{"counter":c,"gte":n}` (also `eq`, `lte`), `{"difficulty":{"gte":n}}`, `{"not":c}`, `{"all":[...]}`, `{"any":[...]}`.

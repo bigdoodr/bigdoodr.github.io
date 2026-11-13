@@ -18,7 +18,8 @@ import deck02, build_level  # noqa: E402
 STAGE = os.path.abspath(sys.argv[1])
 SRC = os.path.abspath(sys.argv[sys.argv.index('--from') + 1]) if '--from' in sys.argv else os.path.join(HERE, '..', '..', 'packs-1.3')   # engine 1.3 packs (packs/ stays at 1.2 for the TestFlight app)
 assert os.path.abspath(STAGE) != os.path.abspath(SRC), 'refusing to overwrite the live packs'
-ENGINE, VERSION = '1.3', '1.3.1'
+ENGINE, VERSION = '1.3', '1.3.2'
+DECK2_ENGINE, DECK2_VERSION = '1.4', '1.1.1'   # 1.4 added the bossSight event, which Deck 02's boss rule uses
 PLACEHOLDERS = []
 RAW = os.path.join(HERE, 'deck02_raw')   # recorded voice/logs and finished art land here (see voice/ tools)
 
@@ -142,12 +143,12 @@ def manifest(pid, extra):
 
 old = jload(os.path.join(core, 'manifest.json'))
 cm, csha = manifest('core', dict(kind='core', version=VERSION, minEngine=ENGINE, title=old['title']))
-dm, dsha = manifest('deck-02', dict(kind='deck', deck=2, version='1.0.0', minEngine=ENGINE, title=deck02.DECK['title'],
+dm, dsha = manifest('deck-02', dict(kind='deck', deck=2, version=DECK2_VERSION, minEngine=DECK2_ENGINE, title=deck02.DECK['title'],
                                     place=deck02.DECK['place'], requires={'core': VERSION}))
 cat = jload(os.path.join(STAGE, 'catalog.json'))
 cat['packs'] = [p for p in cat['packs'] if p['id'] not in ('core', 'deck-02')]
 cat['packs'].insert(0, dict(id='core', kind='core', version=VERSION, minEngine=ENGINE, bytes=cm['bytes'], manifest='core/manifest.json', manifestSha256=csha))
-cat['packs'].append(dict(id='deck-02', kind='deck', version='1.0.0', minEngine=ENGINE, bytes=dm['bytes'], manifest='deck-02/manifest.json', manifestSha256=dsha, deck=2))
+cat['packs'].append(dict(id='deck-02', kind='deck', version=DECK2_VERSION, minEngine=DECK2_ENGINE, bytes=dm['bytes'], manifest='deck-02/manifest.json', manifestSha256=dsha, deck=2))
 for d in cat['decks']:
     if d['deck'] == 2: d['pack'] = 'deck-02'
 jsave(os.path.join(STAGE, 'catalog.json'), cat)
