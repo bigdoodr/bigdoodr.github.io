@@ -782,9 +782,6 @@
          "value": true
         },
         {
-         "sfx": "static"
-        },
-        {
          "say": "moss_openA",
          "sub": 3.6
         },
@@ -811,9 +808,6 @@
            "value": true
           },
           {
-           "sfx": "static"
-          },
-          {
            "say": "moss_second",
            "sub": 3
           },
@@ -829,9 +823,6 @@
           }
          ],
          "else": [
-          {
-           "sfx": "static"
-          },
           {
            "say": "moss_cycled",
            "sub": 4
@@ -875,9 +866,6 @@
          "value": true
         },
         {
-         "sfx": "static"
-        },
-        {
          "say": "moss_openB",
          "sub": 3.6
         },
@@ -904,9 +892,6 @@
            "value": true
           },
           {
-           "sfx": "static"
-          },
-          {
            "say": "moss_second",
            "sub": 3
           },
@@ -922,9 +907,6 @@
           }
          ],
          "else": [
-          {
-           "sfx": "static"
-          },
           {
            "say": "moss_cycled",
            "sub": 4

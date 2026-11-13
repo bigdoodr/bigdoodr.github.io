@@ -2,10 +2,10 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.3.4",
+ "version": "1.3.5",
  "minEngine": "1.3",
  "title": "Hull Breaker shared content",
- "bytes": 5664020,
+ "bytes": 5428016,
  "files": [
   {
    "path": "achievements.json",
@@ -69,8 +69,8 @@
   },
   {
    "path": "sfx.json",
-   "bytes": 5247,
-   "sha256": "73d5d2a8e036723ec8f6666fd3bddac86ab541f39fabe275812c959540c17202"
+   "bytes": 5243,
+   "sha256": "45a7dfd4e8003b7cd6496cfc69417f555dd51478a1ee2091dd70396b70437077"
   },
   {
    "path": "sfx/ambient.wav",
@@ -324,8 +324,8 @@
   },
   {
    "path": "sfx/static.wav",
-   "bytes": 247068,
-   "sha256": "31066fda68e6aef09d08579d6ac6651ee8bae366fba6220b33e816c3009db56a"
+   "bytes": 11068,
+   "sha256": "ee280bf8b4b045107bcf773ddcb4addccb4c372f6d8c6240ea1006d633789b2d"
   },
   {
    "path": "sfx/step.wav",

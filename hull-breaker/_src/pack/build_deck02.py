@@ -18,8 +18,8 @@ import deck02, build_level  # noqa: E402
 STAGE = os.path.abspath(sys.argv[1])
 SRC = os.path.abspath(sys.argv[sys.argv.index('--from') + 1]) if '--from' in sys.argv else os.path.join(HERE, '..', '..', 'packs-1.3')   # engine 1.3 packs (packs/ stays at 1.2 for the TestFlight app)
 assert os.path.abspath(STAGE) != os.path.abspath(SRC), 'refusing to overwrite the live packs'
-ENGINE, VERSION = '1.3', '1.3.4'
-DECK2_ENGINE, DECK2_VERSION = '1.4', '1.1.3'   # 1.4 added the bossSight event, which Deck 02's boss rule uses
+ENGINE, VERSION = '1.3', '1.3.5'
+DECK2_ENGINE, DECK2_VERSION = '1.4', '1.1.4'   # 1.4 added the bossSight event, which Deck 02's boss rule uses
 PLACEHOLDERS = []
 RAW = os.path.join(HERE, 'deck02_raw')   # recorded voice/logs and finished art land here (see voice/ tools)
 

@@ -3,19 +3,19 @@
  "id": "deck-02",
  "kind": "deck",
  "deck": 2,
- "version": "1.1.3",
+ "version": "1.1.4",
  "minEngine": "1.4",
  "title": "Hostile Tenancy",
  "place": "Habitation Spine",
  "requires": {
   "core": "1.3.2"
  },
- "bytes": 1854586,
+ "bytes": 1856633,
  "files": [
   {
    "path": "deck.json",
-   "bytes": 28503,
-   "sha256": "bec3072fa83e1b3e57873ccb62a44c1239f14d40b395e327f2b2a3317790d0ff"
+   "bytes": 28203,
+   "sha256": "6379e189e0673f649faf32a24e55472345c41cd9a7b1c30805ef001e07ca4f18"
   },
   {
    "path": "level.json",
@@ -154,53 +154,53 @@
   },
   {
    "path": "voice/moss_boiler.mp3",
-   "bytes": 26219,
-   "sha256": "3390bbe63811912297845346a17e0da1cf6e735aeb14a8452139664df04553dd"
+   "bytes": 26349,
+   "sha256": "dce44db58373ba356779dae0ead1b0054c2e3da5862c8c9e7a69cbce16358d48"
   },
   {
    "path": "voice/moss_bulkheads.mp3",
-   "bytes": 41370,
-   "sha256": "fe9dcce57d3931a8ce120f9ab19a7d0cdca2ece6bae70bc277a83f2156276e07"
+   "bytes": 41631,
+   "sha256": "7e4c6747214c7f504b8cf3cf0dc64c27e83b75011d0d5dc9e01183b12870bb77"
   },
   {
    "path": "voice/moss_cycled.mp3",
-   "bytes": 32749,
-   "sha256": "44641c0c227c8fc24042169f013dae3d207677eec22882d8aac572a116c4cb0d"
+   "bytes": 32880,
+   "sha256": "86698ebc8ec1a8784bd32aaac809091ff23f64adaa9268cff45259e0b359cfdc"
   },
   {
    "path": "voice/moss_downline.mp3",
-   "bytes": 22823,
-   "sha256": "3e1323ce7b475cec4e1563db3b974dd3d8f14953610612e51c559b40066ca266"
+   "bytes": 22953,
+   "sha256": "208d6a7bd7db10cb83800867d56f3b0f132a40b946818597bf5d9551faf0c7f4"
   },
   {
    "path": "voice/moss_hello.mp3",
-   "bytes": 16162,
-   "sha256": "952b3c8f61190c3edffd2044589ab68169364fcaa6f5a3552e4d03c4cc276158"
+   "bytes": 16423,
+   "sha256": "d0cc3ba01affdb411098f50532d75358a900583e235c0bc585719255605aa13b"
   },
   {
    "path": "voice/moss_junction.mp3",
-   "bytes": 30790,
-   "sha256": "21edb2171a8a89bf1eb5c91cb8f3c0fce42ca73b21dfb2c095e28a1c00cd3f6a"
+   "bytes": 31051,
+   "sha256": "a944e4a35d0b1342b665e906c16ec6e2e2326389e410d9a3ab0cc09a17e5ef04"
   },
   {
    "path": "voice/moss_maint.mp3",
-   "bytes": 36145,
-   "sha256": "ff5ba1051376adefb9c07ee2c741703006a7ea7df617feaefcec22bcc6092faf"
+   "bytes": 36276,
+   "sha256": "6a6bb44b16ad1b31563a295f95c87e6f5b91421b815ed5054d9c53a4de6ac34e"
   },
   {
    "path": "voice/moss_maint_locked.mp3",
-   "bytes": 28570,
-   "sha256": "944728ffcd5ed19bb9a37af1711094be07229db4afad43bb8025ce530cab24e6"
+   "bytes": 28831,
+   "sha256": "9ee55f45ec63e96b5c521841e2224e7b667fed82fb7a6e202d7d47ef4055bfa6"
   },
   {
    "path": "voice/moss_openA.mp3",
-   "bytes": 36276,
-   "sha256": "9875137b3f6b4643a4c79f169a2851717d2da3d0128a109b27787755c2039d84"
+   "bytes": 36406,
+   "sha256": "05bb8c7528ad342b897c2d36544575aba99f6d9a0ed471988ca89bdd3da091f1"
   },
   {
    "path": "voice/moss_openB.mp3",
-   "bytes": 43721,
-   "sha256": "19a1c51c40782f8e39f73cc7c0f0c1c76a9d57a409aabec4867c8b1220b6e57a"
+   "bytes": 43851,
+   "sha256": "16c0840a2e6602e18bc3a876603af542bb32f593a5e813808078e8b2a84c6f67"
   },
   {
    "path": "voice/moss_reply.mp3",
@@ -209,18 +209,18 @@
   },
   {
    "path": "voice/moss_sealed.mp3",
-   "bytes": 22823,
-   "sha256": "3b9ca0f4e4dd431a9263842b7d9f4cd905ef2c1670a1fc79fbb3134e14f47619"
+   "bytes": 23084,
+   "sha256": "837d1c114623a0d6106a4a44b8f25eb7f93bcce0b2bd95cd9f3f9848de2d9edb"
   },
   {
    "path": "voice/moss_second.mp3",
-   "bytes": 22823,
-   "sha256": "4bd146b81a404014b47fbd1da528af27cca10c80b13ad57a46a5ba48cc232904"
+   "bytes": 22953,
+   "sha256": "8db6b213ebbf26ed6c8b5c3ea8ca17d99ed0ca65a0f356f92f1c2340362b9f24"
   },
   {
    "path": "voice/moss_super.mp3",
-   "bytes": 28309,
-   "sha256": "0317f03ec4022064406576850ebf013dd8f3f109c52f6f4f75f162c5eab9c1fe"
+   "bytes": 28439,
+   "sha256": "1e359702ed350809245e682d9fa0f3b7d6eae65bfbef918b9314e3aeda6689ba"
   },
   {
    "path": "voice/need_key.mp3",

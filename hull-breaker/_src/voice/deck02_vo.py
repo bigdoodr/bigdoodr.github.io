@@ -165,7 +165,17 @@ def to_mp3(y, out, af, br='32k'):
 
 
 # ---------------- Moss (af_bella through a radio) ----------------
-RADIO = "highpass=f=320,lowpass=f=3200,acrusher=bits=10:mix=0.25,acompressor=threshold=-18dB:ratio=5:attack=3:release=90:makeup=5,asoftclip=type=tanh:threshold=0.85,loudnorm=I=-16:TP=-1.5"
+RADIO = "highpass=f=320,lowpass=f=3200,acrusher=bits=10:mix=0.12,acompressor=threshold=-18dB:ratio=4:attack=3:release=90:makeup=3,asoftclip=type=tanh:threshold=0.85,loudnorm=I=-16:TP=-1.5"
+# Nov 13: Moss was loud with static on headphones. The old bake had a hiss bed at 3 percent, a key-up burst that started at full level,
+# and a tail burst that ramped UP and then stopped dead (a click at both ends). Now the bursts are squelch-shaped (fast attack, decay),
+# the hiss bed is a quarter as loud, and the engine no longer lays a 5.6 s static.wav under every line (see static.wav).
+
+
+def squelch(n, peak, up=True):
+    """A short radio squelch burst: band-limited noise with a 6 ms attack and an exponential decay, ending at silence."""
+    b = bp(rng.standard_normal(n), 800, 3000, SR); b = b / np.abs(b).max() * peak
+    env = np.exp(-np.linspace(0, 5, n)); a = max(1, int(SR * .006)); env[:a] *= np.linspace(0, 1, a)
+    return b * env
 
 
 def record_moss():
@@ -173,10 +183,10 @@ def record_moss():
         if BUCK_ONLY and lid not in BUCK_ONLY: continue
         y = paced(text, 'af_bella', 'en-us', 1.04, gap=.32)
         y = y / np.abs(y).max() * .85
-        key = bp(rng.standard_normal(int(SR * .12)), 800, 3000, SR); key = key / np.abs(key).max() * .35 * np.linspace(1, .1, len(key))
-        tail = bp(rng.standard_normal(int(SR * .1)), 800, 3000, SR); tail = tail / np.abs(tail).max() * .3 * np.linspace(.1, 1, len(tail))
-        y = np.concatenate([key, np.zeros(int(SR * .06)), y, np.zeros(int(SR * .08)), tail])
-        hiss = bp(rng.standard_normal(len(y)), 500, 3200, SR); y += hiss / np.abs(hiss).max() * .03
+        fade = int(SR * .012); y[:fade] *= np.linspace(0, 1, fade); y[-fade:] *= np.linspace(1, 0, fade)
+        key = squelch(int(SR * .12), .3); tail = squelch(int(SR * .1), .22)
+        y = np.concatenate([key, np.zeros(int(SR * .06)), y, np.zeros(int(SR * .08)), tail, np.zeros(int(SR * .03))])
+        hiss = bp(rng.standard_normal(len(y)), 500, 3200, SR); y += hiss / np.abs(hiss).max() * .008
         to_mp3(y, os.path.join(RAW, 'deck-02/voice', lid + '.mp3'), RADIO, '40k')
         print('moss', lid)
 

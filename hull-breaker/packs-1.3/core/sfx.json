@@ -225,8 +225,8 @@
   },
   "static": {
    "file": "sfx/static.wav",
-   "gain": 0.1641,
-   "seconds": 5.601
+   "gain": 0.1,
+   "seconds": 0.25
   },
   "step": {
    "file": "sfx/step.wav",

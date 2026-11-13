@@ -161,26 +161,26 @@ DECK = {
         {'on': {'event': 'use', 'target': 'intercomA'}, 'do': [
             {'if': {'flag': 'wingA'}, 'then': [{'msg': 'BLOCK A BULKHEAD IS OPEN'}],
              'else': [{'if': {'not': {'flag': 'wingB'}}, 'then': [
-                 {'set': 'wingA', 'value': True}, {'sfx': 'static'}, {'say': 'moss_openA', 'sub': 3.6},
+                 {'set': 'wingA', 'value': True}, {'say': 'moss_openA', 'sub': 3.6},
                  {'objective': 'Block A is open. Reset the lockdown junction box at the south end of its hall.'},
                  {'ambush': 'blockA', 'delay': 4}, {'autosave': 'events'}],
                  'else': [{'if': {'counter': 'junctions', 'gte': 1}, 'then': [
-                     {'set': 'wingA', 'value': True}, {'sfx': 'static'}, {'say': 'moss_second', 'sub': 3},
+                     {'set': 'wingA', 'value': True}, {'say': 'moss_second', 'sub': 3},
                      {'objective': 'Block A is open. Reset its junction box at the south end of the hall.'},
                      {'ambush': 'blockA', 'delay': 4}, {'autosave': 'events'}],
-                     'else': [{'sfx': 'static'}, {'say': 'moss_cycled', 'sub': 4}, {'msg': 'LOCKDOWN CYCLING'}]}]}]},
+                     'else': [{'say': 'moss_cycled', 'sub': 4}, {'msg': 'LOCKDOWN CYCLING'}]}]}]},
         ]},
         {'on': {'event': 'use', 'target': 'intercomB'}, 'do': [
             {'if': {'flag': 'wingB'}, 'then': [{'msg': 'BLOCK B BULKHEAD IS OPEN'}],
              'else': [{'if': {'not': {'flag': 'wingA'}}, 'then': [
-                 {'set': 'wingB', 'value': True}, {'sfx': 'static'}, {'say': 'moss_openB', 'sub': 3.6},
+                 {'set': 'wingB', 'value': True}, {'say': 'moss_openB', 'sub': 3.6},
                  {'objective': 'Block B is open. Reset the lockdown junction box at the south end of its hall.'},
                  {'ambush': 'blockB', 'delay': 4}, {'autosave': 'events'}],
                  'else': [{'if': {'counter': 'junctions', 'gte': 1}, 'then': [
-                     {'set': 'wingB', 'value': True}, {'sfx': 'static'}, {'say': 'moss_second', 'sub': 3},
+                     {'set': 'wingB', 'value': True}, {'say': 'moss_second', 'sub': 3},
                      {'objective': 'Block B is open. Reset its junction box at the south end of the hall.'},
                      {'ambush': 'blockB', 'delay': 4}, {'autosave': 'events'}],
-                     'else': [{'sfx': 'static'}, {'say': 'moss_cycled', 'sub': 4}, {'msg': 'LOCKDOWN CYCLING'}]}]}]},
+                     'else': [{'say': 'moss_cycled', 'sub': 4}, {'msg': 'LOCKDOWN CYCLING'}]}]}]},
         ]},
         {'on': {'event': 'use', 'target': 'junction'}, 'do': [
             {'setTile': 'after'}, {'add': 'junctions', 'value': 1}, {'sfx': 'breaker'}, {'shake': .2},
