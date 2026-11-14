@@ -164,6 +164,26 @@ Actions (one verb each):
 
 The engine does the rest on its own: secret doors, save stations, item pickups and their messages, logs, asset tags, enemy intro lines, kill quips, revives, death, low-health warnings.
 
+### cutscenes (engine 1.5)
+
+`deck.json` may carry `"cutscenes": {id: scene}` and `"intro": {"opening": id}`; the opening plays once when the deck starts fresh (not from a mid-deck save), and the deck's `start` rules run when it ends. The scene sets the flag `opening`, so a `start` rule can skip Buck's usual first line (`{"if":{"flag":"opening"},"then":[],"else":[{"say":...}]}`). Cut scene time is not play time. Pressing Use, Fire or Kick after 0.8 s skips it: spawned enemies appear at their destinations, spoken lines and cards are dropped, and play starts at the `handoff`.
+
+```json
+{"duration": 33.0, "blackUntil": 9.6,
+ "cam":   [{"t":0,"x":11.2,"y":66.5,"ang":3.14159,"pitch":0,"cut":true}, ...],
+ "buck":  [{"t":9.6,"x":3.6,"y":66.5,"view":"front","pose":"walk","flip":false,"hide":false}, ...],
+ "steps": [{"t":0.6,"card":"TEXT","speaker":"GORGON DISPATCH"}, {"t":9.4,"cardOff":true}, {"t":11.2,"say":"line_id","sub":3},
+           {"t":22.4,"use":"floorplan"}, {"t":26.3,"door":[5,57]}, {"t":26.9,"spawn":{"type":"husk","x":5.5,"y":58.6,"toX":5.6,"toY":56.4,"speed":0.8}},
+           {"t":28.0,"sfx":"groan","shake":0.3}],
+ "handoff": {"x":4.6,"y":53.6,"ang":1.5708}}
+```
+
+- `cam`: keys in time order. The camera moves between keys with a smooth ease; a key with `"cut": true` jumps to its position at its time instead. Angles are radians (0 east, 1.5708 south, -1.5708 north); `pitch` is in frame pixels.
+- `buck`: Buck's body as a world sprite. Position moves in a straight line between keys; `view` (`front`, `back`, `side`), `pose` (`idle`, `walk`, `look`, `reach`, `react`) and `flip` come from the key just passed; `hide` removes him (the camera takes his place). Buck is drawn by the engine (`BuckArt`), not from the pack, so changes to his body need an app update. His head is `BuckFace`, the same portrait as the HUD and the trailer.
+- `steps`: `card` shows typed text (42 characters a second) with an optional `speaker` heading, `cardOff` clears it; before `blackUntil` the screen is black. `say` plays a line (a line may carry `"speaker":"dispatch"`: clean audio, subtitled DISPATCH). `use` fires that wall's use event, so the terminal's own rule runs. `door` opens the door at a cell. `spawn` adds a real enemy (it counts toward kills) that walks in a straight line to `toX`, `toY`; it fights normally from the handoff on. `sfx`, `shake` work as in rules.
+- `shots`: `[{"t":0,"end":11,"kind":"cockpit"}, ...]` engine-drawn 2D shots that replace the 3D view while `t` is inside them (`ShotArt`, so new kinds need an app update). Kinds: `cockpit` (Buck's ship, the order coming in), `warp` (systems flying by), `arrive` (out of warp, the Maiden and the moon Ruin in the window), `dock` (the approach and the collar), `tunnel` (the connecting tube, Buck walking it). Camera and Buck keys are ignored during a shot, so the 3D scene can start at the time the last shot ends. `blackUntil` may be 0.
+- A deck whose pack has cut scenes needs `minEngine` 1.5.
+
 ### schematic (engine 1.3)
 
 What the automap knows before Buck explores. `{"hide":[[x1,y1,x2,y2],...], "add":[[x1,y1,x2,y2],...]}`, rectangles inclusive. Gorgon's copy is the real layout (every floor cell outside secret rooms and secret doors), minus `hide`, plus `add`, which may cover solid wall (a hallway on the plan that isn't there). Until the `floorplan` action runs, cells Buck hasn't seen are drawn as faint dots with a faint outline, labeled GORGON'S PLAN. After it runs, and from the start on Very Easy and Easy, the real layout is drawn dimly instead. Secret rooms never appear either way, and the `?` hints don't change. `{}` means Gorgon's copy matches; no `schematic` key means no plan at all (only what Buck has seen).

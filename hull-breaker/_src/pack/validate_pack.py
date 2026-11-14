@@ -10,7 +10,7 @@ import collections, hashlib, json, os, sys
 
 ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), '..', '..', 'packs'))
 ONLY = sys.argv[2:]
-ENGINE_FLAGS = {'power', 'lightsOut', 'alarm'}          # flags the engine itself reacts to
+ENGINE_FLAGS = {'power', 'lightsOut', 'alarm', 'opening'}          # flags the engine itself reacts to
 SIGNALS = {  # combat and score events, with the fields their conditions may read (FORMAT.md)
     # engine 1.3: kill gains state (ceiling, playingDead) and the stomp cause
     'kill': {'enemy', 'cause', 'boss', 'state'}, 'blast': {'source', 'kills'}, 'sever': {'enemy', 'limb', 'state'},
@@ -24,7 +24,7 @@ EVENTS = {'start', 'enterZone', 'pickup', 'use', 'useDecor', 'doorUnlock', 'door
 ACTIONS = {'say', 'msg', 'objective', 'sfx', 'flash', 'shake', 'set', 'add', 'ambush', 'autosave', 'music', 'setTile', 'after', 'if', 'win', 'depart', 'achieve',
            'scene', 'hint', 'floorplan'}   # engine 1.3: scene, hint, floorplan (swap Gorgon's schematic for the real map)
 HINTS = {'move', 'limbs', 'kick', 'stayDown', 'map', 'guide', 'stomp', 'lurker', 'swim'}   # engine 1.3 tutorial prompts
-SPEAKERS = {'moss'}
+SPEAKERS = {'dispatch', 'moss'}
 DIFFS = ['Very Easy', 'Easy', 'Normal', 'Hard', 'Nightmare']
 errors, warns = [], []
 err = errors.append
