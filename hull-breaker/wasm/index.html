@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#04060a">
+<title>Hull Breaker (WebAssembly beta)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Teko:wght@500;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--void:#04060a;--steel:#8b98a5;--ink:#e8edf1;--rig:#3fe0c5;--amber:#ffb627;--blood:#d0142f;--term:#6dff9a;--h:540px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;color:var(--ink);overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+body{font-family:Silkscreen,monospace}
+/* the game keeps a 16:9 frame; bars fill the rest (sides on phones, top and bottom on tall screens) */
+#box{position:absolute;left:0;top:0;overflow:hidden;background:#000}
+#c{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+#hud{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(#0000 0 2px,#00000029 2px 3px)}
+.panel{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:calc(var(--h)*.022);padding:calc(var(--h)*.05)}
+.panel.on{display:flex}
+.title{font-family:Teko,sans-serif;font-weight:700;font-size:calc(var(--h)*.11);line-height:.9;color:var(--ink)}
+.sub{font-family:VT323,monospace;font-size:calc(var(--h)*.036);color:var(--steel);max-width:calc(var(--h)*1.3)}
+.items{display:flex;flex-direction:column;align-items:center;gap:calc(var(--h)*.012);margin-top:calc(var(--h)*.02)}
+.item{font-size:calc(var(--h)*.03);padding:calc(var(--h)*.01) calc(var(--h)*.03);color:var(--ink);cursor:pointer;pointer-events:auto}
+.item.sel{background:var(--rig);color:var(--void)}
+.grid{display:grid;grid-template-columns:auto auto;column-gap:calc(var(--h)*.06);row-gap:calc(var(--h)*.008);font-size:calc(var(--h)*.028);text-align:left}
+.grid .n{text-align:right}
+#load .bar{width:calc(var(--h)*.8);height:calc(var(--h)*.014);background:#1e262e}
+#load .bar i{display:block;height:100%;width:0;background:var(--rig)}
+#beta{position:absolute;right:calc(var(--h)*.02);bottom:calc(var(--h)*.015);font-size:calc(var(--h)*.02);color:var(--steel);opacity:.7}
+select{font-family:Silkscreen,monospace;font-size:calc(var(--h)*.028);background:var(--void);color:var(--ink);border:1px solid var(--steel);padding:calc(var(--h)*.006)}
+</style>
+</head>
+<body>
+<div id="box">
+  <canvas id="c" width="320" height="180" aria-label="Hull Breaker game screen"></canvas>
+  <canvas id="hud" aria-hidden="true"></canvas>
+  <div id="scan"></div>
+
+  <div class="panel on" id="load" style="background:var(--void)">
+    <div class="title">HULL BREAKER</div>
+    <div class="sub" id="loadText">Loading the engine…</div>
+    <div class="bar"><i id="loadBar"></i></div>
+  </div>
+
+  <div class="panel" id="title" style="background:#04060ae0">
+    <div class="title">HULL BREAKER</div>
+    <div class="sub">WebAssembly beta: the Swift engine in your browser. Saves here are kept apart from the regular game.</div>
+    <div class="items" id="titleItems"></div>
+    <div class="sub" id="titleNote"></div>
+  </div>
+
+  <div class="panel" id="menu" style="background:#04060ad1">
+    <div class="title" id="menuTitle"></div>
+    <div id="menuBody"></div>
+    <div class="items" id="menuItems"></div>
+  </div>
+  <div id="beta">WASM BETA</div>
+</div>
+<script type="module" src="shell.js"></script>
+</body>
+</html>

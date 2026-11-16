@@ -25,6 +25,10 @@ The series bible (story, characters, lore facts, deck outlines, rules for contin
 | `pack/parity.py` | Starts the real game on every difficulty and checks it spawns exactly what the pack says. |
 | `pack/keep_unchanged.py` | After a re-extract, keeps unchanged media byte-for-byte from the last release and rewrites manifests and the catalog. |
 
+## WebAssembly beta
+
+`../wasm/` is the Swift engine compiled to WebAssembly with a JavaScript shell (Phase 4 of the platforms plan), served at `bigdoodr.github.io/hull-breaker/wasm/` and reading `../packs-1.5/`. Its source is in the Apple repo (`bigdoodr/hull-breaker-apple`, `Web/` and `Sources/HullBreakerWeb/`); rebuild with `Web/build.sh <site>/hull-breaker/wasm` there rather than editing the copies here. Its saves use `hbw-` keys, apart from this game's `hb-` keys.
+
 ## Deck packs
 
 `../packs/` is public (GitHub Pages serves it at `bigdoodr.github.io/hull-breaker/packs/`), so a deck's pack is pushed only when that deck ships. Rebuild and check Deck 01's pack with:
