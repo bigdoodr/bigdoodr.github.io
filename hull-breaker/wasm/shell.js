@@ -204,7 +204,7 @@ addEventListener('mousemove', (e) => {
   if (document.pointerLockElement === cv || (!lockOK && mode === 'play' && (e.buttons & 1))) { mouseDX += e.movementX; mouseDY += e.movementY; }
 });
 document.addEventListener('pointerlockchange', () => { if (!document.pointerLockElement && mode === 'play') openPause(); });
-function setScheme(s) { if (s !== scheme) { scheme = s; hb?.scheme(s); } }
+function setScheme(s) { if (s !== scheme) { scheme = s; hb?.scheme(s); if (s !== 'touch') touchRelease?.(); } }
 
 // gamepad (standard mapping), as the web game's pollPad
 const pad = { prev: [], on: false, ax: [0, 0, 0, 0], rt: false, pay: 0 };
@@ -227,13 +227,139 @@ function pollPad(down) {
   pad.prev = b;
 }
 
+
+// ---------------------------------------------------------------- touch (mirrors TouchControls.swift)
+// A floating stick in the left 45% of the screen (50-point reach, runs past 90%), drag-to-look in the
+// right 55% (0.0068 radians and 0.5 pitch pixels per point), and the web game's buttons. On phones the
+// frame has side bars, so MAP and PATH sit in the top of the left bar, pause in the top of the right
+// bar, and the thumb cluster tucks toward the right edge. Every touch is tracked on its own.
+const tcv = $('#touch'), tg = tcv.getContext('2d');
+const T = {
+  moveX: 0, moveY: 0, run: false, lookDX: 0, lookDY: 0, fireHeld: false, fireTapped: false,
+  held: new Set(), tapped: new Set(), lookSpeed: 1, bars: false,
+  roles: new Map(), stick: null, stickOrigin: null, stickPos: null, look: null,
+  buttons: [
+    { a: 'fire', t: 'FIRE', size: 94, font: 13, fire: true }, { a: 'kick', t: 'KICK', size: 62, font: 11 },
+    { a: 'use', t: 'USE', size: 54, font: 11 }, { a: 'swap', t: 'SWAP', size: 54, font: 11 },
+    { a: 'map', t: 'MAP', size: 42, font: 10 }, { a: 'pause', t: 'II', size: 42, font: 12 }, { a: 'guide', t: 'PATH', size: 42, font: 9 },
+  ],
+};
+for (const b of T.buttons) { b.base = b.size; b.down = false; }
+function touchLayout() {
+  const W = innerWidth, H = innerHeight, d = Math.min(2, devicePixelRatio || 1);
+  tcv.width = Math.round(W * d); tcv.height = Math.round(H * d);
+  const bar = (W - BW) / 2;
+  T.bars = bar >= 56;
+  const right = T.bars ? 8 : 0, bottom = 6;
+  const B = (a) => T.buttons.find((b) => b.a === a);
+  for (const b of T.buttons) b.size = T.bars && b.base === 42 ? 38 : b.base;
+  const place = (a, x, y) => { const b = B(a); b.x = x; b.y = y; };
+  place('fire', W - right - 22 - 47, H - bottom - 26 - 47);
+  place('kick', W - right - 130 - 31, H - bottom - 20 - 31);
+  place('use', W - right - 138 - 27, H - bottom - 96 - 27);
+  place('swap', W - right - 42 - 27, H - bottom - 132 - 27);
+  if (T.bars) { const x = Math.max(25, bar / 2); place('map', x, 27); place('guide', x, 69); place('pause', W - x, 27); }
+  else { const y = 8 + 21; place('map', W / 2 - 49, y); place('pause', W / 2, y); place('guide', W / 2 + 49, y); }
+}
+addEventListener('resize', touchLayout);
+function touchLive() { return mode === 'play' && scheme === 'touch'; }
+function touchRelease() {
+  for (const b of T.buttons) b.down = false;
+  T.roles.clear(); T.stick = T.look = null; T.moveX = T.moveY = 0; T.run = false;
+  T.fireHeld = false; T.fireTapped = false; T.held.clear(); T.tapped.clear(); T.lookDX = T.lookDY = 0;
+}
+const isTouchDevice = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+function onTouchStart(e) {
+  audio.unlock();
+  if (mode !== 'play') return;
+  e.preventDefault();
+  setScheme('touch');
+  for (const t of e.changedTouches) {
+    const x = t.clientX, y = t.clientY;
+    if (last?.hud?.cutOn) { T.tapped.add('use'); continue; }      // a tap anywhere skips a cut scene
+    const b = T.buttons.find((b) => Math.hypot(x - b.x, y - b.y) <= b.size / 2 + 8);
+    if (b) {
+      T.roles.set(t.identifier, { r: 'button', a: b.a }); b.down = true;
+      if (b.a === 'fire') { T.fireHeld = true; T.fireTapped = true; } else { T.held.add(b.a); T.tapped.add(b.a); }
+      if (b.a === 'kick' && navigator.vibrate) navigator.vibrate(12);
+    } else if (x < innerWidth * 0.45 && T.stick == null) {
+      T.roles.set(t.identifier, { r: 'stick' }); T.stick = t.identifier; T.stickOrigin = T.stickPos = { x, y };
+    } else if (x >= innerWidth * 0.45 && T.look == null) {
+      T.roles.set(t.identifier, { r: 'look', x, y }); T.look = t.identifier;
+    }
+  }
+}
+function onTouchMove(e) {
+  if (mode !== 'play') return;
+  e.preventDefault();
+  for (const t of e.changedTouches) {
+    const role = T.roles.get(t.identifier); if (!role) continue;
+    const x = t.clientX, y = t.clientY;
+    if (role.r === 'stick') {
+      let dx = x - T.stickOrigin.x, dy = y - T.stickOrigin.y; const l = Math.hypot(dx, dy), mx = 50;
+      if (l > mx) { dx *= mx / l; dy *= mx / l; }
+      T.moveX = dx / mx; T.moveY = -dy / mx; T.run = Math.hypot(dx / mx, dy / mx) > 0.9;
+      T.stickPos = { x: T.stickOrigin.x + dx, y: T.stickOrigin.y + dy };
+    } else if (role.r === 'look') {
+      T.lookDX += x - role.x; T.lookDY += y - role.y; role.x = x; role.y = y;
+    }
+  }
+}
+function onTouchEnd(e) {
+  for (const t of e.changedTouches) {
+    const role = T.roles.get(t.identifier); if (!role) continue;
+    T.roles.delete(t.identifier);
+    if (role.r === 'stick') { T.stick = null; T.moveX = T.moveY = 0; T.run = false; }
+    else if (role.r === 'look') T.look = null;
+    else { const b = T.buttons.find((b) => b.a === role.a); if (b) b.down = false; if (role.a === 'fire') T.fireHeld = false; else T.held.delete(role.a); }
+  }
+}
+tcv.addEventListener('touchstart', onTouchStart, { passive: false });
+tcv.addEventListener('touchmove', onTouchMove, { passive: false });
+tcv.addEventListener('touchend', onTouchEnd); tcv.addEventListener('touchcancel', onTouchEnd);
+// the first touch anywhere (title, menus) switches the prompts to touch
+addEventListener('touchstart', () => { audio.unlock(); if (scheme !== 'touch') setScheme('touch'); }, { passive: true, capture: true });
+addEventListener('touchend', () => audio.unlock(), { passive: true, capture: true });
+
+// this frame's touch input into the engine's input (a tap between frames still counts once)
+function drainTouch(i, down) {
+  i.moveX += T.moveX; i.moveY += T.moveY; if (T.run) i.flags |= RUN;
+  i.lookX += T.lookDX * 0.0068 * T.lookSpeed; i.lookY += -T.lookDY * 0.5 * T.lookSpeed; T.lookDX = T.lookDY = 0;
+  if (T.fireHeld || T.fireTapped) i.flags |= FIRE; T.fireTapped = false;
+  for (const a of T.held) down.push('@' + a); for (const a of T.tapped) down.push('@' + a); T.tapped.clear();
+}
+
+function drawTouch() {
+  const d = tcv.width / innerWidth;
+  tg.setTransform(d, 0, 0, d, 0, 0); tg.clearRect(0, 0, innerWidth, innerHeight);
+  const live = touchLive() && !last?.hud?.cutOn;
+  tcv.classList.toggle('live', mode === 'play' && scheme === 'touch');
+  if (!live) return;
+  for (const b of T.buttons) {
+    tg.beginPath(); tg.arc(b.x, b.y, b.size / 2, 0, Math.PI * 2);
+    tg.fillStyle = b.down ? 'rgba(232,237,241,.25)' : b.fire ? 'rgba(208,20,47,.22)' : 'rgba(17,22,27,.5)'; tg.fill();
+    tg.lineWidth = 2; tg.strokeStyle = b.fire ? 'rgba(208,20,47,.85)' : 'rgba(139,152,165,.55)'; tg.stroke();
+    tg.font = `${b.font}px Silkscreen`; tg.fillStyle = C.ink; tg.textAlign = 'center'; tg.textBaseline = 'middle';
+    tg.fillText(b.t, b.x, b.y + 1);
+  }
+  if (T.stick != null) {
+    const o = T.stickOrigin, k = T.stickPos;
+    tg.beginPath(); tg.arc(o.x, o.y, 60, 0, Math.PI * 2); tg.fillStyle = 'rgba(63,224,197,.07)'; tg.fill(); tg.lineWidth = 2; tg.strokeStyle = 'rgba(63,224,197,.4)'; tg.stroke();
+    tg.beginPath(); tg.arc(k.x, k.y, 27, 0, Math.PI * 2); tg.fillStyle = 'rgba(63,224,197,.35)'; tg.fill(); tg.strokeStyle = 'rgba(63,224,197,.7)'; tg.stroke();
+  }
+}
+
+// phones and tablets play in landscape: say so in portrait
+function checkRotate() { $('#rotate').style.display = isTouchDevice && innerHeight > innerWidth ? 'flex' : 'none'; }
+addEventListener('resize', checkRotate);
+
 // ---------------------------------------------------------------- menus
 let mode = 'load';                 // load, title, play, menu
 let menu = null;                   // { kind, items: [{label, act}], sel }
 let info = null;                   // the open deck (hb.info())
 let difficulty = +(store.get('difficulty') ?? 2), deckChoice = 'deck-01';
 
-function showPanel(id) { for (const p of ['#load', '#title', '#menu']) $(p).classList.toggle('on', p === id); }
+function showPanel(id) { for (const p of ['#load', '#title', '#menu']) $(p).classList.toggle('on', p === id); $('#beta').style.display = id ? '' : 'none'; }   // the beta tag hides during play (it sat under FIRE)
 function renderItems(el, items, sel) {
   el.innerHTML = '';
   items.forEach((it, i) => {
@@ -249,6 +375,7 @@ function refreshMenu() {
 }
 function menuInput() {
   if (!menu) { menuEdges.length = 0; return; }
+  if (!menuEdges.length) return;      // redraw the rows only when something changed
   for (const e of menuEdges.splice(0)) {
     const it = menu.items[menu.sel];
     if (e === 'up') { menu.sel = (menu.sel - 1 + menu.items.length) % menu.items.length; audio.tick(); }
@@ -266,6 +393,7 @@ function diffNames() { return info?.difficulties?.map((d) => d.name) || ['Very E
 function savedFor(deck) { try { return JSON.parse(store.get('save-' + deck) || 'null'); } catch { return null; } }
 
 function openTitle() {
+  touchRelease(); tcv.classList.remove('live'); tg.clearRect(0, 0, tcv.width, tcv.height);
   if (document.pointerLockElement) document.exitPointerLock();
   mode = 'title'; showPanel('#title');
   const decks = deckList();
@@ -279,7 +407,9 @@ function openTitle() {
       ...(s ? [{ label: `Continue (${diffNames()[s.difficulty]})`, act: () => startDeck(d().id, s.difficulty, unb64(s.data)) }] : []),
       { label: 'New Run', act: () => startDeck(d().id, difficulty) },
     ];
-    $('#titleNote').textContent = 'Keyboard: WASD move, mouse look (click to capture), Space or click fire, E use, F or right-click kick, Q swap, M map, G path, Esc pause. Controllers work too.';
+    $('#titleNote').textContent = isTouchDevice
+      ? 'Touch: left thumb moves (push far to run), drag on the right to look, FIRE, KICK, USE and SWAP on the right, MAP, PATH and II (pause) at the top. Tap to skip a cut scene. Controllers work too.'
+      : 'Keyboard: WASD move, mouse look (click to capture), Space or click fire, E use, F or right-click kick, Q swap, M map, G path, Esc pause. Controllers work too.';
     refreshMenu();
   };
   build();
@@ -300,10 +430,12 @@ function startDeck(deck, diff, resume = null, carry = undefined) {
   if (resume && !hb.restore(resume)) console.warn('save did not load');
   menu = null; mode = 'play'; showPanel(null);
   faceCache.clear();
-  lockPointer();
+  if (scheme === 'touch') { try { document.documentElement.requestFullscreen?.({ navigationUI: 'hide' })?.catch(() => {}); } catch {} }
+  else lockPointer();
 }
 
 function openMenu(kind, title, bodyHTML, items, back, tint = '#04060ad1') {
+  touchRelease(); drawTouch();
   if (document.pointerLockElement) document.exitPointerLock();
   mode = 'menu'; showPanel('#menu');
   $('#menu').style.background = tint;
@@ -313,7 +445,7 @@ function openMenu(kind, title, bodyHTML, items, back, tint = '#04060ad1') {
   menuEdges.length = 0;
   refreshMenu();
 }
-function closeMenu() { menu = null; mode = 'play'; showPanel(null); audio.pause(false); lockPointer(); }
+function closeMenu() { menu = null; mode = 'play'; showPanel(null); audio.pause(false); if (scheme !== 'touch') lockPointer(); }
 
 function openPause() {
   if (mode !== 'play') return;
@@ -423,6 +555,7 @@ function drawHUD(s, dt) {
   hg.clearRect(0, 0, w, h);
   if (!s.hud) return;
   const cx = w / 2, cy = h / 2, playing = mode === 'play';
+  const touch = scheme === 'touch', bars = touch && T.bars;
   // combat layer: crosshair, damage numbers, hurt tint, pickup flash, low-HP vignette
   if (!p.dead && playing && !hud.cutOn) {
     const c = hud.hit > 0 ? 'rgb(255,48,71)' : 'rgba(95,245,255,.9)';
@@ -449,7 +582,8 @@ function drawHUD(s, dt) {
 
   // messages, top left
   hg.font = font(2.6);
-  hud.messages.forEach((m, i) => alpha(m.life * 2, () => { text(m.text, w * 0.05 + 2 * DPR, h * 0.06 + i * h * 0.035 + 2 * DPR, '#000'); text(m.text, w * 0.05, h * 0.06 + i * h * 0.035, C.ink); }));
+  const mx = touch ? w * 6 / 320 : w * 0.05, my = touch ? h * 26 / 180 : h * 0.06;
+  hud.messages.forEach((m, i) => alpha(m.life * 2, () => { text(m.text, mx + 2 * DPR, my + i * h * 0.035 + 2 * DPR, '#000'); text(m.text, mx, my + i * h * 0.035, C.ink); }));
 
   if (hud.bannerT > 0) alpha(Math.min(hud.bannerT * 1.5, (3.2 - hud.bannerT) * 4), () => {
     hg.font = font(2); text(`DECK ${pad2(info.deck)}`, cx, h * 0.3, C.steel, 'center');
@@ -457,10 +591,11 @@ function drawHUD(s, dt) {
   });
   if (hud.objectiveT > 0 && hud.objective && !hud.mapOn) alpha(hud.objectiveT, () => textBox({
     lines: hud.objective.toUpperCase(), prefix: { text: 'OBJECTIVE: ', color: C.amber }, fontSpec: font(2.2), color: C.ink,
-    x: w - w * 0.04, y: h * 0.04, maxW: w * 0.38, padX: h * 0.015, padY: h * 0.01, bg: 'rgba(0,0,0,.62)', bar: C.amber, anchor: 'tr' }));
+    x: bars ? cx : w - w * 0.04, y: touch && !bars ? h * 0.3 : h * 0.04, maxW: w * 0.38, padX: h * 0.015, padY: h * 0.01,
+    bg: 'rgba(0,0,0,.62)', bar: C.amber, anchor: bars ? 'tc' : 'tr' }));
   if (hud.roomTagT > 0 && hud.bannerT <= 0 && hud.objectiveT <= 0) alpha(hud.roomTagT * 2, () => textBox({
-    lines: hud.roomTag, fontSpec: font(2.4), color: C.ink, x: w - w * 0.05, y: h * 0.06, maxW: w * 0.5, padX: h * 0.015, padY: h * 0.006,
-    bg: 'rgba(4,6,10,.7)', bar: C.rig, barSide: 'right', anchor: 'tr' }));
+    lines: hud.roomTag, fontSpec: font(2.4), color: C.ink, x: touch ? w * 6 / 320 : w - w * 0.05, y: touch ? h - h * 0.025 : h * 0.06,
+    maxW: w * 0.5, padX: h * 0.015, padY: h * 0.006, bg: 'rgba(4,6,10,.7)', bar: C.rig, barSide: 'right', anchor: touch ? 'bl' : 'tr' }));
   if (hud.logOpen) {
     const shown = hud.logText.slice(0, Math.floor(hud.logT * 42));
     hg.font = font(3.6, 't');
@@ -475,13 +610,13 @@ function drawHUD(s, dt) {
   if (hud.hintT > 0 && !hud.mapOn) alpha(hud.hintT * 2, () => textBox({
     lines: hud.hint, fontSpec: font(2.6), color: C.cyan, x: cx, y: h * 0.56, maxW: w * 0.6, padX: h * 0.02, padY: h * 0.012, bg: 'rgba(0,0,0,.7)', bar: C.cyan, anchor: 'tc', align: 'center' }));
   if (hud.breath < 1) {
-    const bw = h * 0.3, y = h * 0.045;
+    const bw = h * 0.3, y = touch ? h * 0.12 : h * 0.045;
     hg.font = font(1.8); const tw = hg.measureText('AIR ').width;
     const x0 = cx - (tw + bw) / 2;
     text('AIR', x0, y, C.steel); rect(x0 + tw, y, bw, h * 0.02, 'rgba(0,0,0,.7)'); rect(x0 + tw, y, bw * hud.breath, h * 0.02, hud.breath > 0.3 ? C.cyan : C.blood);
   }
   if (hud.bossName) {
-    const bw = w * 0.5, y = h - h * 0.19 - h * 0.014;
+    const bw = w * 0.5, y = h - (touch ? h * 0.08 : h * 0.19) - h * 0.014;
     hg.font = font(2); text(hud.bossName, cx, y - h * 0.006, C.blood, 'center', 'bottom');
     rect(cx - bw / 2, y, bw, h * 0.014, 'rgba(0,0,0,.75)'); rect(cx - bw / 2, y, bw * hud.bossHealth, h * 0.014, C.blood);
   }
@@ -490,13 +625,13 @@ function drawHUD(s, dt) {
     textBox({ lines: hud.subtitle, prefix: { text: hud.speaker + ': ', color: sc }, fontSpec: font(2.8), color: C.ink, x: cx, y: h - h * 0.16,
       maxW: w * 0.8, padX: h * 0.02, padY: h * 0.01, bg: 'rgba(0,0,0,.6)', anchor: 'bc', align: 'center' });
   }
-  if (!hud.cutOn) drawStatus(s, w, h, u, dt);
+  if (!hud.cutOn) (touch ? drawTouchStatus : drawStatus)(s, w, h, u, dt);
   if (hud.sceneOn) drawScene(hud, w, h);
   if (hud.cutOn) drawCut(hud, w, h);
   if (hud.mapOn && playing) drawAutomap(w, h);
   if (hud.toastT > 0) {
     const a = Math.min(hud.toastT * 2, (4 - hud.toastT) * 5), off = -h * 0.04 * Math.max(0, 1 - (4 - hud.toastT) * 5);
-    alpha(a, () => drawToast(hud, cx, h * 0.04 + off, h));
+    alpha(a, () => drawToast(hud, cx, (touch ? (bars ? h * 0.14 : h * 0.53) : h * 0.04) + off, h));
   }
 }
 
@@ -551,6 +686,26 @@ function drawAutomap(w, h) {
   hg.closePath(); hg.fill();
   hg.font = `${8 * s}px Silkscreen`;
   for (const [t, x, y, c, an] of m.l) text(t, x * s, y * s, c, an === 'tr' ? 'right' : an === 'c' ? 'center' : 'left', an === 'c' ? 'middle' : 'top');
+}
+
+// touch mode: health and armor top left, ammo, weapon and keys top right, no bottom bar (TouchStatus)
+function drawTouchStatus(s, w, h) {
+  const p = s.player, k = h / 180, RW = w / k;
+  const t = (str, x, y, c, px, align = 'left') => { hg.font = `${px * k}px Silkscreen`; text(str, (x + 1) * k, (y + 1) * k, 'rgba(0,0,0,.8)', align); text(str, x * k, y * k, c, align); };
+  const hc = p.hp > 60 ? C.rig : p.hp > 30 ? C.amber : C.blood, pips = Math.ceil(p.hp / 10);
+  t(String(Math.ceil(p.hp)), 8, 6, hc, 16);
+  t(`ARM ${Math.floor(p.armor)}`, 50, 6, C.steel, 8);
+  for (let i = 0; i < 10; i++) rect((50 + i * 4) * k, 16 * k, 3 * k, 3 * k, i < pips ? hc : 'rgb(31,38,46)');
+  t(String(p.ammo[AMMO[p.wpn]] ?? 0), RW - 8, 20, C.amber, 16, 'right');
+  t(WEAPONS[p.wpn], RW - 8, 36, C.steel, 8, 'right');
+  if (p.weapons[3] && p.wpn !== 3) t(`CHG ${p.ammo.bombs ?? 0}`, RW - 8, 44, C.steel, 8, 'right');
+  let kx = RW - 40;
+  for (const [id, col] of Object.entries(info.keyColors)) {
+    if (s.keys.includes(id)) rect(kx * k, 55 * k, 6 * k, 4 * k, col);
+    else { hg.strokeStyle = 'rgba(139,152,165,.4)'; hg.lineWidth = DPR; hg.strokeRect(kx * k, 55 * k, 6 * k, 4 * k); }
+    kx += 8;
+  }
+  if (p.boots) { const bx = (RW - 52) * k, by = 54 * k; rect(bx, by, 6 * k, 5 * k, '#5a4632'); rect(bx, by + 4 * k, 11 * k, 2 * k, '#3a2a1c'); }
 }
 
 function drawScene(hud, w, h) {
@@ -623,7 +778,8 @@ function frame(t) {
   if (lmb || pad.rt) flags |= FIRE;
   const i = { moveX: 0, moveY: 0, turn: 0, pitch: 0, lookX: mouseDX * 0.0026, lookY: -mouseDY * 0.55, flags };
   mouseDX = mouseDY = 0;
-  if (pad.on) { i.moveX = pad.ax[0]; i.moveY = -pad.ax[1]; i.turn = pad.ax[2] * 1.15; i.pitch = -pad.ax[3]; if (Math.hypot(pad.ax[0], pad.ax[1]) > 0.93) i.flags |= RUN; }
+  if (mode === 'play') drainTouch(i, down);
+  if (pad.on) { i.moveX += pad.ax[0]; i.moveY += -pad.ax[1]; i.turn = pad.ax[2] * 1.15; i.pitch = -pad.ax[3]; if (Math.hypot(pad.ax[0], pad.ax[1]) > 0.93) i.flags |= RUN; }
   if (wasMenu ? !menu || menu.kind === 'pause' || menu.kind === 'depart' : false) i.flags |= MENU;
   const held = new Set([...keys, ...tapped]); tapped.clear();
   const keyList = mode === 'play' ? [...held, ...down] : mode === 'dying' ? [] : [...held];
@@ -635,6 +791,7 @@ function frame(t) {
   if (s.achievements.length) store.set('achievements', b64(hb.achievements()));
   if (s.wantsSave) store.set('save-' + deckChoice, JSON.stringify({ difficulty: info.difficulty, data: b64(hb.snapshot()) }));
   drawHUD(s, dt);
+  drawTouch();
   if (mode === 'play' && !wasMenu) {
     if (s.menu.pause) { openPause(); return; }
     if (s.depart) { openDepart(s.depart); return; }
@@ -649,6 +806,7 @@ let deathT = 0;
 // ---------------------------------------------------------------- boot
 (async () => {
   try {
+    touchLayout(); checkRotate();
     await loadAll();
     openTitle();
     requestAnimationFrame(frame);

@@ -28,6 +28,11 @@ body{font-family:Silkscreen,monospace}
 .grid .n{text-align:right}
 #load .bar{width:calc(var(--h)*.8);height:calc(var(--h)*.014);background:#1e262e}
 #load .bar i{display:block;height:100%;width:0;background:var(--rig)}
+/* touch controls: over the whole screen (the buttons use the side bars), only while playing */
+#touch{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:5;touch-action:none}
+#touch.live{pointer-events:auto}
+#rotate{position:fixed;inset:0;z-index:10;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:var(--void);color:var(--ink);font-size:16px;text-align:center;padding:24px}
+#rotate .big{font-family:Teko,sans-serif;font-weight:700;font-size:40px}
 #beta{position:absolute;right:calc(var(--h)*.02);bottom:calc(var(--h)*.015);font-size:calc(var(--h)*.02);color:var(--steel);opacity:.7}
 select{font-family:Silkscreen,monospace;font-size:calc(var(--h)*.028);background:var(--void);color:var(--ink);border:1px solid var(--steel);padding:calc(var(--h)*.006)}
 </style>
@@ -58,6 +63,8 @@ select{font-family:Silkscreen,monospace;font-size:calc(var(--h)*.028);background
   </div>
   <div id="beta">WASM BETA</div>
 </div>
+<canvas id="touch" aria-hidden="true"></canvas>
+<div id="rotate"><div class="big">TURN YOUR PHONE</div><div style="font-family:VT323,monospace;font-size:22px;color:var(--steel)">Hull Breaker plays in landscape.</div></div>
 <script type="module" src="shell.js"></script>
 </body>
 </html>
