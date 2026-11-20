@@ -29,6 +29,17 @@ The series bible (story, characters, lore facts, deck outlines, rules for contin
 
 `../wasm/` is the Swift engine compiled to WebAssembly with a JavaScript shell (Phase 4 of the platforms plan), served at `bigdoodr.github.io/hull-breaker/wasm/` and reading `../packs-1.5/`. Its source is in the Apple repo (`bigdoodr/hull-breaker-apple`, `Web/` and `Sources/HullBreakerWeb/`); rebuild with `Web/build.sh <site>/hull-breaker/wasm` there rather than editing the copies here. Its saves use `hbw-` keys, apart from this game's `hb-` keys.
 
+## Pack folders by engine
+
+| Folder | Read by | Notes |
+|---|---|---|
+| `../packs/` | engine 1.2 TestFlight builds | being retired |
+| `../packs-1.3/` | the JavaScript web game, engine 1.3–1.4 builds | |
+| `../packs-1.5/` | engine 1.5 builds and the WebAssembly beta | cut scenes |
+| `../packs-1.6/` | engine 1.6 builds | the Super broken part by part, the office valve puzzle, Moss at the locked office. Built from packs-1.5 by `pack/deck02_v16.py` (re-runnable); its voices by `voice/deck02_v16_vo.py`. |
+
+Until the WebAssembly build replaces the web game, a fix to Deck 01 or Deck 02 data goes into every folder that carries that deck (re-run `deck02_v16.py` after changing packs-1.5).
+
 ## Deck packs
 
 `../packs/` is public (GitHub Pages serves it at `bigdoodr.github.io/hull-breaker/packs/`), so a deck's pack is pushed only when that deck ships. Rebuild and check Deck 01's pack with:

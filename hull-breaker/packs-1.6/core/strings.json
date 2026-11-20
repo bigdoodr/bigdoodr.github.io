@@ -1,0 +1,15 @@
+{
+ "accessGranted": "ACCESS GRANTED",
+ "secretFound": "SECRET AREA FOUND",
+ "saved": "PROGRESS SAVED",
+ "checkpoint": "CHECKPOINT SAVED",
+ "outOfAmmo": "OUT OF AMMO",
+ "logFound": "AUDIO LOG {n}/{total}",
+ "assetTagged": "ASSET TAGGED: {name}  ({n}/{total})",
+ "headshotTip": "HEADSHOTS DON'T STOP THEM. CUT THE LIMBS.",
+ "reviveTip": "SOME OF THE DEAD GET BACK UP. KICK BODIES TO KEEP THEM DOWN.",
+ "noRoute": "NO ROUTE FOUND",
+ "route": "ROUTE TO OBJECTIVE: {m} M",
+ "deathHeading": "REPOSSESSED",
+ "deathBody": "Buck Hammersmith has been written off as a total loss."
+}

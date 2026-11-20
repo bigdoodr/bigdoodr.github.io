@@ -110,6 +110,7 @@ Lock id → `{tex?, needs?, denied?, map?, secret?}`. A door with `needs` stays 
 |---|---|
 | `power` | Lights `power` zones, turns off emergency lights. |
 | `lightsOut` | Drops all lamps except alarms to 8%. |
+| `arenaRed` | Engine 1.6: red emergency light pulses over a sealed boss arena (see core/tuning.json, boss parts). |
 | `alarm` | Turns the red alarm lights on and raises the background music. |
 
 Flags, counters, keys held and zones visited are saved with mid-deck saves.
@@ -135,6 +136,7 @@ A rule is `{"on": event, "if": condition?, "once": bool?, "do": [actions]}`. Whe
 | `{"event":"secret"}` | A secret panel opens. Fields: `found`, `total`. Engine 1.1. |
 | `{"event":"cheat"}` | A console cheat is used (engine 1.2). Field: `command`. The run is already marked audited, so only `cheat` achievements can fire. |
 | `{"event":"bossSight"}` | Buck first sees a boss in line of sight, the moment its boss bar appears (engine 1.4: an older app shows the deck as "Update required"). Field: `enemy` (type). Fires once per run; use a flag in the rule if a loaded save must not repeat it. |
+| `{"event":"bossPhase"}` | A boss with `parts` (engine 1.6) loses one and moves to the next. Fields: `enemy` (type), `phase` (the new phase, 2 for the second part and so on), `part` (the new part's `id`), `broke` (the part that just broke). Rules use it for lights, lines, hints and `autosave`. |
 | `{"event":"deckClear"}` | The deck is won, before the outro. Fields: `percent`, `time` (seconds), `par`, `underPar` (bool), `damageTaken`, `weapons` (list of `cutter`, `boomstick`, `rivet`, `charges`, `kick` used), `difficulty` (0–4), `deck`. Engine 1.1. |
 
 Conditions: `{"flag":f}`, `{"key":"R"}`, `{"visited":zone}`, `{"counter":c,"gte":n}` (also `eq`, `lte`), `{"difficulty":{"gte":n}}`, `{"not":c}`, `{"all":[...]}`, `{"any":[...]}`.
@@ -194,6 +196,10 @@ What the automap knows before Buck explores. `{"hide":[[x1,y1,x2,y2],...], "add"
 
 `par` is the deck's target time in seconds (Rush Job). `achievements` lists the deck's own achievements, in the same shape as `core/achievements.json` below.
 
+### solutions (engine 1.6, tools only)
+
+`"solutions": [["valveFeed", 1], ["valveReturn", 2], ["valveBypass", 0]]`: a puzzle's answer as uses in order, from the deck's starting state. The game ignores it. The walkthrough bot and validate_pack.py never use a listed wall on their own; once every listed wall is in reach they use each one the given number of times, in order. List every wall of the puzzle, even one that needs 0 uses.
+
 ### ambushes
 
 `id → {"zones":[...], "spawns":[enemy types]}`. When run, `round(len(spawns) * difficulty.spawn)` enemies (at least 1) drop out of vents on or next to those zones, 1.1 s apart, cycling through the list, preferring vents more than 3 cells from the player.
@@ -246,6 +252,24 @@ World sizes come from `tuning.json` (`height` of items, decor, barrels, enemies,
 A difficulty's `save` is `area` (checkpoints in every new area, plus events and stations), `events` (checkpoints after big moments, plus stations), `stations` (save stations only) or `never` (no mid-deck saves at all: stations refuse, and dying restarts the deck; engine 1.2, Nightmare). Enemies may carry `"boss": true` (engine 1.1; read by the `kill` event). The numbers the JavaScript engine has hard-coded: the difficulty table (`dmg`, `hp`, `spd`, `ammo`, `heal`, `spawn`, `cells`, `save`, `revive`, `desc`), enemy stats (`hp`, `lhp` per limb, `speed`, `dmg`, `reach`, `wind`, `r`, `height`, limbs needed to kill), weapons, ammo caps, kick, explosions, revives, items (amounts scaled by the difficulty's ammo or heal factor), decor sizes, drop chances and end-of-deck ranks. Enemy types and weapon behaviors are engine code; their numbers live here so balance changes ship as a core pack update.
 
 The kick (engine 1.3): `kick.damage` is a standing kick and a plain stomp does `damage × 3.2`. With the stomp boots (an item with `"boots": true`), `kick.stomp` applies: `dmgMul` multiplies the stomp, `sleeperKill` kills a sleeper playing dead outright, `keepsDown` means a body killed by a stomp never revives, and `reach` is how close a body on the floor must be. `kick.boots` (core 1.3.1) is the standing kick with the boots: `dmgMul` multiplies `kick.damage` and `push` multiplies the knockback. Kicks with the boots play the `clank` sound.
+
+### Boss parts (engine 1.6)
+
+An enemy may carry `parts`, an ordered list. It is then fought part by part: one life bar each, and only the current part takes real damage. Packs that use it need engine 1.6 (Deck 02 1.2.0 and core 1.4.0, in `packs-1.6/`; older engines read `packs-1.5/` and keep the one-bar fight).
+
+```json
+"parts": [{"id": "buffer", "name": "FLOOR BUFFER", "hp": 70, "window": "stun"},
+          {"id": "armL", "name": "LEFT ARM", "hp": 85, "regions": ["armL"], "sever": "armL", "window": "swing"}]
+```
+
+- `hp` is multiplied by the difficulty's `hp`. `name` shows on the boss bar as `THE SUPER · LEFT ARM 2/5`.
+- `regions` (limb names, or `torso`): hits there do full damage while the window is open; other hits do 35%. Empty = any hit. A closed window takes `armor` (default 0.12) of every hit. A blast is an on-target hit times `blastMul` (default 0.5) and never severs a limb.
+- `window`: absent = always open; `stun` = while he is stunned after a charge; `vent` = while he vents steam (`ventTime`) or is stunned; `swing` = while he swings and `swingOpen` seconds after; `overheat` = `heatTime` seconds out of every `heatEvery`.
+- `sever`: the limb that comes off when the part breaks. Breaking the last part kills him (the `kill` event, with the cause of the final hit).
+- Part behavior is engine code keyed on `id`: `buffer` charges (`chargeEvery`, `chargeWindup`, `chargeSpeed`, `chargeTime`, `chargeDmgMul`); a charge into a wall or boiler stuns him for `stunTime`, an open-floor charge for `stumbleTime`. `hoses` vents steam every `steamEvery` (`steamRange`, `steamDmg`); once cut, scalding jets (`scaldEvery`, `scaldJets`, `scaldWarn`, `scaldRadius`, `scaldDmg`) break through the floor round Buck. `tank` makes him berserk.
+- In the type's `super` object: `arena: 1` seals every non-secret door next to his zone once Buck is in that zone and has seen him (lock `sealed`); the doors open as plain doors when he dies. Minions come from the zone's vents every `summonEvery`, at most `summonMax` alive. Each minion's death may drop one of `drops` (ammo only for weapons Buck owns) with chance `dropChance`, at most `dropMax × heal` per fight, in place of the usual drop. `breakStagger` is how long he reels when a part breaks.
+- Any number in the `super` object may instead be a list with one value per part (the last repeats): `"summonEvery": [16, 13, 11, 10, 8]`.
+- Save files (engine 1.6) keep the part, its hit points and which pieces are gone.
 
 ## Tools
 

@@ -9,8 +9,13 @@ VOICE={'dockoffice':('am_eric','en-us',1.0),'reception':('af_nicole','en-us',.95
  'reactor':('am_liam','en-us',1.04),'cargo':('am_onyx','en-us',.98),'container':('bm_lewis','en-gb',.88),'cargooffice':('af_sarah','en-us',1.07)}
 rng=np.random.default_rng(11)
 def bp(x,lo,hi,sr):return sosfilt(butter(3,[lo,hi],'band',fs=sr,output='sos'),x)
+# Voice-only respellings: the transcript (logs_text.json, pack logs.json) keeps the real word,
+# Kokoro gets the spelling that it pronounces right. 'read' (past tense) would come out as 'reed'.
+SAYFIX=[("only read about","only 'red' about")]
 def clean(t):
-    t=re.sub(r'\([^)]*\)\s*','',t); t=t.replace('LIMBS','limbs'); return t
+    t=re.sub(r'\([^)]*\)\s*','',t); t=t.replace('LIMBS','limbs')
+    for a,b in SAYFIX:t=t.replace(a,b)
+    return t
 
 SEGS={
  'dockoffice':["Shuttle traffic's frozen. The captain locked down the ring after the drill crew came back from Ruin. That strands four thousand crew on twelve decks, plus twenty-eight hundred relief miners asleep in cryo. Somebody keeps knocking on the inside of cargo container nine.",1.0,'GASP',.3,("…but there's nobody in container nine.",1.0,1.0,{'trem':(6,.12),'breathy':.16})],

@@ -10,13 +10,14 @@ import collections, hashlib, json, os, sys
 
 ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), '..', '..', 'packs'))
 ONLY = sys.argv[2:]
-ENGINE_FLAGS = {'power', 'lightsOut', 'alarm', 'opening'}          # flags the engine itself reacts to
+ENGINE_FLAGS = {'power', 'lightsOut', 'alarm', 'opening', 'arenaRed'}   # arenaRed: engine 1.6          # flags the engine itself reacts to
 SIGNALS = {  # combat and score events, with the fields their conditions may read (FORMAT.md)
     # engine 1.3: kill gains state (ceiling, playingDead) and the stomp cause
     'kill': {'enemy', 'cause', 'boss', 'state'}, 'blast': {'source', 'kills'}, 'sever': {'enemy', 'limb', 'state'},
     'death': {'cause'}, 'secret': {'found', 'total'},
     'deckClear': {'percent', 'time', 'par', 'underPar', 'damageTaken', 'weapons', 'difficulty', 'deck'},
-    'bossSight': {'enemy'},                                # engine 1.4: Buck first sees a boss (the boss bar appears)
+    'bossSight': {'enemy'},
+    'bossPhase': {'enemy', 'phase', 'part', 'broke'},       # engine 1.6: a parts boss lost a part (phase = the new one)                                # engine 1.4: Buck first sees a boss (the boss bar appears)
     'cheat': {'command'},                                  # engine 1.2: a console cheat was used
 }
 STATS = {'kickKills', 'limbsSevered', 'deaths', 'bodiesKicked', 'departStays', 'sleepersStomped'}
@@ -271,6 +272,7 @@ def run_rules(pid, deck, level, start, diff=2):
                 seen.add(n); q.append(n)
         return seen
 
+    solve_uses = {u for u, _ in deck.get('solutions', [])}; S['solved'] = 0
     fire('start')
     for _ in range(200):
         seen = reach(); progressed = False
@@ -287,9 +289,20 @@ def run_rules(pid, deck, level, start, diff=2):
                 w = leg['walls'].get(G[y][x])
                 if not w: continue
                 u = w.get('after', {}).get('use') if S['tiles'].get((x, y)) == 'after' else w.get('use')
-                if not u: continue
+                if not u or u in solve_uses: continue
                 if any((x + dx, y + dy) in seen for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
                     if fire('use', target=u, cell=(x, y)): progressed = True
+        # engine 1.6 `solutions`: a puzzle is worked in order once all its walls are in reach
+        if S['solved'] < len(deck.get('solutions', [])):
+            near = {}
+            for y in range(H):
+                for x in range(W):
+                    w = leg['walls'].get(G[y][x]); u = w and (w.get('after', {}).get('use') if S['tiles'].get((x, y)) == 'after' else w.get('use'))
+                    if u in solve_uses and any((x + dx, y + dy) in seen for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))): near[u] = (x, y)
+            if solve_uses <= set(near):
+                for u, n in deck['solutions']:
+                    for _ in range(n): fire('use', target=u, cell=near[u])
+                S['solved'] = len(deck['solutions']); order.append('solved ' + ' '.join(f'{u}x{n}' for u, n in deck['solutions'])); progressed = True
         # a boss the player can reach is assumed beaten (the engine fires kill with boss: true)
         for (x, y) in sorted(seen):
             od = leg['objects'].get(O[y][x], {})

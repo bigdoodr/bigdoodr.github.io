@@ -1,0 +1,282 @@
+{
+ "format": 1,
+ "achievements": [
+  {
+   "id": "hb.foot_the_bill",
+   "name": "Foot the Bill",
+   "desc": "Land the final blow with a kick, 50 times.",
+   "earned": "Fifty kicks to settle accounts.",
+   "points": 10,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_footnote",
+   "progress": {
+    "stat": "kickKills",
+    "target": 50
+   }
+  },
+  {
+   "id": "hb.steel_toed",
+   "name": "Steel-Toed",
+   "desc": "Finish any boss with a kick.",
+   "earned": "Finished a boss with a kick.",
+   "points": 15,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_steel_toed",
+   "on": {
+    "event": "kill"
+   },
+   "if": {
+    "all": [
+     {
+      "field": "boss",
+      "eq": true
+     },
+     {
+      "field": "cause",
+      "in": [
+       "kick",
+       "stomp"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "hb.line_items",
+   "name": "Line Items",
+   "desc": "Sever 500 limbs.",
+   "earned": "Five hundred limbs, itemized.",
+   "points": 15,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_line_items",
+   "progress": {
+    "stat": "limbsSevered",
+    "target": 500
+   }
+  },
+  {
+   "id": "hb.do_not_resuscitate",
+   "name": "Do Not Resuscitate",
+   "desc": "Kick 25 bodies so they stay down, on Normal or harder.",
+   "earned": "Twenty-five bodies kept down.",
+   "points": 10,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_dnr",
+   "progress": {
+    "stat": "bodiesKicked",
+    "target": 25,
+    "minDifficulty": 2
+   }
+  },
+  {
+   "id": "hb.collateral_damage",
+   "name": "Collateral Damage",
+   "desc": "Kill 3 enemies with one bloater burst.",
+   "earned": "Three for the price of one bloater.",
+   "points": 10,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_collateral",
+   "on": {
+    "event": "blast"
+   },
+   "if": {
+    "all": [
+     {
+      "field": "source",
+      "eq": "bloater"
+     },
+     {
+      "field": "kills",
+      "gte": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "hb.bulk_discount",
+   "name": "Bulk Discount",
+   "desc": "Kill 5 enemies with one Charge Bomb.",
+   "earned": "Five accounts closed with one charge.",
+   "points": 10,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_bulk_discount",
+   "on": {
+    "event": "blast"
+   },
+   "if": {
+    "all": [
+     {
+      "field": "source",
+      "eq": "bomb"
+     },
+     {
+      "field": "kills",
+      "gte": 5
+     }
+    ]
+   }
+  },
+  {
+   "id": "hb.no_head_for_business",
+   "name": "No Head for Business",
+   "desc": "Take a spitter's head while it's spitting.",
+   "earned": "Beheaded a spitter mid-spit.",
+   "points": 10,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_no_head",
+   "on": {
+    "event": "sever"
+   },
+   "if": {
+    "all": [
+     {
+      "field": "enemy",
+      "eq": "spitter"
+     },
+     {
+      "field": "limb",
+      "eq": "head"
+     },
+     {
+      "field": "state",
+      "eq": "spit"
+     }
+    ]
+   }
+  },
+  {
+   "id": "hb.liability",
+   "name": "Liability",
+   "desc": "Get killed by your own Charge Bomb.",
+   "earned": "Blew yourself up. On the clock.",
+   "points": 5,
+   "hidden": false,
+   "status": "live",
+   "on": {
+    "event": "death"
+   },
+   "if": {
+    "field": "cause",
+    "eq": "bomb"
+   }
+  },
+  {
+   "id": "hb.hidden_fees",
+   "name": "Hidden Fees",
+   "desc": "Find every secret in a deck.",
+   "earned": "Found every secret in a deck.",
+   "points": 10,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_hidden_fees",
+   "on": {
+    "event": "secret"
+   },
+   "if": {
+    "field": "found",
+    "eqField": "total"
+   }
+  },
+  {
+   "id": "hb.clean_credit",
+   "name": "Clean Credit",
+   "desc": "Clear a deck without taking damage.",
+   "earned": "Cleared a deck without a scratch.",
+   "points": 25,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_clean_credit",
+   "on": {
+    "event": "deckClear"
+   },
+   "if": {
+    "field": "damageTaken",
+    "eq": 0
+   }
+  },
+  {
+   "id": "hb.rush_job",
+   "name": "Rush Job",
+   "desc": "Clear a deck under its par time.",
+   "earned": "Cleared a deck under par.",
+   "points": 25,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_rush_job",
+   "on": {
+    "event": "deckClear"
+   },
+   "if": {
+    "field": "underPar",
+    "eq": true
+   }
+  },
+  {
+   "id": "hb.budget_cuts",
+   "name": "Budget Cuts",
+   "desc": "Clear a deck using only the Cutter and kicks.",
+   "earned": "Cleared a deck on Cutter and boot leather.",
+   "points": 25,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_budget_cuts",
+   "on": {
+    "event": "deckClear"
+   },
+   "if": {
+    "field": "weapons",
+    "subsetOf": [
+     "cutter",
+     "kick"
+    ]
+   }
+  },
+  {
+   "id": "hb.bad_credit",
+   "name": "Bad Credit",
+   "desc": "Die 100 times.",
+   "earned": "Written off a hundred times.",
+   "points": 10,
+   "hidden": false,
+   "status": "live",
+   "line": "ach_bad_credit",
+   "progress": {
+    "stat": "deaths",
+    "target": 100
+   }
+  },
+  {
+   "id": "hb.second_thoughts",
+   "name": "Second Thoughts",
+   "desc": "Choose Stay at the departure screen 5 times.",
+   "earned": "Five second thoughts at the lever.",
+   "points": 5,
+   "hidden": false,
+   "status": "live",
+   "progress": {
+    "stat": "departStays",
+    "target": 5
+   }
+  },
+  {
+   "id": "hb.irregularities_noted",
+   "name": "Irregularities Noted",
+   "desc": "Use a cheat.",
+   "earned": "Irregularities noted. Commission withheld.",
+   "points": 5,
+   "hidden": false,
+   "status": "live",
+   "on": {
+    "event": "cheat"
+   },
+   "cheat": true
+  }
+ ]
+}
