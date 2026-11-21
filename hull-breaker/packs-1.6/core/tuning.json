@@ -390,9 +390,9 @@
      "name": "LEFT ARM",
      "hp": 85,
      "regions": [
-      "armL"
+      "armR"
      ],
-     "sever": "armL",
+     "sever": "armR",
      "window": "swing"
     },
     {
@@ -410,9 +410,9 @@
      "name": "RIGHT ARM",
      "hp": 85,
      "regions": [
-      "armR"
+      "armL"
      ],
-     "sever": "armR",
+     "sever": "armL",
      "window": "swing"
     },
     {

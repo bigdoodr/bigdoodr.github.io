@@ -12,9 +12,11 @@ import stems                               # noqa: E402
 BUCK = {'phase_buffer': "That's gonna void the warranty.",
         'phase_armL': "That's one arm. The lease says I take both.",
         'phase_hoses': 'Shutting off your utilities.',
-        'phase_armR': 'Nothing left but the deposit.'}
+        'phase_armR': 'Nothing left but the deposit.',
+        'cabinet_locked': "Tighter than escrow. There's a trick to this."}
 MOSS = {'moss_office': 'Hollis was always locking himself out. Mensah kept his spare in the Chapel.'}
 # Nov 20: "Lease says I take both." came out "Lee says" in every take (Buck's growl eats the s); with "The" Whisper hears it right
+V.BUCKSEG["Tighter than escrow. There's a trick to this."] = ["Tighter than escrow.", .45, "There's a trick to this."]
 V.BUCKSEG["That's one arm. The lease says I take both."] = ["That's one arm.", .45, "The lease says I take both."]
 ONLY = set(filter(None, os.environ.get('ONLY', '').split(',')))
 if ONLY:

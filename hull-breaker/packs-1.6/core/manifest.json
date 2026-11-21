@@ -2,10 +2,10 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.4.0",
+ "version": "1.4.1",
  "minEngine": "1.6",
  "title": "Hull Breaker shared content",
- "bytes": 5442909,
+ "bytes": 5443773,
  "files": [
   {
    "path": "achievements.json",
@@ -1094,13 +1094,13 @@
   },
   {
    "path": "textures/keycabinet.em.png",
-   "bytes": 275,
-   "sha256": "bb260c5e1224b07c5fd796caf2bc08bde0182df1c355a2646ddabe5ec641c313"
+   "bytes": 273,
+   "sha256": "f5075e8c09815d03423b8ba27ed86bed407ce8c69e5692289cc8a00c40522f28"
   },
   {
    "path": "textures/keycabinet.png",
-   "bytes": 2283,
-   "sha256": "d3477dc76ddafcf34ecc0a2a813e62e0a00bba5984f3161acddc546e32ab6d82"
+   "bytes": 2321,
+   "sha256": "eadf990ef288b3a7299bdc041e818be96119d973f4d475f16b99bcff48bae0cf"
   },
   {
    "path": "textures/lever.em.png",
@@ -1329,8 +1329,8 @@
   },
   {
    "path": "textures/startupcard.png",
-   "bytes": 2159,
-   "sha256": "8eab55a441539a411367fda78d79ca2330013cc7fe6f17a8dc4c9ae8d918dbe6"
+   "bytes": 2987,
+   "sha256": "0b4899c3580d9aff8652b30c117a1fea57ac24fa8d90fcfd3370c98d83fd95e2"
   },
   {
    "path": "textures/term.em.png",
@@ -1460,7 +1460,7 @@
   {
    "path": "tuning.json",
    "bytes": 11120,
-   "sha256": "a346f80c131bd09fd06c4e3ba961aeaec3212f32361a1c538d7cd52f123b53db"
+   "sha256": "8d6fdeb7a61106c540651ac22dcb318134bb720b27814bc6839be9894242fd0c"
   },
   {
    "path": "voice/ach_bad_credit.mp3",

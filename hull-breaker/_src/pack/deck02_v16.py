@@ -10,8 +10,8 @@ What changes, besides the folder:
   * The Super's Office route: the guide leads to the locked office door first; trying it plays Moss
     ("Hollis was always locking himself out...") and only then does the guide point to the Chapel for the spare.
   * The master key is no longer on the office floor. It hangs in a steam-locked key cabinet in an alcove in the office's
-    west wall. Three valves on the office's south wall (FEED, RETURN, BYPASS) each step LOW 40 / MID 90 / HIGH 140 psi,
-    starting at MID. The boiler startup card on the Laundry's south wall gives the settings: FEED 140, RETURN 40,
+    west wall; trying it plays Buck ("Tighter than escrow. There's a trick to this."). Three valves on the office's south wall (FEED, RETURN, BYPASS) each step LOW 40 / MID 90 / HIGH 140 psi,
+    starting at MID. The boiler startup card beside the cabinet gives the settings: FEED 140, RETURN 40,
     BYPASS 90. All three HIGH blows the relief valve and drops everything back to MID. `solutions` tells the tools the answer.
 Both packs need engine 1.6. Older engines read packs-1.5/ and keep the old fight and the key on the floor."""
 import json, os, shutil, subprocess, sys
@@ -32,9 +32,10 @@ def W(obj, *p): open(os.path.join(DST, *p), 'w').write(json.dumps(obj, indent=1,
 t = J('core', 'tuning.json'); s = t['enemies']['super']
 s['parts'] = [
     {"id": "buffer", "name": "FLOOR BUFFER", "hp": 70, "window": "stun"},
-    {"id": "armL", "name": "LEFT ARM", "hp": 85, "regions": ["armL"], "sever": "armL", "window": "swing"},
+    # Arm names are the Super's own: his left arm is on Buck's right, which the engine's sprite calls armR (Casey, Nov 20)
+    {"id": "armL", "name": "LEFT ARM", "hp": 85, "regions": ["armR"], "sever": "armR", "window": "swing"},
     {"id": "hoses", "name": "STEAM HOSES", "hp": 75, "regions": ["head", "torso"], "window": "vent"},
-    {"id": "armR", "name": "RIGHT ARM", "hp": 85, "regions": ["armR"], "sever": "armR", "window": "swing"},
+    {"id": "armR", "name": "RIGHT ARM", "hp": 85, "regions": ["armL"], "sever": "armL", "window": "swing"},
     {"id": "tank", "name": "BOILER TANK", "hp": 110, "regions": ["torso"], "window": "overheat"}]
 s['super'].update({
     "arena": 1, "armor": 0.12, "blastMul": 0.5, "breakStagger": 1.2,
@@ -85,10 +86,11 @@ d.rectangle((40, 29, 41, 31), fill=(205, 205, 210, 255)); d.rectangle((43, 29, 4
 d.ellipse((12, 48, 22, 58), fill=(225, 220, 200, 255)); d.line((17, 53, 20, 50), fill=(200, 20, 30, 255))   # its gauge
 d.rectangle((44, 49, 51, 55), fill=(200, 30, 30, 255)); d.rectangle((46, 51, 49, 53), fill=(255, 90, 80, 255))   # the red steam-lock lamp
 d.rectangle((9, 8, 54, 14), fill=(22, 24, 26, 255)); text(d, 'MASTER KEY', 32, 9, (230, 200, 120, 255))
-im.save(os.path.join(TEX, 'keycabinet.png'))
-em = em_of(im, (44, 49, 52, 56)); ImageDraw.Draw(em).rectangle((26, 24, 43, 32), fill=(60, 60, 64, 255)); em.save(os.path.join(TEX, 'keycabinet.em.png'))
+em = em_of(im, (44, 49, 52, 56)); ImageDraw.Draw(em).rectangle((26, 24, 43, 32), fill=(60, 60, 64, 255))
+# a door's texture shows mirrored from the side Buck sees it from (the label read backwards on Casey's iPhone, Nov 20): flip both
+im.transpose(Image.FLIP_LEFT_RIGHT).save(os.path.join(TEX, 'keycabinet.png')); em.transpose(Image.FLIP_LEFT_RIGHT).save(os.path.join(TEX, 'keycabinet.em.png'))
 
-im = base.copy(); d = ImageDraw.Draw(im)   # the boiler startup card, clipped to the laundry's pipe wall
+im = Image.open(os.path.join(TEX, 'hull.png')).convert('RGBA').copy(); d = ImageDraw.Draw(im)   # the boiler startup card, on the office's hull wall
 d.rectangle((10, 4, 53, 60), fill=(120, 84, 48, 255)); d.rectangle((26, 2, 37, 7), fill=(150, 150, 155, 255))
 d.rectangle((13, 9, 50, 57), fill=(232, 226, 200, 255))
 for i, line in enumerate(['BOILER', 'STARTUP', 'FEED 140', 'RETURN 40', 'BYPASS 90']):
@@ -123,7 +125,7 @@ setc('geo', 38, 57, '.'); setc('obj', 38, 57, 'M')   # ...it hangs in an alcove 
 setc('geo', 39, 57, '8')                       # behind the steam-locked cabinet door
 for x, ch in ((42, 'E'), (44, 'R'), (50, 'Y')):
     assert lv['geo'][62][x] == 'p'; setc('geo', x, 62, ch)   # the valves, on the office's south wall
-assert lv['geo'][54][40] == 'p'; setc('geo', 40, 54, 'C')     # the startup card, on the laundry's south wall
+assert lv['geo'][56][39] == '#' and lv['geo'][56][38] == '#'; setc('geo', 39, 56, 'C')   # the startup card, beside the cabinet (Casey, Nov 20)
 z = next(z for z in lv['zones'] if z['id'] == 'office'); z['x1'] = min(z['x1'], 38)   # the alcove belongs to the office
 
 # the office route: try the door, hear Moss, then the guide goes to the Chapel
@@ -161,8 +163,7 @@ new_rules += [
         {'msg': 'BOILER STARTUP, G. HOLLIS: FEED 140. RETURN 40. BYPASS 90. NEVER RUN ALL THREE HOT.'},
         {'if': {'not': {'flag': 'pressureSet'}}, 'then': [{'objective': "Set the three valves in the Super's Office to the startup card."}]}]},
     {'on': {'event': 'doorDenied', 'lock': 'cabinet'}, 'once': True, 'do': [
-        {'if': {'not': {'flag': 'chartRead'}}, 'then': [{'objective': 'The key cabinet is steam-locked. The Super kept his boiler settings somewhere: try the Laundry.'}],
-         'else': [{'objective': "Set the three valves on the office's south wall to the startup card."}]}]}]
+        {'say': 'cabinet_locked', 'sub': 3.2}, {'objective': 'Open the steam-locked key cabinet.'}]}]
 
 # the Super, phase by phase (bossPhase: the phase that just began)
 BUCK = {2: 'phase_buffer', 3: 'phase_armL', 4: 'phase_hoses', 5: 'phase_armR'}
@@ -190,6 +191,7 @@ g[i:i] = [{'until': {'any': [{'flag': 'chartRead'}, {'flag': 'pressureSet'}]}, '
 # new lines (MP3s baked by _src/voice/deck02_v16_vo.py)
 NEW_LINES = [('phase_buffer', "That's gonna void the warranty.", None), ('phase_armL', "That's one arm. The lease says I take both.", None),
              ('phase_hoses', 'Shutting off your utilities.', None), ('phase_armR', 'Nothing left but the deposit.', None),
+             ('cabinet_locked', "Tighter than escrow. There's a trick to this.", None),
              ('moss_office', 'Hollis was always locking himself out. Mensah kept his spare in the Chapel.', 'moss')]
 moss_example = next(l for l in lines['lines'] if l['id'] == 'moss_maint')
 for lid, txt, spk in NEW_LINES:
@@ -206,5 +208,5 @@ W(d, 'deck-02', 'deck.json'); W(lv, 'deck-02', 'level.json'); W(lines, 'deck-02'
 # ---------------- manifests and catalog ----------------
 cat = J('catalog.json'); cat['baseUrl'] = 'https://bigdoodr.github.io/hull-breaker/packs-1.6/'; W(cat, 'catalog.json')
 rm = os.path.join(HERE, 'remanifest.py')
-subprocess.run([sys.executable, rm, DST, 'core', '1.4.0', '1.6'], check=True)
-subprocess.run([sys.executable, rm, DST, 'deck-02', '1.2.0', '1.6'], check=True)
+subprocess.run([sys.executable, rm, DST, 'core', '1.4.1', '1.6'], check=True)
+subprocess.run([sys.executable, rm, DST, 'deck-02', '1.2.1', '1.6'], check=True)

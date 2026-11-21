@@ -3,29 +3,29 @@
  "id": "deck-02",
  "kind": "deck",
  "deck": 2,
- "version": "1.2.0",
+ "version": "1.2.1",
  "minEngine": "1.6",
  "title": "Hostile Tenancy",
  "place": "Habitation Spine",
  "requires": {
   "core": "1.3.2"
  },
- "bytes": 1969442,
+ "bytes": 1990402,
  "files": [
   {
    "path": "deck.json",
-   "bytes": 43574,
-   "sha256": "1073dc6d744f250cbf6fa63ba4efdf2b644115581196b3910d17ff1393f9054c"
+   "bytes": 43331,
+   "sha256": "3ac7be0e7f908e476f9729d8c892e40e4a0c7a38ec0c0b6bd271cb5404cb03e3"
   },
   {
    "path": "level.json",
    "bytes": 26939,
-   "sha256": "3b6cd71acf489292e1db100b73331c11f68fbd97bb9d63d12a1931936ea0c560"
+   "sha256": "e6b2e91eb0c618d2a7bf76021a056409bdb249c77be4150b7a5bad5ef2d26d1a"
   },
   {
    "path": "lines.json",
-   "bytes": 4966,
-   "sha256": "aa6c94d85d7e2a48dc1ccb036e724d5973a468aec6e4f1393ec42de5510766eb"
+   "bytes": 5100,
+   "sha256": "16effb849375cfce3034a99e241fa845decf5cb12f992b3ca53fe2f424697f04"
   },
   {
    "path": "logs.json",
@@ -111,6 +111,11 @@
    "path": "voice/boss_check.mp3",
    "bytes": 21405,
    "sha256": "f1b44cbac9287c62f9436822516a72db6b94ee3783e3442ad6dc4914362ffa2f"
+  },
+  {
+   "path": "voice/cabinet_locked.mp3",
+   "bytes": 21069,
+   "sha256": "493d370ccc89009b389b8f89251c50c2281ba6a2acc9d2be1a96be5781b1b0d4"
   },
   {
    "path": "voice/deep_end.mp3",

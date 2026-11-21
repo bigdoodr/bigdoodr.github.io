@@ -2104,21 +2104,11 @@
    "once": true,
    "do": [
     {
-     "if": {
-      "not": {
-       "flag": "chartRead"
-      }
-     },
-     "then": [
-      {
-       "objective": "The key cabinet is steam-locked. The Super kept his boiler settings somewhere: try the Laundry."
-      }
-     ],
-     "else": [
-      {
-       "objective": "Set the three valves on the office's south wall to the startup card."
-      }
-     ]
+     "say": "cabinet_locked",
+     "sub": 3.2
+    },
+    {
+     "objective": "Open the steam-locked key cabinet."
     }
    ]
   },
