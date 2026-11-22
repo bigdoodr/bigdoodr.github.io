@@ -518,6 +518,7 @@
   },
   "cabinet": {
    "tex": "keycabinet",
+   "unlocked": "keycabinetopen",
    "needs": {
     "flag": "pressureSet"
    },

@@ -100,7 +100,7 @@ For each zone: a secret zone gets one steady lamp at its center (`[1,.7,.4]`, ra
 
 ### locks
 
-Lock id → `{tex?, needs?, denied?, map?, secret?}`. A door with `needs` stays shut until the condition is true; walking up to it then opens it for good (texture `unlock`, message `strings.accessGranted`, fires `doorUnlock`). While the condition is false, walking up shows `denied` at most every 3 seconds and fires `doorDenied`. `secret: true` doors look like walls and open with Use; each one counts as a secret. `none` doors open for anyone.
+Lock id → `{tex?, needs?, denied?, map?, secret?, unlocked?}`. A door with `needs` stays shut until the condition is true; walking up to it then opens it for good (texture `unlock`, message `strings.accessGranted`, fires `doorUnlock`). While the condition is false, walking up shows `denied` at most every 3 seconds and fires `doorDenied`. `secret: true` doors look like walls and open with Use; each one counts as a secret. `none` doors open for anyone. `unlocked` (engine 1.6) names the texture the door takes once unlocked, in place of `unlock` (Deck 02's key cabinet keeps its look, lamp gone green). Engine 1.6 also draws a doorway's side walls (jambs) with `hull2`, so a poster or sign beside a door doesn't show again inside it. An enemy whose tuning has `arena: 1` never leaves the zone it started in. Other awake enemies open plain (`none`) doors.
 
 ### state
 

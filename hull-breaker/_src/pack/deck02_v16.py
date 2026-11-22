@@ -89,6 +89,12 @@ d.rectangle((9, 8, 54, 14), fill=(22, 24, 26, 255)); text(d, 'MASTER KEY', 32, 9
 em = em_of(im, (44, 49, 52, 56)); ImageDraw.Draw(em).rectangle((26, 24, 43, 32), fill=(60, 60, 64, 255))
 # a door's texture shows mirrored from the side Buck sees it from (the label read backwards on Casey's iPhone, Nov 20): flip both
 im.transpose(Image.FLIP_LEFT_RIGHT).save(os.path.join(TEX, 'keycabinet.png')); em.transpose(Image.FLIP_LEFT_RIGHT).save(os.path.join(TEX, 'keycabinet.em.png'))
+# solved: the same cabinet with its lamp gone green and the gauge in the safe band (engine 1.6 lock `unlocked`, Nov 21)
+d = ImageDraw.Draw(im)
+d.rectangle((44, 49, 51, 55), fill=(30, 170, 70, 255)); d.rectangle((46, 51, 49, 53), fill=(120, 255, 150, 255))
+d.ellipse((12, 48, 22, 58), fill=(225, 220, 200, 255)); d.line((17, 53, 17, 49), fill=(30, 140, 60, 255))
+em = em_of(im, (44, 49, 52, 56)); ImageDraw.Draw(em).rectangle((26, 24, 43, 32), fill=(60, 60, 64, 255))
+im.transpose(Image.FLIP_LEFT_RIGHT).save(os.path.join(TEX, 'keycabinetopen.png')); em.transpose(Image.FLIP_LEFT_RIGHT).save(os.path.join(TEX, 'keycabinetopen.em.png'))
 
 im = Image.open(os.path.join(TEX, 'hull.png')).convert('RGBA').copy(); d = ImageDraw.Draw(im)   # the boiler startup card, on the office's hull wall
 d.rectangle((10, 4, 53, 60), fill=(120, 84, 48, 255)); d.rectangle((26, 2, 37, 7), fill=(150, 150, 155, 255))
@@ -99,7 +105,7 @@ d.line((15, 55, 30, 52), fill=(40, 60, 140, 255)); d.line((30, 52, 34, 55), fill
 im.save(os.path.join(TEX, 'startupcard.png')); em_of(im, (13, 9, 51, 58)).save(os.path.join(TEX, 'startupcard.em.png'))
 
 art = J('core', 'art.json')
-for n in ('valvefeed', 'valvereturn', 'valvebypass', 'keycabinet', 'startupcard'):
+for n in ('valvefeed', 'valvereturn', 'valvebypass', 'keycabinet', 'keycabinetopen', 'startupcard'):
     art['textures'][n] = {'file': f'textures/{n}.png', 'emissive': f'textures/{n}.em.png'}
 W(art, 'core', 'art.json')
 
@@ -112,7 +118,8 @@ leg['walls'].update({
     'Y': {'tex': 'valvebypass', 'use': 'valveBypass', 'light': [1, 0.8, 0.3], 'map': '#ffc84a'},
     'C': {'tex': 'startupcard', 'use': 'startupCard', 'light': [1, 0.9, 0.7], 'map': '#e8dcb0'}})
 leg['doors']['8'] = 'cabinet'
-d['locks']['cabinet'] = {'tex': 'keycabinet', 'needs': {'flag': 'pressureSet'}, 'denied': "KEY CABINET. STEAM-LOCKED. THE PRESSURE'S WRONG.", 'map': '#c0c8d0'}
+d['locks']['cabinet'] = {'tex': 'keycabinet', 'unlocked': 'keycabinetopen', 'needs': {'flag': 'pressureSet'},
+                         'denied': "KEY CABINET. STEAM-LOCKED. THE PRESSURE'S WRONG.", 'map': '#c0c8d0'}   # unlocked: engine 1.6
 d['locks']['office']['denied'] = "SUPER'S OFFICE. LOCKED."
 d['state']['flags'].update({'arenaRed': False, 'officeTried': False, 'chartRead': False, 'pressureSet': False})
 d['state']['counters'].update({'valveFeed': 1, 'valveReturn': 1, 'valveBypass': 1})
@@ -208,5 +215,5 @@ W(d, 'deck-02', 'deck.json'); W(lv, 'deck-02', 'level.json'); W(lines, 'deck-02'
 # ---------------- manifests and catalog ----------------
 cat = J('catalog.json'); cat['baseUrl'] = 'https://bigdoodr.github.io/hull-breaker/packs-1.6/'; W(cat, 'catalog.json')
 rm = os.path.join(HERE, 'remanifest.py')
-subprocess.run([sys.executable, rm, DST, 'core', '1.4.1', '1.6'], check=True)
-subprocess.run([sys.executable, rm, DST, 'deck-02', '1.2.1', '1.6'], check=True)
+subprocess.run([sys.executable, rm, DST, 'core', '1.4.2', '1.6'], check=True)
+subprocess.run([sys.executable, rm, DST, 'deck-02', '1.2.2', '1.6'], check=True)

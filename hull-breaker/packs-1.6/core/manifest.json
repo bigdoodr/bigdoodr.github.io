@@ -2,10 +2,10 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.4.1",
+ "version": "1.4.2",
  "minEngine": "1.6",
  "title": "Hull Breaker shared content",
- "bytes": 5443773,
+ "bytes": 5446492,
  "files": [
   {
    "path": "achievements.json",
@@ -14,8 +14,8 @@
   },
   {
    "path": "art.json",
-   "bytes": 13538,
-   "sha256": "9fb6516c1d1fdac7654b92e5c5f163cd0e86f1623e4cae2fc201284c8e56efec"
+   "bytes": 13655,
+   "sha256": "07588fb6751accb12b0334292b1fbd5576bcaec243ee48703c50d0500a6f5452"
   },
   {
    "path": "floors/carpet.png",
@@ -1101,6 +1101,16 @@
    "path": "textures/keycabinet.png",
    "bytes": 2321,
    "sha256": "eadf990ef288b3a7299bdc041e818be96119d973f4d475f16b99bcff48bae0cf"
+  },
+  {
+   "path": "textures/keycabinetopen.em.png",
+   "bytes": 278,
+   "sha256": "1c0289f003a301692115f95069b26328625eacbb1e074245c20d28c1475d2992"
+  },
+  {
+   "path": "textures/keycabinetopen.png",
+   "bytes": 2324,
+   "sha256": "bfa879dd7b9430154e1ba03b1ec15f131240bfec8cec62c3ec19fd4c051f77bd"
   },
   {
    "path": "textures/lever.em.png",

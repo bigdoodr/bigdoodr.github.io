@@ -381,6 +381,10 @@
    "file": "textures/keycabinet.png",
    "emissive": "textures/keycabinet.em.png"
   },
+  "keycabinetopen": {
+   "file": "textures/keycabinetopen.png",
+   "emissive": "textures/keycabinetopen.em.png"
+  },
   "startupcard": {
    "file": "textures/startupcard.png",
    "emissive": "textures/startupcard.em.png"
