@@ -1,0 +1,201 @@
+{
+ "format": 1,
+ "id": "deck-03",
+ "kind": "deck",
+ "deck": 3,
+ "version": "1.0.0",
+ "minEngine": "1.7",
+ "title": "Root Cause",
+ "place": "Hydroponics and Life Support",
+ "requires": {
+  "core": "1.5.0"
+ },
+ "bytes": 780645,
+ "files": [
+  {
+   "path": "deck.json",
+   "bytes": 23017,
+   "sha256": "7217f6f0fda9aa0d4a28d01b4d1456b05cc8fccd43cf5f662e018d1051634763"
+  },
+  {
+   "path": "level.json",
+   "bytes": 22539,
+   "sha256": "8dc2decd6a1fb1ff2c9c3e9ed785646bfa251b27a2df3782c88ea888a96eb1fd"
+  },
+  {
+   "path": "lines.json",
+   "bytes": 3302,
+   "sha256": "b616bcbcb942184f61719f0fdb54f6abdb6c52426a94ecc1155ce31303ece728"
+  },
+  {
+   "path": "logs.json",
+   "bytes": 2685,
+   "sha256": "4fc7498507a50d207f929e4b36220e73e1adfe967615a02eca6b77d7211f55ce"
+  },
+  {
+   "path": "logs/agro_a_harvest.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/agro_a_regrowth.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/agro_b_hiding.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/agro_b_light.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/marquez_irrigation.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/marquez_orchard.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/marquez_platform.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/marquez_rooted.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/marquez_seeds.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/okafor_protocol.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/sable_yield.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/tech_orders.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "logs/tech_scrubbers.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/allergy.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/boss_root.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/clear_air.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/doc_alive.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/floorplan.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/moss_arrive.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/moss_downline.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/moss_okafor.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/moss_poison.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/moss_rootdown.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/moss_scrub_locked.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/moss_scrubbers.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/moss_tracks.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/okafor_relay.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/payoff_root.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/plant_fed.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/plant_room.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/sign.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/specimen.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  },
+  {
+   "path": "voice/start.mp3",
+   "bytes": 22094,
+   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+  }
+ ]
+}

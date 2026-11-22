@@ -1,0 +1,132 @@
+{
+ "format": 1,
+ "game": "hull-breaker",
+ "baseUrl": "https://bigdoodr.github.io/hull-breaker/packs-1.7/",
+ "packs": [
+  {
+   "id": "core",
+   "kind": "core",
+   "version": "1.5.0",
+   "minEngine": "1.7",
+   "bytes": 5541323,
+   "manifest": "core/manifest.json",
+   "manifestSha256": "3338b3e3986f0f9ff185052d46bd5ecde544ac21ff6416f223edd45dabdd29a8"
+  },
+  {
+   "id": "deck-01",
+   "kind": "deck",
+   "version": "1.3.1",
+   "minEngine": "1.5",
+   "bytes": 1305768,
+   "manifest": "deck-01/manifest.json",
+   "manifestSha256": "c2882177a6217098dca542ae0f9fa29a3bca5ad3fee7f1c8d32145753acc78e4",
+   "deck": 1
+  },
+  {
+   "id": "deck-02",
+   "kind": "deck",
+   "version": "1.2.3",
+   "minEngine": "1.6",
+   "bytes": 1990436,
+   "manifest": "deck-02/manifest.json",
+   "manifestSha256": "fb2ebcbece3bb1e0f7bae33554f4c21d0b5fb627f16df828c507b9f411bfd761",
+   "deck": 2
+  },
+  {
+   "id": "deck-03",
+   "kind": "deck",
+   "version": "1.0.0",
+   "minEngine": "1.7",
+   "bytes": 780645,
+   "manifest": "deck-03/manifest.json",
+   "manifestSha256": "0008cceeb0fed5c18c69ad28f53374ebb251c830194daafd5a14e740feae153a",
+   "deck": 3
+  }
+ ],
+ "decks": [
+  {
+   "deck": 1,
+   "title": "Repo Day",
+   "place": "Docking Ring",
+   "blurb": "Get aboard, restore power, collect three keycards, and trigger the tram override.",
+   "pack": "deck-01"
+  },
+  {
+   "deck": 2,
+   "title": "Hostile Tenancy",
+   "place": "Habitation Spine",
+   "blurb": "Crew quarters, chapel, and rec decks, where the dead still keep house.",
+   "pack": "deck-02"
+  },
+  {
+   "deck": 3,
+   "title": "Root Cause",
+   "place": "Hydroponics and Life Support",
+   "blurb": "The farms have gone feral and the air is turning against you.",
+   "pack": "deck-03"
+  },
+  {
+   "deck": 4,
+   "title": "Bedside Manner",
+   "place": "Medical and Research",
+   "blurb": "Dr. Okafor's labs, and the specs Gorgon sent before anyone reached Ruin.",
+   "pack": null
+  },
+  {
+   "deck": 5,
+   "title": "Cold Storage",
+   "place": "Cryo Vaults",
+   "blurb": "Twenty-eight hundred relief miners were sleeping here. Were.",
+   "pack": null
+  },
+  {
+   "deck": 6,
+   "title": "Overtime",
+   "place": "Engineering Core",
+   "blurb": "Something has clocked in at the reactor and it is not on the payroll.",
+   "pack": null
+  },
+  {
+   "deck": 7,
+   "title": "Lockdown",
+   "place": "Security and Brig",
+   "blurb": "Sergeant Pruitt locked the ship down. Then he went into the vents.",
+   "pack": null
+  },
+  {
+   "deck": 8,
+   "title": "Hostile Takeover",
+   "place": "Executive Deck",
+   "blurb": "Gorgon's liaison office, where the real contract is kept.",
+   "pack": null
+  },
+  {
+   "deck": 9,
+   "title": "Deep Pockets",
+   "place": "Mining Operations",
+   "blurb": "The drill platform and the tunnels it cut into Ruin.",
+   "pack": null
+  },
+  {
+   "deck": 10,
+   "title": "Gut Check",
+   "place": "The Biomass Decks",
+   "blurb": "The ship is becoming a body. You are inside it.",
+   "pack": null
+  },
+  {
+   "deck": 11,
+   "title": "Breach of Contract",
+   "place": "The Cavity Shaft",
+   "blurb": "Down the drill shaft, into whatever was waiting under Ruin.",
+   "pack": null
+  },
+  {
+   "deck": 12,
+   "title": "Final Notice",
+   "place": "The Choir",
+   "blurb": "Every account comes due.",
+   "pack": null
+  }
+ ]
+}

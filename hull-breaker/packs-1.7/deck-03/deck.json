@@ -1,0 +1,1627 @@
+{
+ "format": 1,
+ "id": "deck-03",
+ "deck": 3,
+ "title": "Root Cause",
+ "place": "Hydroponics and Life Support",
+ "ship": "BRIMSTONE MAIDEN",
+ "intro": {
+  "objective": "Get the farms breathing again.\nRestore the three scrubbers. Vent the air. Find what took root.",
+  "tips": [
+   "The Purge Torch is in the Greenhouse Lab. Burn a rooter's stump or it grows back.",
+   "The Purge Torch is in the Greenhouse Lab. Burn a rooter's stump or it grows back.",
+   "Cut it off, then burn it. Rooters grow back anything you leave.",
+   "Cut it off, then burn it. Saves only happen at save stations.",
+   "Cut it off, then burn it. No saves on this deck: dying starts it over."
+  ],
+  "music": "braam_2_5"
+ },
+ "outro": {
+  "heading": "DECK 03 OF 12 CLEARED",
+  "body": "The down line drops Buck toward medical, with a sample case for a doctor who should be dead. Nine decks to go.",
+  "tease": "Deck 04: Bedside Manner. Medical and Research.",
+  "music": "braam_4",
+  "line": "core:deck_clear"
+ },
+ "legend": {
+  "floor": ".",
+  "floors": {
+   ",": {
+    "water": "wade"
+   },
+   "~": {
+    "water": "swim"
+   }
+  },
+  "walls": {
+   "#": {
+    "tex": "hull"
+   },
+   "=": {
+    "tex": "hull2"
+   },
+   "h": {
+    "tex": "haz"
+   },
+   "b": {
+    "tex": "blood"
+   },
+   "s": {
+    "tex": "scrawl"
+   },
+   "v": {
+    "tex": "vent",
+    "role": "vent"
+   },
+   "p": {
+    "tex": "pipe"
+   },
+   "T": {
+    "tex": "tram"
+   },
+   "w": {
+    "tex": "win",
+    "map": "#3a5a7a"
+   },
+   "W": {
+    "tex": "winmoon",
+    "map": "#3a5a7a"
+   },
+   "g": {
+    "tex": "glasshouse"
+   },
+   "d": {
+    "tex": "domeglass"
+   },
+   "k": {
+    "tex": "seedrack"
+   },
+   "o": {
+    "tex": "trunk"
+   },
+   "Y": {
+    "tex": "oldtree",
+    "map": "#6a4a2a"
+   },
+   "m": {
+    "tex": "caverock"
+   },
+   "t": {
+    "tex": "terrace"
+   },
+   "r": {
+    "tex": "rootwall"
+   },
+   "F": {
+    "tex": "floorplan",
+    "use": "floorplan",
+    "light": [
+     0.35,
+     0.95,
+     1
+    ],
+    "map": "#5ff6ff"
+   },
+   "Q": {
+    "tex": "save",
+    "role": "save",
+    "light": [
+     0.2,
+     1,
+     0.45
+    ],
+    "map": "#30ff70"
+   },
+   "R": {
+    "tex": "relay",
+    "use": "relay",
+    "light": [
+     1,
+     0.3,
+     0.3
+    ],
+    "map": "#ff5050",
+    "after": {
+     "tex": "relayon",
+     "map": "#ff9090",
+     "use": "relayAgain"
+    }
+   },
+   "V": {
+    "tex": "scrubvalve",
+    "use": "scrubber",
+    "light": [
+     1,
+     0.35,
+     0.2
+    ],
+    "map": "#ff4030",
+    "after": {
+     "tex": "scrubvalveon",
+     "map": "#40ff80"
+    }
+   },
+   "N": {
+    "tex": "ventconsole",
+    "use": "ventAir",
+    "light": [
+     1,
+     0.55,
+     0.15
+    ],
+    "map": "#ff8c1a",
+    "after": {
+     "tex": "ventconsoleon",
+     "map": "#40ff80"
+    }
+   },
+   "S": {
+    "tex": "nofeedsign",
+    "use": "sign",
+    "map": "#d4a64a"
+   },
+   "L": {
+    "tex": "lever",
+    "use": "breakGlass",
+    "light": [
+     1,
+     0.6,
+     0.2
+    ],
+    "map": "#ffb627",
+    "after": {
+     "tex": "leveron",
+     "map": "#ffb627",
+     "use": "lever"
+    }
+   }
+  },
+  "doors": {
+   "D": "none",
+   "X": "secret",
+   "5": "spores",
+   "6": "scrubbers",
+   "7": "vented",
+   "8": "rootDown"
+  },
+  "objects": {
+   "@": {
+    "start": true
+   },
+   "h": {
+    "enemy": "husk",
+    "min": 0
+   },
+   "c": {
+    "enemy": "crawler",
+    "min": 0
+   },
+   "s": {
+    "enemy": "spitter",
+    "min": 0
+   },
+   "x": {
+    "enemy": "bloater",
+    "min": 0
+   },
+   "z": {
+    "enemy": "brute",
+    "min": 0
+   },
+   "d": {
+    "enemy": "husk",
+    "min": 0,
+    "dormant": true
+   },
+   "r": {
+    "enemy": "lurker",
+    "min": 0
+   },
+   "y": {
+    "enemy": "sleeper",
+    "min": 0
+   },
+   "g": {
+    "enemy": "rooter",
+    "min": 0
+   },
+   "W": {
+    "enemy": "motherroot",
+    "min": 0
+   },
+   "H": {
+    "enemy": "husk",
+    "min": 2
+   },
+   "C": {
+    "enemy": "crawler",
+    "min": 2
+   },
+   "S": {
+    "enemy": "spitter",
+    "min": 2
+   },
+   "X": {
+    "enemy": "bloater",
+    "min": 2
+   },
+   "Z": {
+    "enemy": "brute",
+    "min": 2
+   },
+   "D": {
+    "enemy": "husk",
+    "min": 2,
+    "dormant": true
+   },
+   "R": {
+    "enemy": "lurker",
+    "min": 2
+   },
+   "Y": {
+    "enemy": "sleeper",
+    "min": 2
+   },
+   "G": {
+    "enemy": "rooter",
+    "min": 2
+   },
+   "6": {
+    "enemy": "husk",
+    "min": 3
+   },
+   "7": {
+    "enemy": "crawler",
+    "min": 3
+   },
+   "8": {
+    "enemy": "spitter",
+    "min": 3
+   },
+   "9": {
+    "enemy": "bloater",
+    "min": 3
+   },
+   "5": {
+    "enemy": "brute",
+    "min": 3
+   },
+   "4": {
+    "enemy": "lurker",
+    "min": 3
+   },
+   "3": {
+    "enemy": "sleeper",
+    "min": 3
+   },
+   "2": {
+    "enemy": "rooter",
+    "min": 3
+   },
+   "+": {
+    "item": "med"
+   },
+   "*": {
+    "item": "medbig"
+   },
+   "u": {
+    "item": "medmax"
+   },
+   "a": {
+    "item": "cells"
+   },
+   "e": {
+    "item": "shells"
+   },
+   "i": {
+    "item": "rivets"
+   },
+   "o": {
+    "item": "bombs"
+   },
+   "f": {
+    "item": "fuel"
+   },
+   "&": {
+    "item": "armor"
+   },
+   "T": {
+    "item": "torch"
+   },
+   "q": {
+    "item": "sampleTissue"
+   },
+   "Q": {
+    "item": "samplePod"
+   },
+   "l": {
+    "item": "log"
+   },
+   "$": {
+    "item": "asset"
+   },
+   "O": {
+    "barrel": true
+   },
+   "K": {
+    "decor": "crate",
+    "solid": true,
+    "r": 0.38
+   },
+   "t": {
+    "decor": "table",
+    "solid": true,
+    "r": 0.42
+   },
+   "k": {
+    "decor": "corpse"
+   },
+   "p": {
+    "decor": "pile"
+   },
+   "P": {
+    "decor": "planter",
+    "solid": true,
+    "r": 0.4
+   },
+   "N": {
+    "decor": "singingplant",
+    "solid": true,
+    "r": 0.45
+   }
+  }
+ },
+ "locks": {
+  "none": {
+   "tex": "door"
+  },
+  "secret": {
+   "secret": true
+  },
+  "spores": {
+   "tex": "sporedoor",
+   "burn": true,
+   "needs": {
+    "flag": "torch"
+   },
+   "denied": "SPORE GROWTH. BURN IT OUT.",
+   "map": "#9acd32"
+  },
+  "scrubbers": {
+   "tex": "pwr",
+   "needs": {
+    "counter": "scrubbers",
+    "gte": 3
+   },
+   "denied": "ATMOSPHERE CONTROL. SEALED UNTIL ALL THREE SCRUBBERS RUN.",
+   "map": "#ff4030"
+  },
+  "vented": {
+   "tex": "rootdoor",
+   "needs": {
+    "flag": "vented"
+   },
+   "denied": "POISONED AIR BEYOND. VENT IT FROM ATMOSPHERE CONTROL.",
+   "map": "#c04040"
+  },
+  "rootDown": {
+   "tex": "pwr",
+   "needs": {
+    "flag": "rootDown"
+   },
+   "denied": "DOWN LINE LOCKED. ROOTS IN THE TRACK SWITCHES.",
+   "map": "#ff4030"
+  }
+ },
+ "keys": {},
+ "state": {
+  "flags": {
+   "torch": false,
+   "relay": false,
+   "vented": false,
+   "rootDown": false,
+   "rootSeen": false,
+   "floorplan": false,
+   "sampleTissue": false,
+   "samplePod": false,
+   "sampleHeartwood": false,
+   "firstSample": false,
+   "sawSign": false
+  },
+  "counters": {
+   "scrubbers": 0,
+   "samples": 0,
+   "sporesBurned": 0
+  }
+ },
+ "carry": [
+  "sampleTissue",
+  "samplePod",
+  "sampleHeartwood"
+ ],
+ "schematic": {
+  "hide": [
+   [
+    33,
+    53,
+    63,
+    75
+   ],
+   [
+    13,
+    26,
+    33,
+    29
+   ]
+  ],
+  "add": [
+   [
+    44,
+    58,
+    52,
+    64
+   ]
+  ]
+ },
+ "rules": [
+  {
+   "on": {
+    "event": "start"
+   },
+   "do": [
+    {
+     "say": "start",
+     "sub": 3
+    },
+    {
+     "after": 3.4,
+     "do": [
+      {
+       "say": "moss_arrive",
+       "sub": 5.2
+      }
+     ]
+    },
+    {
+     "objective": "Find the Greenhouse Lab, east of the platform.",
+     "show": 7
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "floorplan"
+   },
+   "do": [
+    {
+     "if": {
+      "flag": "floorplan"
+     },
+     "then": [
+      {
+       "msg": "FLOOR PLAN ALREADY DOWNLOADED"
+      }
+     ],
+     "else": [
+      {
+       "set": "floorplan",
+       "value": true
+      },
+      {
+       "floorplan": true
+      },
+      {
+       "sfx": "pickup"
+      },
+      {
+       "msg": "FLOOR PLAN DOWNLOADED"
+      },
+      {
+       "say": "floorplan",
+       "sub": 3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "greenhouse"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "greenhouse",
+     "delay": 6
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "pickup",
+    "item": "torch"
+   },
+   "do": [
+    {
+     "set": "torch",
+     "value": true
+    },
+    {
+     "hint": "torch"
+    },
+    {
+     "if": {
+      "flag": "relay"
+     },
+     "then": [
+      {
+       "objective": "Burn through the spore growth into the wings off the Seed Bank. Restore each scrubber valve."
+      }
+     ],
+     "else": [
+      {
+       "objective": "A terminal on the lab's east wall is still transmitting."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "relay"
+   },
+   "do": [
+    {
+     "setTile": "after"
+    },
+    {
+     "set": "relay",
+     "value": true
+    },
+    {
+     "say": "okafor_relay",
+     "sub": 34
+    },
+    {
+     "after": 34.5,
+     "do": [
+      {
+       "msg": "SAMPLE CASE ACQUIRED (0/3)"
+      },
+      {
+       "sfx": "key"
+      },
+      {
+       "say": "doc_alive",
+       "sub": 2.6
+      }
+     ]
+    },
+    {
+     "after": 37.5,
+     "do": [
+      {
+       "say": "moss_okafor",
+       "sub": 3.6
+      }
+     ]
+    },
+    {
+     "if": {
+      "flag": "torch"
+     },
+     "then": [
+      {
+       "objective": "Burn through the spore growth into the wings off the Seed Bank. Restore each scrubber valve."
+      }
+     ],
+     "else": [
+      {
+       "objective": "The Purge Torch is on the lab bench. Take it."
+      }
+     ]
+    },
+    {
+     "autosave": "events"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "relayAgain"
+   },
+   "do": [
+    {
+     "say": "okafor_relay",
+     "sub": 34
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorDenied",
+    "lock": "spores"
+   },
+   "once": true,
+   "do": [
+    {
+     "say": "allergy",
+     "sub": 1.8
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "seedbank"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "seedbank",
+     "delay": 4
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "orchard"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "orchard",
+     "delay": 3
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "terraces"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "terraces",
+     "delay": 3
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "caves"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "caves",
+     "delay": 3
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "scrubber"
+   },
+   "do": [
+    {
+     "setTile": "after"
+    },
+    {
+     "add": "scrubbers",
+     "value": 1
+    },
+    {
+     "sfx": "breaker"
+    },
+    {
+     "shake": 0.3
+    },
+    {
+     "msg": "SCRUBBER RESTORED ({scrubbers}/3)"
+    },
+    {
+     "if": {
+      "counter": "scrubbers",
+      "gte": 3
+     },
+     "then": [
+      {
+       "sfx": "powerup"
+      },
+      {
+       "say": "moss_scrubbers",
+       "sub": 4
+      },
+      {
+       "objective": "All three scrubbers are running. Atmosphere Control is south of the Scrubber Hall. Vent the air."
+      },
+      {
+       "ambush": "scrubberhall",
+       "delay": 3
+      },
+      {
+       "autosave": "events"
+      }
+     ],
+     "else": [
+      {
+       "objective": "Restore the other scrubber valves. One in each wing off the Seed Bank."
+      },
+      {
+       "autosave": "events"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorDenied",
+    "lock": "scrubbers"
+   },
+   "once": true,
+   "do": [
+    {
+     "say": "moss_scrub_locked",
+     "sub": 3.4
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "ventAir"
+   },
+   "do": [
+    {
+     "if": {
+      "flag": "vented"
+     },
+     "then": [
+      {
+       "msg": "AIR VENTED"
+      }
+     ],
+     "else": [
+      {
+       "setTile": "after"
+      },
+      {
+       "set": "vented",
+       "value": true
+      },
+      {
+       "set": "alarm",
+       "value": true
+      },
+      {
+       "sfx": "powerup"
+      },
+      {
+       "shake": 0.8
+      },
+      {
+       "msg": "VENTING POISONED AIR"
+      },
+      {
+       "after": 2.5,
+       "do": [
+        {
+         "say": "clear_air",
+         "sub": 2
+        }
+       ]
+      },
+      {
+       "after": 6,
+       "do": [
+        {
+         "set": "alarm",
+         "value": false
+        },
+        {
+         "msg": "ATMOSPHERE NOMINAL. ROOT CHAMBER UNSEALED."
+        }
+       ]
+      },
+      {
+       "objective": "The Root Chamber is open, south of Atmosphere Control. Something big is growing in there."
+      },
+      {
+       "ambush": "atmos",
+       "delay": 4
+      },
+      {
+       "autosave": "events"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorDenied",
+    "lock": "vented"
+   },
+   "once": true,
+   "do": [
+    {
+     "say": "moss_poison",
+     "sub": 3
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "bossSight"
+   },
+   "if": {
+    "field": "enemy",
+    "eq": "motherroot"
+   },
+   "do": [
+    {
+     "if": {
+      "not": {
+       "flag": "rootSeen"
+      }
+     },
+     "then": [
+      {
+       "set": "rootSeen",
+       "value": true
+      },
+      {
+       "say": "boss_root",
+       "sub": 3
+      },
+      {
+       "music": 1
+      },
+      {
+       "objective": "Burn out her anchor roots, then hit the bloom."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "kill"
+   },
+   "if": {
+    "field": "enemy",
+    "eq": "motherroot"
+   },
+   "do": [
+    {
+     "set": "rootDown",
+     "value": true
+    },
+    {
+     "music": 0.3
+    },
+    {
+     "scene": "root_payoff"
+    },
+    {
+     "set": "sampleHeartwood",
+     "value": true
+    },
+    {
+     "add": "samples",
+     "value": 1
+    },
+    {
+     "after": 1,
+     "do": [
+      {
+       "msg": "SAMPLE: HEARTWOOD ({samples}/3)"
+      },
+      {
+       "say": "moss_rootdown",
+       "sub": 4
+      }
+     ]
+    },
+    {
+     "objective": "Back to Water Reclamation. The down line is through its south-east door."
+    },
+    {
+     "autosave": "events"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "scrubber"
+   },
+   "if": {
+    "flag": "rootDown"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "return_scrubber",
+     "delay": 2
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "waterrec"
+   },
+   "if": {
+    "flag": "rootDown"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "return_waterrec",
+     "delay": 2.5
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorDenied",
+    "lock": "rootDown"
+   },
+   "once": true,
+   "do": [
+    {
+     "say": "moss_tracks",
+     "sub": 3.4
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "pickup",
+    "item": "sampleTissue"
+   },
+   "do": [
+    {
+     "set": "sampleTissue",
+     "value": true
+    },
+    {
+     "add": "samples",
+     "value": 1
+    },
+    {
+     "msg": "SAMPLE: ROOTER TISSUE ({samples}/3)"
+    },
+    {
+     "sfx": "key"
+    },
+    {
+     "if": {
+      "not": {
+       "flag": "firstSample"
+      }
+     },
+     "then": [
+      {
+       "set": "firstSample",
+       "value": true
+      },
+      {
+       "say": "specimen",
+       "sub": 2.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "pickup",
+    "item": "samplePod"
+   },
+   "do": [
+    {
+     "set": "samplePod",
+     "value": true
+    },
+    {
+     "add": "samples",
+     "value": 1
+    },
+    {
+     "msg": "SAMPLE: SPORE POD CORE ({samples}/3)"
+    },
+    {
+     "sfx": "key"
+    },
+    {
+     "if": {
+      "not": {
+       "flag": "firstSample"
+      }
+     },
+     "then": [
+      {
+       "set": "firstSample",
+       "value": true
+      },
+      {
+       "say": "specimen",
+       "sub": 2.4
+      }
+     ]
+    },
+    {
+     "ambush": "compost",
+     "delay": 1.5
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "waterrec"
+   },
+   "once": true,
+   "do": [
+    {
+     "ambush": "waterrec",
+     "delay": 3
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "water",
+    "depth": "wade"
+   },
+   "once": true,
+   "do": [
+    {
+     "sfx": "splash"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "water",
+    "depth": "swim"
+   },
+   "once": true,
+   "do": [
+    {
+     "sfx": "splash"
+    },
+    {
+     "hint": "swim"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "downline"
+   },
+   "do": [
+    {
+     "say": "moss_downline",
+     "sub": 3.6
+    },
+    {
+     "objective": "Break the glass and pull the departure lever."
+    },
+    {
+     "ambush": "downline",
+     "delay": 2
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "sign"
+   },
+   "do": [
+    {
+     "msg": "HYDROPONICS NOTICE: DO NOT FEED AFTER LIGHTS-OUT."
+    },
+    {
+     "if": {
+      "not": {
+       "flag": "sawSign"
+      }
+     },
+     "then": [
+      {
+       "set": "sawSign",
+       "value": true
+      },
+      {
+       "say": "sign",
+       "sub": 2.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "enterZone",
+    "zone": "closet"
+   },
+   "do": [
+    {
+     "sfx": "plant_croon"
+    },
+    {
+     "say": "plant_room",
+     "sub": 2.4
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "useDecor",
+    "decor": "singingplant"
+   },
+   "do": [
+    {
+     "msg": "YOU FEED IT A RATION BAR. IT HUMS A LITTLE HAPPIER."
+    },
+    {
+     "sfx": "plant_gulp"
+    },
+    {
+     "say": "plant_fed",
+     "sub": 2.6
+    },
+    {
+     "achieve": "hb.late_night_snack"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "breakGlass"
+   },
+   "do": [
+    {
+     "setTile": "after"
+    },
+    {
+     "sfx": "glass"
+    },
+    {
+     "shake": 0.25
+    },
+    {
+     "msg": "GLASS BROKEN"
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "use",
+    "target": "lever"
+   },
+   "do": [
+    {
+     "sfx": "breaker"
+    },
+    {
+     "depart": true
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "doorUnlock",
+    "lock": "spores"
+   },
+   "do": [
+    {
+     "add": "sporesBurned",
+     "value": 1
+    },
+    {
+     "if": {
+      "counter": "sporesBurned",
+      "gte": 4
+     },
+     "then": [
+      {
+       "achieve": "hb.allergy_season"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "pickup",
+    "item": "sampleTissue"
+   },
+   "do": [
+    {
+     "if": {
+      "counter": "samples",
+      "gte": 3
+     },
+     "then": [
+      {
+       "achieve": "hb.chain_of_custody"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "pickup",
+    "item": "samplePod"
+   },
+   "do": [
+    {
+     "if": {
+      "counter": "samples",
+      "gte": 3
+     },
+     "then": [
+      {
+       "achieve": "hb.chain_of_custody"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "on": {
+    "event": "kill"
+   },
+   "do": [
+    {
+     "if": {
+      "counter": "samples",
+      "gte": 3
+     },
+     "then": [
+      {
+       "achieve": "hb.chain_of_custody"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "ambushes": {
+  "greenhouse": {
+   "zones": [
+    "greenhouse"
+   ],
+   "spawns": [
+    "husk",
+    "crawler"
+   ]
+  },
+  "seedbank": {
+   "zones": [
+    "seedbank"
+   ],
+   "spawns": [
+    "husk",
+    "crawler",
+    "husk"
+   ]
+  },
+  "orchard": {
+   "zones": [
+    "orchard"
+   ],
+   "spawns": [
+    "rooter",
+    "husk",
+    "crawler"
+   ]
+  },
+  "terraces": {
+   "zones": [
+    "terraces"
+   ],
+   "spawns": [
+    "rooter",
+    "spitter",
+    "husk",
+    "crawler"
+   ]
+  },
+  "caves": {
+   "zones": [
+    "caves"
+   ],
+   "spawns": [
+    "rooter",
+    "crawler",
+    "crawler",
+    "husk"
+   ]
+  },
+  "scrubberhall": {
+   "zones": [
+    "scrubber",
+    "seedbank"
+   ],
+   "spawns": [
+    "rooter",
+    "husk",
+    "husk",
+    "crawler",
+    "spitter",
+    "bloater"
+   ]
+  },
+  "atmos": {
+   "zones": [
+    "atmos",
+    "scrubber"
+   ],
+   "spawns": [
+    "rooter",
+    "rooter",
+    "husk",
+    "crawler"
+   ]
+  },
+  "waterrec": {
+   "zones": [
+    "waterrec"
+   ],
+   "spawns": [
+    "husk",
+    "crawler",
+    "rooter"
+   ]
+  },
+  "compost": {
+   "zones": [
+    "compost"
+   ],
+   "spawns": [
+    "rooter",
+    "husk",
+    "crawler",
+    "crawler"
+   ]
+  },
+  "return_scrubber": {
+   "zones": [
+    "scrubber"
+   ],
+   "spawns": [
+    "rooter",
+    "rooter",
+    "husk",
+    "husk",
+    "crawler",
+    "spitter",
+    "bloater"
+   ]
+  },
+  "return_waterrec": {
+   "zones": [
+    "waterrec"
+   ],
+   "spawns": [
+    "rooter",
+    "husk",
+    "husk",
+    "crawler",
+    "crawler",
+    "spitter"
+   ]
+  },
+  "downline": {
+   "zones": [
+    "downline"
+   ],
+   "spawns": [
+    "husk",
+    "husk",
+    "rooter",
+    "crawler",
+    "spitter"
+   ]
+  }
+ },
+ "guide": [
+  {
+   "until": {
+    "flag": "torch"
+   },
+   "to": {
+    "item": "torch"
+   }
+  },
+  {
+   "until": {
+    "flag": "relay"
+   },
+   "to": {
+    "use": "relay"
+   }
+  },
+  {
+   "until": {
+    "counter": "scrubbers",
+    "gte": 3
+   },
+   "to": {
+    "nearestUse": "scrubber"
+   }
+  },
+  {
+   "until": {
+    "flag": "vented"
+   },
+   "to": {
+    "use": "ventAir"
+   }
+  },
+  {
+   "until": {
+    "flag": "rootDown"
+   },
+   "to": {
+    "cell": [
+     48,
+     62
+    ]
+   }
+  },
+  {
+   "to": {
+    "use": "breakGlass"
+   }
+  }
+ ],
+ "scenes": {
+  "root_payoff": {
+   "target": "lastBossKill",
+   "steps": [
+    {
+     "t": 0,
+     "camera": "faceTarget",
+     "dur": 0.6
+    },
+    {
+     "t": 1,
+     "say": "payoff_root",
+     "sub": 2.4
+    },
+    {
+     "t": 3.2,
+     "end": true
+    }
+   ]
+  }
+ },
+ "par": 1080,
+ "achievements": [
+  {
+   "id": "hb.paid_in_full.03",
+   "name": "Paid in Full: Deck 03",
+   "points": 10,
+   "desc": "Reach 100% on Deck 03.",
+   "earned": "Deck 03 settled in full.",
+   "on": {
+    "event": "deckClear"
+   },
+   "if": {
+    "all": [
+     {
+      "field": "deck",
+      "eq": 3
+     },
+     {
+      "field": "percent",
+      "gte": 100
+     }
+    ]
+   }
+  },
+  {
+   "id": "hb.slash_and_burn",
+   "name": "Slash and Burn",
+   "points": 10,
+   "desc": "Burn 20 rooters before they regrow.",
+   "earned": "Twenty rooters, cauterized.",
+   "progress": {
+    "stat": "rootersBurned",
+    "target": 20
+   },
+   "line": "ach_slash_and_burn"
+  },
+  {
+   "id": "hb.uprooted",
+   "name": "Uprooted",
+   "points": 10,
+   "desc": "Beat Mother Root.",
+   "earned": "Mother Root, pulled.",
+   "on": {
+    "event": "kill"
+   },
+   "if": {
+    "field": "enemy",
+    "eq": "motherroot"
+   }
+  },
+  {
+   "id": "hb.chain_of_custody",
+   "name": "Chain of Custody",
+   "points": 10,
+   "desc": "Collect all three of Okafor's samples.",
+   "earned": "Samples sealed. Chain of custody intact.",
+   "rule": true,
+   "line": "ach_chain_of_custody"
+  },
+  {
+   "id": "hb.allergy_season",
+   "name": "Allergy Season",
+   "points": 5,
+   "desc": "Burn every spore growth on Deck 03.",
+   "earned": "Spore count: zero.",
+   "rule": true
+  },
+  {
+   "id": "hb.late_night_snack",
+   "name": "Late-Night Snack",
+   "points": 5,
+   "hidden": true,
+   "desc": "Feed the singing plant.",
+   "earned": "Fed it after lights-out. Probably fine.",
+   "rule": true
+  }
+ ],
+ "mapLegend": [
+  [
+   "WATER",
+   "#2a6a9a"
+  ],
+  [
+   "SAVE",
+   "#30ff70"
+  ],
+  [
+   "SPORES",
+   "#9acd32"
+  ],
+  [
+   "SCRUBBER",
+   "#ff4030"
+  ],
+  [
+   "VENT",
+   "#ff8c1a"
+  ],
+  [
+   "RELAY",
+   "#ff5050"
+  ],
+  [
+   "FLOOR PLAN",
+   "#5ff6ff"
+  ]
+ ],
+ "blurb": "Farms, scrubbers and reclamation tanks, where the crops learned to grow back."
+}

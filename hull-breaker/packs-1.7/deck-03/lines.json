@@ -1,0 +1,113 @@
+{
+ "lines": [
+  {
+   "id": "start",
+   "text": "Hydroponics. Smells like somebody stopped paying the air bill.",
+   "file": "voice/start.mp3"
+  },
+  {
+   "id": "allergy",
+   "text": "Allergy season.",
+   "file": "voice/allergy.mp3"
+  },
+  {
+   "id": "doc_alive",
+   "text": "Doc's alive. Somebody tell billing.",
+   "file": "voice/doc_alive.mp3"
+  },
+  {
+   "id": "specimen",
+   "text": "Specimen jar. Doc better tip.",
+   "file": "voice/specimen.mp3"
+  },
+  {
+   "id": "clear_air",
+   "text": "Clearing the air.",
+   "file": "voice/clear_air.mp3"
+  },
+  {
+   "id": "boss_root",
+   "text": "Ma'am, you're in violation of the zoning code.",
+   "file": "voice/boss_root.mp3"
+  },
+  {
+   "id": "payoff_root",
+   "text": "Weed's been abated.",
+   "file": "voice/payoff_root.mp3"
+  },
+  {
+   "id": "floorplan",
+   "text": "Gorgon's plan has this room a third the size. Something's been growing.",
+   "file": "voice/floorplan.mp3"
+  },
+  {
+   "id": "sign",
+   "text": "Wasn't planning on it.",
+   "file": "voice/sign.mp3"
+  },
+  {
+   "id": "plant_room",
+   "text": "Is that thing... humming?",
+   "file": "voice/plant_room.mp3"
+  },
+  {
+   "id": "plant_fed",
+   "text": "There you go. Don't tell anybody.",
+   "file": "voice/plant_fed.mp3"
+  },
+  {
+   "id": "moss_arrive",
+   "text": "Life support's been in the red down there since the lockdown. Past the farms, the air's bad. Don't breathe it longer than you have to.",
+   "file": "voice/moss_arrive.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_okafor",
+   "text": "Okafor? Medical went dark days ago. I thought...",
+   "file": "voice/moss_okafor.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_scrubbers",
+   "text": "That's all three scrubbers. Atmosphere Control's south of the hall. Vent it.",
+   "file": "voice/moss_scrubbers.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_scrub_locked",
+   "text": "Atmosphere Control won't open until all three scrubbers are running. One in each wing.",
+   "file": "voice/moss_scrub_locked.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_poison",
+   "text": "Don't open that. Not until the air's vented. Atmosphere Control can do it.",
+   "file": "voice/moss_poison.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_rootdown",
+   "text": "Whatever that was, it had roots in half the deck. The down line's off Water Reclamation.",
+   "file": "voice/moss_rootdown.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_tracks",
+   "text": "Roots got into the track switches. Something's holding them shut.",
+   "file": "voice/moss_tracks.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "moss_downline",
+   "text": "Down-line platform. Medical is the next stop.",
+   "file": "voice/moss_downline.mp3",
+   "speaker": "moss"
+  },
+  {
+   "id": "okafor_relay",
+   "text": "This is Dr. Okafor, medical. If you're hearing this, you restarted the tram. I'm alive. I'm sealed in my lab, and I am staying sealed. Listen. In the farms the infection is doing something it shouldn't. It grows back what you cut off. I need living tissue to understand how. Three samples: a rooter's tissue, the core of the big spore pod in compost, and whatever is feeding the roots. The case is under this terminal. Keep it closed. Bring it down to medical. Please.",
+   "file": "voice/okafor_relay.mp3",
+   "speaker": "okafor"
+  }
+ ]
+}

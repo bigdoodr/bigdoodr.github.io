@@ -6,7 +6,7 @@ import { HB, W, H, FIRE, RUN, MENU } from './hb.js';
 const $ = (s) => document.querySelector(s);
 const params = new URLSearchParams(location.search);
 // where the packs are: ?packs=, else the page's <meta name="hb-packs">, else the site's engine 1.5 folder
-const PACKS = new URL(params.get('packs') || document.querySelector('meta[name="hb-packs"]')?.content || '../packs-1.5/', location.href).href;
+const PACKS = new URL(params.get('packs') || document.querySelector('meta[name="hb-packs"]')?.content || '../packs-1.7/', location.href).href;
 const WASM = new URL('hullbreaker.wasm', import.meta.url).href;
 // Saves and achievements are kept apart from the JavaScript game's hb- keys while this is a beta.
 const KEY = (k) => 'hbw-' + k;
@@ -461,7 +461,8 @@ function openPause() {
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 function openDepart(d) {
-  const rows = [['KILLS', d.kills, d.killTotal], ['SECRETS', d.secrets, d.secretTotal], ['AUDIO LOGS', d.logs, d.logTotal], ['ASSETS TAGGED', d.assets, d.assetTotal]];
+  const rows = [['KILLS', d.kills, d.killTotal], ['SECRETS', d.secrets, d.secretTotal], ['AUDIO LOGS', d.logs, d.logTotal], ['ASSETS TAGGED', d.assets, d.assetTotal]]
+    .concat(d.sampleTotal > 0 ? [['SAMPLES', d.samples, d.sampleTotal]] : []);
   const done = d.percent >= 100;
   const body = `<div class="sub">${done ? `Depart Deck ${pad2(d.deck)}?` : 'Outstanding items stay on the ship.'}</div>
     <div class="grid" style="margin:calc(var(--h)*.02) auto">${rows.map(([n, a, b]) => `<div style="color:var(--steel)">${n}</div><div class="n" style="color:${a >= b ? 'var(--rig)' : 'var(--blood)'}">${a} / ${b}</div>`).join('')}</div>
@@ -484,7 +485,7 @@ function openDead() {
 function openWon(r) {
   store.set('save-' + deckChoice, null);
   const lines = [info.outroBody, `${r.percent}% COMPLETE · ${r.rank}`,
-    `KILLS ${r.kills}/${r.killTotal}   SECRETS ${r.secrets}/${r.secretTotal}   LOGS ${r.logs}/${r.logTotal}   ASSETS ${r.assets}/${r.assetTotal}`,
+    `KILLS ${r.kills}/${r.killTotal}   SECRETS ${r.secrets}/${r.secretTotal}   LOGS ${r.logs}/${r.logTotal}   ASSETS ${r.assets}/${r.assetTotal}` + (r.sampleTotal > 0 ? `   SAMPLES ${r.samples}/${r.sampleTotal}` : ''),
     `TIME ${clock(r.time)}`];
   const decks = deckList(), i = decks.findIndex((x) => x.id === deckChoice);
   const out = hb.loadout(), next = i >= 0 && i + 1 < decks.length ? decks[i + 1] : null;
@@ -499,7 +500,7 @@ function openWon(r) {
 
 // ---------------------------------------------------------------- HUD (matches Apps/Shared/HUDView.swift)
 const C = { void: '#04060a', steel: '#8b98a5', ink: '#e8edf1', rig: '#3fe0c5', amber: '#ffb627', blood: '#d0142f', term: '#6dff9a', cyan: '#5ff6ff' };
-const WEAPONS = ['CUTTER', 'BOOMSTICK', 'RIVET DRIVER', 'CHARGES'], AMMO = ['cells', 'shells', 'rivets', 'bombs'];
+const WEAPONS = ['CUTTER', 'BOOMSTICK', 'RIVET DRIVER', 'CHARGES', 'PURGE TORCH'], AMMO = ['cells', 'shells', 'rivets', 'bombs', 'fuel'];
 let last = null;
 const face = { mood: 0, look: 0, t: 0 };
 const faceCache = new Map();

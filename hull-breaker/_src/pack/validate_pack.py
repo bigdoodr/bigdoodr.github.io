@@ -20,12 +20,12 @@ SIGNALS = {  # combat and score events, with the fields their conditions may rea
     'bossPhase': {'enemy', 'phase', 'part', 'broke'},       # engine 1.6: a parts boss lost a part (phase = the new one)                                # engine 1.4: Buck first sees a boss (the boss bar appears)
     'cheat': {'command'},                                  # engine 1.2: a console cheat was used
 }
-STATS = {'kickKills', 'limbsSevered', 'deaths', 'bodiesKicked', 'departStays', 'sleepersStomped'}
+STATS = {'kickKills', 'limbsSevered', 'deaths', 'bodiesKicked', 'departStays', 'sleepersStomped', 'rootersBurned'}   # rootersBurned: engine 1.7
 EVENTS = {'start', 'enterZone', 'pickup', 'use', 'useDecor', 'doorUnlock', 'doorDenied', 'region', 'water'} | set(SIGNALS)   # water: engine 1.3
 ACTIONS = {'say', 'msg', 'objective', 'sfx', 'flash', 'shake', 'set', 'add', 'ambush', 'autosave', 'music', 'setTile', 'after', 'if', 'win', 'depart', 'achieve',
            'scene', 'hint', 'floorplan'}   # engine 1.3: scene, hint, floorplan (swap Gorgon's schematic for the real map)
-HINTS = {'move', 'limbs', 'kick', 'stayDown', 'map', 'guide', 'stomp', 'lurker', 'swim'}   # engine 1.3 tutorial prompts
-SPEAKERS = {'dispatch', 'moss'}
+HINTS = {'move', 'limbs', 'kick', 'stayDown', 'map', 'guide', 'stomp', 'lurker', 'swim', 'torch', 'rooter'}   # engine 1.3 tutorial prompts; torch, rooter: 1.7
+SPEAKERS = {'dispatch', 'moss', 'okafor'}   # okafor: engine 1.7 (played like a log)
 DIFFS = ['Very Easy', 'Easy', 'Normal', 'Hard', 'Nightmare']
 errors, warns = [], []
 err = errors.append

@@ -1,0 +1,121 @@
+{
+ "logs": [
+  {
+   "id": "marquez_platform",
+   "order": 1,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/marquez_platform.mp3",
+   "zone": "platform"
+  },
+  {
+   "id": "okafor_protocol",
+   "order": 2,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/okafor_protocol.mp3",
+   "zone": "greenhouse"
+  },
+  {
+   "id": "sable_yield",
+   "order": 3,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/sable_yield.mp3",
+   "zone": "seedbank"
+  },
+  {
+   "id": "marquez_seeds",
+   "order": 4,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/marquez_seeds.mp3",
+   "zone": "seedbank"
+  },
+  {
+   "id": "agro_a_harvest",
+   "order": 5,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/agro_a_harvest.mp3",
+   "zone": "orchard"
+  },
+  {
+   "id": "marquez_orchard",
+   "order": 6,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/marquez_orchard.mp3",
+   "zone": "orchard"
+  },
+  {
+   "id": "agro_a_regrowth",
+   "order": 7,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/agro_a_regrowth.mp3",
+   "zone": "terraces"
+  },
+  {
+   "id": "agro_b_hiding",
+   "order": 8,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/agro_b_hiding.mp3",
+   "zone": "caves"
+  },
+  {
+   "id": "agro_b_light",
+   "order": 9,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/agro_b_light.mp3",
+   "zone": "caves"
+  },
+  {
+   "id": "marquez_rooted",
+   "order": 10,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/marquez_rooted.mp3",
+   "zone": "caves"
+  },
+  {
+   "id": "tech_scrubbers",
+   "order": 11,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/tech_scrubbers.mp3",
+   "zone": "scrubber"
+  },
+  {
+   "id": "tech_orders",
+   "order": 12,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/tech_orders.mp3",
+   "zone": "atmos"
+  },
+  {
+   "id": "marquez_irrigation",
+   "order": 13,
+   "header": "AUDIO LOG // TBD",
+   "speaker": "TBD",
+   "text": "(log text not written yet)",
+   "file": "logs/marquez_irrigation.mp3",
+   "zone": "waterrec"
+  }
+ ]
+}
