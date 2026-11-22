@@ -186,6 +186,7 @@ for r in d['rules']:
     if r['on'].get('event') == 'bossSight' and 'super' in json.dumps(r.get('if')):
         r['do'][0]['then'].append({'after': 3.4, 'do': [{'msg': "BAIT HIS CHARGE INTO A BOILER. HIT THE BUFFER WHILE HE'S STUNNED."}]})
 d['rules'] += new_rules
+d['par'] = 1080   # 18:00 Rush Job: a route-knowing Normal run (Casey's first full run was 28:34)
 d['solutions'] = [['valveFeed', 1], ['valveReturn', 2], ['valveBypass', 0]]   # tools only: from MID, MID, MID (every puzzle wall listed, even at 0 turns)
 
 # the guide: office door first, then the Chapel, then the card and the valves
@@ -216,4 +217,4 @@ W(d, 'deck-02', 'deck.json'); W(lv, 'deck-02', 'level.json'); W(lines, 'deck-02'
 cat = J('catalog.json'); cat['baseUrl'] = 'https://bigdoodr.github.io/hull-breaker/packs-1.6/'; W(cat, 'catalog.json')
 rm = os.path.join(HERE, 'remanifest.py')
 subprocess.run([sys.executable, rm, DST, 'core', '1.4.2', '1.6'], check=True)
-subprocess.run([sys.executable, rm, DST, 'deck-02', '1.2.2', '1.6'], check=True)
+subprocess.run([sys.executable, rm, DST, 'deck-02', '1.2.3', '1.6'], check=True)

@@ -25,11 +25,11 @@
   {
    "id": "deck-02",
    "kind": "deck",
-   "version": "1.2.2",
+   "version": "1.2.3",
    "minEngine": "1.6",
-   "bytes": 1990435,
+   "bytes": 1990436,
    "manifest": "deck-02/manifest.json",
-   "manifestSha256": "52b5b924be41fe530180dc9e4b06d769357c23c4328e0ae2b630475e69b0550e",
+   "manifestSha256": "fb2ebcbece3bb1e0f7bae33554f4c21d0b5fb627f16df828c507b9f411bfd761",
    "deck": 2
   }
  ],
