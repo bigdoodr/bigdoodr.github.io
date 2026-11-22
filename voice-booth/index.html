@@ -61,6 +61,10 @@ canvas{width:100%;height:96px;display:block;border-radius:10px;background:color-
 .char small{color:var(--muted);font-size:13px;line-height:1.35}
 .char code{font:400 11px var(--mono);color:var(--muted);margin-top:4px}
 .char[aria-pressed="true"]{border:2px solid var(--accent);padding:13px;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.sechead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.sechead h2{margin:0}
+.chip{padding:6px 14px;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 @media (max-width:640px){.seg{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .seg button{display:grid;gap:1px;text-align:left;border-radius:12px;padding:10px 16px}
@@ -101,14 +105,14 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   </section>
 
   <section aria-label="Characters">
-    <h2>Character</h2>
+    <div class="sechead"><h2>Character</h2><button class="chip" id="noChar">No character</button></div>
     <div class="chars" id="chars"></div>
   </section>
 
   <section aria-label="Voice swap">
     <h2>Voice swap</h2>
     <div class="seg" id="genders" role="group" aria-label="Voice swap"></div>
-    <p class="note" style="margin-top:8px">Stacks on top of any character, so you can make a female robot or a child ghost.</p>
+    <p class="note" style="margin-top:8px">Works on your own voice, or on top of a character for a female robot or a child ghost.</p>
   </section>
 
   <section class="panel" aria-label="Fine-tune">
@@ -153,6 +157,8 @@ const GENDERS = [
   {id:"child",  name:"Child",       hint:"From an adult voice",pitch:9,  formant:24},
 ];
 let gender=GENDERS[0];
+// "No character": your voice untouched, so the voice swap can be used on its own.
+const PLAIN={id:"plain",name:"Your voice",p:{pitch:0,formant:0,low:0,robot:0,wobble:0,echo:0,reverb:0,drive:0,radio:false}};
 const KEYS=["pitch","formant","low","robot","wobble","echo","reverb","drive"];
 const $=id=>document.getElementById(id);
 let actx, srcBuf=null, fxBuf=null, playing=null, current=CHARS[0], ring=55, dirty=true;
@@ -186,12 +192,20 @@ function selectGender(g){
   gender=g; dirty=true; updateName();
   document.querySelectorAll("#genders button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.id===g.id));
 }
-function baseName(){ return current.id+(gender.id!=="none"?"-"+gender.id:"")+"-line"; }
-function voiceLabel(){ return current.name+(gender.id!=="none"?" · "+gender.name:""); }
+function baseName(){
+  const parts=[]; if(current!==PLAIN) parts.push(current.id); if(gender.id!=="none") parts.push(gender.id);
+  return (parts.join("-")||"original")+"-line";
+}
+function voiceLabel(){
+  if(current===PLAIN) return gender.id==="none"?"your original voice":gender.name+" voice";
+  return current.name+(gender.id!=="none"?" · "+gender.name:"");
+}
+$("noChar").onclick=()=>{selectChar(PLAIN); if(srcBuf) playFx();};
 function selectChar(c){
   current=c; ring=c.p.ring||55;
   KEYS.forEach(k=>$(k).value=c.p[k]); $("radio").checked=c.p.radio;
   document.querySelectorAll(".char").forEach(b=>b.setAttribute("aria-pressed",b.dataset.id===c.id));
+  $("noChar").setAttribute("aria-pressed",c===PLAIN);
   labels(); dirty=true; updateName();
 }
 function labels(){
@@ -468,7 +482,7 @@ $("save").onclick=async()=>{
   document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),5000);
 };
 
-selectChar(CHARS[0]); selectGender(GENDERS[0]);
+selectChar(PLAIN); selectGender(GENDERS[0]);
 </script>
 </body>
 </html>
