@@ -61,6 +61,12 @@ canvas{width:100%;height:96px;display:block;border-radius:10px;background:color-
 .char small{color:var(--muted);font-size:13px;line-height:1.35}
 .char code{font:400 11px var(--mono);color:var(--muted);margin-top:4px}
 .char[aria-pressed="true"]{border:2px solid var(--accent);padding:13px;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:640px){.seg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.seg button{display:grid;gap:1px;text-align:left;border-radius:12px;padding:10px 16px}
+.seg button small{font:400 12px var(--body);color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.seg button[aria-pressed="true"] small{color:var(--accent-ink);opacity:.85}
 .sliders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 26px}
 @media (max-width:640px){.sliders{grid-template-columns:1fr}}
 .sl{display:grid;gap:4px}
@@ -99,10 +105,17 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <div class="chars" id="chars"></div>
   </section>
 
+  <section aria-label="Voice swap">
+    <h2>Voice swap</h2>
+    <div class="seg" id="genders" role="group" aria-label="Voice swap"></div>
+    <p class="note" style="margin-top:8px">Stacks on top of any character, so you can make a female robot or a child ghost.</p>
+  </section>
+
   <section class="panel" aria-label="Fine-tune">
     <h2>Fine-tune</h2>
     <div class="sliders">
       <div class="sl"><label for="pitch">Pitch <output id="pitchV"></output></label><input type="range" id="pitch" min="-12" max="12" step="1" value="0"></div>
+      <div class="sl"><label for="formant">Formant <output id="formantV"></output></label><input type="range" id="formant" min="-40" max="40" step="1" value="0"></div>
       <div class="sl"><label for="low">Bass boost <output id="lowV"></output></label><input type="range" id="low" min="0" max="12" step="1" value="0"></div>
       <div class="sl"><label for="robot">Robot <output id="robotV"></output></label><input type="range" id="robot" min="0" max="100" step="5" value="0"></div>
       <div class="sl"><label for="wobble">Wobble <output id="wobbleV"></output></label><input type="range" id="wobble" min="0" max="100" step="5" value="0"></div>
@@ -123,16 +136,24 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
 <script>
 const CHARS = [
-  {id:"ogre",   name:"Ogre",      blurb:"Huge, slow, rumbling.",       p:{pitch:-7,low:8,robot:0,wobble:0,echo:0,reverb:15,drive:25,radio:false}},
-  {id:"gremlin",name:"Gremlin",   blurb:"Tiny, fast-talking pest.",    p:{pitch:8,low:0,robot:0,wobble:0,echo:0,reverb:0,drive:10,radio:false}},
-  {id:"robot",  name:"Robot",     blurb:"Metallic, buzzing machine.",  p:{pitch:-1,low:0,robot:90,wobble:0,echo:15,reverb:10,drive:10,radio:false,ring:55}},
-  {id:"radio",  name:"Dispatcher",blurb:"Crackly radio or phone.",     p:{pitch:0,low:0,robot:0,wobble:0,echo:0,reverb:0,drive:40,radio:true}},
-  {id:"ghost",  name:"Ghost",     blurb:"Airy, wavering, far away.",   p:{pitch:3,low:0,robot:0,wobble:60,echo:40,reverb:80,drive:0,radio:false}},
-  {id:"alien",  name:"Alien",     blurb:"High and strangely ringing.", p:{pitch:5,low:0,robot:55,wobble:20,echo:10,reverb:20,drive:0,radio:false,ring:220}},
-  {id:"wizard", name:"Old Wizard",blurb:"Creaky, shaky, wise.",        p:{pitch:-3,low:2,robot:0,wobble:40,echo:0,reverb:30,drive:10,radio:false}},
-  {id:"narrator",name:"Narrator", blurb:"Deep movie-trailer voice.",   p:{pitch:-3,low:6,robot:0,wobble:0,echo:0,reverb:35,drive:0,radio:false}},
+  {id:"ogre",   name:"Ogre",      blurb:"Huge, slow, rumbling.",       p:{pitch:-7,formant:-25,low:8,robot:0,wobble:0,echo:0,reverb:15,drive:25,radio:false}},
+  {id:"gremlin",name:"Gremlin",   blurb:"Tiny, fast-talking pest.",    p:{pitch:8,formant:35,low:0,robot:0,wobble:0,echo:0,reverb:0,drive:10,radio:false}},
+  {id:"robot",  name:"Robot",     blurb:"Metallic, buzzing machine.",  p:{pitch:-1,formant:0,low:0,robot:90,wobble:0,echo:15,reverb:10,drive:10,radio:false,ring:55}},
+  {id:"radio",  name:"Dispatcher",blurb:"Crackly radio or phone.",     p:{pitch:0,formant:0,low:0,robot:0,wobble:0,echo:0,reverb:0,drive:40,radio:true}},
+  {id:"ghost",  name:"Ghost",     blurb:"Airy, wavering, far away.",   p:{pitch:3,formant:5,low:0,robot:0,wobble:60,echo:40,reverb:80,drive:0,radio:false}},
+  {id:"alien",  name:"Alien",     blurb:"High and strangely ringing.", p:{pitch:5,formant:20,low:0,robot:55,wobble:20,echo:10,reverb:20,drive:0,radio:false,ring:220}},
+  {id:"wizard", name:"Old Wizard",blurb:"Creaky, shaky, wise.",        p:{pitch:-3,formant:-5,low:2,robot:0,wobble:40,echo:0,reverb:30,drive:10,radio:false}},
+  {id:"narrator",name:"Narrator", blurb:"Deep movie-trailer voice.",   p:{pitch:-3,formant:-8,low:6,robot:0,wobble:0,echo:0,reverb:35,drive:0,radio:false}},
 ];
-const KEYS=["pitch","low","robot","wobble","echo","reverb","drive"];
+// Voice swap: added on top of the character's pitch and formant.
+const GENDERS = [
+  {id:"none",   name:"As recorded", hint:"No change",          pitch:0,  formant:0},
+  {id:"female", name:"Female",      hint:"From a male voice",  pitch:6,  formant:16},
+  {id:"male",   name:"Male",        hint:"From a female voice",pitch:-6, formant:-14},
+  {id:"child",  name:"Child",       hint:"From an adult voice",pitch:9,  formant:24},
+];
+let gender=GENDERS[0];
+const KEYS=["pitch","formant","low","robot","wobble","echo","reverb","drive"];
 const $=id=>document.getElementById(id);
 let actx, srcBuf=null, fxBuf=null, playing=null, current=CHARS[0], ring=55, dirty=true;
 
@@ -145,6 +166,7 @@ let downloads=null;
 /* ---------- character cards ---------- */
 function summary(p){
   const s=[]; if(p.pitch) s.push((p.pitch>0?"+":"")+p.pitch+" st");
+  if(Math.abs(p.formant)>=10) s.push("formant "+(p.formant>0?"+":"")+p.formant+"%");
   if(p.robot) s.push("robot"); if(p.radio) s.push("radio"); if(p.wobble) s.push("wobble");
   if(p.reverb>=30) s.push("reverb"); if(p.echo>=30) s.push("echo"); return s.join(" · ");
 }
@@ -154,6 +176,18 @@ CHARS.forEach(c=>{
   b.onclick=()=>{selectChar(c); if(srcBuf) playFx();};
   $("chars").appendChild(b);
 });
+GENDERS.forEach(g=>{
+  const b=document.createElement("button"); b.dataset.id=g.id;
+  b.innerHTML=`<span>${g.name}</span><small>${g.hint}</small>`;
+  b.onclick=()=>{selectGender(g); if(srcBuf) playFx();};
+  $("genders").appendChild(b);
+});
+function selectGender(g){
+  gender=g; dirty=true; updateName();
+  document.querySelectorAll("#genders button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.id===g.id));
+}
+function baseName(){ return current.id+(gender.id!=="none"?"-"+gender.id:"")+"-line"; }
+function voiceLabel(){ return current.name+(gender.id!=="none"?" · "+gender.name:""); }
 function selectChar(c){
   current=c; ring=c.p.ring||55;
   KEYS.forEach(k=>$(k).value=c.p[k]); $("radio").checked=c.p.radio;
@@ -163,12 +197,15 @@ function selectChar(c){
 function labels(){
   const v=k=>+$(k).value;
   $("pitchV").textContent=(v("pitch")>0?"+":"")+v("pitch")+" semitones";
+  $("formantV").textContent=(v("formant")>0?"+":"")+v("formant")+"%"+(v("formant")<0?" bigger":v("formant")>0?" smaller":"");
   $("lowV").textContent=v("low")+" dB";
   ["robot","wobble","echo","reverb","drive"].forEach(k=>$(k+"V").textContent=v(k)+"%");
 }
 [...KEYS,"radio"].forEach(k=>$(k).addEventListener("input",()=>{labels();dirty=true;}));
-function params(){const o={}; KEYS.forEach(k=>o[k]=+$(k).value); o.radio=$("radio").checked; o.ring=ring; return o;}
-function updateName(){ $("fname").textContent=srcBuf?`${current.id}-line.wav`:""; }
+function params(){const o={}; KEYS.forEach(k=>o[k]=+$(k).value); o.radio=$("radio").checked; o.ring=ring;
+  o.pitch=Math.max(-18,Math.min(18,o.pitch+gender.pitch));
+  o.formant=Math.max(-45,Math.min(70,o.formant+gender.formant)); return o;}
+function updateName(){ $("fname").textContent=srcBuf?baseName()+".wav":""; }
 
 /* ---------- recording / loading ---------- */
 let rec=null, chunks=[], recStart=0, tick=null;
@@ -283,6 +320,51 @@ function pitchShift(x,semis,sr){
   return out;
 }
 
+/* ---------- formant shift (spectral envelope warp) ---------- */
+function fft(re,im,inv){
+  const n=re.length;
+  for(let i=1,j=0;i<n;i++){ let bit=n>>1; for(;j&bit;bit>>=1) j^=bit; j^=bit;
+    if(i<j){ let t=re[i];re[i]=re[j];re[j]=t; t=im[i];im[i]=im[j];im[j]=t; } }
+  for(let len=2;len<=n;len<<=1){
+    const ang=(inv?2:-2)*Math.PI/len, wr=Math.cos(ang), wi=Math.sin(ang);
+    for(let i=0;i<n;i+=len){ let cr=1,ci=0;
+      for(let j=0;j<len/2;j++){
+        const a=i+j,b=a+len/2, xr=re[b]*cr-im[b]*ci, xi=re[b]*ci+im[b]*cr;
+        re[b]=re[a]-xr; im[b]=im[a]-xi; re[a]+=xr; im[a]+=xi;
+        const t=cr*wr-ci*wi; ci=cr*wi+ci*wr; cr=t; } } }
+}
+// Moves the vocal-tract resonances by `ratio` without changing pitch.
+// ratio > 1 = smaller/brighter (higher formants), < 1 = bigger/darker.
+function formantShift(x,ratio,sr){
+  if(Math.abs(ratio-1)<0.005) return x;
+  const N=2048, H=N/4, half=N/2, nc=Math.max(20,Math.round(sr*0.0015));
+  const win=new Float32Array(N); for(let i=0;i<N;i++) win[i]=0.5-0.5*Math.cos(2*Math.PI*i/N);
+  const out=new Float32Array(x.length), norm=new Float32Array(x.length);
+  const re=new Float64Array(N), im=new Float64Array(N), cr=new Float64Array(N), ci=new Float64Array(N), L=new Float64Array(half+1);
+  for(let s=-half;s<x.length;s+=H){
+    for(let i=0;i<N;i++){ const k=s+i; re[i]=(k>=0&&k<x.length?x[k]:0)*win[i]; im[i]=0; }
+    fft(re,im,false);
+    // smoothed log-magnitude envelope via cepstral liftering
+    for(let i=0;i<N;i++){ cr[i]=Math.log(Math.hypot(re[i],im[i])+1e-9); ci[i]=0; }
+    fft(cr,ci,true);
+    for(let i=0;i<N;i++){ cr[i]/=N; ci[i]=0; }
+    for(let i=nc;i<=N-nc;i++) cr[i]=0;
+    fft(cr,ci,false);
+    for(let i=0;i<=half;i++) L[i]=cr[i];
+    // envelope wanted at bin i is the current envelope at bin i/ratio
+    for(let i=0;i<=half;i++){
+      const src=Math.min(half,i/ratio), j=Math.floor(src), f=src-j;
+      const Ls=j<half?L[j]*(1-f)+L[j+1]*f:L[half];
+      const g=Math.min(20,Math.max(0.05,Math.exp(Ls-L[i])));
+      re[i]*=g; im[i]*=g; if(i>0&&i<half){ re[N-i]*=g; im[N-i]*=g; }
+    }
+    fft(re,im,true);
+    for(let i=0;i<N;i++){ const k=s+i; if(k>=0&&k<x.length){ out[k]+=re[i]/N*win[i]; norm[k]+=win[i]*win[i]; } }
+  }
+  for(let i=0;i<out.length;i++) if(norm[i]>1e-3) out[i]/=norm[i];
+  return out;
+}
+
 /* ---------- effect chain ---------- */
 function curve(amount){ const k=amount*60, n=2048, c=new Float32Array(n);
   for(let i=0;i<n;i++){const x=i*2/n-1; c[i]=(1+k)*x/(1+k*Math.abs(x));} return c; }
@@ -291,7 +373,9 @@ function impulse(oc,sec){ const len=Math.floor(oc.sampleRate*sec), b=oc.createBu
 
 async function render(){
   const p=params(), sr=srcBuf.sr;
-  const shifted=pitchShift(srcBuf.data,p.pitch,sr);
+  // pitchShift moves formants along with pitch; then warp them to where the Formant setting wants them.
+  const pr=Math.pow(2,p.pitch/12), fr=1+p.formant/100;
+  const shifted=formantShift(pitchShift(srcBuf.data,p.pitch,sr),fr/pr,sr);
   const tail=(p.echo||p.reverb)?2.5:0.1;
   const oc=new OfflineAudioContext(1,Math.ceil(shifted.length+sr*tail),sr);
   const b=oc.createBuffer(1,shifted.length,sr); b.copyToChannel(shifted,0);
@@ -326,7 +410,7 @@ async function render(){
   const g=peak>0?0.9/peak:1; for(let i=0;i<out.length;i++) out[i]*=g;
   return trimSilence(out,sr);
 }
-async function ensureFx(){ if(dirty||!fxBuf){ setMsg("Processing…"); fxBuf=await render(); dirty=false; drawWave(srcBuf.data,fxBuf); setMsg(`Showing ${current.name}. Adjust the sliders to tweak it, or download the WAV.`);} return fxBuf; }
+async function ensureFx(){ if(dirty||!fxBuf){ setMsg("Processing…"); fxBuf=await render(); dirty=false; drawWave(srcBuf.data,fxBuf); setMsg(`Showing ${voiceLabel()}. Adjust the sliders to tweak it, or download the WAV.`);} return fxBuf; }
 
 /* ---------- playback ---------- */
 function stopAudio(){ if(playing){ try{playing.stop();}catch(e){} playing=null; } }
@@ -372,7 +456,7 @@ $("save").onclick=async()=>{
     try{
       $("save").disabled=true; setMsg("Preparing your file… this takes as long as the clip.");
       const {blob,ext}=await encodeCompressed(data,srcBuf.sr);
-      await downloads.save({filename:`${current.id}-line.${ext}`,data:blob});
+      await downloads.save({filename:`${baseName()}.${ext}`,data:blob});
       setMsg("Saved.");
     }catch(e){
       setMsg(e&&e.code==="declined"?"Download cancelled.":"This view couldn't save the file. Open the page in a browser to download a WAV.",e?.code!=="declined");
@@ -380,11 +464,11 @@ $("save").onclick=async()=>{
     return;
   }
   const a=document.createElement("a");
-  a.href=URL.createObjectURL(wav(data,srcBuf.sr)); a.download=`${current.id}-line.wav`;
+  a.href=URL.createObjectURL(wav(data,srcBuf.sr)); a.download=`${baseName()}.wav`;
   document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),5000);
 };
 
-selectChar(CHARS[0]);
+selectChar(CHARS[0]); selectGender(GENDERS[0]);
 </script>
 </body>
 </html>
