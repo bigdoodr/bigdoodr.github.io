@@ -443,9 +443,6 @@
    "file": "textures/console.png",
    "emissive": "textures/console.em.png"
   },
-  "sporedoor": {
-   "file": "textures/blood.png"
-  },
   "rootdoor": {
    "file": "textures/lock.png",
    "emissive": "textures/lock.em.png"
@@ -469,6 +466,10 @@
    "file": "textures/crack_hull.png",
    "emissive": "textures/crack_hull.em.png",
    "crackOf": "hull"
+  },
+  "sporedoor": {
+   "file": "textures/sporedoor.png",
+   "emissive": "textures/sporedoor.em.png"
   }
  },
  "floors": {

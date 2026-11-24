@@ -13,14 +13,14 @@ import hashlib, json, os, shutil, sys, wave
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..', 'level', 'deck03'))
-import deck03, build_level  # noqa: E402
+import deck03, build_level, art_deck03  # noqa: E402
 
 STAGE = os.path.abspath(sys.argv[1])
 SRC = os.path.abspath(sys.argv[sys.argv.index('--from') + 1]) if '--from' in sys.argv else os.path.join(HERE, '..', '..', 'packs-1.6')
 LIVE = {os.path.abspath(os.path.join(HERE, '..', '..', p)) for p in ('packs', 'packs-1.3', 'packs-1.5', 'packs-1.6')}
 assert STAGE != SRC and STAGE not in LIVE, 'refusing to overwrite live packs'
-ENGINE, VERSION = '1.7', '1.5.0'
-DECK3_VERSION = '1.0.0'
+ENGINE, VERSION = '1.7', '1.5.1'
+DECK3_VERSION = '1.0.1'
 PLACEHOLDERS = []
 RAW = os.path.join(HERE, 'deck03_raw')   # recorded voice/logs and finished art land here (see voice/ tools)
 
@@ -60,11 +60,12 @@ E['motherroot'] = dict(E['brute'], hp=260, lhp=[999, 999, 999, 999, 999], speed=
                                  sporeEvery=[0, 8, 6, 5], sporeDmg=6, sporeRange=3,
                                  bloomEvery=9, bloomOpen=3,
                                  summonEvery=[15, 12, 10, 8], summon=['rooter', 'crawler'], summonMax=[2, 3, 4, 4],
-                                 drops=['fuel', 'fuel', 'med', 'medbig', 'shells', 'cells'], dropMax=12, dropChance=.5),
-                       parts=[dict(id='anchor1', name='WEST ANCHOR ROOT', hp=220, window='fire'),
-                              dict(id='anchor2', name='EAST ANCHOR ROOT', hp=220, window='fire'),
-                              dict(id='anchor3', name='TAP ROOT', hp=260, window='fire'),
-                              dict(id='bloom', name='THE BLOOM', hp=200, regions=['torso'], window='bloom')])
+                                 drops=['fuel', 'fuel', 'fuel', 'fuel', 'med', 'medbig', 'shells', 'cells'], dropMax=18, dropChance=.65),
+                       # aim matters (engine 1.7): each part is its own hit region on her sprite
+                       parts=[dict(id='anchor1', name='WEST ANCHOR ROOT', hp=220, regions=['armL'], window='fire'),
+                              dict(id='anchor2', name='EAST ANCHOR ROOT', hp=220, regions=['armR'], window='fire'),
+                              dict(id='anchor3', name='TAP ROOT', hp=260, regions=['legL'], window='fire'),
+                              dict(id='bloom', name='THE BLOOM', hp=200, regions=['head'], window='bloom')])
 I = tun['items']
 I['torch'] = dict(weapon=4, ammo='fuel', amount=60, msg='PICKED UP THE PURGE TORCH  [5]', line='get_torch', sprite='torch', height=.22, mapItem=True)
 I['fuel'] = dict(ammo='fuel', amount=25, msg='TORCH FUEL', sprite='fuel', height=.28)
@@ -83,7 +84,7 @@ art = jload(os.path.join(core, 'art.json'))
 NEW_TEX = {'glasshouse': 'win', 'domeglass': 'win', 'seedrack': 'locker', 'trunk': 'hull2', 'oldtree': 'hull2', 'caverock': 'hull2',
            'terrace': 'hull', 'rootwall': 'blood', 'relay': 'term', 'relayon': 'term', 'scrubvalve': 'brk', 'scrubvalveon': 'brkon',
            'ventconsole': 'ovrcon', 'ventconsoleon': 'brkon', 'nofeedsign': 'sign' if 'sign' in art['textures'] else 'console',
-           'sporedoor': 'blood', 'rootdoor': 'lock',
+           'rootdoor': 'lock',
            'crack_glass': 'crack_hull', 'crack_rack': 'crack_hull', 'crack_cave': 'crack_hull', 'crack_terrace': 'crack_hull'}
 for k, src in NEW_TEX.items():
     if k not in art['textures']: art['textures'][k] = dict(art['textures'][src]); PLACEHOLDERS.append(f'texture: {k} (copy of {src})')
@@ -91,10 +92,13 @@ NEW_SPR = {'torch': 'rivetgun', 'fuel': 'cells', 'sample': 'log', 'planter': 'bu
 for k, src in NEW_SPR.items():
     if src not in art['sprites']: src = next(iter(art['sprites']))
     if k not in art['sprites']: art['sprites'][k] = dict(art['sprites'][src]); PLACEHOLDERS.append(f'sprite: {k} (copy of {src})')
+art_deck03.main(os.path.join(core, 'textures'))   # drawn in code: the spore growth over a doorway
+art['textures']['sporedoor'] = dict(file='textures/sporedoor.png', emissive='textures/sporedoor.em.png')
 jsave(os.path.join(core, 'art.json'), art)
 
 sfx = jload(os.path.join(core, 'sfx.json'))
-for k, src in {'flame': 'whoosh', 'backburn': 'whoosh', 'plant_croon': 'drum', 'plant_gulp': 'pickup', 'regrow': 'whoosh'}.items():
+for k, src in {'flame': 'whoosh', 'backburn': 'whoosh', 'plant_croon': 'drum', 'plant_gulp': 'pickup', 'regrow': 'whoosh',
+               'vinecreak': 'groan', 'vinesnap': 'clank'}.items():
     if k not in sfx['sounds']: sfx['sounds'][k] = dict(sfx['sounds'][src]); PLACEHOLDERS.append(f'sfx: {k} (copy of {src})')
 jsave(os.path.join(core, 'sfx.json'), sfx)
 

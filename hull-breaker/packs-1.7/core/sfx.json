@@ -317,6 +317,16 @@
    "file": "sfx/whoosh.wav",
    "gain": 0.0366,
    "seconds": 0.162
+  },
+  "vinecreak": {
+   "file": "sfx/groan.wav",
+   "gain": 0.4909,
+   "seconds": 1.205
+  },
+  "vinesnap": {
+   "file": "sfx/clank.wav",
+   "gain": 1.1279,
+   "seconds": 0.176
   }
  }
 }

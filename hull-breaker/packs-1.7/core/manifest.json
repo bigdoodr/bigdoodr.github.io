@@ -2,10 +2,10 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.5.0",
+ "version": "1.5.1",
  "minEngine": "1.7",
  "title": "Hull Breaker shared content",
- "bytes": 5541323,
+ "bytes": 5544865,
  "files": [
   {
    "path": "achievements.json",
@@ -14,8 +14,8 @@
   },
   {
    "path": "art.json",
-   "bytes": 15938,
-   "sha256": "b171268e0251e5d9b306d4f7a31bf22dd5ecde6980267dafcd89268a064c7699"
+   "bytes": 15986,
+   "sha256": "1562e54aba2b5786fb984bd0672d1dc1ebe3b4b33ebad774301e7cd3857a99e8"
   },
   {
    "path": "floors/carpet.png",
@@ -69,8 +69,8 @@
   },
   {
    "path": "sfx.json",
-   "bytes": 5685,
-   "sha256": "d294557fdc2cc4c082a10e7f424b91c353941574aa4b746bc6d6c73d52b8e26b"
+   "bytes": 5862,
+   "sha256": "cd17a6840783ef0f97e1c46f7884103a4a244e5636bbf2cb75749409fa5f9270"
   },
   {
    "path": "sfx/ambient.wav",
@@ -1333,6 +1333,16 @@
    "sha256": "32d31be5cb05c101e5087005066724803bae6926ac86d739f5aebd2c0b276bfa"
   },
   {
+   "path": "textures/sporedoor.em.png",
+   "bytes": 761,
+   "sha256": "154016d796056fbe4deb7e3bbfe34c36205044f4d69e6878b72d486aa03eaef9"
+  },
+  {
+   "path": "textures/sporedoor.png",
+   "bytes": 2413,
+   "sha256": "e8281ef97611fd63aa5dcfddd46ef1fdfa7fdc46a57cc966b73d5044ce72d490"
+  },
+  {
    "path": "textures/startupcard.em.png",
    "bytes": 687,
    "sha256": "d04a929e3e52ff9e3e797abb416dfa0be2ce753afd4f01434ba2cc4f19d8f3af"
@@ -1469,8 +1479,8 @@
   },
   {
    "path": "tuning.json",
-   "bytes": 14355,
-   "sha256": "0116ca348a01e9415ce2ae1b2ff679b65f6225ca8b83288677917ddfae38a3cf"
+   "bytes": 14498,
+   "sha256": "150b65629f2824117a1b946c065b55849f7768b27ee0afe148aba37e3e59b470"
   },
   {
    "path": "voice/ach_bad_credit.mp3",

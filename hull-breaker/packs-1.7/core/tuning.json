@@ -532,31 +532,42 @@
     "drops": [
      "fuel",
      "fuel",
+     "fuel",
+     "fuel",
      "med",
      "medbig",
      "shells",
      "cells"
     ],
-    "dropMax": 12,
-    "dropChance": 0.5
+    "dropMax": 18,
+    "dropChance": 0.65
    },
    "parts": [
     {
      "id": "anchor1",
      "name": "WEST ANCHOR ROOT",
      "hp": 220,
+     "regions": [
+      "armL"
+     ],
      "window": "fire"
     },
     {
      "id": "anchor2",
      "name": "EAST ANCHOR ROOT",
      "hp": 220,
+     "regions": [
+      "armR"
+     ],
      "window": "fire"
     },
     {
      "id": "anchor3",
      "name": "TAP ROOT",
      "hp": 260,
+     "regions": [
+      "legL"
+     ],
      "window": "fire"
     },
     {
@@ -564,7 +575,7 @@
      "name": "THE BLOOM",
      "hp": 200,
      "regions": [
-      "torso"
+      "head"
      ],
      "window": "bloom"
     }

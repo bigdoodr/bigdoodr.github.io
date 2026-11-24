@@ -176,9 +176,10 @@ DECK = {
         {'on': {'event': 'bossSight'}, 'if': {'field': 'enemy', 'eq': 'motherroot'}, 'do': [{'if': {'not': {'flag': 'rootSeen'}}, 'then': [
             {'set': 'rootSeen', 'value': True}, {'say': 'boss_root', 'sub': 3}, {'music': 1},
             {'objective': 'Burn out her anchor roots, then hit the bloom.'},
+            {'after': 3.4, 'do': [{'msg': 'BURN HER ANCHOR ROOTS ONE AT A TIME. AIM AT THE ONE THAT GLOWS.'}]},
         ]}]},
         {'on': {'event': 'kill'}, 'if': {'field': 'enemy', 'eq': 'motherroot'}, 'do': [
-            {'set': 'rootDown', 'value': True}, {'music': .3}, {'scene': 'root_payoff'},
+            {'set': 'rootDown', 'value': True}, {'set': 'arenaRed', 'value': False}, {'music': .3}, {'scene': 'root_payoff'},
             {'set': 'sampleHeartwood', 'value': True}, {'add': 'samples', 'value': 1},
             {'after': 1, 'do': [{'msg': 'SAMPLE: HEARTWOOD ({samples}/3)'}, {'say': 'moss_rootdown', 'sub': 4}]},
             {'objective': 'Back to Water Reclamation. The down line is through its south-east door.'},
@@ -293,6 +294,13 @@ DECK['rules'] += [
       for ev in ({'event': 'pickup', 'item': 'sampleTissue'}, {'event': 'pickup', 'item': 'samplePod'},
                  {'event': 'kill'})],
 ]
+
+# Mother Root, phase by phase (bossPhase: the phase that just began). A save at each break: `autosave: events`, so
+# Normal and easier keep it and Hard and Nightmare don't (the difficulty table), as with the Super (Casey, Nov 23).
+ROOT_HINTS = {2: 'THE WEST ROOT IS ASH. BURN THE EAST ANCHOR ROOT.', 3: 'BURN THE TAP ROOT, IN FRONT OF HER.',
+              4: "THE ROOTS ARE GONE. HIT THE BLOOM AT HER CROWN WHILE IT'S OPEN."}
+DECK['rules'] += [{'on': {'event': 'bossPhase'}, 'if': {'all': [{'field': 'enemy', 'eq': 'motherroot'}, {'field': 'phase', 'eq': n}]},
+                   'do': [{'sfx': 'clank'}, {'after': .8, 'do': [{'msg': h}]}, {'autosave': 'events'}]} for n, h in ROOT_HINTS.items()]
 
 # Lines this deck uses: id -> text (Buck unless a speaker is given). Approved drafts (Casey, Nov 21) are marked;
 # the rest are new and go to Casey with the voice review.
