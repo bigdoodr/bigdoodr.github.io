@@ -3,14 +3,14 @@
  "id": "deck-03",
  "kind": "deck",
  "deck": 3,
- "version": "1.0.1",
+ "version": "1.0.2",
  "minEngine": "1.7",
  "title": "Root Cause",
  "place": "Hydroponics and Life Support",
  "requires": {
   "core": "1.5.1"
  },
- "bytes": 782137,
+ "bytes": 1308184,
  "files": [
   {
    "path": "deck.json",
@@ -24,13 +24,13 @@
   },
   {
    "path": "lines.json",
-   "bytes": 3302,
-   "sha256": "b616bcbcb942184f61719f0fdb54f6abdb6c52426a94ecc1155ce31303ece728"
+   "bytes": 3434,
+   "sha256": "c25e44da0715e371ba1f4cb471a95f73c9cfb15ad483dcc46832d10c1e8aec9a"
   },
   {
    "path": "logs.json",
-   "bytes": 2685,
-   "sha256": "4fc7498507a50d207f929e4b36220e73e1adfe967615a02eca6b77d7211f55ce"
+   "bytes": 6695,
+   "sha256": "ab0f6c751bf72d3fbb43b996af55ce4dcd27e010edda37ae7807b5700477fc0c"
   },
   {
    "path": "logs/agro_a_harvest.mp3",
@@ -54,38 +54,38 @@
   },
   {
    "path": "logs/marquez_irrigation.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 67309,
+   "sha256": "85272677d0997ac4e985dce80d63f2174c3a48bd263e1349ea746a279d9feae8"
   },
   {
    "path": "logs/marquez_orchard.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 57801,
+   "sha256": "2309cfb3d0dfe13d841eef3066b5c7c5d5d01ddf9c1c93fed0c194a5e83411cd"
   },
   {
    "path": "logs/marquez_platform.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 74833,
+   "sha256": "f2ddb58a12e2a0f3383fd048b58ebb30fedf5aa106ae50b8caaa4eb2d7beaecc"
   },
   {
    "path": "logs/marquez_rooted.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 70653,
+   "sha256": "593bf9ee13beabe91dd47289fe23e487047296e830d09b39baf1ddb4dfece77e"
   },
   {
    "path": "logs/marquez_seeds.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 72220,
+   "sha256": "0cc4b5f656f49559bca46350b854bebbe663266795a174d6b6f90ac0db0db6d6"
   },
   {
    "path": "logs/okafor_protocol.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 74101,
+   "sha256": "c55140007a699562c0eb54baffe2523f2598ff3db1a7694eb78d7f4a710967cb"
   },
   {
    "path": "logs/sable_yield.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 116524,
+   "sha256": "d49fbc7f555fd836a394230781f51cb088c76cf8d1f331de269f42012103f02d"
   },
   {
    "path": "logs/tech_orders.mp3",
@@ -164,8 +164,8 @@
   },
   {
    "path": "voice/okafor_relay.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 165216,
+   "sha256": "5a03c2e12e7131b678275fb3a6793eea951b1d2ab33a70ff3485a97c2d83c48c"
   },
   {
    "path": "voice/payoff_root.mp3",
