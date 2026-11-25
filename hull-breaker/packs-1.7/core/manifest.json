@@ -2,10 +2,10 @@
  "format": 1,
  "id": "core",
  "kind": "core",
- "version": "1.5.1",
+ "version": "1.5.2",
  "minEngine": "1.7",
  "title": "Hull Breaker shared content",
- "bytes": 5544865,
+ "bytes": 5528501,
  "files": [
   {
    "path": "achievements.json",
@@ -1499,8 +1499,8 @@
   },
   {
    "path": "voice/ach_chain_of_custody.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 25605,
+   "sha256": "04edacf2d7daf7b31a1218390f78a68a7ebaff33b6c4bbefce0e8fbf07ee92bc"
   },
   {
    "path": "voice/ach_clean_credit.mp3",
@@ -1549,8 +1549,8 @@
   },
   {
    "path": "voice/ach_slash_and_burn.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 9477,
+   "sha256": "d0db2e0832ed4ec14bd79abf40fe99e497affcd8dfff68b1584ee80d28af7f0e"
   },
   {
    "path": "voice/ach_steel_toed.mp3",
@@ -1609,8 +1609,8 @@
   },
   {
    "path": "voice/get_torch.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 10989,
+   "sha256": "0a8bffab495dafadda25a70bda839d2c5fc80addb2297dd5f096f95efe860b98"
   },
   {
    "path": "voice/headshot.mp3",
@@ -1664,8 +1664,8 @@
   },
   {
    "path": "voice/rooter_regrow.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 25941,
+   "sha256": "070b09c591e825908d3fc65ba5102b5812a88ab1bb9c0f757acb5c99e7ed5764"
   },
   {
    "path": "voice/save_first.mp3",

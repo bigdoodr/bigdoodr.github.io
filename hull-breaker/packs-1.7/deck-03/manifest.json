@@ -3,14 +3,14 @@
  "id": "deck-03",
  "kind": "deck",
  "deck": 3,
- "version": "1.0.2",
+ "version": "1.0.3",
  "minEngine": "1.7",
  "title": "Root Cause",
  "place": "Hydroponics and Life Support",
  "requires": {
-  "core": "1.5.1"
+  "core": "1.5.2"
  },
- "bytes": 1308184,
+ "bytes": 1290805,
  "files": [
   {
    "path": "deck.json",
@@ -24,8 +24,8 @@
   },
   {
    "path": "lines.json",
-   "bytes": 3434,
-   "sha256": "c25e44da0715e371ba1f4cb471a95f73c9cfb15ad483dcc46832d10c1e8aec9a"
+   "bytes": 3435,
+   "sha256": "7793e9ed7f175a089cb5688ed22551d996b064ef64f91786f39b24daddb0f363"
   },
   {
    "path": "logs.json",
@@ -99,68 +99,68 @@
   },
   {
    "path": "voice/allergy.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 9477,
+   "sha256": "dd2f130bf0c31d652595218f12c9beb9e4586183ff83be05e0f628fd355cd946"
   },
   {
    "path": "voice/boss_root.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 21573,
+   "sha256": "48af6d1dd9727524e253bcbe2271ea95ecc4eb07310009f71a35fc6540ef8944"
   },
   {
    "path": "voice/clear_air.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 8637,
+   "sha256": "e3b0973b57f8a588065ec02cbd073c507aa22ce83c0249c9b4d9270a43d6a000"
   },
   {
    "path": "voice/doc_alive.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 22245,
+   "sha256": "6fd16bf2b1b2841f4688099bee493ea3a49337744a4d3b6152fde3dad6add001"
   },
   {
    "path": "voice/floorplan.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 36021,
+   "sha256": "dbcfd266cd13ed866cd820017b0aaef499d52738338b14067c9d19b2fc28cf4a"
   },
   {
    "path": "voice/moss_arrive.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 37451,
+   "sha256": "9caf9ebf6e3ea0993a5b8684cf738ec104c7bd16a93c15630fea0c028b0e6b93"
   },
   {
    "path": "voice/moss_downline.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 16815,
+   "sha256": "5e06f147abd998083eff018e13a0afee15dfc9dab7bba71f2edfaec3d31b3e68"
   },
   {
    "path": "voice/moss_okafor.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 20602,
+   "sha256": "93df1d6e91c1962e24fe590b2a58270120d902d7a2b718c27a129f91db7c45f1"
   },
   {
    "path": "voice/moss_poison.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 24390,
+   "sha256": "626891dcf4fa9fe83f2500e425866ccaf717cf8f94aafb51e63f25ccfe5709d1"
   },
   {
    "path": "voice/moss_rootdown.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 27917,
+   "sha256": "74f8a083d76fafff89e09efd1b2bb9f7d156e369c5f3c7284ba2f2e00698ed1c"
   },
   {
    "path": "voice/moss_scrub_locked.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 29484,
+   "sha256": "da720f0e602bb0cb1e65556677db3a1af5c646a293e05ac40fc35ef42a939585"
   },
   {
    "path": "voice/moss_scrubbers.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 24390,
+   "sha256": "356b1be8ccc8d237bee02f166b37cfa5d98af57173ba61cfd9661030fcd388f4"
   },
   {
    "path": "voice/moss_tracks.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 19166,
+   "sha256": "fef82d955620e526c9af9bd8dac8ad0d5b79fda86634a9d461110effdd292790"
   },
   {
    "path": "voice/okafor_relay.mp3",
@@ -169,33 +169,33 @@
   },
   {
    "path": "voice/payoff_root.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 10149,
+   "sha256": "df715c1918e501a7c4fc570408cd6d6bb549b823c12f12c0ac576fc3d00f5f1b"
   },
   {
    "path": "voice/plant_fed.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 19389,
+   "sha256": "b8a889e54fcb1a02f84e7b0cdeddcf22547a4b088fd1472637dead4380a48ffc"
   },
   {
    "path": "voice/plant_room.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 14853,
+   "sha256": "b1774026ede0c112f5ff45ec452c23e76ca5e78ccad9459fa9a43582bd6d93f7"
   },
   {
    "path": "voice/sign.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 10485,
+   "sha256": "77aac0002ae44f3b676d22129b194a5f7dfc7311d150a0357c070f6acb6bde1e"
   },
   {
    "path": "voice/specimen.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 18717,
+   "sha256": "8f64b6b35d077ba30e9bac23af19c94456556e5bc04b91d68c3374aea16b4f2e"
   },
   {
    "path": "voice/start.mp3",
-   "bytes": 22094,
-   "sha256": "eb10e5fd31d097147495ad44ff9f847fd199f2c51da6e53be96cf16a562b8d74"
+   "bytes": 30645,
+   "sha256": "166614e2929584e466d68fcd441a5a0b2b5b754ad01a71084ffb3f461dd8902e"
   }
  ]
 }

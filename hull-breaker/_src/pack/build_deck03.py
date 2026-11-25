@@ -19,8 +19,8 @@ STAGE = os.path.abspath(sys.argv[1])
 SRC = os.path.abspath(sys.argv[sys.argv.index('--from') + 1]) if '--from' in sys.argv else os.path.join(HERE, '..', '..', 'packs-1.6')
 LIVE = {os.path.abspath(os.path.join(HERE, '..', '..', p)) for p in ('packs', 'packs-1.3', 'packs-1.5', 'packs-1.6')}
 assert STAGE != SRC and STAGE not in LIVE, 'refusing to overwrite live packs'
-ENGINE, VERSION = '1.7', '1.5.1'
-DECK3_VERSION = '1.0.2'
+ENGINE, VERSION = '1.7', '1.5.2'
+DECK3_VERSION = '1.0.3'
 PLACEHOLDERS = []
 RAW = os.path.join(HERE, 'deck03_raw')   # recorded voice/logs and finished art land here (see voice/ tools)
 

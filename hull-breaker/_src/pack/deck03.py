@@ -305,17 +305,17 @@ DECK['rules'] += [{'on': {'event': 'bossPhase'}, 'if': {'all': [{'field': 'enemy
 # Lines this deck uses: id -> text (Buck unless a speaker is given). Approved drafts (Casey, Nov 21) are marked;
 # the rest are new and go to Casey with the voice review.
 LINES = {
-    'start': 'Hydroponics. Smells like somebody stopped paying the air bill.',     # new
+    'start': 'Hydroponics. Smells like somebody stopped paying the air bill.',     # approved Nov 25
     'allergy': 'Allergy season.',                                                  # approved
     'doc_alive': "Doc's alive. Somebody tell billing.",                           # approved
     'specimen': 'Specimen jar. Doc better tip.',                                   # approved
     'clear_air': 'Clearing the air.',                                              # approved
     'boss_root': "Ma'am, you're in violation of the zoning code.",                 # approved
     'payoff_root': "Weed's been abated.",                                         # approved
-    'floorplan': "Gorgon's plan has this room a third the size. Something's been growing.",   # new
-    'sign': "Wasn't planning on it.",                                              # new
-    'plant_room': "Is that thing... humming?",                                     # new
-    'plant_fed': "There you go. Don't tell anybody.",                              # new
+    'floorplan': "Gorgon's plan says the farms end here. Gorgon lies about square footage.",   # approved Nov 25
+    'sign': "Wasn't planning on it.",                                              # approved Nov 25
+    'plant_room': "Is that thing... humming?",                                     # approved Nov 25
+    'plant_fed': "There you go. Don't tell anybody.",                              # approved Nov 25
 }
 MOSS = {
     'moss_arrive': "Life support's been in the red down there since the lockdown. Past the farms, the air's bad. Don't breathe it longer than you have to.",
@@ -342,8 +342,8 @@ SPEAKERS = {**{k: 'moss' for k in MOSS}, **{k: 'okafor' for k in OKAFOR}}
 CORE_LINES = {
     'get_torch': 'Time to do some weeding.',
     'rooter_regrow': 'Root cause analysis. Step one: fire.',
-    'ach_slash_and_burn': 'Root and branch.',                    # new
-    'ach_chain_of_custody': 'Signed, sealed, delivered. Almost.',  # new
+    'ach_slash_and_burn': 'Root and branch.',                    # approved Nov 25
+    'ach_chain_of_custody': 'Signed, sealed, delivered. Almost.',  # approved Nov 25
 }
 
 LOG_ORDER = ['marquez_platform', 'okafor_protocol', 'sable_yield', 'marquez_seeds', 'agro_a_harvest', 'marquez_orchard',
