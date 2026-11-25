@@ -328,12 +328,13 @@ MOSS = {
     'moss_downline': 'Down-line platform. Medical is the next stop.',
 }
 OKAFOR = {
-    # Played like a log (recorder filter). Draft, written properly in the logs step; Casey approves the text.
-    'okafor_relay': ("This is Dr. Okafor, medical. If you're hearing this, you restarted the tram. I'm alive. I'm sealed in my lab, "
-                     "and I am staying sealed. Listen. In the farms the infection is doing something it shouldn't. It grows back "
-                     "what you cut off. I need living tissue to understand how. Three samples: a rooter's tissue, the core of "
-                     "the big spore pod in compost, and whatever is feeding the roots. The case is under this terminal. Keep it "
-                     "closed. Bring it down to medical. Please."),
+    # Played like a log (recorder filter). Text approved by Casey, Nov 25.
+    'okafor_relay': ("This is Dr. Okafor, chief medical officer. If you can hear this, you restarted the tram, so you're alive and you're "
+                     "not one of them. I'm alive too. I'm sealed in my lab on the medical deck, and I'm staying sealed. Listen to me. In the "
+                     "farms the infection does something it shouldn't. Cut a limb off, and it grows back. Fire stops it. Nothing else does. "
+                     "I need living tissue to understand why. Three samples: tissue from a rooted body, the core of the big spore pod in "
+                     "Compost Works, and whatever is feeding the roots. The case is under this terminal. Keep it sealed. Bring it down to "
+                     "medical. Please."),
 }
 SPEAKERS = {**{k: 'moss' for k in MOSS}, **{k: 'okafor' for k in OKAFOR}}
 
