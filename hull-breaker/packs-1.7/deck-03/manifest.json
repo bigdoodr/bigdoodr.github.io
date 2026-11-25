@@ -3,19 +3,19 @@
  "id": "deck-03",
  "kind": "deck",
  "deck": 3,
- "version": "1.0.3",
+ "version": "1.0.4",
  "minEngine": "1.7",
  "title": "Root Cause",
  "place": "Hydroponics and Life Support",
  "requires": {
   "core": "1.5.2"
  },
- "bytes": 1290805,
+ "bytes": 1293370,
  "files": [
   {
    "path": "deck.json",
-   "bytes": 24509,
-   "sha256": "e56efa2b0f256d6bcd911b17aaeedc9895181aa208230559d0b77cc1ebfe8ac6"
+   "bytes": 27074,
+   "sha256": "db430cc5160435273a37fa462e3a93bb7190a0641fc258f2d8cd447345073513"
   },
   {
    "path": "level.json",

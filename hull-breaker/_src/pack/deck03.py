@@ -17,6 +17,9 @@ Samples: rooter tissue (Fungus Caves), the mother pod's core (Compost Works) and
 payoff scene). The first two are optional for the route and count toward 100%.
 """
 
+import math
+PI = math.pi
+
 DECK = {
     'deck': 3,
     'title': 'Root Cause',
@@ -247,6 +250,48 @@ DECK = {
         {'to': {'use': 'breakGlass'}},
     ],
 
+    # Mother Root's payoff (engine 1.5 cut scene player; the carve and hold poses and gib sparks/carve are 1.7).
+    # Coordinates are relative to her body (anchor lastBoss): x toward where Buck stood when she fell. ROOT_PAYOFF_BEATS.
+    'cutscenes': {
+        'root_payoff': {
+            'anchor': 'lastBoss', 'duration': 12.4,
+            'cam': [
+                {'t': 0.0, 'x': 5.6, 'y': 0.9, 'ang': PI - 0.2},                  # behind and beside Buck as he walks up to the trunk
+                {'t': 2.8, 'x': 4.4, 'y': 0.7, 'ang': PI - 0.15},
+                {'t': 2.9, 'x': 0.65, 'y': 2.1, 'ang': -PI / 2, 'cut': True},     # from the side: the Cutter goes into the trunk
+                {'t': 5.8, 'x': 0.65, 'y': 1.9, 'ang': -PI / 2},
+                {'t': 5.9, 'x': 2.5, 'y': 0.15, 'ang': PI, 'cut': True},          # close on Buck, the case in his hands, the cut trunk behind
+                {'t': 9.5, 'x': 2.4, 'y': 0.15, 'ang': PI},
+                {'t': 9.6, 'x': 3.6, 'y': 1.8, 'ang': -2.5, 'cut': True},         # wide, and he walks off
+                {'t': 12.3, 'x': 3.6, 'y': 1.8, 'ang': -2.5},
+                {'t': 12.4, 'x': 2.2, 'y': 0.6, 'ang': 0.0, 'cut': True},
+            ],
+            'buck': [
+                {'t': 0.0, 'x': 3.7, 'y': -0.3, 'view': 'back', 'pose': 'walk'},
+                {'t': 2.8, 'x': 1.25, 'y': -0.15, 'view': 'back', 'pose': 'idle'},
+                {'t': 2.9, 'x': 1.0, 'y': 0.0, 'view': 'side', 'pose': 'look', 'flip': True},     # looks her over
+                {'t': 3.5, 'x': 1.0, 'y': 0.0, 'view': 'side', 'pose': 'carve', 'flip': True},
+                {'t': 5.9, 'x': 1.15, 'y': 0.0, 'view': 'front', 'pose': 'hold'},
+                {'t': 9.6, 'x': 1.15, 'y': 0.0, 'view': 'front', 'pose': 'idle'},
+                {'t': 10.8, 'x': 1.15, 'y': 0.0, 'view': 'front', 'pose': 'walk'},
+                {'t': 12.2, 'x': 2.4, 'y': 0.9, 'view': 'front', 'pose': 'walk'},
+                {'t': 12.25, 'x': 2.4, 'y': 0.9, 'view': 'front', 'pose': 'walk', 'hide': True},
+            ],
+            'steps': [
+                {'t': 0.0, 'sfx': 'groan', 'shake': 0.4},                         # she sags; the bloom is shut and black
+                {'t': 0.7, 'sfx': 'drain'},
+                {'t': 3.7, 'sfx': 'cutter', 'gib': 'sparks'},
+                {'t': 4.2, 'gib': 'sparks'},
+                {'t': 4.7, 'sfx': 'cutter', 'gib': 'sparks'},
+                {'t': 5.2, 'sfx': 'sever', 'gib': 'carve', 'shake': 0.3},       # the heartwood comes out
+                {'t': 6.1, 'sfx': 'clank'},                                       # into the case, sealed
+                {'t': 6.4, 'sfx': 'key'},
+                {'t': 6.9, 'say': 'payoff_root', 'sub': 2.4},
+            ],
+            'handoff': {'x': 2.2, 'y': 0.6, 'ang': 0.0},
+        },
+    },
+
     'scenes': {
         # First-person fallback for engines without cut scenes (1.4 and older never read this pack, so it is
         # only used if the cut scene fails to load).
@@ -351,7 +396,7 @@ LOG_ORDER = ['marquez_platform', 'okafor_protocol', 'sable_yield', 'marquez_seed
              'marquez_irrigation']
 
 # Mother Root's payoff cut scene (engine 1.5 player, anchored on her body like the Super's). The shots, poses and
-# timing are built with the engine work and written into deck.json `cutscenes` then; these are the approved beats.
+# timing are in DECK['cutscenes']['root_payoff'] (Nov 25); these are the approved beats it follows.
 ROOT_PAYOFF_BEATS = [
     'Mother Root sags; the bloom closes and blackens.',
     'Buck walks up to the trunk and looks it over.',

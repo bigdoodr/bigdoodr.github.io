@@ -1606,6 +1606,189 @@
    }
   }
  ],
+ "cutscenes": {
+  "root_payoff": {
+   "anchor": "lastBoss",
+   "duration": 12.4,
+   "cam": [
+    {
+     "t": 0.0,
+     "x": 5.6,
+     "y": 0.9,
+     "ang": 2.941592653589793
+    },
+    {
+     "t": 2.8,
+     "x": 4.4,
+     "y": 0.7,
+     "ang": 2.991592653589793
+    },
+    {
+     "t": 2.9,
+     "x": 0.65,
+     "y": 2.1,
+     "ang": -1.5707963267948966,
+     "cut": true
+    },
+    {
+     "t": 5.8,
+     "x": 0.65,
+     "y": 1.9,
+     "ang": -1.5707963267948966
+    },
+    {
+     "t": 5.9,
+     "x": 2.5,
+     "y": 0.15,
+     "ang": 3.141592653589793,
+     "cut": true
+    },
+    {
+     "t": 9.5,
+     "x": 2.4,
+     "y": 0.15,
+     "ang": 3.141592653589793
+    },
+    {
+     "t": 9.6,
+     "x": 3.6,
+     "y": 1.8,
+     "ang": -2.5,
+     "cut": true
+    },
+    {
+     "t": 12.3,
+     "x": 3.6,
+     "y": 1.8,
+     "ang": -2.5
+    },
+    {
+     "t": 12.4,
+     "x": 2.2,
+     "y": 0.6,
+     "ang": 0.0,
+     "cut": true
+    }
+   ],
+   "buck": [
+    {
+     "t": 0.0,
+     "x": 3.7,
+     "y": -0.3,
+     "view": "back",
+     "pose": "walk"
+    },
+    {
+     "t": 2.8,
+     "x": 1.25,
+     "y": -0.15,
+     "view": "back",
+     "pose": "idle"
+    },
+    {
+     "t": 2.9,
+     "x": 1.0,
+     "y": 0.0,
+     "view": "side",
+     "pose": "look",
+     "flip": true
+    },
+    {
+     "t": 3.5,
+     "x": 1.0,
+     "y": 0.0,
+     "view": "side",
+     "pose": "carve",
+     "flip": true
+    },
+    {
+     "t": 5.9,
+     "x": 1.15,
+     "y": 0.0,
+     "view": "front",
+     "pose": "hold"
+    },
+    {
+     "t": 9.6,
+     "x": 1.15,
+     "y": 0.0,
+     "view": "front",
+     "pose": "idle"
+    },
+    {
+     "t": 10.8,
+     "x": 1.15,
+     "y": 0.0,
+     "view": "front",
+     "pose": "walk"
+    },
+    {
+     "t": 12.2,
+     "x": 2.4,
+     "y": 0.9,
+     "view": "front",
+     "pose": "walk"
+    },
+    {
+     "t": 12.25,
+     "x": 2.4,
+     "y": 0.9,
+     "view": "front",
+     "pose": "walk",
+     "hide": true
+    }
+   ],
+   "steps": [
+    {
+     "t": 0.0,
+     "sfx": "groan",
+     "shake": 0.4
+    },
+    {
+     "t": 0.7,
+     "sfx": "drain"
+    },
+    {
+     "t": 3.7,
+     "sfx": "cutter",
+     "gib": "sparks"
+    },
+    {
+     "t": 4.2,
+     "gib": "sparks"
+    },
+    {
+     "t": 4.7,
+     "sfx": "cutter",
+     "gib": "sparks"
+    },
+    {
+     "t": 5.2,
+     "sfx": "sever",
+     "gib": "carve",
+     "shake": 0.3
+    },
+    {
+     "t": 6.1,
+     "sfx": "clank"
+    },
+    {
+     "t": 6.4,
+     "sfx": "key"
+    },
+    {
+     "t": 6.9,
+     "say": "payoff_root",
+     "sub": 2.4
+    }
+   ],
+   "handoff": {
+    "x": 2.2,
+    "y": 0.6,
+    "ang": 0.0
+   }
+  }
+ },
  "scenes": {
   "root_payoff": {
    "target": "lastBossKill",
