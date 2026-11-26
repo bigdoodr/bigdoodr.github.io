@@ -178,7 +178,7 @@ DECK = {
         # Mother Root.
         {'on': {'event': 'bossSight'}, 'if': {'field': 'enemy', 'eq': 'motherroot'}, 'do': [{'if': {'not': {'flag': 'rootSeen'}}, 'then': [
             {'set': 'rootSeen', 'value': True}, {'say': 'boss_root', 'sub': 3}, {'music': 1},
-            {'objective': 'Burn out her anchor roots, then hit the bloom.'},
+            {'objective': 'Burn out her anchor roots, then shoot the bloom.'},
             {'after': 3.4, 'do': [{'msg': 'BURN HER ANCHOR ROOTS ONE AT A TIME. AIM AT THE ONE THAT GLOWS.'}]},
         ]}]},
         {'on': {'event': 'kill'}, 'if': {'field': 'enemy', 'eq': 'motherroot'}, 'do': [
@@ -343,7 +343,7 @@ DECK['rules'] += [
 # Mother Root, phase by phase (bossPhase: the phase that just began). A save at each break: `autosave: events`, so
 # Normal and easier keep it and Hard and Nightmare don't (the difficulty table), as with the Super (Casey, Nov 23).
 ROOT_HINTS = {2: 'THE WEST ROOT IS ASH. BURN THE EAST ANCHOR ROOT.', 3: 'BURN THE TAP ROOT, IN FRONT OF HER.',
-              4: "THE ROOTS ARE GONE. HIT THE BLOOM AT HER CROWN WHILE IT'S OPEN."}
+              4: "THE ROOTS ARE GONE. SWITCH GUNS AND SHOOT THE BLOOM AT HER CROWN WHILE IT'S OPEN."}   # Casey, Nov 26: the torch can't reach it
 DECK['rules'] += [{'on': {'event': 'bossPhase'}, 'if': {'all': [{'field': 'enemy', 'eq': 'motherroot'}, {'field': 'phase', 'eq': n}]},
                    'do': [{'sfx': 'clank'}, {'after': .8, 'do': [{'msg': h}]}, {'autosave': 'events'}]} for n, h in ROOT_HINTS.items()]
 

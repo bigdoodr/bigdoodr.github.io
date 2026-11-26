@@ -888,7 +888,7 @@
        "music": 1
       },
       {
-       "objective": "Burn out her anchor roots, then hit the bloom."
+       "objective": "Burn out her anchor roots, then shoot the bloom."
       },
       {
        "after": 3.4,
@@ -1406,7 +1406,7 @@
      "after": 0.8,
      "do": [
       {
-       "msg": "THE ROOTS ARE GONE. HIT THE BLOOM AT HER CROWN WHILE IT'S OPEN."
+       "msg": "THE ROOTS ARE GONE. SWITCH GUNS AND SHOOT THE BLOOM AT HER CROWN WHILE IT'S OPEN."
       }
      ]
     },
